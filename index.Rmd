@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "Collaborative Data Science Practices"
+author: "Will Beasley"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
