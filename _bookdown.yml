@@ -4,3 +4,13 @@ language:
   ui:
     chapter_name: "Chapter "
 output_dir: "docs"
+rmd_files:
+  [
+    "index.Rmd",
+    "ch-intro.Rmd",
+    "ch-literature.Rmd",
+    "ch-method.Rmd",
+    "ch-application.Rmd",
+    "ch-summary.Rmd",
+    "ch-references.Rmd"
+  ]
