@@ -13,5 +13,6 @@ rmd_files:
     "ch-method.Rmd",
     "ch-application.Rmd",
     "ch-summary.Rmd",
+    "ch-scratch-pad.Rmd",
     "ch-references.Rmd"
   ]
