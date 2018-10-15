@@ -87,6 +87,7 @@ Chapters & Sections
     1. Dataset origin & structure
     1. Issues & Tasks
     1. Flow Diagrams
+    1. Setting up new machine ([example](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md))
 1. Publishing Results
     1. To Other Analysts
     1. To Researchers & Content Experts
@@ -98,6 +99,13 @@ Chapters & Sections
     1. Validator
         1. Benefits for Analysts
         1. Benefits for Data Collectors
+1. Troubleshooting and Debugging
+    1. Finding help
+        1. Within your group (eg, Thomas and REDCap questions)
+        1. Within your university (eg, SCUG)
+        1. Outside (eg, Stack Overflow; GitHub issues)
+    1. Debugging
+        1. `traceback()`, `browser()`, etc
 1. Considerations when Selecting Tools
     1. General
         1. The Component's Goal
