@@ -27,7 +27,7 @@ Chapters & Sections
     1. Verify Values
     1. Specify Output Columns
     1. Save to Disk or Database
-1. Data at Rest    
+1. Data at Rest
     1. Data States
         1. Raw
         1. Derived
@@ -52,10 +52,10 @@ Chapters & Sections
     1. Analysis
     1. Presentation -Static
     1. Presentation -Interactive
-    1. Metadata        
+    1. Metadata
 1. Security Private Data
     1. File-level permissions
-    1. Database permissions 
+    1. Database permissions
     1. Public & Private Repositories
         1. Scrubbing GitHub history
 1. Automation
@@ -63,6 +63,7 @@ Chapters & Sections
     1. Makefile
     1. SSIS
     1. cron Jobs & Task Scheduler
+    1. sink log files
 1. Scaling Up
     1. Data Storage
         1. Local File vs Conventional Database vs Redshift
@@ -71,7 +72,7 @@ Chapters & Sections
         1. R vs SQL
         1. R vs Spark
 1. Parallel Collaboration
-    1. Social Contract 
+    1. Social Contract
         1. Issues
         1. Organized Commits & Coherent Diffs
         1. Branch & Merge Strategy
@@ -81,7 +82,7 @@ Chapters & Sections
     1. Remote
         1. Headset & sharing screens
 1. Documentation
-    1. Team-wide 
+    1. Team-wide
     1. Project-specific
     1. Dataset origin & structure
     1. Issues & Tasks
@@ -90,8 +91,10 @@ Chapters & Sections
     1. To Other Analysts
     1. To Researchers & Content Experts
     1. To Technical-Phobic Audiences
-1. Testing & Validation
+1. Testing, Validation, & Defensive Programming
     1. Testing Functions
+    1. Defensive Programming
+        1. Throwing errors
     1. Validator
         1. Benefits for Analysts
         1. Benefits for Data Collectors
@@ -104,8 +107,11 @@ Chapters & Sections
     1. Languages
     1. R Packages
     1. Database
+1. Tools to Consider
+    1. tidyverse
+    1. odbc
 1. Growing a Team
-    1. Recruiting 
+    1. Recruiting
     1. Training to Data Science
         1. Starting with a Researcher
         1. Starting with a Statistician
