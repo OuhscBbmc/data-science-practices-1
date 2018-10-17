@@ -8,11 +8,22 @@ edit: https://github.com/ouhscbbmc/data-science-practices-1/edit/master/%s
 rmd_files:
   [
     "index.Rmd",
+    "ch-architecture.Rmd",
+    "ch-file-prototype.Rmd",
+    "ch-data-persisted.Rmd",
+    "ch-patterns.Rmd",
+    "ch-security.Rmd",
+    "ch-automation.Rmd",
+    "ch-scaling-up.Rmd",
+    "ch-collaboration.Rmd",
+    "ch-documentation.Rmd",
+    "ch-publication.Rmd",
+    "ch-testing-and-validation.Rmd",
+    "ch-troubleshooting.Rmd",
+    "ch-tools.Rmd",
+    "ch-team.Rmd",
+
     "ch-intro.Rmd",
-    "ch-literature.Rmd",
-    "ch-method.Rmd",
-    "ch-application.Rmd",
-    "ch-summary.Rmd",
     "ch-scratch-pad.Rmd",
     "ch-references.Rmd"
   ]

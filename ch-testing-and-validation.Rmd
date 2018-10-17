@@ -1,0 +1,8 @@
+# Testing, Validation, & Defensive Programming
+
+1. Testing Functions
+1. Defensive Programming
+    1. Throwing errors
+1. Validator
+    1. Benefits for Analysts
+    1. Benefits for Data Collectors

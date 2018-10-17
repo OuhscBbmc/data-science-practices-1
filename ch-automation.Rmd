@@ -1,0 +1,7 @@
+# Automation
+
+1. Flow File in R
+1. Makefile
+1. SSIS
+1. cron Jobs & Task Scheduler
+1. sink log files

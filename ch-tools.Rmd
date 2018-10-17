@@ -1,0 +1,10 @@
+# Considerations when Selecting Tools
+
+1. General
+    1. The Component's Goal
+    1. Current Skillset of Team
+    1. Desired Future Skillset of Team
+    1. Skillset of Audience
+1. Languages
+1. R Packages
+1. Database

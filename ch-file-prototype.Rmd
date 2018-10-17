@@ -1,0 +1,12 @@
+# Prototypical File
+
+1. Clear Memory
+1. Load Sources
+1. Load Packages
+1. Declare Globals
+1. Load Data
+1. Tweak Data
+1. (Unique Content)
+1. Verify Values
+1. Specify Output Columns
+1. Save to Disk or Database

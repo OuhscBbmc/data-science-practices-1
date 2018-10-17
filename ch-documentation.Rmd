@@ -1,0 +1,8 @@
+# Documentation
+
+1. Team-wide
+1. Project-specific
+1. Dataset origin & structure
+1. Issues & Tasks
+1. Flow Diagrams
+1. Setting up new machine ([example](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md))

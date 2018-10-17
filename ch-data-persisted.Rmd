@@ -1,0 +1,18 @@
+# Data at Rest
+
+1. Data States
+    1. Raw
+    1. Derived
+        1. Project-wide File on Repo
+        1. Project-wide File on Protected File Server
+        1. User-specific File on Protected File Server
+        1. Project-wide Database
+    1. Original
+1. Data containers
+    1. csv
+    1. rds
+    1. SQLite
+    1. Central Enterprise database
+    1. Central REDCap database
+    1. Containers to avoid for raw/input
+        1. Proprietary like xlsx, sas7bdat

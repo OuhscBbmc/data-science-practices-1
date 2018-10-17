@@ -1,0 +1,712 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Collaborative Data Science Practices},
+            pdfauthor={Will Beasley},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Collaborative Data Science Practices}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Will Beasley}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2018-10-17}
+
+\usepackage{booktabs}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{prerequisites}{%
+\chapter{Prerequisites}\label{prerequisites}}
+
+This is a \emph{sample} book written in \textbf{Markdown}. You can use
+anything that Pandoc's Markdown supports, e.g., a math equation
+\(a^2 + b^2 = c^2\).
+
+The \textbf{bookdown} package can be installed from CRAN or Github:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
+\CommentTok{# or the development version}
+\CommentTok{# devtools::install_github("rstudio/bookdown")}
+\end{Highlighting}
+\end{Shaded}
+
+Remember each Rmd file contains one and only one chapter, and a chapter
+is defined by the first-level heading \texttt{\#}.
+
+To compile this example to PDF, you need XeLaTeX. You are recommended to
+install TinyTeX (which includes XeLaTeX):
+\url{https://yihui.name/tinytex/}.
+
+\hypertarget{architecture-principles}{%
+\chapter{Architecture Principles}\label{architecture-principles}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Encapsulation
+\item
+  Leverage team member's strenghts \& avoid weaknesses
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Focused code files
+  \item
+    Metadata for content experts
+  \end{enumerate}
+\item
+  Scales
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Single source \& single analysis
+  \item
+    Multiple sources \& multiple analyses
+  \end{enumerate}
+\item
+  Consistency
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Across Files
+  \item
+    Across Languages
+  \item
+    Across Projects
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{prototypical-file}{%
+\chapter{Prototypical File}\label{prototypical-file}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Clear Memory
+\item
+  Load Sources
+\item
+  Load Packages
+\item
+  Declare Globals
+\item
+  Load Data
+\item
+  Tweak Data
+\item
+  (Unique Content)
+\item
+  Verify Values
+\item
+  Specify Output Columns
+\item
+  Save to Disk or Database
+\end{enumerate}
+
+\hypertarget{data-at-rest}{%
+\chapter{Data at Rest}\label{data-at-rest}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Data States
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Raw
+  \item
+    Derived
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      Project-wide File on Repo
+    \item
+      Project-wide File on Protected File Server
+    \item
+      User-specific File on Protected File Server
+    \item
+      Project-wide Database
+    \end{enumerate}
+  \item
+    Original
+  \end{enumerate}
+\item
+  Data containers
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    csv
+  \item
+    rds
+  \item
+    SQLite
+  \item
+    Central Enterprise database
+  \item
+    Central REDCap database
+  \item
+    Containers to avoid for raw/input
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      Proprietary like xlsx, sas7bdat
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{patterns}{%
+\chapter{Patterns}\label{patterns}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ellis
+\item
+  Arch
+\item
+  Ferry
+\item
+  Scribe
+\item
+  Analysis
+\item
+  Presentation -Static
+\item
+  Presentation -Interactive
+\item
+  Metadata
+\end{enumerate}
+
+\hypertarget{security-private-data}{%
+\chapter{Security \& Private Data}\label{security-private-data}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  File-level permissions
+\item
+  Database permissions
+\item
+  Public \& Private Repositories
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Scrubbing GitHub history
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{automation}{%
+\chapter{Automation}\label{automation}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Flow File in R
+\item
+  Makefile
+\item
+  SSIS
+\item
+  cron Jobs \& Task Scheduler
+\item
+  sink log files
+\end{enumerate}
+
+\hypertarget{scaling-up}{%
+\chapter{Scaling Up}\label{scaling-up}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Data Storage
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Local File vs Conventional Database vs Redshift
+  \item
+    Usage Cases
+  \end{enumerate}
+\item
+  Data Processing
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    R vs SQL
+  \item
+    R vs Spark
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{parallel-collaboration}{%
+\chapter{Parallel Collaboration}\label{parallel-collaboration}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Social Contract
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Issues
+  \item
+    Organized Commits \& Coherent Diffs
+  \item
+    Branch \& Merge Strategy
+  \end{enumerate}
+\item
+  Code Reviews
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Daily Reviews of PRs
+  \item
+    Periodic Reviews of Files
+  \end{enumerate}
+\item
+  Remote
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Headset \& sharing screens
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{documentation}{%
+\chapter{Documentation}\label{documentation}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Team-wide
+\item
+  Project-specific
+\item
+  Dataset origin \& structure
+\item
+  Issues \& Tasks
+\item
+  Flow Diagrams
+\item
+  Setting up new machine
+  (\href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}{example})
+\end{enumerate}
+
+\hypertarget{publishing-results}{%
+\chapter{Publishing Results}\label{publishing-results}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  To Other Analysts
+\item
+  To Researchers \& Content Experts
+\item
+  To Technical-Phobic Audiences
+\end{enumerate}
+
+\hypertarget{testing-validation-defensive-programming}{%
+\chapter{Testing, Validation, \& Defensive
+Programming}\label{testing-validation-defensive-programming}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Testing Functions
+\item
+  Defensive Programming
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Throwing errors
+  \end{enumerate}
+\item
+  Validator
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Benefits for Analysts
+  \item
+    Benefits for Data Collectors
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{troubleshooting-and-debugging}{%
+\chapter{Troubleshooting and
+Debugging}\label{troubleshooting-and-debugging}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Finding help
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Within your group (eg, Thomas and REDCap questions)
+  \item
+    Within your university (eg, SCUG)
+  \item
+    Outside (eg, Stack Overflow; GitHub issues)
+  \end{enumerate}
+\item
+  Debugging
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    \texttt{traceback()}, \texttt{browser()}, etc
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{considerations-when-selecting-tools}{%
+\chapter{Considerations when Selecting
+Tools}\label{considerations-when-selecting-tools}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  General
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    The Component's Goal
+  \item
+    Current Skillset of Team
+  \item
+    Desired Future Skillset of Team
+  \item
+    Skillset of Audience
+  \end{enumerate}
+\item
+  Languages
+\item
+  R Packages
+\item
+  Database
+\end{enumerate}
+
+\hypertarget{growing-a-team}{%
+\chapter{Growing a Team}\label{growing-a-team}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Recruiting
+\item
+  Training to Data Science
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Starting with a Researcher
+  \item
+    Starting with a Statistician
+  \item
+    Starting with a DBA
+  \item
+    Starting with a Software Developer
+  \end{enumerate}
+\item
+  Bridges Outside the Team
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Monthly User Groups
+  \item
+    Annual Conferences
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{intro}{%
+\chapter{Introduction}\label{intro}}
+
+You can label chapter and section titles using \texttt{\{\#label\}}
+after them, e.g., we can reference Chapter \ref{intro}. If you do not
+manually label them, there will be automatic labels anyway, e.g.,
+Chapter \ref{architecture}.
+
+Figures and tables with captions will be placed in \texttt{figure} and
+\texttt{table} environments, respectively.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(pressure, }\DataTypeTok{type =} \StringTok{'b'}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{data-science-practices-1_files/figure-latex/nice-fig-1} 
+
+}
+
+\caption{Here is a nice figure!}\label{fig:nice-fig}
+\end{figure}
+
+Reference a figure by its code chunk label with the \texttt{fig:}
+prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can
+reference tables generated from \texttt{knitr::kable()}, e.g., see Table
+\ref{tab:nice-tab}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}
+  \KeywordTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\DataTypeTok{caption =} \StringTok{'Here is a nice table!'}\NormalTok{,}
+  \DataTypeTok{booktabs =} \OtherTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:nice-tab}Here is a nice table!}
+\centering
+\begin{tabular}[t]{rrrrl}
+\toprule
+Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
+\midrule
+5.1 & 3.5 & 1.4 & 0.2 & setosa\\
+4.9 & 3.0 & 1.4 & 0.2 & setosa\\
+4.7 & 3.2 & 1.3 & 0.2 & setosa\\
+4.6 & 3.1 & 1.5 & 0.2 & setosa\\
+5.0 & 3.6 & 1.4 & 0.2 & setosa\\
+\addlinespace
+5.4 & 3.9 & 1.7 & 0.4 & setosa\\
+4.6 & 3.4 & 1.4 & 0.3 & setosa\\
+5.0 & 3.4 & 1.5 & 0.2 & setosa\\
+4.4 & 2.9 & 1.4 & 0.2 & setosa\\
+4.9 & 3.1 & 1.5 & 0.1 & setosa\\
+\addlinespace
+5.4 & 3.7 & 1.5 & 0.2 & setosa\\
+4.8 & 3.4 & 1.6 & 0.2 & setosa\\
+4.8 & 3.0 & 1.4 & 0.1 & setosa\\
+4.3 & 3.0 & 1.1 & 0.1 & setosa\\
+5.8 & 4.0 & 1.2 & 0.2 & setosa\\
+\addlinespace
+5.7 & 4.4 & 1.5 & 0.4 & setosa\\
+5.4 & 3.9 & 1.3 & 0.4 & setosa\\
+5.1 & 3.5 & 1.4 & 0.3 & setosa\\
+5.7 & 3.8 & 1.7 & 0.3 & setosa\\
+5.1 & 3.8 & 1.5 & 0.3 & setosa\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+You can write citations, too. For example, we are using the
+\textbf{bookdown} package \citep{R-bookdown} in this sample book, which
+was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+
+\hypertarget{scratch-pad-of-loose-ideas}{%
+\chapter{Scratch Pad of Loose Ideas}\label{scratch-pad-of-loose-ideas}}
+
+\hypertarget{chapters-sections-to-form}{%
+\section{Chapters \& Sections to Form}\label{chapters-sections-to-form}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Tools to Consider
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    tidyverse
+  \item
+    odbc
+  \end{enumerate}
+\end{enumerate}
+
+\bibliography{book.bib,packages.bib}
+
+
+\end{document}

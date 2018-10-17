@@ -1,0 +1,6 @@
+# Security & Private Data
+
+1. File-level permissions
+1. Database permissions
+1. Public & Private Repositories
+    1. Scrubbing GitHub history
