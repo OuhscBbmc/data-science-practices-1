@@ -1,14 +1,21 @@
-Architecture Principles
+Architecture Principles {#architecture}
 ====================================
 
-1. Encapsulation
-1. Leverage team member's strenghts & avoid weaknesses
-    1. Focused code files
-    1. Metadata for content experts
-1. Scales
-    1. Single source & single analysis
-    1. Multiple sources & multiple analyses
-1. Consistency
-    1. Across Files
-    1. Across Languages
-    1. Across Projects
+Encapsulation
+------------------------------------
+
+Leverage team member's strenghts & avoid weaknesses
+------------------------------------
+1. Focused code files
+1. Metadata for content experts
+
+Scales
+------------------------------------
+1. Single source & single analysis
+1. Multiple sources & multiple analyses
+
+Consistency
+------------------------------------
+1. Across Files
+1. Across Languages
+1. Across Projects

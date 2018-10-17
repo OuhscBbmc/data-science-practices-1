@@ -1,8 +1,9 @@
-# Scratch Pad of Loose Ideas
+Scratch Pad of Loose Ideas {#scratch-pad}
+====================================
 
 
 Chapters & Sections to Form
------------------------
+------------------------------------
 
 1. Tools to Consider
     1. tidyverse

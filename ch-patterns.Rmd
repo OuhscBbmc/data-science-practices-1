@@ -1,10 +1,26 @@
-# Patterns
+Patterns {#patterns}
+====================================
 
-1. Ellis
-1. Arch
-1. Ferry
-1. Scribe
-1. Analysis
-1. Presentation -Static
-1. Presentation -Interactive
-1. Metadata
+Ellis
+------------------------------------
+
+Arch
+------------------------------------
+
+Ferry
+------------------------------------
+
+Scribe
+------------------------------------
+
+Analysis
+------------------------------------
+
+Presentation -Static
+------------------------------------
+
+Presentation -Interactive
+------------------------------------
+
+Metadata
+------------------------------------

@@ -174,434 +174,425 @@ To compile this example to PDF, you need XeLaTeX. You are recommended to
 install TinyTeX (which includes XeLaTeX):
 \url{https://yihui.name/tinytex/}.
 
-\hypertarget{architecture-principles}{%
-\chapter{Architecture Principles}\label{architecture-principles}}
+\hypertarget{architecture}{%
+\chapter{Architecture Principles}\label{architecture}}
+
+\hypertarget{encapsulation}{%
+\section{Encapsulation}\label{encapsulation}}
+
+\hypertarget{leverage-team-members-strenghts-avoid-weaknesses}{%
+\section{Leverage team member's strenghts \& avoid
+weaknesses}\label{leverage-team-members-strenghts-avoid-weaknesses}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Encapsulation
+  Focused code files
 \item
-  Leverage team member's strenghts \& avoid weaknesses
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Focused code files
-  \item
-    Metadata for content experts
-  \end{enumerate}
-\item
-  Scales
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Single source \& single analysis
-  \item
-    Multiple sources \& multiple analyses
-  \end{enumerate}
-\item
-  Consistency
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Across Files
-  \item
-    Across Languages
-  \item
-    Across Projects
-  \end{enumerate}
+  Metadata for content experts
 \end{enumerate}
 
-\hypertarget{prototypical-file}{%
-\chapter{Prototypical File}\label{prototypical-file}}
+\hypertarget{scales}{%
+\section{Scales}\label{scales}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Clear Memory
+  Single source \& single analysis
 \item
-  Load Sources
-\item
-  Load Packages
-\item
-  Declare Globals
-\item
-  Load Data
-\item
-  Tweak Data
-\item
-  (Unique Content)
-\item
-  Verify Values
-\item
-  Specify Output Columns
-\item
-  Save to Disk or Database
+  Multiple sources \& multiple analyses
 \end{enumerate}
+
+\hypertarget{consistency}{%
+\section{Consistency}\label{consistency}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Across Files
+\item
+  Across Languages
+\item
+  Across Projects
+\end{enumerate}
+
+\hypertarget{file-prototype}{%
+\chapter{Prototypical File}\label{file-prototype}}
+
+\hypertarget{clear-memory}{%
+\section{Clear Memory}\label{clear-memory}}
+
+\hypertarget{load-sources}{%
+\section{Load Sources}\label{load-sources}}
+
+\hypertarget{load-packages}{%
+\section{Load Packages}\label{load-packages}}
+
+\hypertarget{declare-globals}{%
+\section{Declare Globals}\label{declare-globals}}
+
+\hypertarget{load-data}{%
+\section{Load Data}\label{load-data}}
+
+\hypertarget{tweak-data}{%
+\section{Tweak Data}\label{tweak-data}}
+
+\hypertarget{unique-content}{%
+\section{(Unique Content)}\label{unique-content}}
+
+\hypertarget{verify-values}{%
+\section{Verify Values}\label{verify-values}}
+
+\hypertarget{specify-output-columns}{%
+\section{Specify Output Columns}\label{specify-output-columns}}
+
+\hypertarget{save-to-disk-or-database}{%
+\section{Save to Disk or Database}\label{save-to-disk-or-database}}
 
 \hypertarget{data-at-rest}{%
 \chapter{Data at Rest}\label{data-at-rest}}
 
+\hypertarget{data-states}{%
+\section{Data States}\label{data-states}}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Data States
+  Raw
+\item
+  Derived
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    Raw
+    Project-wide File on Repo
   \item
-    Derived
-
-    \begin{enumerate}
-    \def\labelenumiii{\arabic{enumiii}.}
-    \tightlist
-    \item
-      Project-wide File on Repo
-    \item
-      Project-wide File on Protected File Server
-    \item
-      User-specific File on Protected File Server
-    \item
-      Project-wide Database
-    \end{enumerate}
+    Project-wide File on Protected File Server
   \item
-    Original
+    User-specific File on Protected File Server
+  \item
+    Project-wide Database
   \end{enumerate}
 \item
-  Data containers
+  Original
+\end{enumerate}
+
+\hypertarget{data-containers}{%
+\section{Data Containers}\label{data-containers}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  csv
+\item
+  rds
+\item
+  SQLite
+\item
+  Central Enterprise database
+\item
+  Central REDCap database
+\item
+  Containers to avoid for raw/input
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    csv
-  \item
-    rds
-  \item
-    SQLite
-  \item
-    Central Enterprise database
-  \item
-    Central REDCap database
-  \item
-    Containers to avoid for raw/input
-
-    \begin{enumerate}
-    \def\labelenumiii{\arabic{enumiii}.}
-    \tightlist
-    \item
-      Proprietary like xlsx, sas7bdat
-    \end{enumerate}
+    Proprietary like xlsx, sas7bdat
   \end{enumerate}
 \end{enumerate}
 
 \hypertarget{patterns}{%
 \chapter{Patterns}\label{patterns}}
 
+\hypertarget{ellis}{%
+\section{Ellis}\label{ellis}}
+
+\hypertarget{arch}{%
+\section{Arch}\label{arch}}
+
+\hypertarget{ferry}{%
+\section{Ferry}\label{ferry}}
+
+\hypertarget{scribe}{%
+\section{Scribe}\label{scribe}}
+
+\hypertarget{analysis}{%
+\section{Analysis}\label{analysis}}
+
+\hypertarget{presentation--static}{%
+\section{Presentation -Static}\label{presentation--static}}
+
+\hypertarget{presentation--interactive}{%
+\section{Presentation -Interactive}\label{presentation--interactive}}
+
+\hypertarget{metadata}{%
+\section{Metadata}\label{metadata}}
+
+\hypertarget{security}{%
+\chapter{Security \& Private Data}\label{security}}
+
+\hypertarget{file-level-permissions}{%
+\section{File-level permissions}\label{file-level-permissions}}
+
+\hypertarget{database-permissions}{%
+\section{Database permissions}\label{database-permissions}}
+
+\hypertarget{public-private-repositories}{%
+\section{Public \& Private
+Repositories}\label{public-private-repositories}}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Ellis
-\item
-  Arch
-\item
-  Ferry
-\item
-  Scribe
-\item
-  Analysis
-\item
-  Presentation -Static
-\item
-  Presentation -Interactive
-\item
-  Metadata
-\end{enumerate}
-
-\hypertarget{security-private-data}{%
-\chapter{Security \& Private Data}\label{security-private-data}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  File-level permissions
-\item
-  Database permissions
-\item
-  Public \& Private Repositories
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Scrubbing GitHub history
-  \end{enumerate}
+  Scrubbing GitHub history
 \end{enumerate}
 
 \hypertarget{automation}{%
 \chapter{Automation}\label{automation}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Flow File in R
-\item
-  Makefile
-\item
-  SSIS
-\item
-  cron Jobs \& Task Scheduler
-\item
-  sink log files
-\end{enumerate}
+\hypertarget{flow-file-in-r}{%
+\section{Flow File in R}\label{flow-file-in-r}}
+
+\hypertarget{makefile}{%
+\section{Makefile}\label{makefile}}
+
+\hypertarget{ssis}{%
+\section{SSIS}\label{ssis}}
+
+\hypertarget{cron-jobs-task-scheduler}{%
+\section{cron Jobs \& Task Scheduler}\label{cron-jobs-task-scheduler}}
+
+\hypertarget{sink-log-files}{%
+\section{Sink Log Files}\label{sink-log-files}}
 
 \hypertarget{scaling-up}{%
 \chapter{Scaling Up}\label{scaling-up}}
 
+\hypertarget{data-storage}{%
+\section{Data Storage}\label{data-storage}}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Data Storage
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Local File vs Conventional Database vs Redshift
-  \item
-    Usage Cases
-  \end{enumerate}
+  Local File vs Conventional Database vs Redshift
 \item
-  Data Processing
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    R vs SQL
-  \item
-    R vs Spark
-  \end{enumerate}
+  Usage Cases
 \end{enumerate}
 
-\hypertarget{parallel-collaboration}{%
-\chapter{Parallel Collaboration}\label{parallel-collaboration}}
+\hypertarget{data-processing}{%
+\section{Data Processing}\label{data-processing}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Social Contract
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Issues
-  \item
-    Organized Commits \& Coherent Diffs
-  \item
-    Branch \& Merge Strategy
-  \end{enumerate}
+  R vs SQL
 \item
-  Code Reviews
+  R vs Spark
+\end{enumerate}
 
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Daily Reviews of PRs
-  \item
-    Periodic Reviews of Files
-  \end{enumerate}
+\hypertarget{collaboration}{%
+\chapter{Parallel Collaboration}\label{collaboration}}
+
+\hypertarget{social-contract}{%
+\section{Social Contract}\label{social-contract}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
-  Remote
+  Issues
+\item
+  Organized Commits \& Coherent Diffs
+\item
+  Branch \& Merge Strategy
+\end{enumerate}
 
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Headset \& sharing screens
-  \end{enumerate}
+\hypertarget{code-reviews}{%
+\section{Code Reviews}\label{code-reviews}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Daily Reviews of PRs
+\item
+  Periodic Reviews of Files
+\end{enumerate}
+
+\hypertarget{remote}{%
+\section{Remote}\label{remote}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Headset \& sharing screens
 \end{enumerate}
 
 \hypertarget{documentation}{%
 \chapter{Documentation}\label{documentation}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Team-wide
-\item
-  Project-specific
-\item
-  Dataset origin \& structure
-\item
-  Issues \& Tasks
-\item
-  Flow Diagrams
-\item
-  Setting up new machine
-  (\href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}{example})
-\end{enumerate}
+\hypertarget{team-wide}{%
+\section{Team-wide}\label{team-wide}}
 
-\hypertarget{publishing-results}{%
-\chapter{Publishing Results}\label{publishing-results}}
+\hypertarget{project-specific}{%
+\section{Project-specific}\label{project-specific}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  To Other Analysts
-\item
-  To Researchers \& Content Experts
-\item
-  To Technical-Phobic Audiences
-\end{enumerate}
+\hypertarget{dataset-origin-structure}{%
+\section{Dataset Origin \& Structure}\label{dataset-origin-structure}}
 
-\hypertarget{testing-validation-defensive-programming}{%
+\hypertarget{issues-tasks}{%
+\section{Issues \& Tasks}\label{issues-tasks}}
+
+\hypertarget{flow-diagrams}{%
+\section{Flow Diagrams}\label{flow-diagrams}}
+
+\hypertarget{setting-up-new-machine}{%
+\section{Setting up new machine}\label{setting-up-new-machine}}
+
+(\href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}{example})
+
+\hypertarget{publication}{%
+\chapter{Publishing Results}\label{publication}}
+
+\hypertarget{to-other-analysts}{%
+\section{To Other Analysts}\label{to-other-analysts}}
+
+\hypertarget{to-researchers-content-experts}{%
+\section{To Researchers \& Content
+Experts}\label{to-researchers-content-experts}}
+
+\hypertarget{to-technical-phobic-audiences}{%
+\section{To Technical-Phobic
+Audiences}\label{to-technical-phobic-audiences}}
+
+\hypertarget{testing-and-validation}{%
 \chapter{Testing, Validation, \& Defensive
-Programming}\label{testing-validation-defensive-programming}}
+Programming}\label{testing-and-validation}}
+
+\hypertarget{testing-functions}{%
+\section{Testing Functions}\label{testing-functions}}
+
+\hypertarget{defensive-programming}{%
+\section{Defensive Programming}\label{defensive-programming}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Testing Functions
-\item
-  Defensive Programming
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Throwing errors
-  \end{enumerate}
-\item
-  Validator
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Benefits for Analysts
-  \item
-    Benefits for Data Collectors
-  \end{enumerate}
+  Throwing errors
 \end{enumerate}
 
-\hypertarget{troubleshooting-and-debugging}{%
-\chapter{Troubleshooting and
-Debugging}\label{troubleshooting-and-debugging}}
+\hypertarget{validator}{%
+\section{Validator}\label{validator}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Finding help
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Within your group (eg, Thomas and REDCap questions)
-  \item
-    Within your university (eg, SCUG)
-  \item
-    Outside (eg, Stack Overflow; GitHub issues)
-  \end{enumerate}
+  Benefits for Analysts
 \item
-  Debugging
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    \texttt{traceback()}, \texttt{browser()}, etc
-  \end{enumerate}
+  Benefits for Data Collectors
 \end{enumerate}
 
-\hypertarget{considerations-when-selecting-tools}{%
-\chapter{Considerations when Selecting
-Tools}\label{considerations-when-selecting-tools}}
+\hypertarget{troubleshooting}{%
+\chapter{Troubleshooting and Debugging}\label{troubleshooting}}
+
+\hypertarget{finding-help}{%
+\section{Finding Help}\label{finding-help}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  General
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    The Component's Goal
-  \item
-    Current Skillset of Team
-  \item
-    Desired Future Skillset of Team
-  \item
-    Skillset of Audience
-  \end{enumerate}
+  Within your group (eg, Thomas and REDCap questions)
 \item
-  Languages
+  Within your university (eg, SCUG)
 \item
-  R Packages
-\item
-  Database
+  Outside (eg, Stack Overflow; GitHub issues)
 \end{enumerate}
 
-\hypertarget{growing-a-team}{%
-\chapter{Growing a Team}\label{growing-a-team}}
+\hypertarget{debugging}{%
+\section{Debugging}\label{debugging}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Recruiting
-\item
-  Training to Data Science
+  \texttt{traceback()}, \texttt{browser()}, etc
+\end{enumerate}
 
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Starting with a Researcher
-  \item
-    Starting with a Statistician
-  \item
-    Starting with a DBA
-  \item
-    Starting with a Software Developer
-  \end{enumerate}
-\item
-  Bridges Outside the Team
+\hypertarget{tools}{%
+\chapter{Considerations when Selecting Tools}\label{tools}}
 
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Monthly User Groups
-  \item
-    Annual Conferences
-  \end{enumerate}
+\hypertarget{general}{%
+\section{General}\label{general}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The Component's Goal
+\item
+  Current Skillset of Team
+\item
+  Desired Future Skillset of Team
+\item
+  Skillset of Audience
+\end{enumerate}
+
+\hypertarget{languages}{%
+\section{Languages}\label{languages}}
+
+\hypertarget{r-packages}{%
+\section{R Packages}\label{r-packages}}
+
+\hypertarget{database}{%
+\section{Database}\label{database}}
+
+\hypertarget{team}{%
+\chapter{Growing a Team}\label{team}}
+
+\hypertarget{recruiting}{%
+\section{Recruiting}\label{recruiting}}
+
+\hypertarget{training-to-data-science}{%
+\section{Training to Data Science}\label{training-to-data-science}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Starting with a Researcher
+\item
+  Starting with a Statistician
+\item
+  Starting with a DBA
+\item
+  Starting with a Software Developer
+\end{enumerate}
+
+\hypertarget{bridges-outside-the-team}{%
+\section{Bridges Outside the Team}\label{bridges-outside-the-team}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Monthly User Groups
+\item
+  Annual Conferences
 \end{enumerate}
 
 \hypertarget{intro}{%
@@ -684,8 +675,8 @@ You can write citations, too. For example, we are using the
 \textbf{bookdown} package \citep{R-bookdown} in this sample book, which
 was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
 
-\hypertarget{scratch-pad-of-loose-ideas}{%
-\chapter{Scratch Pad of Loose Ideas}\label{scratch-pad-of-loose-ideas}}
+\hypertarget{scratch-pad}{%
+\chapter{Scratch Pad of Loose Ideas}\label{scratch-pad}}
 
 \hypertarget{chapters-sections-to-form}{%
 \section{Chapters \& Sections to Form}\label{chapters-sections-to-form}}

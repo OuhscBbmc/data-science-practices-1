@@ -1,11 +1,17 @@
-# Parallel Collaboration
+Parallel Collaboration {#collaboration}
+====================================
 
-1. Social Contract
-    1. Issues
-    1. Organized Commits & Coherent Diffs
-    1. Branch & Merge Strategy
-1. Code Reviews
-    1. Daily Reviews of PRs
-    1. Periodic Reviews of Files
-1. Remote
-    1. Headset & sharing screens
+Social Contract
+------------------------------------
+1. Issues
+1. Organized Commits & Coherent Diffs
+1. Branch & Merge Strategy
+
+Code Reviews
+------------------------------------
+1. Daily Reviews of PRs
+1. Periodic Reviews of Files
+
+Remote
+------------------------------------
+1. Headset & sharing screens

@@ -1,11 +1,17 @@
-# Growing a Team
+Growing a Team {#team}
+====================================
 
-1. Recruiting
-1. Training to Data Science
-    1. Starting with a Researcher
-    1. Starting with a Statistician
-    1. Starting with a DBA
-    1. Starting with a Software Developer
-1. Bridges Outside the Team
-    1. Monthly User Groups
-    1. Annual Conferences
+Recruiting
+------------------------------------
+
+Training to Data Science
+------------------------------------
+1. Starting with a Researcher
+1. Starting with a Statistician
+1. Starting with a DBA
+1. Starting with a Software Developer
+
+Bridges Outside the Team
+------------------------------------
+1. Monthly User Groups
+1. Annual Conferences

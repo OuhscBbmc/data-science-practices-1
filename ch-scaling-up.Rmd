@@ -1,8 +1,12 @@
-# Scaling Up
+Scaling Up {#scaling-up}
+====================================
 
-1. Data Storage
-    1. Local File vs Conventional Database vs Redshift
-    1. Usage Cases
-1. Data Processing
-    1. R vs SQL
-    1. R vs Spark
+Data Storage
+------------------------------------
+1. Local File vs Conventional Database vs Redshift
+1. Usage Cases
+
+Data Processing
+------------------------------------
+1. R vs SQL
+1. R vs Spark
