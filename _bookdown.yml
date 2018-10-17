@@ -10,6 +10,7 @@ rmd_files:
     "index.Rmd",
     "ch-architecture.Rmd",
     "ch-file-prototype.Rmd",
+    "ch-repo-prototype.Rmd",
     "ch-data-persisted.Rmd",
     "ch-patterns.Rmd",
     "ch-security.Rmd",
@@ -20,6 +21,7 @@ rmd_files:
     "ch-publication.Rmd",
     "ch-testing-and-validation.Rmd",
     "ch-troubleshooting.Rmd",
+    "ch-establishing-workstation.Rmd",
     "ch-tools.Rmd",
     "ch-team.Rmd",
 

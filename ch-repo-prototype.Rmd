@@ -1,0 +1,31 @@
+Prototypical Repository {#repo-prototype}
+====================================
+
+https://github.com/wibeasley/RAnalysisSkeleton
+
+Analysis
+------------------------------------
+
+Data Public
+------------------------------------
+1. Raw
+1. Derived
+1. Metadata
+1. Database
+1. Original
+
+
+Data Unshared
+------------------------------------
+
+Documentation
+------------------------------------
+
+Manipulation
+------------------------------------
+
+Stitched Output
+------------------------------------
+
+Utility
+------------------------------------
