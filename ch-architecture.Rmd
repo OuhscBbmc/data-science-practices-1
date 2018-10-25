@@ -16,6 +16,6 @@ Scales
 
 Consistency
 ------------------------------------
-1. Across Files
+1. Across Files {#consistency-files}
 1. Across Languages
 1. Across Projects

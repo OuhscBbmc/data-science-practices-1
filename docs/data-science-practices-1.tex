@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-17}
+    \date{2018-10-24}
 
 \usepackage{booktabs}
 
@@ -212,7 +212,7 @@ weaknesses}\label{leverage-team-members-strenghts-avoid-weaknesses}}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Across Files
+  Across Files \{\#consistency-files\}
 \item
   Across Languages
 \item
@@ -221,6 +221,16 @@ weaknesses}\label{leverage-team-members-strenghts-avoid-weaknesses}}
 
 \hypertarget{file-prototype}{%
 \chapter{Prototypical File}\label{file-prototype}}
+
+As stated before, in \ref{consistency-files}, using a consistent file
+structure can (a) improve the quality of the code because the structure
+has been proven over time to facilitate good practices and (b) allow
+your intentions to be more clear to teammates because they are familiar
+with the order and intentions of the chunks.
+
+We use the term ``chunk'' for a section of code because it corresponds
+with knitr terminology \citep{xie2015}, and in many cases, the chunk of
+our R file connects to a knitr Rmd file.
 
 \hypertarget{clear-memory}{%
 \section{Clear Memory}\label{clear-memory}}
@@ -481,8 +491,8 @@ Repositories}\label{public-private-repositories}}
   Headset \& sharing screens
 \end{enumerate}
 
-\hypertarget{documentation}{%
-\chapter{Documentation}\label{documentation}}
+\hypertarget{document}{%
+\chapter{Documentation}\label{document}}
 
 \hypertarget{team-wide}{%
 \section{Team-wide}\label{team-wide}}
@@ -598,18 +608,31 @@ Tools}\label{establishing-workstation}}
 \hypertarget{general}{%
 \section{General}\label{general}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  The Component's Goal
-\item
-  Current Skillset of Team
-\item
-  Desired Future Skillset of Team
-\item
-  Skillset of Audience
-\end{enumerate}
+\hypertarget{the-components-goal}{%
+\subsection{The Component's Goal}\label{the-components-goal}}
+
+While disussing the advantages and disadvanages of tools, a colleague
+once said, ``Tidyverse packages don't do anything that I can't already
+do in Base R, and sometimes it even requires more lines of code''.
+Regardless if I agree, I feel these two points are irrelevant. Sometimes
+the advantage of a tool isn't to expand existing capabilities, but
+rather to facilitate development and maintaince for the same capability.
+
+Likewise, I care less about the line count, and more about the
+readability. I'd prefer to maintain a 20-line chunk that is familar and
+readable than a 10-line chunk with dense phrases and unfamiliar
+functions. The bottleneck for most of our projects is human time, not
+execution time.
+
+\hypertarget{current-skillset-of-team}{%
+\subsection{Current Skillset of Team}\label{current-skillset-of-team}}
+
+\hypertarget{desired-future-skillset-of-team}{%
+\subsection{Desired Future Skillset of
+Team}\label{desired-future-skillset-of-team}}
+
+\hypertarget{skillset-of-audience}{%
+\subsection{Skillset of Audience}\label{skillset-of-audience}}
 
 \hypertarget{languages}{%
 \section{Languages}\label{languages}}

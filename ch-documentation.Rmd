@@ -1,4 +1,4 @@
-Documentation {#documentation}
+Documentation {#document}
 ====================================
 
 Team-wide
