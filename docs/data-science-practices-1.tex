@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-15}
+    \date{2019-01-16}
 
 \usepackage{booktabs}
 
@@ -373,12 +373,90 @@ We use the term ``chunk'' for a section of code because it corresponds with knit
 \hypertarget{public-private-repositories}{%
 \section{Public \& Private Repositories}\label{public-private-repositories}}
 
+\hypertarget{scrubbing-github-history}{%
+\subsection{Scrubbing GitHub history}\label{scrubbing-github-history}}
+
+Occassionaly files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (\emph{i.e.}, the branch's \href{}{head}), but from the entire history of the repo.
+
+Scrubbing is require typically when (a) a sensitive file has been accidentally commited and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.
+
+The two suitable scrubbing approaches both require the command line. The first is the \texttt{git-filter-branch} command within git, and the second is the \href{https://rtyley.github.io/bfg-repo-cleaner/}{BFG repo-cleaner}. We use the second approach, which is {[}recommended by GitHub{]}; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.
+
+The \href{}{bash}-centric steps below remove any file\emph{s} from the repo history called `monster-data.csv' from the `bloated' repository.
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\item
+  If the file contains passwords, change them immediately.
+\item
+  Delete `monster-data.csv' from your branch and push the commit to GitHub.
+\item
+  Ask your collaborators to push any outstanding commits to GitHub and delete their local copy of the repo. Once scrubbing is complete, they will re-clone it.
+\item
+  Download and install the most recent Java JRE from the Oracle site.
+\item
+  Download the most recent jar file from the BFG site to the home directory.
+\item
+  Clone a fresh copy of the repository in the user's home directory. The \texttt{-\/-mirror} argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd}\NormalTok{ ~}
+\FunctionTok{git}\NormalTok{ clone --mirror https://github.com/your-org/bloated.git}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Remove all files (in any directory) called `monster-data.csv'.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{java}\NormalTok{ -jar bfg-*.jar --delete-files monster-data.csv}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \href{}{Reflog} and \href{}{garbage collect} the repo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd}\NormalTok{ bloated.git}
+\FunctionTok{git}\NormalTok{ reflog expire --expire=now --all }\KeywordTok{&&} \FunctionTok{git}\NormalTok{ gc --prune=now --aggressive}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Push your local changes to the GitHub server.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{push}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Delete the bfg jar from the home directory.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd}\NormalTok{ ~}
+\FunctionTok{rm}\NormalTok{ bfg-*.jar}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Ask your collaborators to reclone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo's history.
+\item
+  If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file's history isn't accessible through their website, even if the repo is private.
+\end{enumerate}
+
+\hypertarget{resources}{%
+\paragraph{Resources}\label{resources}}
+
+\begin{itemize}
 \tightlist
 \item
-  Scrubbing GitHub history
-\end{enumerate}
+  \href{https://rtyley.github.io/bfg-repo-cleaner/}{BFG Repo-Cleaner site}
+\item
+  \href{https://github.com/IBM/BluePic/wiki/Using-BFG-Repo-Cleaner-tool-to-remove-sensitive-files-from-your-git-repo}{Additional BFG instructions}
+\item
+  \href{https://help.github.com/articles/github-sensitive-data-removal-policy/}{GitHub Sensitive Data Removal Policy}
+\end{itemize}
 
 \hypertarget{automation}{%
 \chapter{Automation}\label{automation}}
