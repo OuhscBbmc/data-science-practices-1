@@ -125,24 +125,10 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-10-24}
+    \date{2019-01-15}
 
 \usepackage{booktabs}
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[chapter]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[chapter]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -153,9 +139,7 @@
 \hypertarget{prerequisites}{%
 \chapter{Prerequisites}\label{prerequisites}}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use
-anything that Pandoc's Markdown supports, e.g., a math equation
-\(a^2 + b^2 = c^2\).
+This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
 
 The \textbf{bookdown} package can be installed from CRAN or Github:
 
@@ -167,12 +151,9 @@ The \textbf{bookdown} package can be installed from CRAN or Github:
 \end{Highlighting}
 \end{Shaded}
 
-Remember each Rmd file contains one and only one chapter, and a chapter
-is defined by the first-level heading \texttt{\#}.
+Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
 
-To compile this example to PDF, you need XeLaTeX. You are recommended to
-install TinyTeX (which includes XeLaTeX):
-\url{https://yihui.name/tinytex/}.
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.name/tinytex/}.
 
 \hypertarget{architecture}{%
 \chapter{Architecture Principles}\label{architecture}}
@@ -181,8 +162,7 @@ install TinyTeX (which includes XeLaTeX):
 \section{Encapsulation}\label{encapsulation}}
 
 \hypertarget{leverage-team-members-strenghts-avoid-weaknesses}{%
-\section{Leverage team member's strenghts \& avoid
-weaknesses}\label{leverage-team-members-strenghts-avoid-weaknesses}}
+\section{Leverage team member's strenghts \& avoid weaknesses}\label{leverage-team-members-strenghts-avoid-weaknesses}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -222,15 +202,9 @@ weaknesses}\label{leverage-team-members-strenghts-avoid-weaknesses}}
 \hypertarget{file-prototype}{%
 \chapter{Prototypical File}\label{file-prototype}}
 
-As stated before, in \ref{consistency-files}, using a consistent file
-structure can (a) improve the quality of the code because the structure
-has been proven over time to facilitate good practices and (b) allow
-your intentions to be more clear to teammates because they are familiar
-with the order and intentions of the chunks.
+As stated before, in \ref{consistency-files}, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
-We use the term ``chunk'' for a section of code because it corresponds
-with knitr terminology \citep{xie2015}, and in many cases, the chunk of
-our R file connects to a knitr Rmd file.
+We use the term ``chunk'' for a section of code because it corresponds with knitr terminology \citep{xie2015}, and in many cases, the chunk of our R file connects to a knitr Rmd file.
 
 \hypertarget{clear-memory}{%
 \section{Clear Memory}\label{clear-memory}}
@@ -397,8 +371,7 @@ our R file connects to a knitr Rmd file.
 \section{Database permissions}\label{database-permissions}}
 
 \hypertarget{public-private-repositories}{%
-\section{Public \& Private
-Repositories}\label{public-private-repositories}}
+\section{Public \& Private Repositories}\label{public-private-repositories}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -521,16 +494,13 @@ Repositories}\label{public-private-repositories}}
 \section{To Other Analysts}\label{to-other-analysts}}
 
 \hypertarget{to-researchers-content-experts}{%
-\section{To Researchers \& Content
-Experts}\label{to-researchers-content-experts}}
+\section{To Researchers \& Content Experts}\label{to-researchers-content-experts}}
 
 \hypertarget{to-technical-phobic-audiences}{%
-\section{To Technical-Phobic
-Audiences}\label{to-technical-phobic-audiences}}
+\section{To Technical-Phobic Audiences}\label{to-technical-phobic-audiences}}
 
 \hypertarget{testing-and-validation}{%
-\chapter{Testing, Validation, \& Defensive
-Programming}\label{testing-and-validation}}
+\chapter{Testing, Validation, \& Defensive Programming}\label{testing-and-validation}}
 
 \hypertarget{testing-functions}{%
 \section{Testing Functions}\label{testing-functions}}
@@ -585,8 +555,7 @@ Programming}\label{testing-and-validation}}
 \end{enumerate}
 
 \hypertarget{establishing-workstation}{%
-\chapter{Considerations when Selecting
-Tools}\label{establishing-workstation}}
+\chapter{Considerations when Selecting Tools}\label{establishing-workstation}}
 
 \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}
 
@@ -611,25 +580,15 @@ Tools}\label{establishing-workstation}}
 \hypertarget{the-components-goal}{%
 \subsection{The Component's Goal}\label{the-components-goal}}
 
-While disussing the advantages and disadvanages of tools, a colleague
-once said, ``Tidyverse packages don't do anything that I can't already
-do in Base R, and sometimes it even requires more lines of code''.
-Regardless if I agree, I feel these two points are irrelevant. Sometimes
-the advantage of a tool isn't to expand existing capabilities, but
-rather to facilitate development and maintaince for the same capability.
+While disussing the advantages and disadvanages of tools, a colleague once said, ``Tidyverse packages don't do anything that I can't already do in Base R, and sometimes it even requires more lines of code''. Regardless if I agree, I feel these two points are irrelevant. Sometimes the advantage of a tool isn't to expand existing capabilities, but rather to facilitate development and maintaince for the same capability.
 
-Likewise, I care less about the line count, and more about the
-readability. I'd prefer to maintain a 20-line chunk that is familar and
-readable than a 10-line chunk with dense phrases and unfamiliar
-functions. The bottleneck for most of our projects is human time, not
-execution time.
+Likewise, I care less about the line count, and more about the readability. I'd prefer to maintain a 20-line chunk that is familar and readable than a 10-line chunk with dense phrases and unfamiliar functions. The bottleneck for most of our projects is human time, not execution time.
 
 \hypertarget{current-skillset-of-team}{%
 \subsection{Current Skillset of Team}\label{current-skillset-of-team}}
 
 \hypertarget{desired-future-skillset-of-team}{%
-\subsection{Desired Future Skillset of
-Team}\label{desired-future-skillset-of-team}}
+\subsection{Desired Future Skillset of Team}\label{desired-future-skillset-of-team}}
 
 \hypertarget{skillset-of-audience}{%
 \subsection{Skillset of Audience}\label{skillset-of-audience}}
@@ -680,13 +639,9 @@ Team}\label{desired-future-skillset-of-team}}
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
 
-You can label chapter and section titles using \texttt{\{\#label\}}
-after them, e.g., we can reference Chapter \ref{intro}. If you do not
-manually label them, there will be automatic labels anyway, e.g.,
-Chapter \ref{architecture}.
+You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{architecture}.
 
-Figures and tables with captions will be placed in \texttt{figure} and
-\texttt{table} environments, respectively.
+Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -704,10 +659,7 @@ Figures and tables with captions will be placed in \texttt{figure} and
 \caption{Here is a nice figure!}\label{fig:nice-fig}
 \end{figure}
 
-Reference a figure by its code chunk label with the \texttt{fig:}
-prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can
-reference tables generated from \texttt{knitr::kable()}, e.g., see Table
-\ref{tab:nice-tab}.
+Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can reference tables generated from \texttt{knitr::kable()}, e.g., see Table \ref{tab:nice-tab}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -718,11 +670,11 @@ reference tables generated from \texttt{knitr::kable()}, e.g., see Table
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:nice-tab}Here is a nice table!}
 \centering
-\begin{tabular}[t]{rrrrl}
+\begin{tabular}{rrrrl}
 \toprule
 Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \midrule
@@ -753,9 +705,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{tabular}
 \end{table}
 
-You can write citations, too. For example, we are using the
-\textbf{bookdown} package \citep{R-bookdown} in this sample book, which
-was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
 
 \hypertarget{scratch-pad}{%
 \chapter{Scratch Pad of Loose Ideas}\label{scratch-pad}}
