@@ -1,7 +1,7 @@
 Prototypical File {#file-prototype}
 ====================================
 
-As stated before, in \@ref(consistency-files), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
+As stated before, in [Consistency Files](#consistency-files), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
 We use the term "chunk" for a section of code because it corresponds with knitr terminology [@xie2015], and in many cases, the chunk of our R file connects to a knitr Rmd file.
 
