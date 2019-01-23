@@ -25,7 +25,7 @@
 <meta name="author" content="Will Beasley">
 
 
-<meta name="date" content="2019-01-16">
+<meta name="date" content="2019-01-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -276,10 +276,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.3</span> Public &amp; Private Repositories</h2>
 <div id="scrubbing-github-history" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> Scrubbing GitHub history</h3>
-<p>Occassionaly files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (<em>i.e.</em>, the branch’s <a href="">head</a>), but from the entire history of the repo.</p>
+<p>Occassionaly files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (<em>i.e.</em>, the branch’s <a href="https://git-scm.com/docs/gitglossary#gitglossary-aiddefHEADaHEAD">head</a>), but from the entire history of the repo.</p>
 <p>Scrubbing is require typically when (a) a sensitive file has been accidentally commited and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.</p>
 <p>The two suitable scrubbing approaches both require the command line. The first is the <code>git-filter-branch</code> command within git, and the second is the <a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG repo-cleaner</a>. We use the second approach, which is [recommended by GitHub]; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.</p>
-<p>The <a href="">bash</a>-centric steps below remove any file<em>s</em> from the repo history called ‘monster-data.csv’ from the ‘bloated’ repository.</p>
+<p>The <a href="https://www.gnu.org/software/bash/">bash</a>-centric steps below remove any file<em>s</em> from the repo history called ‘monster-data.csv’ from the ‘bloated’ repository.</p>
 <ol style="list-style-type: decimal">
 <li>If the file contains passwords, change them immediately.</li>
 <li>Delete ‘monster-data.csv’ from your branch and push the commit to GitHub.</li>
@@ -290,12 +290,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> ~
 <span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</code></pre></li>
 <li><p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv</code></pre></li>
-<li><p><a href="">Reflog</a> and <a href="">garbage collect</a> the repo.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</code></pre></li>
+<li><p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> bloated.git
 <span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</code></pre></li>
 <li><p>Push your local changes to the GitHub server.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">push</span></code></pre></li>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> push</code></pre></li>
 <li><p>Delete the bfg jar from the home directory.</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> ~
 <span class="fu">rm</span> bfg-*.jar</code></pre></li>

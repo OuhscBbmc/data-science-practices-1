@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-16}
+    \date{2019-01-22}
 
 \usepackage{booktabs}
 
@@ -376,13 +376,13 @@ We use the term ``chunk'' for a section of code because it corresponds with knit
 \hypertarget{scrubbing-github-history}{%
 \subsection{Scrubbing GitHub history}\label{scrubbing-github-history}}
 
-Occassionaly files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (\emph{i.e.}, the branch's \href{}{head}), but from the entire history of the repo.
+Occassionaly files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (\emph{i.e.}, the branch's \href{https://git-scm.com/docs/gitglossary\#gitglossary-aiddefHEADaHEAD}{head}), but from the entire history of the repo.
 
 Scrubbing is require typically when (a) a sensitive file has been accidentally commited and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.
 
 The two suitable scrubbing approaches both require the command line. The first is the \texttt{git-filter-branch} command within git, and the second is the \href{https://rtyley.github.io/bfg-repo-cleaner/}{BFG repo-cleaner}. We use the second approach, which is {[}recommended by GitHub{]}; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.
 
-The \href{}{bash}-centric steps below remove any file\emph{s} from the repo history called `monster-data.csv' from the `bloated' repository.
+The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove any file\emph{s} from the repo history called `monster-data.csv' from the `bloated' repository.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -410,11 +410,11 @@ The \href{}{bash}-centric steps below remove any file\emph{s} from the repo hist
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{java}\NormalTok{ -jar bfg-*.jar --delete-files monster-data.csv}
+\ExtensionTok{java}\NormalTok{ -jar bfg-*.jar --delete-files monster-data.csv bloated.git}
 \end{Highlighting}
 \end{Shaded}
 \item
-  \href{}{Reflog} and \href{}{garbage collect} the repo.
+  \href{https://git-scm.com/docs/git-reflog}{Reflog} and \href{https://git-scm.com/docs/git-gc}{garbage collect} the repo.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -427,7 +427,7 @@ The \href{}{bash}-centric steps below remove any file\emph{s} from the repo hist
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{push}
+\FunctionTok{git}\NormalTok{ push}
 \end{Highlighting}
 \end{Shaded}
 \item
