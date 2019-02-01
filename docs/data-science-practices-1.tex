@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-22}
+    \date{2019-02-01}
 
 \usepackage{booktabs}
 
@@ -339,6 +339,169 @@ We use the term ``chunk'' for a section of code because it corresponds with knit
 
 \hypertarget{ellis}{%
 \section{Ellis}\label{ellis}}
+
+\hypertarget{purpose}{%
+\subsection{Purpose}\label{purpose}}
+
+To incorporate outside data source into your system safely.
+
+\hypertarget{philosophy}{%
+\subsection{Philosophy}\label{philosophy}}
+
+\begin{itemize}
+\tightlist
+\item
+  Without data immigration, all warehouses are useless. Embrace the power of fresh information in a way that is:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    repeatable when the datasource is updated (and you have to refresh your warehouse)
+  \item
+    similar to other Ellis lanes (that are designed for other data sources) so you don't have to learn/remember an entirely new pattern. (Like Rubiks cube instructions.)
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{guidelines}{%
+\subsection{Guidelines}\label{guidelines}}
+
+\begin{itemize}
+\tightlist
+\item
+  Take small bites.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Like all software development, don't tackle all the complexity the first time. Start by processing only the important columns before incorporating move.
+  \item
+    Use only the variables you need in the short-term, especially for new projects. As everyone knows, the variables from the upstream source can change. Don't spend effort writing code for variables you won't need for a few months/years; they'll likely change before you need them.
+  \item
+    After a row passes through the \texttt{verify-values} chunk, you're accountable for any failures it causes in your warehouse. All analysts know that external data is messy, so don't be surprised. Sometimes I'll spend an hour writing an Ellis for 6 columns.
+  \end{itemize}
+\item
+  Narrowly define each Ellis lane. One code file should strive to (a) consume only one CSV and (b) produce only one table. Exceptions include:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    if multiple input files are related, and really belong together (\emph{e.g.}, one CSV per month, or one CSV per clinic). This scenario is pretty common.
+  \item
+    if the CSV should legitimately produce two different tables after munging. This happens infrequently, such as one warehouse table needs to be wide, and another long.
+  \end{enumerate}
+\end{itemize}
+
+\hypertarget{examples}{%
+\subsection{Examples}\label{examples}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/te-ellis.R}
+\item
+  \url{https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/}
+\item
+  \url{https://github.com/OuhscBbmc/usnavy-billets/blob/master/manipulation/survey-ellis.R}
+\end{itemize}
+
+\hypertarget{elements}{%
+\subsection{Elements}\label{elements}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Clear memory} In scripting languages like R (unlike compiled languages like Java), it's easy for old variables to hang around. Explicitly clear them before you run the file again.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list=}\KeywordTok{ls}\NormalTok{(}\DataTypeTok{all=}\OtherTok{TRUE}\NormalTok{)) }\CommentTok{#Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Load Sources} In R, a \texttt{source()}d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.
+
+  The first approach is better suited for quick \& easy development. The second allows you to add documention and unit tests.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- load-sources ------------------------------------------------------------}
+\KeywordTok{source}\NormalTok{(}\StringTok{"./manipulation/osdh/ellis/common-ellis.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Load Packages} This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the \texttt{library()} function) when possible. Their functions don't need to be qualified (\emph{e.g.}, \texttt{dplyr::intersect()}) and could cause naming conflicts. Even if you can guarantee they don't conflict with packages now, packages could add new functions in the future that do conflict.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- load-packages -----------------------------------------------------------}
+\CommentTok{# Attach these package(s) so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path}
+\KeywordTok{library}\NormalTok{(magrittr            , }\DataTypeTok{quietly=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(DBI                 , }\DataTypeTok{quietly=}\OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{        )}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{        )}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{        ) }\CommentTok{# Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"testit"}\NormalTok{)}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{)}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{#devtools::install_github(repo="OuhscBbmc/OuhscMunge")}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Declare Global Variables and Functions}. This includes defining the expected column names and types of the data sources; use \texttt{readr::cols\_only()} (as opposed to \texttt{readr::cols()}) to ignore any new columns that may be been added since the dataset's last refresh.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- declare-globals ---------------------------------------------------------}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Load Data Source(s)} Read all data (\emph{e.g.}, database table, networked CSV, local lookup table). After this chunk, no new data should be introduced. This is for the sake of reducing human cognition load. Everything below this chunk is derived from these first four chunks.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- load-data ---------------------------------------------------------------}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Tweak Data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- tweak-data --------------------------------------------------------------}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Body of the Ellis}
+\item
+  \textbf{Verify}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- verify-values -----------------------------------------------------------}
+\NormalTok{county_month_combo   <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(ds}\OperatorTok{$}\NormalTok{county_id, ds}\OperatorTok{$}\NormalTok{month)}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert_character}\NormalTok{(county_month_combo, }\DataTypeTok{pattern  =}\StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{1,2\} }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{4\}-}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}-}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}$"}\NormalTok{, }\DataTypeTok{any.missing=}\NormalTok{F, }\DataTypeTok{unique=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Specify Columns} Define the exact columns and order to upload to the database. Once you import a column into a warehouse that multiple people are using, it's tough to remove it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- specify-columns-to-upload -----------------------------------------------}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{Welcome} into your warehouse. Until this chunk, nothing should be persisted.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- upload-to-db ------------------------------------------------------------}
+\CommentTok{# ---- save-to-disk ------------------------------------------------------------}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \hypertarget{arch}{%
 \section{Arch}\label{arch}}
