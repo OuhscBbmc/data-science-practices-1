@@ -1,0 +1,9 @@
+\cleardoublepage 
+
+(APPENDIX) Appendix {-}
+====================================
+
+Git & GitHub
+====================================
+
+[Jenny Bryan](https://github.com/jennybc) and [Jim Hester](https://github.com/jimhester) have published a thorough description of using Git from a data scientist's perspective, and we recommend following their guidance.  It is consistent with our approach, with a few exceptions noted below.  A complementary resource is *[Team Geek](https://smile.amazon.com/dp/1449302440)*, which has insightful advice for the human and collaborative aspects of version control.

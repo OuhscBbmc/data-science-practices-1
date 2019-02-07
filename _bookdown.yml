@@ -25,7 +25,9 @@ rmd_files:
     "ch-tools.Rmd",
     "ch-team.Rmd",
 
-    "ch-intro.Rmd",
+    # Appendices
+    "ch-git.Rmd",
     "ch-scratch-pad.Rmd",
+    "ch-intro.Rmd",           # from Yihui's bookdown example -for me to follow easily
     "ch-references.Rmd"
   ]
