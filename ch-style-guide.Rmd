@@ -1,0 +1,18 @@
+Style Guide {#style-guide}
+====================================
+
+Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code.  But like in most themes in this document, the cost is worth the effort.  Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.
+
+For the most part, our team follows the [tidyverse style](http://adv-r.had.co.nz/Style.html).  Here are some additional conventions we attempt to follow.
+
+ggplot2
+------------------------------------
+The expressiveness of [ggplot2](https://ggplot2.tidyverse.org/) allows someone to quickly develop precise scientific graphics.  One graph can be specified in many equivalent styles, which increases the opportunity for confusion.  We formalized much of this style while writing a [textbook for introductory statistics](https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md); the 200+ graphs and their code is publically available.
+
+
+### Order of commands
+
+ggplot2 is essentially a collection of functions combined with the `+` operator.  Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes.  The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions.  Our preference is:
+
+1. ``ggplot2()`, which 
+1. `geom_*`
