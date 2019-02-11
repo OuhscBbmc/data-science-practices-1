@@ -8,3 +8,17 @@ Chapters & Sections to Form
 1. Tools to Consider
     1. tidyverse
     1. odbc
+    
+1. ggplot2
+    1. use factors for explanatory variables when you want to keep the order consistent across graphs.  (@genevamarshall)
+
+1. styles
+    1. variable names: within a variable name order from big to small terms (lexigraphical scoping)  (@thomasnwilson)
+    
+1. public reports (and dashboards)
+    1. when developing a report for a external audience (ie, people outside your immediate research team), choose one or two pals who are unfamilar with your aims/methods as an impromptu focus group.  Ask them what things need to be redesigned/reframed/reformated/further-explained.  (@genevamarshall)
+        1. plots
+        1. plot labels/axes
+        1. variable names
+        1. units of measurement (eg, proportion vs percentage on the *y* axis)
+
