@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 2 Architecture Principles | Collaborative Data Science Practices</title>
+  <title>Chapter 12 Style Guide | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 2 Architecture Principles | Collaborative Data Science Practices" />
+  <meta property="og:title" content="Chapter 12 Style Guide | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Architecture Principles | Collaborative Data Science Practices" />
+  <meta name="twitter:title" content="Chapter 12 Style Guide | Collaborative Data Science Practices" />
   
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="file-prototype.html">
+<link rel="prev" href="document.html">
+<link rel="next" href="publication.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -278,33 +278,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="architecture" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Architecture Principles</h1>
-<div id="encapsulation" class="section level2">
-<h2><span class="header-section-number">2.1</span> Encapsulation</h2>
-</div>
-<div id="leverage-team-members-strenghts-avoid-weaknesses" class="section level2">
-<h2><span class="header-section-number">2.2</span> Leverage team member’s strenghts &amp; avoid weaknesses</h2>
+<div id="style-guide" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Style Guide</h1>
+<p>Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most themes in this document, the cost is worth the effort. Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.</p>
+<p>For the most part, our team follows the <a href="http://adv-r.had.co.nz/Style.html">tidyverse style</a>. Here are some additional conventions we attempt to follow.</p>
+<div id="ggplot2" class="section level2">
+<h2><span class="header-section-number">12.1</span> ggplot2</h2>
+<p>The expressiveness of <a href="https://ggplot2.tidyverse.org/">ggplot2</a> allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a <a href="https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md">textbook for introductory statistics</a>; the 200+ graphs and their code is publically available.</p>
+<div id="order-of-commands" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> Order of commands</h3>
+<p>ggplot2 is essentially a collection of functions combined with the <code>+</code> operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:</p>
 <ol style="list-style-type: decimal">
-<li>Focused code files</li>
-<li>Metadata for content experts</li>
+<li><code>ggplot2()</code> is the primary function to specify the default dataset and aesthetic mappings. Many arguments can be passed to <code>aes()</code>, and we prefer to follow an order consistent with the <code>scale_*()</code> order below.</li>
+<li><code>geom_*()</code> creates the <em>geom</em>etric elements that reperesent the data. Unlike most categories in this list, the order matters. Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.</li>
+<li><code>scale_*()</code> describes how a dimension of data (specified in <code>aes()</code>) is translated into a visual element. We specify the dimensions in descending order of (typical) importance: <code>x</code>, <code>y</code>, <code>group</code>, <code>color</code>, <code>fill</code>, <code>size</code>, <code>radius</code>, <code>alpha</code>, <code>shape</code>, <code>linetype</code>.</li>
+<li><code>coord_*()</code></li>
+<li><code>facet_*()</code> and <code>label_*()</code></li>
+<li><code>theme()</code></li>
+<li><code>labs()</code></li>
 </ol>
 </div>
-<div id="scales" class="section level2">
-<h2><span class="header-section-number">2.3</span> Scales</h2>
+<div id="gotchas" class="section level3">
+<h3><span class="header-section-number">12.1.2</span> Gotchas</h3>
+<p>Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).</p>
 <ol style="list-style-type: decimal">
-<li>Single source &amp; single analysis</li>
-<li>Multiple sources &amp; multiple analyses</li>
-</ol>
-</div>
-<div id="consistency" class="section level2">
-<h2><span class="header-section-number">2.4</span> Consistency</h2>
-<ol style="list-style-type: decimal">
-<li>Across Files {#consistency-files}</li>
-<li>Across Languages</li>
-<li>Across Projects</li>
+<li>Call <code>coord_*()</code> to restrict the plotted <em>x</em>/<em>y</em> values, not <code>scale_*()</code> or <code>lims()</code>/<code>xlim()</code>/<code>ylim()</code>. <code>coord_*()</code> zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to <code>geom_smooth()</code> (<em>e.g.</em>, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling <code>coord_*()</code>, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.</li>
 </ol>
 
+</div>
 </div>
 </div>
             </section>
@@ -312,8 +313,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="file-prototype.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="document.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="publication.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -343,7 +344,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-architecture.Rmd",
+"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-style-guide.Rmd",
 "text": "Edit"
 },
 "history": {

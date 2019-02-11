@@ -18,6 +18,7 @@ rmd_files:
     "ch-scaling-up.Rmd",
     "ch-collaboration.Rmd",
     "ch-documentation.Rmd",
+    "ch-style-guide.Rmd",
     "ch-publication.Rmd",
     "ch-testing-and-validation.Rmd",
     "ch-troubleshooting.Rmd",

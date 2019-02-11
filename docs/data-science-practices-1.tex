@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-02-06}
+    \date{2019-02-11}
 
 \usepackage{booktabs}
 
@@ -728,6 +728,54 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 
 (\href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}{example})
 
+\hypertarget{style-guide}{%
+\chapter{Style Guide}\label{style-guide}}
+
+Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most themes in this document, the cost is worth the effort. Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.
+
+For the most part, our team follows the \href{http://adv-r.had.co.nz/Style.html}{tidyverse style}. Here are some additional conventions we attempt to follow.
+
+\hypertarget{ggplot2}{%
+\section{ggplot2}\label{ggplot2}}
+
+The expressiveness of \href{https://ggplot2.tidyverse.org/}{ggplot2} allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a \href{https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md}{textbook for introductory statistics}; the 200+ graphs and their code is publically available.
+
+\hypertarget{order-of-commands}{%
+\subsection{Order of commands}\label{order-of-commands}}
+
+ggplot2 is essentially a collection of functions combined with the \texttt{+} operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{ggplot2()} is the primary function to specify the default dataset and aesthetic mappings. Many arguments can be passed to \texttt{aes()}, and we prefer to follow an order consistent with the \texttt{scale\_*()} order below.
+\item
+  \texttt{geom\_*()} creates the \emph{geom}etric elements that reperesent the data. Unlike most categories in this list, the order matters. Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.
+\item
+  \texttt{scale\_*()} describes how a dimension of data (specified in \texttt{aes()}) is translated into a visual element. We specify the dimensions in descending order of (typical) importance: \texttt{x}, \texttt{y}, \texttt{group}, \texttt{color}, \texttt{fill}, \texttt{size}, \texttt{radius}, \texttt{alpha}, \texttt{shape}, \texttt{linetype}.
+\item
+  \texttt{coord\_*()}
+\item
+  \texttt{facet\_*()} and \texttt{label\_*()}
+\item
+  \texttt{theme()}
+\item
+  \texttt{labs()}
+\end{enumerate}
+
+\hypertarget{gotchas}{%
+\subsection{Gotchas}\label{gotchas}}
+
+Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Call \texttt{coord\_*()} to restrict the plotted \emph{x}/\emph{y} values, not \texttt{scale\_*()} or \texttt{lims()}/\texttt{xlim()}/\texttt{ylim()}. \texttt{coord\_*()} zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to \texttt{geom\_smooth()} (\emph{e.g.}, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling \texttt{coord\_*()}, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.
+\end{enumerate}
+
 \hypertarget{publication}{%
 \chapter{Publishing Results}\label{publication}}
 
@@ -796,7 +844,7 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 \end{enumerate}
 
 \hypertarget{establishing-workstation}{%
-\chapter{Considerations when Selecting Tools}\label{establishing-workstation}}
+\chapter{Establishing Workstation}\label{establishing-workstation}}
 
 \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}
 

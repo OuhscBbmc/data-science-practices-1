@@ -1,4 +1,4 @@
-Considerations when Selecting Tools {#establishing-workstation}
+Establishing Workstation {#establishing-workstation}
 ====================================
 
 https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md
