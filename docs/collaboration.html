@@ -25,7 +25,7 @@
 <meta name="author" content="Will Beasley">
 
 
-<meta name="date" content="2019-02-11">
+<meta name="date" content="2019-02-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -200,6 +200,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="collaboration.html"><a href="collaboration.html#social-contract"><i class="fa fa-check"></i><b>10.1</b> Social Contract</a></li>
 <li class="chapter" data-level="10.2" data-path="collaboration.html"><a href="collaboration.html#code-reviews"><i class="fa fa-check"></i><b>10.2</b> Code Reviews</a></li>
 <li class="chapter" data-level="10.3" data-path="collaboration.html"><a href="collaboration.html#remote"><i class="fa fa-check"></i><b>10.3</b> Remote</a></li>
+<li class="chapter" data-level="10.4" data-path="collaboration.html"><a href="collaboration.html#loose-notes"><i class="fa fa-check"></i><b>10.4</b> Loose Notes</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="collaboration.html"><a href="collaboration.html#github"><i class="fa fa-check"></i><b>10.4.1</b> GitHub</a></li>
+<li class="chapter" data-level="10.4.2" data-path="collaboration.html"><a href="collaboration.html#common-code"><i class="fa fa-check"></i><b>10.4.2</b> Common Code</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>11</b> Documentation</a><ul>
 <li class="chapter" data-level="11.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>11.1</b> Team-wide</a></li>
@@ -300,7 +304,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>Headset &amp; sharing screens</li>
 </ol>
+</div>
+<div id="loose-notes" class="section level2">
+<h2><span class="header-section-number">10.4</span> Loose Notes</h2>
+<div id="github" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> GitHub</h3>
+<ol style="list-style-type: decimal">
+<li><p>Review your diffs before committing. Check for things like accidental deletions and debugging code that should be deleted (or at least commented out).</p></li>
+<li><p>Keep chatter to a minimum, especially on projects with 3+ people being notified of every issue post.</p></li>
+<li>When encountering a problem,
+<ul>
+<li>Take as much ownership as reasonable. Don’t merely report there’s an error.<br />
+</li>
+<li>If you can’t figure it out, ask the question and describe it well.
+<ul>
+<li>what low-level file &amp; line of code threw the error.</li>
+<li>how you have tried to solve it.</li>
+</ul></li>
+<li>If there’s a questionable line/chunk of code, <a href="https://help.github.com/articles/tracing-changes-in-a-file/">trace</a> its origin. Not for the sake of pointing the finger at someone, but for the sake of understanding its origin and history.</li>
+</ul></li>
+</ol>
+</div>
+<div id="common-code" class="section level3">
+<h3><span class="header-section-number">10.4.2</span> Common Code</h3>
+<p>This involves code/files that multiple people use, like the REDCap arches.</p>
+<ol style="list-style-type: decimal">
+<li>Run the file before committing it. Run common downstream files too (<em>e.g.</em>, if you make a change to the arch, also run the funnel).</li>
+<li>If an upstream variable name must change, alert people. Post a GitHub issue to announce it. Tell everyone, and search the repo (ctrl+shift+f in RStudio) to alert specific people who might be affected.</li>
+</ol>
 
+</div>
 </div>
 </div>
             </section>

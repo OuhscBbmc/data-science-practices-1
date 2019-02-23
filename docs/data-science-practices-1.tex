@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-02-11}
+    \date{2019-02-22}
 
 \usepackage{booktabs}
 
@@ -705,6 +705,54 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
   Headset \& sharing screens
 \end{enumerate}
 
+\hypertarget{loose-notes}{%
+\section{Loose Notes}\label{loose-notes}}
+
+\hypertarget{github}{%
+\subsection{GitHub}\label{github}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Review your diffs before committing. Check for things like accidental deletions and debugging code that should be deleted (or at least commented out).
+\item
+  Keep chatter to a minimum, especially on projects with 3+ people being notified of every issue post.
+\item
+  When encountering a problem,
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Take as much ownership as reasonable. Don't merely report there's an error.\\
+  \item
+    If you can't figure it out, ask the question and describe it well.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      what low-level file \& line of code threw the error.
+    \item
+      how you have tried to solve it.
+    \end{itemize}
+  \item
+    If there's a questionable line/chunk of code, \href{https://help.github.com/articles/tracing-changes-in-a-file/}{trace} its origin. Not for the sake of pointing the finger at someone, but for the sake of understanding its origin and history.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{common-code}{%
+\subsection{Common Code}\label{common-code}}
+
+This involves code/files that multiple people use, like the REDCap arches.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Run the file before committing it. Run common downstream files too (\emph{e.g.}, if you make a change to the arch, also run the funnel).
+\item
+  If an upstream variable name must change, alert people. Post a GitHub issue to announce it. Tell everyone, and search the repo (ctrl+shift+f in RStudio) to alert specific people who might be affected.
+\end{enumerate}
+
 \hypertarget{document}{%
 \chapter{Documentation}\label{document}}
 
@@ -955,6 +1003,46 @@ Likewise, I care less about the line count, and more about the readability. I'd 
     tidyverse
   \item
     odbc
+  \end{enumerate}
+\item
+  ggplot2
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    use factors for explanatory variables when you want to keep the order consistent across graphs. (\citet{genevamarshall})
+  \end{enumerate}
+\item
+  styles
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    variable names: within a variable name order from big to small terms (lexigraphical scoping) (\citet{thomasnwilson})
+  \end{enumerate}
+\item
+  public reports (and dashboards)
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    when developing a report for a external audience (ie, people outside your immediate research team), choose one or two pals who are unfamilar with your aims/methods as an impromptu focus group. Ask them what things need to be redesigned/reframed/reformated/further-explained. (\citet{genevamarshall})
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      plots
+    \item
+      plot labels/axes
+    \item
+      variable names
+    \item
+      units of measurement (eg, proportion vs percentage on the \emph{y} axis)
+    \end{enumerate}
   \end{enumerate}
 \end{enumerate}
 
