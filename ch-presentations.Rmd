@@ -1,0 +1,22 @@
+Presentations
+====================================
+
+Here is a collection of presentations by the BBMC and friends that may help demonstrate concepts discussed in the previous chapters.
+
+CDW
+------------------------------------
+
+1. **[prairie-outpost-public](https://github.com/OuhscBbmc/prairie-outpost-public)**: Documentation and starter files for OUHSC's Clinical Data Warehouse.
+1. **[OUHSC CDW](https://github.com/OuhscBbmc/BbmcResources/blob/master/Publications/presentation-2015-11-18-cdw-bse/clinical-data-warehouse-bse.pdf)**
+
+REDCap
+------------------------------------
+
+1. **[REDCap Systems Integration](https://github.com/OuhscBbmc/BbmcResources/blob/master/Publications/Presentation2015-09-REDCapCon/REDCapIntegration.pdf)**.  [REDCap Con](https://projectredcap.org/about/redcapcon/) 2015, Portland, Oregon.
+1. **[Literate Programming Patterns and Practices with REDCap](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx)** [REDCap Con](https://projectredcap.org/about/redcapcon/) 2014, Park City, Utah.
+1. **[Interacting with the REDCap API using the REDCapR Package](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/REDCapR.pptx)** [REDCap Con](https://projectredcap.org/about/redcapcon/) 2014, Park City, Utah.
+
+GitHub
+------------------------------------
+
+1. **[Scientific Collaboration with GitHub](https://github.com/OuhscBbmc/BbmcResources/blob/master/Publications/Presentation2015-08-GitHub/beasley-github-2015-08.md)**. [OU Bioinformatics Breakfast Club](https://github.com/bwawrik/MBIO5810) 2015.
