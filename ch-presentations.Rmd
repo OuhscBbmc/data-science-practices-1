@@ -20,3 +20,18 @@ GitHub
 ------------------------------------
 
 1. **[Scientific Collaboration with GitHub](https://github.com/OuhscBbmc/BbmcResources/blob/master/Publications/Presentation2015-08-GitHub/beasley-github-2015-08.md)**. [OU Bioinformatics Breakfast Club](https://github.com/bwawrik/MBIO5810) 2015.
+
+
+Architectures
+------------------------------------
+1. Linear Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
+
+    <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png?raw=true" style="width: 500px;"/>.
+    
+1. Many-to-many Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
+
+    <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
+
+1. Immunization transfer 
+
+    <img src="resources/immunization-flow.pdf" style="width: 2000px;"/>.
