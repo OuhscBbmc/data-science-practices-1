@@ -57,3 +57,10 @@ Architectures
 1. Immunization transfer 
 
     <img src="resources/immunization-flow.pdf" style="width: 2000px;"/>.
+
+
+Components
+------------------------------------
+1. **[Customizing display tables: using css with DT and kableExtra](https://raw.githack.com/OuhscBbmc/StatisticalComputing/master/2018-presentations/10-october/table-styling.html#/)**.  [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2018.
+1. **[yaml](https://github.com/wibeasley/class-yaml-2017/blob/master/data-public/raw/miechv-3-outcome-measure.yml)** and **[expandable trees](
+https://rawcdn.githack.com/wibeasley/class-yaml-2017/55ad75a9f69b03fde929c06bb3ec129f25c816a9/analysis/miechv-3-measures/miechv-3-measures.html#4_trees)** that selectively show subsets of hierarchy, 2017.
