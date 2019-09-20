@@ -59,6 +59,10 @@ Architectures
     <img src="resources/immunization-flow.pdf" style="width: 2000px;"/>.
 
 
+1. [IALSA](http://www.ialsa.org/): [A Collaborative Modeling Framework for Multi-study Replication](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)
+  
+    <img src="https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png?raw=true" style="width: 2000px;"/>.
+
 Components
 ------------------------------------
 1. **[Customizing display tables: using css with DT and kableExtra](https://raw.githack.com/OuhscBbmc/StatisticalComputing/master/2018-presentations/10-october/table-styling.html#/)**.  [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2018.
