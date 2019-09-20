@@ -48,15 +48,21 @@ Architectures
 ------------------------------------
 1. Linear Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
-    <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png?raw=true" style="width: 500px;"/>.
+    <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png">
+      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png?raw=true" style="width: 500px;"/>.
+    </a>
     
 1. Many-to-many Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
-    <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
+    <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png">
+      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
+    </a>
 
 1. Immunization transfer 
 
-    <img src="resources/immunization-flow.pdf" style="width: 2000px;"/>.
+    <a href="resources/immunization-flow.pdf">
+      <img src="resources/immunization-flow.png" style="width: 2000px;"/>.
+    </a>
 
 
 1. [IALSA](http://www.ialsa.org/): [A Collaborative Modeling Framework for Multi-study Replication](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)
