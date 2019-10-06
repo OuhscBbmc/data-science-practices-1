@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Patterns | Collaborative Data Science Practices</title>
-  <meta name="description" content="Collection of publicly available practices of data science and analysis.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Collection of publicly available practices of data science and analysis." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Patterns | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
 
-<meta name="author" content="Will Beasley">
+<meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-03-01">
+<meta name="date" content="2019-10-06" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data-at-rest.html">
-<link rel="next" href="security.html">
+<link rel="prev" href="data-at-rest.html"/>
+<link rel="next" href="security.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -56,7 +58,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -68,7 +69,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -338,40 +339,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.1.5</span> Elements</h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>Clear memory</strong> In scripting languages like R (unlike compiled languages like Java), it’s easy for old variables to hang around. Explicitly clear them before you run the file again.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></code></pre></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></a></code></pre></div></li>
 <li><p><strong>Load Sources</strong> In R, a <code>source()</code>d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.</p>
 <p>The first approach is better suited for quick &amp; easy development. The second allows you to add documention and unit tests.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- load-sources ------------------------------------------------------------</span>
-<span class="kw">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</code></pre></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># ---- load-sources ------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</a></code></pre></div></li>
 <li><p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code>library()</code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code>dplyr::intersect()</code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- load-packages -----------------------------------------------------------</span>
-<span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span>
-<span class="kw">library</span>(magrittr            , <span class="dt">quietly=</span><span class="ot">TRUE</span>)
-<span class="kw">library</span>(DBI                 , <span class="dt">quietly=</span><span class="ot">TRUE</span>)
-
-<span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span>
-<span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )
-<span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )
-<span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span>
-<span class="kw">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)
-<span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)
-<span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co">#devtools::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></code></pre></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># ---- load-packages -----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">library</span>(magrittr            , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">library</span>(DBI                 , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co">#devtools::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></a></code></pre></div></li>
 <li><p><strong>Declare Global Variables and Functions</strong>. This includes defining the expected column names and types of the data sources; use <code>readr::cols_only()</code> (as opposed to <code>readr::cols()</code>) to ignore any new columns that may be been added since the dataset’s last refresh.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- declare-globals ---------------------------------------------------------</span></code></pre></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># ---- declare-globals ---------------------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Load Data Source(s)</strong> Read all data (<em>e.g.</em>, database table, networked CSV, local lookup table). After this chunk, no new data should be introduced. This is for the sake of reducing human cognition load. Everything below this chunk is derived from these first four chunks.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- load-data ---------------------------------------------------------------</span></code></pre></li>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># ---- load-data ---------------------------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Tweak Data</strong></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- tweak-data --------------------------------------------------------------</span></code></pre></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># ---- tweak-data --------------------------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Body of the Ellis</strong></p></li>
 <li><p><strong>Verify</strong></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- verify-values -----------------------------------------------------------</span>
-county_month_combo   &lt;-<span class="st"> </span><span class="kw">paste</span>(ds<span class="op">$</span>county_id, ds<span class="op">$</span>month)
-checkmate<span class="op">::</span><span class="kw">assert_character</span>(county_month_combo, <span class="dt">pattern  =</span><span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2} </span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}$&quot;</span>, <span class="dt">any.missing=</span>F, <span class="dt">unique=</span>T)</code></pre></li>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># ---- verify-values -----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">county_month_combo   &lt;-<span class="st"> </span><span class="kw">paste</span>(ds<span class="op">$</span>county_id, ds<span class="op">$</span>month)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">checkmate<span class="op">::</span><span class="kw">assert_character</span>(county_month_combo, <span class="dt">pattern  =</span><span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2} </span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}$&quot;</span>, <span class="dt">any.missing=</span>F, <span class="dt">unique=</span>T)</a></code></pre></div></li>
 <li><p><strong>Specify Columns</strong> Define the exact columns and order to upload to the database. Once you import a column into a warehouse that multiple people are using, it’s tough to remove it.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></code></pre></li>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Welcome</strong> into your warehouse. Until this chunk, nothing should be persisted.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- upload-to-db ------------------------------------------------------------</span>
-<span class="co"># ---- save-to-disk ------------------------------------------------------------</span></code></pre></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># ---- upload-to-db ------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></a></code></pre></div></li>
 </ol>
 </div>
 </div>
@@ -409,11 +410,13 @@ checkmate<span class="op">::</span><span class="kw">assert_character</span>(coun
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -456,8 +459,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

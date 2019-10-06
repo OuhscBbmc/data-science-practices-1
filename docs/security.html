@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Security &amp; Private Data | Collaborative Data Science Practices</title>
-  <meta name="description" content="Collection of publicly available practices of data science and analysis.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Collection of publicly available practices of data science and analysis." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Security &amp; Private Data | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
 
-<meta name="author" content="Will Beasley">
+<meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-03-01">
+<meta name="date" content="2019-10-06" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="patterns.html">
-<link rel="next" href="automation.html">
+<link rel="prev" href="patterns.html"/>
+<link rel="next" href="automation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -56,7 +58,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -68,7 +69,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -315,18 +316,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Download and install the most recent Java JRE from the Oracle site.</li>
 <li>Download the most recent jar file from the BFG site to the home directory.</li>
 <li><p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> ~
-<span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</code></pre></li>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="bu">cd</span> ~</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</a></code></pre></div></li>
 <li><p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</code></pre></li>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</a></code></pre></div></li>
 <li><p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> bloated.git
-<span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</code></pre></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="bu">cd</span> bloated.git</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</a></code></pre></div></li>
 <li><p>Push your local changes to the GitHub server.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> push</code></pre></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="fu">git</span> push</a></code></pre></div></li>
 <li><p>Delete the bfg jar from the home directory.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> ~
-<span class="fu">rm</span> bfg-*.jar</code></pre></li>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="bu">cd</span> ~</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="fu">rm</span> bfg-*.jar</a></code></pre></div></li>
 <li><p>Ask your collaborators to reclone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
@@ -353,11 +354,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -400,8 +403,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
