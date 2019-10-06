@@ -297,8 +297,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">D</span> Introduction</h1>
 <p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro">D</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="architecture.html#architecture">2</a>.</p>
 <p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
 <img src="data-science-practices-1_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
 <p class="caption">
@@ -306,10 +306,10 @@ Figure D.1: Here is a nice figure!
 </p>
 </div>
 <p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="intro.html#fig:nice-fig">D.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="intro.html#tab:nice-tab">D.1</a>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">)</a></code></pre></div>
 <table>
 <caption><span id="tab:nice-tab">Table D.1: </span>Here is a nice table!</caption>
 <thead>

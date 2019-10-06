@@ -296,12 +296,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="file-prototype" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Prototypical File</h1>
 <p>As stated before, in <a href="#consistency-files">Consistency Files</a>, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.</p>
-<p>We use the term “chunk” for a section of code because it corresponds with knitr terminology <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>, and in many cases, the chunk of our R file connects to a knitr Rmd file.</p>
+<p>We use the term “chunk” for a section of code because it corresponds with knitr terminology <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>, and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.</p>
 <div id="clear-memory" class="section level2">
 <h2><span class="header-section-number">3.1</span> Clear Memory</h2>
+<p>Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developig and debugging because it prevents previous runs from contaminating subsequent runs. However it has little effect during production; we’ll look at manipulation files separately from analysis files.</p>
+<p>Manipulation R files are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d with the argument <code>local=new.env()</code>. The file is executed in a fresh environment, so there are no variables to clear. Analysis R files are typically called from an Rmd file’s <code>knitr::read_chunk()</code>, and code positioned above the first chunk is not called by knitr.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>However typically do not clear the memory in R files that are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d in the same environment as the caller, as it will interfere with the caller’s variables.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 </div>
 <div id="load-sources" class="section level2">
 <h2><span class="header-section-number">3.2</span> Load Sources</h2>
+<p>In the first true chunk, <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a> any R files containing global variables and functions that the current file requires. For instance, when a team of statisticians is producing a large report containing many analysis files, we define many of the graphical elements in a single file. This sourced file defines common color palettes and graphical functions so the cosmetics are more uniform across analyses.</p>
+<p>Keep the chunk, even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># ---- load-sources ------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">base<span class="op">::</span><span class="kw">source</span>(<span class="dt">file=</span><span class="st">&quot;./analysis/common/display-1.R&quot;</span>)      <span class="co"># Load common graphing functions.</span></a></code></pre></div>
 </div>
 <div id="load-packages" class="section level2">
 <h2><span class="header-section-number">3.3</span> Load Packages</h2>
@@ -334,6 +342,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ref-xie2015">
 <p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Read more about knitr’s <a href="https://yihui.name/knitr/demo/externalization/">code externalization</a><a href="file-prototype.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

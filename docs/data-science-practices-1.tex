@@ -203,13 +203,36 @@ To compile this example to PDF, you need XeLaTeX. You are recommended to install
 
 As stated before, in \protect\hyperlink{consistency-files}{Consistency Files}, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
-We use the term ``chunk'' for a section of code because it corresponds with knitr terminology \citep{xie2015}, and in many cases, the chunk of our R file connects to a knitr Rmd file.
+We use the term ``chunk'' for a section of code because it corresponds with knitr terminology \citep{xie2015}, and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.
 
 \hypertarget{clear-memory}{%
 \section{Clear Memory}\label{clear-memory}}
 
+Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developig and debugging because it prevents previous runs from contaminating subsequent runs. However it has little effect during production; we'll look at manipulation files separately from analysis files.
+
+Manipulation R files are \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html}{\texttt{source}}d with the argument \texttt{local=new.env()}. The file is executed in a fresh environment, so there are no variables to clear. Analysis R files are typically called from an Rmd file's \texttt{knitr::read\_chunk()}, and code positioned above the first chunk is not called by knitr \footnote{Read more about knitr's \href{https://yihui.name/knitr/demo/externalization/}{code externalization}}.
+
+However typically do not clear the memory in R files that are \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html}{\texttt{source}}d in the same environment as the caller, as it will interfere with the caller's variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{(}\DataTypeTok{all.names =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{load-sources}{%
 \section{Load Sources}\label{load-sources}}
+
+In the first true chunk, \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html}{\texttt{source}} any R files containing global variables and functions that the current file requires. For instance, when a team of statisticians is producing a large report containing many analysis files, we define many of the graphical elements in a single file. This sourced file defines common color palettes and graphical functions so the cosmetics are more uniform across analyses.
+
+Keep the chunk, even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- load-sources ------------------------------------------------------------}
+\NormalTok{base}\OperatorTok{::}\KeywordTok{source}\NormalTok{(}\DataTypeTok{file=}\StringTok{"./analysis/common/display-1.R"}\NormalTok{)      }\CommentTok{# Load common graphing functions.}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{load-packages}{%
 \section{Load Packages}\label{load-packages}}

@@ -3,13 +3,31 @@ Prototypical File {#file-prototype}
 
 As stated before, in [Consistency Files](#consistency-files), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
-We use the term "chunk" for a section of code because it corresponds with knitr terminology [@xie2015], and in many cases, the chunk of our R file connects to a knitr Rmd file.
+We use the term "chunk" for a section of code because it corresponds with knitr terminology [@xie2015], and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.
 
 Clear Memory
 ------------------------------------
+Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developig and debugging because it prevents previous runs from contaminating subsequent runs.  However it has little effect during production; we'll look at manipulation files separately from analysis files.  
+
+Manipulation R files are [`source`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html)d with the argument `local=new.env()`.  The file is executed in a fresh environment, so there are no variables to clear.  Analysis R files are typically called from an Rmd file's `knitr::read_chunk()`, and code positioned above the first chunk is not called by knitr ^[Read more about knitr's [code externalization](https://yihui.name/knitr/demo/externalization/)].
+
+However typically do not clear the memory in R files that are [`source`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html)d in the same environment as the caller, as it will interfere with the caller's variables.
+
+```r
+rm(list = ls(all.names = TRUE))
+```
 
 Load Sources
 ------------------------------------
+
+In the first true chunk, [`source`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html) any R files containing global variables and functions that the current file requires.  For instance, when a team of statisticians is producing a large report containing many analysis files, we define many of the graphical elements in a single file.  This sourced file defines common color palettes and graphical functions so the cosmetics are more uniform across analyses.
+
+Keep the chunk, even if no files are sourced.  An empty chunk is instructive to readers trying to determine if any files are sourced.
+
+```r
+# ---- load-sources ------------------------------------------------------------
+base::source(file="./analysis/common/display-1.R")      # Load common graphing functions.
+```
 
 Load Packages
 ------------------------------------
