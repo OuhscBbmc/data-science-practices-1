@@ -32,6 +32,25 @@ base::source(file="./analysis/common/display-1.R")      # Load common graphing f
 Load Packages
 ------------------------------------
 
+qqq Discuss why `requireNamespace()` is preferable to `library()` for most packages.  qqq
+
+The `source`d files above may load their own packages (by calling `library()`).  It is important that `library()` calls in this file follow the 'load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent.  Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.  
+
+Attach these package(s) so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+
+Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+
+
+```r
+# ---- load-packages -----------------------------------------------------------
+library(magrittr            , quietly=TRUE)
+
+requireNamespace("readr"        )
+requireNamespace("tidyr"        )
+requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function names conflict many packages (esp base, stats, and plyr).
+requireNamespace("rlang"        ) # Language constucts, like quosures
+requireNamespace("checkmate"    ) # For asserting conditions meet expected requireNamespace("OuhscMunge"   ) # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
+```
 Declare Globals
 ------------------------------------
 

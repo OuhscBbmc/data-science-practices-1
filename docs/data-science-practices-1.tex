@@ -237,6 +237,27 @@ Keep the chunk, even if no files are sourced. An empty chunk is instructive to r
 \hypertarget{load-packages}{%
 \section{Load Packages}\label{load-packages}}
 
+qqq Discuss why \texttt{requireNamespace()} is preferable to \texttt{library()} for most packages. qqq
+
+The \texttt{source}d files above may load their own packages (by calling \texttt{library()}). It is important that \texttt{library()} calls in this file follow the `load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.
+
+Attach these package(s) so their functions don't need to be qualified: \url{http://r-pkgs.had.co.nz/namespace.html\#search-path}
+
+Verify these packages are available on the machine, but their functions need to be qualified: \url{http://r-pkgs.had.co.nz/namespace.html\#search-path}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- load-packages -----------------------------------------------------------}
+\KeywordTok{library}\NormalTok{(magrittr            , }\DataTypeTok{quietly=}\OtherTok{TRUE}\NormalTok{)}
+
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{        )}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{        )}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{        ) }\CommentTok{# Avoid attaching dplyr, b/c its function names conflict many packages (esp base, stats, and plyr).}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"rlang"}\NormalTok{        ) }\CommentTok{# Language constucts, like quosures}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{    ) }\CommentTok{# For asserting conditions meet expected requireNamespace("OuhscMunge"   ) # remotes::install_github(repo="OuhscBbmc/OuhscMunge")}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{declare-globals}{%
 \section{Declare Globals}\label{declare-globals}}
 
