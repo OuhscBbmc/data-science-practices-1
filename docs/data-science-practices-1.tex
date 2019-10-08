@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-07}
+    \date{2019-10-08}
 
 \usepackage{booktabs}
 
@@ -255,12 +255,18 @@ As discussed in the previous \protect\hyperlink{qualify-functions}{qualify all f
 
 \texttt{requireNamespace()} is not used in several scenarios.
 
-\begin{verbatim}
-1. Core packages (*e.g.*, 'base' and 'stats') are loaded by R in most default installations.  We avoid unnecessary calls like `library(stats)` because they distract from more important features.
-1. Obvious dependencies are not called by `reqiureNamespace()` or `library()` for similar reasons, especially if they are not called directly.  For example 'tidyselect' is not listed when 'tidyr' is listed.
-1. The "pipe" function (declared in the `magrittr' package , *i.e.*, `%>%`) is attached with `import::from(magrittr, "%>%")`.  This frequently-used function is available without qualification.
-1. Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common.  Typical packages used in analysis are 'ggplot2' and 'lme4'.
-\end{verbatim}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Core packages (\emph{e.g.}, `base' and `stats') are loaded by R in most default installations. We avoid unnecessary calls like \texttt{library(stats)} because they distract from more important features.
+\item
+  Obvious dependencies are not called by \texttt{reqiureNamespace()} or \texttt{library()} for similar reasons, especially if they are not called directly. For example `tidyselect' is not listed when `tidyr' is listed.
+\item
+  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater{}\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater{}\%'')`. This frequently-used function is available without qualification.
+\item
+  Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common. Typical packages used in analysis are `ggplot2' and `lme4'.
+\end{enumerate}
 
 The \texttt{source}d files above may load their own packages (by calling \texttt{library()}). It is important that the \texttt{library()} calls in this file follow the `load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.
 

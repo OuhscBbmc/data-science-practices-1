@@ -38,10 +38,10 @@ As discussed in the previous [qualify all functions](#qualify-functions) section
 
 `requireNamespace()` is not used in several scenarios.
 
-    1. Core packages (*e.g.*, 'base' and 'stats') are loaded by R in most default installations.  We avoid unnecessary calls like `library(stats)` because they distract from more important features.
-    1. Obvious dependencies are not called by `reqiureNamespace()` or `library()` for similar reasons, especially if they are not called directly.  For example 'tidyselect' is not listed when 'tidyr' is listed.
-    1. The "pipe" function (declared in the `magrittr' package , *i.e.*, `%>%`) is attached with `import::from(magrittr, "%>%")`.  This frequently-used function is available without qualification.
-    1. Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common.  Typical packages used in analysis are 'ggplot2' and 'lme4'.
+1. Core packages (*e.g.*, 'base' and 'stats') are loaded by R in most default installations.  We avoid unnecessary calls like `library(stats)` because they distract from more important features.
+1. Obvious dependencies are not called by `reqiureNamespace()` or `library()` for similar reasons, especially if they are not called directly.  For example 'tidyselect' is not listed when 'tidyr' is listed.
+1. The "pipe" function (declared in the `magrittr' package , *i.e.*, `%>%`) is attached with `import::from(magrittr, "%>%")`.  This frequently-used function is available without qualification.
+1. Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common.  Typical packages used in analysis are 'ggplot2' and 'lme4'.
     
 
 The `source`d files above may load their own packages (by calling `library()`).  It is important that the `library()` calls in this file follow the 'load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent.  Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.  
