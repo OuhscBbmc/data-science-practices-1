@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-10-06" />
+<meta name="date" content="2019-10-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a></li>
 <li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a></li>
 <li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a></li>
+<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="file-prototype.html"><a href="file-prototype.html"><i class="fa fa-check"></i><b>3</b> Prototypical File</a><ul>
 <li class="chapter" data-level="3.1" data-path="file-prototype.html"><a href="file-prototype.html#clear-memory"><i class="fa fa-check"></i><b>3.1</b> Clear Memory</a></li>
@@ -295,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="file-prototype" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Prototypical File</h1>
-<p>As stated before, in <a href="#consistency-files">Consistency Files</a>, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.</p>
+<p>As stated before, in <a href="#consistency-files">Consistency across Files</a>, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.</p>
 <p>We use the term “chunk” for a section of code because it corresponds with knitr terminology <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>, and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.</p>
 <div id="clear-memory" class="section level2">
 <h2><span class="header-section-number">3.1</span> Clear Memory</h2>
@@ -313,18 +314,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="load-packages" class="section level2">
 <h2><span class="header-section-number">3.3</span> Load Packages</h2>
-<p>qqq Discuss why <code>requireNamespace()</code> is preferable to <code>library()</code> for most packages. qqq</p>
-<p>The <code>source</code>d files above may load their own packages (by calling <code>library()</code>). It is important that <code>library()</code> calls in this file follow the ‘load-sources’ chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.</p>
-<p>Attach these package(s) so their functions don’t need to be qualified: <a href="http://r-pkgs.had.co.nz/namespace.html#search-path" class="uri">http://r-pkgs.had.co.nz/namespace.html#search-path</a></p>
-<p>Verify these packages are available on the machine, but their functions need to be qualified: <a href="http://r-pkgs.had.co.nz/namespace.html#search-path" class="uri">http://r-pkgs.had.co.nz/namespace.html#search-path</a></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># ---- load-packages -----------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">library</span>(magrittr            , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict many packages (esp base, stats, and plyr).</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">requireNamespace</span>(<span class="st">&quot;rlang&quot;</span>        ) <span class="co"># Language constucts, like quosures</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>    ) <span class="co"># For asserting conditions meet expected requireNamespace(&quot;OuhscMunge&quot;   ) # remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></a></code></pre></div>
+<p>The ‘load-packages’ chunk declares required packages, and this is near the file’s beginning for three reasons. First, a reader scanning the file can more easily determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Third, this style mimics a requirement of other languages, such as declaring headers at the top of a C++ file.</p>
+<p>As discussed in the previous <a href="#qualify-functions">qualify all functions</a> section, we recommend that functions are qualified with their package (<em>e.g.</em>, <code>foo::bar()</code> instead of merely <code>bar()</code>). Consequently, the ‘load-packages’ chunk calls <code>requireNamespace()</code> more frequently than <code>library()</code>. <code>requireNamespace()</code> verifies the package is available on the local machine, but does not load it into memory; <code>library()</code> verifies the package is available, and then loads it.</p>
+<p><code>requireNamespace()</code> is not used in several scenarios.</p>
+<pre><code>1. Core packages (*e.g.*, &#39;base&#39; and &#39;stats&#39;) are loaded by R in most default installations.  We avoid unnecessary calls like `library(stats)` because they distract from more important features.
+1. Obvious dependencies are not called by `reqiureNamespace()` or `library()` for similar reasons, especially if they are not called directly.  For example &#39;tidyselect&#39; is not listed when &#39;tidyr&#39; is listed.
+1. The &quot;pipe&quot; function (declared in the `magrittr&#39; package , *i.e.*, `%&gt;%`) is attached with `import::from(magrittr, &quot;%&gt;%&quot;)`.  This frequently-used function is available without qualification.
+1. Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common.  Typical packages used in analysis are &#39;ggplot2&#39; and &#39;lme4&#39;.</code></pre>
+<p>The <code>source</code>d files above may load their own packages (by calling <code>library()</code>). It is important that the <code>library()</code> calls in this file follow the ‘load-sources’ chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.</p>
+<p><a href="http://r-pkgs.had.co.nz/namespace.html#search-path" class="uri">http://r-pkgs.had.co.nz/namespace.html#search-path</a> about <code>library()</code>, <code>requireNamespace()</code>, and their siblings, as well as the larger concepts such as attaching functions into the search path.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># ---- load-packages -----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">import<span class="op">::</span><span class="kw">from</span>(magrittr, <span class="st">&quot;%&gt;%&quot;</span> )</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>     )</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>     )</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>     ) <span class="co"># Don&#39;t attach. Its function names conflict many packages (esp base, stats, and plyr)</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">requireNamespace</span>(<span class="st">&quot;rlang&quot;</span>     ) <span class="co"># Language constucts, like quosures</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span> ) <span class="co"># Asserts expected conditions requireNamespace(&quot;OuhscMunge&quot;) # remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></a></code></pre></div>
 </div>
 <div id="declare-globals" class="section level2">
 <h2><span class="header-section-number">3.4</span> Declare Globals</h2>
@@ -359,6 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <ol start="1">
 <li id="fn1"><p>Read more about knitr’s <a href="https://yihui.name/knitr/demo/externalization/">code externalization</a><a href="file-prototype.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>The error message “Error in library(foo) : there is no package called ‘foo’” is easier to understand than “Error in bar() : could not find function ‘bar’”; this also illuminate conflicts arising when two packages have a <code>bar()</code> function. See McConnell 2004 Section qqq for more about the ‘fail early’ principle.<a href="file-prototype.html#fnref2" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

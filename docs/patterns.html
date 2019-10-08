@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-10-06" />
+<meta name="date" content="2019-10-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a></li>
 <li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a></li>
 <li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a></li>
+<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="file-prototype.html"><a href="file-prototype.html"><i class="fa fa-check"></i><b>3</b> Prototypical File</a><ul>
 <li class="chapter" data-level="3.1" data-path="file-prototype.html"><a href="file-prototype.html#clear-memory"><i class="fa fa-check"></i><b>3.1</b> Clear Memory</a></li>
@@ -339,40 +340,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.1.5</span> Elements</h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>Clear memory</strong> In scripting languages like R (unlike compiled languages like Java), it’s easy for old variables to hang around. Explicitly clear them before you run the file again.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></a></code></pre></div></li>
 <li><p><strong>Load Sources</strong> In R, a <code>source()</code>d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.</p>
 <p>The first approach is better suited for quick &amp; easy development. The second allows you to add documention and unit tests.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># ---- load-sources ------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># ---- load-sources ------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</a></code></pre></div></li>
 <li><p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code>library()</code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code>dplyr::intersect()</code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># ---- load-packages -----------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">library</span>(magrittr            , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw">library</span>(DBI                 , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="kw">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co">#devtools::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># ---- load-packages -----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">library</span>(magrittr            , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw">library</span>(DBI                 , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="kw">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co">#devtools::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></a></code></pre></div></li>
 <li><p><strong>Declare Global Variables and Functions</strong>. This includes defining the expected column names and types of the data sources; use <code>readr::cols_only()</code> (as opposed to <code>readr::cols()</code>) to ignore any new columns that may be been added since the dataset’s last refresh.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># ---- declare-globals ---------------------------------------------------------</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># ---- declare-globals ---------------------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Load Data Source(s)</strong> Read all data (<em>e.g.</em>, database table, networked CSV, local lookup table). After this chunk, no new data should be introduced. This is for the sake of reducing human cognition load. Everything below this chunk is derived from these first four chunks.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># ---- load-data ---------------------------------------------------------------</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># ---- load-data ---------------------------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Tweak Data</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># ---- tweak-data --------------------------------------------------------------</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># ---- tweak-data --------------------------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Body of the Ellis</strong></p></li>
 <li><p><strong>Verify</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># ---- verify-values -----------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">county_month_combo   &lt;-<span class="st"> </span><span class="kw">paste</span>(ds<span class="op">$</span>county_id, ds<span class="op">$</span>month)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">checkmate<span class="op">::</span><span class="kw">assert_character</span>(county_month_combo, <span class="dt">pattern  =</span><span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2} </span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}$&quot;</span>, <span class="dt">any.missing=</span>F, <span class="dt">unique=</span>T)</a></code></pre></div></li>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># ---- verify-values -----------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">county_month_combo   &lt;-<span class="st"> </span><span class="kw">paste</span>(ds<span class="op">$</span>county_id, ds<span class="op">$</span>month)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">checkmate<span class="op">::</span><span class="kw">assert_character</span>(county_month_combo, <span class="dt">pattern  =</span><span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2} </span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}$&quot;</span>, <span class="dt">any.missing=</span>F, <span class="dt">unique=</span>T)</a></code></pre></div></li>
 <li><p><strong>Specify Columns</strong> Define the exact columns and order to upload to the database. Once you import a column into a warehouse that multiple people are using, it’s tough to remove it.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></a></code></pre></div></li>
 <li><p><strong>Welcome</strong> into your warehouse. Until this chunk, nothing should be persisted.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># ---- upload-to-db ------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># ---- upload-to-db ------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></a></code></pre></div></li>
 </ol>
 </div>
 </div>

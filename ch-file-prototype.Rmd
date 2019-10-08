@@ -1,7 +1,7 @@
 Prototypical File {#file-prototype}
 ====================================
 
-As stated before, in [Consistency Files](#consistency-files), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
+As stated before, in [Consistency across Files](#consistency-files), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
 We use the term "chunk" for a section of code because it corresponds with knitr terminology [@xie2015], and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.
 
@@ -29,28 +29,36 @@ Keep the chunk, even if no files are sourced.  An empty chunk is instructive to 
 base::source(file="./analysis/common/display-1.R")      # Load common graphing functions.
 ```
 
-Load Packages
+Load Packages {#load-packages}
 ------------------------------------
 
-qqq Discuss why `requireNamespace()` is preferable to `library()` for most packages.  qqq
+The 'load-packages' chunk declares required packages, and this is near the file's beginning for three reasons.  First, a reader scanning the file can more easily determine its dependencies when located in a single chunk.  Second, if your machine is lacking a required package, it is best to know early^[The error message "Error in library(foo) : there is no package called 'foo'" is easier to understand than "Error in bar() : could not find function 'bar'"; this also illuminate conflicts arising when two packages have a `bar()` function. See McConnell 2004 Section qqq for more about the 'fail early' principle.].  Third, this style mimics a requirement of other languages, such as declaring headers at the top of a C++ file.
 
-The `source`d files above may load their own packages (by calling `library()`).  It is important that `library()` calls in this file follow the 'load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent.  Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.  
+As discussed in the previous [qualify all functions](#qualify-functions) section, we recommend that functions are qualified with their package (*e.g.*, `foo::bar()` instead of merely `bar()`).  Consequently, the 'load-packages' chunk calls `requireNamespace()` more frequently than `library()`.  `requireNamespace()` verifies the package is available on the local machine, but does not load it into memory; `library()` verifies the package is available, and then loads it.
 
-Attach these package(s) so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+`requireNamespace()` is not used in several scenarios.
 
-Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+    1. Core packages (*e.g.*, 'base' and 'stats') are loaded by R in most default installations.  We avoid unnecessary calls like `library(stats)` because they distract from more important features.
+    1. Obvious dependencies are not called by `reqiureNamespace()` or `library()` for similar reasons, especially if they are not called directly.  For example 'tidyselect' is not listed when 'tidyr' is listed.
+    1. The "pipe" function (declared in the `magrittr' package , *i.e.*, `%>%`) is attached with `import::from(magrittr, "%>%")`.  This frequently-used function is available without qualification.
+    1. Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common.  Typical packages used in analysis are 'ggplot2' and 'lme4'.
+    
 
+The `source`d files above may load their own packages (by calling `library()`).  It is important that the `library()` calls in this file follow the 'load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent.  Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.  
+
+http://r-pkgs.had.co.nz/namespace.html#search-path about `library()`, `requireNamespace()`, and their siblings, as well as the larger concepts such as attaching functions into the search path.
 
 ```r
 # ---- load-packages -----------------------------------------------------------
-library(magrittr            , quietly=TRUE)
+import::from(magrittr, "%>%" )
 
-requireNamespace("readr"        )
-requireNamespace("tidyr"        )
-requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function names conflict many packages (esp base, stats, and plyr).
-requireNamespace("rlang"        ) # Language constucts, like quosures
-requireNamespace("checkmate"    ) # For asserting conditions meet expected requireNamespace("OuhscMunge"   ) # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
+requireNamespace("readr"     )
+requireNamespace("tidyr"     )
+requireNamespace("dplyr"     ) # Don't attach. Its function names conflict many packages (esp base, stats, and plyr)
+requireNamespace("rlang"     ) # Language constucts, like quosures
+requireNamespace("checkmate" ) # Asserts expected conditions requireNamespace("OuhscMunge") # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
 ```
+
 Declare Globals
 ------------------------------------
 
