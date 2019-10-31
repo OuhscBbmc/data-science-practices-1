@@ -64,10 +64,13 @@ Architectures
       <img src="resources/immunization-flow.png" style="width: 2000px;"/>.
     </a>
 
-
 1. [IALSA](http://www.ialsa.org/): [A Collaborative Modeling Framework for Multi-study Replication](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)
   
     <img src="https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png?raw=true" style="width: 2000px;"/>.
+
+1. [POPS](https://github.com/OuhscBbmc/darden-pharmaco-1): Automated daily screening eligibility for rare and understudied prescriptions.
+  
+    <img src="resources/pops-flow.png?raw=true" style="width: 2000px;"/>.
 
 Components
 ------------------------------------
