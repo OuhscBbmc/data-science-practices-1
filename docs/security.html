@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-10-08" />
+<meta name="date" content="2019-10-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,9 +53,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -64,14 +64,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +82,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -311,24 +313,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The two suitable scrubbing approaches both require the command line. The first is the <code>git-filter-branch</code> command within git, and the second is the <a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG repo-cleaner</a>. We use the second approach, which is [recommended by GitHub]; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.</p>
 <p>The <a href="https://www.gnu.org/software/bash/">bash</a>-centric steps below remove any file<em>s</em> from the repo history called ‘monster-data.csv’ from the ‘bloated’ repository.</p>
 <ol style="list-style-type: decimal">
-<li>If the file contains passwords, change them immediately.</li>
-<li>Delete ‘monster-data.csv’ from your branch and push the commit to GitHub.</li>
-<li>Ask your collaborators to push any outstanding commits to GitHub and delete their local copy of the repo. Once scrubbing is complete, they will re-clone it.</li>
-<li>Download and install the most recent Java JRE from the Oracle site.</li>
-<li>Download the most recent jar file from the BFG site to the home directory.</li>
+<li><p>If the file contains passwords, change them immediately.</p></li>
+<li><p>Delete ‘monster-data.csv’ from your branch and push the commit to GitHub.</p></li>
+<li><p>Ask your collaborators to push any outstanding commits to GitHub and delete their local copy of the repo. Once scrubbing is complete, they will re-clone it.</p></li>
+<li><p>Download and install the most recent Java JRE from the Oracle site.</p></li>
+<li><p>Download the most recent jar file from the BFG site to the home directory.</p></li>
 <li><p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="bu">cd</span> ~</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</a></code></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="security.html#cb14-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb14-2"><a href="security.html#cb14-2"></a><span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</span></code></pre></div></li>
 <li><p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</a></code></pre></div></li>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="security.html#cb15-1"></a><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</span></code></pre></div></li>
 <li><p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="bu">cd</span> bloated.git</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</a></code></pre></div></li>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="security.html#cb16-1"></a><span class="bu">cd</span> bloated.git</span>
+<span id="cb16-2"><a href="security.html#cb16-2"></a><span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</span></code></pre></div></li>
 <li><p>Push your local changes to the GitHub server.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="fu">git</span> push</a></code></pre></div></li>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="security.html#cb17-1"></a><span class="fu">git</span> push</span></code></pre></div></li>
 <li><p>Delete the bfg jar from the home directory.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="bu">cd</span> ~</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="fu">rm</span> bfg-*.jar</a></code></pre></div></li>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="security.html#cb18-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb18-2"><a href="security.html#cb18-2"></a><span class="fu">rm</span> bfg-*.jar</span></code></pre></div></li>
 <li><p>Ask your collaborators to reclone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
