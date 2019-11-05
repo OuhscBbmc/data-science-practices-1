@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-10-31" />
+<meta name="date" content="2019-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,13 +154,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="file-prototype.html"><a href="file-prototype.html#save-to-disk-or-database"><i class="fa fa-check"></i><b>3.10</b> Save to Disk or Database</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>4</b> Prototypical Repository</a><ul>
-<li class="chapter" data-level="4.1" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>4.1</b> Analysis</a></li>
-<li class="chapter" data-level="4.2" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>4.2</b> Data Public</a></li>
-<li class="chapter" data-level="4.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>4.3</b> Data Unshared</a></li>
-<li class="chapter" data-level="4.4" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>4.4</b> Documentation</a></li>
-<li class="chapter" data-level="4.5" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>4.5</b> Manipulation</a></li>
-<li class="chapter" data-level="4.6" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>4.6</b> Stitched Output</a></li>
-<li class="chapter" data-level="4.7" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>4.7</b> Utility</a></li>
+<li class="chapter" data-level="4.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>4.1</b> Root</a></li>
+<li class="chapter" data-level="4.2" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>4.2</b> Analysis</a></li>
+<li class="chapter" data-level="4.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>4.3</b> Data Public</a></li>
+<li class="chapter" data-level="4.4" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>4.4</b> Data Unshared</a></li>
+<li class="chapter" data-level="4.5" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>4.5</b> Documentation</a></li>
+<li class="chapter" data-level="4.6" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>4.6</b> Manipulation</a></li>
+<li class="chapter" data-level="4.7" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>4.7</b> Stitched Output</a></li>
+<li class="chapter" data-level="4.8" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>4.8</b> Utility</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>5</b> Data at Rest</a><ul>
 <li class="chapter" data-level="5.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>5.1</b> Data States</a></li>
@@ -299,11 +300,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="repo-prototype" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Prototypical Repository</h1>
 <p><a href="https://github.com/wibeasley/RAnalysisSkeleton" class="uri">https://github.com/wibeasley/RAnalysisSkeleton</a></p>
+<div id="repo-root" class="section level2">
+<h2><span class="header-section-number">4.1</span> Root</h2>
+<ol style="list-style-type: decimal">
+<li><p><code>config.R</code> is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is great when a value has to be coordinated across multiple file</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="repo-prototype.html#cb6-1"></a><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="repo-prototype.html#cb6-2"></a><span class="co"># To be processed by Ellis lanes</span></span>
+<span id="cb6-3"><a href="repo-prototype.html#cb6-3"></a><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/raw/subject-1.csv&quot;</span></span>
+<span id="cb6-4"><a href="repo-prototype.html#cb6-4"></a><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">&quot;data-public/raw/mlm-1.csv&quot;</span></span>
+<span id="cb6-5"><a href="repo-prototype.html#cb6-5"></a></span>
+<span id="cb6-6"><a href="repo-prototype.html#cb6-6"></a><span class="co"># Central Database (produced by Ellis lanes).</span></span>
+<span id="cb6-7"><a href="repo-prototype.html#cb6-7"></a><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">&quot;data-public/derived/db.sqlite3&quot;</span></span>
+<span id="cb6-8"><a href="repo-prototype.html#cb6-8"></a></span>
+<span id="cb6-9"><a href="repo-prototype.html#cb6-9"></a><span class="co"># Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
+<span id="cb6-10"><a href="repo-prototype.html#cb6-10"></a><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/derived/mlm-1.rds&quot;</span></span>
+<span id="cb6-11"><a href="repo-prototype.html#cb6-11"></a></span>
+<span id="cb6-12"><a href="repo-prototype.html#cb6-12"></a><span class="co"># Metadata</span></span>
+<span id="cb6-13"><a href="repo-prototype.html#cb6-13"></a><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">&quot;data-public/metadata/cqi-annotation.csv&quot;</span></span>
+<span id="cb6-14"><a href="repo-prototype.html#cb6-14"></a></span>
+<span id="cb6-15"><a href="repo-prototype.html#cb6-15"></a><span class="co"># Logging errors and messages from automated execution.</span></span>
+<span id="cb6-16"><a href="repo-prototype.html#cb6-16"></a><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)</span></span>
+<span id="cb6-17"><a href="repo-prototype.html#cb6-17"></a></span>
+<span id="cb6-18"><a href="repo-prototype.html#cb6-18"></a><span class="co"># time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.</span></span>
+<span id="cb6-19"><a href="repo-prototype.html#cb6-19"></a></span>
+<span id="cb6-20"><a href="repo-prototype.html#cb6-20"></a><span class="co"># ---- Validation Ranges &amp; Patterns ----</span></span>
+<span id="cb6-21"><a href="repo-prototype.html#cb6-21"></a><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
+<span id="cb6-22"><a href="repo-prototype.html#cb6-22"></a><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span>
+<span id="cb6-23"><a href="repo-prototype.html#cb6-23"></a><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct(&quot;2019-01-01&quot;, tz=&quot;America/Chicago&quot;), Sys.time())</span></span>
+<span id="cb6-24"><a href="repo-prototype.html#cb6-24"></a><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
+<span id="cb6-25"><a href="repo-prototype.html#cb6-25"></a><span class="fu">pattern_mrn_centricity  </span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^</span><span class="sc">\\</span><span class="st">d{16}$&quot;</span><span class="co">        # The 64-bit int is more easily validated as a character.</span></span></code></pre></div></li>
+<li><p><code>flow.R</code></p></li>
+<li><p><code>README.md</code></p></li>
+<li><p><code>*.Rproj</code></p></li>
+</ol>
+</div>
 <div id="analysis" class="section level2">
-<h2><span class="header-section-number">4.1</span> Analysis</h2>
+<h2><span class="header-section-number">4.2</span> Analysis</h2>
 </div>
 <div id="data-public" class="section level2">
-<h2><span class="header-section-number">4.2</span> Data Public</h2>
+<h2><span class="header-section-number">4.3</span> Data Public</h2>
 <ol style="list-style-type: decimal">
 <li>Raw</li>
 <li>Derived</li>
@@ -313,19 +348,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </div>
 <div id="data-unshared" class="section level2">
-<h2><span class="header-section-number">4.3</span> Data Unshared</h2>
+<h2><span class="header-section-number">4.4</span> Data Unshared</h2>
 </div>
 <div id="documentation" class="section level2">
-<h2><span class="header-section-number">4.4</span> Documentation</h2>
+<h2><span class="header-section-number">4.5</span> Documentation</h2>
 </div>
 <div id="manipulation" class="section level2">
-<h2><span class="header-section-number">4.5</span> Manipulation</h2>
+<h2><span class="header-section-number">4.6</span> Manipulation</h2>
 </div>
 <div id="stitched-output" class="section level2">
-<h2><span class="header-section-number">4.6</span> Stitched Output</h2>
+<h2><span class="header-section-number">4.7</span> Stitched Output</h2>
 </div>
 <div id="utility" class="section level2">
-<h2><span class="header-section-number">4.7</span> Utility</h2>
+<h2><span class="header-section-number">4.8</span> Utility</h2>
 
 </div>
 </div>

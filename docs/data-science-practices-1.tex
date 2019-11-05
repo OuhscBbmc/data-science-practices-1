@@ -124,7 +124,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-10-31}
+    \date{2019-11-04}
 
 \usepackage{booktabs}
 
@@ -237,7 +237,11 @@ However typically do not clear the memory in R files that are \href{https://stat
 
 In the first true chunk, \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html}{\texttt{source}} any R files containing global variables and functions that the current file requires. For instance, when a team of statisticians is producing a large report containing many analysis files, we define many of the graphical elements in a single file. This sourced file defines common color palettes and graphical functions so the cosmetics are more uniform across analyses.
 
-Keep the chunk, even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced.
+We prefer not to have \texttt{source}d files perform any real action, such as importing data or manipulating a file. One reason is because it is difficult to be consistent about the environmental variables when the sourced file's functions are run. A second reason is that it more cognitively difficult to understand how the files are connected.
+
+When the sourced file contains only function definitions, these operations can be called at any time in the current file with much tighter control of which variables are modfied. A bonus of the discipline of defining functions (instead of executing functions) is that the operations are typically more robust and generalizable.
+
+Keep the chunk even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced. This applies recommendation applies to all the chunks discussed in this chapter. As always, your team should agree on its own set of standards.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -249,7 +253,7 @@ Keep the chunk, even if no files are sourced. An empty chunk is instructive to r
 \hypertarget{load-packages}{%
 \section{Load Packages}\label{load-packages}}
 
-The `load-packages' chunk declares required packages, and this is near the file's beginning for three reasons. First, a reader scanning the file can more easily determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early\footnote{The error message ``Error in library(foo) : there is no package called `foo'\,'' is easier to understand than ``Error in bar() : could not find function `bar'\,''; this also illuminate conflicts arising when two packages have a \texttt{bar()} function. See McConnell 2004 Section qqq for more about the `fail early' principle.}. Third, this style mimics a requirement of other languages, such as declaring headers at the top of a C++ file.
+The `load-packages' chunk declares required packages near the file's beginning for three reasons. First, a reader scanning the file can quickly determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early\footnote{The error message ``Error in library(foo) : there is no package called `foo'\,'' is easier to understand than ``Error in bar() : could not find function `bar'\,'' thrown somewhere in the middle of the file; this check can also illuminate conflicts arising when two packages have a \texttt{bar()} function. See McConnell 2004 Section qqq for more about the `fail early' principle.}. Third, this style mimics a requirement of other languages, such as declaring headers at the top of a C++ file.
 
 As discussed in the previous \protect\hyperlink{qualify-functions}{qualify all functions} section, we recommend that functions are qualified with their package (\emph{e.g.}, \texttt{foo::bar()} instead of merely \texttt{bar()}). Consequently, the `load-packages' chunk calls \texttt{requireNamespace()} more frequently than \texttt{library()}. \texttt{requireNamespace()} verifies the package is available on the local machine, but does not load it into memory; \texttt{library()} verifies the package is available, and then loads it.
 
@@ -263,14 +267,16 @@ As discussed in the previous \protect\hyperlink{qualify-functions}{qualify all f
 \item
   Obvious dependencies are not called by \texttt{reqiureNamespace()} or \texttt{library()} for similar reasons, especially if they are not called directly. For example `tidyselect' is not listed when `tidyr' is listed.
 \item
-  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater\%'')`. This frequently-used function is available without qualification.
+  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater\%'')`. This frequently-used function called be called throughout the execution without qualification.
 \item
-  Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common. Typical packages used in analysis are `ggplot2' and `lme4'.
+  Compared to manipulation files, our analysis files tend to use many functions in a few concentrated packages so conflicting function names are less common. Typical packages used in analysis are `ggplot2' and `lme4'.
 \end{enumerate}
 
 The \texttt{source}d files above may load their own packages (by calling \texttt{library()}). It is important that the \texttt{library()} calls in this file follow the `load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.
 
-\url{http://r-pkgs.had.co.nz/namespace.html\#search-path} about \texttt{library()}, \texttt{requireNamespace()}, and their siblings, as well as the larger concepts such as attaching functions into the search path.
+Read \href{http://r-pkgs.had.co.nz/namespace.html\#search-path}{R Packages} for more about \texttt{library()}, \texttt{requireNamespace()}, and their siblings, as well as the larger concepts such as attaching functions into the search path.
+
+Here are packages found in most of our manipulation files. Notice the lesser-known packages have a quick explanation; this helps maintainers decide if the declaration is still necessary. Also notice the packages distributed outside of CRAN (\emph{e.g.}, GitHub) have a quick commented line to help the user install or update the package.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -279,14 +285,38 @@ The \texttt{source}d files above may load their own packages (by calling \texttt
 
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{     )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{     )}
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{     ) }\CommentTok{# Don't attach. Its function names conflict many packages (esp base, stats, and plyr)}
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"rlang"}\NormalTok{     ) }\CommentTok{# Language constucts, like quosures}
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{ ) }\CommentTok{# Asserts expected conditions requireNamespace("OuhscMunge") # remotes::install_github(repo="OuhscBbmc/OuhscMunge")}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{     ) }
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"config"}\NormalTok{     ) }
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{ ) }\CommentTok{# Asserts expected conditions }
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{# remotes::install_github(repo="OuhscBbmc/OuhscMunge")}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{declare-globals}{%
 \section{Declare Globals}\label{declare-globals}}
+
+When values are repeatedly used within a file, consider dedicating a variable so it's defined and set only once. This is also a good place for variables that are used only once, but whose value are central to the file's mission. Typical variables in our `declare-globals' chunk include data file paths, data file variables, color palettes, and values in the \emph{config} file.
+
+The \protect\hyperlink{repo-root}{config file} can coordinate a static variable across multiple files. Centrally
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ---- declare-globals ---------------------------------------------------------}
+\CommentTok{# Constant values that won't change.}
+\NormalTok{config                         <-}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
+\NormalTok{path_db                        <-}\StringTok{ }\NormalTok{config}\OperatorTok{$}\NormalTok{path_database}
+
+\CommentTok{# Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).}
+\CommentTok{#   OuhscMunge::readr_spec_aligned(config$path_subject_1_raw)}
+\NormalTok{col_types <-}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{cols_only}\NormalTok{(}
+  \DataTypeTok{subject_id          =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_integer}\NormalTok{(),}
+  \DataTypeTok{county_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_integer}\NormalTok{(),}
+  \DataTypeTok{gender_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_double}\NormalTok{(),}
+  \DataTypeTok{race                =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_character}\NormalTok{(),}
+  \DataTypeTok{ethnicity           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_character}\NormalTok{()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{load-data}{%
 \section{Load Data}\label{load-data}}
@@ -310,6 +340,51 @@ The \texttt{source}d files above may load their own packages (by calling \texttt
 \chapter{Prototypical Repository}\label{repo-prototype}}
 
 \url{https://github.com/wibeasley/RAnalysisSkeleton}
+
+\hypertarget{repo-root}{%
+\section{Root}\label{repo-root}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{config.R} is simply a plain-text yaml file read by the \href{https://CRAN.R-project.org/package=config}{config} package. It is great when a value has to be coordinated across multiple file
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{default}\KeywordTok{:}
+\CommentTok{# To be processed by Ellis lanes}
+\FunctionTok{path_subject_1_raw}\KeywordTok{:}\AttributeTok{  }\StringTok{"data-public/raw/subject-1.csv"}
+\FunctionTok{path_mlm_1_raw}\KeywordTok{:}\AttributeTok{      }\StringTok{"data-public/raw/mlm-1.csv"}
+
+\CommentTok{# Central Database (produced by Ellis lanes).}
+\FunctionTok{path_database}\KeywordTok{:}\AttributeTok{       }\StringTok{"data-public/derived/db.sqlite3"}
+
+\CommentTok{# Analysis-ready datasets (produced by scribes & consumed by analyses).}
+\FunctionTok{path_mlm_1_derived}\KeywordTok{:}\AttributeTok{  }\StringTok{"data-public/derived/mlm-1.rds"}
+
+\CommentTok{# Metadata}
+\FunctionTok{path_annotation}\KeywordTok{:}\AttributeTok{     }\StringTok{"data-public/metadata/cqi-annotation.csv"}
+
+\CommentTok{# Logging errors and messages from automated execution.}
+\FunctionTok{path_log_flow}\KeywordTok{:}\AttributeTok{       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")}
+
+\CommentTok{# time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.}
+
+\CommentTok{# ---- Validation Ranges & Patterns ----}
+\FunctionTok{range_record_id         }\KeywordTok{:}\AttributeTok{ !expr c(1L, 999999L)}
+\FunctionTok{range_dob               }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))}
+\FunctionTok{range_datetime_entry    }\KeywordTok{:}\AttributeTok{ !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())}
+\FunctionTok{max_age                 }\KeywordTok{:}\AttributeTok{ }\DecValTok{25}
+\FunctionTok{pattern_mrn_centricity  }\KeywordTok{:}\AttributeTok{ }\StringTok{"^}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{16\}$"}\CommentTok{        # The 64-bit int is more easily validated as a character.}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{flow.R}
+\item
+  \texttt{README.md}
+\item
+  \texttt{*.Rproj}
+\end{enumerate}
 
 \hypertarget{analysis}{%
 \section{Analysis}\label{analysis}}

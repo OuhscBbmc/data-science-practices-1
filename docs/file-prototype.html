@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-10-31" />
+<meta name="date" content="2019-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,13 +154,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.10" data-path="file-prototype.html"><a href="file-prototype.html#save-to-disk-or-database"><i class="fa fa-check"></i><b>3.10</b> Save to Disk or Database</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>4</b> Prototypical Repository</a><ul>
-<li class="chapter" data-level="4.1" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>4.1</b> Analysis</a></li>
-<li class="chapter" data-level="4.2" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>4.2</b> Data Public</a></li>
-<li class="chapter" data-level="4.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>4.3</b> Data Unshared</a></li>
-<li class="chapter" data-level="4.4" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>4.4</b> Documentation</a></li>
-<li class="chapter" data-level="4.5" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>4.5</b> Manipulation</a></li>
-<li class="chapter" data-level="4.6" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>4.6</b> Stitched Output</a></li>
-<li class="chapter" data-level="4.7" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>4.7</b> Utility</a></li>
+<li class="chapter" data-level="4.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>4.1</b> Root</a></li>
+<li class="chapter" data-level="4.2" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>4.2</b> Analysis</a></li>
+<li class="chapter" data-level="4.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>4.3</b> Data Public</a></li>
+<li class="chapter" data-level="4.4" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>4.4</b> Data Unshared</a></li>
+<li class="chapter" data-level="4.5" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>4.5</b> Documentation</a></li>
+<li class="chapter" data-level="4.6" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>4.6</b> Manipulation</a></li>
+<li class="chapter" data-level="4.7" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>4.7</b> Stitched Output</a></li>
+<li class="chapter" data-level="4.8" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>4.8</b> Utility</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>5</b> Data at Rest</a><ul>
 <li class="chapter" data-level="5.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>5.1</b> Data States</a></li>
@@ -310,34 +311,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-sources" class="section level2">
 <h2><span class="header-section-number">3.2</span> Load Sources</h2>
 <p>In the first true chunk, <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a> any R files containing global variables and functions that the current file requires. For instance, when a team of statisticians is producing a large report containing many analysis files, we define many of the graphical elements in a single file. This sourced file defines common color palettes and graphical functions so the cosmetics are more uniform across analyses.</p>
-<p>Keep the chunk, even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced.</p>
+<p>We prefer not to have <code>source</code>d files perform any real action, such as importing data or manipulating a file. One reason is because it is difficult to be consistent about the environmental variables when the sourced file’s functions are run. A second reason is that it more cognitively difficult to understand how the files are connected.</p>
+<p>When the sourced file contains only function definitions, these operations can be called at any time in the current file with much tighter control of which variables are modfied. A bonus of the discipline of defining functions (instead of executing functions) is that the operations are typically more robust and generalizable.</p>
+<p>Keep the chunk even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced. This applies recommendation applies to all the chunks discussed in this chapter. As always, your team should agree on its own set of standards.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="file-prototype.html#cb3-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
 <span id="cb3-2"><a href="file-prototype.html#cb3-2"></a>base<span class="op">::</span><span class="kw">source</span>(<span class="dt">file=</span><span class="st">&quot;./analysis/common/display-1.R&quot;</span>)      <span class="co"># Load common graphing functions.</span></span></code></pre></div>
 </div>
 <div id="load-packages" class="section level2">
 <h2><span class="header-section-number">3.3</span> Load Packages</h2>
-<p>The ‘load-packages’ chunk declares required packages, and this is near the file’s beginning for three reasons. First, a reader scanning the file can more easily determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early<a href="references.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Third, this style mimics a requirement of other languages, such as declaring headers at the top of a C++ file.</p>
+<p>The ‘load-packages’ chunk declares required packages near the file’s beginning for three reasons. First, a reader scanning the file can quickly determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early<a href="references.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Third, this style mimics a requirement of other languages, such as declaring headers at the top of a C++ file.</p>
 <p>As discussed in the previous <a href="#qualify-functions">qualify all functions</a> section, we recommend that functions are qualified with their package (<em>e.g.</em>, <code>foo::bar()</code> instead of merely <code>bar()</code>). Consequently, the ‘load-packages’ chunk calls <code>requireNamespace()</code> more frequently than <code>library()</code>. <code>requireNamespace()</code> verifies the package is available on the local machine, but does not load it into memory; <code>library()</code> verifies the package is available, and then loads it.</p>
 <p><code>requireNamespace()</code> is not used in several scenarios.</p>
 <ol style="list-style-type: decimal">
 <li>Core packages (<em>e.g.</em>, ‘base’ and ‘stats’) are loaded by R in most default installations. We avoid unnecessary calls like <code>library(stats)</code> because they distract from more important features.</li>
 <li>Obvious dependencies are not called by <code>reqiureNamespace()</code> or <code>library()</code> for similar reasons, especially if they are not called directly. For example ‘tidyselect’ is not listed when ‘tidyr’ is listed.</li>
-<li>The “pipe” function (declared in the <code>magrittr' package , *i.e.*,</code>%&gt;%<code>) is attached with</code>import::from(magrittr, “%&gt;%”)`. This frequently-used function is available without qualification.</li>
-<li>Our analysis files tend to use many functions in a few concentrated packages (compared to manipulation files), so conflicting function names are less common. Typical packages used in analysis are ‘ggplot2’ and ‘lme4’.</li>
+<li>The “pipe” function (declared in the <code>magrittr' package , *i.e.*,</code>%&gt;%<code>) is attached with</code>import::from(magrittr, “%&gt;%”)`. This frequently-used function called be called throughout the execution without qualification.</li>
+<li>Compared to manipulation files, our analysis files tend to use many functions in a few concentrated packages so conflicting function names are less common. Typical packages used in analysis are ‘ggplot2’ and ‘lme4’.</li>
 </ol>
 <p>The <code>source</code>d files above may load their own packages (by calling <code>library()</code>). It is important that the <code>library()</code> calls in this file follow the ‘load-sources’ chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.</p>
-<p><a href="http://r-pkgs.had.co.nz/namespace.html#search-path" class="uri">http://r-pkgs.had.co.nz/namespace.html#search-path</a> about <code>library()</code>, <code>requireNamespace()</code>, and their siblings, as well as the larger concepts such as attaching functions into the search path.</p>
+<p>Read <a href="http://r-pkgs.had.co.nz/namespace.html#search-path">R Packages</a> for more about <code>library()</code>, <code>requireNamespace()</code>, and their siblings, as well as the larger concepts such as attaching functions into the search path.</p>
+<p>Here are packages found in most of our manipulation files. Notice the lesser-known packages have a quick explanation; this helps maintainers decide if the declaration is still necessary. Also notice the packages distributed outside of CRAN (<em>e.g.</em>, GitHub) have a quick commented line to help the user install or update the package.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="file-prototype.html#cb4-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
 <span id="cb4-2"><a href="file-prototype.html#cb4-2"></a>import<span class="op">::</span><span class="kw">from</span>(magrittr, <span class="st">&quot;%&gt;%&quot;</span> )</span>
 <span id="cb4-3"><a href="file-prototype.html#cb4-3"></a></span>
 <span id="cb4-4"><a href="file-prototype.html#cb4-4"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>     )</span>
 <span id="cb4-5"><a href="file-prototype.html#cb4-5"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>     )</span>
-<span id="cb4-6"><a href="file-prototype.html#cb4-6"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>     ) <span class="co"># Don&#39;t attach. Its function names conflict many packages (esp base, stats, and plyr)</span></span>
-<span id="cb4-7"><a href="file-prototype.html#cb4-7"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;rlang&quot;</span>     ) <span class="co"># Language constucts, like quosures</span></span>
-<span id="cb4-8"><a href="file-prototype.html#cb4-8"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span> ) <span class="co"># Asserts expected conditions requireNamespace(&quot;OuhscMunge&quot;) # remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div>
+<span id="cb4-6"><a href="file-prototype.html#cb4-6"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>     ) </span>
+<span id="cb4-7"><a href="file-prototype.html#cb4-7"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;config&quot;</span>     ) </span>
+<span id="cb4-8"><a href="file-prototype.html#cb4-8"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span> ) <span class="co"># Asserts expected conditions </span></span>
+<span id="cb4-9"><a href="file-prototype.html#cb4-9"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co"># remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div>
 </div>
 <div id="declare-globals" class="section level2">
 <h2><span class="header-section-number">3.4</span> Declare Globals</h2>
+<p>When values are repeatedly used within a file, consider dedicating a variable so it’s defined and set only once. This is also a good place for variables that are used only once, but whose value are central to the file’s mission. Typical variables in our ‘declare-globals’ chunk include data file paths, data file variables, color palettes, and values in the <em>config</em> file.</p>
+<p>The <a href="repo-prototype.html#repo-root">config file</a> can coordinate a static variable across multiple files. Centrally</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="file-prototype.html#cb5-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb5-2"><a href="file-prototype.html#cb5-2"></a><span class="co"># Constant values that won&#39;t change.</span></span>
+<span id="cb5-3"><a href="file-prototype.html#cb5-3"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
+<span id="cb5-4"><a href="file-prototype.html#cb5-4"></a>path_db                        &lt;-<span class="st"> </span>config<span class="op">$</span>path_database</span>
+<span id="cb5-5"><a href="file-prototype.html#cb5-5"></a></span>
+<span id="cb5-6"><a href="file-prototype.html#cb5-6"></a><span class="co"># Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).</span></span>
+<span id="cb5-7"><a href="file-prototype.html#cb5-7"></a><span class="co">#   OuhscMunge::readr_spec_aligned(config$path_subject_1_raw)</span></span>
+<span id="cb5-8"><a href="file-prototype.html#cb5-8"></a>col_types &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">cols_only</span>(</span>
+<span id="cb5-9"><a href="file-prototype.html#cb5-9"></a>  <span class="dt">subject_id          =</span> readr<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb5-10"><a href="file-prototype.html#cb5-10"></a>  <span class="dt">county_id           =</span> readr<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb5-11"><a href="file-prototype.html#cb5-11"></a>  <span class="dt">gender_id           =</span> readr<span class="op">::</span><span class="kw">col_double</span>(),</span>
+<span id="cb5-12"><a href="file-prototype.html#cb5-12"></a>  <span class="dt">race                =</span> readr<span class="op">::</span><span class="kw">col_character</span>(),</span>
+<span id="cb5-13"><a href="file-prototype.html#cb5-13"></a>  <span class="dt">ethnicity           =</span> readr<span class="op">::</span><span class="kw">col_character</span>()</span>
+<span id="cb5-14"><a href="file-prototype.html#cb5-14"></a>)</span></code></pre></div>
 </div>
 <div id="load-data" class="section level2">
 <h2><span class="header-section-number">3.5</span> Load Data</h2>
