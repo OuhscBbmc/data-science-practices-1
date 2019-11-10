@@ -7,3 +7,7 @@ Git & GitHub
 ====================================
 
 [Jenny Bryan](https://github.com/jennybc) and [Jim Hester](https://github.com/jimhester) have published a thorough description of using Git from a data scientist's perspective ([Happy Git and GitHub for the useR](https://happygitwithr.com/)), and we recommend following their guidance.  It is consistent with our approach, with a few exceptions noted below.  A complementary resource is *[Team Geek](https://smile.amazon.com/dp/1449302440)*, which has insightful advice for the human and collaborative aspects of version control.
+
+
+Other Resources
+1. [Setting up a CI/CD Process on GitHub with Travis CI](https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github).  Travis-CI blob from August 2019.
