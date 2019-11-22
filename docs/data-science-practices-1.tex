@@ -71,7 +71,11 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
+% grffile has become a legacy package: https://ctan.org/pkg/grffile
+\IfFileExists{grffile.sty}{%
+\usepackage{grffile}
+}{}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -124,7 +128,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-11-04}
+    \date{2019-11-22}
 
 \usepackage{booktabs}
 
@@ -253,7 +257,7 @@ Keep the chunk even if no files are sourced. An empty chunk is instructive to re
 \hypertarget{load-packages}{%
 \section{Load Packages}\label{load-packages}}
 
-The `load-packages' chunk declares required packages near the file's beginning for three reasons. First, a reader scanning the file can quickly determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early\footnote{The error message ``Error in library(foo) : there is no package called `foo'\,'' is easier to understand than ``Error in bar() : could not find function `bar'\,'' thrown somewhere in the middle of the file; this check can also illuminate conflicts arising when two packages have a \texttt{bar()} function. See McConnell 2004 Section qqq for more about the `fail early' principle.}. Third, this style mimics a requirement of other languages, such as declaring headers at the top of a C++ file.
+The `load-packages' chunk declares required packages near the file's beginning for three reasons. First, a reader scanning the file can quickly determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early\footnote{The error message ``Error in library(foo) : there is no package called `foo'\,'' is easier to understand than ``Error in bar() : could not find function `bar'\,'' thrown somewhere in the middle of the file; this check can also illuminate conflicts arising when two packages have a \texttt{bar()} function. See McConnell 2004 Section qqq for more about the `fail early' principle.}. Third, this style mimics a requirement of other languages (such as declaring headers at the top of a C++ file) and follows the \href{https://style.tidyverse.org/files.html\#internal-structure}{tidyverse style guide}.
 
 As discussed in the previous \protect\hyperlink{qualify-functions}{qualify all functions} section, we recommend that functions are qualified with their package (\emph{e.g.}, \texttt{foo::bar()} instead of merely \texttt{bar()}). Consequently, the `load-packages' chunk calls \texttt{requireNamespace()} more frequently than \texttt{library()}. \texttt{requireNamespace()} verifies the package is available on the local machine, but does not load it into memory; \texttt{library()} verifies the package is available, and then loads it.
 
@@ -267,7 +271,7 @@ As discussed in the previous \protect\hyperlink{qualify-functions}{qualify all f
 \item
   Obvious dependencies are not called by \texttt{reqiureNamespace()} or \texttt{library()} for similar reasons, especially if they are not called directly. For example `tidyselect' is not listed when `tidyr' is listed.
 \item
-  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater\%'')`. This frequently-used function called be called throughout the execution without qualification.
+  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater{}\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater{}\%'')`. This frequently-used function called be called throughout the execution without qualification.
 \item
   Compared to manipulation files, our analysis files tend to use many functions in a few concentrated packages so conflicting function names are less common. Typical packages used in analysis are `ggplot2' and `lme4'.
 \end{enumerate}
@@ -286,7 +290,7 @@ Here are packages found in most of our manipulation files. Notice the lesser-kno
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{     )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{     )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{     ) }
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"config"}\NormalTok{     ) }
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"config"}\NormalTok{    ) }
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{ ) }\CommentTok{# Asserts expected conditions }
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{# remotes::install_github(repo="OuhscBbmc/OuhscMunge")}
 \end{Highlighting}
@@ -351,31 +355,31 @@ The \protect\hyperlink{repo-root}{config file} can coordinate a static variable 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{default}\KeywordTok{:}
+\FunctionTok{default:}
 \CommentTok{# To be processed by Ellis lanes}
-\FunctionTok{path_subject_1_raw}\KeywordTok{:}\AttributeTok{  }\StringTok{"data-public/raw/subject-1.csv"}
-\FunctionTok{path_mlm_1_raw}\KeywordTok{:}\AttributeTok{      }\StringTok{"data-public/raw/mlm-1.csv"}
+\FunctionTok{path_subject_1_raw:}\AttributeTok{  }\StringTok{"data-public/raw/subject-1.csv"}
+\FunctionTok{path_mlm_1_raw:}\AttributeTok{      }\StringTok{"data-public/raw/mlm-1.csv"}
 
 \CommentTok{# Central Database (produced by Ellis lanes).}
-\FunctionTok{path_database}\KeywordTok{:}\AttributeTok{       }\StringTok{"data-public/derived/db.sqlite3"}
+\FunctionTok{path_database:}\AttributeTok{       }\StringTok{"data-public/derived/db.sqlite3"}
 
 \CommentTok{# Analysis-ready datasets (produced by scribes & consumed by analyses).}
-\FunctionTok{path_mlm_1_derived}\KeywordTok{:}\AttributeTok{  }\StringTok{"data-public/derived/mlm-1.rds"}
+\FunctionTok{path_mlm_1_derived:}\AttributeTok{  }\StringTok{"data-public/derived/mlm-1.rds"}
 
 \CommentTok{# Metadata}
-\FunctionTok{path_annotation}\KeywordTok{:}\AttributeTok{     }\StringTok{"data-public/metadata/cqi-annotation.csv"}
+\FunctionTok{path_annotation:}\AttributeTok{     }\StringTok{"data-public/metadata/cqi-annotation.csv"}
 
 \CommentTok{# Logging errors and messages from automated execution.}
-\FunctionTok{path_log_flow}\KeywordTok{:}\AttributeTok{       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")}
+\FunctionTok{path_log_flow:}\AttributeTok{       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")}
 
 \CommentTok{# time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.}
 
 \CommentTok{# ---- Validation Ranges & Patterns ----}
-\FunctionTok{range_record_id         }\KeywordTok{:}\AttributeTok{ !expr c(1L, 999999L)}
-\FunctionTok{range_dob               }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))}
-\FunctionTok{range_datetime_entry    }\KeywordTok{:}\AttributeTok{ !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())}
-\FunctionTok{max_age                 }\KeywordTok{:}\AttributeTok{ }\DecValTok{25}
-\FunctionTok{pattern_mrn_centricity  }\KeywordTok{:}\AttributeTok{ }\StringTok{"^}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{16\}$"}\CommentTok{        # The 64-bit int is more easily validated as a character.}
+\FunctionTok{range_record_id         :}\AttributeTok{ !expr c(1L, 999999L)}
+\FunctionTok{range_dob               :}\AttributeTok{ !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))}
+\FunctionTok{range_datetime_entry    :}\AttributeTok{ !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())}
+\FunctionTok{max_age                 :}\AttributeTok{ 25}
+\FunctionTok{pattern_mrn_centricity  :}\AttributeTok{ }\StringTok{"^\textbackslash{}\textbackslash{}d\{16\}$"}\ErrorTok{        # The 64-bit int is more easily validated as a character.}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -1128,6 +1132,9 @@ Likewise, I care less about the line count, and more about the readability. I'd 
 \chapter{Git \& GitHub}\label{git-github}}
 
 \href{https://github.com/jennybc}{Jenny Bryan} and \href{https://github.com/jimhester}{Jim Hester} have published a thorough description of using Git from a data scientist's perspective (\href{https://happygitwithr.com/}{Happy Git and GitHub for the useR}), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is \emph{\href{https://smile.amazon.com/dp/1449302440}{Team Geek}}, which has insightful advice for the human and collaborative aspects of version control.
+
+Other Resources
+1. \href{https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github}{Setting up a CI/CD Process on GitHub with Travis CI}. Travis-CI blob from August 2019.
 
 \hypertarget{presentations}{%
 \chapter{Presentations}\label{presentations}}
