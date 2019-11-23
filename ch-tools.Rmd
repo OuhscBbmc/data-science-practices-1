@@ -22,5 +22,9 @@ Languages
 R Packages
 ------------------------------------
 
+1. When developing a codebase used by many people on your team, choose packages both on their functionality, as well as their ease of installation and maintainability.  For example, the [rJava](https://CRAN.R-project.org/package=rJava) package is a powerful package that allows R package developers to leverage the widespread [Java](https://www.java.com/en/) framework and many popular Java packages.  However, installing Java and setting the appropriate [path](https://en.wikipedia.org/wiki/PATH_(variable)) or [registry](https://en.wikipedia.org/wiki/Windows_Registry) settings can be error-prone, especially for non-developers.  
+
+    Therefore if when considering between two functions with comparable capabilities (*e.g.*, [`xlsx::read.xlsx()`](https://CRAN.R-project.org/package=xlsx) and [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html)), avoid the package that requires a proper installation and configuration of Java and rJava.
+
 Database
 ------------------------------------
