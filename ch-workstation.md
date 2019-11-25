@@ -1,20 +1,19 @@
-Establishing and Maintaining a Workstation {#workstation}
+Workstation {#workstation}
 ====================================
 
-https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md
+We believe it is important to keep software updated and consistent across workstations in your project.  This material was originally posted at https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md.  It should help establish our tools on a new development computer.
 
 
-Setting up the R and REDCap project on a new development computer
+Required Installation {#installation-required}
 ------------------------------------
 
-### Installation (required)
 The order matters.
 
 1. **[R](http://cran.r-project.org/)** is the centerpiece of the analysis. Every few months, you'll need to download the most recent version.  {added Sept 2012}
 
 1. **[RStudio Desktop](http://www.rstudio.com/ide/download/desktop)** is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.   {added Sept 2012}
 
-1. **Dozens of R Packages** will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least thirty minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated.  {added Sept 2012}   
+1. **Dozens of R Packages** {#package-installation} will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least thirty minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated.  {added Sept 2012}   
 
     1. Run the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3) file, which is the easiest option for beginners.  Just three calls are needed.  The first installs an important package, the second defines the `package_janitor_remote()` function, and the third calls the function (and passes a specific CSV of packages).
 
@@ -23,8 +22,7 @@ The order matters.
         devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
         package_janitor_remote(
           "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"
-        )
-        
+        )        
         ````
 
     1. Run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R) (located in the `utility/` directory) that lives in this repository.  The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R).
@@ -35,7 +33,8 @@ The order matters.
 
 1. **[GitHub for Windows Client](http://windows.github.com/)** does the basic tasks a little easier the git features built into RStudio.  {added Oct 2012}
 
-### Installation (recommended)
+Recommended Installation {#installation-recommended}
+------------------------------------
 
 The order does not matter.     
 
@@ -101,7 +100,9 @@ The order does not matter.
 
 * **[Pulse Secure](https://connect.ouhsc.edu)** is VPN client for OUHSC researchers.  It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
 
-### Installation (optional)
+Optional Installation {#installation-optional}
+-----------------------------------
+
 The order does not matter.
 
 * **[Git](https://git-scm.com/downloads)** command-line utility enables some advanced operations that the GitHub client doesn't support.  Use the default installation options, except these preferences of ours:
@@ -139,7 +140,8 @@ The order does not matter.
 * **[pandoc](http://johnmacfarlane.net/pandoc/)** converts files from one markup format into another.  We'll possibly use this to create tables in MS Word (for article submissions). {added Sept 2012}
 
 
-### Ubuntu
+Ubuntu Installation {#installation-ubuntu}
+-----------------------------------
 
 Ubuntu desktop 19.04 follows [these instructions](https://askubuntu.com/a/862520/153921) for the R and RStudio and required these debian packages to be installed before the R packages.  The `--yes` option avoids manual confirmation for each line, so you can copy & paste this into the terminal.
 
@@ -228,10 +230,11 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 }
 install-packages
 )
-  ```
+```
 
+Asset Locations
+-----------------------------------
 
-### Location Examples
 
 * **GitHub repository** https://github.com/OuhscBbmc/RedcapExamplesAndPatterns {added Sept 2012}
 
@@ -243,7 +246,8 @@ install-packages
 
 * **ODBC UserDsn** The name depends on your specific repository, and SQL Server database.  Ask Thomas, Will or David for how to set it up.
 
-### Installation (possible troubleshooting)
+Installation Troubleshooting
+-----------------------------------
 
 * **Git**: Will Beasley resorted to this workaround Sept 2012: http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing.  And then he copied the following four files from `D:/Program Files/msysgit/mingw/bin/` to `D:/Program Files/msysgit/bin/`: (1) `libiconv2.dll`, (2) `libcurl-4.dll`, (3) `libcrypto.dll`, and (4) `libssl.dll`. (If you install to the default location, you'll  move instead from `C:/msysgit/mingw/bin/` to `C:/msysgit/bin/`) {added Sept 2012}
 
@@ -252,10 +256,11 @@ install-packages
 * **RStudio** If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings`. {added Sept 2012}
 
 
-### Retired Software
+Retired Tools
+-----------------------------------
+
 
 We previously installed this software in this list.  Most have been replaced by software above that's either newer or more natural to use.
-
 
 * **[msysGit](http://msysgit.github.com/)** allows RStudio to track changes and commit & sync them to the GitHub server. Connect RStudio to GitHub repository.  I moved this to optional (Oct 14, 2012) because the GitHub client (see above) does almost everything that the RStudio plugin does; and it does it a little better and a little more robust; and its installation hasn't given me problems.  {added Oct 2012}
   * Starting in the top right of RStudio, click: Project -> New Project -> Create Project from Version Control -> Git  {added Sept 2012}
@@ -270,16 +275,3 @@ We previously installed this software in this list.  Most have been replaced by 
 * **[GitHub for Eclipse](http://eclipse.github.com/)** is something I discourage for a beginner, and I strongly recommend you start with RStudio (and [GitHub Client](http://windows.github.com/) or the git capabilities within RStudio) for a few months before you even consider Eclipse.  It's included in this list for the sake of completeness. When installing EGit plug-in, ignore eclipse site and check out this youtube video:http://www.youtube.com/watch?v=I7fbCE5nWPU.
 
 * **[Color Oracle](http://colororacle.org/)** simulates the three most common types of color blindness.  If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too).  If it's already installed, it takes less than 10 second to check it against all three types of color blindness. If it's not installed, extra work may be necessary if Java isn't already installed.  When you download the zip, extract the `ColorOracle.exe` program where you like. {added Sept 2012}  
-
-
-
-
-
-Recommended Installation
-------------------------------------
-
-Optional Installation
-------------------------------------
-
-Asset Locations
-------------------------------------

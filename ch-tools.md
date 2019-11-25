@@ -6,9 +6,9 @@ General
 
 ### The Component's Goal
 
-While disussing the advantages and disadvanages of tools, a colleague once said, "Tidyverse packages don't do anything that I can't already do in Base R, and sometimes it even requires more lines of code".  Regardless if I agree, I feel these two points are irrelevant.  Sometimes the advantage of a tool isn't to expand existing capabilities, but rather to facilitate development and maintaince for the same capability.
+While discussing the advantages and disadvantages of tools, a colleague once said, "Tidyverse packages don't do anything that I can't already do in Base R, and sometimes it even requires more lines of code".  Regardless if I agree, I feel these two points are irrelevant.  Sometimes the advantage of a tool isn't to expand existing capabilities, but rather to facilitate development and maintenance for the same capability.
 
-Likewise, I care less about the line count, and more about the readability.  I'd prefer to maintain a 20-line chunk that is familar and readable than a 10-line chunk with dense phrases and unfamiliar functions.  The bottleneck for most of our projects is human time, not execution time.
+Likewise, I care less about the line count, and more about the readability.  I'd prefer to maintain a 20-line chunk that is familiar and readable than a 10-line chunk with dense phrases and unfamiliar functions.  The bottleneck for most of our projects is human time, not execution time.
 
 ### Current Skillset of Team
 
