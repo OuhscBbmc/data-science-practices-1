@@ -9,29 +9,51 @@ Required Installation {#installation-required}
 
 The order matters.
 
-1. **[R](http://cran.r-project.org/)** is the centerpiece of the analysis. Every few months, you'll need to download the most recent version.  {added Sept 2012}
+### R
 
-1. **[RStudio Desktop](http://www.rstudio.com/ide/download/desktop)** is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.   {added Sept 2012}
+[R](http://cran.r-project.org/) is the centerpiece of the analysis. Every few months, you'll need to download the most recent version.  {added Sept 2012}
 
-1. **Dozens of R Packages** {#package-installation} will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least thirty minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated.  {added Sept 2012}   
+### RStudio 
 
-    1. Run the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3) file, which is the easiest option for beginners.  Just three calls are needed.  The first installs an important package, the second defines the `package_janitor_remote()` function, and the third calls the function (and passes a specific CSV of packages).
+[RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.   {added Sept 2012}
 
-        ```r
-        if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
-        devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
-        package_janitor_remote(
-          "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"
-        )        
-        ````
+### Installing R Packages
 
-    1. Run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R) (located in the `utility/` directory) that lives in this repository.  The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R).
+Dozens of R Packages will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least fifteen minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated. 
 
-1. **Several R Packages** might need to be updated.  Unless you've been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(ask="graphics", checkBuilt=TRUE)`. {added Sept 2012}
+To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3), which defines the `package_janitor_remote()` function.  The final line calls the function (and passes a specific CSV of packages)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R) (located in the `utility/` directory) that lives in this repository.  The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R).].
 
-1. **[GitHub](https://github.com/)** registration is necessary to push modified files to the repository.    First, register a free user account at https://github.com/plans.  Then tell the repository owner your exact username, and they'll add you as a collaborator  (eg, to https://github.com/OuhscBbmc/RedcapExamplesAndPatterns). {added Sept 2012}
+```r
+if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
+devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
 
-1. **[GitHub for Windows Client](http://windows.github.com/)** does the basic tasks a little easier the git features built into RStudio.  {added Oct 2012}
+package_janitor_remote(
+  "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"
+)        
+````
+
+Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper `DESCRIPTION` file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION) for an example.
+
+When the project is opened in RStudio, [`update_packages_addin()`](http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html) in [OuhscMunge](https://ouhscbbmc.github.io/OuhscMunge) will find the DESCRIPTION file and install the package dependencies.
+
+```r
+if( !base::requireNamespace("remotes"   ) ) utils::install.packages("remotes")
+if( !base::requireNamespace("OuhscMunge") ) remotes::install_github("OuhscMunge")
+OuhscMunge::update_packages_addin()
+```
+
+### Updating R Packages
+
+Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(ask="graphics", checkBuilt=TRUE)`.
+
+### GitHub
+
+[GitHub](https://github.com/) registration is necessary to push modified files to the repository.    First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator  (*e.g.*, to https://github.com/OuhscBbmc/RedcapExamplesAndPatterns).
+
+### GitHub for Windows Client
+
+[GitHub for Windows Client](http://windows.github.com/) does the basic tasks a little easier than the git features built into RStudio.  Occasionally, someone might need to use git form the command line to fix problems.
+
 
 Recommended Installation {#installation-recommended}
 ------------------------------------
@@ -42,7 +64,7 @@ The order does not matter.
 
 * **[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/)** is necessary to build some packages in development hosted on GitHub. {added Feb 2017}
 
-* **[Notepad++](http://notepad-plus-plus.org/)** is a text editor that allows you look at the raw text files, such as code and CSVs.  For CSVs and other data files, it's helpful when troubleshooting (instead of looking at the file through Excel, which masks & causes some issues).  {added Sept 2012}
+* **[Notepad++](http://notepad-plus-plus.org/)** is a text editor that allows you look at the raw text files, such as code and CSVs.  For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks & causes some issues).  {added Sept 2012}
 
 * **[Atom](https://atom.io/)** is a text editor, similar to Notepad++.  Notepad++ appears more efficient opening large CSVs.  Atom is better suited when editing a lot of files in a repository.  For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.  
 

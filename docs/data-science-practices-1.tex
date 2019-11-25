@@ -1040,22 +1040,383 @@ Here are some common mistakes we see not-so-infrequently (even sometimes in our 
   \texttt{traceback()}, \texttt{browser()}, etc
 \end{enumerate}
 
-\hypertarget{establishing-workstation}{%
-\chapter{Establishing Workstation}\label{establishing-workstation}}
+\hypertarget{workstation}{%
+\chapter{Workstation}\label{workstation}}
 
-\url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}
+We believe it is important to keep software updated and consistent across workstations in your project. This material was originally posted at \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}. It should help establish our tools on a new development computer.
 
-\hypertarget{required-installation}{%
-\section{Required Installation}\label{required-installation}}
+\hypertarget{installation-required}{%
+\section{Required Installation}\label{installation-required}}
 
-\hypertarget{recommended-installation}{%
-\section{Recommended Installation}\label{recommended-installation}}
+The order matters.
 
-\hypertarget{optional-installation}{%
-\section{Optional Installation}\label{optional-installation}}
+\hypertarget{r}{%
+\subsection{R}\label{r}}
+
+\href{http://cran.r-project.org/}{R} is the centerpiece of the analysis. Every few months, you'll need to download the most recent version. \{added Sept 2012\}
+
+\hypertarget{rstudio}{%
+\subsection{RStudio}\label{rstudio}}
+
+\href{http://www.rstudio.com/ide/download/desktop}{RStudio Desktop} is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus \texttt{Help} -\textgreater{} \texttt{Check\ for\ updates}. \{added Sept 2012\}
+
+\hypertarget{installing-r-packages}{%
+\subsection{Installing R Packages}\label{installing-r-packages}}
+
+Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install \href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv}{from our list of packages that our data analysts typically need}. The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available. Create a new `personal library' if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.
+
+To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online \href{https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3}{Gist}, which defines the \texttt{package\_janitor\_remote()} function. The final line calls the function (and passes a specific CSV of packages)\footnote{As an alternative to the Gist, run the local R script \href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R}{\texttt{install-packages.R}} (located in the \texttt{utility/} directory) that lives in this repository. The workhorse of this function is \href{https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R}{\texttt{OuhscMunge::package\_janitor()}}.}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"devtools"}\NormalTok{) ) utils}\OperatorTok{::}\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{source_gist}\NormalTok{(}\StringTok{"2c5e7459b88ec28b9e8fa0c695b15ee3"}\NormalTok{, }\DataTypeTok{filename=}\StringTok{"package-janitor-bbmc.R"}\NormalTok{)}
+
+\KeywordTok{package_janitor_remote}\NormalTok{(}
+  \StringTok{"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"}
+\NormalTok{)        }
+\end{Highlighting}
+\end{Shaded}
+
+Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper \texttt{DESCRIPTION} file. See \href{https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION}{RAnalysisSkeleton} for an example.
+
+When the project is opened in RStudio, \href{http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html}{\texttt{update\_packages\_addin()}} in \href{https://ouhscbbmc.github.io/OuhscMunge}{OuhscMunge} will find the DESCRIPTION file and install the package dependencies.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"remotes"}\NormalTok{   ) ) utils}\OperatorTok{::}\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) ) remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{)}
+\NormalTok{OuhscMunge}\OperatorTok{::}\KeywordTok{update_packages_addin}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{updating-r-packages}{%
+\subsection{Updating R Packages}\label{updating-r-packages}}
+
+Several R packages will need to be updated every weeks. Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code \texttt{update.packages(ask="graphics",\ checkBuilt=TRUE)}.
+
+\hypertarget{github-1}{%
+\subsection{GitHub}\label{github-1}}
+
+\href{https://github.com/}{GitHub} registration is necessary to push modified files to the repository. First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator (\emph{e.g.}, to \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns}).
+
+\hypertarget{github-for-windows-client}{%
+\subsection{GitHub for Windows Client}\label{github-for-windows-client}}
+
+\href{http://windows.github.com/}{GitHub for Windows Client} does the basic tasks a little easier than the git features built into RStudio. Occasionally, someone might need to use git form the command line to fix problems.
+
+\hypertarget{installation-recommended}{%
+\section{Recommended Installation}\label{installation-recommended}}
+
+The order does not matter.
+
+\begin{itemize}
+\item
+  \textbf{\href{https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server}{ODBC Driver for SQL Server}} is for connecting to the \href{https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd}{token server}, if your institution is using one. As of this writing, version 17 is the most recent driver version. See if a new one exists. \{updated Apr 2018\}
+\item
+  \textbf{\href{https://cran.r-project.org/bin/windows/Rtools/}{R Tools for Windows}} is necessary to build some packages in development hosted on GitHub. \{added Feb 2017\}
+\item
+  \textbf{\href{http://notepad-plus-plus.org/}{Notepad++}} is a text editor that allows you look at the raw text files, such as code and CSVs. For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks \& causes some issues). \{added Sept 2012\}
+\item
+  \textbf{\href{https://atom.io/}{Atom}} is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
+
+  Productivity is enhanced with the following \href{https://atom.io/packages}{Atom packages}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    \href{https://atom.io/packages/Sublime-Style-Column-Selection}{Sublime Style Column Selection}: Enable Sublime style `Column Selection'. Just hold `alt' while you select, or select using your middle mouse button.
+  \item
+    \href{https://atom.io/packages/atom-language-r}{atom-language-r} allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well. An older alternative is \href{https://atom.io/packages/language-r}{language-r}.
+  \item
+    \href{https://atom.io/packages/language-csv}{language-csv}: Adds syntax highlighting to \href{https://en.wikipedia.org/wiki/Comma-separated_values}{CSV} files. The highlighting is nice, and it automatically disables spell checking lines.
+  \item
+    \href{https://atom.io/packages/atom-beautify}{atom-beautify}: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C\#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
+  \item
+    \href{https://atom.io/packages/atom-wrap-in-tag}{atom-wrap-in-tag}: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
+  \item
+    \href{https://atom.io/packages/minimap}{minimap}: A preview of the full source code (in the right margin).
+  \item
+    \href{https://atom.io/packages/script}{script}: Run scripts based on file name, a selection of code, or by line number.
+  \item
+    \href{https://atom.io/packages/git-plus}{git-plus}: Do git things without the terminal (I don't think this is necessary anymore).
+  \end{enumerate}
+
+  The packages can be installed through Atom, or through the \texttt{apm} utility in the command line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apm}\NormalTok{ install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script}
+\end{Highlighting}
+\end{Shaded}
+
+  And the following settings keep files consistent among developers.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
+  \item
+    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Type: soft (This inserts 2 spaces instead of a tab when `Tab' is pressed)
+  \end{enumerate}
+\item
+  \textbf{\href{https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms}{SQL Server Management Studio (SSMS)}} is an easy way to access the database and write queries (and transfer the SQL to an R file). It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+
+  Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database \emph{structure} (not data) on GitHub, so we can easily track/monitor the structural changes over time. The \emph{tabs} options keeps things consistent between editors. In the SSMS `Tools \textbar{} Options' dialog box:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    `SQL Server Object Explorer' \textbar{} `Scripting' \textbar{} `Include descriptive headers': False
+  \item
+    `SQL Server Object Explorer' \textbar{} `Scripting' \textbar{} `Script extended properties': False
+  \item
+    `Text Editor' \textbar{} `All Languages' \textbar{} `Tabs' \textbar{} `Tab size': 2
+  \item
+    `Text Editor' \textbar{} `All Languages' \textbar{} `Tabs' \textbar{} `Indent size': 2
+  \item
+    `Text Editor' \textbar{} `All Languages' \textbar{} `Tabs' \textbar{} `Insert Spaces': selected
+  \end{enumerate}
+
+  These don't affect the saved files, but make life easier. The first makes the \href{https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/}{result font bigger}.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    `Environment' \textbar{} `Fonts and Colors' \textbar{} `Show settings for: Grid Results' \textbar{} `Size': 10
+  \item
+    `Query Results' \textbar{} `SQL Server' \textbar{} `Results to Grid' \textbar{} `Include column headers when copying or saving the results': checked
+  \item
+    `Designers' \textbar{} `Table and Database Designers' \textbar{} `Prevent saving changes that require table-recreation': unchecked
+  \item
+    `Text Editor' \textbar{} `Editor Tab and Status Bar' \textbar{} `Tab Text' \textbar{} `Include Server Name': false
+  \item
+    `Text Editor' \textbar{} `Editor Tab and Status Bar' \textbar{} `Tab Text' \textbar{} `Include Database Name': false
+  \item
+    `Text Editor' \textbar{} `Editor Tab and Status Bar' \textbar{} `Tab Text' \textbar{} `Include Login Name': false
+  \item
+    `Text Editor' \textbar{} `All Languages' \textbar{} `General' \textbar{} `Line Numbers': true
+  \end{enumerate}
+
+  For more details, see \href{https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md}{setting-up-dev-machine.md} (in a private repo that's restricted to BBMC members).
+\item
+  \textbf{\href{https://connect.ouhsc.edu}{Pulse Secure}} is VPN client for OUHSC researchers. It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
+\end{itemize}
+
+\hypertarget{installation-optional}{%
+\section{Optional Installation}\label{installation-optional}}
+
+The order does not matter.
+
+\begin{itemize}
+\item
+  \textbf{\href{https://git-scm.com/downloads}{Git}} command-line utility enables some advanced operations that the GitHub client doesn't support. Use the default installation options, except these preferences of ours:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Nano is the default text editor.
+  \end{enumerate}
+\item
+  \textbf{GitLab SSL Certificate} isn't software, but still needs to be configured.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Talk to Will for the server URL and the \texttt{*.cer} file.
+  \item
+    Save the file in something like \texttt{\textasciitilde{}/keys/ca-bundle-gitlab.cer}
+  \item
+    Associate the file with \texttt{git\ config\ -\/-global\ http.sslCAInfo\ ...path.../ca-bundle-gitlab.cer} (but replace \texttt{...path...}).
+  \end{enumerate}
+\item
+  \textbf{\href{http://miktex.org/}{MiKTeX}} is necessary only if you're using knitr or Sweave to produce \emph{LaTeX} files (and not just \emph{markdown} files). It's a huge, slow installation that can take an hour or two. \{added Sept 2012\}
+\item
+  \textbf{\href{https://www.libreoffice.org/discover/calc/}{LibreOffice Calc}} is an alternative to Excel. Unlike it Excel, it doesn't guess much with formatting (which usually mess up things, especially dates).
+\item
+  \textbf{\href{https://code.visualstudio.com/}{Visual Studio Code}} is an extensible text editor that runs on Windows and Linux, similar to \href{https://atom.io/}{Atom} (described above). It's much \href{https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio}{lighter} than the full \href{https://visualstudio.microsoft.com/}{Visual Studio}. Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. Currently, it supports searching CSVs better than Atom. Productivity is enhanced with the following extensions: \{added Dec 2018\}
+
+  \begin{itemize}
+  \item
+    \href{https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer}{Excel Viewer} isn't a good name, but I've liked the capability. It displays CSVs and other files in a grid. \{added Dec 2018\}
+  \item
+    \href{https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv}{Rainbow CSV} color codes the columns, but still allows you to see and edit the raw plain-text file. \{added Dec 2018\}
+  \item
+    \href{https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql}{SQL Server} allows you to execute against a database, and view/copy/save the grid results. It doesn't replicate all SSMS features, but is nice as your scanning through files. \{added Dec 2018\}
+  \item
+    \href{https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker}{Code Spell Checker} produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.
+  \end{itemize}
+
+  These extensions \href{https://code.visualstudio.com/docs/editor/command-line\#_working-with-extensions}{can be installed by command line}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{code}\NormalTok{ --list-extensions}
+\ExtensionTok{code}\NormalTok{ --install-extension GrapeCity.gc-excelviewer}
+\ExtensionTok{code}\NormalTok{ --install-extension mechatroner.rainbow-csv}
+\ExtensionTok{code}\NormalTok{ --install-extension ms-mssql.mssql}
+\ExtensionTok{code}\NormalTok{ --install-extension streetsidesoftware.code-spell-checker}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \textbf{\href{http://johnmacfarlane.net/pandoc/}{pandoc}} converts files from one markup format into another. We'll possibly use this to create tables in MS Word (for article submissions). \{added Sept 2012\}
+\end{itemize}
+
+\hypertarget{installation-ubuntu}{%
+\section{Ubuntu Installation}\label{installation-ubuntu}}
+
+Ubuntu desktop 19.04 follows \href{https://askubuntu.com/a/862520/153921}{these instructions} for the R and RStudio and required these debian packages to be installed before the R packages. The \texttt{-\/-yes} option avoids manual confirmation for each line, so you can copy \& paste this into the terminal.
+
+Add the following to the sources with \texttt{sudo\ nano\ /etc/apt/sources.list}. The `eoan' version may be updated; The `metrocast' part could be modified too from \href{https://launchpad.net/ubuntu/+archivemirrors}{this list}. I found it worked better for a new Ubuntu release than `cloud.r-project.org'.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan main }
+\ExtensionTok{deb-src}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan main }
+\ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe}
+\end{Highlighting}
+\end{Shaded}
+
+This next block can be copied and pasted (ctrl-shift-v) into the console \href{https://stackoverflow.com/a/43164204}{entirely}. Or lines can be pasted individual (without the \texttt{(\ function\ install-packages\ \{} line, or the last three lines).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{(} \KeywordTok{function}\FunctionTok{ install-packages} \KeywordTok{\{}
+  \CommentTok{### Add the key, update the list, then install base R.}
+  \FunctionTok{sudo}\NormalTok{ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9}
+  \FunctionTok{sudo}\NormalTok{ apt-get update}
+  \FunctionTok{sudo}\NormalTok{ apt-get install r-base}
+  \FunctionTok{sudo}\NormalTok{ apt-get install r-base-dev}
+  
+  \CommentTok{### Git}
+  \FunctionTok{sudo}\NormalTok{ apt-get install git-core}
+  \FunctionTok{git}\NormalTok{ config --global user.email }\StringTok{"wibeasley@hotmail.com"}
+  \FunctionTok{git}\NormalTok{ config --global user.name }\StringTok{"Will Beasley"}
+  \FunctionTok{git}\NormalTok{ config --global credential.helper }\StringTok{'cache --timeout=3600000'}
+
+  \CommentTok{### Ubuntu & Bioconductor packages that are indirectly needed for packages and BBMC scripts}
+
+  \CommentTok{# Supports the `locate` command in bash}
+  \FunctionTok{sudo}\NormalTok{ apt-get install mlocate}
+
+  \CommentTok{# The genefilter package is needed for 'modeest' on CRAN.}
+  \CommentTok{# No longer a modeest dependency: Rscript -e 'BiocManager::install("genefilter")'}
+  
+  \CommentTok{### CRAN packages that are also on the Ubuntu repositories}
+  
+  \CommentTok{# The 'xml2' package:}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libxml2-dev r-cran-xml}
+
+  \CommentTok{# The 'curl' package, and others}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libssl-dev libcurl4-openssl-dev}
+
+  \CommentTok{# The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libudunits2-dev}
+
+  \CommentTok{# The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc}
+
+  \CommentTok{# The 'rgl' package}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libcgal-dev libglu1-mesa-dev libglu1-mesa-dev}
+
+  \CommentTok{# The 'magick' package}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install }\StringTok{'libmagick++-dev'}
+
+  \CommentTok{# The 'pdftools' and 'Rpoppler' packages, which involve PDFs}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev}
+
+  \CommentTok{# The 'sys' package}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libapparmor-dev}
+
+  \CommentTok{# The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu}
+  \FunctionTok{sudo}\NormalTok{ add-apt-repository ppa:ubuntugis/ubuntugis-unstable}
+  \FunctionTok{sudo}\NormalTok{ apt-get update}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev}
+
+  \CommentTok{# Some package I forgot, maybe 'svglite'}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libcairo2-dev}
+
+  \CommentTok{# 'rJava' and others}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install default-jre default-jdk}
+  \FunctionTok{sudo}\NormalTok{ R CMD javareconf}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install r-cran-rjava}
+
+  \CommentTok{# The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu}
+  \FunctionTok{sudo}\NormalTok{ add-apt-repository ppa:ubuntugis/ubuntugis-unstable}
+  \FunctionTok{sudo}\NormalTok{ apt-get update}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev}
+
+  \CommentTok{# gifski -apparently the rust compiler is necessary}
+  \FunctionTok{sudo}\NormalTok{ apt-get install cargo}
+
+  \CommentTok{# For databases}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install sqlite sqliteman}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install postgresql postgresql-contrib pgadmin3}
+\KeywordTok{\}}
+\ExtensionTok{install-packages}
+\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{asset-locations}{%
 \section{Asset Locations}\label{asset-locations}}
+
+\begin{itemize}
+\item
+  \textbf{GitHub repository} \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns} \{added Sept 2012\}
+\item
+  \textbf{File server directory} Ask your PI. For Peds, it's typically on the ``S'' drive.
+\item
+  \textbf{SQL Server Database} Ask Thomas, Will or David
+\item
+  \textbf{REDCap database} Ask Thomas, Will or David. It is a http url, and we're trying not to publicize its value.
+\item
+  \textbf{ODBC UserDsn} The name depends on your specific repository, and SQL Server database. Ask Thomas, Will or David for how to set it up.
+\end{itemize}
+
+\hypertarget{installation-troubleshooting}{%
+\section{Installation Troubleshooting}\label{installation-troubleshooting}}
+
+\begin{itemize}
+\item
+  \textbf{Git}: Will Beasley resorted to this workaround Sept 2012: \url{http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing}. And then he copied the following four files from \texttt{D:/Program\ Files/msysgit/mingw/bin/} to \texttt{D:/Program\ Files/msysgit/bin/}: (1) \texttt{libiconv2.dll}, (2) \texttt{libcurl-4.dll}, (3) \texttt{libcrypto.dll}, and (4) \texttt{libssl.dll}. (If you install to the default location, you'll move instead from \texttt{C:/msysgit/mingw/bin/} to \texttt{C:/msysgit/bin/}) \{added Sept 2012\}
+\item
+  \textbf{Git}: On a different computer, Will Beasley couldn't get RStudio to recognize msysGit, so installed the \texttt{Full\ installer\ for\ official\ Git\ for\ Windows\ 1.7.11} from (\url{http://code.google.com/p/msysgit/downloads/list}) and switched the Git Path in the RStudio Options. \{added Sept 2012\}
+\item
+  \textbf{RStudio} If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased. To be safe, you can be thorough and delete the equivalent of \texttt{C:\textbackslash{}Users\textbackslash{}wibeasley\textbackslash{}AppData\textbackslash{}Local\textbackslash{}RStudio-Desktop\textbackslash{}}. The options settings are stored (and can be manipulated) in this extentionless text file: \texttt{C:\textbackslash{}Users\textbackslash{}wibeasley\textbackslash{}AppData\textbackslash{}Local\textbackslash{}RStudio-Desktop\textbackslash{}monitored\textbackslash{}user-settings\textbackslash{}user-settings}. \{added Sept 2012\}
+\end{itemize}
+
+\hypertarget{retired-tools}{%
+\section{Retired Tools}\label{retired-tools}}
+
+We previously installed this software in this list. Most have been replaced by software above that's either newer or more natural to use.
+
+\begin{itemize}
+\item
+  \textbf{\href{http://msysgit.github.com/}{msysGit}} allows RStudio to track changes and commit \& sync them to the GitHub server. Connect RStudio to GitHub repository. I moved this to optional (Oct 14, 2012) because the GitHub client (see above) does almost everything that the RStudio plugin does; and it does it a little better and a little more robust; and its installation hasn't given me problems. \{added Oct 2012\}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Starting in the top right of RStudio, click: Project -\textgreater{} New Project -\textgreater{} Create Project from Version Control -\textgreater{} Git \{added Sept 2012\}
+  \item
+    An example of a repository URL is \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns}. Specify a location to save (a copy of) the project on your local computer. \{added Sept 2012\}
+  \end{itemize}
+\item
+  \textbf{\href{http://csved.sjfrancke.nl/}{CSVed}} is a lightweight program for viewing data files. It fits somewhere between a text editor and Excel.
+\item
+  \textbf{\href{http://www.sourcetreeapp.com/}{SourceTree}} is a rich client that has many more features than the GitHub client. I don't recommend it for beginners, since it has more ways to mess up things. But for developers, it nicely fills a spot in between the GitHub client and command-line operations. The branching visualization is really nice too. Unfortunately and ironically, it doesn't currently support Linux. \{added Sept 2014\}.
+\item
+  \textbf{\href{http://git-cola.github.io/}{git-cola}} is probably the best GUI for Git supported on Linux. It's available through the official \href{http://packages.ubuntu.com/search?keywords=git-cola}{Ubuntu repositories} with \texttt{apt-get} (also see \href{https://apps.ubuntu.com/cat/applications/git-cola/}{this}). The branch visualization features are in a different, but related program, `git dag'. \{added Sept 2014\}
+\item
+  \textbf{\href{http://eclipse.github.com/}{GitHub for Eclipse}} is something I discourage for a beginner, and I strongly recommend you start with RStudio (and \href{http://windows.github.com/}{GitHub Client} or the git capabilities within RStudio) for a few months before you even consider Eclipse. It's included in this list for the sake of completeness. When installing EGit plug-in, ignore eclipse site and check out this youtube video:\url{http://www.youtube.com/watch?v=I7fbCE5nWPU}.
+\item
+  \textbf{\href{http://colororacle.org/}{Color Oracle}} simulates the three most common types of color blindness. If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too). If it's already installed, it takes less than 10 second to check it against all three types of color blindness. If it's not installed, extra work may be necessary if Java isn't already installed. When you download the zip, extract the \texttt{ColorOracle.exe} program where you like. \{added Sept 2012\}
+\end{itemize}
 
 \hypertarget{tools}{%
 \chapter{Considerations when Selecting Tools}\label{tools}}
@@ -1066,9 +1427,9 @@ Here are some common mistakes we see not-so-infrequently (even sometimes in our 
 \hypertarget{the-components-goal}{%
 \subsection{The Component's Goal}\label{the-components-goal}}
 
-While disussing the advantages and disadvanages of tools, a colleague once said, ``Tidyverse packages don't do anything that I can't already do in Base R, and sometimes it even requires more lines of code''. Regardless if I agree, I feel these two points are irrelevant. Sometimes the advantage of a tool isn't to expand existing capabilities, but rather to facilitate development and maintaince for the same capability.
+While discussing the advantages and disadvantages of tools, a colleague once said, ``Tidyverse packages don't do anything that I can't already do in Base R, and sometimes it even requires more lines of code''. Regardless if I agree, I feel these two points are irrelevant. Sometimes the advantage of a tool isn't to expand existing capabilities, but rather to facilitate development and maintenance for the same capability.
 
-Likewise, I care less about the line count, and more about the readability. I'd prefer to maintain a 20-line chunk that is familar and readable than a 10-line chunk with dense phrases and unfamiliar functions. The bottleneck for most of our projects is human time, not execution time.
+Likewise, I care less about the line count, and more about the readability. I'd prefer to maintain a 20-line chunk that is familiar and readable than a 10-line chunk with dense phrases and unfamiliar functions. The bottleneck for most of our projects is human time, not execution time.
 
 \hypertarget{current-skillset-of-team}{%
 \subsection{Current Skillset of Team}\label{current-skillset-of-team}}
@@ -1277,8 +1638,8 @@ Here is a collection of presentations by the BBMC and friends that may help demo
   \textbf{\href{https://rawgit.com/wibeasley/RAnalysisSkeleton/master/documentation/time-and-effort-synthesis.html\#/}{Time and Effort Data Synthesis}}. \href{https://github.com/OuhscBbmc/StatisticalComputing}{SCUG} 2015.
 \end{enumerate}
 
-\hypertarget{github-1}{%
-\section{GitHub}\label{github-1}}
+\hypertarget{github-2}{%
+\section{GitHub}\label{github-2}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
