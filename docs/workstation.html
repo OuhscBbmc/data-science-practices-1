@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 16 Establishing and Maintaining a Workstation | Collaborative Data Science Practices</title>
+  <meta name="description" content="Collection of publicly available practices of data science and analysis." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 16 Establishing and Maintaining a Workstation | Collaborative Data Science Practices" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Collection of publicly available practices of data science and analysis." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 16 Establishing and Maintaining a Workstation | Collaborative Data Science Practices" />
+  
+  <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
+  
+
+<meta name="author" content="Will Beasley" />
+
+
+<meta name="date" content="2019-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="troubleshooting.html"/>
+<link rel="next" href="tools.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Collaborative Data Science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture Principles</a><ul>
+<li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>2.1</b> Encapsulation</a></li>
+<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a></li>
+<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a></li>
+<li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a></li>
+<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="file-prototype.html"><a href="file-prototype.html"><i class="fa fa-check"></i><b>3</b> Prototypical File</a><ul>
+<li class="chapter" data-level="3.1" data-path="file-prototype.html"><a href="file-prototype.html#clear-memory"><i class="fa fa-check"></i><b>3.1</b> Clear Memory</a></li>
+<li class="chapter" data-level="3.2" data-path="file-prototype.html"><a href="file-prototype.html#load-sources"><i class="fa fa-check"></i><b>3.2</b> Load Sources</a></li>
+<li class="chapter" data-level="3.3" data-path="file-prototype.html"><a href="file-prototype.html#load-packages"><i class="fa fa-check"></i><b>3.3</b> Load Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="file-prototype.html"><a href="file-prototype.html#declare-globals"><i class="fa fa-check"></i><b>3.4</b> Declare Globals</a></li>
+<li class="chapter" data-level="3.5" data-path="file-prototype.html"><a href="file-prototype.html#load-data"><i class="fa fa-check"></i><b>3.5</b> Load Data</a></li>
+<li class="chapter" data-level="3.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data"><i class="fa fa-check"></i><b>3.6</b> Tweak Data</a></li>
+<li class="chapter" data-level="3.7" data-path="file-prototype.html"><a href="file-prototype.html#unique-content"><i class="fa fa-check"></i><b>3.7</b> (Unique Content)</a></li>
+<li class="chapter" data-level="3.8" data-path="file-prototype.html"><a href="file-prototype.html#verify-values"><i class="fa fa-check"></i><b>3.8</b> Verify Values</a></li>
+<li class="chapter" data-level="3.9" data-path="file-prototype.html"><a href="file-prototype.html#specify-output-columns"><i class="fa fa-check"></i><b>3.9</b> Specify Output Columns</a></li>
+<li class="chapter" data-level="3.10" data-path="file-prototype.html"><a href="file-prototype.html#save-to-disk-or-database"><i class="fa fa-check"></i><b>3.10</b> Save to Disk or Database</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>4</b> Prototypical Repository</a><ul>
+<li class="chapter" data-level="4.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>4.1</b> Root</a></li>
+<li class="chapter" data-level="4.2" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>4.2</b> Analysis</a></li>
+<li class="chapter" data-level="4.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>4.3</b> Data Public</a></li>
+<li class="chapter" data-level="4.4" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>4.4</b> Data Unshared</a></li>
+<li class="chapter" data-level="4.5" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>4.5</b> Documentation</a></li>
+<li class="chapter" data-level="4.6" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>4.6</b> Manipulation</a></li>
+<li class="chapter" data-level="4.7" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>4.7</b> Stitched Output</a></li>
+<li class="chapter" data-level="4.8" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>4.8</b> Utility</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>5</b> Data at Rest</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>5.1</b> Data States</a></li>
+<li class="chapter" data-level="5.2" data-path="data-at-rest.html"><a href="data-at-rest.html#data-containers"><i class="fa fa-check"></i><b>5.2</b> Data Containers</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>6</b> Patterns</a><ul>
+<li class="chapter" data-level="6.1" data-path="patterns.html"><a href="patterns.html#ellis"><i class="fa fa-check"></i><b>6.1</b> Ellis</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="patterns.html"><a href="patterns.html#purpose"><i class="fa fa-check"></i><b>6.1.1</b> Purpose</a></li>
+<li class="chapter" data-level="6.1.2" data-path="patterns.html"><a href="patterns.html#philosophy"><i class="fa fa-check"></i><b>6.1.2</b> Philosophy</a></li>
+<li class="chapter" data-level="6.1.3" data-path="patterns.html"><a href="patterns.html#guidelines"><i class="fa fa-check"></i><b>6.1.3</b> Guidelines</a></li>
+<li class="chapter" data-level="6.1.4" data-path="patterns.html"><a href="patterns.html#examples"><i class="fa fa-check"></i><b>6.1.4</b> Examples</a></li>
+<li class="chapter" data-level="6.1.5" data-path="patterns.html"><a href="patterns.html#elements"><i class="fa fa-check"></i><b>6.1.5</b> Elements</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="patterns.html"><a href="patterns.html#arch"><i class="fa fa-check"></i><b>6.2</b> Arch</a></li>
+<li class="chapter" data-level="6.3" data-path="patterns.html"><a href="patterns.html#ferry"><i class="fa fa-check"></i><b>6.3</b> Ferry</a></li>
+<li class="chapter" data-level="6.4" data-path="patterns.html"><a href="patterns.html#scribe"><i class="fa fa-check"></i><b>6.4</b> Scribe</a></li>
+<li class="chapter" data-level="6.5" data-path="patterns.html"><a href="patterns.html#analysis-1"><i class="fa fa-check"></i><b>6.5</b> Analysis</a></li>
+<li class="chapter" data-level="6.6" data-path="patterns.html"><a href="patterns.html#presentation--static"><i class="fa fa-check"></i><b>6.6</b> Presentation -Static</a></li>
+<li class="chapter" data-level="6.7" data-path="patterns.html"><a href="patterns.html#presentation--interactive"><i class="fa fa-check"></i><b>6.7</b> Presentation -Interactive</a></li>
+<li class="chapter" data-level="6.8" data-path="patterns.html"><a href="patterns.html#metadata"><i class="fa fa-check"></i><b>6.8</b> Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>7</b> Security &amp; Private Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="security.html"><a href="security.html#file-level-permissions"><i class="fa fa-check"></i><b>7.1</b> File-level permissions</a></li>
+<li class="chapter" data-level="7.2" data-path="security.html"><a href="security.html#database-permissions"><i class="fa fa-check"></i><b>7.2</b> Database permissions</a></li>
+<li class="chapter" data-level="7.3" data-path="security.html"><a href="security.html#public-private-repositories"><i class="fa fa-check"></i><b>7.3</b> Public &amp; Private Repositories</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>7.3.1</b> Scrubbing GitHub history</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>8</b> Automation</a><ul>
+<li class="chapter" data-level="8.1" data-path="automation.html"><a href="automation.html#flow-file-in-r"><i class="fa fa-check"></i><b>8.1</b> Flow File in R</a></li>
+<li class="chapter" data-level="8.2" data-path="automation.html"><a href="automation.html#makefile"><i class="fa fa-check"></i><b>8.2</b> Makefile</a></li>
+<li class="chapter" data-level="8.3" data-path="automation.html"><a href="automation.html#ssis"><i class="fa fa-check"></i><b>8.3</b> SSIS</a></li>
+<li class="chapter" data-level="8.4" data-path="automation.html"><a href="automation.html#cron-jobs-task-scheduler"><i class="fa fa-check"></i><b>8.4</b> cron Jobs &amp; Task Scheduler</a></li>
+<li class="chapter" data-level="8.5" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>8.5</b> Sink Log Files</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="scaling-up.html"><a href="scaling-up.html"><i class="fa fa-check"></i><b>9</b> Scaling Up</a><ul>
+<li class="chapter" data-level="9.1" data-path="scaling-up.html"><a href="scaling-up.html#data-storage"><i class="fa fa-check"></i><b>9.1</b> Data Storage</a></li>
+<li class="chapter" data-level="9.2" data-path="scaling-up.html"><a href="scaling-up.html#data-processing"><i class="fa fa-check"></i><b>9.2</b> Data Processing</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="collaboration.html"><a href="collaboration.html"><i class="fa fa-check"></i><b>10</b> Parallel Collaboration</a><ul>
+<li class="chapter" data-level="10.1" data-path="collaboration.html"><a href="collaboration.html#social-contract"><i class="fa fa-check"></i><b>10.1</b> Social Contract</a></li>
+<li class="chapter" data-level="10.2" data-path="collaboration.html"><a href="collaboration.html#code-reviews"><i class="fa fa-check"></i><b>10.2</b> Code Reviews</a></li>
+<li class="chapter" data-level="10.3" data-path="collaboration.html"><a href="collaboration.html#remote"><i class="fa fa-check"></i><b>10.3</b> Remote</a></li>
+<li class="chapter" data-level="10.4" data-path="collaboration.html"><a href="collaboration.html#loose-notes"><i class="fa fa-check"></i><b>10.4</b> Loose Notes</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="collaboration.html"><a href="collaboration.html#github"><i class="fa fa-check"></i><b>10.4.1</b> GitHub</a></li>
+<li class="chapter" data-level="10.4.2" data-path="collaboration.html"><a href="collaboration.html#common-code"><i class="fa fa-check"></i><b>10.4.2</b> Common Code</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>11</b> Documentation</a><ul>
+<li class="chapter" data-level="11.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>11.1</b> Team-wide</a></li>
+<li class="chapter" data-level="11.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>11.2</b> Project-specific</a></li>
+<li class="chapter" data-level="11.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>11.3</b> Dataset Origin &amp; Structure</a></li>
+<li class="chapter" data-level="11.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>11.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="11.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>11.5</b> Flow Diagrams</a></li>
+<li class="chapter" data-level="11.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>11.6</b> Setting up new machine</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>12</b> Style Guide</a><ul>
+<li class="chapter" data-level="12.1" data-path="style-guide.html"><a href="style-guide.html#ggplot2"><i class="fa fa-check"></i><b>12.1</b> ggplot2</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="style-guide.html"><a href="style-guide.html#order-of-commands"><i class="fa fa-check"></i><b>12.1.1</b> Order of commands</a></li>
+<li class="chapter" data-level="12.1.2" data-path="style-guide.html"><a href="style-guide.html#gotchas"><i class="fa fa-check"></i><b>12.1.2</b> Gotchas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="publication.html"><a href="publication.html"><i class="fa fa-check"></i><b>13</b> Publishing Results</a><ul>
+<li class="chapter" data-level="13.1" data-path="publication.html"><a href="publication.html#to-other-analysts"><i class="fa fa-check"></i><b>13.1</b> To Other Analysts</a></li>
+<li class="chapter" data-level="13.2" data-path="publication.html"><a href="publication.html#to-researchers-content-experts"><i class="fa fa-check"></i><b>13.2</b> To Researchers &amp; Content Experts</a></li>
+<li class="chapter" data-level="13.3" data-path="publication.html"><a href="publication.html#to-technical-phobic-audiences"><i class="fa fa-check"></i><b>13.3</b> To Technical-Phobic Audiences</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="testing-and-validation.html"><a href="testing-and-validation.html"><i class="fa fa-check"></i><b>14</b> Testing, Validation, &amp; Defensive Programming</a><ul>
+<li class="chapter" data-level="14.1" data-path="testing-and-validation.html"><a href="testing-and-validation.html#testing-functions"><i class="fa fa-check"></i><b>14.1</b> Testing Functions</a></li>
+<li class="chapter" data-level="14.2" data-path="testing-and-validation.html"><a href="testing-and-validation.html#defensive-programming"><i class="fa fa-check"></i><b>14.2</b> Defensive Programming</a></li>
+<li class="chapter" data-level="14.3" data-path="testing-and-validation.html"><a href="testing-and-validation.html#validator"><i class="fa fa-check"></i><b>14.3</b> Validator</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>15</b> Troubleshooting and Debugging</a><ul>
+<li class="chapter" data-level="15.1" data-path="troubleshooting.html"><a href="troubleshooting.html#finding-help"><i class="fa fa-check"></i><b>15.1</b> Finding Help</a></li>
+<li class="chapter" data-level="15.2" data-path="troubleshooting.html"><a href="troubleshooting.html#debugging"><i class="fa fa-check"></i><b>15.2</b> Debugging</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="workstation.html"><a href="workstation.html"><i class="fa fa-check"></i><b>16</b> Establishing and Maintaining a Workstation</a><ul>
+<li class="chapter" data-level="16.1" data-path="workstation.html"><a href="workstation.html#setting-up-the-r-and-redcap-project-on-a-new-development-computer"><i class="fa fa-check"></i><b>16.1</b> Setting up the R and REDCap project on a new development computer</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="workstation.html"><a href="workstation.html#installation-required"><i class="fa fa-check"></i><b>16.1.1</b> Installation (required)</a></li>
+<li class="chapter" data-level="16.1.2" data-path="workstation.html"><a href="workstation.html#installation-recommended"><i class="fa fa-check"></i><b>16.1.2</b> Installation (recommended)</a></li>
+<li class="chapter" data-level="16.1.3" data-path="workstation.html"><a href="workstation.html#installation-optional"><i class="fa fa-check"></i><b>16.1.3</b> Installation (optional)</a></li>
+<li class="chapter" data-level="16.1.4" data-path="workstation.html"><a href="workstation.html#ubuntu"><i class="fa fa-check"></i><b>16.1.4</b> Ubuntu</a></li>
+<li class="chapter" data-level="16.1.5" data-path="workstation.html"><a href="workstation.html#location-examples"><i class="fa fa-check"></i><b>16.1.5</b> Location Examples</a></li>
+<li class="chapter" data-level="16.1.6" data-path="workstation.html"><a href="workstation.html#installation-possible-troubleshooting"><i class="fa fa-check"></i><b>16.1.6</b> Installation (possible troubleshooting)</a></li>
+<li class="chapter" data-level="16.1.7" data-path="workstation.html"><a href="workstation.html#retired-software"><i class="fa fa-check"></i><b>16.1.7</b> Retired Software</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="workstation.html"><a href="workstation.html#recommended-installation"><i class="fa fa-check"></i><b>16.2</b> Recommended Installation</a></li>
+<li class="chapter" data-level="16.3" data-path="workstation.html"><a href="workstation.html#optional-installation"><i class="fa fa-check"></i><b>16.3</b> Optional Installation</a></li>
+<li class="chapter" data-level="16.4" data-path="workstation.html"><a href="workstation.html#asset-locations"><i class="fa fa-check"></i><b>16.4</b> Asset Locations</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>17</b> Considerations when Selecting Tools</a><ul>
+<li class="chapter" data-level="17.1" data-path="tools.html"><a href="tools.html#general"><i class="fa fa-check"></i><b>17.1</b> General</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="tools.html"><a href="tools.html#the-components-goal"><i class="fa fa-check"></i><b>17.1.1</b> The Component’s Goal</a></li>
+<li class="chapter" data-level="17.1.2" data-path="tools.html"><a href="tools.html#current-skillset-of-team"><i class="fa fa-check"></i><b>17.1.2</b> Current Skillset of Team</a></li>
+<li class="chapter" data-level="17.1.3" data-path="tools.html"><a href="tools.html#desired-future-skillset-of-team"><i class="fa fa-check"></i><b>17.1.3</b> Desired Future Skillset of Team</a></li>
+<li class="chapter" data-level="17.1.4" data-path="tools.html"><a href="tools.html#skillset-of-audience"><i class="fa fa-check"></i><b>17.1.4</b> Skillset of Audience</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="tools.html"><a href="tools.html#languages"><i class="fa fa-check"></i><b>17.2</b> Languages</a></li>
+<li class="chapter" data-level="17.3" data-path="tools.html"><a href="tools.html#r-packages"><i class="fa fa-check"></i><b>17.3</b> R Packages</a></li>
+<li class="chapter" data-level="17.4" data-path="tools.html"><a href="tools.html#database"><i class="fa fa-check"></i><b>17.4</b> Database</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="team.html"><a href="team.html"><i class="fa fa-check"></i><b>18</b> Growing a Team</a><ul>
+<li class="chapter" data-level="18.1" data-path="team.html"><a href="team.html#recruiting"><i class="fa fa-check"></i><b>18.1</b> Recruiting</a></li>
+<li class="chapter" data-level="18.2" data-path="team.html"><a href="team.html#training-to-data-science"><i class="fa fa-check"></i><b>18.2</b> Training to Data Science</a></li>
+<li class="chapter" data-level="18.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>18.3</b> Bridges Outside the Team</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="git-github.html"><a href="git-github.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a><ul>
+<li class="chapter" data-level="A.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
+<li class="chapter" data-level="A.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>B</b> Presentations</a><ul>
+<li class="chapter" data-level="B.1" data-path="presentations.html"><a href="presentations.html#cdw"><i class="fa fa-check"></i><b>B.1</b> CDW</a></li>
+<li class="chapter" data-level="B.2" data-path="presentations.html"><a href="presentations.html#redcap"><i class="fa fa-check"></i><b>B.2</b> REDCap</a></li>
+<li class="chapter" data-level="B.3" data-path="presentations.html"><a href="presentations.html#reproducible-research-visualization"><i class="fa fa-check"></i><b>B.3</b> Reproducible Research &amp; Visualization</a></li>
+<li class="chapter" data-level="B.4" data-path="presentations.html"><a href="presentations.html#data-management"><i class="fa fa-check"></i><b>B.4</b> Data Management</a></li>
+<li class="chapter" data-level="B.5" data-path="presentations.html"><a href="presentations.html#github-1"><i class="fa fa-check"></i><b>B.5</b> GitHub</a></li>
+<li class="chapter" data-level="B.6" data-path="presentations.html"><a href="presentations.html#software"><i class="fa fa-check"></i><b>B.6</b> Software</a></li>
+<li class="chapter" data-level="B.7" data-path="presentations.html"><a href="presentations.html#architectures"><i class="fa fa-check"></i><b>B.7</b> Architectures</a></li>
+<li class="chapter" data-level="B.8" data-path="presentations.html"><a href="presentations.html#components"><i class="fa fa-check"></i><b>B.8</b> Components</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="scratch-pad.html"><a href="scratch-pad.html"><i class="fa fa-check"></i><b>C</b> Scratch Pad of Loose Ideas</a><ul>
+<li class="chapter" data-level="C.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>C.1</b> Chapters &amp; Sections to Form</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>D</b> Introduction</a></li>
+<li class="chapter" data-level="E" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>E</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Collaborative Data Science Practices</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="workstation" class="section level1">
+<h1><span class="header-section-number">Chapter 16</span> Establishing and Maintaining a Workstation</h1>
+<p><a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md</a></p>
+<div id="setting-up-the-r-and-redcap-project-on-a-new-development-computer" class="section level2">
+<h2><span class="header-section-number">16.1</span> Setting up the R and REDCap project on a new development computer</h2>
+<div id="installation-required" class="section level3">
+<h3><span class="header-section-number">16.1.1</span> Installation (required)</h3>
+<p>The order matters.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong><a href="http://cran.r-project.org/">R</a></strong> is the centerpiece of the analysis. Every few months, you’ll need to download the most recent version. {added Sept 2012}</p></li>
+<li><p><strong><a href="http://www.rstudio.com/ide/download/desktop">RStudio Desktop</a></strong> is the IDE (integrated design interface) that you’ll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus <code>Help</code> -&gt; <code>Check for updates</code>. {added Sept 2012}</p></li>
+<li><p><strong>Dozens of R Packages</strong> will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least thirty minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated. {added Sept 2012}</p>
+<ol style="list-style-type: decimal">
+<li><p>Run the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a> file, which is the easiest option for beginners. Just three calls are needed. The first installs an important package, the second defines the <code>package_janitor_remote()</code> function, and the third calls the function (and passes a specific CSV of packages).</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="cf">if</span>( <span class="op">!</span>base<span class="op">::</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>) ) utils<span class="op">::</span><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">source_gist</span>(<span class="st">&quot;2c5e7459b88ec28b9e8fa0c695b15ee3&quot;</span>, <span class="dt">filename=</span><span class="st">&quot;package-janitor-bbmc.R&quot;</span>)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw">package_janitor_remote</span>(</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv&quot;</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">)</a></code></pre></div></li>
+<li><p>Run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in the <code>utility/</code> directory) that lives in this repository. The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.</p></li>
+</ol></li>
+<li><p><strong>Several R Packages</strong> might need to be updated. Unless you’ve been told not to (because it would break something -this is rare), periodically update the packages by executing the following code <code>update.packages(ask=&quot;graphics&quot;, checkBuilt=TRUE)</code>. {added Sept 2012}</p></li>
+<li><p><strong><a href="https://github.com/">GitHub</a></strong> registration is necessary to push modified files to the repository. First, register a free user account at <a href="https://github.com/plans" class="uri">https://github.com/plans</a>. Then tell the repository owner your exact username, and they’ll add you as a collaborator (eg, to <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns</a>). {added Sept 2012}</p></li>
+<li><p><strong><a href="http://windows.github.com/">GitHub for Windows Client</a></strong> does the basic tasks a little easier the git features built into RStudio. {added Oct 2012}</p></li>
+</ol>
+</div>
+<div id="installation-recommended" class="section level3">
+<h3><span class="header-section-number">16.1.2</span> Installation (recommended)</h3>
+<p>The order does not matter.</p>
+<ul>
+<li><p><strong><a href="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server">ODBC Driver for SQL Server</a></strong> is for connecting to the <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd">token server</a>, if your institution is using one. As of this writing, version 17 is the most recent driver version. See if a new one exists. {updated Apr 2018}</p></li>
+<li><p><strong><a href="https://cran.r-project.org/bin/windows/Rtools/">R Tools for Windows</a></strong> is necessary to build some packages in development hosted on GitHub. {added Feb 2017}</p></li>
+<li><p><strong><a href="http://notepad-plus-plus.org/">Notepad++</a></strong> is a text editor that allows you look at the raw text files, such as code and CSVs. For CSVs and other data files, it’s helpful when troubleshooting (instead of looking at the file through Excel, which masks &amp; causes some issues). {added Sept 2012}</p></li>
+<li><p><strong><a href="https://atom.io/">Atom</a></strong> is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.</p>
+<p>Productivity is enhanced with the following <a href="https://atom.io/packages">Atom packages</a>:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://atom.io/packages/Sublime-Style-Column-Selection">Sublime Style Column Selection</a>: Enable Sublime style ‘Column Selection’. Just hold ‘alt’ while you select, or select using your middle mouse button.</p></li>
+<li><p><a href="https://atom.io/packages/atom-language-r">atom-language-r</a> allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom’s tree panel (on the left) works well. An older alternative is <a href="https://atom.io/packages/language-r">language-r</a>.</p></li>
+<li><p><a href="https://atom.io/packages/language-csv">language-csv</a>: Adds syntax highlighting to <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files. The highlighting is nice, and it automatically disables spell checking lines.</p></li>
+<li><p><a href="https://atom.io/packages/atom-beautify">atom-beautify</a>: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.</p></li>
+<li><p><a href="https://atom.io/packages/atom-wrap-in-tag">atom-wrap-in-tag</a>: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.</p></li>
+<li><p><a href="https://atom.io/packages/minimap">minimap</a>: A preview of the full source code (in the right margin).</p></li>
+<li><p><a href="https://atom.io/packages/script">script</a>: Run scripts based on file name, a selection of code, or by line number.</p></li>
+<li><p><a href="https://atom.io/packages/git-plus">git-plus</a>: Do git things without the terminal (I don’t think this is necessary anymore).</p></li>
+</ol>
+<p>The packages can be installed through Atom, or through the <code>apm</code> utility in the command line:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="fu">apm</span> install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script</a></code></pre></div>
+<p>And the following settings keep files consistent among developers.</p>
+<ol style="list-style-type: decimal">
+<li>File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)</li>
+<li>File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when ‘Tab’ is pressed)</li>
+</ol></li>
+<li><p><strong><a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms">SQL Server Management Studio (SSMS)</a></strong> is an easy way to access the database and write queries (and transfer the SQL to an R file). It’s not required for the REDCap API, but it’s usually necessary when integrating REDCap with other databases.</p>
+<p>Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database <em>structure</em> (not data) on GitHub, so we can easily track/monitor the structural changes over time. The <em>tabs</em> options keeps things consistent between editors. In the SSMS ‘Tools | Options’ dialog box:</p>
+<ol style="list-style-type: decimal">
+<li>‘SQL Server Object Explorer’ | ‘Scripting’ | ‘Include descriptive headers’: False</li>
+<li>‘SQL Server Object Explorer’ | ‘Scripting’ | ‘Script extended properties’: False</li>
+<li>‘Text Editor’ | ‘All Languages’ | ‘Tabs’ | ‘Tab size’: 2</li>
+<li>‘Text Editor’ | ‘All Languages’ | ‘Tabs’ | ‘Indent size’: 2</li>
+<li>‘Text Editor’ | ‘All Languages’ | ‘Tabs’ | ‘Insert Spaces’: selected</li>
+</ol>
+<p>These don’t affect the saved files, but make life easier. The first makes the <a href="https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/">result font bigger</a>.</p>
+<ol style="list-style-type: decimal">
+<li>‘Environment’ | ‘Fonts and Colors’ | ‘Show settings for: Grid Results’ | ‘Size’: 10</li>
+<li>‘Query Results’ | ‘SQL Server’ | ‘Results to Grid’ | ‘Include column headers when copying or saving the results’: checked</li>
+<li><p>‘Designers’ | ‘Table and Database Designers’ | ‘Prevent saving changes that require table-recreation’: unchecked</p></li>
+<li>‘Text Editor’ | ‘Editor Tab and Status Bar’ | ‘Tab Text’ | ‘Include Server Name’: false</li>
+<li>‘Text Editor’ | ‘Editor Tab and Status Bar’ | ‘Tab Text’ | ‘Include Database Name’: false</li>
+<li>‘Text Editor’ | ‘Editor Tab and Status Bar’ | ‘Tab Text’ | ‘Include Login Name’: false</li>
+<li><p>‘Text Editor’ | ‘All Languages’ | ‘General’ | ‘Line Numbers’: true</p></li>
+</ol>
+<p>For more details, see <a href="https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md">setting-up-dev-machine.md</a> (in a private repo that’s restricted to BBMC members).</p></li>
+<li><p><strong><a href="https://connect.ouhsc.edu">Pulse Secure</a></strong> is VPN client for OUHSC researchers. It’s not required for the REDCap API, but it’s usually necessary to communicate with other campus data sources.</p></li>
+</ul>
+</div>
+<div id="installation-optional" class="section level3">
+<h3><span class="header-section-number">16.1.3</span> Installation (optional)</h3>
+<p>The order does not matter.</p>
+<ul>
+<li><strong><a href="https://git-scm.com/downloads">Git</a></strong> command-line utility enables some advanced operations that the GitHub client doesn’t support. Use the default installation options, except these preferences of ours:
+<ol style="list-style-type: decimal">
+<li>Nano is the default text editor.</li>
+</ol></li>
+<li><strong>GitLab SSL Certificate</strong> isn’t software, but still needs to be configured.
+<ol style="list-style-type: decimal">
+<li>Talk to Will for the server URL and the <code>*.cer</code> file.</li>
+<li>Save the file in something like <code>~/keys/ca-bundle-gitlab.cer</code></li>
+<li>Associate the file with <code>git config --global http.sslCAInfo ...path.../ca-bundle-gitlab.cer</code> (but replace <code>...path...</code>).</li>
+</ol></li>
+<li><p><strong><a href="http://miktex.org/">MiKTeX</a></strong> is necessary only if you’re using knitr or Sweave to produce <em>LaTeX</em> files (and not just <em>markdown</em> files). It’s a huge, slow installation that can take an hour or two. {added Sept 2012}</p></li>
+<li><p><strong><a href="https://www.libreoffice.org/discover/calc/">LibreOffice Calc</a></strong> is an alternative to Excel. Unlike it Excel, it doesn’t guess much with formatting (which usually mess up things, especially dates).</p></li>
+<li><p><strong><a href="https://code.visualstudio.com/">Visual Studio Code</a></strong> is an extensible text editor that runs on Windows and Linux, similar to <a href="https://atom.io/">Atom</a> (described above). It’s much <a href="https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio">lighter</a> than the full <a href="https://visualstudio.microsoft.com/">Visual Studio</a>. Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. Currently, it supports searching CSVs better than Atom. Productivity is enhanced with the following extensions: {added Dec 2018}</p>
+<ul>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer">Excel Viewer</a> isn’t a good name, but I’ve liked the capability. It displays CSVs and other files in a grid. {added Dec 2018}</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv">Rainbow CSV</a> color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql">SQL Server</a> allows you to execute against a database, and view/copy/save the grid results. It doesn’t replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a> produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.</p></li>
+</ul>
+<p>These extensions <a href="https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions">can be installed by command line</a>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ex">code</span> --list-extensions</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="ex">code</span> --install-extension GrapeCity.gc-excelviewer</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="ex">code</span> --install-extension mechatroner.rainbow-csv</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="ex">code</span> --install-extension ms-mssql.mssql</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="ex">code</span> --install-extension streetsidesoftware.code-spell-checker</a></code></pre></div></li>
+<li><p><strong><a href="http://johnmacfarlane.net/pandoc/">pandoc</a></strong> converts files from one markup format into another. We’ll possibly use this to create tables in MS Word (for article submissions). {added Sept 2012}</p></li>
+</ul>
+</div>
+<div id="ubuntu" class="section level3">
+<h3><span class="header-section-number">16.1.4</span> Ubuntu</h3>
+<p>Ubuntu desktop 19.04 follows <a href="https://askubuntu.com/a/862520/153921">these instructions</a> for the R and RStudio and required these debian packages to be installed before the R packages. The <code>--yes</code> option avoids manual confirmation for each line, so you can copy &amp; paste this into the terminal.</p>
+<p>Add the following to the sources with <code>sudo nano /etc/apt/sources.list</code>. The ‘eoan’ version may be updated; The ‘metrocast’ part could be modified too from <a href="https://launchpad.net/ubuntu/+archivemirrors">this list</a>. I found it worked better for a new Ubuntu release than ‘cloud.r-project.org’.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="ex">deb</span> http://mirror.metrocast.net/ubuntu/ eoan main </a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="ex">deb-src</span> http://mirror.metrocast.net/ubuntu/ eoan main </a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="ex">deb</span> http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe</a></code></pre></div>
+<p>This next block can be copied and pasted (ctrl-shift-v) into the console <a href="https://stackoverflow.com/a/43164204">entirely</a>. Or lines can be pasted individual (without the <code>( function install-packages {</code> line, or the last three lines).</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">  <span class="co">### Add the key, update the list, then install base R.</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">  <span class="fu">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">  <span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">  <span class="fu">sudo</span> apt-get install r-base</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">  <span class="fu">sudo</span> apt-get install r-base-dev</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">  <span class="co">### Git</span></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9">  <span class="fu">sudo</span> apt-get install git-core</a>
+<a class="sourceLine" id="cb25-10" data-line-number="10">  <span class="fu">git</span> config --global user.email <span class="st">&quot;wibeasley@hotmail.com&quot;</span></a>
+<a class="sourceLine" id="cb25-11" data-line-number="11">  <span class="fu">git</span> config --global user.name <span class="st">&quot;Will Beasley&quot;</span></a>
+<a class="sourceLine" id="cb25-12" data-line-number="12">  <span class="fu">git</span> config --global credential.helper <span class="st">&#39;cache --timeout=3600000&#39;</span></a>
+<a class="sourceLine" id="cb25-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb25-14" data-line-number="14">  <span class="co">### Ubuntu &amp; Bioconductor packages that are indirectly needed for packages and BBMC scripts</span></a>
+<a class="sourceLine" id="cb25-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb25-16" data-line-number="16">  <span class="co"># Supports the `locate` command in bash</span></a>
+<a class="sourceLine" id="cb25-17" data-line-number="17">  <span class="fu">sudo</span> apt-get install mlocate</a>
+<a class="sourceLine" id="cb25-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb25-19" data-line-number="19">  <span class="co"># The genefilter package is needed for &#39;modeest&#39; on CRAN.</span></a>
+<a class="sourceLine" id="cb25-20" data-line-number="20">  <span class="co"># No longer a modeest dependency: Rscript -e &#39;BiocManager::install(&quot;genefilter&quot;)&#39;</span></a>
+<a class="sourceLine" id="cb25-21" data-line-number="21">  </a>
+<a class="sourceLine" id="cb25-22" data-line-number="22">  <span class="co">### CRAN packages that are also on the Ubuntu repositories</span></a>
+<a class="sourceLine" id="cb25-23" data-line-number="23">  </a>
+<a class="sourceLine" id="cb25-24" data-line-number="24">  <span class="co"># The &#39;xml2&#39; package:</span></a>
+<a class="sourceLine" id="cb25-25" data-line-number="25">  <span class="fu">sudo</span> apt-get --yes install libxml2-dev r-cran-xml</a>
+<a class="sourceLine" id="cb25-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb25-27" data-line-number="27">  <span class="co"># The &#39;curl&#39; package, and others</span></a>
+<a class="sourceLine" id="cb25-28" data-line-number="28">  <span class="fu">sudo</span> apt-get --yes install libssl-dev libcurl4-openssl-dev</a>
+<a class="sourceLine" id="cb25-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb25-30" data-line-number="30">  <span class="co"># The &#39;udunits2&#39; package: https://cran.r-project.org/web/packages/udunits2/index.html</span></a>
+<a class="sourceLine" id="cb25-31" data-line-number="31">  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev</a>
+<a class="sourceLine" id="cb25-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb25-33" data-line-number="33">  <span class="co"># The &#39;odbc&#39; package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></a>
+<a class="sourceLine" id="cb25-34" data-line-number="34">  <span class="fu">sudo</span> apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</a>
+<a class="sourceLine" id="cb25-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb25-36" data-line-number="36">  <span class="co"># The &#39;rgl&#39; package</span></a>
+<a class="sourceLine" id="cb25-37" data-line-number="37">  <span class="fu">sudo</span> apt-get --yes install libcgal-dev libglu1-mesa-dev libglu1-mesa-dev</a>
+<a class="sourceLine" id="cb25-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb25-39" data-line-number="39">  <span class="co"># The &#39;magick&#39; package</span></a>
+<a class="sourceLine" id="cb25-40" data-line-number="40">  <span class="fu">sudo</span> apt-get --yes install <span class="st">&#39;libmagick++-dev&#39;</span></a>
+<a class="sourceLine" id="cb25-41" data-line-number="41"></a>
+<a class="sourceLine" id="cb25-42" data-line-number="42">  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></a>
+<a class="sourceLine" id="cb25-43" data-line-number="43">  <span class="fu">sudo</span> apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev</a>
+<a class="sourceLine" id="cb25-44" data-line-number="44"></a>
+<a class="sourceLine" id="cb25-45" data-line-number="45">  <span class="co"># The &#39;sys&#39; package</span></a>
+<a class="sourceLine" id="cb25-46" data-line-number="46">  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</a>
+<a class="sourceLine" id="cb25-47" data-line-number="47"></a>
+<a class="sourceLine" id="cb25-48" data-line-number="48">  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu</span></a>
+<a class="sourceLine" id="cb25-49" data-line-number="49">  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable</a>
+<a class="sourceLine" id="cb25-50" data-line-number="50">  <span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb25-51" data-line-number="51">  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</a>
+<a class="sourceLine" id="cb25-52" data-line-number="52"></a>
+<a class="sourceLine" id="cb25-53" data-line-number="53">  <span class="co"># Some package I forgot, maybe &#39;svglite&#39;</span></a>
+<a class="sourceLine" id="cb25-54" data-line-number="54">  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</a>
+<a class="sourceLine" id="cb25-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb25-56" data-line-number="56">  <span class="co"># &#39;rJava&#39; and others</span></a>
+<a class="sourceLine" id="cb25-57" data-line-number="57">  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</a>
+<a class="sourceLine" id="cb25-58" data-line-number="58">  <span class="fu">sudo</span> R CMD javareconf</a>
+<a class="sourceLine" id="cb25-59" data-line-number="59">  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</a>
+<a class="sourceLine" id="cb25-60" data-line-number="60"></a>
+<a class="sourceLine" id="cb25-61" data-line-number="61">  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu</span></a>
+<a class="sourceLine" id="cb25-62" data-line-number="62">  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable</a>
+<a class="sourceLine" id="cb25-63" data-line-number="63">  <span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb25-64" data-line-number="64">  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev</a>
+<a class="sourceLine" id="cb25-65" data-line-number="65"></a>
+<a class="sourceLine" id="cb25-66" data-line-number="66">  <span class="co"># gifski -apparently the rust compiler is necessary</span></a>
+<a class="sourceLine" id="cb25-67" data-line-number="67">  <span class="fu">sudo</span> apt-get install cargo</a>
+<a class="sourceLine" id="cb25-68" data-line-number="68"></a>
+<a class="sourceLine" id="cb25-69" data-line-number="69">  <span class="co"># For databases</span></a>
+<a class="sourceLine" id="cb25-70" data-line-number="70">  <span class="fu">sudo</span> apt-get --yes install sqlite sqliteman</a>
+<a class="sourceLine" id="cb25-71" data-line-number="71">  <span class="fu">sudo</span> apt-get --yes install postgresql postgresql-contrib pgadmin3</a>
+<a class="sourceLine" id="cb25-72" data-line-number="72"><span class="kw">}</span></a>
+<a class="sourceLine" id="cb25-73" data-line-number="73"><span class="ex">install-packages</span></a>
+<a class="sourceLine" id="cb25-74" data-line-number="74"><span class="kw">)</span></a></code></pre></div>
+</div>
+<div id="location-examples" class="section level3">
+<h3><span class="header-section-number">16.1.5</span> Location Examples</h3>
+<ul>
+<li><p><strong>GitHub repository</strong> <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns</a> {added Sept 2012}</p></li>
+<li><p><strong>File server directory</strong> Ask your PI. For Peds, it’s typically on the “S” drive.</p></li>
+<li><p><strong>SQL Server Database</strong> Ask Thomas, Will or David</p></li>
+<li><p><strong>REDCap database</strong> Ask Thomas, Will or David. It is a http url, and we’re trying not to publicize its value.</p></li>
+<li><p><strong>ODBC UserDsn</strong> The name depends on your specific repository, and SQL Server database. Ask Thomas, Will or David for how to set it up.</p></li>
+</ul>
+</div>
+<div id="installation-possible-troubleshooting" class="section level3">
+<h3><span class="header-section-number">16.1.6</span> Installation (possible troubleshooting)</h3>
+<ul>
+<li><p><strong>Git</strong>: Will Beasley resorted to this workaround Sept 2012: <a href="http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing" class="uri">http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing</a>. And then he copied the following four files from <code>D:/Program Files/msysgit/mingw/bin/</code> to <code>D:/Program Files/msysgit/bin/</code>: (1) <code>libiconv2.dll</code>, (2) <code>libcurl-4.dll</code>, (3) <code>libcrypto.dll</code>, and (4) <code>libssl.dll</code>. (If you install to the default location, you’ll move instead from <code>C:/msysgit/mingw/bin/</code> to <code>C:/msysgit/bin/</code>) {added Sept 2012}</p></li>
+<li><p><strong>Git</strong>: On a different computer, Will Beasley couldn’t get RStudio to recognize msysGit, so installed the <code>Full installer for official Git for Windows 1.7.11</code> from (<a href="http://code.google.com/p/msysgit/downloads/list" class="uri">http://code.google.com/p/msysgit/downloads/list</a>) and switched the Git Path in the RStudio Options. {added Sept 2012}</p></li>
+<li><p><strong>RStudio</strong> If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren’t erased. To be safe, you can be thorough and delete the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio-Desktop\</code>. The options settings are stored (and can be manipulated) in this extentionless text file: <code>C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings</code>. {added Sept 2012}</p></li>
+</ul>
+</div>
+<div id="retired-software" class="section level3">
+<h3><span class="header-section-number">16.1.7</span> Retired Software</h3>
+<p>We previously installed this software in this list. Most have been replaced by software above that’s either newer or more natural to use.</p>
+<ul>
+<li><strong><a href="http://msysgit.github.com/">msysGit</a></strong> allows RStudio to track changes and commit &amp; sync them to the GitHub server. Connect RStudio to GitHub repository. I moved this to optional (Oct 14, 2012) because the GitHub client (see above) does almost everything that the RStudio plugin does; and it does it a little better and a little more robust; and its installation hasn’t given me problems. {added Oct 2012}
+<ul>
+<li>Starting in the top right of RStudio, click: Project -&gt; New Project -&gt; Create Project from Version Control -&gt; Git {added Sept 2012}</li>
+<li>An example of a repository URL is <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns</a>. Specify a location to save (a copy of) the project on your local computer. {added Sept 2012}</li>
+</ul></li>
+<li><p><strong><a href="http://csved.sjfrancke.nl/">CSVed</a></strong> is a lightweight program for viewing data files. It fits somewhere between a text editor and Excel.</p></li>
+<li><p><strong><a href="http://www.sourcetreeapp.com/">SourceTree</a></strong> is a rich client that has many more features than the GitHub client. I don’t recommend it for beginners, since it has more ways to mess up things. But for developers, it nicely fills a spot in between the GitHub client and command-line operations. The branching visualization is really nice too. Unfortunately and ironically, it doesn’t currently support Linux. {added Sept 2014}.</p></li>
+<li><p><strong><a href="http://git-cola.github.io/">git-cola</a></strong> is probably the best GUI for Git supported on Linux. It’s available through the official <a href="http://packages.ubuntu.com/search?keywords=git-cola">Ubuntu repositories</a> with <code>apt-get</code> (also see <a href="https://apps.ubuntu.com/cat/applications/git-cola/">this</a>). The branch visualization features are in a different, but related program, ‘git dag’. {added Sept 2014}</p></li>
+<li><p><strong><a href="http://eclipse.github.com/">GitHub for Eclipse</a></strong> is something I discourage for a beginner, and I strongly recommend you start with RStudio (and <a href="http://windows.github.com/">GitHub Client</a> or the git capabilities within RStudio) for a few months before you even consider Eclipse. It’s included in this list for the sake of completeness. When installing EGit plug-in, ignore eclipse site and check out this youtube video:<a href="http://www.youtube.com/watch?v=I7fbCE5nWPU" class="uri">http://www.youtube.com/watch?v=I7fbCE5nWPU</a>.</p></li>
+<li><p><strong><a href="http://colororacle.org/">Color Oracle</a></strong> simulates the three most common types of color blindness. If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too). If it’s already installed, it takes less than 10 second to check it against all three types of color blindness. If it’s not installed, extra work may be necessary if Java isn’t already installed. When you download the zip, extract the <code>ColorOracle.exe</code> program where you like. {added Sept 2012}</p></li>
+</ul>
+</div>
+</div>
+<div id="recommended-installation" class="section level2">
+<h2><span class="header-section-number">16.2</span> Recommended Installation</h2>
+</div>
+<div id="optional-installation" class="section level2">
+<h2><span class="header-section-number">16.3</span> Optional Installation</h2>
+</div>
+<div id="asset-locations" class="section level2">
+<h2><span class="header-section-number">16.4</span> Asset Locations</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="troubleshooting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-workstation.md",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["data-science-practices-1.pdf", "data-science-practices-1.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
