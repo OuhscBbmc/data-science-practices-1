@@ -15,7 +15,7 @@ The order matters.
 
 ### RStudio 
 
-[RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.   {added Sept 2012}
+[RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.
 
 ### Installing R Packages
 
@@ -32,7 +32,7 @@ package_janitor_remote(
 )        
 ````
 
-Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper `DESCRIPTION` file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION) for an example.
+Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper [DESCRIPTION](http://r-pkgs.had.co.nz/description.html) file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION) for an example.
 
 When the project is opened in RStudio, [`update_packages_addin()`](http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html) in [OuhscMunge](https://ouhscbbmc.github.io/OuhscMunge) will find the DESCRIPTION file and install the package dependencies.
 
@@ -44,7 +44,7 @@ OuhscMunge::update_packages_addin()
 
 ### Updating R Packages
 
-Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(ask="graphics", checkBuilt=TRUE)`.
+Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(checkBuilt=TRUE)`.
 
 ### GitHub
 
