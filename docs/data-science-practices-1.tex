@@ -128,7 +128,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-11-25}
+    \date{2019-11-26}
 
 \usepackage{booktabs}
 
@@ -1058,7 +1058,7 @@ The order matters.
 \hypertarget{rstudio}{%
 \subsection{RStudio}\label{rstudio}}
 
-\href{http://www.rstudio.com/ide/download/desktop}{RStudio Desktop} is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus \texttt{Help} -\textgreater{} \texttt{Check\ for\ updates}. \{added Sept 2012\}
+\href{http://www.rstudio.com/ide/download/desktop}{RStudio Desktop} is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus \texttt{Help} -\textgreater{} \texttt{Check\ for\ updates}.
 
 \hypertarget{installing-r-packages}{%
 \subsection{Installing R Packages}\label{installing-r-packages}}
@@ -1078,7 +1078,7 @@ To install our frequently-used packages, run the following snippet. The first li
 \end{Highlighting}
 \end{Shaded}
 
-Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper \texttt{DESCRIPTION} file. See \href{https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION}{RAnalysisSkeleton} for an example.
+Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper \href{http://r-pkgs.had.co.nz/description.html}{DESCRIPTION} file. See \href{https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION}{RAnalysisSkeleton} for an example.
 
 When the project is opened in RStudio, \href{http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html}{\texttt{update\_packages\_addin()}} in \href{https://ouhscbbmc.github.io/OuhscMunge}{OuhscMunge} will find the DESCRIPTION file and install the package dependencies.
 
@@ -1093,7 +1093,7 @@ When the project is opened in RStudio, \href{http://ouhscbbmc.github.io/OuhscMun
 \hypertarget{updating-r-packages}{%
 \subsection{Updating R Packages}\label{updating-r-packages}}
 
-Several R packages will need to be updated every weeks. Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code \texttt{update.packages(ask="graphics",\ checkBuilt=TRUE)}.
+Several R packages will need to be updated every weeks. Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code \texttt{update.packages(checkBuilt=TRUE)}.
 
 \hypertarget{github-1}{%
 \subsection{GitHub}\label{github-1}}
@@ -1763,7 +1763,29 @@ Here is a collection of presentations by the BBMC and friends that may help demo
       units of measurement (eg, proportion vs percentage on the \emph{y} axis)
     \end{enumerate}
   \end{enumerate}
+\item
+  documentation - bookdown
 \end{enumerate}
+
+\begin{quote}
+Bookdown has worked well for us so far. It's basically independent markdown documents stored on a dedicated git repo. Then you click ``build'' in RStudio and it converts all the markdown files to static html files. Because GitHub is essentially serving as the backend, everyone can make changes to sections and we don't have to be too worried about
+
+Here's a version that's hosted publicly, but I tested that it can be hosted on our shared file server. (It's possible because the html files are so static.) If this is what you guys want for OU's collective CDW, please tell me:
+
+\begin{itemize}
+\tightlist
+\item
+  who you want to be able to edit the documents without review. I'll add them to the GitHub repo.
+\item
+  who you want to be able to view the documents. I'll add them to a dedicate file server space.
+\end{itemize}
+
+\url{https://ouhscbbmc.github.io/data-science-practices-1/workstation.html\#installation-required}
+
+I was thinking that each individual database gets it own chapter. The BBMC has \textasciitilde{}4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database. Then there are \textasciitilde{}3 sections within each chapter: (a) a black-and-white description of the tables, columns, \& indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers \& admins).
+
+My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor \& commit, and let someone else click ``build'' in RStudio on their machine). But I'm very flexible on all this. I'll support \& contribute to any system that you guys feel will work well across the teams.
+\end{quote}
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}

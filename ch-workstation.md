@@ -30,7 +30,7 @@ devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-jani
 package_janitor_remote(
   "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"
 )        
-````
+```
 
 Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper [DESCRIPTION](http://r-pkgs.had.co.nz/description.html) file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION) for an example.
 
