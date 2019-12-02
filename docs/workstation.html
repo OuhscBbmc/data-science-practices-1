@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-11-26" />
+<meta name="date" content="2019-12-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -463,10 +463,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb26-21" data-line-number="21">  </a>
 <a class="sourceLine" id="cb26-22" data-line-number="22">  <span class="co">### CRAN packages that are also on the Ubuntu repositories</span></a>
 <a class="sourceLine" id="cb26-23" data-line-number="23">  </a>
-<a class="sourceLine" id="cb26-24" data-line-number="24">  <span class="co"># The &#39;xml2&#39; package:</span></a>
+<a class="sourceLine" id="cb26-24" data-line-number="24">  <span class="co"># The &#39;xml2&#39; package; https://CRAN.R-project.org/package=xml2 </span></a>
 <a class="sourceLine" id="cb26-25" data-line-number="25">  <span class="fu">sudo</span> apt-get --yes install libxml2-dev r-cran-xml</a>
 <a class="sourceLine" id="cb26-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb26-27" data-line-number="27">  <span class="co"># The &#39;curl&#39; package, and others</span></a>
+<a class="sourceLine" id="cb26-27" data-line-number="27">  <span class="co"># The &#39;curl&#39; package, and others; https://CRAN.R-project.org/package=curl </span></a>
 <a class="sourceLine" id="cb26-28" data-line-number="28">  <span class="fu">sudo</span> apt-get --yes install libssl-dev libcurl4-openssl-dev</a>
 <a class="sourceLine" id="cb26-29" data-line-number="29"></a>
 <a class="sourceLine" id="cb26-30" data-line-number="30">  <span class="co"># The &#39;udunits2&#39; package: https://cran.r-project.org/web/packages/udunits2/index.html</span></a>
@@ -475,10 +475,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb26-33" data-line-number="33">  <span class="co"># The &#39;odbc&#39; package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></a>
 <a class="sourceLine" id="cb26-34" data-line-number="34">  <span class="fu">sudo</span> apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</a>
 <a class="sourceLine" id="cb26-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb26-36" data-line-number="36">  <span class="co"># The &#39;rgl&#39; package</span></a>
-<a class="sourceLine" id="cb26-37" data-line-number="37">  <span class="fu">sudo</span> apt-get --yes install libcgal-dev libglu1-mesa-dev libglu1-mesa-dev</a>
+<a class="sourceLine" id="cb26-36" data-line-number="36">  <span class="co"># The &#39;rgl&#39; package; https://stackoverflow.com/a/39952771/1082435</span></a>
+<a class="sourceLine" id="cb26-37" data-line-number="37">  <span class="fu">sudo</span> apt-get --yes install libcgal-dev libglu1-mesa-dev</a>
 <a class="sourceLine" id="cb26-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb26-39" data-line-number="39">  <span class="co"># The &#39;magick&#39; package</span></a>
+<a class="sourceLine" id="cb26-39" data-line-number="39">  <span class="co"># The &#39;magick&#39; package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></a>
 <a class="sourceLine" id="cb26-40" data-line-number="40">  <span class="fu">sudo</span> apt-get --yes install <span class="st">&#39;libmagick++-dev&#39;</span></a>
 <a class="sourceLine" id="cb26-41" data-line-number="41"></a>
 <a class="sourceLine" id="cb26-42" data-line-number="42">  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></a>
@@ -488,14 +488,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb26-46" data-line-number="46">  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</a>
 <a class="sourceLine" id="cb26-47" data-line-number="47"></a>
 <a class="sourceLine" id="cb26-48" data-line-number="48">  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu</span></a>
-<a class="sourceLine" id="cb26-49" data-line-number="49">  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable</a>
-<a class="sourceLine" id="cb26-50" data-line-number="50">  <span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb26-51" data-line-number="51">  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</a>
+<a class="sourceLine" id="cb26-49" data-line-number="49">  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</a>
+<a class="sourceLine" id="cb26-50" data-line-number="50">  <span class="co"># old: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable</span></a>
+<a class="sourceLine" id="cb26-51" data-line-number="51">  <span class="co"># old: sudo apt-get update</span></a>
 <a class="sourceLine" id="cb26-52" data-line-number="52"></a>
-<a class="sourceLine" id="cb26-53" data-line-number="53">  <span class="co"># Some package I forgot, maybe &#39;svglite&#39;</span></a>
+<a class="sourceLine" id="cb26-53" data-line-number="53">  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></a>
 <a class="sourceLine" id="cb26-54" data-line-number="54">  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</a>
 <a class="sourceLine" id="cb26-55" data-line-number="55"></a>
-<a class="sourceLine" id="cb26-56" data-line-number="56">  <span class="co"># &#39;rJava&#39; and others</span></a>
+<a class="sourceLine" id="cb26-56" data-line-number="56">  <span class="co"># &#39;rJava&#39; and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></a>
 <a class="sourceLine" id="cb26-57" data-line-number="57">  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</a>
 <a class="sourceLine" id="cb26-58" data-line-number="58">  <span class="fu">sudo</span> R CMD javareconf</a>
 <a class="sourceLine" id="cb26-59" data-line-number="59">  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</a>

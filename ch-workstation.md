@@ -201,10 +201,10 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   
   ### CRAN packages that are also on the Ubuntu repositories
   
-  # The 'xml2' package:
+  # The 'xml2' package; https://CRAN.R-project.org/package=xml2 
   sudo apt-get --yes install libxml2-dev r-cran-xml
 
-  # The 'curl' package, and others
+  # The 'curl' package, and others; https://CRAN.R-project.org/package=curl 
   sudo apt-get --yes install libssl-dev libcurl4-openssl-dev
 
   # The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html
@@ -213,10 +213,10 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   # The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu
   sudo apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc
 
-  # The 'rgl' package
-  sudo apt-get --yes install libcgal-dev libglu1-mesa-dev libglu1-mesa-dev
+  # The 'rgl' package; https://stackoverflow.com/a/39952771/1082435
+  sudo apt-get --yes install libcgal-dev libglu1-mesa-dev
 
-  # The 'magick' package
+  # The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source
   sudo apt-get --yes install 'libmagick++-dev'
 
   # The 'pdftools' and 'Rpoppler' packages, which involve PDFs
@@ -226,14 +226,14 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   sudo apt-get --yes install libapparmor-dev
 
   # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu
-  sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-  sudo apt-get update
   sudo apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev
+  # old: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+  # old: sudo apt-get update
 
-  # Some package I forgot, maybe 'svglite'
+  # For Cairo package, a dependency of Shiny & plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/
   sudo apt-get --yes install libcairo2-dev
 
-  # 'rJava' and others
+  # 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/
   sudo apt-get --yes install default-jre default-jdk
   sudo R CMD javareconf
   sudo apt-get --yes install r-cran-rjava

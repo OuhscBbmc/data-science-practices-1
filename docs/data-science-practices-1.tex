@@ -1,3 +1,6 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,30 +9,31 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
 \usepackage{hyperref}
-\hypersetup{unicode=true,
+\hypersetup{
             pdftitle={Collaborative Data Science Practices},
             pdfauthor={Will Beasley},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{apalike}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -71,11 +75,9 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-\usepackage{graphicx}
-% grffile has become a legacy package: https://ctan.org/pkg/grffile
-\IfFileExists{grffile.sty}{%
-\usepackage{grffile}
-}{}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -84,12 +86,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -104,33 +100,40 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\usepackage{booktabs}
+% https://github.com/rstudio/rmarkdown/issues/337
 \let\rmarkdownfootnote\footnote%
 \def\footnote{\protect\rmarkdownfootnote}
 
-%%% Change title format to be more compact
+% https://github.com/rstudio/rmarkdown/pull/252
 \usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
 \setlength{\droptitle}{-2em}
 
-  \title{Collaborative Data Science Practices}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Will Beasley}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2019-11-26}
+\pretitle{\vspace{\droptitle}\centering\huge}
+\posttitle{\par}
 
-\usepackage{booktabs}
+\preauthor{\centering\large\emph}
+\postauthor{\par}
+
+\predate{\centering\large\emph}
+\postdate{\par}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{Collaborative Data Science Practices}
+\author{Will Beasley}
+\date{2019-12-01}
 
 \begin{document}
 \maketitle
@@ -1308,10 +1311,10 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   
   \CommentTok{### CRAN packages that are also on the Ubuntu repositories}
   
-  \CommentTok{# The 'xml2' package:}
+  \CommentTok{# The 'xml2' package; https://CRAN.R-project.org/package=xml2 }
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install libxml2-dev r-cran-xml}
 
-  \CommentTok{# The 'curl' package, and others}
+  \CommentTok{# The 'curl' package, and others; https://CRAN.R-project.org/package=curl }
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install libssl-dev libcurl4-openssl-dev}
 
   \CommentTok{# The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html}
@@ -1320,10 +1323,10 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   \CommentTok{# The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu}
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc}
 
-  \CommentTok{# The 'rgl' package}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libcgal-dev libglu1-mesa-dev libglu1-mesa-dev}
+  \CommentTok{# The 'rgl' package; https://stackoverflow.com/a/39952771/1082435}
+  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libcgal-dev libglu1-mesa-dev}
 
-  \CommentTok{# The 'magick' package}
+  \CommentTok{# The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source}
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install }\StringTok{'libmagick++-dev'}
 
   \CommentTok{# The 'pdftools' and 'Rpoppler' packages, which involve PDFs}
@@ -1333,14 +1336,14 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install libapparmor-dev}
 
   \CommentTok{# The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu}
-  \FunctionTok{sudo}\NormalTok{ add-apt-repository ppa:ubuntugis/ubuntugis-unstable}
-  \FunctionTok{sudo}\NormalTok{ apt-get update}
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev}
+  \CommentTok{# old: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable}
+  \CommentTok{# old: sudo apt-get update}
 
-  \CommentTok{# Some package I forgot, maybe 'svglite'}
+  \CommentTok{# For Cairo package, a dependency of Shiny & plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/}
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install libcairo2-dev}
 
-  \CommentTok{# 'rJava' and others}
+  \CommentTok{# 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/}
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install default-jre default-jdk}
   \FunctionTok{sudo}\NormalTok{ R CMD javareconf}
   \FunctionTok{sudo}\NormalTok{ apt-get --yes install r-cran-rjava}
@@ -1859,6 +1862,5 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
 
 \bibliography{book.bib,packages.bib}
-
 
 \end{document}
