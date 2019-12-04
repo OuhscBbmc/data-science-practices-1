@@ -37,3 +37,9 @@ Chapters & Sections to Form
 > I was thinking that each individual database gets it own chapter.  The BBMC has ~4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database.  Then there are ~3 sections within each chapter: (a) a black-and-white description of the tables, columns, & indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers & admins).
 > 
 > My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor & commit, and let someone else click "build" in RStudio on their machine).  But I'm very flexible on all this.  I'll support & contribute to any system that you guys feel will work well across the teams.  
+
+1. developing packages
+
+* [*R packages*](http://r-pkgs.had.co.nz/) by Hadley Wickham
+
+* http://mangothecat.github.io/goodpractice/
