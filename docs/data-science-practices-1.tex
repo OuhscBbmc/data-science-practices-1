@@ -1,39 +1,46 @@
-\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
-\documentclass[]{book}
+\documentclass[
+]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provides euro and other symbols
-\else % if luatex or xelatex
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
   \usepackage{unicode-math}
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage[]{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\usepackage{hyperref}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-            pdftitle={Collaborative Data Science Practices},
-            pdfauthor={Will Beasley},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
+  pdftitle={Collaborative Data Science Practices},
+  pdfauthor={Will Beasley},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -75,9 +82,15 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
-\usepackage{graphicx,grffile}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -86,31 +99,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-% set default figure placement to htbp
+% Set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
 \usepackage{booktabs}
 % https://github.com/rstudio/rmarkdown/issues/337
 \let\rmarkdownfootnote\footnote%
@@ -133,15 +129,17 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-01}
+\date{2019-12-03}
 
 \begin{document}
+\frontmatter
 \maketitle
 
 {
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\mainmatter
 \hypertarget{prerequisites}{%
 \chapter{Prerequisites}\label{prerequisites}}
 
@@ -152,8 +150,8 @@ The \textbf{bookdown} package can be installed from CRAN or Github:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{# or the development version}
-\CommentTok{# devtools::install_github("rstudio/bookdown")}
+\CommentTok{\# or the development version}
+\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -252,8 +250,8 @@ Keep the chunk even if no files are sourced. An empty chunk is instructive to re
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- load-sources ------------------------------------------------------------}
-\NormalTok{base}\OperatorTok{::}\KeywordTok{source}\NormalTok{(}\DataTypeTok{file=}\StringTok{"./analysis/common/display-1.R"}\NormalTok{)      }\CommentTok{# Load common graphing functions.}
+\CommentTok{\# {-}{-}{-}{-} load{-}sources {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{base}\OperatorTok{::}\KeywordTok{source}\NormalTok{(}\DataTypeTok{file=}\StringTok{"./analysis/common/display{-}1.R"}\NormalTok{)      }\CommentTok{\# Load common graphing functions.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -274,7 +272,7 @@ As discussed in the previous \protect\hyperlink{qualify-functions}{qualify all f
 \item
   Obvious dependencies are not called by \texttt{reqiureNamespace()} or \texttt{library()} for similar reasons, especially if they are not called directly. For example `tidyselect' is not listed when `tidyr' is listed.
 \item
-  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater{}\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater{}\%'')`. This frequently-used function called be called throughout the execution without qualification.
+  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater\%'')`. This frequently-used function called be called throughout the execution without qualification.
 \item
   Compared to manipulation files, our analysis files tend to use many functions in a few concentrated packages so conflicting function names are less common. Typical packages used in analysis are `ggplot2' and `lme4'.
 \end{enumerate}
@@ -287,15 +285,15 @@ Here are packages found in most of our manipulation files. Notice the lesser-kno
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- load-packages -----------------------------------------------------------}
-\NormalTok{import}\OperatorTok{::}\KeywordTok{from}\NormalTok{(magrittr, }\StringTok{"%>%"}\NormalTok{ )}
+\CommentTok{\# {-}{-}{-}{-} load{-}packages {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{import}\OperatorTok{::}\KeywordTok{from}\NormalTok{(magrittr, }\StringTok{"\%>\%"}\NormalTok{ )}
 
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{     )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{     )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{     ) }
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"config"}\NormalTok{    ) }
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{ ) }\CommentTok{# Asserts expected conditions }
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{# remotes::install_github(repo="OuhscBbmc/OuhscMunge")}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{ ) }\CommentTok{\# Asserts expected conditions }
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{\# remotes::install\_github(repo="OuhscBbmc/OuhscMunge")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -308,19 +306,19 @@ The \protect\hyperlink{repo-root}{config file} can coordinate a static variable 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- declare-globals ---------------------------------------------------------}
-\CommentTok{# Constant values that won't change.}
-\NormalTok{config                         <-}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
-\NormalTok{path_db                        <-}\StringTok{ }\NormalTok{config}\OperatorTok{$}\NormalTok{path_database}
+\CommentTok{\# {-}{-}{-}{-} declare{-}globals {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Constant values that won\textquotesingle{}t change.}
+\NormalTok{config                         <{-}}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
+\NormalTok{path\_db                        <{-}}\StringTok{ }\NormalTok{config}\OperatorTok{$}\NormalTok{path\_database}
 
-\CommentTok{# Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).}
-\CommentTok{#   OuhscMunge::readr_spec_aligned(config$path_subject_1_raw)}
-\NormalTok{col_types <-}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{cols_only}\NormalTok{(}
-  \DataTypeTok{subject_id          =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_integer}\NormalTok{(),}
-  \DataTypeTok{county_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_integer}\NormalTok{(),}
-  \DataTypeTok{gender_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_double}\NormalTok{(),}
-  \DataTypeTok{race                =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_character}\NormalTok{(),}
-  \DataTypeTok{ethnicity           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col_character}\NormalTok{()}
+\CommentTok{\# Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).}
+\CommentTok{\#   OuhscMunge::readr\_spec\_aligned(config$path\_subject\_1\_raw)}
+\NormalTok{col\_types <{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{cols\_only}\NormalTok{(}
+  \DataTypeTok{subject\_id          =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
+  \DataTypeTok{county\_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
+  \DataTypeTok{gender\_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_double}\NormalTok{(),}
+  \DataTypeTok{race                =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_character}\NormalTok{(),}
+  \DataTypeTok{ethnicity           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_character}\NormalTok{()}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -358,31 +356,31 @@ The \protect\hyperlink{repo-root}{config file} can coordinate a static variable 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{default:}
-\CommentTok{# To be processed by Ellis lanes}
-\FunctionTok{path_subject_1_raw:}\AttributeTok{  }\StringTok{"data-public/raw/subject-1.csv"}
-\FunctionTok{path_mlm_1_raw:}\AttributeTok{      }\StringTok{"data-public/raw/mlm-1.csv"}
+\FunctionTok{default}\KeywordTok{:}
+\CommentTok{\# To be processed by Ellis lanes}
+\FunctionTok{path\_subject\_1\_raw}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/raw/subject{-}1.csv"}
+\FunctionTok{path\_mlm\_1\_raw}\KeywordTok{:}\AttributeTok{      }\StringTok{"data{-}public/raw/mlm{-}1.csv"}
 
-\CommentTok{# Central Database (produced by Ellis lanes).}
-\FunctionTok{path_database:}\AttributeTok{       }\StringTok{"data-public/derived/db.sqlite3"}
+\CommentTok{\# Central Database (produced by Ellis lanes).}
+\FunctionTok{path\_database}\KeywordTok{:}\AttributeTok{       }\StringTok{"data{-}public/derived/db.sqlite3"}
 
-\CommentTok{# Analysis-ready datasets (produced by scribes & consumed by analyses).}
-\FunctionTok{path_mlm_1_derived:}\AttributeTok{  }\StringTok{"data-public/derived/mlm-1.rds"}
+\CommentTok{\# Analysis{-}ready datasets (produced by scribes \& consumed by analyses).}
+\FunctionTok{path\_mlm\_1\_derived}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/derived/mlm{-}1.rds"}
 
-\CommentTok{# Metadata}
-\FunctionTok{path_annotation:}\AttributeTok{     }\StringTok{"data-public/metadata/cqi-annotation.csv"}
+\CommentTok{\# Metadata}
+\FunctionTok{path\_annotation}\KeywordTok{:}\AttributeTok{     }\StringTok{"data{-}public/metadata/cqi{-}annotation.csv"}
 
-\CommentTok{# Logging errors and messages from automated execution.}
-\FunctionTok{path_log_flow:}\AttributeTok{       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")}
+\CommentTok{\# Logging errors and messages from automated execution.}
+\FunctionTok{path\_log\_flow}\KeywordTok{:}\AttributeTok{       !expr strftime(Sys.time(), "data{-}unshared/log/flow{-}\%Y{-}\%m{-}\%d{-}{-}\%H{-}\%M{-}\%S.log")}
 
-\CommentTok{# time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.}
+\CommentTok{\# time\_zone\_local       :  "America/Chicago" \# Force local time, in case remotely run.}
 
-\CommentTok{# ---- Validation Ranges & Patterns ----}
-\FunctionTok{range_record_id         :}\AttributeTok{ !expr c(1L, 999999L)}
-\FunctionTok{range_dob               :}\AttributeTok{ !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))}
-\FunctionTok{range_datetime_entry    :}\AttributeTok{ !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())}
-\FunctionTok{max_age                 :}\AttributeTok{ 25}
-\FunctionTok{pattern_mrn_centricity  :}\AttributeTok{ }\StringTok{"^\textbackslash{}\textbackslash{}d\{16\}$"}\ErrorTok{        # The 64-bit int is more easily validated as a character.}
+\CommentTok{\# {-}{-}{-}{-} Validation Ranges \& Patterns {-}{-}{-}{-}}
+\FunctionTok{range\_record\_id         }\KeywordTok{:}\AttributeTok{ !expr c(1L, 999999L)}
+\FunctionTok{range\_dob               }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2010{-}01{-}01"), Sys.Date() + lubridate::days(1))}
+\FunctionTok{range\_datetime\_entry    }\KeywordTok{:}\AttributeTok{ !expr c(as.POSIXct("2019{-}01{-}01", tz="America/Chicago"), Sys.time())}
+\FunctionTok{max\_age                 }\KeywordTok{:}\AttributeTok{ }\DecValTok{25}
+\FunctionTok{pattern\_mrn\_centricity  }\KeywordTok{:}\AttributeTok{ }\StringTok{"\^{}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{16\}$"}\CommentTok{        \# The 64{-}bit int is more easily validated as a character.}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -567,7 +565,7 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list=}\KeywordTok{ls}\NormalTok{(}\DataTypeTok{all=}\OtherTok{TRUE}\NormalTok{)) }\CommentTok{#Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.}
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list=}\KeywordTok{ls}\NormalTok{(}\DataTypeTok{all=}\OtherTok{TRUE}\NormalTok{)) }\CommentTok{\#Clear the memory of variables from previous run. This is not called by knitr, because it\textquotesingle{}s above the first chunk.}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -577,8 +575,8 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- load-sources ------------------------------------------------------------}
-\KeywordTok{source}\NormalTok{(}\StringTok{"./manipulation/osdh/ellis/common-ellis.R"}\NormalTok{)}
+\CommentTok{\# {-}{-}{-}{-} load{-}sources {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\KeywordTok{source}\NormalTok{(}\StringTok{"./manipulation/osdh/ellis/common{-}ellis.R"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -586,18 +584,18 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- load-packages -----------------------------------------------------------}
-\CommentTok{# Attach these package(s) so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path}
+\CommentTok{\# {-}{-}{-}{-} load{-}packages {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Attach these package(s) so their functions don\textquotesingle{}t need to be qualified: http://r{-}pkgs.had.co.nz/namespace.html\#search{-}path}
 \KeywordTok{library}\NormalTok{(magrittr            , }\DataTypeTok{quietly=}\OtherTok{TRUE}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(DBI                 , }\DataTypeTok{quietly=}\OtherTok{TRUE}\NormalTok{)}
 
-\CommentTok{# Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path}
+\CommentTok{\# Verify these packages are available on the machine, but their functions need to be qualified: http://r{-}pkgs.had.co.nz/namespace.html\#search{-}path}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{        )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{        )}
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{        ) }\CommentTok{# Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{        ) }\CommentTok{\# Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"testit"}\NormalTok{)}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{)}
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{#devtools::install_github(repo="OuhscBbmc/OuhscMunge")}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{\#devtools::install\_github(repo="OuhscBbmc/OuhscMunge")}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -605,7 +603,7 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- declare-globals ---------------------------------------------------------}
+\CommentTok{\# {-}{-}{-}{-} declare{-}globals {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -613,7 +611,7 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- load-data ---------------------------------------------------------------}
+\CommentTok{\# {-}{-}{-}{-} load{-}data {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -621,7 +619,7 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- tweak-data --------------------------------------------------------------}
+\CommentTok{\# {-}{-}{-}{-} tweak{-}data {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -631,9 +629,9 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- verify-values -----------------------------------------------------------}
-\NormalTok{county_month_combo   <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(ds}\OperatorTok{$}\NormalTok{county_id, ds}\OperatorTok{$}\NormalTok{month)}
-\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert_character}\NormalTok{(county_month_combo, }\DataTypeTok{pattern  =}\StringTok{"^}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{1,2\} }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{4\}-}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}-}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}$"}\NormalTok{, }\DataTypeTok{any.missing=}\NormalTok{F, }\DataTypeTok{unique=}\NormalTok{T)}
+\CommentTok{\# {-}{-}{-}{-} verify{-}values {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{county\_month\_combo   <{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(ds}\OperatorTok{$}\NormalTok{county\_id, ds}\OperatorTok{$}\NormalTok{month)}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_character}\NormalTok{(county\_month\_combo, }\DataTypeTok{pattern  =}\StringTok{"\^{}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{1,2\} }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{4\}{-}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}{-}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}$"}\NormalTok{, }\DataTypeTok{any.missing=}\NormalTok{F, }\DataTypeTok{unique=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -641,7 +639,7 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- specify-columns-to-upload -----------------------------------------------}
+\CommentTok{\# {-}{-}{-}{-} specify{-}columns{-}to{-}upload {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -649,8 +647,8 @@ To incorporate outside data source into your system safely.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# ---- upload-to-db ------------------------------------------------------------}
-\CommentTok{# ---- save-to-disk ------------------------------------------------------------}
+\CommentTok{\# {-}{-}{-}{-} upload{-}to{-}db {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# {-}{-}{-}{-} save{-}to{-}disk {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \end{Highlighting}
 \end{Shaded}
 \end{enumerate}
@@ -716,8 +714,8 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\BuiltInTok{cd}\NormalTok{ ~}
-\FunctionTok{git}\NormalTok{ clone --mirror https://github.com/your-org/bloated.git}
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}}
+\FunctionTok{git}\NormalTok{ clone {-}{-}mirror https://github.com/your{-}org/bloated.git}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -725,7 +723,7 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{java}\NormalTok{ -jar bfg-*.jar --delete-files monster-data.csv bloated.git}
+\ExtensionTok{java}\NormalTok{ {-}jar bfg{-}*.jar {-}{-}delete{-}files monster{-}data.csv bloated.git}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -734,7 +732,7 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 \begin{Shaded}
 \begin{Highlighting}[]
 \BuiltInTok{cd}\NormalTok{ bloated.git}
-\FunctionTok{git}\NormalTok{ reflog expire --expire=now --all }\KeywordTok{&&} \FunctionTok{git}\NormalTok{ gc --prune=now --aggressive}
+\FunctionTok{git}\NormalTok{ reflog expire {-}{-}expire=now {-}{-}all }\KeywordTok{\&\&} \FunctionTok{git}\NormalTok{ gc {-}{-}prune=now {-}{-}aggressive}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -750,8 +748,8 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\BuiltInTok{cd}\NormalTok{ ~}
-\FunctionTok{rm}\NormalTok{ bfg-*.jar}
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}}
+\FunctionTok{rm}\NormalTok{ bfg{-}*.jar}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -1073,10 +1071,10 @@ To install our frequently-used packages, run the following snippet. The first li
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"devtools"}\NormalTok{) ) utils}\OperatorTok{::}\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{source_gist}\NormalTok{(}\StringTok{"2c5e7459b88ec28b9e8fa0c695b15ee3"}\NormalTok{, }\DataTypeTok{filename=}\StringTok{"package-janitor-bbmc.R"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{source\_gist}\NormalTok{(}\StringTok{"2c5e7459b88ec28b9e8fa0c695b15ee3"}\NormalTok{, }\DataTypeTok{filename=}\StringTok{"package{-}janitor{-}bbmc.R"}\NormalTok{)}
 
-\KeywordTok{package_janitor_remote}\NormalTok{(}
-  \StringTok{"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"}
+\KeywordTok{package\_janitor\_remote}\NormalTok{(}
+  \StringTok{"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package{-}dependency{-}list.csv"}
 \NormalTok{)        }
 \end{Highlighting}
 \end{Shaded}
@@ -1088,8 +1086,8 @@ When the project is opened in RStudio, \href{http://ouhscbbmc.github.io/OuhscMun
 \begin{Shaded}
 \begin{Highlighting}[]
 \ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"remotes"}\NormalTok{   ) ) utils}\OperatorTok{::}\KeywordTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
-\ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) ) remotes}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{)}
-\NormalTok{OuhscMunge}\OperatorTok{::}\KeywordTok{update_packages_addin}\NormalTok{()}
+\ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) ) remotes}\OperatorTok{::}\KeywordTok{install\_github}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{)}
+\NormalTok{OuhscMunge}\OperatorTok{::}\KeywordTok{update\_packages\_addin}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1149,7 +1147,7 @@ The order does not matter.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{apm}\NormalTok{ install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script}
+\FunctionTok{apm}\NormalTok{ install sublime{-}style{-}column{-}selection atom{-}language{-}r language{-}csv atom{-}beautify atom{-}wrap{-}in{-}tag minimap script}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1258,15 +1256,15 @@ The order does not matter.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{code}\NormalTok{ --list-extensions}
-\ExtensionTok{code}\NormalTok{ --install-extension GrapeCity.gc-excelviewer}
-\ExtensionTok{code}\NormalTok{ --install-extension mechatroner.rainbow-csv}
-\ExtensionTok{code}\NormalTok{ --install-extension ms-mssql.mssql}
-\ExtensionTok{code}\NormalTok{ --install-extension streetsidesoftware.code-spell-checker}
+\ExtensionTok{code}\NormalTok{ {-}{-}list{-}extensions}
+\ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension GrapeCity.gc{-}excelviewer}
+\ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension mechatroner.rainbow{-}csv}
+\ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension ms{-}mssql.mssql}
+\ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension streetsidesoftware.code{-}spell{-}checker}
 \end{Highlighting}
 \end{Shaded}
 \item
-  \textbf{\href{http://johnmacfarlane.net/pandoc/}{pandoc}} converts files from one markup format into another. We'll possibly use this to create tables in MS Word (for article submissions). \{added Sept 2012\}
+  \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
 \end{itemize}
 
 \hypertarget{installation-ubuntu}{%
@@ -1279,8 +1277,8 @@ Add the following to the sources with \texttt{sudo\ nano\ /etc/apt/sources.list}
 \begin{Shaded}
 \begin{Highlighting}[]
 \ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan main }
-\ExtensionTok{deb-src}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan main }
-\ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe}
+\ExtensionTok{deb{-}src}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan main }
+\ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan{-}backports main restricted universe}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1288,80 +1286,92 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{(} \KeywordTok{function}\FunctionTok{ install-packages} \KeywordTok{\{}
-  \CommentTok{### Add the key, update the list, then install base R.}
-  \FunctionTok{sudo}\NormalTok{ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9}
-  \FunctionTok{sudo}\NormalTok{ apt-get update}
-  \FunctionTok{sudo}\NormalTok{ apt-get install r-base}
-  \FunctionTok{sudo}\NormalTok{ apt-get install r-base-dev}
+\KeywordTok{(} \KeywordTok{function}\FunctionTok{ install{-}packages} \KeywordTok{\{}
+  \AlertTok{\#\#\#}\CommentTok{ Add the key, update the list, then install base R.}
+  \FunctionTok{sudo}\NormalTok{ apt{-}key adv {-}{-}keyserver keyserver.ubuntu.com {-}{-}recv{-}keys E298A3A825C0D65DFD57CBB651716619E084DAB9}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get update}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get install r{-}base}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get install r{-}base{-}dev}
   
-  \CommentTok{### Git}
-  \FunctionTok{sudo}\NormalTok{ apt-get install git-core}
-  \FunctionTok{git}\NormalTok{ config --global user.email }\StringTok{"wibeasley@hotmail.com"}
-  \FunctionTok{git}\NormalTok{ config --global user.name }\StringTok{"Will Beasley"}
-  \FunctionTok{git}\NormalTok{ config --global credential.helper }\StringTok{'cache --timeout=3600000'}
+  \AlertTok{\#\#\#}\CommentTok{ Git}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get install git{-}core}
+  \FunctionTok{git}\NormalTok{ config {-}{-}global user.email }\StringTok{"wibeasley@hotmail.com"}
+  \FunctionTok{git}\NormalTok{ config {-}{-}global user.name }\StringTok{"Will Beasley"}
+  \FunctionTok{git}\NormalTok{ config {-}{-}global credential.helper }\StringTok{\textquotesingle{}cache {-}{-}timeout=3600000\textquotesingle{}}
 
-  \CommentTok{### Ubuntu & Bioconductor packages that are indirectly needed for packages and BBMC scripts}
+  \AlertTok{\#\#\#}\CommentTok{ Ubuntu \& Bioconductor packages that are indirectly needed for packages and BBMC scripts}
 
-  \CommentTok{# Supports the `locate` command in bash}
-  \FunctionTok{sudo}\NormalTok{ apt-get install mlocate}
+  \CommentTok{\# Supports the \textasciigrave{}locate\textasciigrave{} command in bash}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get install mlocate}
 
-  \CommentTok{# The genefilter package is needed for 'modeest' on CRAN.}
-  \CommentTok{# No longer a modeest dependency: Rscript -e 'BiocManager::install("genefilter")'}
+  \CommentTok{\# The genefilter package is needed for \textquotesingle{}modeest\textquotesingle{} on CRAN.}
+  \CommentTok{\# No longer a modeest dependency: Rscript {-}e \textquotesingle{}BiocManager::install("genefilter")\textquotesingle{}}
   
-  \CommentTok{### CRAN packages that are also on the Ubuntu repositories}
+  \AlertTok{\#\#\#}\CommentTok{ CRAN packages that are also on the Ubuntu repositories}
   
-  \CommentTok{# The 'xml2' package; https://CRAN.R-project.org/package=xml2 }
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libxml2-dev r-cran-xml}
+  \CommentTok{\# The \textquotesingle{}xml2\textquotesingle{} package; https://CRAN.R{-}project.org/package=xml2 }
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libxml2{-}dev r{-}cran{-}xml}
 
-  \CommentTok{# The 'curl' package, and others; https://CRAN.R-project.org/package=curl }
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libssl-dev libcurl4-openssl-dev}
+  \CommentTok{\# The \textquotesingle{}curl\textquotesingle{} package, and others; https://CRAN.R{-}project.org/package=curl }
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libssl{-}dev libcurl4{-}openssl{-}dev}
 
-  \CommentTok{# The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libudunits2-dev}
+  \CommentTok{\# The \textquotesingle{}udunits2\textquotesingle{} package: https://cran.r{-}project.org/web/packages/udunits2/index.html}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libudunits2{-}dev}
 
-  \CommentTok{# The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc}
+  \CommentTok{\# The \textquotesingle{}odbc\textquotesingle{} package: https://github.com/r{-}dbi/odbc\#linux{-}{-}{-}debian{-}{-}ubuntu}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install unixodbc{-}dev tdsodbc odbc{-}postgresql libsqliteodbc}
 
-  \CommentTok{# The 'rgl' package; https://stackoverflow.com/a/39952771/1082435}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libcgal-dev libglu1-mesa-dev}
+  \CommentTok{\# The \textquotesingle{}rgl\textquotesingle{} package; https://stackoverflow.com/a/39952771/1082435}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libcgal{-}dev libglu1{-}mesa{-}dev}
 
-  \CommentTok{# The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install }\StringTok{'libmagick++-dev'}
+  \CommentTok{\# The \textquotesingle{}magick\textquotesingle{} package; https://docs.ropensci.org/magick/articles/intro.html\#build{-}from{-}source}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install }\StringTok{\textquotesingle{}libmagick++{-}dev\textquotesingle{}}
 
-  \CommentTok{# The 'pdftools' and 'Rpoppler' packages, which involve PDFs}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev}
+  \CommentTok{\# The \textquotesingle{}pdftools\textquotesingle{} and \textquotesingle{}Rpoppler\textquotesingle{} packages, which involve PDFs}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libpoppler{-}cpp{-}dev libpoppler{-}glib{-}dev}
 
-  \CommentTok{# The 'sys' package}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libapparmor-dev}
+  \CommentTok{\# The \textquotesingle{}sys\textquotesingle{} package}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libapparmor{-}dev}
 
-  \CommentTok{# The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev}
-  \CommentTok{# old: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable}
-  \CommentTok{# old: sudo apt-get update}
+  \CommentTok{\# The \textquotesingle{}sf\textquotesingle{} and other spatial packages: https://github.com/r{-}spatial/sf\#ubuntu}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libudunits2{-}dev libgdal{-}dev libgeos{-}dev libproj{-}dev libgeos++{-}dev}
+  \CommentTok{\# old: sudo add{-}apt{-}repository ppa:ubuntugis/ubuntugis{-}unstable}
+  \CommentTok{\# old: sudo apt{-}get update}
 
-  \CommentTok{# For Cairo package, a dependency of Shiny & plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libcairo2-dev}
+  \CommentTok{\# For Cairo package, a dependency of Shiny \& plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing{-}cairo{-}for{-}r{-}on{-}ubuntu{-}17{-}04/}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libcairo2{-}dev}
 
-  \CommentTok{# 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install default-jre default-jdk}
+  \CommentTok{\# \textquotesingle{}rJava\textquotesingle{} and others; https://www.r{-}bloggers.com/installing{-}rjava{-}on{-}ubuntu/}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install default{-}jre default{-}jdk}
   \FunctionTok{sudo}\NormalTok{ R CMD javareconf}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install r-cran-rjava}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install r{-}cran{-}rjava}
 
-  \CommentTok{# The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu}
-  \FunctionTok{sudo}\NormalTok{ add-apt-repository ppa:ubuntugis/ubuntugis-unstable}
-  \FunctionTok{sudo}\NormalTok{ apt-get update}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev}
+  \CommentTok{\# The \textquotesingle{}sf\textquotesingle{} and other spatial packages: https://github.com/r{-}spatial/sf\#ubuntu}
+  \FunctionTok{sudo}\NormalTok{ add{-}apt{-}repository ppa:ubuntugis/ubuntugis{-}unstable}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get update}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libudunits2{-}dev libgdal{-}dev libgeos{-}dev libproj{-}dev}
 
-  \CommentTok{# gifski -apparently the rust compiler is necessary}
-  \FunctionTok{sudo}\NormalTok{ apt-get install cargo}
+  \CommentTok{\# gifski {-}apparently the rust compiler is necessary}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get install cargo}
 
-  \CommentTok{# For databases}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install sqlite sqliteman}
-  \FunctionTok{sudo}\NormalTok{ apt-get --yes install postgresql postgresql-contrib pgadmin3}
+  \CommentTok{\# For databases}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install sqlite sqliteman}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install postgresql postgresql{-}contrib pgadmin3}
+
+  \CommentTok{\# pandoc}
+  \FunctionTok{sudo}\NormalTok{ apt install pandoc}
 \KeywordTok{\}}
-\ExtensionTok{install-packages}
+\ExtensionTok{install{-}packages}
 \KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, \href{https://github.com/jgm/pandoc/releases}{download the .deb file} then install from the same directory. Finally, verify the version.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ dpkg {-}i pandoc{-}*}
+\ExtensionTok{pandoc}\NormalTok{ {-}v}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1785,7 +1795,7 @@ Here's a version that's hosted publicly, but I tested that it can be hosted on o
 
 \url{https://ouhscbbmc.github.io/data-science-practices-1/workstation.html\#installation-required}
 
-I was thinking that each individual database gets it own chapter. The BBMC has \textasciitilde{}4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database. Then there are \textasciitilde{}3 sections within each chapter: (a) a black-and-white description of the tables, columns, \& indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers \& admins).
+I was thinking that each individual database gets it own chapter. The BBMC has \textasciitilde4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database. Then there are \textasciitilde3 sections within each chapter: (a) a black-and-white description of the tables, columns, \& indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers \& admins).
 
 My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor \& commit, and let someone else click ``build'' in RStudio on their machine). But I'm very flexible on all this. I'll support \& contribute to any system that you guys feel will work well across the teams.
 \end{quote}
@@ -1800,7 +1810,7 @@ Figures and tables with captions will be placed in \texttt{figure} and \texttt{t
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.1}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(pressure, }\DataTypeTok{type =} \StringTok{'b'}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(pressure, }\DataTypeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1818,7 +1828,7 @@ Reference a figure by its code chunk label with the \texttt{fig:} prefix, e.g., 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{(}
-  \KeywordTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\DataTypeTok{caption =} \StringTok{'Here is a nice table!'}\NormalTok{,}
+  \KeywordTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\DataTypeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
   \DataTypeTok{booktabs =} \OtherTok{TRUE}
 \NormalTok{)}
 \end{Highlighting}
@@ -1861,6 +1871,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
 
-\bibliography{book.bib,packages.bib}
+\backmatter
+  \bibliography{book.bib,packages.bib}
 
 \end{document}
