@@ -159,7 +159,7 @@ The order does not matter.
     code --install-extension streetsidesoftware.code-spell-checker
     ```
 
-* **[pandoc](http://johnmacfarlane.net/pandoc/)** converts files from one markup format into another.  We'll possibly use this to create tables in MS Word (for article submissions). {added Sept 2012}
+* **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
 
 
 Ubuntu Installation {#installation-ubuntu}
@@ -249,9 +249,19 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   # For databases
   sudo apt-get --yes install sqlite sqliteman
   sudo apt-get --yes install postgresql postgresql-contrib pgadmin3
+
+  # pandoc
+  sudo apt install pandoc
 }
 install-packages
 )
+```
+
+The version of pandoc from the Ubuntu repository may be delayed.  To install the latest version, [download the .deb file](https://github.com/jgm/pandoc/releases) then install from the same directory.  Finally, verify the version.
+
+```sh
+sudo dpkg -i pandoc-*
+pandoc -v
 ```
 
 Asset Locations
