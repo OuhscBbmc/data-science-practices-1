@@ -1327,17 +1327,18 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   \CommentTok{\# The \textquotesingle{}magick\textquotesingle{} package; https://docs.ropensci.org/magick/articles/intro.html\#build{-}from{-}source}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install }\StringTok{\textquotesingle{}libmagick++{-}dev\textquotesingle{}}
 
+  \CommentTok{\# To compress vignettes when building a package; https://kalimu.github.io/post/checklist{-}for{-}r{-}package{-}submission{-}to{-}cran/}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install qpdf}
+
   \CommentTok{\# The \textquotesingle{}pdftools\textquotesingle{} and \textquotesingle{}Rpoppler\textquotesingle{} packages, which involve PDFs}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libpoppler{-}cpp{-}dev libpoppler{-}glib{-}dev}
 
   \CommentTok{\# The \textquotesingle{}sys\textquotesingle{} package}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libapparmor{-}dev}
 
-  \CommentTok{\# The \textquotesingle{}sf\textquotesingle{} and other spatial packages: https://github.com/r{-}spatial/sf\#ubuntu}
+  \CommentTok{\# The \textquotesingle{}sf\textquotesingle{} and other spatial packages: https://github.com/r{-}spatial/sf\#ubuntu; https://github.com/r{-}spatial/sf/pull/1208}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libudunits2{-}dev libgdal{-}dev libgeos{-}dev libproj{-}dev libgeos++{-}dev}
-  \CommentTok{\# old: sudo add{-}apt{-}repository ppa:ubuntugis/ubuntugis{-}unstable}
-  \CommentTok{\# old: sudo apt{-}get update}
-
+  
   \CommentTok{\# For Cairo package, a dependency of Shiny \& plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing{-}cairo{-}for{-}r{-}on{-}ubuntu{-}17{-}04/}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libcairo2{-}dev}
 
@@ -1346,13 +1347,11 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   \FunctionTok{sudo}\NormalTok{ R CMD javareconf}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install r{-}cran{-}rjava}
 
-  \CommentTok{\# The \textquotesingle{}sf\textquotesingle{} and other spatial packages: https://github.com/r{-}spatial/sf\#ubuntu}
-  \FunctionTok{sudo}\NormalTok{ add{-}apt{-}repository ppa:ubuntugis/ubuntugis{-}unstable}
-  \FunctionTok{sudo}\NormalTok{ apt{-}get update}
-  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libudunits2{-}dev libgdal{-}dev libgeos{-}dev libproj{-}dev}
+  \CommentTok{\# For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex\#installation}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install xclip}
 
   \CommentTok{\# gifski {-}apparently the rust compiler is necessary}
-  \FunctionTok{sudo}\NormalTok{ apt{-}get install cargo}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install cargo}
 
   \CommentTok{\# For databases}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install sqlite sqliteman}
@@ -1799,6 +1798,20 @@ I was thinking that each individual database gets it own chapter. The BBMC has \
 
 My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor \& commit, and let someone else click ``build'' in RStudio on their machine). But I'm very flexible on all this. I'll support \& contribute to any system that you guys feel will work well across the teams.
 \end{quote}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  developing packages
+\end{enumerate}
+
+\begin{itemize}
+\item
+  \href{http://r-pkgs.had.co.nz/}{\emph{R packages}} by Hadley Wickham
+\item
+  \url{http://mangothecat.github.io/goodpractice/}
+\end{itemize}
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}

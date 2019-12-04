@@ -508,42 +508,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb26-39"><a href="workstation.html#cb26-39"></a>  <span class="co"># The &#39;magick&#39; package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
 <span id="cb26-40"><a href="workstation.html#cb26-40"></a>  <span class="fu">sudo</span> apt-get --yes install <span class="st">&#39;libmagick++-dev&#39;</span></span>
 <span id="cb26-41"><a href="workstation.html#cb26-41"></a></span>
-<span id="cb26-42"><a href="workstation.html#cb26-42"></a>  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></span>
-<span id="cb26-43"><a href="workstation.html#cb26-43"></a>  <span class="fu">sudo</span> apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev</span>
+<span id="cb26-42"><a href="workstation.html#cb26-42"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
+<span id="cb26-43"><a href="workstation.html#cb26-43"></a>  <span class="fu">sudo</span> apt-get --yes install qpdf</span>
 <span id="cb26-44"><a href="workstation.html#cb26-44"></a></span>
-<span id="cb26-45"><a href="workstation.html#cb26-45"></a>  <span class="co"># The &#39;sys&#39; package</span></span>
-<span id="cb26-46"><a href="workstation.html#cb26-46"></a>  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</span>
+<span id="cb26-45"><a href="workstation.html#cb26-45"></a>  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></span>
+<span id="cb26-46"><a href="workstation.html#cb26-46"></a>  <span class="fu">sudo</span> apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev</span>
 <span id="cb26-47"><a href="workstation.html#cb26-47"></a></span>
-<span id="cb26-48"><a href="workstation.html#cb26-48"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu</span></span>
-<span id="cb26-49"><a href="workstation.html#cb26-49"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
-<span id="cb26-50"><a href="workstation.html#cb26-50"></a>  <span class="co"># old: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable</span></span>
-<span id="cb26-51"><a href="workstation.html#cb26-51"></a>  <span class="co"># old: sudo apt-get update</span></span>
-<span id="cb26-52"><a href="workstation.html#cb26-52"></a></span>
-<span id="cb26-53"><a href="workstation.html#cb26-53"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
-<span id="cb26-54"><a href="workstation.html#cb26-54"></a>  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</span>
-<span id="cb26-55"><a href="workstation.html#cb26-55"></a></span>
-<span id="cb26-56"><a href="workstation.html#cb26-56"></a>  <span class="co"># &#39;rJava&#39; and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
-<span id="cb26-57"><a href="workstation.html#cb26-57"></a>  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</span>
-<span id="cb26-58"><a href="workstation.html#cb26-58"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
-<span id="cb26-59"><a href="workstation.html#cb26-59"></a>  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</span>
-<span id="cb26-60"><a href="workstation.html#cb26-60"></a></span>
-<span id="cb26-61"><a href="workstation.html#cb26-61"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu</span></span>
-<span id="cb26-62"><a href="workstation.html#cb26-62"></a>  <span class="fu">sudo</span> add-apt-repository ppa:ubuntugis/ubuntugis-unstable</span>
-<span id="cb26-63"><a href="workstation.html#cb26-63"></a>  <span class="fu">sudo</span> apt-get update</span>
-<span id="cb26-64"><a href="workstation.html#cb26-64"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev</span>
-<span id="cb26-65"><a href="workstation.html#cb26-65"></a></span>
-<span id="cb26-66"><a href="workstation.html#cb26-66"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
-<span id="cb26-67"><a href="workstation.html#cb26-67"></a>  <span class="fu">sudo</span> apt-get install cargo</span>
-<span id="cb26-68"><a href="workstation.html#cb26-68"></a></span>
-<span id="cb26-69"><a href="workstation.html#cb26-69"></a>  <span class="co"># For databases</span></span>
-<span id="cb26-70"><a href="workstation.html#cb26-70"></a>  <span class="fu">sudo</span> apt-get --yes install sqlite sqliteman</span>
-<span id="cb26-71"><a href="workstation.html#cb26-71"></a>  <span class="fu">sudo</span> apt-get --yes install postgresql postgresql-contrib pgadmin3</span>
-<span id="cb26-72"><a href="workstation.html#cb26-72"></a></span>
-<span id="cb26-73"><a href="workstation.html#cb26-73"></a>  <span class="co"># pandoc</span></span>
-<span id="cb26-74"><a href="workstation.html#cb26-74"></a>  <span class="fu">sudo</span> apt install pandoc</span>
-<span id="cb26-75"><a href="workstation.html#cb26-75"></a><span class="kw">}</span></span>
-<span id="cb26-76"><a href="workstation.html#cb26-76"></a><span class="ex">install-packages</span></span>
-<span id="cb26-77"><a href="workstation.html#cb26-77"></a><span class="kw">)</span></span></code></pre></div>
+<span id="cb26-48"><a href="workstation.html#cb26-48"></a>  <span class="co"># The &#39;sys&#39; package</span></span>
+<span id="cb26-49"><a href="workstation.html#cb26-49"></a>  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</span>
+<span id="cb26-50"><a href="workstation.html#cb26-50"></a></span>
+<span id="cb26-51"><a href="workstation.html#cb26-51"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
+<span id="cb26-52"><a href="workstation.html#cb26-52"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
+<span id="cb26-53"><a href="workstation.html#cb26-53"></a>  </span>
+<span id="cb26-54"><a href="workstation.html#cb26-54"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
+<span id="cb26-55"><a href="workstation.html#cb26-55"></a>  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</span>
+<span id="cb26-56"><a href="workstation.html#cb26-56"></a></span>
+<span id="cb26-57"><a href="workstation.html#cb26-57"></a>  <span class="co"># &#39;rJava&#39; and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
+<span id="cb26-58"><a href="workstation.html#cb26-58"></a>  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</span>
+<span id="cb26-59"><a href="workstation.html#cb26-59"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
+<span id="cb26-60"><a href="workstation.html#cb26-60"></a>  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</span>
+<span id="cb26-61"><a href="workstation.html#cb26-61"></a></span>
+<span id="cb26-62"><a href="workstation.html#cb26-62"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
+<span id="cb26-63"><a href="workstation.html#cb26-63"></a>  <span class="fu">sudo</span> apt-get --yes install xclip</span>
+<span id="cb26-64"><a href="workstation.html#cb26-64"></a></span>
+<span id="cb26-65"><a href="workstation.html#cb26-65"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
+<span id="cb26-66"><a href="workstation.html#cb26-66"></a>  <span class="fu">sudo</span> apt-get --yes install cargo</span>
+<span id="cb26-67"><a href="workstation.html#cb26-67"></a></span>
+<span id="cb26-68"><a href="workstation.html#cb26-68"></a>  <span class="co"># For databases</span></span>
+<span id="cb26-69"><a href="workstation.html#cb26-69"></a>  <span class="fu">sudo</span> apt-get --yes install sqlite sqliteman</span>
+<span id="cb26-70"><a href="workstation.html#cb26-70"></a>  <span class="fu">sudo</span> apt-get --yes install postgresql postgresql-contrib pgadmin3</span>
+<span id="cb26-71"><a href="workstation.html#cb26-71"></a></span>
+<span id="cb26-72"><a href="workstation.html#cb26-72"></a>  <span class="co"># pandoc</span></span>
+<span id="cb26-73"><a href="workstation.html#cb26-73"></a>  <span class="fu">sudo</span> apt install pandoc</span>
+<span id="cb26-74"><a href="workstation.html#cb26-74"></a><span class="kw">}</span></span>
+<span id="cb26-75"><a href="workstation.html#cb26-75"></a><span class="ex">install-packages</span></span>
+<span id="cb26-76"><a href="workstation.html#cb26-76"></a><span class="kw">)</span></span></code></pre></div>
 <p>The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, <a href="https://github.com/jgm/pandoc/releases">download the .deb file</a> then install from the same directory. Finally, verify the version.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb27-1"><a href="workstation.html#cb27-1"></a><span class="fu">sudo</span> dpkg -i pandoc-*</span>
 <span id="cb27-2"><a href="workstation.html#cb27-2"></a><span class="ex">pandoc</span> -v</span></code></pre></div>

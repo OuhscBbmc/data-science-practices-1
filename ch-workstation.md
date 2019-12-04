@@ -219,17 +219,18 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   # The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source
   sudo apt-get --yes install 'libmagick++-dev'
 
+  # To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/
+  sudo apt-get --yes install qpdf
+
   # The 'pdftools' and 'Rpoppler' packages, which involve PDFs
   sudo apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev
 
   # The 'sys' package
   sudo apt-get --yes install libapparmor-dev
 
-  # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu
+  # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208
   sudo apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev
-  # old: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-  # old: sudo apt-get update
-
+  
   # For Cairo package, a dependency of Shiny & plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/
   sudo apt-get --yes install libcairo2-dev
 
@@ -238,13 +239,11 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   sudo R CMD javareconf
   sudo apt-get --yes install r-cran-rjava
 
-  # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu
-  sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-  sudo apt-get update
-  sudo apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
+  # For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation
+  sudo apt-get --yes install xclip
 
   # gifski -apparently the rust compiler is necessary
-  sudo apt-get install cargo
+  sudo apt-get --yes install cargo
 
   # For databases
   sudo apt-get --yes install sqlite sqliteman
