@@ -277,6 +277,13 @@ Asset Locations
 
 * **ODBC UserDsn** The name depends on your specific repository, and SQL Server database.  Ask Thomas, Will or David for how to set it up.
 
+
+
+Administrator Installation {#installation-administrator}
+-----------------------------------
+
+* **[MySQL Workbench](https://dev.mysql.com/downloads/workbench/)** is useful occassionly for REDCap admins.
+
 Installation Troubleshooting
 -----------------------------------
 
