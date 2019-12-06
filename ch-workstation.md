@@ -263,6 +263,12 @@ sudo dpkg -i pandoc-*
 pandoc -v
 ```
 
+The Postman native app for Ubuntu is [installed](https://learning.getpostman.com/docs/postman/launching-postman/installation-and-updates/#installing-postman-on-linux) through [snap](https://tutorials.ubuntu.com/tutorial/basic-snap-usage), which is [updated daily automatically](https://tutorials.ubuntu.com/tutorial/basic-snap-usage#2).
+
+```sh
+snap install postman
+```
+
 Asset Locations
 -----------------------------------
 
@@ -283,6 +289,7 @@ Administrator Installation {#installation-administrator}
 -----------------------------------
 
 * **[MySQL Workbench](https://dev.mysql.com/downloads/workbench/)** is useful occassionly for REDCap admins.
+* **[Postman Native App](https://www.getpostman.com/downloads/)** is useful for developing with the API and has [replaced the Chrome app](https://blog.getpostman.com/2017/03/14/going-native/).  If that's not possible, a [web client](https://web.postman.co/) is available as well.  With either program, do not access any PHI.
 
 Installation Troubleshooting
 -----------------------------------
