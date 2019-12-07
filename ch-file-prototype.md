@@ -91,6 +91,12 @@ col_types <- readr::cols_only(
 Load Data
 ------------------------------------
 
+All data ingested by this file occurs in this chunk.  We like to think of each file as a linear pipe with a single point of input and single point of output.  Although it is possible for a file to read  data files on any line, we recommend avoiding this sprawl because it is more difficult for humans to understand.  If the software developer is a deist watchmaker, the file's fate has been sealed by the end of this chunk.  This makes is easier for a human to reason to isolate problems as either existing with (a) the incoming data or (b) the calculations on that data.
+
+Ideally this chunk consumes data from either a plain-text csv or a database.
+
+Many capable R functions and packages ingest data.  We prefer the tidyverse [readr]() for reading conventional files; its younger cousin, [vroom]() has some nice advantages when working with larger files and some forms of jagged rectangles^[Say a csv has 20 columns, but a row has missing values for the last five columns.  Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value.  vroom infers the missing values correctly, while some other packages do not.].
+
 Tweak Data
 ------------------------------------
 
