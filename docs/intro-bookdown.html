@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Establishing Workstation | Collaborative Data Science Practices</title>
+  <title>22 # Introduction | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Establishing Workstation | Collaborative Data Science Practices" />
+  <meta property="og:title" content="22 # Introduction | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Establishing Workstation | Collaborative Data Science Practices" />
+  <meta name="twitter:title" content="22 # Introduction | Collaborative Data Science Practices" />
   
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-11-25" />
+<meta name="date" content="2019-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="troubleshooting.html"/>
-<link rel="next" href="tools.html"/>
+<link rel="prev" href="scratch-pad.html"/>
+<link rel="next" href="intro.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,25 +53,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -80,9 +81,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -132,14 +133,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
-<li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture Principles</a><ul>
+<li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture Principles</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>2.1</b> Encapsulation</a></li>
 <li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a></li>
 <li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a></li>
 <li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a></li>
 <li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="file-prototype.html"><a href="file-prototype.html"><i class="fa fa-check"></i><b>3</b> Prototypical File</a><ul>
+<li class="chapter" data-level="3" data-path="file-prototype.html"><a href="file-prototype.html"><i class="fa fa-check"></i><b>3</b> Prototypical File</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="file-prototype.html"><a href="file-prototype.html#clear-memory"><i class="fa fa-check"></i><b>3.1</b> Clear Memory</a></li>
 <li class="chapter" data-level="3.2" data-path="file-prototype.html"><a href="file-prototype.html#load-sources"><i class="fa fa-check"></i><b>3.2</b> Load Sources</a></li>
 <li class="chapter" data-level="3.3" data-path="file-prototype.html"><a href="file-prototype.html#load-packages"><i class="fa fa-check"></i><b>3.3</b> Load Packages</a></li>
@@ -151,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.9" data-path="file-prototype.html"><a href="file-prototype.html#specify-output-columns"><i class="fa fa-check"></i><b>3.9</b> Specify Output Columns</a></li>
 <li class="chapter" data-level="3.10" data-path="file-prototype.html"><a href="file-prototype.html#save-to-disk-or-database"><i class="fa fa-check"></i><b>3.10</b> Save to Disk or Database</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>4</b> Prototypical Repository</a><ul>
+<li class="chapter" data-level="4" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>4</b> Prototypical Repository</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>4.1</b> Root</a></li>
 <li class="chapter" data-level="4.2" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>4.2</b> Analysis</a></li>
 <li class="chapter" data-level="4.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>4.3</b> Data Public</a></li>
@@ -161,12 +165,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>4.7</b> Stitched Output</a></li>
 <li class="chapter" data-level="4.8" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>4.8</b> Utility</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>5</b> Data at Rest</a><ul>
+<li class="chapter" data-level="5" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>5</b> Data at Rest</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>5.1</b> Data States</a></li>
 <li class="chapter" data-level="5.2" data-path="data-at-rest.html"><a href="data-at-rest.html#data-containers"><i class="fa fa-check"></i><b>5.2</b> Data Containers</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>6</b> Patterns</a><ul>
-<li class="chapter" data-level="6.1" data-path="patterns.html"><a href="patterns.html#ellis"><i class="fa fa-check"></i><b>6.1</b> Ellis</a><ul>
+<li class="chapter" data-level="6" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>6</b> Patterns</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="patterns.html"><a href="patterns.html#ellis"><i class="fa fa-check"></i><b>6.1</b> Ellis</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="patterns.html"><a href="patterns.html#purpose"><i class="fa fa-check"></i><b>6.1.1</b> Purpose</a></li>
 <li class="chapter" data-level="6.1.2" data-path="patterns.html"><a href="patterns.html#philosophy"><i class="fa fa-check"></i><b>6.1.2</b> Philosophy</a></li>
 <li class="chapter" data-level="6.1.3" data-path="patterns.html"><a href="patterns.html#guidelines"><i class="fa fa-check"></i><b>6.1.3</b> Guidelines</a></li>
@@ -181,34 +188,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="patterns.html"><a href="patterns.html#presentation--interactive"><i class="fa fa-check"></i><b>6.7</b> Presentation -Interactive</a></li>
 <li class="chapter" data-level="6.8" data-path="patterns.html"><a href="patterns.html#metadata"><i class="fa fa-check"></i><b>6.8</b> Metadata</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>7</b> Security &amp; Private Data</a><ul>
+<li class="chapter" data-level="7" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>7</b> Security &amp; Private Data</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="security.html"><a href="security.html#file-level-permissions"><i class="fa fa-check"></i><b>7.1</b> File-level permissions</a></li>
 <li class="chapter" data-level="7.2" data-path="security.html"><a href="security.html#database-permissions"><i class="fa fa-check"></i><b>7.2</b> Database permissions</a></li>
-<li class="chapter" data-level="7.3" data-path="security.html"><a href="security.html#public-private-repositories"><i class="fa fa-check"></i><b>7.3</b> Public &amp; Private Repositories</a><ul>
+<li class="chapter" data-level="7.3" data-path="security.html"><a href="security.html#public-private-repositories"><i class="fa fa-check"></i><b>7.3</b> Public &amp; Private Repositories</a>
+<ul>
 <li class="chapter" data-level="7.3.1" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>7.3.1</b> Scrubbing GitHub history</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>8</b> Automation</a><ul>
+<li class="chapter" data-level="8" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>8</b> Automation</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="automation.html"><a href="automation.html#flow-file-in-r"><i class="fa fa-check"></i><b>8.1</b> Flow File in R</a></li>
 <li class="chapter" data-level="8.2" data-path="automation.html"><a href="automation.html#makefile"><i class="fa fa-check"></i><b>8.2</b> Makefile</a></li>
 <li class="chapter" data-level="8.3" data-path="automation.html"><a href="automation.html#ssis"><i class="fa fa-check"></i><b>8.3</b> SSIS</a></li>
 <li class="chapter" data-level="8.4" data-path="automation.html"><a href="automation.html#cron-jobs-task-scheduler"><i class="fa fa-check"></i><b>8.4</b> cron Jobs &amp; Task Scheduler</a></li>
 <li class="chapter" data-level="8.5" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>8.5</b> Sink Log Files</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="scaling-up.html"><a href="scaling-up.html"><i class="fa fa-check"></i><b>9</b> Scaling Up</a><ul>
+<li class="chapter" data-level="9" data-path="scaling-up.html"><a href="scaling-up.html"><i class="fa fa-check"></i><b>9</b> Scaling Up</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="scaling-up.html"><a href="scaling-up.html#data-storage"><i class="fa fa-check"></i><b>9.1</b> Data Storage</a></li>
 <li class="chapter" data-level="9.2" data-path="scaling-up.html"><a href="scaling-up.html#data-processing"><i class="fa fa-check"></i><b>9.2</b> Data Processing</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="collaboration.html"><a href="collaboration.html"><i class="fa fa-check"></i><b>10</b> Parallel Collaboration</a><ul>
+<li class="chapter" data-level="10" data-path="collaboration.html"><a href="collaboration.html"><i class="fa fa-check"></i><b>10</b> Parallel Collaboration</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="collaboration.html"><a href="collaboration.html#social-contract"><i class="fa fa-check"></i><b>10.1</b> Social Contract</a></li>
 <li class="chapter" data-level="10.2" data-path="collaboration.html"><a href="collaboration.html#code-reviews"><i class="fa fa-check"></i><b>10.2</b> Code Reviews</a></li>
 <li class="chapter" data-level="10.3" data-path="collaboration.html"><a href="collaboration.html#remote"><i class="fa fa-check"></i><b>10.3</b> Remote</a></li>
-<li class="chapter" data-level="10.4" data-path="collaboration.html"><a href="collaboration.html#loose-notes"><i class="fa fa-check"></i><b>10.4</b> Loose Notes</a><ul>
+<li class="chapter" data-level="10.4" data-path="collaboration.html"><a href="collaboration.html#loose-notes"><i class="fa fa-check"></i><b>10.4</b> Loose Notes</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="collaboration.html"><a href="collaboration.html#github"><i class="fa fa-check"></i><b>10.4.1</b> GitHub</a></li>
 <li class="chapter" data-level="10.4.2" data-path="collaboration.html"><a href="collaboration.html#common-code"><i class="fa fa-check"></i><b>10.4.2</b> Common Code</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>11</b> Documentation</a><ul>
+<li class="chapter" data-level="11" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>11</b> Documentation</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>11.1</b> Team-wide</a></li>
 <li class="chapter" data-level="11.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>11.2</b> Project-specific</a></li>
 <li class="chapter" data-level="11.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>11.3</b> Dataset Origin &amp; Structure</a></li>
@@ -216,34 +230,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>11.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="11.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>11.6</b> Setting up new machine</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>12</b> Style Guide</a><ul>
-<li class="chapter" data-level="12.1" data-path="style-guide.html"><a href="style-guide.html#ggplot2"><i class="fa fa-check"></i><b>12.1</b> ggplot2</a><ul>
+<li class="chapter" data-level="12" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>12</b> Style Guide</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="style-guide.html"><a href="style-guide.html#ggplot2"><i class="fa fa-check"></i><b>12.1</b> ggplot2</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="style-guide.html"><a href="style-guide.html#order-of-commands"><i class="fa fa-check"></i><b>12.1.1</b> Order of commands</a></li>
 <li class="chapter" data-level="12.1.2" data-path="style-guide.html"><a href="style-guide.html#gotchas"><i class="fa fa-check"></i><b>12.1.2</b> Gotchas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="publication.html"><a href="publication.html"><i class="fa fa-check"></i><b>13</b> Publishing Results</a><ul>
+<li class="chapter" data-level="13" data-path="publication.html"><a href="publication.html"><i class="fa fa-check"></i><b>13</b> Publishing Results</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="publication.html"><a href="publication.html#to-other-analysts"><i class="fa fa-check"></i><b>13.1</b> To Other Analysts</a></li>
 <li class="chapter" data-level="13.2" data-path="publication.html"><a href="publication.html#to-researchers-content-experts"><i class="fa fa-check"></i><b>13.2</b> To Researchers &amp; Content Experts</a></li>
 <li class="chapter" data-level="13.3" data-path="publication.html"><a href="publication.html#to-technical-phobic-audiences"><i class="fa fa-check"></i><b>13.3</b> To Technical-Phobic Audiences</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="testing-and-validation.html"><a href="testing-and-validation.html"><i class="fa fa-check"></i><b>14</b> Testing, Validation, &amp; Defensive Programming</a><ul>
+<li class="chapter" data-level="14" data-path="testing-and-validation.html"><a href="testing-and-validation.html"><i class="fa fa-check"></i><b>14</b> Testing, Validation, &amp; Defensive Programming</a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="testing-and-validation.html"><a href="testing-and-validation.html#testing-functions"><i class="fa fa-check"></i><b>14.1</b> Testing Functions</a></li>
 <li class="chapter" data-level="14.2" data-path="testing-and-validation.html"><a href="testing-and-validation.html#defensive-programming"><i class="fa fa-check"></i><b>14.2</b> Defensive Programming</a></li>
 <li class="chapter" data-level="14.3" data-path="testing-and-validation.html"><a href="testing-and-validation.html#validator"><i class="fa fa-check"></i><b>14.3</b> Validator</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>15</b> Troubleshooting and Debugging</a><ul>
+<li class="chapter" data-level="15" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>15</b> Troubleshooting and Debugging</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="troubleshooting.html"><a href="troubleshooting.html#finding-help"><i class="fa fa-check"></i><b>15.1</b> Finding Help</a></li>
 <li class="chapter" data-level="15.2" data-path="troubleshooting.html"><a href="troubleshooting.html#debugging"><i class="fa fa-check"></i><b>15.2</b> Debugging</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="establishing-workstation.html"><a href="establishing-workstation.html"><i class="fa fa-check"></i><b>16</b> Establishing Workstation</a><ul>
-<li class="chapter" data-level="16.1" data-path="establishing-workstation.html"><a href="establishing-workstation.html#required-installation"><i class="fa fa-check"></i><b>16.1</b> Required Installation</a></li>
-<li class="chapter" data-level="16.2" data-path="establishing-workstation.html"><a href="establishing-workstation.html#recommended-installation"><i class="fa fa-check"></i><b>16.2</b> Recommended Installation</a></li>
-<li class="chapter" data-level="16.3" data-path="establishing-workstation.html"><a href="establishing-workstation.html#optional-installation"><i class="fa fa-check"></i><b>16.3</b> Optional Installation</a></li>
-<li class="chapter" data-level="16.4" data-path="establishing-workstation.html"><a href="establishing-workstation.html#asset-locations"><i class="fa fa-check"></i><b>16.4</b> Asset Locations</a></li>
+<li class="chapter" data-level="16" data-path="workstation.html"><a href="workstation.html"><i class="fa fa-check"></i><b>16</b> Workstation</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="workstation.html"><a href="workstation.html#installation-required"><i class="fa fa-check"></i><b>16.1</b> Required Installation</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="workstation.html"><a href="workstation.html#r"><i class="fa fa-check"></i><b>16.1.1</b> R</a></li>
+<li class="chapter" data-level="16.1.2" data-path="workstation.html"><a href="workstation.html#rstudio"><i class="fa fa-check"></i><b>16.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="16.1.3" data-path="workstation.html"><a href="workstation.html#installing-r-packages"><i class="fa fa-check"></i><b>16.1.3</b> Installing R Packages</a></li>
+<li class="chapter" data-level="16.1.4" data-path="workstation.html"><a href="workstation.html#updating-r-packages"><i class="fa fa-check"></i><b>16.1.4</b> Updating R Packages</a></li>
+<li class="chapter" data-level="16.1.5" data-path="workstation.html"><a href="workstation.html#github-1"><i class="fa fa-check"></i><b>16.1.5</b> GitHub</a></li>
+<li class="chapter" data-level="16.1.6" data-path="workstation.html"><a href="workstation.html#github-for-windows-client"><i class="fa fa-check"></i><b>16.1.6</b> GitHub for Windows Client</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>17</b> Considerations when Selecting Tools</a><ul>
-<li class="chapter" data-level="17.1" data-path="tools.html"><a href="tools.html#general"><i class="fa fa-check"></i><b>17.1</b> General</a><ul>
+<li class="chapter" data-level="16.2" data-path="workstation.html"><a href="workstation.html#installation-recommended"><i class="fa fa-check"></i><b>16.2</b> Recommended Installation</a></li>
+<li class="chapter" data-level="16.3" data-path="workstation.html"><a href="workstation.html#installation-optional"><i class="fa fa-check"></i><b>16.3</b> Optional Installation</a></li>
+<li class="chapter" data-level="16.4" data-path="workstation.html"><a href="workstation.html#installation-ubuntu"><i class="fa fa-check"></i><b>16.4</b> Ubuntu Installation</a></li>
+<li class="chapter" data-level="16.5" data-path="workstation.html"><a href="workstation.html#asset-locations"><i class="fa fa-check"></i><b>16.5</b> Asset Locations</a></li>
+<li class="chapter" data-level="16.6" data-path="workstation.html"><a href="workstation.html#installation-administrator"><i class="fa fa-check"></i><b>16.6</b> Administrator Installation</a></li>
+<li class="chapter" data-level="16.7" data-path="workstation.html"><a href="workstation.html#installation-troubleshooting"><i class="fa fa-check"></i><b>16.7</b> Installation Troubleshooting</a></li>
+<li class="chapter" data-level="16.8" data-path="workstation.html"><a href="workstation.html#retired-tools"><i class="fa fa-check"></i><b>16.8</b> Retired Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>17</b> Considerations when Selecting Tools</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="tools.html"><a href="tools.html#general"><i class="fa fa-check"></i><b>17.1</b> General</a>
+<ul>
 <li class="chapter" data-level="17.1.1" data-path="tools.html"><a href="tools.html#the-components-goal"><i class="fa fa-check"></i><b>17.1.1</b> The Component’s Goal</a></li>
 <li class="chapter" data-level="17.1.2" data-path="tools.html"><a href="tools.html#current-skillset-of-team"><i class="fa fa-check"></i><b>17.1.2</b> Current Skillset of Team</a></li>
 <li class="chapter" data-level="17.1.3" data-path="tools.html"><a href="tools.html#desired-future-skillset-of-team"><i class="fa fa-check"></i><b>17.1.3</b> Desired Future Skillset of Team</a></li>
@@ -253,31 +287,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.3" data-path="tools.html"><a href="tools.html#r-packages"><i class="fa fa-check"></i><b>17.3</b> R Packages</a></li>
 <li class="chapter" data-level="17.4" data-path="tools.html"><a href="tools.html#database"><i class="fa fa-check"></i><b>17.4</b> Database</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="team.html"><a href="team.html"><i class="fa fa-check"></i><b>18</b> Growing a Team</a><ul>
+<li class="chapter" data-level="18" data-path="team.html"><a href="team.html"><i class="fa fa-check"></i><b>18</b> Growing a Team</a>
+<ul>
 <li class="chapter" data-level="18.1" data-path="team.html"><a href="team.html#recruiting"><i class="fa fa-check"></i><b>18.1</b> Recruiting</a></li>
 <li class="chapter" data-level="18.2" data-path="team.html"><a href="team.html#training-to-data-science"><i class="fa fa-check"></i><b>18.2</b> Training to Data Science</a></li>
 <li class="chapter" data-level="18.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>18.3</b> Bridges Outside the Team</a></li>
 </ul></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="git-github.html"><a href="git-github.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a><ul>
-<li class="chapter" data-level="A.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
+<li class="chapter" data-level="" data-path="appendix-appendix.html"><a href="appendix-appendix.html"><i class="fa fa-check"></i>(APPENDIX) Appendix</a></li>
+<li class="chapter" data-level="19" data-path="git-github.html"><a href="git-github.html"><i class="fa fa-check"></i><b>19</b> Git &amp; GitHub</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>19.1</b> for Code Development</a></li>
+<li class="chapter" data-level="19.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>19.2</b> for Collaboration</a></li>
+<li class="chapter" data-level="19.3" data-path="git-github.html"><a href="git-github.html#for-stability"><i class="fa fa-check"></i><b>19.3</b> for Stability</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>B</b> Presentations</a><ul>
-<li class="chapter" data-level="B.1" data-path="presentations.html"><a href="presentations.html#cdw"><i class="fa fa-check"></i><b>B.1</b> CDW</a></li>
-<li class="chapter" data-level="B.2" data-path="presentations.html"><a href="presentations.html#redcap"><i class="fa fa-check"></i><b>B.2</b> REDCap</a></li>
-<li class="chapter" data-level="B.3" data-path="presentations.html"><a href="presentations.html#reproducible-research-visualization"><i class="fa fa-check"></i><b>B.3</b> Reproducible Research &amp; Visualization</a></li>
-<li class="chapter" data-level="B.4" data-path="presentations.html"><a href="presentations.html#data-management"><i class="fa fa-check"></i><b>B.4</b> Data Management</a></li>
-<li class="chapter" data-level="B.5" data-path="presentations.html"><a href="presentations.html#github-1"><i class="fa fa-check"></i><b>B.5</b> GitHub</a></li>
-<li class="chapter" data-level="B.6" data-path="presentations.html"><a href="presentations.html#software"><i class="fa fa-check"></i><b>B.6</b> Software</a></li>
-<li class="chapter" data-level="B.7" data-path="presentations.html"><a href="presentations.html#architectures"><i class="fa fa-check"></i><b>B.7</b> Architectures</a></li>
-<li class="chapter" data-level="B.8" data-path="presentations.html"><a href="presentations.html#components"><i class="fa fa-check"></i><b>B.8</b> Components</a></li>
+<li class="chapter" data-level="20" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>20</b> Presentations</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="presentations.html"><a href="presentations.html#cdw"><i class="fa fa-check"></i><b>20.1</b> CDW</a></li>
+<li class="chapter" data-level="20.2" data-path="presentations.html"><a href="presentations.html#redcap"><i class="fa fa-check"></i><b>20.2</b> REDCap</a></li>
+<li class="chapter" data-level="20.3" data-path="presentations.html"><a href="presentations.html#reproducible-research-visualization"><i class="fa fa-check"></i><b>20.3</b> Reproducible Research &amp; Visualization</a></li>
+<li class="chapter" data-level="20.4" data-path="presentations.html"><a href="presentations.html#data-management"><i class="fa fa-check"></i><b>20.4</b> Data Management</a></li>
+<li class="chapter" data-level="20.5" data-path="presentations.html"><a href="presentations.html#github-2"><i class="fa fa-check"></i><b>20.5</b> GitHub</a></li>
+<li class="chapter" data-level="20.6" data-path="presentations.html"><a href="presentations.html#software"><i class="fa fa-check"></i><b>20.6</b> Software</a></li>
+<li class="chapter" data-level="20.7" data-path="presentations.html"><a href="presentations.html#architectures"><i class="fa fa-check"></i><b>20.7</b> Architectures</a></li>
+<li class="chapter" data-level="20.8" data-path="presentations.html"><a href="presentations.html#components"><i class="fa fa-check"></i><b>20.8</b> Components</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="scratch-pad.html"><a href="scratch-pad.html"><i class="fa fa-check"></i><b>C</b> Scratch Pad of Loose Ideas</a><ul>
-<li class="chapter" data-level="C.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>C.1</b> Chapters &amp; Sections to Form</a></li>
+<li class="chapter" data-level="21" data-path="scratch-pad.html"><a href="scratch-pad.html"><i class="fa fa-check"></i><b>21</b> Scratch Pad of Loose Ideas</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>21.1</b> Chapters &amp; Sections to Form</a></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>D</b> Introduction</a></li>
-<li class="chapter" data-level="E" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>E</b> References</a></li>
+<li class="chapter" data-level="22" data-path="intro-bookdown.html"><a href="intro-bookdown.html"><i class="fa fa-check"></i><b>22</b> # Introduction</a></li>
+<li class="chapter" data-level="23" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>23</b> Introduction</a></li>
+<li class="chapter" data-level="24" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -298,30 +338,188 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="establishing-workstation" class="section level1">
-<h1><span class="header-section-number">Chapter 16</span> Establishing Workstation</h1>
-<p><a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md</a></p>
-<div id="required-installation" class="section level2">
-<h2><span class="header-section-number">16.1</span> Required Installation</h2>
+<div id="intro-bookdown" class="section level1">
+<h1 number="22"><span class="header-section-number">22</span> # Introduction</h1>
+<p><em>This intro was copied from the 1st chapter of the example bookdown repo. I’m keeping it temporarily for reference.</em></p>
+<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro"><strong>??</strong></a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="architecture.html#architecture"><strong>??</strong></a>.</p>
+<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="intro-bookdown.html#cb29-1"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</span>
+<span id="cb29-2"><a href="intro-bookdown.html#cb29-2"></a><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
+<img src="data-science-practices-1_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
+<p class="caption">
+Figure 1: Here is a nice figure!
+</p>
 </div>
-<div id="recommended-installation" class="section level2">
-<h2><span class="header-section-number">16.2</span> Recommended Installation</h2>
-</div>
-<div id="optional-installation" class="section level2">
-<h2><span class="header-section-number">16.3</span> Optional Installation</h2>
-</div>
-<div id="asset-locations" class="section level2">
-<h2><span class="header-section-number">16.4</span> Asset Locations</h2>
+<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="intro-bookdown.html#fig:nice-fig">1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="intro-bookdown.html#tab:nice-tab">1</a>.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="intro-bookdown.html#cb30-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb30-2"><a href="intro-bookdown.html#cb30-2"></a>  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb30-3"><a href="intro-bookdown.html#cb30-3"></a>  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></span>
+<span id="cb30-4"><a href="intro-bookdown.html#cb30-4"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:nice-tab">Table 1: </span>Here is a nice table!</caption>
+<thead>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.6</td>
+<td align="right">3.4</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">3.4</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.4</td>
+<td align="right">2.9</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.7</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.8</td>
+<td align="right">3.4</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">4.8</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">4.3</td>
+<td align="right">3.0</td>
+<td align="right">1.1</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.8</td>
+<td align="right">4.0</td>
+<td align="right">1.2</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.7</td>
+<td align="right">4.4</td>
+<td align="right">1.5</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.3</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="odd">
+<td align="right">5.7</td>
+<td align="right">3.8</td>
+<td align="right">1.7</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.8</td>
+<td align="right">1.5</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
+</tr>
+</tbody>
+</table>
+<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(Xie <a href="references.html#ref-R-bookdown" role="doc-biblioref">2019</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(Xie <a href="references.html#ref-xie2015" role="doc-biblioref">2015</a>)</span>.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="troubleshooting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scratch-pad.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -352,7 +550,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-workstation.md",
+"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-scratch-pad.md",
 "text": "Edit"
 },
 "history": {

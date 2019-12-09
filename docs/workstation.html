@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-03" />
+<meta name="date" content="2019-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -270,8 +270,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.3" data-path="workstation.html"><a href="workstation.html#installation-optional"><i class="fa fa-check"></i><b>16.3</b> Optional Installation</a></li>
 <li class="chapter" data-level="16.4" data-path="workstation.html"><a href="workstation.html#installation-ubuntu"><i class="fa fa-check"></i><b>16.4</b> Ubuntu Installation</a></li>
 <li class="chapter" data-level="16.5" data-path="workstation.html"><a href="workstation.html#asset-locations"><i class="fa fa-check"></i><b>16.5</b> Asset Locations</a></li>
-<li class="chapter" data-level="16.6" data-path="workstation.html"><a href="workstation.html#installation-troubleshooting"><i class="fa fa-check"></i><b>16.6</b> Installation Troubleshooting</a></li>
-<li class="chapter" data-level="16.7" data-path="workstation.html"><a href="workstation.html#retired-tools"><i class="fa fa-check"></i><b>16.7</b> Retired Tools</a></li>
+<li class="chapter" data-level="16.6" data-path="workstation.html"><a href="workstation.html#installation-administrator"><i class="fa fa-check"></i><b>16.6</b> Administrator Installation</a></li>
+<li class="chapter" data-level="16.7" data-path="workstation.html"><a href="workstation.html#installation-troubleshooting"><i class="fa fa-check"></i><b>16.7</b> Installation Troubleshooting</a></li>
+<li class="chapter" data-level="16.8" data-path="workstation.html"><a href="workstation.html#retired-tools"><i class="fa fa-check"></i><b>16.8</b> Retired Tools</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>17</b> Considerations when Selecting Tools</a>
 <ul>
@@ -297,6 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="19.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>19.1</b> for Code Development</a></li>
 <li class="chapter" data-level="19.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>19.2</b> for Collaboration</a></li>
+<li class="chapter" data-level="19.3" data-path="git-github.html"><a href="git-github.html#for-stability"><i class="fa fa-check"></i><b>19.3</b> for Stability</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>20</b> Presentations</a>
 <ul>
@@ -313,8 +315,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="21.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>21.1</b> Chapters &amp; Sections to Form</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>22</b> Introduction</a></li>
-<li class="chapter" data-level="23" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>23</b> References</a></li>
+<li class="chapter" data-level="22" data-path="intro-bookdown.html"><a href="intro-bookdown.html"><i class="fa fa-check"></i><b>22</b> # Introduction</a></li>
+<li class="chapter" data-level="23" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>23</b> Introduction</a></li>
+<li class="chapter" data-level="24" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -352,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installing-r-packages" class="section level3">
 <h3 number="16.1.3"><span class="header-section-number">16.1.3</span> Installing R Packages</h3>
 <p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
-<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a>, which defines the <code>package_janitor_remote()</code> function. The final line calls the function (and passes a specific CSV of packages)<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a>, which defines the <code>package_janitor_remote()</code> function. The final line calls the function (and passes a specific CSV of packages)<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="workstation.html#cb21-1"></a><span class="cf">if</span>( <span class="op">!</span>base<span class="op">::</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>) ) utils<span class="op">::</span><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
 <span id="cb21-2"><a href="workstation.html#cb21-2"></a>devtools<span class="op">::</span><span class="kw">source_gist</span>(<span class="st">&quot;2c5e7459b88ec28b9e8fa0c695b15ee3&quot;</span>, <span class="dt">filename=</span><span class="st">&quot;package-janitor-bbmc.R&quot;</span>)</span>
 <span id="cb21-3"><a href="workstation.html#cb21-3"></a></span>
@@ -546,6 +549,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, <a href="https://github.com/jgm/pandoc/releases">download the .deb file</a> then install from the same directory. Finally, verify the version.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb27-1"><a href="workstation.html#cb27-1"></a><span class="fu">sudo</span> dpkg -i pandoc-*</span>
 <span id="cb27-2"><a href="workstation.html#cb27-2"></a><span class="ex">pandoc</span> -v</span></code></pre></div>
+<p>The Postman native app for Ubuntu is <a href="https://learning.getpostman.com/docs/postman/launching-postman/installation-and-updates/#installing-postman-on-linux">installed</a> through <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage">snap</a>, which is <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage#2">updated daily automatically</a>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb28-1"><a href="workstation.html#cb28-1"></a><span class="ex">snap</span> install postman</span></code></pre></div>
 </div>
 <div id="asset-locations" class="section level2">
 <h2 number="16.5"><span class="header-section-number">16.5</span> Asset Locations</h2>
@@ -557,8 +562,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>ODBC UserDsn</strong> The name depends on your specific repository, and SQL Server database. Ask Thomas, Will or David for how to set it up.</p></li>
 </ul>
 </div>
+<div id="installation-administrator" class="section level2">
+<h2 number="16.6"><span class="header-section-number">16.6</span> Administrator Installation</h2>
+<ul>
+<li><strong><a href="https://dev.mysql.com/downloads/workbench/">MySQL Workbench</a></strong> is useful occassionly for REDCap admins.</li>
+<li><strong><a href="https://www.getpostman.com/downloads/">Postman Native App</a></strong> is useful for developing with the API and has <a href="https://blog.getpostman.com/2017/03/14/going-native/">replaced the Chrome app</a>. If that’s not possible, a <a href="https://web.postman.co/">web client</a> is available as well. With either program, do not access any PHI.</li>
+</ul>
+</div>
 <div id="installation-troubleshooting" class="section level2">
-<h2 number="16.6"><span class="header-section-number">16.6</span> Installation Troubleshooting</h2>
+<h2 number="16.7"><span class="header-section-number">16.7</span> Installation Troubleshooting</h2>
 <ul>
 <li><p><strong>Git</strong>: Will Beasley resorted to this workaround Sept 2012: <a href="http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing" class="uri">http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing</a>. And then he copied the following four files from <code>D:/Program Files/msysgit/mingw/bin/</code> to <code>D:/Program Files/msysgit/bin/</code>: (1) <code>libiconv2.dll</code>, (2) <code>libcurl-4.dll</code>, (3) <code>libcrypto.dll</code>, and (4) <code>libssl.dll</code>. (If you install to the default location, you’ll move instead from <code>C:/msysgit/mingw/bin/</code> to <code>C:/msysgit/bin/</code>) {added Sept 2012}</p></li>
 <li><p><strong>Git</strong>: On a different computer, Will Beasley couldn’t get RStudio to recognize msysGit, so installed the <code>Full installer for official Git for Windows 1.7.11</code> from (<a href="http://code.google.com/p/msysgit/downloads/list" class="uri">http://code.google.com/p/msysgit/downloads/list</a>) and switched the Git Path in the RStudio Options. {added Sept 2012}</p></li>
@@ -566,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 <div id="retired-tools" class="section level2">
-<h2 number="16.7"><span class="header-section-number">16.7</span> Retired Tools</h2>
+<h2 number="16.8"><span class="header-section-number">16.8</span> Retired Tools</h2>
 <p>We previously installed this software in this list. Most have been replaced by software above that’s either newer or more natural to use.</p>
 <ul>
 <li><p><strong><a href="http://msysgit.github.com/">msysGit</a></strong> allows RStudio to track changes and commit &amp; sync them to the GitHub server. Connect RStudio to GitHub repository. I moved this to optional (Oct 14, 2012) because the GitHub client (see above) does almost everything that the RStudio plugin does; and it does it a little better and a little more robust; and its installation hasn’t given me problems. {added Oct 2012}</p>
@@ -585,8 +597,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="3">
-<li id="fn3"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in the <code>utility/</code> directory) that lives in this repository. The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<ol start="4">
+<li id="fn4"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in the <code>utility/</code> directory) that lives in this repository. The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

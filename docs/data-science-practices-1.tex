@@ -129,7 +129,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-03}
+\date{2019-12-09}
 
 \begin{document}
 \frontmatter
@@ -325,6 +325,12 @@ The \protect\hyperlink{repo-root}{config file} can coordinate a static variable 
 
 \hypertarget{load-data}{%
 \section{Load Data}\label{load-data}}
+
+All data ingested by this file occurs in this chunk. We like to think of each file as a linear pipe with a single point of input and single point of output. Although it is possible for a file to read data files on any line, we recommend avoiding this sprawl because it is more difficult for humans to understand. If the software developer is a deist watchmaker, the file's fate has been sealed by the end of this chunk. This makes is easier for a human to reason to isolate problems as either existing with (a) the incoming data or (b) the calculations on that data.
+
+Ideally this chunk consumes data from either a plain-text csv or a database.
+
+Many capable R functions and packages ingest data. We prefer the tidyverse \href{}{readr} for reading conventional files; its younger cousin, \href{}{vroom} has some nice advantages when working with larger files and some forms of jagged rectangles\footnote{Say a csv has 20 columns, but a row has missing values for the last five columns. Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value. vroom infers the missing values correctly, while some other packages do not.}.
 
 \hypertarget{tweak-data}{%
 \section{Tweak Data}\label{tweak-data}}
@@ -1374,6 +1380,14 @@ The version of pandoc from the Ubuntu repository may be delayed. To install the 
 \end{Highlighting}
 \end{Shaded}
 
+The Postman native app for Ubuntu is \href{https://learning.getpostman.com/docs/postman/launching-postman/installation-and-updates/\#installing-postman-on-linux}{installed} through \href{https://tutorials.ubuntu.com/tutorial/basic-snap-usage}{snap}, which is \href{https://tutorials.ubuntu.com/tutorial/basic-snap-usage\#2}{updated daily automatically}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{snap}\NormalTok{ install postman}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{asset-locations}{%
 \section{Asset Locations}\label{asset-locations}}
 
@@ -1388,6 +1402,17 @@ The version of pandoc from the Ubuntu repository may be delayed. To install the 
   \textbf{REDCap database} Ask Thomas, Will or David. It is a http url, and we're trying not to publicize its value.
 \item
   \textbf{ODBC UserDsn} The name depends on your specific repository, and SQL Server database. Ask Thomas, Will or David for how to set it up.
+\end{itemize}
+
+\hypertarget{installation-administrator}{%
+\section{Administrator Installation}\label{installation-administrator}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\href{https://dev.mysql.com/downloads/workbench/}{MySQL Workbench}} is useful occassionly for REDCap admins.
+\item
+  \textbf{\href{https://www.getpostman.com/downloads/}{Postman Native App}} is useful for developing with the API and has \href{https://blog.getpostman.com/2017/03/14/going-native/}{replaced the Chrome app}. If that's not possible, a \href{https://web.postman.co/}{web client} is available as well. With either program, do not access any PHI.
 \end{itemize}
 
 \hypertarget{installation-troubleshooting}{%
@@ -1474,7 +1499,7 @@ Likewise, I care less about the line count, and more about the readability. I'd 
   \item
     5 minutes to \textbf{create a GitHub Issue} that (a) announces the new requirement, (b) describes who/what needs to install the requirement, (c) points to the markdown documentation, and (d) encourages teammates to post their problems, recommendations, and solutions in this issue. We've found that a dedicated Issue helps communicate that the package dependency necessitates some intention and encourages people to assist other people's troubleshooting. When something potentially useful is posted in the Issue, move it to the markdown document. Make sure the document and the issue hyperlink to each other.
   \item
-    15 minutes every year to re-evaluate the landscape. Confirm that the package is still actively maintained, and that no newer (and easily- maintained) package offers the desired capability. If better fit now exists, evaluate if the effort to transition to the new package is worth the benefit. Be more willing to transition is the project is relatively green, and more development is upcoming. Be more willing to transition if the transition is relatively in-place, and will not require much modification of code or training of people.
+    15 minutes every year to re-evaluate the landscape. Confirm that the package is still actively maintained, and that no newer (and easily- maintained) package offers the desired capability.\footnote{In this case, the \href{https://ycphs.github.io/openxlsx}{openxlsx} package is worth consideration because it writes to an Excel file, but uses a C++ library, not a Java library.} If better fit now exists, evaluate if the effort to transition to the new package is worth the benefit. Be more willing to transition is the project is relatively green, and more development is upcoming. Be more willing to transition if the transition is relatively in-place, and will not require much modification of code or training of people.
   \end{enumerate}
 \end{enumerate}
 
@@ -1584,6 +1609,27 @@ Here are some tips from our experiences with projects involving between 2 and 10
     a link to the code's file (and ideally the line number, such as \href{https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-version.R\#L40}{\texttt{https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-version.R\#L40}}) so the reader can hop over to the entire file.
   \item
     references to similar GitHub Issues or Stack Overflow questions that could aid troubleshooting.
+  \end{enumerate}
+\end{enumerate}
+
+\hypertarget{for-stability}{%
+\section{for Stability}\label{for-stability}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Review Git commits closely
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    No unintended functional difference (\emph{e.g.}, \texttt{!match} accidentally changed to \texttt{match}).
+  \item
+    No PHI snuck in (\emph{e.g.}, a patient ID used while isolating and debugging).
+  \item
+    The metadata format didn't change (\emph{e.g.}, Excel sometimes changes the string `010' to the number `10').
   \end{enumerate}
 \end{enumerate}
 
@@ -1813,8 +1859,10 @@ My proposal uses GitHub and Markdown because they're so universal (no knowledge 
   \url{http://mangothecat.github.io/goodpractice/}
 \end{itemize}
 
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
+\hypertarget{intro-bookdown}{%
+\chapter{\# Introduction}\label{intro-bookdown}}
+
+\emph{This intro was copied from the 1st chapter of the example bookdown repo. I'm keeping it temporarily for reference.}
 
 You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{architecture}.
 
@@ -1883,6 +1931,11 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{table}
 
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+
+\hypertarget{intro}{%
+\chapter{Introduction}\label{intro}}
+
+This collection of documents describe practices used by the OUHSC \href{https://ouhsc.edu/bbmc}{BBMC} in our analytics projects.
 
 \backmatter
   \bibliography{book.bib,packages.bib}
