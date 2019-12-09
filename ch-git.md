@@ -47,3 +47,12 @@ Here are some tips from our experiences with projects involving between 2 and 10
     1. references to similar GitHub Issues or Stack Overflow questions that could aid troubleshooting.
     
 <!-- Consider including good examples, like https://github.com/OuhscBbmc/miechv-3/issues/2073.  Probably shorten some for clarity. -->
+
+
+for Stability
+------------------------------------
+
+1. Review Git commits closely
+    1. No unintended functional difference (*e.g.*, `!match` accidentally changed to `match`).
+    1. No PHI snuck in (*e.g.*, a patient ID used while isolating and debugging).
+    1. The metadata format didn't change (*e.g.*, Excel sometimes changes the string '010' to the number '10').
