@@ -129,7 +129,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-09}
+\date{2019-12-11}
 
 \begin{document}
 \frontmatter
@@ -937,7 +937,39 @@ This involves code/files that multiple people use, like the REDCap arches.
 
 Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most themes in this document, the cost is worth the effort. Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.
 
-For the most part, our team follows the \href{http://adv-r.had.co.nz/Style.html}{tidyverse style}. Here are some additional conventions we attempt to follow.
+For the most part, our team follows the \href{https://style.tidyverse.org/}{tidyverse style}. Here are some additional conventions we attempt to follow. Many of these were inspired by \citep{balena-dimauro}.
+
+\hypertarget{readability}{%
+\section{Readability}\label{readability}}
+
+\hypertarget{style-abbreviation}{%
+\subsection{Abbreviations}\label{style-abbreviation}}
+
+Try to avoid abbreviations. Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable. At very least, it wastes time trying to remember if \texttt{subject\_number}, \texttt{subject\_num}, or \texttt{subject\_no} was used.
+
+However, some terms are too long to reasonably use without shortening. We make some exceptions, such as the following scenarios
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  humans commonly use the term orally. For instance, people tend to say ``OR'' instead of ``operating room''.
+\item
+  your team has agreed on set list of abbreviations. The list for our \href{https://github.com/OuhscBbmc/prairie-outpost-public\#readme}{CDW} team includes:
+  \href{https://www.merriam-webster.com/dictionary/appointment}{appt},
+  \href{https://en.wikipedia.org/wiki/Clinical_data_repository}{cdw},
+  \href{https://en.wikipedia.org/wiki/Current_Procedural_Terminology}{cpt},
+  \href{https://www.medicinenet.com/script/main/art.asp?articlekey=33829}{dx},
+  \href{https://medical-dictionary.thefreedictionary.com/Hx}{hx},
+  \href{https://www.cdc.gov/nchs/icd/icd10cm.htm}{icd}, and
+  \href{https://www.medicinenet.com/script/main/art.asp?articlekey=39154}{pt}.
+\end{enumerate}
+
+When your team choose terms (\emph{e.g.}, `apt' vs `appt'), try to use a standard vocabulary, such as \href{https://www.medicinenet.com/medterms-medical-dictionary/article.htm}{MedTerms Medical Dictionary}.
+
+\hypertarget{style-number}{%
+\subsection{Number}\label{style-number}}
+
+The word `number' is ambiguous, especially in data science. Try for more specific terms like `count', `id', `index', and `tally'.
 
 \hypertarget{ggplot2}{%
 \section{ggplot2}\label{ggplot2}}

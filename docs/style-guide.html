@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-09" />
+<meta name="date" content="2019-12-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -232,10 +232,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>12</b> Style Guide</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="style-guide.html"><a href="style-guide.html#ggplot2"><i class="fa fa-check"></i><b>12.1</b> ggplot2</a>
+<li class="chapter" data-level="12.1" data-path="style-guide.html"><a href="style-guide.html#readability"><i class="fa fa-check"></i><b>12.1</b> Readability</a>
 <ul>
-<li class="chapter" data-level="12.1.1" data-path="style-guide.html"><a href="style-guide.html#order-of-commands"><i class="fa fa-check"></i><b>12.1.1</b> Order of commands</a></li>
-<li class="chapter" data-level="12.1.2" data-path="style-guide.html"><a href="style-guide.html#gotchas"><i class="fa fa-check"></i><b>12.1.2</b> Gotchas</a></li>
+<li class="chapter" data-level="12.1.1" data-path="style-guide.html"><a href="style-guide.html#style-abbreviation"><i class="fa fa-check"></i><b>12.1.1</b> Abbreviations</a></li>
+<li class="chapter" data-level="12.1.2" data-path="style-guide.html"><a href="style-guide.html#style-number"><i class="fa fa-check"></i><b>12.1.2</b> Number</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="style-guide.html"><a href="style-guide.html#ggplot2"><i class="fa fa-check"></i><b>12.2</b> ggplot2</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="style-guide.html"><a href="style-guide.html#order-of-commands"><i class="fa fa-check"></i><b>12.2.1</b> Order of commands</a></li>
+<li class="chapter" data-level="12.2.2" data-path="style-guide.html"><a href="style-guide.html#gotchas"><i class="fa fa-check"></i><b>12.2.2</b> Gotchas</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="publication.html"><a href="publication.html"><i class="fa fa-check"></i><b>13</b> Publishing Results</a>
@@ -341,12 +346,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="style-guide" class="section level1">
 <h1 number="12"><span class="header-section-number">12</span> Style Guide</h1>
 <p>Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most themes in this document, the cost is worth the effort. Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.</p>
-<p>For the most part, our team follows the <a href="http://adv-r.had.co.nz/Style.html">tidyverse style</a>. Here are some additional conventions we attempt to follow.</p>
+<p>For the most part, our team follows the <a href="https://style.tidyverse.org/">tidyverse style</a>. Here are some additional conventions we attempt to follow. Many of these were inspired by <span class="citation">(Francesco Balena <a href="references.html#ref-balena-dimauro" role="doc-biblioref">2005</a>)</span>.</p>
+<div id="readability" class="section level2">
+<h2 number="12.1"><span class="header-section-number">12.1</span> Readability</h2>
+<div id="style-abbreviation" class="section level3">
+<h3 number="12.1.1"><span class="header-section-number">12.1.1</span> Abbreviations</h3>
+<p>Try to avoid abbreviations. Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable. At very least, it wastes time trying to remember if <code>subject_number</code>, <code>subject_num</code>, or <code>subject_no</code> was used.</p>
+<p>However, some terms are too long to reasonably use without shortening. We make some exceptions, such as the following scenarios</p>
+<ol style="list-style-type: decimal">
+<li><p>humans commonly use the term orally. For instance, people tend to say “OR” instead of “operating room”.</p></li>
+<li><p>your team has agreed on set list of abbreviations. The list for our <a href="https://github.com/OuhscBbmc/prairie-outpost-public#readme">CDW</a> team includes:
+<a href="https://www.merriam-webster.com/dictionary/appointment">appt</a>,
+<a href="https://en.wikipedia.org/wiki/Clinical_data_repository">cdw</a>,
+<a href="https://en.wikipedia.org/wiki/Current_Procedural_Terminology">cpt</a>,
+<a href="https://www.medicinenet.com/script/main/art.asp?articlekey=33829">dx</a>,
+<a href="https://medical-dictionary.thefreedictionary.com/Hx">hx</a>,
+<a href="https://www.cdc.gov/nchs/icd/icd10cm.htm">icd</a>, and
+<a href="https://www.medicinenet.com/script/main/art.asp?articlekey=39154">pt</a>.</p></li>
+</ol>
+<p>When your team choose terms (<em>e.g.</em>, ‘apt’ vs ‘appt’), try to use a standard vocabulary, such as <a href="https://www.medicinenet.com/medterms-medical-dictionary/article.htm">MedTerms Medical Dictionary</a>.</p>
+</div>
+<div id="style-number" class="section level3">
+<h3 number="12.1.2"><span class="header-section-number">12.1.2</span> Number</h3>
+<p>The word ‘number’ is ambiguous, especially in data science. Try for more specific terms like ‘count’, ‘id’, ‘index’, and ‘tally’.</p>
+</div>
+</div>
 <div id="ggplot2" class="section level2">
-<h2 number="12.1"><span class="header-section-number">12.1</span> ggplot2</h2>
+<h2 number="12.2"><span class="header-section-number">12.2</span> ggplot2</h2>
 <p>The expressiveness of <a href="https://ggplot2.tidyverse.org/">ggplot2</a> allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a <a href="https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md">textbook for introductory statistics</a>; the 200+ graphs and their code is publically available.</p>
 <div id="order-of-commands" class="section level3">
-<h3 number="12.1.1"><span class="header-section-number">12.1.1</span> Order of commands</h3>
+<h3 number="12.2.1"><span class="header-section-number">12.2.1</span> Order of commands</h3>
 <p>ggplot2 is essentially a collection of functions combined with the <code>+</code> operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:</p>
 <ol style="list-style-type: decimal">
 <li><code>ggplot2()</code> is the primary function to specify the default dataset and aesthetic mappings. Many arguments can be passed to <code>aes()</code>, and we prefer to follow an order consistent with the <code>scale_*()</code> order below.</li>
@@ -359,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </div>
 <div id="gotchas" class="section level3">
-<h3 number="12.1.2"><span class="header-section-number">12.1.2</span> Gotchas</h3>
+<h3 number="12.2.2"><span class="header-section-number">12.2.2</span> Gotchas</h3>
 <p>Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).</p>
 <ol style="list-style-type: decimal">
 <li>Call <code>coord_*()</code> to restrict the plotted <em>x</em>/<em>y</em> values, not <code>scale_*()</code> or <code>lims()</code>/<code>xlim()</code>/<code>ylim()</code>. <code>coord_*()</code> zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to <code>geom_smooth()</code> (<em>e.g.</em>, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling <code>coord_*()</code>, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.</li>
