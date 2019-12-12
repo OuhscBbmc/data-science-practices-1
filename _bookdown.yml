@@ -8,6 +8,7 @@ edit: https://github.com/ouhscbbmc/data-science-practices-1/edit/master/%s
 rmd_files:
   [
     "index.Rmd",
+    "ch-intro.Rmd",
     "ch-architecture.md",
     "ch-file-prototype.md",
     "ch-repo-prototype.md",
@@ -30,6 +31,6 @@ rmd_files:
     "ch-git.md",
     "ch-presentations.md",
     "ch-scratch-pad.md",
-    "ch-intro.Rmd",           # from Yihui's bookdown example -for me to follow easily
+    "ch-example.Rmd",
     "ch-references.md"
   ]

@@ -132,7 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Collaborative Data Science</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>2.1</b> Encapsulation</a></li>
@@ -336,9 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="21.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>21.1</b> Chapters &amp; Sections to Form</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="intro-bookdown.html"><a href="intro-bookdown.html"><i class="fa fa-check"></i><b>22</b> Introduction</a></li>
-<li class="chapter" data-level="23" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>23</b> Introduction</a></li>
-<li class="chapter" data-level="24" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
+<li class="chapter" data-level="22" data-path="example-bookdown.html"><a href="example-bookdown.html"><i class="fa fa-check"></i><b>22</b> Example</a></li>
+<li class="chapter" data-level="23" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>23</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -366,31 +365,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 number="4.1"><span class="header-section-number">4.1</span> Root</h2>
 <ol style="list-style-type: decimal">
 <li><p><code>config.R</code> is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is great when a value has to be coordinated across multiple file</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="repo-prototype.html#cb6-1"></a><span class="fu">default</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="repo-prototype.html#cb6-2"></a><span class="co"># To be processed by Ellis lanes</span></span>
-<span id="cb6-3"><a href="repo-prototype.html#cb6-3"></a><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/raw/subject-1.csv&quot;</span></span>
-<span id="cb6-4"><a href="repo-prototype.html#cb6-4"></a><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">&quot;data-public/raw/mlm-1.csv&quot;</span></span>
-<span id="cb6-5"><a href="repo-prototype.html#cb6-5"></a></span>
-<span id="cb6-6"><a href="repo-prototype.html#cb6-6"></a><span class="co"># Central Database (produced by Ellis lanes).</span></span>
-<span id="cb6-7"><a href="repo-prototype.html#cb6-7"></a><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">&quot;data-public/derived/db.sqlite3&quot;</span></span>
-<span id="cb6-8"><a href="repo-prototype.html#cb6-8"></a></span>
-<span id="cb6-9"><a href="repo-prototype.html#cb6-9"></a><span class="co"># Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
-<span id="cb6-10"><a href="repo-prototype.html#cb6-10"></a><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/derived/mlm-1.rds&quot;</span></span>
-<span id="cb6-11"><a href="repo-prototype.html#cb6-11"></a></span>
-<span id="cb6-12"><a href="repo-prototype.html#cb6-12"></a><span class="co"># Metadata</span></span>
-<span id="cb6-13"><a href="repo-prototype.html#cb6-13"></a><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">&quot;data-public/metadata/cqi-annotation.csv&quot;</span></span>
-<span id="cb6-14"><a href="repo-prototype.html#cb6-14"></a></span>
-<span id="cb6-15"><a href="repo-prototype.html#cb6-15"></a><span class="co"># Logging errors and messages from automated execution.</span></span>
-<span id="cb6-16"><a href="repo-prototype.html#cb6-16"></a><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)</span></span>
-<span id="cb6-17"><a href="repo-prototype.html#cb6-17"></a></span>
-<span id="cb6-18"><a href="repo-prototype.html#cb6-18"></a><span class="co"># time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.</span></span>
-<span id="cb6-19"><a href="repo-prototype.html#cb6-19"></a></span>
-<span id="cb6-20"><a href="repo-prototype.html#cb6-20"></a><span class="co"># ---- Validation Ranges &amp; Patterns ----</span></span>
-<span id="cb6-21"><a href="repo-prototype.html#cb6-21"></a><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
-<span id="cb6-22"><a href="repo-prototype.html#cb6-22"></a><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span>
-<span id="cb6-23"><a href="repo-prototype.html#cb6-23"></a><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct(&quot;2019-01-01&quot;, tz=&quot;America/Chicago&quot;), Sys.time())</span></span>
-<span id="cb6-24"><a href="repo-prototype.html#cb6-24"></a><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
-<span id="cb6-25"><a href="repo-prototype.html#cb6-25"></a><span class="fu">pattern_mrn_centricity  </span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^</span><span class="sc">\\</span><span class="st">d{16}$&quot;</span><span class="co">        # The 64-bit int is more easily validated as a character.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="repo-prototype.html#cb5-1"></a><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="repo-prototype.html#cb5-2"></a><span class="co"># To be processed by Ellis lanes</span></span>
+<span id="cb5-3"><a href="repo-prototype.html#cb5-3"></a><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/raw/subject-1.csv&quot;</span></span>
+<span id="cb5-4"><a href="repo-prototype.html#cb5-4"></a><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">&quot;data-public/raw/mlm-1.csv&quot;</span></span>
+<span id="cb5-5"><a href="repo-prototype.html#cb5-5"></a></span>
+<span id="cb5-6"><a href="repo-prototype.html#cb5-6"></a><span class="co"># Central Database (produced by Ellis lanes).</span></span>
+<span id="cb5-7"><a href="repo-prototype.html#cb5-7"></a><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">&quot;data-public/derived/db.sqlite3&quot;</span></span>
+<span id="cb5-8"><a href="repo-prototype.html#cb5-8"></a></span>
+<span id="cb5-9"><a href="repo-prototype.html#cb5-9"></a><span class="co"># Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
+<span id="cb5-10"><a href="repo-prototype.html#cb5-10"></a><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/derived/mlm-1.rds&quot;</span></span>
+<span id="cb5-11"><a href="repo-prototype.html#cb5-11"></a></span>
+<span id="cb5-12"><a href="repo-prototype.html#cb5-12"></a><span class="co"># Metadata</span></span>
+<span id="cb5-13"><a href="repo-prototype.html#cb5-13"></a><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">&quot;data-public/metadata/cqi-annotation.csv&quot;</span></span>
+<span id="cb5-14"><a href="repo-prototype.html#cb5-14"></a></span>
+<span id="cb5-15"><a href="repo-prototype.html#cb5-15"></a><span class="co"># Logging errors and messages from automated execution.</span></span>
+<span id="cb5-16"><a href="repo-prototype.html#cb5-16"></a><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)</span></span>
+<span id="cb5-17"><a href="repo-prototype.html#cb5-17"></a></span>
+<span id="cb5-18"><a href="repo-prototype.html#cb5-18"></a><span class="co"># time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.</span></span>
+<span id="cb5-19"><a href="repo-prototype.html#cb5-19"></a></span>
+<span id="cb5-20"><a href="repo-prototype.html#cb5-20"></a><span class="co"># ---- Validation Ranges &amp; Patterns ----</span></span>
+<span id="cb5-21"><a href="repo-prototype.html#cb5-21"></a><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
+<span id="cb5-22"><a href="repo-prototype.html#cb5-22"></a><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span>
+<span id="cb5-23"><a href="repo-prototype.html#cb5-23"></a><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct(&quot;2019-01-01&quot;, tz=&quot;America/Chicago&quot;), Sys.time())</span></span>
+<span id="cb5-24"><a href="repo-prototype.html#cb5-24"></a><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
+<span id="cb5-25"><a href="repo-prototype.html#cb5-25"></a><span class="fu">pattern_mrn_centricity  </span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^</span><span class="sc">\\</span><span class="st">d{16}$&quot;</span><span class="co">        # The 64-bit int is more easily validated as a character.</span></span></code></pre></div></li>
 <li><p><code>flow.R</code></p></li>
 <li><p><code>README.md</code></p></li>
 <li><p><code>*.Rproj</code></p></li>
@@ -482,20 +481,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

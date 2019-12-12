@@ -140,24 +140,10 @@
 \tableofcontents
 }
 \mainmatter
-\hypertarget{prerequisites}{%
-\chapter{Prerequisites}\label{prerequisites}}
+\hypertarget{intro}{%
+\chapter{Introduction}\label{intro}}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
-
-The \textbf{bookdown} package can be installed from CRAN or Github:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{\# or the development version}
-\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
-
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
-
-To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.name/tinytex/}.
+This collection of documents describe practices used by the OUHSC \href{https://ouhsc.edu/bbmc}{BBMC} in our analytics projects.
 
 \hypertarget{architecture}{%
 \chapter{Architecture Principles}\label{architecture}}
@@ -1881,8 +1867,8 @@ My proposal uses GitHub and Markdown because they're so universal (no knowledge 
   \url{http://mangothecat.github.io/goodpractice/}
 \end{itemize}
 
-\hypertarget{intro-bookdown}{%
-\chapter{Introduction}\label{intro-bookdown}}
+\hypertarget{example-bookdown}{%
+\chapter{Example}\label{example-bookdown}}
 
 \emph{This intro was copied from the 1st chapter of the example bookdown repo. I'm keeping it temporarily for reference.}
 
@@ -1953,11 +1939,6 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \end{table}
 
 You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
-
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
-
-This collection of documents describe practices used by the OUHSC \href{https://ouhsc.edu/bbmc}{BBMC} in our analytics projects.
 
 \backmatter
   \bibliography{book.bib,packages.bib}
