@@ -20,6 +20,7 @@ However, some terms are too long to reasonably use without shortening.  We make 
 [appt](https://www.merriam-webster.com/dictionary/appointment), 
 [cdw](https://en.wikipedia.org/wiki/Clinical_data_repository), 
 [cpt](https://en.wikipedia.org/wiki/Current_Procedural_Terminology), 
+[drg](https://en.wikipedia.org/wiki/Diagnosis-related_group) (stands for diagnosis-related group),
 [dx](https://www.medicinenet.com/script/main/art.asp?articlekey=33829),
 [hx](https://medical-dictionary.thefreedictionary.com/Hx),
 [icd](https://www.cdc.gov/nchs/icd/icd10cm.htm), and
