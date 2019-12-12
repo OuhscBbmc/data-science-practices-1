@@ -136,10 +136,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>2.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a></li>
-<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a></li>
-<li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a></li>
-<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a></li>
+<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>2.2.1</b> Focused code files</a></li>
+<li class="chapter" data-level="2.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>2.2.2</b> Metadata for content experts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="architecture.html"><a href="architecture.html#single-source-single-analysis"><i class="fa fa-check"></i><b>2.3.1</b> Single source &amp; single analysis</a></li>
+<li class="chapter" data-level="2.3.2" data-path="architecture.html"><a href="architecture.html#multiple-sources-multiple-analyses"><i class="fa fa-check"></i><b>2.3.2</b> Multiple sources &amp; multiple analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#architecture-consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="architecture.html"><a href="architecture.html#consistency-files"><i class="fa fa-check"></i><b>2.4.1</b> Across Files</a></li>
+<li class="chapter" data-level="2.4.2" data-path="architecture.html"><a href="architecture.html#across-languages"><i class="fa fa-check"></i><b>2.4.2</b> Across Languages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="architecture.html"><a href="architecture.html#across-projects"><i class="fa fa-check"></i><b>2.4.3</b> Across Projects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="architecture.html"><a href="architecture.html#qualify-functions"><i class="fa fa-check"></i><b>2.5.1</b> Qualify functions</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="file-prototype.html"><a href="file-prototype.html"><i class="fa fa-check"></i><b>3</b> Prototypical File</a>
 <ul>
@@ -320,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="21.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>21.1</b> Chapters &amp; Sections to Form</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="intro-bookdown.html"><a href="intro-bookdown.html"><i class="fa fa-check"></i><b>22</b> # Introduction</a></li>
+<li class="chapter" data-level="22" data-path="intro-bookdown.html"><a href="intro-bookdown.html"><i class="fa fa-check"></i><b>22</b> Introduction</a></li>
 <li class="chapter" data-level="23" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>23</b> Introduction</a></li>
 <li class="chapter" data-level="24" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
 <li class="divider"></li>
@@ -351,8 +367,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 number="12.1"><span class="header-section-number">12.1</span> Readability</h2>
 <div id="style-abbreviation" class="section level3">
 <h3 number="12.1.1"><span class="header-section-number">12.1.1</span> Abbreviations</h3>
-<p>Try to avoid abbreviations. Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable. At very least, it wastes time trying to remember if <code>subject_number</code>, <code>subject_num</code>, or <code>subject_no</code> was used.</p>
-<p>However, some terms are too long to reasonably use without shortening. We make some exceptions, such as the following scenarios</p>
+<p>Try to avoid abbreviations. Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable. At very least, it wastes time trying to remember if <code>subject_number</code>, <code>subject_num</code>, or <code>subject_no</code> was used. The <a href="architecture.html#architecture-consistency">Consistency</a> section describes how this can reduce errors and increase efficiency.</p>
+<p>However, some terms are too long to reasonably use without shortening. We make some exceptions, such as the following scenarios:</p>
 <ol style="list-style-type: decimal">
 <li><p>humans commonly use the term orally. For instance, people tend to say “OR” instead of “operating room”.</p></li>
 <li><p>your team has agreed on set list of abbreviations. The list for our <a href="https://github.com/OuhscBbmc/prairie-outpost-public#readme">CDW</a> team includes:

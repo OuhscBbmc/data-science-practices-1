@@ -10,9 +10,9 @@ Readability
 
 ### Abbreviations {#style-abbreviation}
 
-Try to avoid abbreviations.  Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable.  At very least, it wastes time trying to remember if `subject_number`, `subject_num`, or `subject_no` was used.
+Try to avoid abbreviations.  Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable.  At very least, it wastes time trying to remember if `subject_number`, `subject_num`, or `subject_no` was used.  The [Consistency](#architecture-consistency) section describes how this can reduce errors and increase efficiency.
 
-However, some terms are too long to reasonably use without shortening.  We make some exceptions, such as the following scenarios 
+However, some terms are too long to reasonably use without shortening.  We make some exceptions, such as the following scenarios:
 
 1. humans commonly use the term orally.  For instance, people tend to say "OR" instead of "operating room".
 

@@ -136,10 +136,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>2.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a></li>
-<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a></li>
-<li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a></li>
-<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a></li>
+<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>2.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>2.2.1</b> Focused code files</a></li>
+<li class="chapter" data-level="2.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>2.2.2</b> Metadata for content experts</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>2.3</b> Scales</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="architecture.html"><a href="architecture.html#single-source-single-analysis"><i class="fa fa-check"></i><b>2.3.1</b> Single source &amp; single analysis</a></li>
+<li class="chapter" data-level="2.3.2" data-path="architecture.html"><a href="architecture.html#multiple-sources-multiple-analyses"><i class="fa fa-check"></i><b>2.3.2</b> Multiple sources &amp; multiple analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#architecture-consistency"><i class="fa fa-check"></i><b>2.4</b> Consistency</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="architecture.html"><a href="architecture.html#consistency-files"><i class="fa fa-check"></i><b>2.4.1</b> Across Files</a></li>
+<li class="chapter" data-level="2.4.2" data-path="architecture.html"><a href="architecture.html#across-languages"><i class="fa fa-check"></i><b>2.4.2</b> Across Languages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="architecture.html"><a href="architecture.html#across-projects"><i class="fa fa-check"></i><b>2.4.3</b> Across Projects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#defensive-style"><i class="fa fa-check"></i><b>2.5</b> Defensive Style</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="architecture.html"><a href="architecture.html#qualify-functions"><i class="fa fa-check"></i><b>2.5.1</b> Qualify functions</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="file-prototype.html"><a href="file-prototype.html"><i class="fa fa-check"></i><b>3</b> Prototypical File</a>
 <ul>
@@ -320,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="21.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>21.1</b> Chapters &amp; Sections to Form</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="intro-bookdown.html"><a href="intro-bookdown.html"><i class="fa fa-check"></i><b>22</b> # Introduction</a></li>
+<li class="chapter" data-level="22" data-path="intro-bookdown.html"><a href="intro-bookdown.html"><i class="fa fa-check"></i><b>22</b> Introduction</a></li>
 <li class="chapter" data-level="23" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>23</b> Introduction</a></li>
 <li class="chapter" data-level="24" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
 <li class="divider"></li>
@@ -345,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="file-prototype" class="section level1">
 <h1 number="3"><span class="header-section-number">3</span> Prototypical File</h1>
-<p>As stated before, in <a href="#consistency-files">Consistency across Files</a>, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.</p>
+<p>As stated before, in <a href="architecture.html#consistency-files">Consistency across Files</a>, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.</p>
 <p>We use the term “chunk” for a section of code because it corresponds with knitr terminology <span class="citation">(Xie <a href="references.html#ref-xie2015" role="doc-biblioref">2015</a>)</span>, and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.</p>
 <div id="clear-memory" class="section level2">
 <h2 number="3.1"><span class="header-section-number">3.1</span> Clear Memory</h2>
@@ -366,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-packages" class="section level2">
 <h2 number="3.3"><span class="header-section-number">3.3</span> Load Packages</h2>
 <p>The ‘load-packages’ chunk declares required packages near the file’s beginning for three reasons. First, a reader scanning the file can quickly determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Third, this style mimics a requirement of other languages (such as declaring headers at the top of a C++ file) and follows the <a href="https://style.tidyverse.org/files.html#internal-structure">tidyverse style guide</a>.</p>
-<p>As discussed in the previous <a href="#qualify-functions">qualify all functions</a> section, we recommend that functions are qualified with their package (<em>e.g.</em>, <code>foo::bar()</code> instead of merely <code>bar()</code>). Consequently, the ‘load-packages’ chunk calls <code>requireNamespace()</code> more frequently than <code>library()</code>. <code>requireNamespace()</code> verifies the package is available on the local machine, but does not load it into memory; <code>library()</code> verifies the package is available, and then loads it.</p>
+<p>As discussed in the previous <a href="architecture.html#qualify-functions">qualify all functions</a> section, we recommend that functions are qualified with their package (<em>e.g.</em>, <code>foo::bar()</code> instead of merely <code>bar()</code>). Consequently, the ‘load-packages’ chunk calls <code>requireNamespace()</code> more frequently than <code>library()</code>. <code>requireNamespace()</code> verifies the package is available on the local machine, but does not load it into memory; <code>library()</code> verifies the package is available, and then loads it.</p>
 <p><code>requireNamespace()</code> is not used in several scenarios.</p>
 <ol style="list-style-type: decimal">
 <li>Core packages (<em>e.g.</em>, ‘base’ and ‘stats’) are loaded by R in most default installations. We avoid unnecessary calls like <code>library(stats)</code> because they distract from more important features.</li>
