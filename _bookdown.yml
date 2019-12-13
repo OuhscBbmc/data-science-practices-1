@@ -8,7 +8,6 @@ edit: https://github.com/ouhscbbmc/data-science-practices-1/edit/master/%s
 rmd_files:
   [
     "index.Rmd",
-    "ch-intro.Rmd",
     "ch-architecture.md",
     "ch-file-prototype.md",
     "ch-repo-prototype.md",

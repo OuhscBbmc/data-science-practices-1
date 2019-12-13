@@ -1,4 +1,0 @@
-Introduction {#intro}
-====================================
-
-This collection of documents describe practices used by the OUHSC [BBMC](https://ouhsc.edu/bbmc) in our analytics projects.

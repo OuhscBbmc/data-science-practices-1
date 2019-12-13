@@ -10,6 +10,12 @@ link-citations: yes
 description: "Collection of publicly available practices of data science and analysis."
 ---
 
+Introduction {#intro}
+====================================
+
+This collection of documents describe practices used by the OUHSC [BBMC](https://ouhsc.edu/bbmc) in our analytics projects.
+
+
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
