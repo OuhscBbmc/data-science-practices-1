@@ -154,11 +154,90 @@ This collection of documents describe practices used by the OUHSC \href{https://
 \hypertarget{data-types}{%
 \subsection{Data Types}\label{data-types}}
 
+Use the simplest data type reasonable. A simpler data type is less likely contain unintented values. As we have seen, a string variable called \texttt{gender} can simulatneously contain the values ``m'', ``f'', ``F'', ``Female'', ``MALE'', ``0'', ``1'', ``2'', ``Latino'', "", and \texttt{NA}. On the other hand, a boolean variable \texttt{gender\_male} can be only \texttt{FALSE}, \texttt{TRUE}, and \texttt{NA}.\footnote{The database \texttt{bit} equivalents are \texttt{0}, \texttt{1}, and \texttt{NULL}}.
+
+Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
+
+Within R, the preference for numeric-ish variables is
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{logical}/boolean/bit,
+\item
+  \texttt{integer},
+\item
+  \texttt{bit64::integer64}, and
+\item
+  \texttt{numeric}/double-precision floats.
+\end{enumerate}
+
+The preference for categorical variables is
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{logical}/boolean/bit,
+\item
+  \texttt{factor}, and
+\item
+  \texttt{character}.
+\end{enumerate}
+
 \hypertarget{categorical-levels}{%
 \subsection{Categorical Levels}\label{categorical-levels}}
 
+When a boolean variable would be too restrictive and a factor or character is required, choose the simplest representation. Where possible:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use only lower case (\emph{e.g.}, `male' instead of `Male' for the \texttt{gender} variable).
+\item
+  avoid repeating the variable in the level (\emph{e.g.}, `control' instead of `control condition' for the \texttt{condition} variable).
+\end{enumerate}
+
 \hypertarget{recoding}{%
 \subsection{Recoding}\label{recoding}}
+
+Almost every project recodes many variables. Choose the simplest function possible. The functions at the top are much easier to read and harder to mess up.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \texttt{!}: instead of \texttt{gender\_male\ ==\ FALSE} or \texttt{gender\_male\ !=\ TRUE}, write \texttt{!gender\_male}.
+\item
+  \texttt{dplyr::coalesce()}: The function evaluates a single variable and replaces \texttt{NA} with values from another variable.
+
+  A coalesce like
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{visit\_completed =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{coalesce}\NormalTok{(visit\_completed, }\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  is much easier to read and not mess up than
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{visit\_completed =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(visit\_completed), visit\_completed, }\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{dplyr::if\_else()}: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) \texttt{NA}.
+\item
+  \texttt{cut()}: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
+\item
+  \texttt{dplyr::recode()}: The function evaluates a single integer or character variable. The output branches to a single discrete value.
+\item
+  \emph{lookup table}: It feasible recode 6 levels of race directly in R. It's less feasible to recode 200 provider names. Specify the mapping in a csv, \texttt{readr} the csv to a data.frame, and left-join it.
+\item
+  \texttt{dplyr::case\_when()}: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This `water fall' execution helps in complicated scenarios, but is overkill for most.
+\end{enumerate}
 
 \hypertarget{architecture}{%
 \chapter{Architecture Principles}\label{architecture}}

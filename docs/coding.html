@@ -386,15 +386,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 number="2.1"><span class="header-section-number">2.1</span> Simplify</h2>
 <div id="data-types" class="section level3">
 <h3 number="2.1.1"><span class="header-section-number">2.1.1</span> Data Types</h3>
+<p>Use the simplest data type reasonable. A simpler data type is less likely contain unintented values. As we have seen, a string variable called <code>gender</code> can simulatneously contain the values “m”, “f”, “F”, “Female”, “MALE”, “0”, “1”, “2”, “Latino”, "", and <code>NA</code>. On the other hand, a boolean variable <code>gender_male</code> can be only <code>FALSE</code>, <code>TRUE</code>, and <code>NA</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
+<p>Within R, the preference for numeric-ish variables is</p>
+<ol style="list-style-type: decimal">
+<li><code>logical</code>/boolean/bit,</li>
+<li><code>integer</code>,</li>
+<li><code>bit64::integer64</code>, and</li>
+<li><code>numeric</code>/double-precision floats.</li>
+</ol>
+<p>The preference for categorical variables is</p>
+<ol style="list-style-type: decimal">
+<li><code>logical</code>/boolean/bit,</li>
+<li><code>factor</code>, and</li>
+<li><code>character</code>.</li>
+</ol>
 </div>
 <div id="categorical-levels" class="section level3">
 <h3 number="2.1.2"><span class="header-section-number">2.1.2</span> Categorical Levels</h3>
+<p>When a boolean variable would be too restrictive and a factor or character is required, choose the simplest representation. Where possible:</p>
+<ol style="list-style-type: decimal">
+<li>Use only lower case (<em>e.g.</em>, ‘male’ instead of ‘Male’ for the <code>gender</code> variable).</li>
+<li>avoid repeating the variable in the level (<em>e.g.</em>, ‘control’ instead of ‘control condition’ for the <code>condition</code> variable).</li>
+</ol>
 </div>
 <div id="recoding" class="section level3">
 <h3 number="2.1.3"><span class="header-section-number">2.1.3</span> Recoding</h3>
+<p>Almost every project recodes many variables. Choose the simplest function possible. The functions at the top are much easier to read and harder to mess up.</p>
+<ol style="list-style-type: decimal">
+<li><p><code>!</code>: instead of <code>gender_male == FALSE</code> or <code>gender_male != TRUE</code>, write <code>!gender_male</code>.</p></li>
+<li><p><code>dplyr::coalesce()</code>: The function evaluates a single variable and replaces <code>NA</code> with values from another variable.</p>
+<p>A coalesce like</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="coding.html#cb1-1"></a>visit_completed =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">coalesce</span>(visit_completed, <span class="ot">FALSE</span>)</span></code></pre></div>
+<p>is much easier to read and not mess up than</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="coding.html#cb2-1"></a>visit_completed =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">if_else</span>(<span class="op">!</span><span class="kw">is.na</span>(visit_completed), visit_completed, <span class="ot">FALSE</span>)</span></code></pre></div></li>
+<li><p><code>dplyr::if_else()</code>: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) <code>NA</code>.</p></li>
+<li><p><code>cut()</code>: The function evaluations only a single numeric variable. It’s range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).</p></li>
+<li><p><code>dplyr::recode()</code>: The function evaluates a single integer or character variable. The output branches to a single discrete value.</p></li>
+<li><p><em>lookup table</em>: It feasible recode 6 levels of race directly in R. It’s less feasible to recode 200 provider names. Specify the mapping in a csv, <code>readr</code> the csv to a data.frame, and left-join it.</p></li>
+<li><p><code>dplyr::case_when()</code>: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This ‘water fall’ execution helps in complicated scenarios, but is overkill for most.</p></li>
+</ol>
 
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>The database <code>bit</code> equivalents are <code>0</code>, <code>1</code>, and <code>NULL</code><a href="coding.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
