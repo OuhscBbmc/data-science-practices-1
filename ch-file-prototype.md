@@ -5,7 +5,7 @@ As stated before, in [Consistency across Files](#consistency-files), using a con
 
 We use the term "chunk" for a section of code because it corresponds with knitr terminology [@xie2015], and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.
 
-Clear Memory
+Clear Memory {#chunk-clear}
 ------------------------------------
 Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developig and debugging because it prevents previous runs from contaminating subsequent runs.  However it has little effect during production; we'll look at manipulation files separately from analysis files.  
 
@@ -17,7 +17,7 @@ However typically do not clear the memory in R files that are [`source`](https:/
 rm(list = ls(all.names = TRUE))
 ```
 
-Load Sources
+Load Sources {#chunk-load-sources}
 ------------------------------------
 
 In the first true chunk, [`source`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html) any R files containing global variables and functions that the current file requires.  For instance, when a team of statisticians is producing a large report containing many analysis files, we define many of the graphical elements in a single file.  This sourced file defines common color palettes and graphical functions so the cosmetics are more uniform across analyses.
@@ -33,7 +33,7 @@ Keep the chunk even if no files are sourced.  An empty chunk is instructive to r
 base::source(file="./analysis/common/display-1.R")      # Load common graphing functions.
 ```
 
-Load Packages {#load-packages}
+Load Packages {#chunk-load-packages}
 ------------------------------------
 
 The 'load-packages' chunk declares required packages near the file's beginning for three reasons.  First, a reader scanning the file can quickly determine its dependencies when located in a single chunk.  Second, if your machine is lacking a required package, it is best to know early^[The error message "Error in library(foo) : there is no package called 'foo'" is easier to understand than "Error in bar() : could not find function 'bar'" thrown somewhere in the middle of the file; this check can also illuminate conflicts arising when two packages have a `bar()` function. See McConnell 2004 Section qqq for more about the 'fail early' principle.].  Third, this style mimics a requirement of other languages (such as declaring headers at the top of a C++ file) and follows the [tidyverse style guide](https://style.tidyverse.org/files.html#internal-structure).
@@ -65,7 +65,7 @@ requireNamespace("checkmate" ) # Asserts expected conditions
 requireNamespace("OuhscMunge") # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
 ```
 
-Declare Globals
+Declare Globals {#chunk-declare}
 ------------------------------------
 When values are repeatedly used within a file, consider dedicating a variable so it's defined and set only once.  This is also a good place for variables that are used only once, but whose value are central to the file's mission. Typical variables in our 'declare-globals' chunk include data file paths, data file variables, color palettes, and values in the *config* file.
 
@@ -88,7 +88,7 @@ col_types <- readr::cols_only(
 )
 ```
 
-Load Data
+Load Data {#chunk-load-data}
 ------------------------------------
 
 All data ingested by this file occurs in this chunk.  We like to think of each file as a linear pipe with a single point of input and single point of output.  Although it is possible for a file to read  data files on any line, we recommend avoiding this sprawl because it is more difficult for humans to understand.  If the software developer is a deist watchmaker, the file's fate has been sealed by the end of this chunk.  This makes is easier for a human to reason to isolate problems as either existing with (a) the incoming data or (b) the calculations on that data.
@@ -97,17 +97,86 @@ Ideally this chunk consumes data from either a plain-text csv or a database.
 
 Many capable R functions and packages ingest data.  We prefer the tidyverse [readr]() for reading conventional files; its younger cousin, [vroom]() has some nice advantages when working with larger files and some forms of jagged rectangles^[Say a csv has 20 columns, but a row has missing values for the last five columns.  Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value.  vroom infers the missing values correctly, while some other packages do not.].
 
-Tweak Data
+
+When used in an [Ellis](#pattern-ellis), this chunk likely consumees a flat file like a csv with data or metadata.  When used in a [Ferry](#pattern-ferry), [Arch](#pattern-arch), or [Scribe](#pattern-scribe), this chunk likely consumes a database table.  When used in an [Analysis file](#pattern-analysis), this chunk likely cosumes a database table or rds (*i.e.*, a compressed R data file).
+
+In some large-scale scenarios, there may be a series of datasets that cannot be held in RAM simultaneously.  Our first choice is to split the R file so each new file has only a subset of the datasets --in other words, the R file probably was given to much responsibility.  Occassionaly the multiple datasets need to be considered at once, so splitting the R file is not a option.  In these scenarios, we prefer to upload all the datasets to a database, which is better manipulating datasets too large for RAM.
+
+An R solution may be to losen the restriction that dataset enter the R file only during the 'load-data' chunk.  Once a dataset is processed and no longer needed, `rm()` *r*e*m*oves it from RAM.  Now another dataset can be read from a file and manipulated.
+
+
+
+*loose scrap*: 
+the chunk reads all data (*e.g.*, database table, networked CSV, local lookup table).  After this chunk, no new data should be introduced.  This is for the sake of reducing human cognition load.  Everything below this chunk is derived from these first four chunks.
+
+Tweak Data (#chunk-tweak-data)
 ------------------------------------
+
+
+*loose scrap*: 
+It's best to rename the dataset (a) in a single place and (b) early in the pipeline, so the bad variable are never referenced.
+
+```r
+# OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.
+ds <-
+  ds %>%
+  dplyr::select(    # `dplyr::select()` drops columns not included.
+    subject_id,
+    county_id,
+    gender_id,
+    race,
+    ethnicity
+  ) %>%
+  dplyr::mutate(
+
+  )  %>%
+  dplyr::arrange(subject_id) # %>%
+  # tibble::rowid_to_column("subject_id") # Add a unique index if necessary
+```
 
 (Unique Content)
 ------------------------------------
 
-Verify Values
+Verify Values {#chunk-verify-values}
 ------------------------------------
 
-Specify Output Columns
+Specify Output Columns {#chunk-specify-columns}
 ------------------------------------
+
+This chunk:
+
+1. verifies these variables exist before uploading, 
+1. documents (to troubleshooting developers) these variables are a product of the file, and
+1. reorders the variables to match the expected structure.
+
+Variable order is especially important for the database engines/drivers that ignore the variable name, and use only the variable position.
+
+We use the term 'slim' because typically this output has fewer variables than the full dataset processed by the file.
+
+If you doubt the variable will be needed downstream, leave it in the `dplyr::select()`, but commented out.  If someone needs it in the future, they'll easily determine where it might come from, and then uncomment the line (and possibly modify the database table). Once you import a column into a warehouse that multiple people are using, it can be tough to remove without breaking their code.
+
+This chunk follows [verify-values](#chunk-verify-values) because sometimesyou want to check the validity of variables that are not consumed downstream.  These variables are not important themselves, but an illegal value may reveal a larger problem with the dataset.
+
+```r
+# Print colnames that `dplyr::select()`  should contain below:
+#   cat(paste0("    ", colnames(ds), collapse=",\n"))
+
+# Define the subset of columns that will be needed in the analyses.
+#   The fewer columns that are exported, the fewer things that can break downstream.
+
+ds_slim <-
+  ds %>%
+  # dplyr::slice(1:100) %>%
+  dplyr::select(
+    subject_id,
+    county_id,
+    gender_id,
+    race,
+    ethnicity
+  )
+
+ds_slim
+```
 
 Save to Disk or Database
 ------------------------------------

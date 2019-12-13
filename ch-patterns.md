@@ -1,7 +1,7 @@
 Patterns {#patterns}
 ====================================
 
-Ellis
+Ellis {#pattern-ellis}
 ------------------------------------
 
 ### Purpose
@@ -73,14 +73,20 @@ To incorporate outside data source into your system safely.
     # ---- declare-globals ---------------------------------------------------------
     ```
 
-1. **Load Data Source(s)** Read all data (*e.g.*, database table, networked CSV, local lookup table).  After this chunk, no new data should be introduced.  This is for the sake of reducing human cognition load.  Everything below this chunk is derived from these first four chunks.
+1. **Load Data Source(s)** See [load-data](#chunk-load-data) chunk described in the prototypical file.
 
+
+    
+    
     ```r
     # ---- load-data ---------------------------------------------------------------
     ```
 
 1. **Tweak Data**
 
+    See [tweak-data](#chunk-tweak-data) chunk described in the prototypical file.
+    
+    
     ```r
     # ---- tweak-data --------------------------------------------------------------
     ```
@@ -96,7 +102,10 @@ To incorporate outside data source into your system safely.
     checkmate::assert_character(county_month_combo, pattern  ="^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$", any.missing=F, unique=T)
     ```
 
-1. **Specify Columns** Define the exact columns and order to upload to the database.  Once you import a column into a warehouse that multiple people are using, it's tough to remove it.
+1. **Specify Columns** 
+
+
+    See [specify-columns-to-upload](#chunk-specify-columns) chunk described in the prototypical file.
 
     ```r
     # ---- specify-columns-to-upload -----------------------------------------------
@@ -105,28 +114,28 @@ To incorporate outside data source into your system safely.
 1. **Welcome** into your warehouse.  Until this chunk, nothing should be persisted.
 
     ```r
-    # ---- upload-to-db ------------------------------------------------------------
+    # ---- save-to-db --------------------------------------------------------------
     # ---- save-to-disk ------------------------------------------------------------
     ```
 
 
-Arch
+Arch {#pattern-arch}
 ------------------------------------
 
-Ferry
+Ferry {#pattern-ferry}
 ------------------------------------
 
-Scribe
+Scribe {#pattern-scribe}
 ------------------------------------
 
-Analysis
+Analysis {#pattern-analysis}
 ------------------------------------
 
-Presentation -Static
+Presentation -Static {#pattern-presentation-static}
 ------------------------------------
 
-Presentation -Interactive
+Presentation -Interactive {#pattern-presentation-interactive}
 ------------------------------------
 
-Metadata
+Metadata {#pattern-metadata}
 ------------------------------------
