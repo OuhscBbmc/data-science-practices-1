@@ -58,10 +58,10 @@ Almost every project recodes many variables.  Choose the simplest function possi
     date_start <- as.Date("2017-01-01")
     
     # If a missing `month` element needs to be handled explicitly.
-    stage       = dplyr::if_else(month < date_start, "pre", "post", missing = "missing-month"),
+    stage       = dplyr::if_else(date_start <= month, "pre", "post", missing = "missing-month"),
     
     # Otherwise a simple boolean output is sufficient.
-    stage_post  = (month < date_cqi_start)
+    stage_post  = (date_start <= month)
     ```
 
 1. `base::cut()`: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).
