@@ -28,6 +28,7 @@ rmd_files:
 
     # Appendices
     "ch-git.md",
+    "ch-snippets.Rmd",
     "ch-presentations.md",
     "ch-scratch-pad.md",
     "ch-example.Rmd",

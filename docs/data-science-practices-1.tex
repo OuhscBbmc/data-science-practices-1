@@ -1642,6 +1642,91 @@ Here are some tips from our experiences with projects involving between 2 and 10
   \end{enumerate}
 \end{enumerate}
 
+\hypertarget{snippets}{%
+\chapter{Snippets}\label{snippets}}
+
+\hypertarget{reading-external-data}{%
+\section{Reading External Data}\label{reading-external-data}}
+
+\hypertarget{reading-from-excel}{%
+\subsection{Reading from Excel}\label{reading-from-excel}}
+
+\emph{Background}: Avoid Excel for so many reasons. But if there isn't another good option, be protective. \href{https://readxl.tidyverse.org/reference/read_excel.html}{\texttt{readxl::read\_excel()}} allows you to specify column types, but not column order. The names of \texttt{col\_types} is ignored by \texttt{readxl::read\_excel()}. To defend against roamining columns (\emph{e.g.}, the files changed over time), \texttt{tesit::assert()} that the order is what you expect.
+
+\emph{Last Modified}: 2019-12-12 by Will
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# {-}{-}{-}{-} declare{-}globals {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{config                         <{-}}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
+
+\CommentTok{\# cat(sprintf(\textquotesingle{}  \textasciigrave{}\%s\textasciigrave{}             = "text",\textbackslash{}n\textquotesingle{}, colnames(ds)), sep="") \# \textquotesingle{}text\textquotesingle{} by default {-}{-}then change where appropriate.}
+\NormalTok{col\_types <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Med Rec Num}\StringTok{\textasciigrave{}}\NormalTok{        =}\StringTok{ "text"}\NormalTok{,}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Admit Date}\StringTok{\textasciigrave{}}\NormalTok{         =}\StringTok{ "date"}\NormalTok{,}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Tot Cash Pymt}\StringTok{\textasciigrave{}}\NormalTok{      =}\StringTok{ "numeric"}
+\NormalTok{)}
+
+\CommentTok{\# {-}{-}{-}{-} load{-}data {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{ds <{-}}\StringTok{ }\NormalTok{readxl}\OperatorTok{::}\KeywordTok{read\_excel}\NormalTok{(}
+  \DataTypeTok{path       =}\NormalTok{ config}\OperatorTok{$}\NormalTok{path\_admission\_charge,}
+  \DataTypeTok{col\_types  =}\NormalTok{ col\_types}
+  \CommentTok{\# sheet    = "dont{-}use{-}sheets{-}if{-}possible"}
+\NormalTok{)}
+
+\NormalTok{testit}\OperatorTok{::}\KeywordTok{assert}\NormalTok{(}
+  \StringTok{"The order of column names must match the expected list."}\NormalTok{,}
+  \KeywordTok{names}\NormalTok{(col\_types) }\OperatorTok{==}\StringTok{ }\KeywordTok{colnames}\NormalTok{(ds)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{removing-trailing-comma-from-header}{%
+\subsection{Removing Trailing Comma from Header}\label{removing-trailing-comma-from-header}}
+
+\emph{Background}: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, \href{https://readr.tidyverse.org/reference/read_delim.html}{\texttt{readr:read\_csv()}} appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.
+
+\emph{Explanation}: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to \texttt{readr::read\_csv()} to convert it into a data.frame.
+
+\emph{Instruction}: Modify \texttt{Dx50\ Name} to the name of the final (real) column.
+
+\emph{Real Example}: \href{https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R\#L158-L162}{truong-pharmacist-transition-1} (Accessible to only CDW members.)
+
+\emph{Last Modified}: 2019-12-12 by Will
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# The next two lines remove the trailing comma at the end of the 1st line.}
+\NormalTok{raw\_text  <{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_file}\NormalTok{(path\_in)}
+\NormalTok{raw\_text  <{-}}\StringTok{ }\KeywordTok{sub}\NormalTok{(}\StringTok{"\^{}(.+Dx50 Name),"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{, raw\_text)}
+
+\NormalTok{ds        <{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_csv}\NormalTok{(raw\_text, }\DataTypeTok{col\_types=}\NormalTok{col\_types)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{grooming}{%
+\section{Grooming}\label{grooming}}
+
+\hypertarget{correct-for-misinterpreted-two-digit-year}{%
+\subsection{Correct for misinterpreted two-digit year}\label{correct-for-misinterpreted-two-digit-year}}
+
+\emph{Background}: Sometimes the Meditech dates are specified like \texttt{1/6/54} instead of \texttt{1/6/1954}. \texttt{readr::read\_csv()} has to choose if the year is supposed to be `1954' or `2054'. A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can't (so it guesses 2054). For avoid this and other problems, request dates in an \href{https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601}{ISO-8601} format.
+
+\emph{Explanation}: Correct for this in a \texttt{dplyr::mutate()} clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.
+
+\emph{Instruction}: For future dates such as loan payments, the direction will flip.
+
+\emph{Last Modified}: 2019-12-12 by Will
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ ds }\OperatorTok{\%>\%}
+\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{dob   =}\NormalTok{ dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(dob }\OperatorTok{<=}\StringTok{ }\KeywordTok{Sys.Date}\NormalTok{(), dob, dob }\OperatorTok{{-}}\StringTok{ }\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{years}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{presentations}{%
 \chapter{Presentations}\label{presentations}}
 

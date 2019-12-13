@@ -1,0 +1,77 @@
+Snippets {#snippets}
+====================================
+
+
+Reading External Data
+------------------------------------
+
+### Reading from Excel
+
+*Background*: Avoid Excel for so many reasons.  But if there isn't another good option, be protective.  [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html) allows you to specify column types, but not column order.  The names of `col_types` is ignored by `readxl::read_excel()`.  To defend against roamining columns (*e.g.*, the files changed over time), `tesit::assert()` that the order is what you expect. 
+
+*Last Modified*: 2019-12-12 by Will
+
+```r
+# ---- declare-globals ---------------------------------------------------------
+config                         <- config::get()
+
+# cat(sprintf('  `%s`             = "text",\n', colnames(ds)), sep="") # 'text' by default --then change where appropriate.
+col_types <- c(
+  `Med Rec Num`        = "text",
+  `Admit Date`         = "date",
+  `Tot Cash Pymt`      = "numeric"
+)
+
+# ---- load-data ---------------------------------------------------------------
+ds <- readxl::read_excel(
+  path       = config$path_admission_charge,
+  col_types  = col_types
+  # sheet    = "dont-use-sheets-if-possible"
+)
+
+testit::assert(
+  "The order of column names must match the expected list.",
+  names(col_types) == colnames(ds)
+)
+```
+
+### Removing Trailing Comma from Header
+
+*Background*: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line.  For each subsequent line, [`readr:read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) appropriately throws a new warning that it is missing a column.  This warning flood can mask real problems.
+
+*Explanation*: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to `readr::read_csv()` to convert it into a data.frame.
+
+*Instruction*: Modify `Dx50 Name` to the name of the final (real) column.
+
+*Real Example*: [truong-pharmacist-transition-1](https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162) (Accessible to only CDW members.)
+
+*Last Modified*: 2019-12-12 by Will
+
+```r
+# The next two lines remove the trailing comma at the end of the 1st line.
+raw_text  <- readr::read_file(path_in)
+raw_text  <- sub("^(.+Dx50 Name),", "\\1", raw_text)
+
+ds        <- readr::read_csv(raw_text, col_types=col_types)
+```
+
+
+Grooming
+------------------------------------
+
+### Correct for misinterpreted two-digit year
+
+*Background*: Sometimes the Meditech dates are specified like `1/6/54` instead of `1/6/1954`.  `readr::read_csv()` has to choose if the year is supposed to be '1954' or '2054'.  A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can't (so it guesses 2054).  For avoid this and other problems, request dates in an [ISO-8601](https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601) format.
+
+*Explanation*: Correct for this in a `dplyr::mutate()` clause; compare the date value against today.  If the date is today or before, use it; if the day is in the future, subtract 100 years.  
+
+*Instruction*: For future dates such as loan payments, the direction will flip.
+
+*Last Modified*: 2019-12-12 by Will
+
+```r
+ ds %>%
+ dplyr::mutate(
+    dob   = dplyr::if_else(dob <= Sys.Date(), dob, dob - lubridate::years(100))
+  )
+```
