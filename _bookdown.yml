@@ -32,5 +32,6 @@ rmd_files:
     "ch-presentations.md",
     "ch-scratch-pad.md",
     "ch-example.Rmd",
+    "ch-acknowledgements.md",
     "ch-references.md"
   ]
