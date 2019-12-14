@@ -134,12 +134,35 @@ ds <-
   # tibble::rowid_to_column("subject_id") # Add a unique index if necessary
 ```
 
-(Unique Content)
+(Unique Content) {#chunk-unique}
 ------------------------------------
+
+This section represents all the chunks between [tweak-data](#chunk-tweak-data) and [verify-values](#chunk-verify-values).  These chunks contain most of of the file's creativity and contribution.  In a sense, the structure of the first and last chunks allow these middle chunks to focus on concepts instead of plumbing.
+
+For simple files like the ellis of a metadata file, may not even need anything here.  But complex analysis files may have 200+ lines distributed across a dozen chunks.  We recommend that you create dedicate a chunk to each conceptual stage.  If one starts to contain more than ~20 lines, consider if a more granular organization would clarify the code's intent.
 
 Verify Values {#chunk-verify-values}
 ------------------------------------
 
+Running `OuhscMunge::verify_value_headstart(ds)`  will
+
+    ```r
+    # ---- verify-values -----------------------------------------------------------
+    # Sniff out problems
+    # OuhscMunge::verify_value_headstart(ds)
+    checkmate::assert_integer(  ds$county_month_id    , any.missing=F , lower=1, upper=3080                , unique=T)
+    checkmate::assert_integer(  ds$county_id          , any.missing=F , lower=1, upper=77                            )
+    checkmate::assert_date(     ds$month              , any.missing=F , lower=as.Date("2012-06-15"), upper=Sys.Date())
+    checkmate::assert_character(ds$county_name        , any.missing=F , pattern="^.{3,12}$"                          )
+    checkmate::assert_integer(  ds$region_id          , any.missing=F , lower=1, upper=20                            )
+    checkmate::assert_numeric(  ds$fte                , any.missing=F , lower=0, upper=40                            )
+    checkmate::assert_logical(  ds$fte_approximated   , any.missing=F                                                )
+    checkmate::assert_numeric(  ds$fte_rolling_median , any.missing=T , lower=0, upper=40                            )
+
+    county_month_combo   <- paste(ds$county_id, ds$month)
+    checkmate::assert_character(county_month_combo, pattern  ="^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$", any.missing=F, unique=T)
+    ```
+    
 Specify Output Columns {#chunk-specify-columns}
 ------------------------------------
 

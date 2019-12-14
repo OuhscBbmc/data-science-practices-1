@@ -96,11 +96,7 @@ To incorporate outside data source into your system safely.
 
 1. **Verify**
 
-    ```r
-    # ---- verify-values -----------------------------------------------------------
-    county_month_combo   <- paste(ds$county_id, ds$month)
-    checkmate::assert_character(county_month_combo, pattern  ="^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$", any.missing=F, unique=T)
-    ```
+
 
 1. **Specify Columns** 
 

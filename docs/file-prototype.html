@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-13" />
+<meta name="date" content="2019-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
 <li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
-<li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#unique-content"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
+<li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
 <li class="chapter" data-level="4.10" data-path="file-prototype.html"><a href="file-prototype.html#save-to-disk-or-database"><i class="fa fa-check"></i><b>4.10</b> Save to Disk or Database</a></li>
@@ -474,11 +474,30 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <span id="cb7-14"><a href="file-prototype.html#cb7-14"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(subject_id) <span class="co"># %&gt;%</span></span>
 <span id="cb7-15"><a href="file-prototype.html#cb7-15"></a>  <span class="co"># tibble::rowid_to_column(&quot;subject_id&quot;) # Add a unique index if necessary</span></span></code></pre></div>
 </div>
-<div id="unique-content" class="section level2">
+<div id="chunk-unique" class="section level2">
 <h2 number="4.7"><span class="header-section-number">4.7</span> (Unique Content)</h2>
+<p>This section represents all the chunks between <a href="#chunk-tweak-data">tweak-data</a> and <a href="file-prototype.html#chunk-verify-values">verify-values</a>. These chunks contain most of of the file’s creativity and contribution. In a sense, the structure of the first and last chunks allow these middle chunks to focus on concepts instead of plumbing.</p>
+<p>For simple files like the ellis of a metadata file, may not even need anything here. But complex analysis files may have 200+ lines distributed across a dozen chunks. We recommend that you create dedicate a chunk to each conceptual stage. If one starts to contain more than ~20 lines, consider if a more granular organization would clarify the code’s intent.</p>
 </div>
 <div id="chunk-verify-values" class="section level2">
 <h2 number="4.8"><span class="header-section-number">4.8</span> Verify Values</h2>
+<p>Running <code>OuhscMunge::verify_value_headstart(ds)</code> will</p>
+<pre><code>```r
+# ---- verify-values -----------------------------------------------------------
+# Sniff out problems
+# OuhscMunge::verify_value_headstart(ds)
+checkmate::assert_integer(  ds$county_month_id    , any.missing=F , lower=1, upper=3080                , unique=T)
+checkmate::assert_integer(  ds$county_id          , any.missing=F , lower=1, upper=77                            )
+checkmate::assert_date(     ds$month              , any.missing=F , lower=as.Date(&quot;2012-06-15&quot;), upper=Sys.Date())
+checkmate::assert_character(ds$county_name        , any.missing=F , pattern=&quot;^.{3,12}$&quot;                          )
+checkmate::assert_integer(  ds$region_id          , any.missing=F , lower=1, upper=20                            )
+checkmate::assert_numeric(  ds$fte                , any.missing=F , lower=0, upper=40                            )
+checkmate::assert_logical(  ds$fte_approximated   , any.missing=F                                                )
+checkmate::assert_numeric(  ds$fte_rolling_median , any.missing=T , lower=0, upper=40                            )
+
+county_month_combo   &lt;- paste(ds$county_id, ds$month)
+checkmate::assert_character(county_month_combo, pattern  =&quot;^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$&quot;, any.missing=F, unique=T)
+```</code></pre>
 </div>
 <div id="chunk-specify-columns" class="section level2">
 <h2 number="4.9"><span class="header-section-number">4.9</span> Specify Output Columns</h2>
@@ -492,24 +511,24 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <p>We use the term ‘slim’ because typically this output has fewer variables than the full dataset processed by the file.</p>
 <p>If you doubt the variable will be needed downstream, leave it in the <code>dplyr::select()</code>, but commented out. If someone needs it in the future, they’ll easily determine where it might come from, and then uncomment the line (and possibly modify the database table). Once you import a column into a warehouse that multiple people are using, it can be tough to remove without breaking their code.</p>
 <p>This chunk follows <a href="file-prototype.html#chunk-verify-values">verify-values</a> because sometimesyou want to check the validity of variables that are not consumed downstream. These variables are not important themselves, but an illegal value may reveal a larger problem with the dataset.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="file-prototype.html#cb8-1"></a><span class="co"># Print colnames that `dplyr::select()`  should contain below:</span></span>
-<span id="cb8-2"><a href="file-prototype.html#cb8-2"></a><span class="co">#   cat(paste0(&quot;    &quot;, colnames(ds), collapse=&quot;,\n&quot;))</span></span>
-<span id="cb8-3"><a href="file-prototype.html#cb8-3"></a></span>
-<span id="cb8-4"><a href="file-prototype.html#cb8-4"></a><span class="co"># Define the subset of columns that will be needed in the analyses.</span></span>
-<span id="cb8-5"><a href="file-prototype.html#cb8-5"></a><span class="co">#   The fewer columns that are exported, the fewer things that can break downstream.</span></span>
-<span id="cb8-6"><a href="file-prototype.html#cb8-6"></a></span>
-<span id="cb8-7"><a href="file-prototype.html#cb8-7"></a>ds_slim &lt;-</span>
-<span id="cb8-8"><a href="file-prototype.html#cb8-8"></a><span class="st">  </span>ds <span class="op">%&gt;%</span></span>
-<span id="cb8-9"><a href="file-prototype.html#cb8-9"></a><span class="st">  </span><span class="co"># dplyr::slice(1:100) %&gt;%</span></span>
-<span id="cb8-10"><a href="file-prototype.html#cb8-10"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(</span>
-<span id="cb8-11"><a href="file-prototype.html#cb8-11"></a>    subject_id,</span>
-<span id="cb8-12"><a href="file-prototype.html#cb8-12"></a>    county_id,</span>
-<span id="cb8-13"><a href="file-prototype.html#cb8-13"></a>    gender_id,</span>
-<span id="cb8-14"><a href="file-prototype.html#cb8-14"></a>    race,</span>
-<span id="cb8-15"><a href="file-prototype.html#cb8-15"></a>    ethnicity</span>
-<span id="cb8-16"><a href="file-prototype.html#cb8-16"></a>  )</span>
-<span id="cb8-17"><a href="file-prototype.html#cb8-17"></a></span>
-<span id="cb8-18"><a href="file-prototype.html#cb8-18"></a>ds_slim</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="file-prototype.html#cb9-1"></a><span class="co"># Print colnames that `dplyr::select()`  should contain below:</span></span>
+<span id="cb9-2"><a href="file-prototype.html#cb9-2"></a><span class="co">#   cat(paste0(&quot;    &quot;, colnames(ds), collapse=&quot;,\n&quot;))</span></span>
+<span id="cb9-3"><a href="file-prototype.html#cb9-3"></a></span>
+<span id="cb9-4"><a href="file-prototype.html#cb9-4"></a><span class="co"># Define the subset of columns that will be needed in the analyses.</span></span>
+<span id="cb9-5"><a href="file-prototype.html#cb9-5"></a><span class="co">#   The fewer columns that are exported, the fewer things that can break downstream.</span></span>
+<span id="cb9-6"><a href="file-prototype.html#cb9-6"></a></span>
+<span id="cb9-7"><a href="file-prototype.html#cb9-7"></a>ds_slim &lt;-</span>
+<span id="cb9-8"><a href="file-prototype.html#cb9-8"></a><span class="st">  </span>ds <span class="op">%&gt;%</span></span>
+<span id="cb9-9"><a href="file-prototype.html#cb9-9"></a><span class="st">  </span><span class="co"># dplyr::slice(1:100) %&gt;%</span></span>
+<span id="cb9-10"><a href="file-prototype.html#cb9-10"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(</span>
+<span id="cb9-11"><a href="file-prototype.html#cb9-11"></a>    subject_id,</span>
+<span id="cb9-12"><a href="file-prototype.html#cb9-12"></a>    county_id,</span>
+<span id="cb9-13"><a href="file-prototype.html#cb9-13"></a>    gender_id,</span>
+<span id="cb9-14"><a href="file-prototype.html#cb9-14"></a>    race,</span>
+<span id="cb9-15"><a href="file-prototype.html#cb9-15"></a>    ethnicity</span>
+<span id="cb9-16"><a href="file-prototype.html#cb9-16"></a>  )</span>
+<span id="cb9-17"><a href="file-prototype.html#cb9-17"></a></span>
+<span id="cb9-18"><a href="file-prototype.html#cb9-18"></a>ds_slim</span></code></pre></div>
 </div>
 <div id="save-to-disk-or-database" class="section level2">
 <h2 number="4.10"><span class="header-section-number">4.10</span> Save to Disk or Database</h2>
