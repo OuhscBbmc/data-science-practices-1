@@ -170,8 +170,8 @@ Ubuntu desktop 19.04 follows [these instructions](https://askubuntu.com/a/862520
 Add the following to the sources with `sudo nano /etc/apt/sources.list`.  The 'eoan' version may be updated; The 'metrocast' part could be modified too from [this list](https://launchpad.net/ubuntu/+archivemirrors).  I found it worked better for a new Ubuntu release than 'cloud.r-project.org'.
 
 ```sh
-deb http://mirror.metrocast.net/ubuntu/ eoan main 
-deb-src http://mirror.metrocast.net/ubuntu/ eoan main 
+deb https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ 
+deb-src https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ 
 deb http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe
 ```
 
@@ -182,8 +182,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   ### Add the key, update the list, then install base R.
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
   sudo apt-get update
-  sudo apt-get install r-base
-  sudo apt-get install r-base-dev
+  sudo apt-get install r-base r-base-dev
   
   ### Git
   sudo apt-get install git-core
@@ -250,7 +249,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   sudo apt-get --yes install postgresql postgresql-contrib pgadmin3
 
   # pandoc
-  sudo apt install pandoc
+  sudo apt-get --yes install pandoc
 }
 install-packages
 )

@@ -49,10 +49,22 @@ Almost every project recodes many variables.  Choose the simplest function possi
     ```r
     visit_completed = dplyr::if_else(!is.na(visit_completed), visit_completed, FALSE)
     ```
-    
-1. `dplyr::if_else()`:  The function evaluates a single boolean variable.  The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) `NA`.
 
-1. `cut()`: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).
+1. `<=` (or a similar comparison operator): Compare two quantities to output a boolean variable.
+
+1. `dplyr::if_else()`:  The function evaluates a single boolean variable.  The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) `NA`.  An advantage over `<=` is that `NA` values can be specified directly.
+
+    ```r    
+    date_start <- as.Date("2017-01-01")
+    
+    # If a missing `month` element needs to be handled explicitly.
+    stage       = dplyr::if_else(date_start <= month, "pre", "post", missing = "missing-month"),
+    
+    # Otherwise a simple boolean output is sufficient.
+    stage_post  = (date_start <= month)
+    ```
+
+1. `base::cut()`: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).
 
 1. `dplyr::recode()`: The function evaluates a single integer or character variable.  The output branches to a single discrete value.
 
