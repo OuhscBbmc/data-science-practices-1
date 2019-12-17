@@ -282,22 +282,22 @@ Administrator Installation {#installation-administrator}
 
     Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
 
-    1. 'SQL Server Object Explorer' | 'Scripting' | 'Include descriptive headers': False
-    1. 'SQL Server Object Explorer' | 'Scripting' | 'Script extended properties': False
-    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Tab size': 2
-    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Indent size': 2
-    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Insert Spaces': selected
+    1. SQL Server Object Explorer | Scripting | Include descriptive headers: False
+    1. SQL Server Object Explorer | Scripting | Script extended properties: False
+    1. Text Editor | All Languages | Tabs | Tab size: 2
+    1. Text Editor | All Languages | Tabs | Indent size: 2
+    1. Text Editor | All Languages | Tabs | Insert Spaces: true
     
-    These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
+    These dont affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
 
-    1. 'Environment' | 'Fonts and Colors' | 'Show settings for: Grid Results' | 'Size': 10
-    1. 'Query Results' | 'SQL Server' | 'Results to Grid' | 'Include column headers when copying or saving the results': checked
-    1. 'Designers' | 'Table and Database Designers' | 'Prevent saving changes that require table-recreation': unchecked
+    1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
+    1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
+    1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
     
-    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Server Name': false
-    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Database Name': false
-    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Login Name': false
-    1. 'Text Editor' | 'All Languages' | 'General' | 'Line Numbers': true
+    1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false
+    1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false
+    1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false
+    1. Text Editor | All Languages | General | Line Numbers: true
 
     For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
 
