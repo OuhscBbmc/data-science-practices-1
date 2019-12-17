@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-14" />
+<meta name="date" content="2019-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,6 +34,7 @@
 <link rel="prev" href="index.html"/>
 <link rel="next" href="architecture.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -420,8 +421,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="coding.html#cb1-1"></a>visit_completed =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">coalesce</span>(visit_completed, <span class="ot">FALSE</span>)</span></code></pre></div>
 <p>is much easier to read and not mess up than</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="coding.html#cb2-1"></a>visit_completed =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">if_else</span>(<span class="op">!</span><span class="kw">is.na</span>(visit_completed), visit_completed, <span class="ot">FALSE</span>)</span></code></pre></div></li>
-<li><p><code>dplyr::if_else()</code>: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) <code>NA</code>.</p></li>
-<li><p><code>cut()</code>: The function evaluations only a single numeric variable. It’s range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).</p></li>
+<li><p><code>&lt;=</code> (or a similar comparison operator): Compare two quantities to output a boolean variable.</p></li>
+<li><p><code>dplyr::if_else()</code>: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) <code>NA</code>. An advantage over <code>&lt;=</code> is that <code>NA</code> values can be specified directly.</p>
+<p>`<code>month</code> element needs to be handled explicitly.
+stage = dplyr::if_else(date_start &lt;= month, “pre”, “post”, missing = “missing-month”),</p>
+<p># Otherwise a simple boolean output is sufficient.
+stage_post = (date_start &lt;= month)
+```</p></li>
+<li><p><code>base::cut()</code>: The function evaluations only a single numeric variable. It’s range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).</p></li>
 <li><p><code>dplyr::recode()</code>: The function evaluates a single integer or character variable. The output branches to a single discrete value.</p></li>
 <li><p><em>lookup table</em>: It feasible recode 6 levels of race directly in R. It’s less feasible to recode 200 provider names. Specify the mapping in a csv, <code>readr</code> the csv to a data.frame, and left-join it.</p></li>
 <li><p><code>dplyr::case_when()</code>: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This ‘water fall’ execution helps in complicated scenarios, but is overkill for most.</p></li>

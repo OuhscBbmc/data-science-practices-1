@@ -108,28 +108,12 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
-% https://github.com/rstudio/rmarkdown/issues/337
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-% https://github.com/rstudio/rmarkdown/pull/252
-\usepackage{titling}
-\setlength{\droptitle}{-2em}
-
-\pretitle{\vspace{\droptitle}\centering\huge}
-\posttitle{\par}
-
-\preauthor{\centering\large\emph}
-\postauthor{\par}
-
-\predate{\centering\large\emph}
-\postdate{\par}
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-14}
+\date{2019-12-17}
 
 \begin{document}
 \frontmatter
@@ -228,9 +212,18 @@ Almost every project recodes many variables. Choose the simplest function possib
 \end{Highlighting}
 \end{Shaded}
 \item
-  \texttt{dplyr::if\_else()}: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) \texttt{NA}.
+  \texttt{\textless{}=} (or a similar comparison operator): Compare two quantities to output a boolean variable.
 \item
-  \texttt{cut()}: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
+  \texttt{dplyr::if\_else()}: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) \texttt{NA}. An advantage over \texttt{\textless{}=} is that \texttt{NA} values can be specified directly.
+
+  `\texttt{month} element needs to be handled explicitly.
+  stage = dplyr::if\_else(date\_start \textless= month, ``pre'', ``post'', missing = ``missing-month''),
+
+  \# Otherwise a simple boolean output is sufficient.
+  stage\_post = (date\_start \textless= month)
+  ```
+\item
+  \texttt{base::cut()}: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
 \item
   \texttt{dplyr::recode()}: The function evaluates a single integer or character variable. The output branches to a single discrete value.
 \item
@@ -1366,46 +1359,24 @@ The order does not matter.
     File \textbar{} Settings \textbar{} Editor \textbar{} Tab Type: soft (This inserts 2 spaces instead of a tab when `Tab' is pressed)
   \end{enumerate}
 \item
-  \textbf{\href{https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms}{SQL Server Management Studio (SSMS)}} is an easy way to access the database and write queries (and transfer the SQL to an R file). It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+  \textbf{\href{https://docs.microsoft.com/en-us/sql/azure-data-studio/download}{Azure Data Studio (ADS)}} is now recommended by \href{https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/}{Microsoft} and \href{https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/}{others} for analysts (and some other roles) --ahead of SQL Server Managment Studio.
 
-  Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database \emph{structure} (not data) on GitHub, so we can easily track/monitor the structural changes over time. The \emph{tabs} options keeps things consistent between editors. In the SSMS `Tools \textbar{} Options' dialog box:
+  Note: here are some non-default changes that facilitate our workflow.
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \tightlist
   \item
-    `SQL Server Object Explorer' \textbar{} `Scripting' \textbar{} `Include descriptive headers': False
+    Settings \textbar{} Text Editor \textbar{} \textbf{Tab Size: 2} \{\texttt{"editor.tabSize":\ 2}\}
   \item
-    `SQL Server Object Explorer' \textbar{} `Scripting' \textbar{} `Script extended properties': False
+    Settings \textbar{} Text Editor \textbar{} \textbf{Insert Final Newlines: check} \{\texttt{"files.insertFinalNewline":\ true}\}
   \item
-    `Text Editor' \textbar{} `All Languages' \textbar{} `Tabs' \textbar{} `Tab size': 2
+    Settings \textbar{} Text Editor \textbar{} \textbf{Trim Final Newlines: check} \{\texttt{"files.trimFinalNewlines":\ true}\}
   \item
-    `Text Editor' \textbar{} `All Languages' \textbar{} `Tabs' \textbar{} `Indent size': 2
+    Settings \textbar{} Text Editor \textbar{} \textbf{Trim Trailing Whitespace: check} \{\texttt{"files.trimTrailingWhitespace":\ true}\}
   \item
-    `Text Editor' \textbar{} `All Languages' \textbar{} `Tabs' \textbar{} `Insert Spaces': selected
+    Data \textbar{} Sql \textbar{} \textbf{Copy Includes Headers: check} \{\texttt{"sql.copyIncludeHeaders":\ true}\}
   \end{enumerate}
-
-  These don't affect the saved files, but make life easier. The first makes the \href{https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/}{result font bigger}.
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item
-    `Environment' \textbar{} `Fonts and Colors' \textbar{} `Show settings for: Grid Results' \textbar{} `Size': 10
-  \item
-    `Query Results' \textbar{} `SQL Server' \textbar{} `Results to Grid' \textbar{} `Include column headers when copying or saving the results': checked
-  \item
-    `Designers' \textbar{} `Table and Database Designers' \textbar{} `Prevent saving changes that require table-recreation': unchecked
-  \item
-    `Text Editor' \textbar{} `Editor Tab and Status Bar' \textbar{} `Tab Text' \textbar{} `Include Server Name': false
-  \item
-    `Text Editor' \textbar{} `Editor Tab and Status Bar' \textbar{} `Tab Text' \textbar{} `Include Database Name': false
-  \item
-    `Text Editor' \textbar{} `Editor Tab and Status Bar' \textbar{} `Tab Text' \textbar{} `Include Login Name': false
-  \item
-    `Text Editor' \textbar{} `All Languages' \textbar{} `General' \textbar{} `Line Numbers': true
-  \end{enumerate}
-
-  For more details, see \href{https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md}{setting-up-dev-machine.md} (in a private repo that's restricted to BBMC members).
 \item
   \textbf{\href{https://connect.ouhsc.edu}{Pulse Secure}} is VPN client for OUHSC researchers. It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
 \end{itemize}
@@ -1480,8 +1451,8 @@ Add the following to the sources with \texttt{sudo\ nano\ /etc/apt/sources.list}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan main }
-\ExtensionTok{deb{-}src}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan main }
+\ExtensionTok{deb}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/ }
+\ExtensionTok{deb{-}src}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/ }
 \ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan{-}backports main restricted universe}
 \end{Highlighting}
 \end{Shaded}
@@ -1494,8 +1465,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   \AlertTok{\#\#\#}\CommentTok{ Add the key, update the list, then install base R.}
   \FunctionTok{sudo}\NormalTok{ apt{-}key adv {-}{-}keyserver keyserver.ubuntu.com {-}{-}recv{-}keys E298A3A825C0D65DFD57CBB651716619E084DAB9}
   \FunctionTok{sudo}\NormalTok{ apt{-}get update}
-  \FunctionTok{sudo}\NormalTok{ apt{-}get install r{-}base}
-  \FunctionTok{sudo}\NormalTok{ apt{-}get install r{-}base{-}dev}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get install r{-}base r{-}base{-}dev}
   
   \AlertTok{\#\#\#}\CommentTok{ Git}
   \FunctionTok{sudo}\NormalTok{ apt{-}get install git{-}core}
@@ -1562,7 +1532,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install postgresql postgresql{-}contrib pgadmin3}
 
   \CommentTok{\# pandoc}
-  \FunctionTok{sudo}\NormalTok{ apt install pandoc}
+  \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install pandoc}
 \KeywordTok{\}}
 \ExtensionTok{install{-}packages}
 \KeywordTok{)}
@@ -1606,11 +1576,51 @@ The Postman native app for Ubuntu is \href{https://learning.getpostman.com/docs/
 \section{Administrator Installation}\label{installation-administrator}}
 
 \begin{itemize}
-\tightlist
 \item
   \textbf{\href{https://dev.mysql.com/downloads/workbench/}{MySQL Workbench}} is useful occassionly for REDCap admins.
 \item
   \textbf{\href{https://www.getpostman.com/downloads/}{Postman Native App}} is useful for developing with the API and has \href{https://blog.getpostman.com/2017/03/14/going-native/}{replaced the Chrome app}. If that's not possible, a \href{https://web.postman.co/}{web client} is available as well. With either program, do not access any PHI.
+\item
+  \textbf{\href{https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms}{SQL Server Management Studio (SSMS)}} has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators. It is an easy way to access the database and write queries (and transfer the SQL to an R file). It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+
+  Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database \emph{structure} (not data) on GitHub, so we can easily track/monitor the structural changes over time. The \emph{tabs} options keeps things consistent between editors. In the SSMS `Tools \textbar{} Options' dialog box:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    SQL Server Object Explorer \textbar{} Scripting \textbar{} Include descriptive headers: False
+  \item
+    SQL Server Object Explorer \textbar{} Scripting \textbar{} Script extended properties: False
+  \item
+    Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Tab size: 2
+  \item
+    Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Indent size: 2
+  \item
+    Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Insert Spaces: true
+  \end{enumerate}
+
+  These dont affect the saved files, but make life easier. The first makes the \href{https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/}{result font bigger}.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    Environment \textbar{} Fonts and Colors \textbar{} Show settings for: Grid Results \textbar{} Size: 10
+  \item
+    Query Results \textbar{} SQL Server \textbar{} Results to Grid \textbar{} Include column headers when copying or saving the results: false`
+  \item
+    Designers \textbar{} Table and Database Designers \textbar{} Prevent saving changes that require table-recreation: false
+  \item
+    Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Server Name: false
+  \item
+    Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Database Name: false
+  \item
+    Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Login Name: false
+  \item
+    Text Editor \textbar{} All Languages \textbar{} General \textbar{} Line Numbers: true
+  \end{enumerate}
+
+  For more details, see \href{https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md}{setting-up-dev-machine.md} (in a private repo that's restricted to BBMC members).
 \end{itemize}
 
 \hypertarget{installation-troubleshooting}{%

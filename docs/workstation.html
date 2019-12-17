@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-14" />
+<meta name="date" content="2019-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,6 +34,7 @@
 <link rel="prev" href="troubleshooting.html"/>
 <link rel="next" href="tools.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -449,26 +450,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)</li>
 <li>File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when ‘Tab’ is pressed)</li>
 </ol></li>
-<li><p><strong><a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms">SQL Server Management Studio (SSMS)</a></strong> is an easy way to access the database and write queries (and transfer the SQL to an R file). It’s not required for the REDCap API, but it’s usually necessary when integrating REDCap with other databases.</p>
-<p>Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database <em>structure</em> (not data) on GitHub, so we can easily track/monitor the structural changes over time. The <em>tabs</em> options keeps things consistent between editors. In the SSMS ‘Tools | Options’ dialog box:</p>
+<li><p><strong><a href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download">Azure Data Studio (ADS)</a></strong> is now recommended by <a href="https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/">Microsoft</a> and <a href="https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/">others</a> for analysts (and some other roles) –ahead of SQL Server Managment Studio.</p>
+<p>Note: here are some non-default changes that facilitate our workflow.</p>
 <ol style="list-style-type: decimal">
-<li>‘SQL Server Object Explorer’ | ‘Scripting’ | ‘Include descriptive headers’: False</li>
-<li>‘SQL Server Object Explorer’ | ‘Scripting’ | ‘Script extended properties’: False</li>
-<li>‘Text Editor’ | ‘All Languages’ | ‘Tabs’ | ‘Tab size’: 2</li>
-<li>‘Text Editor’ | ‘All Languages’ | ‘Tabs’ | ‘Indent size’: 2</li>
-<li>‘Text Editor’ | ‘All Languages’ | ‘Tabs’ | ‘Insert Spaces’: selected</li>
-</ol>
-<p>These don’t affect the saved files, but make life easier. The first makes the <a href="https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/">result font bigger</a>.</p>
-<ol style="list-style-type: decimal">
-<li><p>‘Environment’ | ‘Fonts and Colors’ | ‘Show settings for: Grid Results’ | ‘Size’: 10</p></li>
-<li><p>‘Query Results’ | ‘SQL Server’ | ‘Results to Grid’ | ‘Include column headers when copying or saving the results’: checked</p></li>
-<li><p>‘Designers’ | ‘Table and Database Designers’ | ‘Prevent saving changes that require table-recreation’: unchecked</p></li>
-<li><p>‘Text Editor’ | ‘Editor Tab and Status Bar’ | ‘Tab Text’ | ‘Include Server Name’: false</p></li>
-<li><p>‘Text Editor’ | ‘Editor Tab and Status Bar’ | ‘Tab Text’ | ‘Include Database Name’: false</p></li>
-<li><p>‘Text Editor’ | ‘Editor Tab and Status Bar’ | ‘Tab Text’ | ‘Include Login Name’: false</p></li>
-<li><p>‘Text Editor’ | ‘All Languages’ | ‘General’ | ‘Line Numbers’: true</p></li>
-</ol>
-<p>For more details, see <a href="https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md">setting-up-dev-machine.md</a> (in a private repo that’s restricted to BBMC members).</p></li>
+<li>Settings | Text Editor | <strong>Tab Size: 2</strong> {<code>"editor.tabSize": 2</code>}</li>
+<li>Settings | Text Editor | <strong>Insert Final Newlines: check</strong> {<code>"files.insertFinalNewline": true</code>}</li>
+<li>Settings | Text Editor | <strong>Trim Final Newlines: check</strong> {<code>"files.trimFinalNewlines": true</code>}</li>
+<li>Settings | Text Editor | <strong>Trim Trailing Whitespace: check</strong> {<code>"files.trimTrailingWhitespace": true</code>}</li>
+<li>Data | Sql | <strong>Copy Includes Headers: check</strong> {<code>"sql.copyIncludeHeaders": true</code>}</li>
+</ol></li>
 <li><p><strong><a href="https://connect.ouhsc.edu">Pulse Secure</a></strong> is VPN client for OUHSC researchers. It’s not required for the REDCap API, but it’s usually necessary to communicate with other campus data sources.</p></li>
 </ul>
 </div>
@@ -508,86 +498,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 number="17.4"><span class="header-section-number">17.4</span> Ubuntu Installation</h2>
 <p>Ubuntu desktop 19.04 follows <a href="https://askubuntu.com/a/862520/153921">these instructions</a> for the R and RStudio and required these debian packages to be installed before the R packages. The <code>--yes</code> option avoids manual confirmation for each line, so you can copy &amp; paste this into the terminal.</p>
 <p>Add the following to the sources with <code>sudo nano /etc/apt/sources.list</code>. The ‘eoan’ version may be updated; The ‘metrocast’ part could be modified too from <a href="https://launchpad.net/ubuntu/+archivemirrors">this list</a>. I found it worked better for a new Ubuntu release than ‘cloud.r-project.org’.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb28-1"><a href="workstation.html#cb28-1"></a><span class="ex">deb</span> http://mirror.metrocast.net/ubuntu/ eoan main </span>
-<span id="cb28-2"><a href="workstation.html#cb28-2"></a><span class="ex">deb-src</span> http://mirror.metrocast.net/ubuntu/ eoan main </span>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb28-1"><a href="workstation.html#cb28-1"></a><span class="ex">deb</span> https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ </span>
+<span id="cb28-2"><a href="workstation.html#cb28-2"></a><span class="ex">deb-src</span> https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ </span>
 <span id="cb28-3"><a href="workstation.html#cb28-3"></a><span class="ex">deb</span> http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe</span></code></pre></div>
 <p>This next block can be copied and pasted (ctrl-shift-v) into the console <a href="https://stackoverflow.com/a/43164204">entirely</a>. Or lines can be pasted individual (without the <code>( function install-packages {</code> line, or the last three lines).</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb29-1"><a href="workstation.html#cb29-1"></a><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></span>
 <span id="cb29-2"><a href="workstation.html#cb29-2"></a>  <span class="al">###</span><span class="co"> Add the key, update the list, then install base R.</span></span>
 <span id="cb29-3"><a href="workstation.html#cb29-3"></a>  <span class="fu">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9</span>
 <span id="cb29-4"><a href="workstation.html#cb29-4"></a>  <span class="fu">sudo</span> apt-get update</span>
-<span id="cb29-5"><a href="workstation.html#cb29-5"></a>  <span class="fu">sudo</span> apt-get install r-base</span>
-<span id="cb29-6"><a href="workstation.html#cb29-6"></a>  <span class="fu">sudo</span> apt-get install r-base-dev</span>
-<span id="cb29-7"><a href="workstation.html#cb29-7"></a>  </span>
-<span id="cb29-8"><a href="workstation.html#cb29-8"></a>  <span class="al">###</span><span class="co"> Git</span></span>
-<span id="cb29-9"><a href="workstation.html#cb29-9"></a>  <span class="fu">sudo</span> apt-get install git-core</span>
-<span id="cb29-10"><a href="workstation.html#cb29-10"></a>  <span class="fu">git</span> config --global user.email <span class="st">&quot;wibeasley@hotmail.com&quot;</span></span>
-<span id="cb29-11"><a href="workstation.html#cb29-11"></a>  <span class="fu">git</span> config --global user.name <span class="st">&quot;Will Beasley&quot;</span></span>
-<span id="cb29-12"><a href="workstation.html#cb29-12"></a>  <span class="fu">git</span> config --global credential.helper <span class="st">&#39;cache --timeout=3600000&#39;</span></span>
-<span id="cb29-13"><a href="workstation.html#cb29-13"></a></span>
-<span id="cb29-14"><a href="workstation.html#cb29-14"></a>  <span class="al">###</span><span class="co"> Ubuntu &amp; Bioconductor packages that are indirectly needed for packages and BBMC scripts</span></span>
-<span id="cb29-15"><a href="workstation.html#cb29-15"></a></span>
-<span id="cb29-16"><a href="workstation.html#cb29-16"></a>  <span class="co"># Supports the `locate` command in bash</span></span>
-<span id="cb29-17"><a href="workstation.html#cb29-17"></a>  <span class="fu">sudo</span> apt-get install mlocate</span>
-<span id="cb29-18"><a href="workstation.html#cb29-18"></a></span>
-<span id="cb29-19"><a href="workstation.html#cb29-19"></a>  <span class="co"># The genefilter package is needed for &#39;modeest&#39; on CRAN.</span></span>
-<span id="cb29-20"><a href="workstation.html#cb29-20"></a>  <span class="co"># No longer a modeest dependency: Rscript -e &#39;BiocManager::install(&quot;genefilter&quot;)&#39;</span></span>
-<span id="cb29-21"><a href="workstation.html#cb29-21"></a>  </span>
-<span id="cb29-22"><a href="workstation.html#cb29-22"></a>  <span class="al">###</span><span class="co"> CRAN packages that are also on the Ubuntu repositories</span></span>
-<span id="cb29-23"><a href="workstation.html#cb29-23"></a>  </span>
-<span id="cb29-24"><a href="workstation.html#cb29-24"></a>  <span class="co"># The &#39;xml2&#39; package; https://CRAN.R-project.org/package=xml2 </span></span>
-<span id="cb29-25"><a href="workstation.html#cb29-25"></a>  <span class="fu">sudo</span> apt-get --yes install libxml2-dev r-cran-xml</span>
-<span id="cb29-26"><a href="workstation.html#cb29-26"></a></span>
-<span id="cb29-27"><a href="workstation.html#cb29-27"></a>  <span class="co"># The &#39;curl&#39; package, and others; https://CRAN.R-project.org/package=curl </span></span>
-<span id="cb29-28"><a href="workstation.html#cb29-28"></a>  <span class="fu">sudo</span> apt-get --yes install libssl-dev libcurl4-openssl-dev</span>
-<span id="cb29-29"><a href="workstation.html#cb29-29"></a></span>
-<span id="cb29-30"><a href="workstation.html#cb29-30"></a>  <span class="co"># The &#39;udunits2&#39; package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
-<span id="cb29-31"><a href="workstation.html#cb29-31"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev</span>
-<span id="cb29-32"><a href="workstation.html#cb29-32"></a></span>
-<span id="cb29-33"><a href="workstation.html#cb29-33"></a>  <span class="co"># The &#39;odbc&#39; package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
-<span id="cb29-34"><a href="workstation.html#cb29-34"></a>  <span class="fu">sudo</span> apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
-<span id="cb29-35"><a href="workstation.html#cb29-35"></a></span>
-<span id="cb29-36"><a href="workstation.html#cb29-36"></a>  <span class="co"># The &#39;rgl&#39; package; https://stackoverflow.com/a/39952771/1082435</span></span>
-<span id="cb29-37"><a href="workstation.html#cb29-37"></a>  <span class="fu">sudo</span> apt-get --yes install libcgal-dev libglu1-mesa-dev</span>
-<span id="cb29-38"><a href="workstation.html#cb29-38"></a></span>
-<span id="cb29-39"><a href="workstation.html#cb29-39"></a>  <span class="co"># The &#39;magick&#39; package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
-<span id="cb29-40"><a href="workstation.html#cb29-40"></a>  <span class="fu">sudo</span> apt-get --yes install <span class="st">&#39;libmagick++-dev&#39;</span></span>
-<span id="cb29-41"><a href="workstation.html#cb29-41"></a></span>
-<span id="cb29-42"><a href="workstation.html#cb29-42"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
-<span id="cb29-43"><a href="workstation.html#cb29-43"></a>  <span class="fu">sudo</span> apt-get --yes install qpdf</span>
-<span id="cb29-44"><a href="workstation.html#cb29-44"></a></span>
-<span id="cb29-45"><a href="workstation.html#cb29-45"></a>  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></span>
-<span id="cb29-46"><a href="workstation.html#cb29-46"></a>  <span class="fu">sudo</span> apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev</span>
-<span id="cb29-47"><a href="workstation.html#cb29-47"></a></span>
-<span id="cb29-48"><a href="workstation.html#cb29-48"></a>  <span class="co"># The &#39;sys&#39; package</span></span>
-<span id="cb29-49"><a href="workstation.html#cb29-49"></a>  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</span>
-<span id="cb29-50"><a href="workstation.html#cb29-50"></a></span>
-<span id="cb29-51"><a href="workstation.html#cb29-51"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
-<span id="cb29-52"><a href="workstation.html#cb29-52"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
-<span id="cb29-53"><a href="workstation.html#cb29-53"></a>  </span>
-<span id="cb29-54"><a href="workstation.html#cb29-54"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
-<span id="cb29-55"><a href="workstation.html#cb29-55"></a>  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</span>
-<span id="cb29-56"><a href="workstation.html#cb29-56"></a></span>
-<span id="cb29-57"><a href="workstation.html#cb29-57"></a>  <span class="co"># &#39;rJava&#39; and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
-<span id="cb29-58"><a href="workstation.html#cb29-58"></a>  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</span>
-<span id="cb29-59"><a href="workstation.html#cb29-59"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
-<span id="cb29-60"><a href="workstation.html#cb29-60"></a>  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</span>
-<span id="cb29-61"><a href="workstation.html#cb29-61"></a></span>
-<span id="cb29-62"><a href="workstation.html#cb29-62"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
-<span id="cb29-63"><a href="workstation.html#cb29-63"></a>  <span class="fu">sudo</span> apt-get --yes install xclip</span>
-<span id="cb29-64"><a href="workstation.html#cb29-64"></a></span>
-<span id="cb29-65"><a href="workstation.html#cb29-65"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
-<span id="cb29-66"><a href="workstation.html#cb29-66"></a>  <span class="fu">sudo</span> apt-get --yes install cargo</span>
-<span id="cb29-67"><a href="workstation.html#cb29-67"></a></span>
-<span id="cb29-68"><a href="workstation.html#cb29-68"></a>  <span class="co"># For databases</span></span>
-<span id="cb29-69"><a href="workstation.html#cb29-69"></a>  <span class="fu">sudo</span> apt-get --yes install sqlite sqliteman</span>
-<span id="cb29-70"><a href="workstation.html#cb29-70"></a>  <span class="fu">sudo</span> apt-get --yes install postgresql postgresql-contrib pgadmin3</span>
-<span id="cb29-71"><a href="workstation.html#cb29-71"></a></span>
-<span id="cb29-72"><a href="workstation.html#cb29-72"></a>  <span class="co"># pandoc</span></span>
-<span id="cb29-73"><a href="workstation.html#cb29-73"></a>  <span class="fu">sudo</span> apt install pandoc</span>
-<span id="cb29-74"><a href="workstation.html#cb29-74"></a><span class="kw">}</span></span>
-<span id="cb29-75"><a href="workstation.html#cb29-75"></a><span class="ex">install-packages</span></span>
-<span id="cb29-76"><a href="workstation.html#cb29-76"></a><span class="kw">)</span></span></code></pre></div>
+<span id="cb29-5"><a href="workstation.html#cb29-5"></a>  <span class="fu">sudo</span> apt-get install r-base r-base-dev</span>
+<span id="cb29-6"><a href="workstation.html#cb29-6"></a>  </span>
+<span id="cb29-7"><a href="workstation.html#cb29-7"></a>  <span class="al">###</span><span class="co"> Git</span></span>
+<span id="cb29-8"><a href="workstation.html#cb29-8"></a>  <span class="fu">sudo</span> apt-get install git-core</span>
+<span id="cb29-9"><a href="workstation.html#cb29-9"></a>  <span class="fu">git</span> config --global user.email <span class="st">&quot;wibeasley@hotmail.com&quot;</span></span>
+<span id="cb29-10"><a href="workstation.html#cb29-10"></a>  <span class="fu">git</span> config --global user.name <span class="st">&quot;Will Beasley&quot;</span></span>
+<span id="cb29-11"><a href="workstation.html#cb29-11"></a>  <span class="fu">git</span> config --global credential.helper <span class="st">&#39;cache --timeout=3600000&#39;</span></span>
+<span id="cb29-12"><a href="workstation.html#cb29-12"></a></span>
+<span id="cb29-13"><a href="workstation.html#cb29-13"></a>  <span class="al">###</span><span class="co"> Ubuntu &amp; Bioconductor packages that are indirectly needed for packages and BBMC scripts</span></span>
+<span id="cb29-14"><a href="workstation.html#cb29-14"></a></span>
+<span id="cb29-15"><a href="workstation.html#cb29-15"></a>  <span class="co"># Supports the `locate` command in bash</span></span>
+<span id="cb29-16"><a href="workstation.html#cb29-16"></a>  <span class="fu">sudo</span> apt-get install mlocate</span>
+<span id="cb29-17"><a href="workstation.html#cb29-17"></a></span>
+<span id="cb29-18"><a href="workstation.html#cb29-18"></a>  <span class="co"># The genefilter package is needed for &#39;modeest&#39; on CRAN.</span></span>
+<span id="cb29-19"><a href="workstation.html#cb29-19"></a>  <span class="co"># No longer a modeest dependency: Rscript -e &#39;BiocManager::install(&quot;genefilter&quot;)&#39;</span></span>
+<span id="cb29-20"><a href="workstation.html#cb29-20"></a>  </span>
+<span id="cb29-21"><a href="workstation.html#cb29-21"></a>  <span class="al">###</span><span class="co"> CRAN packages that are also on the Ubuntu repositories</span></span>
+<span id="cb29-22"><a href="workstation.html#cb29-22"></a>  </span>
+<span id="cb29-23"><a href="workstation.html#cb29-23"></a>  <span class="co"># The &#39;xml2&#39; package; https://CRAN.R-project.org/package=xml2 </span></span>
+<span id="cb29-24"><a href="workstation.html#cb29-24"></a>  <span class="fu">sudo</span> apt-get --yes install libxml2-dev r-cran-xml</span>
+<span id="cb29-25"><a href="workstation.html#cb29-25"></a></span>
+<span id="cb29-26"><a href="workstation.html#cb29-26"></a>  <span class="co"># The &#39;curl&#39; package, and others; https://CRAN.R-project.org/package=curl </span></span>
+<span id="cb29-27"><a href="workstation.html#cb29-27"></a>  <span class="fu">sudo</span> apt-get --yes install libssl-dev libcurl4-openssl-dev</span>
+<span id="cb29-28"><a href="workstation.html#cb29-28"></a></span>
+<span id="cb29-29"><a href="workstation.html#cb29-29"></a>  <span class="co"># The &#39;udunits2&#39; package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
+<span id="cb29-30"><a href="workstation.html#cb29-30"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev</span>
+<span id="cb29-31"><a href="workstation.html#cb29-31"></a></span>
+<span id="cb29-32"><a href="workstation.html#cb29-32"></a>  <span class="co"># The &#39;odbc&#39; package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
+<span id="cb29-33"><a href="workstation.html#cb29-33"></a>  <span class="fu">sudo</span> apt-get --yes install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
+<span id="cb29-34"><a href="workstation.html#cb29-34"></a></span>
+<span id="cb29-35"><a href="workstation.html#cb29-35"></a>  <span class="co"># The &#39;rgl&#39; package; https://stackoverflow.com/a/39952771/1082435</span></span>
+<span id="cb29-36"><a href="workstation.html#cb29-36"></a>  <span class="fu">sudo</span> apt-get --yes install libcgal-dev libglu1-mesa-dev</span>
+<span id="cb29-37"><a href="workstation.html#cb29-37"></a></span>
+<span id="cb29-38"><a href="workstation.html#cb29-38"></a>  <span class="co"># The &#39;magick&#39; package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
+<span id="cb29-39"><a href="workstation.html#cb29-39"></a>  <span class="fu">sudo</span> apt-get --yes install <span class="st">&#39;libmagick++-dev&#39;</span></span>
+<span id="cb29-40"><a href="workstation.html#cb29-40"></a></span>
+<span id="cb29-41"><a href="workstation.html#cb29-41"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
+<span id="cb29-42"><a href="workstation.html#cb29-42"></a>  <span class="fu">sudo</span> apt-get --yes install qpdf</span>
+<span id="cb29-43"><a href="workstation.html#cb29-43"></a></span>
+<span id="cb29-44"><a href="workstation.html#cb29-44"></a>  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></span>
+<span id="cb29-45"><a href="workstation.html#cb29-45"></a>  <span class="fu">sudo</span> apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev</span>
+<span id="cb29-46"><a href="workstation.html#cb29-46"></a></span>
+<span id="cb29-47"><a href="workstation.html#cb29-47"></a>  <span class="co"># The &#39;sys&#39; package</span></span>
+<span id="cb29-48"><a href="workstation.html#cb29-48"></a>  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</span>
+<span id="cb29-49"><a href="workstation.html#cb29-49"></a></span>
+<span id="cb29-50"><a href="workstation.html#cb29-50"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
+<span id="cb29-51"><a href="workstation.html#cb29-51"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
+<span id="cb29-52"><a href="workstation.html#cb29-52"></a>  </span>
+<span id="cb29-53"><a href="workstation.html#cb29-53"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
+<span id="cb29-54"><a href="workstation.html#cb29-54"></a>  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</span>
+<span id="cb29-55"><a href="workstation.html#cb29-55"></a></span>
+<span id="cb29-56"><a href="workstation.html#cb29-56"></a>  <span class="co"># &#39;rJava&#39; and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
+<span id="cb29-57"><a href="workstation.html#cb29-57"></a>  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</span>
+<span id="cb29-58"><a href="workstation.html#cb29-58"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
+<span id="cb29-59"><a href="workstation.html#cb29-59"></a>  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</span>
+<span id="cb29-60"><a href="workstation.html#cb29-60"></a></span>
+<span id="cb29-61"><a href="workstation.html#cb29-61"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
+<span id="cb29-62"><a href="workstation.html#cb29-62"></a>  <span class="fu">sudo</span> apt-get --yes install xclip</span>
+<span id="cb29-63"><a href="workstation.html#cb29-63"></a></span>
+<span id="cb29-64"><a href="workstation.html#cb29-64"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
+<span id="cb29-65"><a href="workstation.html#cb29-65"></a>  <span class="fu">sudo</span> apt-get --yes install cargo</span>
+<span id="cb29-66"><a href="workstation.html#cb29-66"></a></span>
+<span id="cb29-67"><a href="workstation.html#cb29-67"></a>  <span class="co"># For databases</span></span>
+<span id="cb29-68"><a href="workstation.html#cb29-68"></a>  <span class="fu">sudo</span> apt-get --yes install sqlite sqliteman</span>
+<span id="cb29-69"><a href="workstation.html#cb29-69"></a>  <span class="fu">sudo</span> apt-get --yes install postgresql postgresql-contrib pgadmin3</span>
+<span id="cb29-70"><a href="workstation.html#cb29-70"></a></span>
+<span id="cb29-71"><a href="workstation.html#cb29-71"></a>  <span class="co"># pandoc</span></span>
+<span id="cb29-72"><a href="workstation.html#cb29-72"></a>  <span class="fu">sudo</span> apt-get --yes install pandoc</span>
+<span id="cb29-73"><a href="workstation.html#cb29-73"></a><span class="kw">}</span></span>
+<span id="cb29-74"><a href="workstation.html#cb29-74"></a><span class="ex">install-packages</span></span>
+<span id="cb29-75"><a href="workstation.html#cb29-75"></a><span class="kw">)</span></span></code></pre></div>
 <p>The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, <a href="https://github.com/jgm/pandoc/releases">download the .deb file</a> then install from the same directory. Finally, verify the version.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb30-1"><a href="workstation.html#cb30-1"></a><span class="fu">sudo</span> dpkg -i pandoc-*</span>
 <span id="cb30-2"><a href="workstation.html#cb30-2"></a><span class="ex">pandoc</span> -v</span></code></pre></div>
@@ -607,8 +596,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installation-administrator" class="section level2">
 <h2 number="17.6"><span class="header-section-number">17.6</span> Administrator Installation</h2>
 <ul>
-<li><strong><a href="https://dev.mysql.com/downloads/workbench/">MySQL Workbench</a></strong> is useful occassionly for REDCap admins.</li>
-<li><strong><a href="https://www.getpostman.com/downloads/">Postman Native App</a></strong> is useful for developing with the API and has <a href="https://blog.getpostman.com/2017/03/14/going-native/">replaced the Chrome app</a>. If that’s not possible, a <a href="https://web.postman.co/">web client</a> is available as well. With either program, do not access any PHI.</li>
+<li><p><strong><a href="https://dev.mysql.com/downloads/workbench/">MySQL Workbench</a></strong> is useful occassionly for REDCap admins.</p></li>
+<li><p><strong><a href="https://www.getpostman.com/downloads/">Postman Native App</a></strong> is useful for developing with the API and has <a href="https://blog.getpostman.com/2017/03/14/going-native/">replaced the Chrome app</a>. If that’s not possible, a <a href="https://web.postman.co/">web client</a> is available as well. With either program, do not access any PHI.</p></li>
+<li><p><strong><a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms">SQL Server Management Studio (SSMS)</a></strong> has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators. It is an easy way to access the database and write queries (and transfer the SQL to an R file). It’s not required for the REDCap API, but it’s usually necessary when integrating REDCap with other databases.</p>
+<p>Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database <em>structure</em> (not data) on GitHub, so we can easily track/monitor the structural changes over time. The <em>tabs</em> options keeps things consistent between editors. In the SSMS ‘Tools | Options’ dialog box:</p>
+<ol style="list-style-type: decimal">
+<li>SQL Server Object Explorer | Scripting | Include descriptive headers: False</li>
+<li>SQL Server Object Explorer | Scripting | Script extended properties: False</li>
+<li>Text Editor | All Languages | Tabs | Tab size: 2</li>
+<li>Text Editor | All Languages | Tabs | Indent size: 2</li>
+<li>Text Editor | All Languages | Tabs | Insert Spaces: true</li>
+</ol>
+<p>These dont affect the saved files, but make life easier. The first makes the <a href="https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/">result font bigger</a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10</p></li>
+<li><p>Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`</p></li>
+<li><p>Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false</p></li>
+<li><p>Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false</p></li>
+<li><p>Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false</p></li>
+<li><p>Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false</p></li>
+<li><p>Text Editor | All Languages | General | Line Numbers: true</p></li>
+</ol>
+<p>For more details, see <a href="https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md">setting-up-dev-machine.md</a> (in a private repo that’s restricted to BBMC members).</p></li>
 </ul>
 </div>
 <div id="installation-troubleshooting" class="section level2">
