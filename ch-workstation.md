@@ -107,29 +107,6 @@ The order does not matter.
     1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
     1. Data | Sql | **Copy Includes Headers: check** {`"sql.copyIncludeHeaders": true`}
 
-* **[SQL Server Management Studio (SSMS)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)** has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators.  It is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
-
-    Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
-
-    1. 'SQL Server Object Explorer' | 'Scripting' | 'Include descriptive headers': False
-    1. 'SQL Server Object Explorer' | 'Scripting' | 'Script extended properties': False
-    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Tab size': 2
-    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Indent size': 2
-    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Insert Spaces': selected
-    
-    These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
-
-    1. 'Environment' | 'Fonts and Colors' | 'Show settings for: Grid Results' | 'Size': 10
-    1. 'Query Results' | 'SQL Server' | 'Results to Grid' | 'Include column headers when copying or saving the results': checked
-    1. 'Designers' | 'Table and Database Designers' | 'Prevent saving changes that require table-recreation': unchecked
-    
-    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Server Name': false
-    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Database Name': false
-    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Login Name': false
-    1. 'Text Editor' | 'All Languages' | 'General' | 'Line Numbers': true
-
-    For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
-
 * **[Pulse Secure](https://connect.ouhsc.edu)** is VPN client for OUHSC researchers.  It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
 
 Optional Installation {#installation-optional}
@@ -298,7 +275,31 @@ Administrator Installation {#installation-administrator}
 -----------------------------------
 
 * **[MySQL Workbench](https://dev.mysql.com/downloads/workbench/)** is useful occassionly for REDCap admins.
+
 * **[Postman Native App](https://www.getpostman.com/downloads/)** is useful for developing with the API and has [replaced the Chrome app](https://blog.getpostman.com/2017/03/14/going-native/).  If that's not possible, a [web client](https://web.postman.co/) is available as well.  With either program, do not access any PHI.
+
+* **[SQL Server Management Studio (SSMS)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)** has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators.  It is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+
+    Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
+
+    1. 'SQL Server Object Explorer' | 'Scripting' | 'Include descriptive headers': False
+    1. 'SQL Server Object Explorer' | 'Scripting' | 'Script extended properties': False
+    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Tab size': 2
+    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Indent size': 2
+    1. 'Text Editor' | 'All Languages' | 'Tabs' | 'Insert Spaces': selected
+    
+    These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
+
+    1. 'Environment' | 'Fonts and Colors' | 'Show settings for: Grid Results' | 'Size': 10
+    1. 'Query Results' | 'SQL Server' | 'Results to Grid' | 'Include column headers when copying or saving the results': checked
+    1. 'Designers' | 'Table and Database Designers' | 'Prevent saving changes that require table-recreation': unchecked
+    
+    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Server Name': false
+    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Database Name': false
+    1. 'Text Editor' | 'Editor Tab and Status Bar' | 'Tab Text' | 'Include Login Name': false
+    1. 'Text Editor' | 'All Languages' | 'General' | 'Line Numbers': true
+
+    For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
 
 Installation Troubleshooting
 -----------------------------------
