@@ -97,7 +97,17 @@ The order does not matter.
     1. File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
     1. File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when 'Tab' is pressed)
 
-* **[SQL Server Management Studio (SSMS)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)** is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+* **[Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download)** is now recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Managment Studio. 
+
+    Note: here are some non-default changes that facilitate our workflow. 
+    
+    1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
+    1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
+    1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
+    1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
+    1. Data | Sql | **Copy Includes Headers: check** {`"sql.copyIncludeHeaders": true`}
+
+* **[SQL Server Management Studio (SSMS)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)** has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators.  It is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
 
     Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
 
