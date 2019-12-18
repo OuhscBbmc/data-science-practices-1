@@ -109,7 +109,7 @@ An R solution may be to losen the restriction that dataset enter the R file only
 *loose scrap*: 
 the chunk reads all data (*e.g.*, database table, networked CSV, local lookup table).  After this chunk, no new data should be introduced.  This is for the sake of reducing human cognition load.  Everything below this chunk is derived from these first four chunks.
 
-Tweak Data (#chunk-tweak-data)
+Tweak Data {#chunk-tweak-data}
 ------------------------------------
 
 
