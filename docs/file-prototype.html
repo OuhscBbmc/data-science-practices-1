@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-17" />
+<meta name="date" content="2019-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
+<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
 <li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
@@ -212,7 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>7.5</b> Analysis</a></li>
 <li class="chapter" data-level="7.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>7.6</b> Presentation -Static</a></li>
 <li class="chapter" data-level="7.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>7.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a></li>
+<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.1</b> Primary Rules for Mapping</a></li>
+<li class="chapter" data-level="7.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.2</b> Secondary Rules for Mapping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>8</b> Security &amp; Private Data</a>
 <ul>
@@ -381,18 +385,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="file-prototype" class="section level1">
+<div id="file-prototype" class="section level1" number="4">
 <h1 number="4"><span class="header-section-number">4</span> Prototypical File</h1>
 <p>As stated before, in <a href="architecture.html#consistency-files">Consistency across Files</a>, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.</p>
 <p>We use the term “chunk” for a section of code because it corresponds with knitr terminology <span class="citation">(Xie <a href="references.html#ref-xie2015" role="doc-biblioref">2015</a>)</span>, and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.</p>
-<div id="chunk-clear" class="section level2">
+<div id="chunk-clear" class="section level2" number="4.1">
 <h2 number="4.1"><span class="header-section-number">4.1</span> Clear Memory</h2>
 <p>Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developig and debugging because it prevents previous runs from contaminating subsequent runs. However it has little effect during production; we’ll look at manipulation files separately from analysis files.</p>
 <p>Manipulation R files are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d with the argument <code>local=new.env()</code>. The file is executed in a fresh environment, so there are no variables to clear. Analysis R files are typically called from an Rmd file’s <code>knitr::read_chunk()</code>, and code positioned above the first chunk is not called by knitr.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>However typically do not clear the memory in R files that are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d in the same environment as the caller, as it will interfere with the caller’s variables.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="file-prototype.html#cb3-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
 </div>
-<div id="chunk-load-sources" class="section level2">
+<div id="chunk-load-sources" class="section level2" number="4.2">
 <h2 number="4.2"><span class="header-section-number">4.2</span> Load Sources</h2>
 <p>In the first true chunk, <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a> any R files containing global variables and functions that the current file requires. For instance, when a team of statisticians is producing a large report containing many analysis files, we define many of the graphical elements in a single file. This sourced file defines common color palettes and graphical functions so the cosmetics are more uniform across analyses.</p>
 <p>We prefer not to have <code>source</code>d files perform any real action, such as importing data or manipulating a file. One reason is because it is difficult to be consistent about the environmental variables when the sourced file’s functions are run. A second reason is that it more cognitively difficult to understand how the files are connected.</p>
@@ -401,7 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="file-prototype.html#cb4-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
 <span id="cb4-2"><a href="file-prototype.html#cb4-2"></a>base<span class="op">::</span><span class="kw">source</span>(<span class="dt">file=</span><span class="st">&quot;./analysis/common/display-1.R&quot;</span>)      <span class="co"># Load common graphing functions.</span></span></code></pre></div>
 </div>
-<div id="chunk-load-packages" class="section level2">
+<div id="chunk-load-packages" class="section level2" number="4.3">
 <h2 number="4.3"><span class="header-section-number">4.3</span> Load Packages</h2>
 <p>The ‘load-packages’ chunk declares required packages near the file’s beginning for three reasons. First, a reader scanning the file can quickly determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. Third, this style mimics a requirement of other languages (such as declaring headers at the top of a C++ file) and follows the <a href="https://style.tidyverse.org/files.html#internal-structure">tidyverse style guide</a>.</p>
 <p>As discussed in the previous <a href="coding.html#qualify-functions">qualify all functions</a> section, we recommend that functions are qualified with their package (<em>e.g.</em>, <code>foo::bar()</code> instead of merely <code>bar()</code>). Consequently, the ‘load-packages’ chunk calls <code>requireNamespace()</code> more frequently than <code>library()</code>. <code>requireNamespace()</code> verifies the package is available on the local machine, but does not load it into memory; <code>library()</code> verifies the package is available, and then loads it.</p>
@@ -425,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-8"><a href="file-prototype.html#cb5-8"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span> ) <span class="co"># Asserts expected conditions </span></span>
 <span id="cb5-9"><a href="file-prototype.html#cb5-9"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co"># remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div>
 </div>
-<div id="chunk-declare" class="section level2">
+<div id="chunk-declare" class="section level2" number="4.4">
 <h2 number="4.4"><span class="header-section-number">4.4</span> Declare Globals</h2>
 <p>When values are repeatedly used within a file, consider dedicating a variable so it’s defined and set only once. This is also a good place for variables that are used only once, but whose value are central to the file’s mission. Typical variables in our ‘declare-globals’ chunk include data file paths, data file variables, color palettes, and values in the <em>config</em> file.</p>
 <p>The <a href="repo-prototype.html#repo-root">config file</a> can coordinate a static variable across multiple files. Centrally</p>
@@ -444,7 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-13"><a href="file-prototype.html#cb6-13"></a>  <span class="dt">ethnicity           =</span> readr<span class="op">::</span><span class="kw">col_character</span>()</span>
 <span id="cb6-14"><a href="file-prototype.html#cb6-14"></a>)</span></code></pre></div>
 </div>
-<div id="chunk-load-data" class="section level2">
+<div id="chunk-load-data" class="section level2" number="4.5">
 <h2 number="4.5"><span class="header-section-number">4.5</span> Load Data</h2>
 <p>All data ingested by this file occurs in this chunk. We like to think of each file as a linear pipe with a single point of input and single point of output. Although it is possible for a file to read data files on any line, we recommend avoiding this sprawl because it is more difficult for humans to understand. If the software developer is a deist watchmaker, the file’s fate has been sealed by the end of this chunk. This makes is easier for a human to reason to isolate problems as either existing with (a) the incoming data or (b) the calculations on that data.</p>
 <p>Ideally this chunk consumes data from either a plain-text csv or a database.</p>
@@ -455,8 +459,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>loose scrap</em>:
 the chunk reads all data (<em>e.g.</em>, database table, networked CSV, local lookup table). After this chunk, no new data should be introduced. This is for the sake of reducing human cognition load. Everything below this chunk is derived from these first four chunks.</p>
 </div>
-<div id="tweak-data-chunk-tweak-data" class="section level2">
-<h2 number="4.6"><span class="header-section-number">4.6</span> Tweak Data (#chunk-tweak-data)</h2>
+<div id="chunk-tweak-data" class="section level2" number="4.6">
+<h2 number="4.6"><span class="header-section-number">4.6</span> Tweak Data</h2>
 <p><em>loose scrap</em>:
 It’s best to rename the dataset (a) in a single place and (b) early in the pipeline, so the bad variable are never referenced.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="file-prototype.html#cb7-1"></a><span class="co"># OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.</span></span>
@@ -475,32 +479,30 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <span id="cb7-14"><a href="file-prototype.html#cb7-14"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(subject_id) <span class="co"># %&gt;%</span></span>
 <span id="cb7-15"><a href="file-prototype.html#cb7-15"></a>  <span class="co"># tibble::rowid_to_column(&quot;subject_id&quot;) # Add a unique index if necessary</span></span></code></pre></div>
 </div>
-<div id="chunk-unique" class="section level2">
+<div id="chunk-unique" class="section level2" number="4.7">
 <h2 number="4.7"><span class="header-section-number">4.7</span> (Unique Content)</h2>
-<p>This section represents all the chunks between <a href="#chunk-tweak-data">tweak-data</a> and <a href="file-prototype.html#chunk-verify-values">verify-values</a>. These chunks contain most of of the file’s creativity and contribution. In a sense, the structure of the first and last chunks allow these middle chunks to focus on concepts instead of plumbing.</p>
+<p>This section represents all the chunks between <a href="file-prototype.html#chunk-tweak-data">tweak-data</a> and <a href="file-prototype.html#chunk-verify-values">verify-values</a>. These chunks contain most of of the file’s creativity and contribution. In a sense, the structure of the first and last chunks allow these middle chunks to focus on concepts instead of plumbing.</p>
 <p>For simple files like the ellis of a metadata file, may not even need anything here. But complex analysis files may have 200+ lines distributed across a dozen chunks. We recommend that you create dedicate a chunk to each conceptual stage. If one starts to contain more than ~20 lines, consider if a more granular organization would clarify the code’s intent.</p>
 </div>
-<div id="chunk-verify-values" class="section level2">
+<div id="chunk-verify-values" class="section level2" number="4.8">
 <h2 number="4.8"><span class="header-section-number">4.8</span> Verify Values</h2>
 <p>Running <code>OuhscMunge::verify_value_headstart(ds)</code> will</p>
-<pre><code>```r
-# ---- verify-values -----------------------------------------------------------
-# Sniff out problems
-# OuhscMunge::verify_value_headstart(ds)
-checkmate::assert_integer(  ds$county_month_id    , any.missing=F , lower=1, upper=3080                , unique=T)
-checkmate::assert_integer(  ds$county_id          , any.missing=F , lower=1, upper=77                            )
-checkmate::assert_date(     ds$month              , any.missing=F , lower=as.Date(&quot;2012-06-15&quot;), upper=Sys.Date())
-checkmate::assert_character(ds$county_name        , any.missing=F , pattern=&quot;^.{3,12}$&quot;                          )
-checkmate::assert_integer(  ds$region_id          , any.missing=F , lower=1, upper=20                            )
-checkmate::assert_numeric(  ds$fte                , any.missing=F , lower=0, upper=40                            )
-checkmate::assert_logical(  ds$fte_approximated   , any.missing=F                                                )
-checkmate::assert_numeric(  ds$fte_rolling_median , any.missing=T , lower=0, upper=40                            )
-
-county_month_combo   &lt;- paste(ds$county_id, ds$month)
-checkmate::assert_character(county_month_combo, pattern  =&quot;^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$&quot;, any.missing=F, unique=T)
-```</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="file-prototype.html#cb8-1"></a><span class="co"># ---- verify-values -----------------------------------------------------------</span></span>
+<span id="cb8-2"><a href="file-prototype.html#cb8-2"></a><span class="co"># Sniff out problems</span></span>
+<span id="cb8-3"><a href="file-prototype.html#cb8-3"></a><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
+<span id="cb8-4"><a href="file-prototype.html#cb8-4"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>county_month_id    , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">3080</span>                , <span class="dt">unique=</span>T)</span>
+<span id="cb8-5"><a href="file-prototype.html#cb8-5"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>county_id          , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">77</span>                            )</span>
+<span id="cb8-6"><a href="file-prototype.html#cb8-6"></a>checkmate<span class="op">::</span><span class="kw">assert_date</span>(     ds<span class="op">$</span>month              , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="kw">as.Date</span>(<span class="st">&quot;2012-06-15&quot;</span>), <span class="dt">upper=</span><span class="kw">Sys.Date</span>())</span>
+<span id="cb8-7"><a href="file-prototype.html#cb8-7"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>county_name        , <span class="dt">any.missing=</span>F , <span class="dt">pattern=</span><span class="st">&quot;^.{3,12}$&quot;</span>                          )</span>
+<span id="cb8-8"><a href="file-prototype.html#cb8-8"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>region_id          , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">20</span>                            )</span>
+<span id="cb8-9"><a href="file-prototype.html#cb8-9"></a>checkmate<span class="op">::</span><span class="kw">assert_numeric</span>(  ds<span class="op">$</span>fte                , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">0</span>, <span class="dt">upper=</span><span class="dv">40</span>                            )</span>
+<span id="cb8-10"><a href="file-prototype.html#cb8-10"></a>checkmate<span class="op">::</span><span class="kw">assert_logical</span>(  ds<span class="op">$</span>fte_approximated   , <span class="dt">any.missing=</span>F                                                )</span>
+<span id="cb8-11"><a href="file-prototype.html#cb8-11"></a>checkmate<span class="op">::</span><span class="kw">assert_numeric</span>(  ds<span class="op">$</span>fte_rolling_median , <span class="dt">any.missing=</span>T , <span class="dt">lower=</span><span class="dv">0</span>, <span class="dt">upper=</span><span class="dv">40</span>                            )</span>
+<span id="cb8-12"><a href="file-prototype.html#cb8-12"></a></span>
+<span id="cb8-13"><a href="file-prototype.html#cb8-13"></a>county_month_combo   &lt;-<span class="st"> </span><span class="kw">paste</span>(ds<span class="op">$</span>county_id, ds<span class="op">$</span>month)</span>
+<span id="cb8-14"><a href="file-prototype.html#cb8-14"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(county_month_combo, <span class="dt">pattern  =</span><span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2} </span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}$&quot;</span>, <span class="dt">any.missing=</span>F, <span class="dt">unique=</span>T)</span></code></pre></div>
 </div>
-<div id="chunk-specify-columns" class="section level2">
+<div id="chunk-specify-columns" class="section level2" number="4.9">
 <h2 number="4.9"><span class="header-section-number">4.9</span> Specify Output Columns</h2>
 <p>This chunk:</p>
 <ol style="list-style-type: decimal">
@@ -531,7 +533,7 @@ checkmate::assert_character(county_month_combo, pattern  =&quot;^\\d{1,2} \\d{4}
 <span id="cb9-17"><a href="file-prototype.html#cb9-17"></a></span>
 <span id="cb9-18"><a href="file-prototype.html#cb9-18"></a>ds_slim</span></code></pre></div>
 </div>
-<div id="save-to-disk-or-database" class="section level2">
+<div id="save-to-disk-or-database" class="section level2" number="4.10">
 <h2 number="4.10"><span class="header-section-number">4.10</span> Save to Disk or Database</h2>
 
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-17" />
+<meta name="date" content="2019-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
+<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
 <li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
@@ -212,7 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>7.5</b> Analysis</a></li>
 <li class="chapter" data-level="7.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>7.6</b> Presentation -Static</a></li>
 <li class="chapter" data-level="7.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>7.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a></li>
+<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.1</b> Primary Rules for Mapping</a></li>
+<li class="chapter" data-level="7.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.2</b> Secondary Rules for Mapping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>8</b> Security &amp; Private Data</a>
 <ul>
@@ -381,15 +385,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="git-github" class="section level1">
+<div id="git-github" class="section level1" number="20">
 <h1 number="20"><span class="header-section-number">20</span> Git &amp; GitHub</h1>
-<div id="for-code-development" class="section level2">
+<div id="for-code-development" class="section level2" number="20.1">
 <h2 number="20.1"><span class="header-section-number">20.1</span> for Code Development</h2>
 <p><a href="https://github.com/jennybc">Jenny Bryan</a> and <a href="https://github.com/jimhester">Jim Hester</a> have published a thorough description of using Git from a data scientist’s perspective (<a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a>), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is <em><a href="https://smile.amazon.com/dp/1449302440">Team Geek</a></em>, which has insightful advice for the human and collaborative aspects of version control.</p>
 <p>Other Resources
 1. <a href="https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github">Setting up a CI/CD Process on GitHub with Travis CI</a>. Travis-CI blob from August 2019.</p>
 </div>
-<div id="for-collaboration" class="section level2">
+<div id="for-collaboration" class="section level2" number="20.2">
 <h2 number="20.2"><span class="header-section-number">20.2</span> for Collaboration</h2>
 <ol style="list-style-type: decimal">
 <li><p>Somewhat separate from it’s version control capabilities, GitHub provides built-in tools for coordinating projects across people and time. This tools revolves around <a href="https://guides.github.com/features/issues/">GitHub Issues</a>, which allow teammates to</p></li>
@@ -412,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <!-- Consider including good examples, like https://github.com/OuhscBbmc/miechv-3/issues/2073.  Probably shorten some for clarity. -->
 </div>
-<div id="for-stability" class="section level2">
+<div id="for-stability" class="section level2" number="20.3">
 <h2 number="20.3"><span class="header-section-number">20.3</span> for Stability</h2>
 <ol style="list-style-type: decimal">
 <li>Review Git commits closely

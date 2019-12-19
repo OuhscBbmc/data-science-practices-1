@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-17" />
+<meta name="date" content="2019-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
+<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
 <li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
@@ -212,7 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>7.5</b> Analysis</a></li>
 <li class="chapter" data-level="7.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>7.6</b> Presentation -Static</a></li>
 <li class="chapter" data-level="7.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>7.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a></li>
+<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.1</b> Primary Rules for Mapping</a></li>
+<li class="chapter" data-level="7.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.2</b> Secondary Rules for Mapping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>8</b> Security &amp; Private Data</a>
 <ul>
@@ -381,13 +385,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="style-guide" class="section level1">
+<div id="style-guide" class="section level1" number="13">
 <h1 number="13"><span class="header-section-number">13</span> Style Guide</h1>
 <p>Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most themes in this document, the cost is worth the effort. Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.</p>
 <p>For the most part, our team follows the <a href="https://style.tidyverse.org/">tidyverse style</a>. Here are some additional conventions we attempt to follow. Many of these were inspired by <span class="citation">(Francesco Balena <a href="references.html#ref-balena-dimauro" role="doc-biblioref">2005</a>)</span>.</p>
-<div id="readability" class="section level2">
+<div id="readability" class="section level2" number="13.1">
 <h2 number="13.1"><span class="header-section-number">13.1</span> Readability</h2>
-<div id="style-abbreviation" class="section level3">
+<div id="style-abbreviation" class="section level3" number="13.1.1">
 <h3 number="13.1.1"><span class="header-section-number">13.1.1</span> Abbreviations</h3>
 <p>Try to avoid abbreviations. Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable. At very least, it wastes time trying to remember if <code>subject_number</code>, <code>subject_num</code>, or <code>subject_no</code> was used. The <a href="architecture.html#architecture-consistency">Consistency</a> section describes how this can reduce errors and increase efficiency.</p>
 <p>However, some terms are too long to reasonably use without shortening. We make some exceptions, such as the following scenarios:</p>
@@ -405,15 +409,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>When your team choose terms (<em>e.g.</em>, ‘apt’ vs ‘appt’), try to use a standard vocabulary, such as <a href="https://www.medicinenet.com/medterms-medical-dictionary/article.htm">MedTerms Medical Dictionary</a>.</p>
 </div>
-<div id="style-number" class="section level3">
+<div id="style-number" class="section level3" number="13.1.2">
 <h3 number="13.1.2"><span class="header-section-number">13.1.2</span> Number</h3>
 <p>The word ‘number’ is ambiguous, especially in data science. Try for more specific terms like ‘count’, ‘id’, ‘index’, and ‘tally’.</p>
 </div>
 </div>
-<div id="ggplot2" class="section level2">
+<div id="ggplot2" class="section level2" number="13.2">
 <h2 number="13.2"><span class="header-section-number">13.2</span> ggplot2</h2>
 <p>The expressiveness of <a href="https://ggplot2.tidyverse.org/">ggplot2</a> allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a <a href="https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md">textbook for introductory statistics</a>; the 200+ graphs and their code is publically available.</p>
-<div id="order-of-commands" class="section level3">
+<div id="order-of-commands" class="section level3" number="13.2.1">
 <h3 number="13.2.1"><span class="header-section-number">13.2.1</span> Order of commands</h3>
 <p>ggplot2 is essentially a collection of functions combined with the <code>+</code> operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:</p>
 <ol style="list-style-type: decimal">
@@ -426,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>labs()</code></li>
 </ol>
 </div>
-<div id="gotchas" class="section level3">
+<div id="gotchas" class="section level3" number="13.2.2">
 <h3 number="13.2.2"><span class="header-section-number">13.2.2</span> Gotchas</h3>
 <p>Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).</p>
 <ol style="list-style-type: decimal">

@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-17" />
+<meta name="date" content="2019-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
+<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
 <li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
@@ -212,7 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>7.5</b> Analysis</a></li>
 <li class="chapter" data-level="7.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>7.6</b> Presentation -Static</a></li>
 <li class="chapter" data-level="7.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>7.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a></li>
+<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.1</b> Primary Rules for Mapping</a></li>
+<li class="chapter" data-level="7.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.2</b> Secondary Rules for Mapping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>8</b> Security &amp; Private Data</a>
 <ul>
@@ -381,29 +385,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tools" class="section level1">
+<div id="tools" class="section level1" number="18">
 <h1 number="18"><span class="header-section-number">18</span> Considerations when Selecting Tools</h1>
-<div id="general" class="section level2">
+<div id="general" class="section level2" number="18.1">
 <h2 number="18.1"><span class="header-section-number">18.1</span> General</h2>
-<div id="the-components-goal" class="section level3">
+<div id="the-components-goal" class="section level3" number="18.1.1">
 <h3 number="18.1.1"><span class="header-section-number">18.1.1</span> The Component’s Goal</h3>
 <p>While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base R, and sometimes it even requires more lines of code”. Regardless if I agree, I feel these two points are irrelevant. Sometimes the advantage of a tool isn’t to expand existing capabilities, but rather to facilitate development and maintenance for the same capability.</p>
 <p>Likewise, I care less about the line count, and more about the readability. I’d prefer to maintain a 20-line chunk that is familiar and readable than a 10-line chunk with dense phrases and unfamiliar functions. The bottleneck for most of our projects is human time, not execution time.</p>
 </div>
-<div id="current-skillset-of-team" class="section level3">
+<div id="current-skillset-of-team" class="section level3" number="18.1.2">
 <h3 number="18.1.2"><span class="header-section-number">18.1.2</span> Current Skillset of Team</h3>
 </div>
-<div id="desired-future-skillset-of-team" class="section level3">
+<div id="desired-future-skillset-of-team" class="section level3" number="18.1.3">
 <h3 number="18.1.3"><span class="header-section-number">18.1.3</span> Desired Future Skillset of Team</h3>
 </div>
-<div id="skillset-of-audience" class="section level3">
+<div id="skillset-of-audience" class="section level3" number="18.1.4">
 <h3 number="18.1.4"><span class="header-section-number">18.1.4</span> Skillset of Audience</h3>
 </div>
 </div>
-<div id="languages" class="section level2">
+<div id="languages" class="section level2" number="18.2">
 <h2 number="18.2"><span class="header-section-number">18.2</span> Languages</h2>
 </div>
-<div id="r-packages" class="section level2">
+<div id="r-packages" class="section level2" number="18.3">
 <h2 number="18.3"><span class="header-section-number">18.3</span> R Packages</h2>
 <ol style="list-style-type: decimal">
 <li><p>When developing a codebase used by many people, choose packages both on their functionality, as well as their ease of installation and maintainability. For example, the <a href="https://CRAN.R-project.org/package=rJava">rJava</a> package is a powerful package that allows R package developers to leverage the widespread <a href="https://www.java.com/en/">Java</a> framework and many popular Java packages. However, installing Java and setting the appropriate <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> or <a href="https://en.wikipedia.org/wiki/Windows_Registry">registry</a> settings can be error-prone, especially for non-developers.</p>
@@ -417,7 +421,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Finally, consider how much traffic passes through the dependency A brittle dependency will not be too disruptive if isolated in a downstream analysis file run by only one statistician. On the other hand, be very protective in the middle of the pipeline where typically most of your team runs.</p>
 </div>
-<div id="database" class="section level2">
+<div id="database" class="section level2" number="18.4">
 <h2 number="18.4"><span class="header-section-number">18.4</span> Database</h2>
 <ol style="list-style-type: decimal">
 <li><p>Ease of installation &amp; maintenance</p></li>

@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-17" />
+<meta name="date" content="2019-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
+<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
 <li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
@@ -212,7 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>7.5</b> Analysis</a></li>
 <li class="chapter" data-level="7.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>7.6</b> Presentation -Static</a></li>
 <li class="chapter" data-level="7.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>7.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a></li>
+<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.1</b> Primary Rules for Mapping</a></li>
+<li class="chapter" data-level="7.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.2</b> Secondary Rules for Mapping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>8</b> Security &amp; Private Data</a>
 <ul>
@@ -381,10 +385,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="repo-prototype" class="section level1">
+<div id="repo-prototype" class="section level1" number="5">
 <h1 number="5"><span class="header-section-number">5</span> Prototypical Repository</h1>
 <p><a href="https://github.com/wibeasley/RAnalysisSkeleton" class="uri">https://github.com/wibeasley/RAnalysisSkeleton</a></p>
-<div id="repo-root" class="section level2">
+<div id="repo-root" class="section level2" number="5.1">
 <h2 number="5.1"><span class="header-section-number">5.1</span> Root</h2>
 <ol style="list-style-type: decimal">
 <li><p><code>config.R</code> is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is great when a value has to be coordinated across multiple file</p>
@@ -418,10 +422,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>*.Rproj</code></p></li>
 </ol>
 </div>
-<div id="analysis" class="section level2">
+<div id="analysis" class="section level2" number="5.2">
 <h2 number="5.2"><span class="header-section-number">5.2</span> Analysis</h2>
 </div>
-<div id="data-public" class="section level2">
+<div id="data-public" class="section level2" number="5.3">
 <h2 number="5.3"><span class="header-section-number">5.3</span> Data Public</h2>
 <ol style="list-style-type: decimal">
 <li>Raw</li>
@@ -431,19 +435,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Original</li>
 </ol>
 </div>
-<div id="data-unshared" class="section level2">
+<div id="data-unshared" class="section level2" number="5.4">
 <h2 number="5.4"><span class="header-section-number">5.4</span> Data Unshared</h2>
 </div>
-<div id="documentation" class="section level2">
+<div id="documentation" class="section level2" number="5.5">
 <h2 number="5.5"><span class="header-section-number">5.5</span> Documentation</h2>
 </div>
-<div id="manipulation" class="section level2">
+<div id="manipulation" class="section level2" number="5.6">
 <h2 number="5.6"><span class="header-section-number">5.6</span> Manipulation</h2>
 </div>
-<div id="stitched-output" class="section level2">
+<div id="stitched-output" class="section level2" number="5.7">
 <h2 number="5.7"><span class="header-section-number">5.7</span> Stitched Output</h2>
 </div>
-<div id="utility" class="section level2">
+<div id="utility" class="section level2" number="5.8">
 <h2 number="5.8"><span class="header-section-number">5.8</span> Utility</h2>
 
 </div>

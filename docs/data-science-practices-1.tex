@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-17}
+\date{2019-12-19}
 
 \begin{document}
 \frontmatter
@@ -402,8 +402,8 @@ An R solution may be to losen the restriction that dataset enter the R file only
 \emph{loose scrap}:
 the chunk reads all data (\emph{e.g.}, database table, networked CSV, local lookup table). After this chunk, no new data should be introduced. This is for the sake of reducing human cognition load. Everything below this chunk is derived from these first four chunks.
 
-\hypertarget{tweak-data-chunk-tweak-data}{%
-\section{Tweak Data (\#chunk-tweak-data)}\label{tweak-data-chunk-tweak-data}}
+\hypertarget{chunk-tweak-data}{%
+\section{Tweak Data}\label{chunk-tweak-data}}
 
 \emph{loose scrap}:
 It's best to rename the dataset (a) in a single place and (b) early in the pipeline, so the bad variable are never referenced.
@@ -440,24 +440,24 @@ For simple files like the ellis of a metadata file, may not even need anything h
 
 Running \texttt{OuhscMunge::verify\_value\_headstart(ds)} will
 
-\begin{verbatim}
-```r
-# ---- verify-values -----------------------------------------------------------
-# Sniff out problems
-# OuhscMunge::verify_value_headstart(ds)
-checkmate::assert_integer(  ds$county_month_id    , any.missing=F , lower=1, upper=3080                , unique=T)
-checkmate::assert_integer(  ds$county_id          , any.missing=F , lower=1, upper=77                            )
-checkmate::assert_date(     ds$month              , any.missing=F , lower=as.Date("2012-06-15"), upper=Sys.Date())
-checkmate::assert_character(ds$county_name        , any.missing=F , pattern="^.{3,12}$"                          )
-checkmate::assert_integer(  ds$region_id          , any.missing=F , lower=1, upper=20                            )
-checkmate::assert_numeric(  ds$fte                , any.missing=F , lower=0, upper=40                            )
-checkmate::assert_logical(  ds$fte_approximated   , any.missing=F                                                )
-checkmate::assert_numeric(  ds$fte_rolling_median , any.missing=T , lower=0, upper=40                            )
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# {-}{-}{-}{-} verify{-}values {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Sniff out problems}
+\CommentTok{\# OuhscMunge::verify\_value\_headstart(ds)}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_integer}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{county\_month\_id    , }\DataTypeTok{any.missing=}\NormalTok{F , }\DataTypeTok{lower=}\DecValTok{1}\NormalTok{, }\DataTypeTok{upper=}\DecValTok{3080}\NormalTok{                , }\DataTypeTok{unique=}\NormalTok{T)}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_integer}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{county\_id          , }\DataTypeTok{any.missing=}\NormalTok{F , }\DataTypeTok{lower=}\DecValTok{1}\NormalTok{, }\DataTypeTok{upper=}\DecValTok{77}\NormalTok{                            )}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_date}\NormalTok{(     ds}\OperatorTok{$}\NormalTok{month              , }\DataTypeTok{any.missing=}\NormalTok{F , }\DataTypeTok{lower=}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2012{-}06{-}15"}\NormalTok{), }\DataTypeTok{upper=}\KeywordTok{Sys.Date}\NormalTok{())}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_character}\NormalTok{(ds}\OperatorTok{$}\NormalTok{county\_name        , }\DataTypeTok{any.missing=}\NormalTok{F , }\DataTypeTok{pattern=}\StringTok{"\^{}.\{3,12\}$"}\NormalTok{                          )}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_integer}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{region\_id          , }\DataTypeTok{any.missing=}\NormalTok{F , }\DataTypeTok{lower=}\DecValTok{1}\NormalTok{, }\DataTypeTok{upper=}\DecValTok{20}\NormalTok{                            )}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_numeric}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{fte                , }\DataTypeTok{any.missing=}\NormalTok{F , }\DataTypeTok{lower=}\DecValTok{0}\NormalTok{, }\DataTypeTok{upper=}\DecValTok{40}\NormalTok{                            )}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_logical}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{fte\_approximated   , }\DataTypeTok{any.missing=}\NormalTok{F                                                )}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_numeric}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{fte\_rolling\_median , }\DataTypeTok{any.missing=}\NormalTok{T , }\DataTypeTok{lower=}\DecValTok{0}\NormalTok{, }\DataTypeTok{upper=}\DecValTok{40}\NormalTok{                            )}
 
-county_month_combo   <- paste(ds$county_id, ds$month)
-checkmate::assert_character(county_month_combo, pattern  ="^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$", any.missing=F, unique=T)
-```
-\end{verbatim}
+\NormalTok{county\_month\_combo   <{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(ds}\OperatorTok{$}\NormalTok{county\_id, ds}\OperatorTok{$}\NormalTok{month)}
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_character}\NormalTok{(county\_month\_combo, }\DataTypeTok{pattern  =}\StringTok{"\^{}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{1,2\} }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{4\}{-}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}{-}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}$"}\NormalTok{, }\DataTypeTok{any.missing=}\NormalTok{F, }\DataTypeTok{unique=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{chunk-specify-columns}{%
 \section{Specify Output Columns}\label{chunk-specify-columns}}
@@ -837,6 +837,284 @@ To incorporate outside data source into your system safely.
 
 \hypertarget{pattern-metadata}{%
 \section{Metadata}\label{pattern-metadata}}
+
+Survey items can change across time (for justified and unjustified reasons). We prefer to dedicate a metadata csv to a single variable
+
+\url{https://github.com/LiveOak/vasquez-mexican-census-1/issues/17\#issuecomment-567254695}
+
+\begin{longtable}[]{@{}lllllll@{}}
+\toprule
+\begin{minipage}[b]{0.10\columnwidth}\raggedright
+relationship\_id\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright
+code\_2011\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright
+code\_2016\strut
+\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
+relationship\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+display\_order\strut
+\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
+description\_2011\strut
+\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\raggedright
+description\_2016\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Jefe(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+1\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Jefe(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Jefe(a)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Esposo(a) o compañero(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+2\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Esposo(a) o compañero(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Esposo(a) o compañero(a)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Hijo(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+3\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Hijo(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Hijo(a)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+4\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+4\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+4\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Nieto(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+4\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Nieto(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Nieto(a)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+5\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+5\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+5\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Yerno/nuera\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+5\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Yerno/nuera\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Yerno/nuera\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+6\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+6\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+6\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Hermano(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+6\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Hermano(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Hermano(a)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+7\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+7\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Sobrino(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+7\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Sobrino(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+8\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+8\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Padre o madre\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+8\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Padre o madre\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+9\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+9\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Suegro(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+9\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Suegro(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+10\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+10\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Cuñado(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+10\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Cuñado(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Cuñado(a)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+11\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+11\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+7\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Otros parientes\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+11\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Otros parientes\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Otros parientes\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+12\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+12\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+8\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+No parientes\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+12\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+No parientes\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+No parientes\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+13\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+13\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+9\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Empleado(a) doméstico(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+13\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Empleado(a) doméstico(a)\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+Empleado(a) doméstico(a)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.10\columnwidth}\raggedright
+99\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+99\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+No especificado\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+99\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+No especificado\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{primary-rules-for-mapping}{%
+\subsection{Primary Rules for Mapping}\label{primary-rules-for-mapping}}
+
+A few important rules are necessary to map concepts in this multidimensional space.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  each \textbf{variable} gets its own \textbf{csv}, such as \texttt{relationship.csv} (show above), \texttt{education.csv}, \texttt{living-status.csv}, or \texttt{race.csv}. It's easiest if this file name matches the variable.
+\item
+  each \textbf{variable} also needs a unique \emph{integer} that identifies the underlying level in the database, such as \texttt{education\_id}, \texttt{living\_status\_id}, and \texttt{relationship\_id}.
+\item
+  each \textbf{survey wave} gets its own \textbf{column} within the csv, such as \texttt{code\_2011} and \texttt{code\_2016}.
+\item
+  each \textbf{level} within a variable-wave gets its own \textbf{row}, like \texttt{Jefe}, \texttt{Esposo}, and \texttt{Hijo}.
+\end{enumerate}
+
+\hypertarget{secondary-rules-for-mapping}{%
+\subsection{Secondary Rules for Mapping}\label{secondary-rules-for-mapping}}
+
+In this scenarios, the first three columns are critical (\emph{i.e.}, \texttt{relationship\_id}, \texttt{code\_2011}, \texttt{code\_2016}). Yet these additional guidelines will help the plumbing and manipulation of lookup variables.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  each \textbf{variable} also needs a unique \emph{name} that identifies the underlying level for human, such as \texttt{education}, \texttt{living\_status}, and \texttt{relationship}. This is the human label corresponding to \texttt{relationship\_id}. It's easiest if this column name matches the variable.
+\item
+  each \textbf{survey wave} gets its own \textbf{column} within the csv, such as \texttt{description\_2011} and \texttt{description\_2016}. These are the human labels corresponding to variables like \texttt{code\_2011} and \texttt{code\_2016}.
+\item
+  each \textbf{variable} benefits from a unique \emph{display order} value, that will be used later in analyses. Categorical variables typically have some desired sequence in graph legends and tables; specify that order here. This helps define the \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html}{\texttt{factor}} levels in R or the \href{https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html\#pandas.Categorical}{\texttt{pandas.Categorical}} levels in Python.
+\item
+  Mappings are usually informed by outside documentation. For transparency and maintainability, clearly describe where the documentation can be found. One option is to include it in \texttt{data-public/metadata/README.md}. Another option is to include it at the bottonm of the csv, preceded by a \texttt{\#}, or some `comment' character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells. Notes for this example are:
+
+\begin{verbatim}
+# Notes,,,,,,
+# 2016 codes come from `documentation/2106/fd_endireh2016_dbf.pdf`, pages 14-15,,,,,
+# 2011 codes come from `documentation/2011/fd_endireh11.xls`, ‘TSDem’ tab,,,,,
+\end{verbatim}
+\item
+  sometimes a \texttt{notes} column helps humans keep things straight, especially researchers new to the field/project. In the example above, the \texttt{notes} value in the first row might be ``\emph{jefe} means `head', not `boss'\,''.
+\end{enumerate}
 
 \hypertarget{security}{%
 \chapter{Security \& Private Data}\label{security}}

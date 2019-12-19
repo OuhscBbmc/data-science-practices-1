@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2019-12-17" />
+<meta name="date" content="2019-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
+<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
 <li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
@@ -212,7 +212,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>7.5</b> Analysis</a></li>
 <li class="chapter" data-level="7.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>7.6</b> Presentation -Static</a></li>
 <li class="chapter" data-level="7.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>7.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a></li>
+<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.1</b> Primary Rules for Mapping</a></li>
+<li class="chapter" data-level="7.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.2</b> Secondary Rules for Mapping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>8</b> Security &amp; Private Data</a>
 <ul>
@@ -381,11 +385,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="coding" class="section level1">
+<div id="coding" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Coding Principles</h1>
-<div id="simplify" class="section level2">
+<div id="simplify" class="section level2" number="2.1">
 <h2 number="2.1"><span class="header-section-number">2.1</span> Simplify</h2>
-<div id="data-types" class="section level3">
+<div id="data-types" class="section level3" number="2.1.1">
 <h3 number="2.1.1"><span class="header-section-number">2.1.1</span> Data Types</h3>
 <p>Use the simplest data type reasonable. A simpler data type is less likely contain unintented values. As we have seen, a string variable called <code>gender</code> can simulatneously contain the values “m”, “f”, “F”, “Female”, “MALE”, “0”, “1”, “2”, “Latino”, "", and <code>NA</code>. On the other hand, a boolean variable <code>gender_male</code> can be only <code>FALSE</code>, <code>TRUE</code>, and <code>NA</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <p>Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
@@ -403,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>character</code>.</li>
 </ol>
 </div>
-<div id="categorical-levels" class="section level3">
+<div id="categorical-levels" class="section level3" number="2.1.2">
 <h3 number="2.1.2"><span class="header-section-number">2.1.2</span> Categorical Levels</h3>
 <p>When a boolean variable would be too restrictive and a factor or character is required, choose the simplest representation. Where possible:</p>
 <ol style="list-style-type: decimal">
@@ -411,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>avoid repeating the variable in the level (<em>e.g.</em>, ‘control’ instead of ‘control condition’ for the <code>condition</code> variable).</li>
 </ol>
 </div>
-<div id="recoding" class="section level3">
+<div id="recoding" class="section level3" number="2.1.3">
 <h3 number="2.1.3"><span class="header-section-number">2.1.3</span> Recoding</h3>
 <p>Almost every project recodes many variables. Choose the simplest function possible. The functions at the top are much easier to read and harder to mess up.</p>
 <ol style="list-style-type: decimal">
@@ -435,9 +439,9 @@ stage_post = (date_start &lt;= month)
 </ol>
 </div>
 </div>
-<div id="defensive-style" class="section level2">
+<div id="defensive-style" class="section level2" number="2.2">
 <h2 number="2.2"><span class="header-section-number">2.2</span> Defensive Style</h2>
-<div id="qualify-functions" class="section level3">
+<div id="qualify-functions" class="section level3" number="2.2.1">
 <h3 number="2.2.1"><span class="header-section-number">2.2.1</span> Qualify functions</h3>
 <p>Try to prepend each function with its package. Write <code>dplyr::filter()</code> instead of <code>filter()</code>. When two packages contain public functions with the same name, the package that was most recently called with <code>library()</code> takes precedent. When multiple R files are executed, the packages’ precedents may not be predictable. Specifying the package eliminates the ambiguity, while also making the code easier to follow. For this reason, we recommend that almost all R files contain a <a href="file-prototype.html#chunk-load-packages">‘load-packages’</a> chunk.</p>
 

@@ -156,28 +156,31 @@ https://github.com/LiveOak/vasquez-mexican-census-1/issues/17#issuecomment-56725
 | 12              | 12        | 8         | No parientes             | 12            | No parientes             | No parientes             |
 | 13              | 13        | 9         | Empleado(a) doméstico(a) | 13            | Empleado(a) doméstico(a) | Empleado(a) doméstico(a) |
 | 99              | 99        | NA        | No especificado          | 99            | No especificado          | NA                       |
+
 ### Primary Rules for Mapping
 
 A few important rules are necessary to map concepts in this multidimensional space.
 
-1. each **variable** gets its own **csv**, such as `education.csv`, `living-status.csv`, or `relationship.csv` (example below).  It's easiest if this file name matches the variable.
+1. each **variable** gets its own **csv**, such as `relationship.csv` (show above), `education.csv`, `living-status.csv`, or `race.csv`.  It's easiest if this file name matches the variable.
 
-1. each **survey wave** gets its own **column** within the csv, such as `code_2011`, `code_2016`, `description_2011`, `description_2016`
+1. each **variable** also needs a unique *integer* that identifies the underlying level in the database, such as `education_id`, `living_status_id`, and `relationship_id`.
 
-1. each **level** within a variable-wave gets its own **row**, like
+1. each **survey wave** gets its own **column** within the csv, such as `code_2011` and `code_2016`.
+
+1. each **level** within a variable-wave gets its own **row**, like `Jefe`, `Esposo`, and `Hijo`.
 
 
 ### Secondary Rules for Mapping
 
-These guidelines will help the plumbing and manipulation of lookup variables.
+In this scenarios, the first three columns are critical (*i.e.*, `relationship_id`, `code_2011`, `code_2016`).  Yet these additional guidelines will help the plumbing and manipulation of lookup variables.
 
-1. each **variable** also needs a unique *integer* that identifies the underlying level in the database, such as `education_id`, `living_status_id`, and `relationship_id`.
+1. each **variable** also needs a unique *name* that identifies the underlying level for human, such as `education`, `living_status`, and `relationship`.  This is the human label corresponding to `relationship_id`.  It's easiest if this column name matches the variable.
 
-1. each **variable** also needs a unique *name* that identifies the underlying level for human, such as `education`, `living_status`, and `relationship`.  It's easiest if this column name matches the variable.
+1. each **survey wave** gets its own **column** within the csv, such as `description_2011` and `description_2016`.  These are the human labels corresponding to variables like `code_2011` and `code_2016`.
 
-1. each **variable** also needs a unique *display order* value, that will be used later in analyses.  Categorical variables typically have some nonarbitrary desired sequence in graph legends and tables; specify the desired order here.  This helps you order the [`factor`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html) levels in R or the [`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical) levels in Python.
+1. each **variable** benefits from a unique *display order* value, that will be used later in analyses.  Categorical variables typically have some desired sequence in graph legends and tables; specify that order here.  This helps define the [`factor`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html) levels in R or the [`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical) levels in Python.
 
-1. Outside documentation is typically necessary for complicated mapping.  For transparency and maintainability, clearly describe where the documentation can be found.  One option is to include it in `data-public/metadata/README.md`.  Another option is to include it at the bottonm of the csv, preceded by a `#`, or some 'comment' character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells.  Notes for this example are:
+1. Mappings are usually informed by outside documentation.  For transparency and maintainability, clearly describe where the documentation can be found.  One option is to include it in `data-public/metadata/README.md`.  Another option is to include it at the bottonm of the csv, preceded by a `#`, or some 'comment' character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells.  Notes for this example are:
 
     ```csv
     # Notes,,,,,,
