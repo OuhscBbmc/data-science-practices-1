@@ -18,6 +18,12 @@ Remote
 
 
 
+
+Additional Resources
+------------------------------------
+* [@gillespie], particularly the "Efficient collaboration" chapter.
+* [@fitzpatrick]
+
 Loose Notes
 ------------------------------------
 

@@ -46,3 +46,8 @@ Database
 1. Integration with LDAP, Active Directory, or Shibboleth.
 
 1. Warehouse vs transactional performance
+
+
+Additional Resources
+------------------------------------
+* [@gillespie], particularly the "Package selection" section.

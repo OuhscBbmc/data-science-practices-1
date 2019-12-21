@@ -95,12 +95,12 @@ All data ingested by this file occurs in this chunk.  We like to think of each f
 
 Ideally this chunk consumes data from either a plain-text csv or a database.
 
-Many capable R functions and packages ingest data.  We prefer the tidyverse [readr]() for reading conventional files; its younger cousin, [vroom]() has some nice advantages when working with larger files and some forms of jagged rectangles^[Say a csv has 20 columns, but a row has missing values for the last five columns.  Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value.  vroom infers the missing values correctly, while some other packages do not.].
+Many capable R functions and packages ingest data.  We prefer the tidyverse [readr](https://readr.tidyverse.org/) for reading conventional files; its younger cousin, [vroom]()https://vroom.r-lib.org/ has some nice advantages when working with larger files and some forms of jagged rectangles^[Say a csv has 20 columns, but a row has missing values for the last five columns.  Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value.  vroom infers the missing values correctly, while some other packages do not.].  Depending on the file format, good packages to consider are [data.table](https://cran.r-project.org/package=data.table), [haven](https://haven.tidyverse.org/), [readxl](https://readxl.tidyverse.org/), [openxlsx](https://ycphs.github.io/openxlsx/), [arrow](https://CRAN.R-project.org/package=arrow), [jsonlite](https://CRAN.R-project.org/package=jsonlite), [fst](http://www.fstpackage.org/), [yaml](https://CRAN.R-project.org/package=yaml), and  [rio](https://cloud.r-project.org/web/packages/rio/vignettes/rio.html).
 
 
 When used in an [Ellis](#pattern-ellis), this chunk likely consumees a flat file like a csv with data or metadata.  When used in a [Ferry](#pattern-ferry), [Arch](#pattern-arch), or [Scribe](#pattern-scribe), this chunk likely consumes a database table.  When used in an [Analysis file](#pattern-analysis), this chunk likely cosumes a database table or rds (*i.e.*, a compressed R data file).
 
-In some large-scale scenarios, there may be a series of datasets that cannot be held in RAM simultaneously.  Our first choice is to split the R file so each new file has only a subset of the datasets --in other words, the R file probably was given to much responsibility.  Occassionaly the multiple datasets need to be considered at once, so splitting the R file is not a option.  In these scenarios, we prefer to upload all the datasets to a database, which is better manipulating datasets too large for RAM.
+In some large-scale scenarios, there may be a series of datasets that cannot be held in RAM simultaneously.  Our first choice is to split the R file so each new file has only a subset of the datasets --in other words, the R file probably was given too much responsibility.  Occassionaly the multiple datasets need to be considered at once, so splitting the R file is not a option.  In these scenarios, we prefer to upload all the datasets to a database, which is better manipulating datasets too large for RAM.
 
 An R solution may be to losen the restriction that dataset enter the R file only during the 'load-data' chunk.  Once a dataset is processed and no longer needed, `rm()` *r*e*m*oves it from RAM.  Now another dataset can be read from a file and manipulated.
 
@@ -203,3 +203,8 @@ ds_slim
 
 Save to Disk or Database
 ------------------------------------
+
+
+Additional Resources
+------------------------------------
+* [@gillespie], particularly the "Efficient input/output" chapter.
