@@ -135,3 +135,57 @@ Presentation -Interactive {#pattern-presentation-interactive}
 
 Metadata {#pattern-metadata}
 ------------------------------------
+
+Survey items can change across time (for justified and unjustified reasons).  We prefer to dedicate a metadata csv to a single variable
+
+https://github.com/LiveOak/vasquez-mexican-census-1/issues/17#issuecomment-567254695
+
+| relationship_id | code_2011 | code_2016 | relationship             | display_order | description_2011         | description_2016         |
+|-----------------|-----------|-----------|--------------------------|---------------|--------------------------|--------------------------|
+| 1               | 1         | 1         | Jefe(a)                  | 1             | Jefe(a)                  | Jefe(a)                  |
+| 2               | 2         | 2         | Esposo(a) o compañero(a) | 2             | Esposo(a) o compañero(a) | Esposo(a) o compañero(a) |
+| 3               | 3         | 3         | Hijo(a)                  | 3             | Hijo(a)                  | Hijo(a)                  |
+| 4               | 4         | 4         | Nieto(a)                 | 4             | Nieto(a)                 | Nieto(a)                 |
+| 5               | 5         | 5         | Yerno/nuera              | 5             | Yerno/nuera              | Yerno/nuera              |
+| 6               | 6         | 6         | Hermano(a)               | 6             | Hermano(a)               | Hermano(a)               |
+| 7               | 7         | NA        | Sobrino(a)               | 7             | Sobrino(a)               | NA                       |
+| 8               | 8         | NA        | Padre o madre            | 8             | Padre o madre            | NA                       |
+| 9               | 9         | NA        | Suegro(a)                | 9             | Suegro(a)                | NA                       |
+| 10              | 10        | NA        | Cuñado(a)                | 10            | Cuñado(a)                | Cuñado(a)                |
+| 11              | 11        | 7         | Otros parientes          | 11            | Otros parientes          | Otros parientes          |
+| 12              | 12        | 8         | No parientes             | 12            | No parientes             | No parientes             |
+| 13              | 13        | 9         | Empleado(a) doméstico(a) | 13            | Empleado(a) doméstico(a) | Empleado(a) doméstico(a) |
+| 99              | 99        | NA        | No especificado          | 99            | No especificado          | NA                       |
+
+### Primary Rules for Mapping
+
+A few important rules are necessary to map concepts in this multidimensional space.
+
+1. each **variable** gets its own **csv**, such as `relationship.csv` (show above), `education.csv`, `living-status.csv`, or `race.csv`.  It's easiest if this file name matches the variable.
+
+1. each **variable** also needs a unique *integer* that identifies the underlying level in the database, such as `education_id`, `living_status_id`, and `relationship_id`.
+
+1. each **survey wave** gets its own **column** within the csv, such as `code_2011` and `code_2016`.
+
+1. each **level** within a variable-wave gets its own **row**, like `Jefe`, `Esposo`, and `Hijo`.
+
+
+### Secondary Rules for Mapping
+
+In this scenarios, the first three columns are critical (*i.e.*, `relationship_id`, `code_2011`, `code_2016`).  Yet these additional guidelines will help the plumbing and manipulation of lookup variables.
+
+1. each **variable** also needs a unique *name* that identifies the underlying level for human, such as `education`, `living_status`, and `relationship`.  This is the human label corresponding to `relationship_id`.  It's easiest if this column name matches the variable.
+
+1. each **survey wave** gets its own **column** within the csv, such as `description_2011` and `description_2016`.  These are the human labels corresponding to variables like `code_2011` and `code_2016`.
+
+1. each **variable** benefits from a unique *display order* value, that will be used later in analyses.  Categorical variables typically have some desired sequence in graph legends and tables; specify that order here.  This helps define the [`factor`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html) levels in R or the [`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical) levels in Python.
+
+1. Mappings are usually informed by outside documentation.  For transparency and maintainability, clearly describe where the documentation can be found.  One option is to include it in `data-public/metadata/README.md`.  Another option is to include it at the bottonm of the csv, preceded by a `#`, or some 'comment' character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells.  Notes for this example are:
+
+    ```csv
+    # Notes,,,,,,
+    # 2016 codes come from `documentation/2106/fd_endireh2016_dbf.pdf`, pages 14-15,,,,,
+    # 2011 codes come from `documentation/2011/fd_endireh11.xls`, ‘TSDem’ tab,,,,,
+    ```
+
+1. sometimes a `notes` column helps humans keep things straight, especially researchers new to the field/project.  In the example above, the `notes` value in the first row might be "*jefe* means 'head', not 'boss'".

@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
 <li class="chapter" data-level="4.4" data-path="file-prototype.html"><a href="file-prototype.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
 <li class="chapter" data-level="4.5" data-path="file-prototype.html"><a href="file-prototype.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#tweak-data-chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data (#chunk-tweak-data)</a></li>
+<li class="chapter" data-level="4.6" data-path="file-prototype.html"><a href="file-prototype.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
 <li class="chapter" data-level="4.7" data-path="file-prototype.html"><a href="file-prototype.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
 <li class="chapter" data-level="4.8" data-path="file-prototype.html"><a href="file-prototype.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
 <li class="chapter" data-level="4.9" data-path="file-prototype.html"><a href="file-prototype.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
@@ -213,7 +213,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>7.5</b> Analysis</a></li>
 <li class="chapter" data-level="7.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>7.6</b> Presentation -Static</a></li>
 <li class="chapter" data-level="7.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>7.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a></li>
+<li class="chapter" data-level="7.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>7.8</b> Metadata</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.1</b> Primary Rules for Mapping</a></li>
+<li class="chapter" data-level="7.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>7.8.2</b> Secondary Rules for Mapping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>8</b> Security &amp; Private Data</a>
 <ul>
@@ -384,62 +388,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="snippets" class="section level1">
+<div id="snippets" class="section level1" number="21">
 <h1 number="21"><span class="header-section-number">21</span> Snippets</h1>
-<div id="reading-external-data" class="section level2">
+<div id="reading-external-data" class="section level2" number="21.1">
 <h2 number="21.1"><span class="header-section-number">21.1</span> Reading External Data</h2>
-<div id="reading-from-excel" class="section level3">
+<div id="reading-from-excel" class="section level3" number="21.1.1">
 <h3 number="21.1.1"><span class="header-section-number">21.1.1</span> Reading from Excel</h3>
 <p><em>Background</em>: Avoid Excel for so many reasons. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roamining columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="snippets.html#cb32-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb32-2"><a href="snippets.html#cb32-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
-<span id="cb32-3"><a href="snippets.html#cb32-3"></a></span>
-<span id="cb32-4"><a href="snippets.html#cb32-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
-<span id="cb32-5"><a href="snippets.html#cb32-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb32-6"><a href="snippets.html#cb32-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>        =<span class="st"> &quot;text&quot;</span>,</span>
-<span id="cb32-7"><a href="snippets.html#cb32-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>         =<span class="st"> &quot;date&quot;</span>,</span>
-<span id="cb32-8"><a href="snippets.html#cb32-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>      =<span class="st"> &quot;numeric&quot;</span></span>
-<span id="cb32-9"><a href="snippets.html#cb32-9"></a>)</span>
-<span id="cb32-10"><a href="snippets.html#cb32-10"></a></span>
-<span id="cb32-11"><a href="snippets.html#cb32-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb32-12"><a href="snippets.html#cb32-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
-<span id="cb32-13"><a href="snippets.html#cb32-13"></a>  <span class="dt">path       =</span> config<span class="op">$</span>path_admission_charge,</span>
-<span id="cb32-14"><a href="snippets.html#cb32-14"></a>  <span class="dt">col_types  =</span> col_types</span>
-<span id="cb32-15"><a href="snippets.html#cb32-15"></a>  <span class="co"># sheet    = &quot;dont-use-sheets-if-possible&quot;</span></span>
-<span id="cb32-16"><a href="snippets.html#cb32-16"></a>)</span>
-<span id="cb32-17"><a href="snippets.html#cb32-17"></a></span>
-<span id="cb32-18"><a href="snippets.html#cb32-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
-<span id="cb32-19"><a href="snippets.html#cb32-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
-<span id="cb32-20"><a href="snippets.html#cb32-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
-<span id="cb32-21"><a href="snippets.html#cb32-21"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="snippets.html#cb33-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb33-2"><a href="snippets.html#cb33-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
+<span id="cb33-3"><a href="snippets.html#cb33-3"></a></span>
+<span id="cb33-4"><a href="snippets.html#cb33-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
+<span id="cb33-5"><a href="snippets.html#cb33-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb33-6"><a href="snippets.html#cb33-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>        =<span class="st"> &quot;text&quot;</span>,</span>
+<span id="cb33-7"><a href="snippets.html#cb33-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>         =<span class="st"> &quot;date&quot;</span>,</span>
+<span id="cb33-8"><a href="snippets.html#cb33-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>      =<span class="st"> &quot;numeric&quot;</span></span>
+<span id="cb33-9"><a href="snippets.html#cb33-9"></a>)</span>
+<span id="cb33-10"><a href="snippets.html#cb33-10"></a></span>
+<span id="cb33-11"><a href="snippets.html#cb33-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb33-12"><a href="snippets.html#cb33-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
+<span id="cb33-13"><a href="snippets.html#cb33-13"></a>  <span class="dt">path       =</span> config<span class="op">$</span>path_admission_charge,</span>
+<span id="cb33-14"><a href="snippets.html#cb33-14"></a>  <span class="dt">col_types  =</span> col_types</span>
+<span id="cb33-15"><a href="snippets.html#cb33-15"></a>  <span class="co"># sheet    = &quot;dont-use-sheets-if-possible&quot;</span></span>
+<span id="cb33-16"><a href="snippets.html#cb33-16"></a>)</span>
+<span id="cb33-17"><a href="snippets.html#cb33-17"></a></span>
+<span id="cb33-18"><a href="snippets.html#cb33-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
+<span id="cb33-19"><a href="snippets.html#cb33-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
+<span id="cb33-20"><a href="snippets.html#cb33-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
+<span id="cb33-21"><a href="snippets.html#cb33-21"></a>)</span></code></pre></div>
 </div>
-<div id="removing-trailing-comma-from-header" class="section level3">
+<div id="removing-trailing-comma-from-header" class="section level3" number="21.1.2">
 <h3 number="21.1.2"><span class="header-section-number">21.1.2</span> Removing Trailing Comma from Header</h3>
 <p><em>Background</em>: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr:read_csv()</code></a> appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.</p>
 <p><em>Explanation</em>: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to <code>readr::read_csv()</code> to convert it into a data.frame.</p>
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="snippets.html#cb33-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
-<span id="cb33-2"><a href="snippets.html#cb33-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
-<span id="cb33-3"><a href="snippets.html#cb33-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
-<span id="cb33-4"><a href="snippets.html#cb33-4"></a></span>
-<span id="cb33-5"><a href="snippets.html#cb33-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="snippets.html#cb34-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
+<span id="cb34-2"><a href="snippets.html#cb34-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
+<span id="cb34-3"><a href="snippets.html#cb34-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
+<span id="cb34-4"><a href="snippets.html#cb34-4"></a></span>
+<span id="cb34-5"><a href="snippets.html#cb34-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
 </div>
 </div>
-<div id="grooming" class="section level2">
+<div id="grooming" class="section level2" number="21.2">
 <h2 number="21.2"><span class="header-section-number">21.2</span> Grooming</h2>
-<div id="correct-for-misinterpreted-two-digit-year" class="section level3">
+<div id="correct-for-misinterpreted-two-digit-year" class="section level3" number="21.2.1">
 <h3 number="21.2.1"><span class="header-section-number">21.2.1</span> Correct for misinterpreted two-digit year</h3>
 <p><em>Background</em>: Sometimes the Meditech dates are specified like <code>1/6/54</code> instead of <code>1/6/1954</code>. <code>readr::read_csv()</code> has to choose if the year is supposed to be ‘1954’ or ‘2054’. A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can’t (so it guesses 2054). For avoid this and other problems, request dates in an <a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a> format.</p>
 <p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="snippets.html#cb34-1"></a> ds <span class="op">%&gt;%</span></span>
-<span id="cb34-2"><a href="snippets.html#cb34-2"></a><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
-<span id="cb34-3"><a href="snippets.html#cb34-3"></a>    <span class="dt">dob   =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(dob <span class="op">&lt;=</span><span class="st"> </span><span class="kw">Sys.Date</span>(), dob, dob <span class="op">-</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">years</span>(<span class="dv">100</span>))</span>
-<span id="cb34-4"><a href="snippets.html#cb34-4"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="snippets.html#cb35-1"></a> ds <span class="op">%&gt;%</span></span>
+<span id="cb35-2"><a href="snippets.html#cb35-2"></a><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
+<span id="cb35-3"><a href="snippets.html#cb35-3"></a>    <span class="dt">dob   =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(dob <span class="op">&lt;=</span><span class="st"> </span><span class="kw">Sys.Date</span>(), dob, dob <span class="op">-</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">years</span>(<span class="dv">100</span>))</span>
+<span id="cb35-4"><a href="snippets.html#cb35-4"></a>  )</span></code></pre></div>
 
 </div>
 </div>
