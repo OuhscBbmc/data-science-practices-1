@@ -394,7 +394,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 number="2.1"><span class="header-section-number">2.1</span> Simplify</h2>
 <div id="data-types" class="section level3" number="2.1.1">
 <h3 number="2.1.1"><span class="header-section-number">2.1.1</span> Data Types</h3>
-<p>Use the simplest data type reasonable. A simpler data type is less likely contain unintented values. As we have seen, a string variable called <code>gender</code> can simulatneously contain the values “m”, “f”, “F”, “Female”, “MALE”, “0”, “1”, “2”, “Latino”, "", and <code>NA</code>. On the other hand, a boolean variable <code>gender_male</code> can be only <code>FALSE</code>, <code>TRUE</code>, and <code>NA</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called <code>gender</code> can simultaneously contain the values “m”, “f”, “F”, “Female”, “MALE”, “0”, “1”, “2”, “Latino”, "", and <code>NA</code>. On the other hand, a boolean variable <code>gender_male</code> can be only <code>FALSE</code>, <code>TRUE</code>, and <code>NA</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <p>Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
 <p>Within R, the preference for numeric-ish variables is</p>
 <ol style="list-style-type: decimal">
@@ -429,12 +429,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>is much easier to read and not mess up than</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="coding.html#cb2-1"></a>visit_completed =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">if_else</span>(<span class="op">!</span><span class="kw">is.na</span>(visit_completed), visit_completed, <span class="ot">FALSE</span>)</span></code></pre></div></li>
 <li><p><code>&lt;=</code> (or a similar comparison operator): Compare two quantities to output a boolean variable.</p></li>
-<li><p><code>dplyr::if_else()</code>: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) <code>NA</code>. An advantage over <code>&lt;=</code> is that <code>NA</code> values can be specified directly.</p>
-<p>`<code>month</code> element needs to be handled explicitly.
-stage = dplyr::if_else(date_start &lt;= month, “pre”, “post”, missing = “missing-month”),</p>
-<p># Otherwise a simple boolean output is sufficient.
-stage_post = (date_start &lt;= month)
-```</p></li>
+<li><p><code>dplyr::if_else()</code>: The function evaluates a single boolean variable. The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) <code>NA</code>. An advantage over <code>&lt;=</code> is that <code>NA</code> values can be specified directly.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="coding.html#cb3-1"></a>date_start &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-01-01&quot;</span>)</span>
+<span id="cb3-2"><a href="coding.html#cb3-2"></a></span>
+<span id="cb3-3"><a href="coding.html#cb3-3"></a><span class="co"># If a missing month element needs to be handled explicitly.</span></span>
+<span id="cb3-4"><a href="coding.html#cb3-4"></a>stage       =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">if_else</span>(date_start <span class="op">&lt;=</span><span class="st"> </span>month, <span class="st">&quot;pre&quot;</span>, <span class="st">&quot;post&quot;</span>, <span class="dt">missing =</span> <span class="st">&quot;missing-month&quot;</span>)</span>
+<span id="cb3-5"><a href="coding.html#cb3-5"></a></span>
+<span id="cb3-6"><a href="coding.html#cb3-6"></a><span class="co"># Otherwise a simple boolean output is sufficient.</span></span>
+<span id="cb3-7"><a href="coding.html#cb3-7"></a>stage_post  =<span class="st"> </span>(date_start <span class="op">&lt;=</span><span class="st"> </span>month)</span></code></pre></div></li>
 <li><p><code>base::cut()</code>: The function evaluations only a single numeric variable. It’s range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).</p></li>
 <li><p><code>dplyr::recode()</code>: The function evaluates a single integer or character variable. The output branches to a single discrete value.</p></li>
 <li><p><em>lookup table</em>: It feasible recode 6 levels of race directly in R. It’s less feasible to recode 200 provider names. Specify the mapping in a csv, <code>readr</code> the csv to a data.frame, and left-join it.</p></li>

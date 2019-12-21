@@ -6,7 +6,7 @@ Simplify
 
 ### Data Types
 
-Use the simplest data type reasonable.  A simpler data type is less likely contain unintented values.  As we have seen, a string variable called `gender` can simulatneously contain the values "m", "f", "F", "Female", "MALE", "0", "1", "2", "Latino", "", and `NA`.  On the other hand, a boolean variable `gender_male` can be only `FALSE`, `TRUE`, and `NA`.^[The database `bit` equivalents are `0`, `1`, and `NULL`].
+Use the simplest data type reasonable.  A simpler data type is less likely contain unintended values.  As we have seen, a string variable called `gender` can simultaneously contain the values "m", "f", "F", "Female", "MALE", "0", "1", "2", "Latino", "", and `NA`.  On the other hand, a boolean variable `gender_male` can be only `FALSE`, `TRUE`, and `NA`.^[The database `bit` equivalents are `0`, `1`, and `NULL`].
 
 Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced.  As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
 
@@ -52,13 +52,13 @@ Almost every project recodes many variables.  Choose the simplest function possi
 
 1. `<=` (or a similar comparison operator): Compare two quantities to output a boolean variable.
 
-1. `dplyr::if_else()`:  The function evaluates a single boolean variable.  The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) `NA`.  An advantage over `<=` is that `NA` values can be specified directly.
+1. `dplyr::if_else()`:  The function evaluates a single boolean variable.  The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) `NA`.  An advantage over `<=` is that `NA` values can be specified directly.
 
-    ```r    
+    ```r
     date_start <- as.Date("2017-01-01")
     
-    # If a missing `month` element needs to be handled explicitly.
-    stage       = dplyr::if_else(date_start <= month, "pre", "post", missing = "missing-month"),
+    # If a missing month element needs to be handled explicitly.
+    stage       = dplyr::if_else(date_start <= month, "pre", "post", missing = "missing-month")
     
     # Otherwise a simple boolean output is sufficient.
     stage_post  = (date_start <= month)

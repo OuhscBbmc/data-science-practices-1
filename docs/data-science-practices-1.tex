@@ -138,7 +138,7 @@ This collection of documents describe practices used by the OUHSC \href{https://
 \hypertarget{data-types}{%
 \subsection{Data Types}\label{data-types}}
 
-Use the simplest data type reasonable. A simpler data type is less likely contain unintented values. As we have seen, a string variable called \texttt{gender} can simulatneously contain the values ``m'', ``f'', ``F'', ``Female'', ``MALE'', ``0'', ``1'', ``2'', ``Latino'', "", and \texttt{NA}. On the other hand, a boolean variable \texttt{gender\_male} can be only \texttt{FALSE}, \texttt{TRUE}, and \texttt{NA}.\footnote{The database \texttt{bit} equivalents are \texttt{0}, \texttt{1}, and \texttt{NULL}}.
+Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called \texttt{gender} can simultaneously contain the values ``m'', ``f'', ``F'', ``Female'', ``MALE'', ``0'', ``1'', ``2'', ``Latino'', "", and \texttt{NA}. On the other hand, a boolean variable \texttt{gender\_male} can be only \texttt{FALSE}, \texttt{TRUE}, and \texttt{NA}.\footnote{The database \texttt{bit} equivalents are \texttt{0}, \texttt{1}, and \texttt{NULL}}.
 
 Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
 
@@ -214,14 +214,19 @@ Almost every project recodes many variables. Choose the simplest function possib
 \item
   \texttt{\textless{}=} (or a similar comparison operator): Compare two quantities to output a boolean variable.
 \item
-  \texttt{dplyr::if\_else()}: The function evaluates a single boolean variable. The output branches to only three possiblities: condition is (a) true, (b) false, or (c) (optionally) \texttt{NA}. An advantage over \texttt{\textless{}=} is that \texttt{NA} values can be specified directly.
+  \texttt{dplyr::if\_else()}: The function evaluates a single boolean variable. The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) \texttt{NA}. An advantage over \texttt{\textless{}=} is that \texttt{NA} values can be specified directly.
 
-  `\texttt{month} element needs to be handled explicitly.
-  stage = dplyr::if\_else(date\_start \textless= month, ``pre'', ``post'', missing = ``missing-month''),
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{date\_start <{-}}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2017{-}01{-}01"}\NormalTok{)}
 
-  \# Otherwise a simple boolean output is sufficient.
-  stage\_post = (date\_start \textless= month)
-  ```
+\CommentTok{\# If a missing month element needs to be handled explicitly.}
+\NormalTok{stage       =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(date\_start }\OperatorTok{<=}\StringTok{ }\NormalTok{month, }\StringTok{"pre"}\NormalTok{, }\StringTok{"post"}\NormalTok{, }\DataTypeTok{missing =} \StringTok{"missing{-}month"}\NormalTok{)}
+
+\CommentTok{\# Otherwise a simple boolean output is sufficient.}
+\NormalTok{stage\_post  =}\StringTok{ }\NormalTok{(date\_start }\OperatorTok{<=}\StringTok{ }\NormalTok{month)}
+\end{Highlighting}
+\end{Shaded}
 \item
   \texttt{base::cut()}: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
 \item
