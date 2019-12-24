@@ -43,3 +43,10 @@ Chapters & Sections to Form
 * [*R packages*](http://r-pkgs.had.co.nz/) by Hadley Wickham
 
 * http://mangothecat.github.io/goodpractice/
+
+Practices
+------------------------------------
+
+### Date Arithmetic {#date-arithmetic}
+
+Don't use `-` to subtract dates, use `difftime(stop, start, units="days")`.  It's longer but protects from the scneario that `start` or `stop` are changed upstream to a date time.  In that case, `stop - start` equals the number of *seconds* between the two points, not the number of *days*.
