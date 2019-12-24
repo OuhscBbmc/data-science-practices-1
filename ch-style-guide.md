@@ -28,9 +28,55 @@ However, some terms are too long to reasonably use without shortening.  We make 
 
 When your team choose terms (*e.g.*, 'apt' vs 'appt'), try to use a standard vocabulary, such as [MedTerms Medical Dictionary](https://www.medicinenet.com/medterms-medical-dictionary/article.htm).
 
+### Filtering Rows {#style-filter)
+
+Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices have hopefully reduced our mistakes and improved maintainability.  
+
+#### Dropping rows with missing values {#style-filter-drop_na}
+
+[`tidyr::drop_na()`]() drops rows with a missing value in a specific column.  
+
+```r
+ds %>%
+  tidyr::drop_na(dob)
+```
+
+is cleaner to read and write than these two styles.  In particular, it's easy to forget/overllok a `!`.
+
+```r
+ds %>%
+  dplyr::filter(!is.na(dob))
+  
+ds[!is.na(ds$dob), ]  
+```
+
+
+#### Mimic number line {#style-filter-number-line}
+
+When ordering quantities, go smallest-to-largest as you type left-to-right.
+
+
+#### Searchable verbs {#style-filter-searchable}
+
+You've probably asked in frustration, "Where did all the rows go?  I had 1,000 in the middle of the file, but now have only 782."  Try to keep a consistent tools for filtering, so you can 'ctrl+f' only a handful of terms, such as
+`filter`,
+`drop_na`, and
+`summarize/summarise`.
+
+It's more difficult to highlight the When using the base R's filtering style, (*e.g.*, `ds <- ds[4 <= ds$count, ]`).
+
 ### Number {#style-number}
 
 The word 'number' is ambiguous, especially in data science.  Try for more specific terms like 'count', 'id', 'index', and 'tally'.
+
+
+Naming
+------------------------------------
+
+### Semantic sorting {#style-naming-semantic}
+
+Put the "biggest" term on the left side of the variable.
+
 
 
 ggplot2
