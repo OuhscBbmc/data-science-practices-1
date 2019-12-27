@@ -23,8 +23,9 @@ However, some terms are too long to reasonably use without shortening.  We make 
 [drg](https://en.wikipedia.org/wiki/Diagnosis-related_group) (stands for diagnosis-related group),
 [dx](https://www.medicinenet.com/script/main/art.asp?articlekey=33829),
 [hx](https://medical-dictionary.thefreedictionary.com/Hx),
-[icd](https://www.cdc.gov/nchs/icd/icd10cm.htm), and
-[pt](https://www.medicinenet.com/script/main/art.asp?articlekey=39154).
+[icd](https://www.cdc.gov/nchs/icd/icd10cm.htm)
+[pt](https://www.medicinenet.com/script/main/art.asp?articlekey=39154), and
+[vr]() (vital records).
 
 When your team choose terms (*e.g.*, 'apt' vs 'appt'), try to use a standard vocabulary, such as [MedTerms Medical Dictionary](https://www.medicinenet.com/medterms-medical-dictionary/article.htm).
 
@@ -69,6 +70,63 @@ It's more difficult to highlight the When using the base R's filtering style, (*
 
 The word 'number' is ambiguous, especially in data science.  Try for more specific terms like 'count', 'id', 'index', and 'tally'.
 
+Categorical Variables {#style-factor}
+------------------------------------
+
+There are lots of names for a categorical variable across the different disciplines (*e.g.*, factor, categorical, ...).  
+
+### Explicit Missing Values {#style-factor-unknown}
+
+Define a level like `"unknown"` so the data manipulation doesn't have to test for both `is.na(x)` and `x=="unknown"`.  The explicit labels also helps when included in a statistical procedure and coefficient table.
+
+### Granularity {#style-factor-granularity}
+
+Sometimes it helps to represent the values differently, say a granular and a coarse way.  We say `cut7` or `cut3` to denotes the number of levels; this is related to [`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html).  'unknown' and 'other' are frequently levels, and they counts toward the quantity.
+
+```r
+education_cut7      = dplyr::recode(
+  education_cut7,
+  "No Highschool Degree / GED"  = "no diploma",
+  "High School Degree / GED"    = "diploma",
+  "Some College"                = "some college",
+  "Associate's Degree"          = "associate",
+  "Bachelor's Degree"           = "bachelor",
+  "Post-graduate degree"        = "post-grad",
+  "Unknown"                     = "unknown",
+  .missing                      = "unknown",
+),
+education_cut3      = dplyr::recode(
+  education_cut7,
+  "no diploma"    = "no bachelor",
+  "diploma"       = "no bachelor",
+  "some college"  = "no bachelor",
+  "associate"     = "no bachelor",
+  "bachelor"      = "bachelor",
+  "post-grad"     = "bachelor",
+  "unknown"       = "unknown",
+),
+education_cut7 = factor(education_cut7, levels=c(
+  "no diploma",
+  "diploma",
+  "some college",
+  "associate",
+  "bachelor",
+  "post-grad",
+  "unknown"
+)),
+education_cut3 = factor(education_cut3, levels=c(
+  "no bachelor",
+  "bachelor",
+  "unknown"
+))
+```
+
+Dates {#style-dates}
+------------------------------------
+
+* yob is an integer, but mob and wob are dates.  Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of [`OuhscMunge::clump_month_date()`](http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html) and [`OuhscMunge::clump_week_date()`](http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html).  These help obfuscate the real value, if PHI is involved.  Months are centered because the midpoint is usually a better representation of the month's performance than the month's initial day.
+
+* `birth_month_index` can be values 1 through 12, while `birth_month` (or commonly `mob`) contains the year (*e.g.*, 2014-07-15).
 
 Naming
 ------------------------------------
