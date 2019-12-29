@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-20}
+\date{2019-12-28}
 
 \begin{document}
 \frontmatter
@@ -209,6 +209,24 @@ Almost every project recodes many variables. Choose the simplest function possib
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{visit\_completed =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(visit\_completed), visit\_completed, }\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  \texttt{dplyr::na\_if()} transforms a nonmissing value into an NA.
+
+  Recoding missing values like
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birth\_apgar =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{na\_if}\NormalTok{(birth\_apgar, }\DecValTok{99}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  is easier to read and not mess up than
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{birth\_apgar =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(birth\_apgar }\OperatorTok{==}\StringTok{ }\DecValTok{99}\NormalTok{, }\OtherTok{NA\_real\_}\NormalTok{, birth\_apgar)}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -1393,8 +1411,8 @@ This involves code/files that multiple people use, like the REDCap arches.
 
 (\href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}{example})
 
-\hypertarget{style-guide}{%
-\chapter{Style Guide}\label{style-guide}}
+\hypertarget{style}{%
+\chapter{Style Guide}\label{style}}
 
 Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most themes in this document, the cost is worth the effort. Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.
 
@@ -1422,24 +1440,141 @@ However, some terms are too long to reasonably use without shortening. We make s
   \href{https://en.wikipedia.org/wiki/Diagnosis-related_group}{drg} (stands for diagnosis-related group),
   \href{https://www.medicinenet.com/script/main/art.asp?articlekey=33829}{dx},
   \href{https://medical-dictionary.thefreedictionary.com/Hx}{hx},
-  \href{https://www.cdc.gov/nchs/icd/icd10cm.htm}{icd}, and
-  \href{https://www.medicinenet.com/script/main/art.asp?articlekey=39154}{pt}.
+  \href{https://www.cdc.gov/nchs/icd/icd10cm.htm}{icd}
+  \href{https://www.medicinenet.com/script/main/art.asp?articlekey=39154}{pt}, and
+  \href{}{vr} (vital records).
 \end{enumerate}
 
 When your team choose terms (\emph{e.g.}, `apt' vs `appt'), try to use a standard vocabulary, such as \href{https://www.medicinenet.com/medterms-medical-dictionary/article.htm}{MedTerms Medical Dictionary}.
+
+\hypertarget{filtering-rows-style-filter}{%
+\subsection{Filtering Rows \{\#style-filter)}\label{filtering-rows-style-filter}}
+
+Removing datasets rows is an important operation that is a frequent source of sneaky errors. These practices have hopefully reduced our mistakes and improved maintainability.
+
+\hypertarget{style-filter-drop_na}{%
+\subsubsection{Dropping rows with missing values}\label{style-filter-drop_na}}
+
+\href{}{\texttt{tidyr::drop\_na()}} drops rows with a missing value in a specific column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ds }\OperatorTok{\%>\%}
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{drop\_na}\NormalTok{(dob)}
+\end{Highlighting}
+\end{Shaded}
+
+is cleaner to read and write than these two styles. In particular, it's easy to forget/overllok a \texttt{!}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ds }\OperatorTok{\%>\%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(dob))}
+  
+\NormalTok{ds[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(ds}\OperatorTok{$}\NormalTok{dob), ]  }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-filter-number-line}{%
+\subsubsection{Mimic number line}\label{style-filter-number-line}}
+
+When ordering quantities, go smallest-to-largest as you type left-to-right.
+
+\hypertarget{style-filter-searchable}{%
+\subsubsection{Searchable verbs}\label{style-filter-searchable}}
+
+You've probably asked in frustration, ``Where did all the rows go? I had 1,000 in the middle of the file, but now have only 782.'' Try to keep a consistent tools for filtering, so you can `ctrl+f' only a handful of terms, such as
+\texttt{filter},
+\texttt{drop\_na}, and
+\texttt{summarize/summarise}.
+
+It's more difficult to highlight the When using the base R's filtering style, (\emph{e.g.}, \texttt{ds\ \textless{}-\ ds{[}4\ \textless{}=\ ds\$count,\ {]}}).
 
 \hypertarget{style-number}{%
 \subsection{Number}\label{style-number}}
 
 The word `number' is ambiguous, especially in data science. Try for more specific terms like `count', `id', `index', and `tally'.
 
-\hypertarget{ggplot2}{%
-\section{ggplot2}\label{ggplot2}}
+\hypertarget{style-factor}{%
+\section{Categorical Variables}\label{style-factor}}
+
+There are lots of names for a categorical variable across the different disciplines (\emph{e.g.}, factor, categorical, \ldots).
+
+\hypertarget{style-factor-unknown}{%
+\subsection{Explicit Missing Values}\label{style-factor-unknown}}
+
+Define a level like \texttt{"unknown"} so the data manipulation doesn't have to test for both \texttt{is.na(x)} and \texttt{x=="unknown"}. The explicit labels also helps when included in a statistical procedure and coefficient table.
+
+\hypertarget{style-factor-granularity}{%
+\subsection{Granularity}\label{style-factor-granularity}}
+
+Sometimes it helps to represent the values differently, say a granular and a coarse way. We say \texttt{cut7} or \texttt{cut3} to denotes the number of levels; this is related to \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html}{\texttt{base::cut()}}. `unknown' and `other' are frequently levels, and they counts toward the quantity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{education\_cut7      =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{recode}\NormalTok{(}
+\NormalTok{  education\_cut7,}
+  \StringTok{"No Highschool Degree / GED"}\NormalTok{  =}\StringTok{ "no diploma"}\NormalTok{,}
+  \StringTok{"High School Degree / GED"}\NormalTok{    =}\StringTok{ "diploma"}\NormalTok{,}
+  \StringTok{"Some College"}\NormalTok{                =}\StringTok{ "some college"}\NormalTok{,}
+  \StringTok{"Associate\textquotesingle{}s Degree"}\NormalTok{          =}\StringTok{ "associate"}\NormalTok{,}
+  \StringTok{"Bachelor\textquotesingle{}s Degree"}\NormalTok{           =}\StringTok{ "bachelor"}\NormalTok{,}
+  \StringTok{"Post{-}graduate degree"}\NormalTok{        =}\StringTok{ "post{-}grad"}\NormalTok{,}
+  \StringTok{"Unknown"}\NormalTok{                     =}\StringTok{ "unknown"}\NormalTok{,}
+  \DataTypeTok{.missing                      =} \StringTok{"unknown"}\NormalTok{,}
+\NormalTok{),}
+\NormalTok{education\_cut3      =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{recode}\NormalTok{(}
+\NormalTok{  education\_cut7,}
+  \StringTok{"no diploma"}\NormalTok{    =}\StringTok{ "no bachelor"}\NormalTok{,}
+  \StringTok{"diploma"}\NormalTok{       =}\StringTok{ "no bachelor"}\NormalTok{,}
+  \StringTok{"some college"}\NormalTok{  =}\StringTok{ "no bachelor"}\NormalTok{,}
+  \StringTok{"associate"}\NormalTok{     =}\StringTok{ "no bachelor"}\NormalTok{,}
+  \StringTok{"bachelor"}\NormalTok{      =}\StringTok{ "bachelor"}\NormalTok{,}
+  \StringTok{"post{-}grad"}\NormalTok{     =}\StringTok{ "bachelor"}\NormalTok{,}
+  \StringTok{"unknown"}\NormalTok{       =}\StringTok{ "unknown"}\NormalTok{,}
+\NormalTok{),}
+\NormalTok{education\_cut7 =}\StringTok{ }\KeywordTok{factor}\NormalTok{(education\_cut7, }\DataTypeTok{levels=}\KeywordTok{c}\NormalTok{(}
+  \StringTok{"no diploma"}\NormalTok{,}
+  \StringTok{"diploma"}\NormalTok{,}
+  \StringTok{"some college"}\NormalTok{,}
+  \StringTok{"associate"}\NormalTok{,}
+  \StringTok{"bachelor"}\NormalTok{,}
+  \StringTok{"post{-}grad"}\NormalTok{,}
+  \StringTok{"unknown"}
+\NormalTok{)),}
+\NormalTok{education\_cut3 =}\StringTok{ }\KeywordTok{factor}\NormalTok{(education\_cut3, }\DataTypeTok{levels=}\KeywordTok{c}\NormalTok{(}
+  \StringTok{"no bachelor"}\NormalTok{,}
+  \StringTok{"bachelor"}\NormalTok{,}
+  \StringTok{"unknown"}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-dates}{%
+\section{Dates}\label{style-dates}}
+
+\begin{itemize}
+\item
+  yob is an integer, but mob and wob are dates. Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of \href{http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html}{\texttt{OuhscMunge::clump\_month\_date()}} and \href{http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html}{\texttt{OuhscMunge::clump\_week\_date()}}. These help obfuscate the real value, if PHI is involved. Months are centered because the midpoint is usually a better representation of the month's performance than the month's initial day.
+\item
+  \texttt{birth\_month\_index} can be values 1 through 12, while \texttt{birth\_month} (or commonly \texttt{mob}) contains the year (\emph{e.g.}, 2014-07-15).
+\end{itemize}
+
+\hypertarget{naming}{%
+\section{Naming}\label{naming}}
+
+\hypertarget{style-naming-semantic}{%
+\subsection{Semantic sorting}\label{style-naming-semantic}}
+
+Put the ``biggest'' term on the left side of the variable.
+
+\hypertarget{style-ggplot}{%
+\section{ggplot2}\label{style-ggplot}}
 
 The expressiveness of \href{https://ggplot2.tidyverse.org/}{ggplot2} allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a \href{https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md}{textbook for introductory statistics} (\citet{deshea}); the 200+ graphs and their code is publically available.
 
-\hypertarget{order-of-commands}{%
-\subsection{Order of commands}\label{order-of-commands}}
+\hypertarget{style-ggplot-order}{%
+\subsection{Order of commands}\label{style-ggplot-order}}
 
 ggplot2 is essentially a collection of functions combined with the \texttt{+} operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:
 
@@ -1447,9 +1582,9 @@ ggplot2 is essentially a collection of functions combined with the \texttt{+} op
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \texttt{ggplot2()} is the primary function to specify the default dataset and aesthetic mappings. Many arguments can be passed to \texttt{aes()}, and we prefer to follow an order consistent with the \texttt{scale\_*()} order below.
+  \texttt{ggplot()} is the primary function to specify the default dataset and aesthetic mappings. Many arguments can be passed to \texttt{aes()}, and we prefer to follow an order consistent with the \texttt{scale\_*()} order below.
 \item
-  \texttt{geom\_*()} creates the \emph{geom}etric elements that reperesent the data. Unlike most categories in this list, the order matters. Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.
+  \texttt{geom\_*()} and \texttt{annotate()} creates the \emph{geom}etric elements that reperesent the data. Unlike most categories in this list, the order matters. Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.
 \item
   \texttt{scale\_*()} describes how a dimension of data (specified in \texttt{aes()}) is translated into a visual element. We specify the dimensions in descending order of (typical) importance: \texttt{x}, \texttt{y}, \texttt{group}, \texttt{color}, \texttt{fill}, \texttt{size}, \texttt{radius}, \texttt{alpha}, \texttt{shape}, \texttt{linetype}.
 \item
@@ -1457,22 +1592,27 @@ ggplot2 is essentially a collection of functions combined with the \texttt{+} op
 \item
   \texttt{facet\_*()} and \texttt{label\_*()}
 \item
-  \texttt{theme()}
+  \texttt{guides()}
+\item
+  \texttt{theme()} (call the `big' themes like \texttt{theme\_minimal()} before overriding the details like \texttt{theme(panel.grid\ =\ element\_line(color\ =\ "gray"))})
 \item
   \texttt{labs()}
 \end{enumerate}
 
-\hypertarget{gotchas}{%
-\subsection{Gotchas}\label{gotchas}}
+\hypertarget{style-ggplot-gotchas}{%
+\subsection{Gotchas}\label{style-ggplot-gotchas}}
 
 Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Call \texttt{coord\_*()} to restrict the plotted \emph{x}/\emph{y} values, not \texttt{scale\_*()} or \texttt{lims()}/\texttt{xlim()}/\texttt{ylim()}. \texttt{coord\_*()} zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to \texttt{geom\_smooth()} (\emph{e.g.}, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling \texttt{coord\_*()}, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.
-\end{enumerate}
+\hypertarget{style-ggplot-zoom}{%
+\subsubsection{Zooming}\label{style-ggplot-zoom}}
+
+Call \texttt{coord\_*()} to restrict the plotted \emph{x}/\emph{y} values, not \texttt{scale\_*()} or \texttt{lims()}/\texttt{xlim()}/\texttt{ylim()}. \texttt{coord\_*()} zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to \texttt{geom\_smooth()} (\emph{e.g.}, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling \texttt{coord\_*()}, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.
+
+\hypertarget{style-ggplot-seed}{%
+\subsubsection{Seed}\label{style-ggplot-seed}}
+
+When jittering, set the seed in the `declare-globals' chunk so that rerunning the report won't create a (slightly) different png. The insignificantly different pngs will consume extra space in the Git repository. Also, the GitHub diff will show the difference between png versions, which requires extra cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.
 
 \hypertarget{publication}{%
 \chapter{Publishing Results}\label{publication}}
@@ -2463,6 +2603,14 @@ My proposal uses GitHub and Markdown because they're so universal (no knowledge 
 \item
   \url{http://mangothecat.github.io/goodpractice/}
 \end{itemize}
+
+\hypertarget{practices}{%
+\section{Practices}\label{practices}}
+
+\hypertarget{date-arithmetic}{%
+\subsection{Date Arithmetic}\label{date-arithmetic}}
+
+Don't use \texttt{-} to subtract dates, use \texttt{difftime(stop,\ start,\ units="days")}. It's longer but protects from the scneario that \texttt{start} or \texttt{stop} are changed upstream to a date time. In that case, \texttt{stop\ -\ start} equals the number of \emph{seconds} between the two points, not the number of \emph{days}.
 
 \hypertarget{example-bookdown}{%
 \chapter{Example}\label{example-bookdown}}
