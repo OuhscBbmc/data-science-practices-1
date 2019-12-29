@@ -1,4 +1,4 @@
-Style Guide {#style-guide}
+Style Guide {#style}
 ====================================
 
 Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code.  But like in most themes in this document, the cost is worth the effort.  Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.
