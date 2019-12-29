@@ -50,6 +50,20 @@ Almost every project recodes many variables.  Choose the simplest function possi
     visit_completed = dplyr::if_else(!is.na(visit_completed), visit_completed, FALSE)
     ```
 
+1. `dplyr::na_if()` transforms a nonmissing value into an NA.
+
+    Recoding missing values like
+    
+    ```r
+    birth_apgar = dplyr::na_if(birth_apgar, 99)
+    ```
+    
+    is easier to read and not mess up than
+    
+    ```r
+    birth_apgar = dplyr::if_else(birth_apgar == 99, NA_real_, birth_apgar)
+    ```
+
 1. `<=` (or a similar comparison operator): Compare two quantities to output a boolean variable.
 
 1. `dplyr::if_else()`:  The function evaluates a single boolean variable.  The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) `NA`.  An advantage over `<=` is that `NA` values can be specified directly.
