@@ -75,3 +75,50 @@ Grooming
     dob   = dplyr::if_else(dob <= Sys.Date(), dob, dob - lubridate::years(100))
   )
 ```
+
+Identification
+------------------------------------
+
+### Generating "tags" {#snippet-tag}
+
+*Background*: When you need to generate unique identification values for future people/clients/patients, as described in the [style guide](#style-number).
+
+*Explanation*: This snippet will create a 5-row csv with random 7-character "tags" to send to the research team collecting patients.  The
+
+*Instruction*: Set `pt_count`, `tag_length`, `path_out`, and execute.  Add and rename the columns to be more appropriate for your domain (*e.g.*, change "patient tag" to "store tag").
+
+*Last Modified*: 2019-12-30 by Will
+
+```r
+pt_count    <- 5L   # The number of rows in the dataset.
+tag_length  <- 7L   # The number of characters in each tag.
+path_out    <- "data-private/derived/pt-pool.csv"
+
+draw_tag <- function (tag_length = 4L, urn = c(0:9, letters)) {
+  paste(sample(urn, size = tag_length, replace = T), collapse = "")
+}
+
+ds_pt_pool <- 
+  tibble::tibble(
+    pt_index    = seq_len(pt_count),
+    pt_tag      = vapply(rep(tag_length, pt_count), draw_tag, character(1)),
+    assigned    = FALSE,
+    name_last   = "--",
+    name_first  = "--"
+  )
+
+readr::write_csv(ds_pt_pool, path_out)
+```
+
+The resulting dataset will look like this, but with different randomly-generated tags.
+
+```csv
+# A tibble: 5 x 5
+  pt_index pt_tag  assigned name_last name_first
+     <int> <chr>   <lgl>    <chr>     <chr>     
+1        1 seikyfr FALSE    --        --        
+2        2 voiix4l FALSE    --        --        
+3        3 wosn4w2 FALSE    --        --        
+4        4 jl0dg84 FALSE    --        --        
+5        5 r5ei5ph FALSE    --        --        
+```

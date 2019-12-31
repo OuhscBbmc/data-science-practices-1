@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-28}
+\date{2019-12-31}
 
 \begin{document}
 \frontmatter
@@ -138,7 +138,9 @@ This collection of documents describe practices used by the OUHSC \href{https://
 \hypertarget{data-types}{%
 \subsection{Data Types}\label{data-types}}
 
-Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called \texttt{gender} can simultaneously contain the values ``m'', ``f'', ``F'', ``Female'', ``MALE'', ``0'', ``1'', ``2'', ``Latino'', "", and \texttt{NA}. On the other hand, a boolean variable \texttt{gender\_male} can be only \texttt{FALSE}, \texttt{TRUE}, and \texttt{NA}.\footnote{The database \texttt{bit} equivalents are \texttt{0}, \texttt{1}, and \texttt{NULL}}.
+Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called \texttt{gender} can simultaneously contain the values ``m'', ``f'', ``F'', ``Female'', ``MALE'', ``0'', ``1'', ``2'', ``Latino'', "", and \texttt{NA}. On the other hand, a boolean variable \texttt{gender\_male} can be only \texttt{FALSE}, \texttt{TRUE}, and \texttt{NA}.\^{}{[}The equivalent of R's \texttt{logical} data type is called a \texttt{bit} in \href{https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql}{SQL Server}, and a \texttt{boolean} in \href{https://www.postgresql.org/docs/current/datatype-boolean.html}{Postgres} and \href{https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html}{MySQL}.
+
+\href{https://www.sqlite.org/datatype3.html}{SQLite} does not have a dedicated datatype, so you must resort to storing it as \texttt{0}, \texttt{1} and \texttt{NULL} values. Because a caller can't assume that an obstensible boolean SQLite variable contains only those three values, the variable should be checked.{]}
 
 Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
 
@@ -192,9 +194,9 @@ Almost every project recodes many variables. Choose the simplest function possib
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \texttt{!}: instead of \texttt{gender\_male\ ==\ FALSE} or \texttt{gender\_male\ !=\ TRUE}, write \texttt{!gender\_male}.
+  \textbf{\texttt{!}}: instead of \texttt{gender\_male\ ==\ FALSE} or \texttt{gender\_male\ !=\ TRUE}, write \texttt{!gender\_male}.
 \item
-  \texttt{dplyr::coalesce()}: The function evaluates a single variable and replaces \texttt{NA} with values from another variable.
+  \textbf{\texttt{dplyr::coalesce()}}: The function evaluates a single variable and replaces \texttt{NA} with values from another variable.
 
   A coalesce like
 
@@ -212,7 +214,7 @@ Almost every project recodes many variables. Choose the simplest function possib
 \end{Highlighting}
 \end{Shaded}
 \item
-  \texttt{dplyr::na\_if()} transforms a nonmissing value into an NA.
+  \textbf{\texttt{dplyr::na\_if()}} transforms a nonmissing value into an NA.
 
   Recoding missing values like
 
@@ -230,9 +232,9 @@ Almost every project recodes many variables. Choose the simplest function possib
 \end{Highlighting}
 \end{Shaded}
 \item
-  \texttt{\textless{}=} (or a similar comparison operator): Compare two quantities to output a boolean variable.
+  \textbf{\texttt{\textless{}=}} (or a similar comparison operator): Compare two quantities to output a boolean variable.
 \item
-  \texttt{dplyr::if\_else()}: The function evaluates a single boolean variable. The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) \texttt{NA}. An advantage over \texttt{\textless{}=} is that \texttt{NA} values can be specified directly.
+  \textbf{\texttt{dplyr::if\_else()}}: The function evaluates a single boolean variable. The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) \texttt{NA}. An advantage over \texttt{\textless{}=} is that \texttt{NA} values can be specified directly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -246,13 +248,13 @@ Almost every project recodes many variables. Choose the simplest function possib
 \end{Highlighting}
 \end{Shaded}
 \item
-  \texttt{base::cut()}: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
+  **\texttt{base::cut()}*: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
 \item
-  \texttt{dplyr::recode()}: The function evaluates a single integer or character variable. The output branches to a single discrete value.
+  *\texttt{dplyr::recode()}**: The function evaluates a single integer or character variable. The output branches to a single discrete value.
 \item
-  \emph{lookup table}: It feasible recode 6 levels of race directly in R. It's less feasible to recode 200 provider names. Specify the mapping in a csv, \texttt{readr} the csv to a data.frame, and left-join it.
+  \textbf{lookup table}: It feasible recode 6 levels of race directly in R. It's less feasible to recode 200 provider names. Specify the mapping in a csv, \texttt{readr} the csv to a data.frame, and left-join it.
 \item
-  \texttt{dplyr::case\_when()}: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This `water fall' execution helps in complicated scenarios, but is overkill for most.
+  \textbf{\texttt{dplyr::case\_when()}}: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This `water fall' execution helps in complicated scenarios, but is overkill for most.
 \end{enumerate}
 
 \hypertarget{defensive-style}{%
@@ -262,6 +264,8 @@ Almost every project recodes many variables. Choose the simplest function possib
 \subsection{Qualify functions}\label{qualify-functions}}
 
 Try to prepend each function with its package. Write \texttt{dplyr::filter()} instead of \texttt{filter()}. When two packages contain public functions with the same name, the package that was most recently called with \texttt{library()} takes precedent. When multiple R files are executed, the packages' precedents may not be predictable. Specifying the package eliminates the ambiguity, while also making the code easier to follow. For this reason, we recommend that almost all R files contain a \protect\hyperlink{chunk-load-packages}{`load-packages'} chunk.
+
+See the \href{https://google.github.io/styleguide/Rguide.html\#qualifying-namespaces}{Google Style Guide} for more about qualifying functions
 
 \hypertarget{architecture}{%
 \chapter{Architecture Principles}\label{architecture}}
@@ -1421,6 +1425,34 @@ For the most part, our team follows the \href{https://style.tidyverse.org/}{tidy
 \hypertarget{readability}{%
 \section{Readability}\label{readability}}
 
+\hypertarget{style-number}{%
+\subsection{Number}\label{style-number}}
+
+The word ``number'' is ambiguous, especially in data science. Try for these more specific terms
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{count}: the number of discrete objects or events, such as \texttt{visit\_count}, \texttt{pt\_count}, \texttt{dx\_count}.
+\item
+  \textbf{id}: a value that uniquely identifies an entity that doesn't change over time, such as \texttt{pt\_id}, \texttt{clinic\_id}, \texttt{client\_id},
+\item
+  \textbf{index}: a 1-based sequence that's typically temporary, but unique within the dataset. For instance, \texttt{pt\_index} 195 in Tuesday's dataset is likey a different person than \texttt{pt\_index} 195 on Wednesday. On any given day, there is only one value of 195.
+\item
+  \textbf{tag}: it is persistent across time like ``id'', but typically created by the analysts and send to the research team. See \protect\hyperlink{snippet-tag}{the snippet} in the appendix for an example.
+\item
+  \textbf{tally}: a running count
+\item
+  \textbf{duration}: a length of time. Specify the units if it not self-evident.
+\item
+  physical and statistical quantities like
+  ``depth'',
+  ``length'',
+  ``mass'',
+  ``mean'', and
+  ``sum''.
+\end{itemize}
+
 \hypertarget{style-abbreviation}{%
 \subsection{Abbreviations}\label{style-abbreviation}}
 
@@ -1447,8 +1479,11 @@ However, some terms are too long to reasonably use without shortening. We make s
 
 When your team choose terms (\emph{e.g.}, `apt' vs `appt'), try to use a standard vocabulary, such as \href{https://www.medicinenet.com/medterms-medical-dictionary/article.htm}{MedTerms Medical Dictionary}.
 
-\hypertarget{filtering-rows-style-filter}{%
-\subsection{Filtering Rows \{\#style-filter)}\label{filtering-rows-style-filter}}
+\hypertarget{datasets}{%
+\section{Datasets}\label{datasets}}
+
+\hypertarget{style-filter}{%
+\subsection{Filtering Rows}\label{style-filter}}
 
 Removing datasets rows is an important operation that is a frequent source of sneaky errors. These practices have hopefully reduced our mistakes and improved maintainability.
 
@@ -1490,10 +1525,10 @@ You've probably asked in frustration, ``Where did all the rows go? I had 1,000 i
 
 It's more difficult to highlight the When using the base R's filtering style, (\emph{e.g.}, \texttt{ds\ \textless{}-\ ds{[}4\ \textless{}=\ ds\$count,\ {]}}).
 
-\hypertarget{style-number}{%
-\subsection{Number}\label{style-number}}
+\hypertarget{style-attach}{%
+\subsection{Don't attach}\label{style-attach}}
 
-The word `number' is ambiguous, especially in data science. Try for more specific terms like `count', `id', `index', and `tally'.
+As the \href{https://google.github.io/styleguide/Rguide.html\#dont-use-attach}{Google Stylesheet} says, ``The possibilities for creating errors when using \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html}{\texttt{attach()}} are numerous.''
 
 \hypertarget{style-factor}{%
 \section{Categorical Variables}\label{style-factor}}
@@ -1508,7 +1543,7 @@ Define a level like \texttt{"unknown"} so the data manipulation doesn't have to 
 \hypertarget{style-factor-granularity}{%
 \subsection{Granularity}\label{style-factor-granularity}}
 
-Sometimes it helps to represent the values differently, say a granular and a coarse way. We say \texttt{cut7} or \texttt{cut3} to denotes the number of levels; this is related to \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html}{\texttt{base::cut()}}. `unknown' and `other' are frequently levels, and they counts toward the quantity.
+Sometimes it helps to represent the values differently, say a granular and a coarse way. We say \texttt{cut7} or \texttt{cut3} to denotes the number of levels; this is related to \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html}{\texttt{base::cut()}}. `unknown' and `other' are frequently levels, and they count toward the quantity.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1567,6 +1602,50 @@ Sometimes it helps to represent the values differently, say a granular and a coa
 \subsection{Semantic sorting}\label{style-naming-semantic}}
 
 Put the ``biggest'' term on the left side of the variable.
+
+\hypertarget{style-whitespace}{%
+\section{Whitespace}\label{style-whitespace}}
+
+Although execution is rarely affected by whitespace in R and SQL files, be consistent and minimalisic. One benefit is that Git diffs won't show unnecessary churn. When a line of code lights up in a diff, it's nice when reflect a real change, and not something trivial like tabs were converted to spaces, or trailing spaces were added or deleted.
+
+Some of these guidelines are handled automatically by modern IDEs, if you configure the correct settings.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Tabs should be replaced by spaces. Most modern IDEs have an option to do this for you automatically. (RStudio calls this ``Insert spaces for tabs''.)
+\item
+  Indentions should be replaced by a consistent number of spaces, depending on the file type.
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    R: 2 spaces
+  \item
+    SQL: 2 spaces
+  \item
+    Python: 4 spaces
+  \end{enumerate}
+\item
+  Each file should end \href{https://unix.stackexchange.com/a/18746/104659}{with a blank line}. (RStudio calls this ``Ensure that source files end with newline.'')
+\item
+  Remove spaces and tabs at the end of lines. (RStudio calls this ``Strip trailing horizontal whitepace when saving''.)
+\end{enumerate}
+
+\hypertarget{style-database}{%
+\section{Database}\label{style-database}}
+
+GitLab's data team has a good \href{https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/}{style guide} for databases and sql that's fairly consistent with our style. Some important similarities and differences are
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Favor CTEs
+\item
+  The name of the primary key should typically contain the table. In the \texttt{employee} table, the key should be \texttt{empoyee\_id}, not \texttt{id}.
+\end{enumerate}
 
 \hypertarget{style-ggplot}{%
 \section{ggplot2}\label{style-ggplot}}
@@ -2377,6 +2456,56 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{identification}{%
+\section{Identification}\label{identification}}
+
+\hypertarget{snippet-tag}{%
+\subsection{Generating ``tags''}\label{snippet-tag}}
+
+\emph{Background}: When you need to generate unique identification values for future people/clients/patients, as described in the \protect\hyperlink{style-number}{style guide}.
+
+\emph{Explanation}: This snippet will create a 5-row csv with random 7-character ``tags'' to send to the research team collecting patients. The
+
+\emph{Instruction}: Set \texttt{pt\_count}, \texttt{tag\_length}, \texttt{path\_out}, and execute. Add and rename the columns to be more appropriate for your domain (\emph{e.g.}, change ``patient tag'' to ``store tag'').
+
+\emph{Last Modified}: 2019-12-30 by Will
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pt\_count    <{-}}\StringTok{ }\NormalTok{5L   }\CommentTok{\# The number of rows in the dataset.}
+\NormalTok{tag\_length  <{-}}\StringTok{ }\NormalTok{7L   }\CommentTok{\# The number of characters in each tag.}
+\NormalTok{path\_out    <{-}}\StringTok{ "data{-}private/derived/pt{-}pool.csv"}
+
+\NormalTok{draw\_tag <{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (}\DataTypeTok{tag\_length =}\NormalTok{ 4L, }\DataTypeTok{urn =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{9}\NormalTok{, letters)) \{}
+  \KeywordTok{paste}\NormalTok{(}\KeywordTok{sample}\NormalTok{(urn, }\DataTypeTok{size =}\NormalTok{ tag\_length, }\DataTypeTok{replace =}\NormalTok{ T), }\DataTypeTok{collapse =} \StringTok{""}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{ds\_pt\_pool <{-}}\StringTok{ }
+\StringTok{  }\NormalTok{tibble}\OperatorTok{::}\KeywordTok{tibble}\NormalTok{(}
+    \DataTypeTok{pt\_index    =} \KeywordTok{seq\_len}\NormalTok{(pt\_count),}
+    \DataTypeTok{pt\_tag      =} \KeywordTok{vapply}\NormalTok{(}\KeywordTok{rep}\NormalTok{(tag\_length, pt\_count), draw\_tag, }\KeywordTok{character}\NormalTok{(}\DecValTok{1}\NormalTok{)),}
+    \DataTypeTok{assigned    =} \OtherTok{FALSE}\NormalTok{,}
+    \DataTypeTok{name\_last   =} \StringTok{"{-}{-}"}\NormalTok{,}
+    \DataTypeTok{name\_first  =} \StringTok{"{-}{-}"}
+\NormalTok{  )}
+
+\NormalTok{readr}\OperatorTok{::}\KeywordTok{write\_csv}\NormalTok{(ds\_pt\_pool, path\_out)}
+\end{Highlighting}
+\end{Shaded}
+
+The resulting dataset will look like this, but with different randomly-generated tags.
+
+\begin{verbatim}
+# A tibble: 5 x 5
+  pt_index pt_tag  assigned name_last name_first
+     <int> <chr>   <lgl>    <chr>     <chr>     
+1        1 seikyfr FALSE    --        --        
+2        2 voiix4l FALSE    --        --        
+3        3 wosn4w2 FALSE    --        --        
+4        4 jl0dg84 FALSE    --        --        
+5        5 r5ei5ph FALSE    --        --        
+\end{verbatim}
 
 \hypertarget{presentations}{%
 \chapter{Presentations}\label{presentations}}

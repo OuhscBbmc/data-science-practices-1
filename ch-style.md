@@ -8,6 +8,24 @@ For the most part, our team follows the [tidyverse style](https://style.tidyvers
 Readability
 ------------------------------------
 
+### Number {#style-number}
+
+The word "number" is ambiguous, especially in data science.  Try for these more specific terms 
+
+* **count**: the number of discrete objects or events, such as `visit_count`, `pt_count`, `dx_count`.
+* **id**: a value that uniquely identifies an entity that doesn't change over time, such as `pt_id`, `clinic_id`, `client_id`, 
+* **index**: a 1-based sequence that's typically temporary, but unique within the dataset.  For instance, `pt_index` 195 in Tuesday's dataset is likey a different person than `pt_index` 195 on Wednesday.  On any given day, there is only one value of 195.
+* **tag**: it is persistent across time like "id", but typically created by the analysts and send to the research team.  See [the snippet](#snippet-tag) in the appendix for an example.
+* **tally**: a running count
+* **duration**: a length of time. Specify the units if it not self-evident.
+* physical and statistical quantities like 
+"depth",
+"length", 
+"mass",
+"mean", and
+"sum".
+
+
 ### Abbreviations {#style-abbreviation}
 
 Try to avoid abbreviations.  Different people tend to shorten words differently; this variability increases the chance that people reference the wrong variable.  At very least, it wastes time trying to remember if `subject_number`, `subject_num`, or `subject_no` was used.  The [Consistency](#architecture-consistency) section describes how this can reduce errors and increase efficiency.
@@ -29,7 +47,11 @@ However, some terms are too long to reasonably use without shortening.  We make 
 
 When your team choose terms (*e.g.*, 'apt' vs 'appt'), try to use a standard vocabulary, such as [MedTerms Medical Dictionary](https://www.medicinenet.com/medterms-medical-dictionary/article.htm).
 
-### Filtering Rows {#style-filter)
+
+Datasets
+------------------------------------
+
+### Filtering Rows {#style-filter}
 
 Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices have hopefully reduced our mistakes and improved maintainability.  
 
@@ -66,9 +88,10 @@ You've probably asked in frustration, "Where did all the rows go?  I had 1,000 i
 
 It's more difficult to highlight the When using the base R's filtering style, (*e.g.*, `ds <- ds[4 <= ds$count, ]`).
 
-### Number {#style-number}
 
-The word 'number' is ambiguous, especially in data science.  Try for more specific terms like 'count', 'id', 'index', and 'tally'.
+### Don't attach {#style-attach}
+
+As the [Google Stylesheet](https://google.github.io/styleguide/Rguide.html#dont-use-attach) says, "The possibilities for creating errors when using [`attach()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html) are numerous."
 
 Categorical Variables {#style-factor}
 ------------------------------------
@@ -81,7 +104,7 @@ Define a level like `"unknown"` so the data manipulation doesn't have to test fo
 
 ### Granularity {#style-factor-granularity}
 
-Sometimes it helps to represent the values differently, say a granular and a coarse way.  We say `cut7` or `cut3` to denotes the number of levels; this is related to [`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html).  'unknown' and 'other' are frequently levels, and they counts toward the quantity.
+Sometimes it helps to represent the values differently, say a granular and a coarse way.  We say `cut7` or `cut3` to denotes the number of levels; this is related to [`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html).  'unknown' and 'other' are frequently levels, and they count toward the quantity.
 
 ```r
 education_cut7      = dplyr::recode(
@@ -136,6 +159,31 @@ Naming
 Put the "biggest" term on the left side of the variable.
 
 
+Whitespace {#style-whitespace}
+------------------------------------
+
+Although execution is rarely affected by whitespace in R and SQL files, be consistent and minimalisic.  One benefit is that Git diffs won't show unnecessary churn.  When a line of code lights up in a diff, it's nice when reflect a real change, and not something trivial like tabs were converted to spaces, or trailing spaces were added or deleted.
+
+Some of these guidelines are handled automatically by modern IDEs, if you configure the correct settings.
+
+1. Tabs should be replaced by spaces.  Most modern IDEs have an option to do this for you automatically.  (RStudio calls this "Insert spaces for tabs".)
+1. Indentions should be replaced by a consistent number of spaces, depending on the file type.
+    1. R: 2 spaces
+    1. SQL: 2 spaces
+    1. Python: 4 spaces
+1. Each file should end [with a blank line](https://unix.stackexchange.com/a/18746/104659).  (RStudio calls this "Ensure that source files end with newline.")
+1. Remove spaces and tabs at the end of lines.  (RStudio calls this "Strip trailing horizontal whitepace when saving".)
+
+Database {#style-database}
+------------------------------------
+
+GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/) for databases and sql that's fairly consistent with our style.  Some important similarities and differences are
+
+1. Favor CTEs
+
+1. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `empoyee_id`, not `id`.
+
+<!-- 1. When a boolean variable might be ambiguous, -->
 
 ggplot2 {#style-ggplot}
 ------------------------------------
