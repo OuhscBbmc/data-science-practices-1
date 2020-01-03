@@ -136,15 +136,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>2</b> Coding Principles</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="coding.html"><a href="coding.html#simplify"><i class="fa fa-check"></i><b>2.1</b> Simplify</a>
+<li class="chapter" data-level="2.1" data-path="coding.html"><a href="coding.html#coding-simplify"><i class="fa fa-check"></i><b>2.1</b> Simplify</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="coding.html"><a href="coding.html#data-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
-<li class="chapter" data-level="2.1.2" data-path="coding.html"><a href="coding.html#categorical-levels"><i class="fa fa-check"></i><b>2.1.2</b> Categorical Levels</a></li>
-<li class="chapter" data-level="2.1.3" data-path="coding.html"><a href="coding.html#recoding"><i class="fa fa-check"></i><b>2.1.3</b> Recoding</a></li>
+<li class="chapter" data-level="2.1.1" data-path="coding.html"><a href="coding.html#coding-simplify-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
+<li class="chapter" data-level="2.1.2" data-path="coding.html"><a href="coding.html#coding-simplify-categorical"><i class="fa fa-check"></i><b>2.1.2</b> Categorical Levels</a></li>
+<li class="chapter" data-level="2.1.3" data-path="coding.html"><a href="coding.html#coding-simplify-recoding"><i class="fa fa-check"></i><b>2.1.3</b> Recoding</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#defensive-style"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
+<li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#coding-defensive"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
+<li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -554,7 +554,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 number="13.5"><span class="header-section-number">13.5</span> Naming</h2>
 <div id="style-naming-datasets" class="section level3" number="13.5.1">
 <h3 number="13.5.1"><span class="header-section-number">13.5.1</span> Datasets</h3>
-<p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. In the R world, “dataset” is typically a synonym of <code>data.frame</code> –a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that “dataset” means a collections of tables in the the <a href="https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/">.NET</a> world, and a collection of (not-necessarily-rectangular) files in <a href="https://dataverse.harvard.edu">Dataverse</a>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. In the R world, “dataset” is typically a synonym of <code>data.frame</code> –a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that “dataset” means a collections of tables in the the <a href="https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/">.NET</a> world, and a collection of (not-necessarily-rectangular) files in <a href="https://dataverse.harvard.edu">Dataverse</a>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <div id="style-naming-datasets-prefix" class="section level4" number="13.5.1.1">
 <h4 number="13.5.1.1"><span class="header-section-number">13.5.1.1</span> Prefix with <code>ds_</code> and <code>d_</code></h4>
 <p>Datasets are handled so differently than other variables that we find it’s easier to identify its type and scope. The prefix <code>ds_</code> indicates the dataset is available to the entire file, while <code>d_</code> indicates the scope is localized to a function.</p>
@@ -674,8 +674,8 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 </div>
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>To complete the survey of “dataset” definitions: TThe Java world is like R, in that “dataset” typically describes rectangular tables (<em>e.g.</em>, <a href="https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html">Java</a>, <a href="https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html">Spark</a>, [scala]). In Julia and Python, qqq<a href="style.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<ol start="5">
+<li id="fn5"><p>To complete the survey of “dataset” definitions: TThe Java world is like R, in that “dataset” typically describes rectangular tables (<em>e.g.</em>, <a href="https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html">Java</a>, <a href="https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html">Spark</a>, [scala]). In Julia and Python, qqq<a href="style.html#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

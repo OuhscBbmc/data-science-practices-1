@@ -136,15 +136,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>2</b> Coding Principles</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="coding.html"><a href="coding.html#simplify"><i class="fa fa-check"></i><b>2.1</b> Simplify</a>
+<li class="chapter" data-level="2.1" data-path="coding.html"><a href="coding.html#coding-simplify"><i class="fa fa-check"></i><b>2.1</b> Simplify</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="coding.html"><a href="coding.html#data-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
-<li class="chapter" data-level="2.1.2" data-path="coding.html"><a href="coding.html#categorical-levels"><i class="fa fa-check"></i><b>2.1.2</b> Categorical Levels</a></li>
-<li class="chapter" data-level="2.1.3" data-path="coding.html"><a href="coding.html#recoding"><i class="fa fa-check"></i><b>2.1.3</b> Recoding</a></li>
+<li class="chapter" data-level="2.1.1" data-path="coding.html"><a href="coding.html#coding-simplify-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
+<li class="chapter" data-level="2.1.2" data-path="coding.html"><a href="coding.html#coding-simplify-categorical"><i class="fa fa-check"></i><b>2.1.2</b> Categorical Levels</a></li>
+<li class="chapter" data-level="2.1.3" data-path="coding.html"><a href="coding.html#coding-simplify-recoding"><i class="fa fa-check"></i><b>2.1.3</b> Recoding</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#defensive-style"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
+<li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#coding-defensive"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
+<li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -431,7 +431,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installing-r-packages" class="section level3" number="17.1.3">
 <h3 number="17.1.3"><span class="header-section-number">17.1.3</span> Installing R Packages</h3>
 <p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
-<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a>, which defines the <code>package_janitor_remote()</code> function. The final line calls the function (and passes a specific CSV of packages)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
+<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a>, which defines the <code>package_janitor_remote()</code> function. The final line calls the function (and passes a specific CSV of packages)<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="workstation.html#cb35-1"></a><span class="cf">if</span>( <span class="op">!</span>base<span class="op">::</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>) ) utils<span class="op">::</span><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
 <span id="cb35-2"><a href="workstation.html#cb35-2"></a>devtools<span class="op">::</span><span class="kw">source_gist</span>(<span class="st">&quot;2c5e7459b88ec28b9e8fa0c695b15ee3&quot;</span>, <span class="dt">filename=</span><span class="st">&quot;package-janitor-bbmc.R&quot;</span>)</span>
 <span id="cb35-3"><a href="workstation.html#cb35-3"></a></span>
@@ -681,8 +681,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="5">
-<li id="fn5"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in the <code>utility/</code> directory) that lives in this repository. The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<ol start="6">
+<li id="fn6"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in the <code>utility/</code> directory) that lives in this repository. The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

@@ -1,12 +1,12 @@
 Coding Principles {#coding}
 ====================================
 
-Simplify
+Simplify {#coding-simplify}
 ------------------------------------
 
-### Data Types
+### Data Types {#coding-simplify-types}
 
-Use the simplest data type reasonable.  A simpler data type is less likely contain unintended values.  As we have seen, a string variable called `gender` can simultaneously contain the values "m", "f", "F", "Female", "MALE", "0", "1", "2", "Latino", "", and `NA`.  On the other hand, a boolean variable `gender_male` can be only `FALSE`, `TRUE`, and `NA`.^[The equivalent of R's `logical` data type is called a `bit` in [SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql), and a `boolean` in [Postgres](https://www.postgresql.org/docs/current/datatype-boolean.html) and [MySQL](https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html). 
+Use the simplest data type reasonable.  A simpler data type is less likely contain unintended values.  As we have seen, a string variable called `gender` can simultaneously contain the values "m", "f", "F", "Female", "MALE", "0", "1", "2", "Latino", "", and `NA`.  On the other hand, a boolean variable `gender_male` can be only `FALSE`, `TRUE`, and `NA`.^[The equivalent of R's `logical` data type is called a `bit` in [SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql), and a `boolean` in [Postgres](https://www.postgresql.org/docs/current/datatype-boolean.html) and [MySQL](https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html).] 
 
 [SQLite](https://www.sqlite.org/datatype3.html) does not have a dedicated datatype, so you must resort to storing it as `0`, `1` and `NULL` values.  Because a caller can't assume that an obstensible boolean SQLite variable contains only those three values, the variable should be checked.]
 
@@ -25,18 +25,22 @@ The preference for categorical variables is
 1. `factor`, and 
 1. `character`.
 
-### Categorical Levels
+### Categorical Levels {#coding-simplify-categorical}
 
 When a boolean variable would be too restrictive and a factor or character is required, choose the simplest representation.  Where possible:
 
 1. Use only lower case (*e.g.*, 'male' instead of 'Male' for the `gender` variable).
 1. avoid repeating the variable in the level (*e.g.*, 'control' instead of 'control condition' for the `condition` variable).
 
-### Recoding
+### Recoding {#coding-simplify-recoding}
 
 Almost every project recodes many variables.  Choose the simplest function possible.  The functions at the top are much easier to read and harder to mess up.
 
-1. **`!`**: instead of `gender_male == FALSE` or `gender_male != TRUE`, write `!gender_male`.
+1. **Leverage exising booleans:** Suppose you have the logical variable `gender_male` (which can be only `TRUE`, `FALSE`, or `NA`).  Writing `gender_male == TRUE` or `gender_male == FALSE` will evaluate to a boolean --that's unnecessary because `gender_male` is already a boolean.
+
+    1. *Testing for `TRUE`*: use the variable by itself (*i.e.*, `gender_male` instead of `gender_male == TRUE`).
+    
+    1. *Testing for `FALSE`*:  use `!`.  Write `!gender_male` instead of `gender_male == FALSE` or `gender_male != TRUE`.
 
 1. **`dplyr::coalesce()`**: The function evaluates a single variable and replaces `NA` with values from another variable.
 
@@ -88,10 +92,10 @@ Almost every project recodes many variables.  Choose the simplest function possi
 
 1. **`dplyr::case_when()`**: The function is the most complicated because it can evaluate multiple variables.  Also, multiple cases can be true, but only the first output is returned. This 'water fall' execution helps in complicated scenarios, but is overkill for most.
 
-Defensive Style
+Defensive Style {#coding-defensive}
 ------------------------------------
 
-### Qualify functions {#qualify-functions}  
+### Qualify functions {#coding-defensive-qualify-functions}  
 
 Try to prepend each function with its package.  Write `dplyr::filter()` instead of `filter()`.  When two packages contain public functions with the same name, the package that was most recently called with `library()` takes precedent.  When multiple R files are executed, the packages' precedents may not be predictable.  Specifying the package eliminates the ambiguity, while also making the code easier to follow.  For this reason, we recommend that almost all R files contain a ['load-packages'](#chunk-load-packages) chunk.
 
