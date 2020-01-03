@@ -60,16 +60,19 @@ Removing datasets rows is an important operation that is a frequent source of sn
 [`tidyr::drop_na()`]() drops rows with a missing value in a specific column.  
 
 ```r
+# Good
 ds %>%
   tidyr::drop_na(dob)
 ```
 
-is cleaner to read and write than these two styles.  In particular, it's easy to forget/overllok a `!`.
+is cleaner to read and write than these two styles.  In particular, it's easy to forget/overlook a `!`.
 
 ```r
+# Worse
 ds %>%
   dplyr::filter(!is.na(dob))
-  
+
+# Worst
 ds[!is.na(ds$dob), ]  
 ```
 
@@ -107,6 +110,7 @@ Define a level like `"unknown"` so the data manipulation doesn't have to test fo
 Sometimes it helps to represent the values differently, say a granular and a coarse way.  We say `cut7` or `cut3` to denotes the number of levels; this is related to [`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html).  'unknown' and 'other' are frequently levels, and they count toward the quantity.
 
 ```r
+# Inside a dplyr::mutate() clause
 education_cut7      = dplyr::recode(
   education_cut7,
   "No Highschool Degree / GED"  = "no diploma",
@@ -154,6 +158,65 @@ Dates {#style-dates}
 Naming
 ------------------------------------
 
+### Datasets {#style-naming-datasets}
+
+[`data.frame`]() are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent of a conventional table.  Note that "dataset" means a collections of tables in the the [.net]() world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).
+
+#### Prefix with `ds_` and `d_`
+
+Datasets are handled so differently than other variables that we find it's easier to identify its type and scope.  The prefix `ds_` indicates the dataset is available to the entire file, while `d_` indicates the scope is localized to a function.
+
+```r
+count_elements <- function (d) {
+  nrow(d) * ncol(d)
+}
+
+ds <- mtcars
+count_elements(d = ds)
+```
+
+#### Express the grain
+
+The [grain]() of a dataset describes what each row represents, which is a similar idea to the statistician's concept of "unit of analysis".  Essentially it the the most granular entity described.  Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a [tidy]() dataset with a clear grain.
+
+```r
+ds_student          # One row per student
+ds_teacher          # One row per teacher
+ds_course           # One row per course
+ds_course_student   # One row per student-course combination
+```
+
+```r
+ds_pt         # One row per patient
+ds_pt_visit   # One row per patient-visit combination
+ds_visit      # Same as above, since it's clear a visit is connected w/ a pt
+```
+
+#### Use `ds` when definition is clear
+
+Many times an [ellis file]() deals with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.  
+
+#### Use an adjective after the grain, if necessary
+
+If the same R file is manipulating two datasets with the same grain, qualify their differences after the grain, such as `ds_client_all` and `ds_client_michigan`.  Adjectives commonly indicate that one dataset is a subset of another.
+
+An occasional limitation with our naming scheme is that the difficult to distinguish the grain from the adjective.  For instance, is the grain of `ds_student_enroll` either (a) every instance of a student enrollment (*i.e.*, `student` and `enroll` both describe the grain) or (b) the subset of students who enrolled (*i.e.*, `student` is the grain and `enroll` is the adjective)?  It's not clear without examine the code, comments, or documentation.
+
+If someone has a proposed solution, we would love to hear it.  So far, we've been reluctant to decorate the variable name more, such as `ds_grain_client_adj_enroll`.
+
+#### Define the dataset when in doubt
+
+If it's potentially unclear to a new reader, use a comment immediately before the dataset's initial use.
+
+```r
+# `ds_client_enroll`:
+#    grain: one row per client
+#    subset: only clients who have successfully enrolled are included
+#    source: the `client` database table, where `enroll_count` is 1+.
+ds_client_enroll <- ...
+```
+
+
 ### Semantic sorting {#style-naming-semantic}
 
 Put the "biggest" term on the left side of the variable.
@@ -162,7 +225,7 @@ Put the "biggest" term on the left side of the variable.
 Whitespace {#style-whitespace}
 ------------------------------------
 
-Although execution is rarely affected by whitespace in R and SQL files, be consistent and minimalisic.  One benefit is that Git diffs won't show unnecessary churn.  When a line of code lights up in a diff, it's nice when reflect a real change, and not something trivial like tabs were converted to spaces, or trailing spaces were added or deleted.
+Although execution is rarely affected by whitespace in R and SQL files, be consistent and minimalistic.  One benefit is that Git diffs won't show unnecessary churn.  When a line of code lights up in a diff, it's nice when reflect a real change, and not something trivial like tabs were converted to spaces, or trailing spaces were added or deleted.
 
 Some of these guidelines are handled automatically by modern IDEs, if you configure the correct settings.
 
@@ -172,7 +235,7 @@ Some of these guidelines are handled automatically by modern IDEs, if you config
     1. SQL: 2 spaces
     1. Python: 4 spaces
 1. Each file should end [with a blank line](https://unix.stackexchange.com/a/18746/104659).  (RStudio calls this "Ensure that source files end with newline.")
-1. Remove spaces and tabs at the end of lines.  (RStudio calls this "Strip trailing horizontal whitepace when saving".)
+1. Remove spaces and tabs at the end of lines.  (RStudio calls this "Strip trailing horizontal whitespace when saving".)
 
 Database {#style-database}
 ------------------------------------
@@ -188,15 +251,17 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 ggplot2 {#style-ggplot}
 ------------------------------------
 
-The expressiveness of [ggplot2](https://ggplot2.tidyverse.org/) allows someone to quickly develop precise scientific graphics.  One graph can be specified in many equivalent styles, which increases the opportunity for confusion.  We formalized much of this style while writing a [textbook for introductory statistics](https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md) (@deshea); the 200+ graphs and their code is publically available.
+The expressiveness of [ggplot2](https://ggplot2.tidyverse.org/) allows someone to quickly develop precise scientific graphics.  One graph can be specified in many equivalent styles, which increases the opportunity for confusion.  We formalized much of this style while writing a [textbook for introductory statistics](https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md) (@deshea); the 200+ graphs and their code is publicly available.
+
+There are a few additional ggplot2 tips in the [tidyverse style guide](https://style.tidyverse.org/ggplot2.html).
 
 
 ### Order of commands {#style-ggplot-order}
 
-ggplot2 is essentially a collection of functions combined with the `+` operator.  Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes.  The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions.  Our preference is:
+ggplot2 is essentially a collection of functions combined with the `+` operator.  Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes.  The family of functions should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions.  Our preference is:
 
 1. `ggplot()` is the primary function to specify the default dataset and aesthetic mappings.  Many arguments can be passed to `aes()`, and we prefer to follow an order consistent with the `scale_*()` order below.
-1. `geom_*()` and `annotate()` creates the *geom*etric elements that reperesent the data.  Unlike most categories in this list, the order matters.  Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.
+1. `geom_*()` and `annotate()` creates the *geom*etric elements that represent the data.  Unlike most categories in this list, the order matters.  Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.
 1. `scale_*()` describes how a dimension of data (specified in `aes()`) is translated into a visual element.  We specify the dimensions in descending order of (typical) importance: `x`, `y`, `group`, `color`, `fill`, `size`, `radius`, `alpha`, `shape`, `linetype`.
 1. `coord_*()`
 1. `facet_*()` and `label_*()`
