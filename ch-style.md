@@ -162,7 +162,7 @@ Naming
 
 [`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html)s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent of a conventional table.  Note that "dataset" means a collections of tables in the the [.NET](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/) world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).^[To complete the survey of "dataset" definitions: TThe Java world is like R, in that "dataset" typically describes rectangular tables (*e.g.*, [Java](https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html), [Spark](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html), [scala]).  In Julia and Python, qqq]
 
-#### Prefix with `ds_` and `d_`
+#### Prefix with `ds_` and `d_` {#style-naming-datasets-prefix}
 
 Datasets are handled so differently than other variables that we find it's easier to identify its type and scope.  The prefix `ds_` indicates the dataset is available to the entire file, while `d_` indicates the scope is localized to a function.
 
@@ -175,7 +175,7 @@ ds <- mtcars
 count_elements(d = ds)
 ```
 
-#### Express the grain
+#### Express the grain {#style-naming-datasets-grain}
 
 The [grain](https://gerardnico.com/olap/dimensional_modeling/grain#grain) of a dataset describes what each row represents, which is a similar idea to the statistician's concept of "unit of analysis".  Essentially it the the most granular entity described.  Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a [tidy](https://r4ds.had.co.nz/tidy-data.html) dataset with a clear grain.
 
@@ -198,11 +198,21 @@ For more insight into grains, [Ralph Kimball writes](https://www.kimballgroup.co
 > ...
 > I hope you’ve noticed some powerful effects from declaring the grain. First, you can visualize the dimensionality of the doctor bill line item very precisely, and you can therefore confidently examine your data sources, deciding whether or not a dimension can be attached to this data. For example, you probably would exclude “treatment outcome” from this example because most medical billing data doesn’t tie to any notion of outcome.
 
-#### Use `ds` when definition is clear
+#### Singular table names {#style-naming-datasets-singular}
 
-Many times an [ellis file](#pattern-ellis) deals with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.  
+If you adopt the style that the table's name reflects the grain, this is a corollary.  If the grain is singular like "one row per client" or "one row per building", the name should be `ds_client` and `ds_building` (not `ds_clients` and `ds_buildings`).  If these datasets are saved to a database, the tables are called `client` and `building`.
 
-#### Use an adjective after the grain, if necessary
+Table names are plural when the grain is plural.  If a record has field like `client_id`, `date_birth`, `date_graduation` and `date_death`, I suggest called the table `client_milestones` (because a single row contains three milestones).
+
+This [Stack Overflow post](https://stackoverflow.com/questions/338156/table-naming-dilemma-singular-vs-plural-names) presents a variety of opinions and justifications when adopting a singular or plural naming scheme.
+
+I think it's acceptable if the R vectors follow a different style than R `data.frame`s.  For instance, a vector can have a plural name even though each element is singular (*e.g.*, `client_ids <- c(10, 24, 25)`).
+
+#### Use `ds` when definition is clear {#style-naming-datasets-ds-only}
+
+Many times an [ellis file](#pattern-ellis) handles with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.  
+
+#### Use an adjective after the grain, if necessary {#style-naming-datasets-adjective}
 
 If the same R file is manipulating two datasets with the same grain, qualify their differences after the grain, such as `ds_client_all` and `ds_client_michigan`.  Adjectives commonly indicate that one dataset is a subset of another.
 
@@ -210,7 +220,7 @@ An occasional limitation with our naming scheme is that the difficult to disting
 
 If someone has a proposed solution, we would love to hear it.  So far, we've been reluctant to decorate the variable name more, such as `ds_grain_client_adj_enroll`.
 
-#### Define the dataset when in doubt
+#### Define the dataset when in doubt {#style-naming-datasets-define}
 
 If it's potentially unclear to a new reader, use a comment immediately before the dataset's initial use.
 

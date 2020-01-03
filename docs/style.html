@@ -555,7 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="style-naming-datasets" class="section level3" number="13.5.1">
 <h3 number="13.5.1"><span class="header-section-number">13.5.1</span> Datasets</h3>
 <p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. In the R world, “dataset” is typically a synonym of <code>data.frame</code> –a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that “dataset” means a collections of tables in the the <a href="https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/">.NET</a> world, and a collection of (not-necessarily-rectangular) files in <a href="https://dataverse.harvard.edu">Dataverse</a>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
-<div id="prefix-with-ds_-and-d_" class="section level4" number="13.5.1.1">
+<div id="style-naming-datasets-prefix" class="section level4" number="13.5.1.1">
 <h4 number="13.5.1.1"><span class="header-section-number">13.5.1.1</span> Prefix with <code>ds_</code> and <code>d_</code></h4>
 <p>Datasets are handled so differently than other variables that we find it’s easier to identify its type and scope. The prefix <code>ds_</code> indicates the dataset is available to the entire file, while <code>d_</code> indicates the scope is localized to a function.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="style.html#cb31-1"></a>count_elements &lt;-<span class="st"> </span><span class="cf">function</span> (d) {</span>
@@ -565,7 +565,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb31-5"><a href="style.html#cb31-5"></a>ds &lt;-<span class="st"> </span>mtcars</span>
 <span id="cb31-6"><a href="style.html#cb31-6"></a><span class="kw">count_elements</span>(<span class="dt">d =</span> ds)</span></code></pre></div>
 </div>
-<div id="express-the-grain" class="section level4" number="13.5.1.2">
+<div id="style-naming-datasets-grain" class="section level4" number="13.5.1.2">
 <h4 number="13.5.1.2"><span class="header-section-number">13.5.1.2</span> Express the grain</h4>
 <p>The <a href="https://gerardnico.com/olap/dimensional_modeling/grain#grain">grain</a> of a dataset describes what each row represents, which is a similar idea to the statistician’s concept of “unit of analysis”. Essentially it the the most granular entity described. Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy</a> dataset with a clear grain.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="style.html#cb32-1"></a>ds_student          <span class="co"># One row per student</span></span>
@@ -582,18 +582,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 I hope you’ve noticed some powerful effects from declaring the grain. First, you can visualize the dimensionality of the doctor bill line item very precisely, and you can therefore confidently examine your data sources, deciding whether or not a dimension can be attached to this data. For example, you probably would exclude “treatment outcome” from this example because most medical billing data doesn’t tie to any notion of outcome.</p>
 </blockquote>
 </div>
-<div id="use-ds-when-definition-is-clear" class="section level4" number="13.5.1.3">
-<h4 number="13.5.1.3"><span class="header-section-number">13.5.1.3</span> Use <code>ds</code> when definition is clear</h4>
-<p>Many times an <a href="patterns.html#pattern-ellis">ellis file</a> deals with only one incoming csv and outgoing dataset, and the grain is obvious –typically because the ellis filename clearly states the grain.</p>
+<div id="style-naming-datasets-singular" class="section level4" number="13.5.1.3">
+<h4 number="13.5.1.3"><span class="header-section-number">13.5.1.3</span> Singular table names</h4>
+<p>If you adopt the style that the table’s name reflects the grain, this is a corollary. If the grain is singular like “one row per client” or “one row per building”, the name should be <code>ds_client</code> and <code>ds_building</code> (not <code>ds_clients</code> and <code>ds_buildings</code>). If these datasets are saved to a database, the tables are called <code>client</code> and <code>building</code>.</p>
+<p>Table names are plural when the grain is plural. If a record has field like <code>client_id</code>, <code>date_birth</code>, <code>date_graduation</code> and <code>date_death</code>, I suggest called the table <code>client_milestones</code> (because a single row contains three milestones).</p>
+<p>This <a href="https://stackoverflow.com/questions/338156/table-naming-dilemma-singular-vs-plural-names">Stack Overflow post</a> presents a variety of opinions and justifications when adopting a singular or plural naming scheme.</p>
+<p>I think it’s acceptable if the R vectors follow a different style than R <code>data.frame</code>s. For instance, a vector can have a plural name even though each element is singular (<em>e.g.</em>, <code>client_ids &lt;- c(10, 24, 25)</code>).</p>
 </div>
-<div id="use-an-adjective-after-the-grain-if-necessary" class="section level4" number="13.5.1.4">
-<h4 number="13.5.1.4"><span class="header-section-number">13.5.1.4</span> Use an adjective after the grain, if necessary</h4>
+<div id="style-naming-datasets-ds-only" class="section level4" number="13.5.1.4">
+<h4 number="13.5.1.4"><span class="header-section-number">13.5.1.4</span> Use <code>ds</code> when definition is clear</h4>
+<p>Many times an <a href="patterns.html#pattern-ellis">ellis file</a> handles with only one incoming csv and outgoing dataset, and the grain is obvious –typically because the ellis filename clearly states the grain.</p>
+</div>
+<div id="style-naming-datasets-adjective" class="section level4" number="13.5.1.5">
+<h4 number="13.5.1.5"><span class="header-section-number">13.5.1.5</span> Use an adjective after the grain, if necessary</h4>
 <p>If the same R file is manipulating two datasets with the same grain, qualify their differences after the grain, such as <code>ds_client_all</code> and <code>ds_client_michigan</code>. Adjectives commonly indicate that one dataset is a subset of another.</p>
 <p>An occasional limitation with our naming scheme is that the difficult to distinguish the grain from the adjective. For instance, is the grain of <code>ds_student_enroll</code> either (a) every instance of a student enrollment (<em>i.e.</em>, <code>student</code> and <code>enroll</code> both describe the grain) or (b) the subset of students who enrolled (<em>i.e.</em>, <code>student</code> is the grain and <code>enroll</code> is the adjective)? It’s not clear without examine the code, comments, or documentation.</p>
 <p>If someone has a proposed solution, we would love to hear it. So far, we’ve been reluctant to decorate the variable name more, such as <code>ds_grain_client_adj_enroll</code>.</p>
 </div>
-<div id="define-the-dataset-when-in-doubt" class="section level4" number="13.5.1.5">
-<h4 number="13.5.1.5"><span class="header-section-number">13.5.1.5</span> Define the dataset when in doubt</h4>
+<div id="style-naming-datasets-define" class="section level4" number="13.5.1.6">
+<h4 number="13.5.1.6"><span class="header-section-number">13.5.1.6</span> Define the dataset when in doubt</h4>
 <p>If it’s potentially unclear to a new reader, use a comment immediately before the dataset’s initial use.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="style.html#cb34-1"></a><span class="co"># `ds_client_enroll`:</span></span>
 <span id="cb34-2"><a href="style.html#cb34-2"></a><span class="co">#    grain: one row per client</span></span>
