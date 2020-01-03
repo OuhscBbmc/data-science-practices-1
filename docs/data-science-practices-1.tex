@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2019-12-31}
+\date{2020-01-03}
 
 \begin{document}
 \frontmatter
@@ -418,7 +418,7 @@ All data ingested by this file occurs in this chunk. We like to think of each fi
 
 Ideally this chunk consumes data from either a plain-text csv or a database.
 
-Many capable R functions and packages ingest data. We prefer the tidyverse \href{https://readr.tidyverse.org/}{readr} for reading conventional files; its younger cousin, \href{}{vroom}\url{https://vroom.r-lib.org/} has some nice advantages when working with larger files and some forms of jagged rectangles\footnote{Say a csv has 20 columns, but a row has missing values for the last five columns. Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value. vroom infers the missing values correctly, while some other packages do not.}. Depending on the file format, good packages to consider are \href{https://cran.r-project.org/package=data.table}{data.table}, \href{https://haven.tidyverse.org/}{haven}, \href{https://readxl.tidyverse.org/}{readxl}, \href{https://ycphs.github.io/openxlsx/}{openxlsx}, \href{https://CRAN.R-project.org/package=arrow}{arrow}, \href{https://CRAN.R-project.org/package=jsonlite}{jsonlite}, \href{http://www.fstpackage.org/}{fst}, \href{https://CRAN.R-project.org/package=yaml}{yaml}, and \href{https://cloud.r-project.org/web/packages/rio/vignettes/rio.html}{rio}.
+Many capable R functions and packages ingest data. We prefer the tidyverse \href{https://readr.tidyverse.org/}{readr} for reading conventional files; its younger cousin, \href{https://vroom.r-lib.org/}{vroom} has some nice advantages when working with larger files and some forms of jagged rectangles\footnote{Say a csv has 20 columns, but a row has missing values for the last five columns. Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value. vroom infers the missing values correctly, while some other packages do not.}. Depending on the file format, good packages to consider are \href{https://cran.r-project.org/package=data.table}{data.table}, \href{https://haven.tidyverse.org/}{haven}, \href{https://readxl.tidyverse.org/}{readxl}, \href{https://ycphs.github.io/openxlsx/}{openxlsx}, \href{https://CRAN.R-project.org/package=arrow}{arrow}, \href{https://CRAN.R-project.org/package=jsonlite}{jsonlite}, \href{http://www.fstpackage.org/}{fst}, \href{https://CRAN.R-project.org/package=yaml}{yaml}, and \href{https://cloud.r-project.org/web/packages/rio/vignettes/rio.html}{rio}.
 
 When used in an \protect\hyperlink{pattern-ellis}{Ellis}, this chunk likely consumees a flat file like a csv with data or metadata. When used in a \protect\hyperlink{pattern-ferry}{Ferry}, \protect\hyperlink{pattern-arch}{Arch}, or \protect\hyperlink{pattern-scribe}{Scribe}, this chunk likely consumes a database table. When used in an \protect\hyperlink{pattern-analysis}{Analysis file}, this chunk likely cosumes a database table or rds (\emph{i.e.}, a compressed R data file).
 
@@ -1466,7 +1466,7 @@ However, some terms are too long to reasonably use without shortening. We make s
   humans commonly use the term orally. For instance, people tend to say ``OR'' instead of ``operating room''.
 \item
   your team has agreed on set list of abbreviations. The list for our \href{https://github.com/OuhscBbmc/prairie-outpost-public\#readme}{CDW} team includes:
-  \href{https://www.merriam-webster.com/dictionary/appointment}{appt},
+  \href{https://www.merriam-webster.com/dictionary/appointment}{appt} (not ``apt''),
   \href{https://en.wikipedia.org/wiki/Clinical_data_repository}{cdw},
   \href{https://en.wikipedia.org/wiki/Current_Procedural_Terminology}{cpt},
   \href{https://en.wikipedia.org/wiki/Diagnosis-related_group}{drg} (stands for diagnosis-related group),
@@ -1474,7 +1474,7 @@ However, some terms are too long to reasonably use without shortening. We make s
   \href{https://medical-dictionary.thefreedictionary.com/Hx}{hx},
   \href{https://www.cdc.gov/nchs/icd/icd10cm.htm}{icd}
   \href{https://www.medicinenet.com/script/main/art.asp?articlekey=39154}{pt}, and
-  \href{}{vr} (vital records).
+  \href{https://www.ok.gov/health/Birth_and_Death_Certificates/}{vr} (vital records).
 \end{enumerate}
 
 When your team choose terms (\emph{e.g.}, `apt' vs `appt'), try to use a standard vocabulary, such as \href{https://www.medicinenet.com/medterms-medical-dictionary/article.htm}{MedTerms Medical Dictionary}.
@@ -1490,22 +1490,25 @@ Removing datasets rows is an important operation that is a frequent source of sn
 \hypertarget{style-filter-drop_na}{%
 \subsubsection{Dropping rows with missing values}\label{style-filter-drop_na}}
 
-\href{}{\texttt{tidyr::drop\_na()}} drops rows with a missing value in a specific column.
+\href{https://tidyr.tidyverse.org/reference/drop_na.html}{\texttt{tidyr::drop\_na()}} drops rows with a missing value in a specific column.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Good}
 \NormalTok{ds }\OperatorTok{\%>\%}
 \StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{drop\_na}\NormalTok{(dob)}
 \end{Highlighting}
 \end{Shaded}
 
-is cleaner to read and write than these two styles. In particular, it's easy to forget/overllok a \texttt{!}.
+is cleaner to read and write than these two styles. In particular, it's easy to forget/overlook a \texttt{!}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Worse}
 \NormalTok{ds }\OperatorTok{\%>\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(dob))}
-  
+
+\CommentTok{\# Worst}
 \NormalTok{ds[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(ds}\OperatorTok{$}\NormalTok{dob), ]  }
 \end{Highlighting}
 \end{Shaded}
@@ -1547,6 +1550,7 @@ Sometimes it helps to represent the values differently, say a granular and a coa
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Inside a dplyr::mutate() clause}
 \NormalTok{education\_cut7      =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{recode}\NormalTok{(}
 \NormalTok{  education\_cut7,}
   \StringTok{"No Highschool Degree / GED"}\NormalTok{  =}\StringTok{ "no diploma"}\NormalTok{,}
@@ -1598,6 +1602,86 @@ Sometimes it helps to represent the values differently, say a granular and a coa
 \hypertarget{naming}{%
 \section{Naming}\label{naming}}
 
+\hypertarget{style-naming-datasets}{%
+\subsection{Datasets}\label{style-naming-datasets}}
+
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html}{\texttt{data.frame}}s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. In the R world, ``dataset'' is typically a synonym of \texttt{data.frame} --a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that ``dataset'' means a collections of tables in the the \href{https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/}{.NET} world, and a collection of (not-necessarily-rectangular) files in \href{https://dataverse.harvard.edu}{Dataverse}.\footnote{To complete the survey of ``dataset'' definitions: TThe Java world is like R, in that ``dataset'' typically describes rectangular tables (\emph{e.g.}, \href{https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html}{Java}, \href{https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html}{Spark}, {[}scala{]}). In Julia and Python, qqq}
+
+\hypertarget{prefix-with-ds_-and-d_}{%
+\subsubsection{\texorpdfstring{Prefix with \texttt{ds\_} and \texttt{d\_}}{Prefix with ds\_ and d\_}}\label{prefix-with-ds_-and-d_}}
+
+Datasets are handled so differently than other variables that we find it's easier to identify its type and scope. The prefix \texttt{ds\_} indicates the dataset is available to the entire file, while \texttt{d\_} indicates the scope is localized to a function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count\_elements <{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (d) \{}
+  \KeywordTok{nrow}\NormalTok{(d) }\OperatorTok{*}\StringTok{ }\KeywordTok{ncol}\NormalTok{(d)}
+\NormalTok{\}}
+
+\NormalTok{ds <{-}}\StringTok{ }\NormalTok{mtcars}
+\KeywordTok{count\_elements}\NormalTok{(}\DataTypeTok{d =}\NormalTok{ ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{express-the-grain}{%
+\subsubsection{Express the grain}\label{express-the-grain}}
+
+The \href{https://gerardnico.com/olap/dimensional_modeling/grain\#grain}{grain} of a dataset describes what each row represents, which is a similar idea to the statistician's concept of ``unit of analysis''. Essentially it the the most granular entity described. Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a \href{https://r4ds.had.co.nz/tidy-data.html}{tidy} dataset with a clear grain.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ds\_student          }\CommentTok{\# One row per student}
+\NormalTok{ds\_teacher          }\CommentTok{\# One row per teacher}
+\NormalTok{ds\_course           }\CommentTok{\# One row per course}
+\NormalTok{ds\_course\_student   }\CommentTok{\# One row per student{-}course combination}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ds\_pt         }\CommentTok{\# One row per patient}
+\NormalTok{ds\_pt\_visit   }\CommentTok{\# One row per patient{-}visit combination}
+\NormalTok{ds\_visit      }\CommentTok{\# Same as above, since it\textquotesingle{}s clear a visit is connected w/ a pt}
+\end{Highlighting}
+\end{Shaded}
+
+For more insight into grains, \href{https://www.kimballgroup.com/2003/03/declaring-the-grain/}{Ralph Kimball writes}
+
+\begin{quote}
+In debugging literally thousands of dimensional designs from my students over the years, I have found that the most frequent design error by far is not declaring the grain of the fact table at the beginning of the design process. If the grain isn't clearly defined, the whole design rests on quicksand. Discussions about candidate dimensions go around in circles, and rogue facts that introduce application errors sneak into the design.
+\ldots{}
+I hope you've noticed some powerful effects from declaring the grain. First, you can visualize the dimensionality of the doctor bill line item very precisely, and you can therefore confidently examine your data sources, deciding whether or not a dimension can be attached to this data. For example, you probably would exclude ``treatment outcome'' from this example because most medical billing data doesn't tie to any notion of outcome.
+\end{quote}
+
+\hypertarget{use-ds-when-definition-is-clear}{%
+\subsubsection{\texorpdfstring{Use \texttt{ds} when definition is clear}{Use ds when definition is clear}}\label{use-ds-when-definition-is-clear}}
+
+Many times an \protect\hyperlink{pattern-ellis}{ellis file} deals with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.
+
+\hypertarget{use-an-adjective-after-the-grain-if-necessary}{%
+\subsubsection{Use an adjective after the grain, if necessary}\label{use-an-adjective-after-the-grain-if-necessary}}
+
+If the same R file is manipulating two datasets with the same grain, qualify their differences after the grain, such as \texttt{ds\_client\_all} and \texttt{ds\_client\_michigan}. Adjectives commonly indicate that one dataset is a subset of another.
+
+An occasional limitation with our naming scheme is that the difficult to distinguish the grain from the adjective. For instance, is the grain of \texttt{ds\_student\_enroll} either (a) every instance of a student enrollment (\emph{i.e.}, \texttt{student} and \texttt{enroll} both describe the grain) or (b) the subset of students who enrolled (\emph{i.e.}, \texttt{student} is the grain and \texttt{enroll} is the adjective)? It's not clear without examine the code, comments, or documentation.
+
+If someone has a proposed solution, we would love to hear it. So far, we've been reluctant to decorate the variable name more, such as \texttt{ds\_grain\_client\_adj\_enroll}.
+
+\hypertarget{define-the-dataset-when-in-doubt}{%
+\subsubsection{Define the dataset when in doubt}\label{define-the-dataset-when-in-doubt}}
+
+If it's potentially unclear to a new reader, use a comment immediately before the dataset's initial use.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# \textasciigrave{}ds\_client\_enroll\textasciigrave{}:}
+\CommentTok{\#    grain: one row per client}
+\CommentTok{\#    subset: only clients who have successfully enrolled are included}
+\CommentTok{\#    source: the \textasciigrave{}client\textasciigrave{} database table, where \textasciigrave{}enroll\_count\textasciigrave{} is 1+.}
+\NormalTok{ds\_client\_enroll <{-}}\StringTok{ }\NormalTok{...}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{style-naming-semantic}{%
 \subsection{Semantic sorting}\label{style-naming-semantic}}
 
@@ -1606,7 +1690,7 @@ Put the ``biggest'' term on the left side of the variable.
 \hypertarget{style-whitespace}{%
 \section{Whitespace}\label{style-whitespace}}
 
-Although execution is rarely affected by whitespace in R and SQL files, be consistent and minimalisic. One benefit is that Git diffs won't show unnecessary churn. When a line of code lights up in a diff, it's nice when reflect a real change, and not something trivial like tabs were converted to spaces, or trailing spaces were added or deleted.
+Although execution is rarely affected by whitespace in R and SQL files, be consistent and minimalistic. One benefit is that Git diffs won't show unnecessary churn. When a line of code lights up in a diff, it's nice when reflect a real change, and not something trivial like tabs were converted to spaces, or trailing spaces were added or deleted.
 
 Some of these guidelines are handled automatically by modern IDEs, if you configure the correct settings.
 
@@ -1631,7 +1715,7 @@ Some of these guidelines are handled automatically by modern IDEs, if you config
 \item
   Each file should end \href{https://unix.stackexchange.com/a/18746/104659}{with a blank line}. (RStudio calls this ``Ensure that source files end with newline.'')
 \item
-  Remove spaces and tabs at the end of lines. (RStudio calls this ``Strip trailing horizontal whitepace when saving''.)
+  Remove spaces and tabs at the end of lines. (RStudio calls this ``Strip trailing horizontal whitespace when saving''.)
 \end{enumerate}
 
 \hypertarget{style-database}{%
@@ -1650,12 +1734,14 @@ GitLab's data team has a good \href{https://about.gitlab.com/handbook/business-o
 \hypertarget{style-ggplot}{%
 \section{ggplot2}\label{style-ggplot}}
 
-The expressiveness of \href{https://ggplot2.tidyverse.org/}{ggplot2} allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a \href{https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md}{textbook for introductory statistics} (\citet{deshea}); the 200+ graphs and their code is publically available.
+The expressiveness of \href{https://ggplot2.tidyverse.org/}{ggplot2} allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a \href{https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md}{textbook for introductory statistics} (\citet{deshea}); the 200+ graphs and their code is publicly available.
+
+There are a few additional ggplot2 tips in the \href{https://style.tidyverse.org/ggplot2.html}{tidyverse style guide}.
 
 \hypertarget{style-ggplot-order}{%
 \subsection{Order of commands}\label{style-ggplot-order}}
 
-ggplot2 is essentially a collection of functions combined with the \texttt{+} operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functoins should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:
+ggplot2 is essentially a collection of functions combined with the \texttt{+} operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functions should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1663,7 +1749,7 @@ ggplot2 is essentially a collection of functions combined with the \texttt{+} op
 \item
   \texttt{ggplot()} is the primary function to specify the default dataset and aesthetic mappings. Many arguments can be passed to \texttt{aes()}, and we prefer to follow an order consistent with the \texttt{scale\_*()} order below.
 \item
-  \texttt{geom\_*()} and \texttt{annotate()} creates the \emph{geom}etric elements that reperesent the data. Unlike most categories in this list, the order matters. Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.
+  \texttt{geom\_*()} and \texttt{annotate()} creates the \emph{geom}etric elements that represent the data. Unlike most categories in this list, the order matters. Geoms specified first are drawn first, and therefore can be obscured by subsequent geoms.
 \item
   \texttt{scale\_*()} describes how a dimension of data (specified in \texttt{aes()}) is translated into a visual element. We specify the dimensions in descending order of (typical) importance: \texttt{x}, \texttt{y}, \texttt{group}, \texttt{color}, \texttt{fill}, \texttt{size}, \texttt{radius}, \texttt{alpha}, \texttt{shape}, \texttt{linetype}.
 \item

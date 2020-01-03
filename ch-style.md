@@ -35,7 +35,7 @@ However, some terms are too long to reasonably use without shortening.  We make 
 1. humans commonly use the term orally.  For instance, people tend to say "OR" instead of "operating room".
 
 1. your team has agreed on set list of abbreviations.  The list for our [CDW](https://github.com/OuhscBbmc/prairie-outpost-public#readme) team includes:
-[appt](https://www.merriam-webster.com/dictionary/appointment), 
+[appt](https://www.merriam-webster.com/dictionary/appointment) (not "apt"), 
 [cdw](https://en.wikipedia.org/wiki/Clinical_data_repository), 
 [cpt](https://en.wikipedia.org/wiki/Current_Procedural_Terminology), 
 [drg](https://en.wikipedia.org/wiki/Diagnosis-related_group) (stands for diagnosis-related group),
@@ -43,7 +43,7 @@ However, some terms are too long to reasonably use without shortening.  We make 
 [hx](https://medical-dictionary.thefreedictionary.com/Hx),
 [icd](https://www.cdc.gov/nchs/icd/icd10cm.htm)
 [pt](https://www.medicinenet.com/script/main/art.asp?articlekey=39154), and
-[vr]() (vital records).
+[vr](https://www.ok.gov/health/Birth_and_Death_Certificates/) (vital records).
 
 When your team choose terms (*e.g.*, 'apt' vs 'appt'), try to use a standard vocabulary, such as [MedTerms Medical Dictionary](https://www.medicinenet.com/medterms-medical-dictionary/article.htm).
 
@@ -57,7 +57,7 @@ Removing datasets rows is an important operation that is a frequent source of sn
 
 #### Dropping rows with missing values {#style-filter-drop_na}
 
-[`tidyr::drop_na()`]() drops rows with a missing value in a specific column.  
+[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.  
 
 ```r
 # Good
@@ -160,7 +160,7 @@ Naming
 
 ### Datasets {#style-naming-datasets}
 
-[`data.frame`]() are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent of a conventional table.  Note that "dataset" means a collections of tables in the the [.net]() world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).
+[`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html)s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent of a conventional table.  Note that "dataset" means a collections of tables in the the [.NET](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/) world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).^[To complete the survey of "dataset" definitions: TThe Java world is like R, in that "dataset" typically describes rectangular tables (*e.g.*, [Java](https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html), [Spark](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html), [scala]).  In Julia and Python, qqq]
 
 #### Prefix with `ds_` and `d_`
 
@@ -177,7 +177,7 @@ count_elements(d = ds)
 
 #### Express the grain
 
-The [grain]() of a dataset describes what each row represents, which is a similar idea to the statistician's concept of "unit of analysis".  Essentially it the the most granular entity described.  Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a [tidy]() dataset with a clear grain.
+The [grain](https://gerardnico.com/olap/dimensional_modeling/grain#grain) of a dataset describes what each row represents, which is a similar idea to the statistician's concept of "unit of analysis".  Essentially it the the most granular entity described.  Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a [tidy](https://r4ds.had.co.nz/tidy-data.html) dataset with a clear grain.
 
 ```r
 ds_student          # One row per student
@@ -192,9 +192,15 @@ ds_pt_visit   # One row per patient-visit combination
 ds_visit      # Same as above, since it's clear a visit is connected w/ a pt
 ```
 
+For more insight into grains, [Ralph Kimball writes](https://www.kimballgroup.com/2003/03/declaring-the-grain/)
+
+> In debugging literally thousands of dimensional designs from my students over the years, I have found that the most frequent design error by far is not declaring the grain of the fact table at the beginning of the design process. If the grain isn’t clearly defined, the whole design rests on quicksand. Discussions about candidate dimensions go around in circles, and rogue facts that introduce application errors sneak into the design.
+> ...
+> I hope you’ve noticed some powerful effects from declaring the grain. First, you can visualize the dimensionality of the doctor bill line item very precisely, and you can therefore confidently examine your data sources, deciding whether or not a dimension can be attached to this data. For example, you probably would exclude “treatment outcome” from this example because most medical billing data doesn’t tie to any notion of outcome.
+
 #### Use `ds` when definition is clear
 
-Many times an [ellis file]() deals with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.  
+Many times an [ellis file](#pattern-ellis) deals with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.  
 
 #### Use an adjective after the grain, if necessary
 
