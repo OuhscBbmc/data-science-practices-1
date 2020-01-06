@@ -237,6 +237,9 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # pandoc
   sudo apt-get --yes install pandoc
+  
+  # For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.
+  sudo apt-get install texinfo
 }
 install-packages
 )
