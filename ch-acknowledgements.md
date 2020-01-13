@@ -18,6 +18,7 @@ The authors thank all our colleauges for the discussions and experiences about d
 [\@man9472](https://github.com/man9472),
 [\@rmatkins](https://github.com/rmatkins),
 [\@sbohora](https://github.com/sbohora),
+[\@thomasnwilson](https://github.com/thomasnwilson),
 [\@vimleshbavadiya](https://github.com/vimleshbavadiya),
 [\@waleboro](https://github.com/waleboro),
 [\@YuiYamaoka](https://github.com/YuiYamaoka),
