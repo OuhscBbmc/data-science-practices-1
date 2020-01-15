@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-01-12}
+\date{2020-01-15}
 
 \begin{document}
 \maketitle
@@ -272,6 +272,11 @@ Almost every project recodes many variables. Choose the simplest function possib
 Try to prepend each function with its package. Write \texttt{dplyr::filter()} instead of \texttt{filter()}. When two packages contain public functions with the same name, the package that was most recently called with \texttt{library()} takes precedent. When multiple R files are executed, the packages' precedents may not be predictable. Specifying the package eliminates the ambiguity, while also making the code easier to follow. For this reason, we recommend that almost all R files contain a \protect\hyperlink{chunk-load-packages}{`load-packages'} chunk.
 
 See the \href{https://google.github.io/styleguide/Rguide.html\#qualifying-namespaces}{Google Style Guide} for more about qualifying functions
+
+\hypertarget{coding-defensive-date-arithmetic}{%
+\subsection{Date Arithmetic}\label{coding-defensive-date-arithmetic}}
+
+Don't use the minus operator (\emph{i.e.}, \texttt{-}) to subtract dates. Instead use \texttt{as.integer(difftime(stop,\ start,\ units="days"))}. It's longer but protects from the scneario that \texttt{start} or \texttt{stop} are changed upstream to a datetime. In that case, \texttt{stop\ -\ start} equals the number of \emph{seconds} between the two points, not the number of \emph{days}.
 
 \hypertarget{architecture}{%
 \chapter{Architecture Principles}\label{architecture}}
@@ -559,53 +564,59 @@ This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} becaus
 \hypertarget{repo-root}{%
 \section{Root}\label{repo-root}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  \texttt{config.R} is simply a plain-text yaml file read by the \href{https://CRAN.R-project.org/package=config}{config} package. It is great when a value has to be coordinated across multiple file
+\hypertarget{repo-config}{%
+\subsection{\texorpdfstring{\texttt{config.R}}{config.R}}\label{repo-config}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{default}\KeywordTok{:}
-\CommentTok{\# To be processed by Ellis lanes}
-\FunctionTok{path\_subject\_1\_raw}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/raw/subject{-}1.csv"}
-\FunctionTok{path\_mlm\_1\_raw}\KeywordTok{:}\AttributeTok{      }\StringTok{"data{-}public/raw/mlm{-}1.csv"}
+The configuration file is simply a plain-text yaml file read by the \href{https://CRAN.R-project.org/package=config}{config} package. It is great when a value has to be coordinated across multiple file
 
-\CommentTok{\# Central Database (produced by Ellis lanes).}
-\FunctionTok{path\_database}\KeywordTok{:}\AttributeTok{       }\StringTok{"data{-}public/derived/db.sqlite3"}
+\begin{verbatim}
+```yaml
+default:
+# To be processed by Ellis lanes
+path_subject_1_raw:  "data-public/raw/subject-1.csv"
+path_mlm_1_raw:      "data-public/raw/mlm-1.csv"
 
-\CommentTok{\# Analysis{-}ready datasets (produced by scribes \& consumed by analyses).}
-\FunctionTok{path\_mlm\_1\_derived}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/derived/mlm{-}1.rds"}
+# Central Database (produced by Ellis lanes).
+path_database:       "data-public/derived/db.sqlite3"
 
-\CommentTok{\# Metadata}
-\FunctionTok{path\_annotation}\KeywordTok{:}\AttributeTok{     }\StringTok{"data{-}public/metadata/cqi{-}annotation.csv"}
+# Analysis-ready datasets (produced by scribes & consumed by analyses).
+path_mlm_1_derived:  "data-public/derived/mlm-1.rds"
 
-\CommentTok{\# Logging errors and messages from automated execution.}
-\FunctionTok{path\_log\_flow}\KeywordTok{:}\AttributeTok{       !expr strftime(Sys.time(), "data{-}unshared/log/flow{-}\%Y{-}\%m{-}\%d{-}{-}\%H{-}\%M{-}\%S.log")}
+# Metadata
+path_annotation:     "data-public/metadata/cqi-annotation.csv"
 
-\CommentTok{\# time\_zone\_local       :  "America/Chicago" \# Force local time, in case remotely run.}
+# Logging errors and messages from automated execution.
+path_log_flow:       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")
 
-\CommentTok{\# {-}{-}{-}{-} Validation Ranges \& Patterns {-}{-}{-}{-}}
-\FunctionTok{range\_record\_id         }\KeywordTok{:}\AttributeTok{ !expr c(1L, 999999L)}
-\FunctionTok{range\_dob               }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2010{-}01{-}01"), Sys.Date() + lubridate::days(1))}
-\FunctionTok{range\_datetime\_entry    }\KeywordTok{:}\AttributeTok{ !expr c(as.POSIXct("2019{-}01{-}01", tz="America/Chicago"), Sys.time())}
-\FunctionTok{max\_age                 }\KeywordTok{:}\AttributeTok{ }\DecValTok{25}
-\FunctionTok{pattern\_mrn\_centricity  }\KeywordTok{:}\AttributeTok{ }\StringTok{"\^{}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{16\}$"}\CommentTok{        \# The 64{-}bit int is more easily validated as a character.}
-\end{Highlighting}
-\end{Shaded}
-\item
-  \texttt{flow.R}
-\item
-  \texttt{README.md}
-\item
-  \texttt{*.Rproj}
-\end{enumerate}
+# time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.
 
-\hypertarget{analysis}{%
-\section{Analysis}\label{analysis}}
+# ---- Validation Ranges & Patterns ----
+range_record_id         : !expr c(1L, 999999L)
+range_dob               : !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))
+range_datetime_entry    : !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())
+max_age                 : 25
+pattern_mrn             : "^E\\d{9}$"  # An 'E', followed by 9 digits.
+```
+\end{verbatim}
 
-\hypertarget{data-public}{%
-\section{Data Public}\label{data-public}}
+\hypertarget{repo-flow}{%
+\subsection{\texorpdfstring{\texttt{flow.R}}{flow.R}}\label{repo-flow}}
+
+The workflow of the repo is determined by \texttt{flow.R}. It calls (typically R and SQL) files in a specific order, while sending the log messages to a file.
+
+See also the \protect\hyperlink{automation-flow}{automation mediators}.
+
+\hypertarget{repo-readme}{%
+\subsection{\texorpdfstring{\texttt{README.md}}{README.md}}\label{repo-readme}}
+
+\hypertarget{repo-rproj}{%
+\subsection{\texorpdfstring{\texttt{*.Rproj}}{*.Rproj}}\label{repo-rproj}}
+
+\hypertarget{repo-analysis}{%
+\section{Analysis}\label{repo-analysis}}
+
+\hypertarget{repo-data-public}{%
+\section{Data Public}\label{repo-data-public}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -622,20 +633,20 @@ This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} becaus
   Original
 \end{enumerate}
 
-\hypertarget{data-unshared}{%
-\section{Data Unshared}\label{data-unshared}}
+\hypertarget{repo-data-unshared}{%
+\section{Data Unshared}\label{repo-data-unshared}}
 
-\hypertarget{documentation}{%
-\section{Documentation}\label{documentation}}
+\hypertarget{repo-documentation}{%
+\section{Documentation}\label{repo-documentation}}
 
-\hypertarget{manipulation}{%
-\section{Manipulation}\label{manipulation}}
+\hypertarget{repo-manipulation}{%
+\section{Manipulation}\label{repo-manipulation}}
 
-\hypertarget{stitched-output}{%
-\section{Stitched Output}\label{stitched-output}}
+\hypertarget{repo-stitched}{%
+\section{Stitched Output}\label{repo-stitched}}
 
-\hypertarget{utility}{%
-\section{Utility}\label{utility}}
+\hypertarget{repo-utility}{%
+\section{Utility}\label{repo-utility}}
 
 \hypertarget{data-at-rest}{%
 \chapter{Data at Rest}\label{data-at-rest}}
@@ -1256,22 +1267,139 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 \end{itemize}
 
 \hypertarget{automation}{%
-\chapter{Automation}\label{automation}}
+\chapter{Automation \& Reproducibility}\label{automation}}
 
-\hypertarget{flow-file-in-r}{%
-\section{Flow File in R}\label{flow-file-in-r}}
+Automation is an important prerequisite of reproducibility.
 
-\hypertarget{makefile}{%
-\section{Makefile}\label{makefile}}
+\hypertarget{automation-mediator}{%
+\section{Mediator}\label{automation-mediator}}
 
-\hypertarget{ssis}{%
-\section{SSIS}\label{ssis}}
+A nontirivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. This single file is a special cases of the \href{https://en.wikipedia.org/wiki/Mediator_pattern}{mediator pattern}, in the sense that it defines how each piece relates to each other.
 
-\hypertarget{cron-jobs-task-scheduler}{%
-\section{cron Jobs \& Task Scheduler}\label{cron-jobs-task-scheduler}}
+\hypertarget{automation-flow}{%
+\subsection{Flow File in R}\label{automation-flow}}
+
+See also the \protect\hyperlink{repo-flow}{prototypical repo}.
+
+\hypertarget{automation-makefile}{%
+\subsection{Makefile}\label{automation-makefile}}
+
+\hypertarget{automation-ssis}{%
+\subsection{SSIS}\label{automation-ssis}}
+
+\hypertarget{automation-scheduling}{%
+\section{Scheduling}\label{automation-scheduling}}
+
+\hypertarget{automation-cron}{%
+\subsection{cron}\label{automation-cron}}
+
+\href{https://en.wikipedia.org/wiki/Cron}{cron} is the common choice when scheduling tasks on Linux. A plain text file specifies which file to run, and on what recurring schedule. A lot of \href{https://www.computerhope.com/unix/ucrontab.htm}{helpful documentation and tutorials} exists, as well as sites that help construct and validate your entries like \href{https://crontab.guru/}{crontab guru}.
+
+\hypertarget{automation-task-scheduler}{%
+\subsection{Task Scheduler}\label{automation-task-scheduler}}
+
+\href{https://en.wikipedia.org/wiki/Windows_Task_Scheduler}{Windows Task Scheduler} is the common choice when scheduling tasks on Windows.
+
+Many of the GUI options are easy to specify, but three are error-prone, and must be specified carefully. The exist under ``Actions'' \textbar{} ``Start a program''.
+
+\begin{itemize}
+\item
+  \textbf{Program/script:} is the absolute path to \texttt{Rscript.exe}. It needs to be updated every time you upgrade R (unless you're doing something tricky with the \texttt{PATH} environmental OS variable.). Notice we are using the ``patched'' version of R. The entry should be enclosed in quotes.
+
+\begin{verbatim}
+"C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe"
+\end{verbatim}
+\item
+  \textbf{Add arguments (optional):} specifies the flow file to run. In this case, the repo `butcher-hearing-screen-1' is under in the 'Documents/cdw/` directory; the \protect\hyperlink{automation-flow}{flow file} is located in the repo's root directory, as discussed in the \protect\hyperlink{repo-flow}{prototypical repo}. The entry should be enclosed in quotes.
+
+\begin{verbatim}
+"C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R"
+\end{verbatim}
+\item
+  \textbf{Start in (optional):} sets the working directory. If not properly set, the relative paths of the files will not point to the correct locations. This should be identical to the entry above, but (a) do not include `/flow.R' and (b) does not contains quotes. We repeate, the entry should NOT be enclosed in quotes.
+
+\begin{verbatim}
+C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1
+\end{verbatim}
+\end{itemize}
+
+Other options we typically specify are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ``Run whether the user is logged in or not.''
+\item
+  ``Run as the highest available version of Windows.''
+\item
+  ``Wake the computer ot run this task'' is probably necessary if this is located on a normal desktop. It is not something we specify, because our tasks are located on a \href{https://en.wikipedia.org/wiki/System_virtual_machine}{VM}-based workstation that is never turned off.
+\end{enumerate}
+
+Following these instructions, you are required to enter your password every time you modify the task, and every time you update your password. If you are using network credentials, you probably should specify your account like ``domain/username''. Be careful: when you modify a task and are prompted for a password, the GUI subtly alters the account entry to just ``username'' (instead of ``domain/username''). Make sure you prepend the username with the domain, as you enter the password.
+
+\hypertarget{automation-sql-server-agent}{%
+\subsection{SQL Server Agent}\label{automation-sql-server-agent}}
+
+\href{https://docs.microsoft.com/en-us/sql/ssms/agent/sql-server-agent}{SQL Server Agent} executes jobs on a specified schedule. It also naturally interfaces with \protect\hyperlink{automation-ssis}{SSIS packages} deployed to the server, but can also execute other formats, like a plain sql file.
+
+An important distinction is that it runs as a service \emph{on the database server}, as opposed to Task Schedular, which runs as a service on the client machine. We prefer running jobs on the server when the job either
+1. requires elevated/administrative privileges,
+1. would require a lot of network constraints when passing large amount of data between the server and client, or
+1. ``feels'' like it is the server's responsibility, such as rebuilding a database index, or archiving server logs.
+
+\hypertarget{auxiliary-issues}{%
+\section{Auxiliary Issues}\label{auxiliary-issues}}
+
+The following subsections do not execute or scheule any code, but should be considered.
 
 \hypertarget{sink-log-files}{%
-\section{Sink Log Files}\label{sink-log-files}}
+\subsection{Sink Log Files}\label{sink-log-files}}
+
+\hypertarget{package-versions}{%
+\subsection{Package Versions}\label{package-versions}}
+
+When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected, and when they are, the error messages may not be as clear as when you are running the procedure in RStudio. For these and other reasons, plan your strategy for maintaining the version of R and its packages. Here are some approaches, with different tradeoffs.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Meticulously specifies the desired version of each R package. Packages sometimes release backwards-incompatibilities (commonly called ``breaking changes'' in the \href{https://style.tidyverse.org/news.html\#breaking-changes}{news file}). This approach reduces the chance of a new version of a package breaking existing pipeline code. We recommend this approach when uptime is important.
+
+  The most intuitive implementation is to install with explicit code in a file like \texttt{utility/install-dependencies.R}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_version}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{     , }\DataTypeTok{version =} \StringTok{"0.4.3"}\NormalTok{ )}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_version}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{   , }\DataTypeTok{version =} \StringTok{"2.0.0"}\NormalTok{ )}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_version}\NormalTok{(}\StringTok{"data.table"}\NormalTok{, }\DataTypeTok{version =} \StringTok{"1.10.4"}\NormalTok{)}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_version}\NormalTok{(}\StringTok{"lubridate"}\NormalTok{ , }\DataTypeTok{version =} \StringTok{"1.6.0"}\NormalTok{ )}
+\NormalTok{remotes}\OperatorTok{::}\KeywordTok{install\_version}\NormalTok{(}\StringTok{"openxlsx"}\NormalTok{  , }\DataTypeTok{version =} \StringTok{"4.0.17"}\NormalTok{)}
+\CommentTok{\# ... package list continues ...}
+\end{Highlighting}
+\end{Shaded}
+
+  Another implementation is to convert the repo to a package itself, and \href{http://r-pkgs.had.co.nz/description.html\#dependencies}{specify the versions} in the \texttt{DESCRIPTION} file.
+
+\begin{verbatim}
+Imports:
+   dplyr       (== 0.4.3 )
+   ggplot2     (== 2.0.0 )
+   data.table  (== 1.10.4)
+   lubridate   (== 1.6.0 )
+   openxlsx    (== 4.0.17)
+\end{verbatim}
+
+  A downside is that it can be difficult to set up a identical machine in a few months. Sometimes these packages have depend on packages that are incompatible with other package versions. For example, at one point, the current version of dplyr was 0.4.3. A few months later, the rlang package (which wasn't explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr. The developer on the new machine needs to decide wether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.
+
+  A second important downside is that this approach can lock all the user's projects to specific outdate package version.
+
+  We and others\footnote{\href{https://insightindustry.com/}{Chris Modzelewski}} advocate this approach when your team is experienced with only R, and has a machine dedicated to an important line-of-business workflow.
+\item
+  For most conventional projects, we keep all packages up to date, and live with the occasional breaks. Stick to a practice of (a) run our weekly workflow, (b) update the packages (and R \& RStudio if necessary), (c) rereun that same week's workflow, and finally (d) verify that the results from a \& c are the same. If something is different, we have a week to adapt the pipeline code to the breaking changes in the packages.
+\item
+  A compromise between these two approaches in the `renv' - R Environmentals package (\url{https://rstudio.github.io/renv}). It is a successor to \href{https://rstudio.github.io/packrat/}{packrat}. It requires some learning and cognitive overhead. But if you were running hourly predictions and downtime is a big deal, this investment becomes a lot more appealing.
+\end{enumerate}
 
 \hypertarget{scaling-up}{%
 \chapter{Scaling Up}\label{scaling-up}}
@@ -1603,6 +1731,8 @@ Sometimes it helps to represent the values differently, say a granular and a coa
   yob is an integer, but mob and wob are dates. Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of \href{http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html}{\texttt{OuhscMunge::clump\_month\_date()}} and \href{http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html}{\texttt{OuhscMunge::clump\_week\_date()}}. These help obfuscate the real value, if PHI is involved. Months are centered because the midpoint is usually a better representation of the month's performance than the month's initial day.
 \item
   \texttt{birth\_month\_index} can be values 1 through 12, while \texttt{birth\_month} (or commonly \texttt{mob}) contains the year (\emph{e.g.}, 2014-07-15).
+\item
+  Don't use the minus operator (\emph{i.e.}, \texttt{-}). See \protect\hyperlink{coding-defensive-date-arithmetic}{Defensive Date Arithmetic}.
 \end{itemize}
 
 \hypertarget{naming}{%
@@ -1999,6 +2129,8 @@ The order does not matter.
     Settings \textbar{} Text Editor \textbar{} \textbf{Trim Final Newlines: check} \{\texttt{"files.trimFinalNewlines":\ true}\}
   \item
     Settings \textbar{} Text Editor \textbar{} \textbf{Trim Trailing Whitespace: check} \{\texttt{"files.trimTrailingWhitespace":\ true}\}
+  \item
+    Data \textbar{} Sql \textbar{} \textbf{Show Connection Info In Title: uncheck} \{\texttt{"sql.showConnectionInfoInTitle":\ false}\}
   \item
     Data \textbar{} Sql \textbar{} \textbf{Copy Includes Headers: check} \{\texttt{"sql.copyIncludeHeaders":\ true}\}
   \end{enumerate}
@@ -2749,7 +2881,6 @@ Here is a collection of presentations by the BBMC and friends that may help demo
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Tools to Consider
 
@@ -2803,31 +2934,26 @@ Here is a collection of presentations by the BBMC and friends that may help demo
   \end{enumerate}
 \item
   documentation - bookdown
-\end{enumerate}
 
-\begin{quote}
-Bookdown has worked well for us so far. It's basically independent markdown documents stored on a dedicated git repo. Then you click ``build'' in RStudio and it converts all the markdown files to static html files. Because GitHub is essentially serving as the backend, everyone can make changes to sections and we don't have to be too worried about
+  \begin{quote}
+  Bookdown has worked well for us so far. It's basically independent markdown documents stored on a dedicated git repo. Then you click ``build'' in RStudio and it converts all the markdown files to static html files. Because GitHub is essentially serving as the backend, everyone can make changes to sections and we don't have to be too worried about
 
-Here's a version that's hosted publicly, but I tested that it can be hosted on our shared file server. (It's possible because the html files are so static.) If this is what you guys want for OU's collective CDW, please tell me:
+  Here's a version that's hosted publicly, but I tested that it can be hosted on our shared file server. (It's possible because the html files are so static.) If this is what you guys want for OU's collective CDW, please tell me:
 
-\begin{itemize}
-\tightlist
-\item
-  who you want to be able to edit the documents without review. I'll add them to the GitHub repo.
-\item
-  who you want to be able to view the documents. I'll add them to a dedicate file server space.
-\end{itemize}
+  \begin{itemize}
+  \tightlist
+  \item
+    who you want to be able to edit the documents without review. I'll add them to the GitHub repo.
+  \item
+    who you want to be able to view the documents. I'll add them to a dedicate file server space.
+  \end{itemize}
 
-\url{https://ouhscbbmc.github.io/data-science-practices-1/workstation.html\#installation-required}
+  \url{https://ouhscbbmc.github.io/data-science-practices-1/workstation.html\#installation-required}
 
-I was thinking that each individual database gets it own chapter. The BBMC has \textasciitilde4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database. Then there are \textasciitilde3 sections within each chapter: (a) a black-and-white description of the tables, columns, \& indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers \& admins).
+  I was thinking that each individual database gets it own chapter. The BBMC has \textasciitilde4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database. Then there are \textasciitilde3 sections within each chapter: (a) a black-and-white description of the tables, columns, \& indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers \& admins).
 
-My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor \& commit, and let someone else click ``build'' in RStudio on their machine). But I'm very flexible on all this. I'll support \& contribute to any system that you guys feel will work well across the teams.
-\end{quote}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
+  My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor \& commit, and let someone else click ``build'' in RStudio on their machine). But I'm very flexible on all this. I'll support \& contribute to any system that you guys feel will work well across the teams.
+  \end{quote}
 \item
   developing packages
 \end{enumerate}
@@ -2839,13 +2965,16 @@ My proposal uses GitHub and Markdown because they're so universal (no knowledge 
   \url{http://mangothecat.github.io/goodpractice/}
 \end{itemize}
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Cargo cult programming ``is a style of computer programming characterized by the ritual inclusion of code or program structures that serve no real purpose.'' (\href{https://en.wikipedia.org/wiki/Cargo_cult_programming}{Wikipedia})
+
+  Your team should decide which elements of \href{https://ouhscbbmc.github.io/data-science-practices-1/file-prototype.html}{a file prototype} and \href{https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html}{repo prototype} are best for you.
+\end{enumerate}
+
 \hypertarget{practices}{%
 \section{Practices}\label{practices}}
-
-\hypertarget{date-arithmetic}{%
-\subsection{Date Arithmetic}\label{date-arithmetic}}
-
-Don't use \texttt{-} to subtract dates, use \texttt{difftime(stop,\ start,\ units="days")}. It's longer but protects from the scneario that \texttt{start} or \texttt{stop} are changed upstream to a date time. In that case, \texttt{stop\ -\ start} equals the number of \emph{seconds} between the two points, not the number of \emph{days}.
 
 \hypertarget{example-bookdown}{%
 \chapter{Example}\label{example-bookdown}}
@@ -2940,6 +3069,7 @@ The authors thank all our colleauges for the discussions and experiences about d
 \href{https://github.com/man9472}{@man9472},
 \href{https://github.com/rmatkins}{@rmatkins},
 \href{https://github.com/sbohora}{@sbohora},
+\href{https://github.com/thomasnwilson}{@thomasnwilson},
 \href{https://github.com/vimleshbavadiya}{@vimleshbavadiya},
 \href{https://github.com/waleboro}{@waleboro},
 \href{https://github.com/YuiYamaoka}{@YuiYamaoka},
