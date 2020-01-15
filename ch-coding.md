@@ -100,3 +100,7 @@ Defensive Style {#coding-defensive}
 Try to prepend each function with its package.  Write `dplyr::filter()` instead of `filter()`.  When two packages contain public functions with the same name, the package that was most recently called with `library()` takes precedent.  When multiple R files are executed, the packages' precedents may not be predictable.  Specifying the package eliminates the ambiguity, while also making the code easier to follow.  For this reason, we recommend that almost all R files contain a ['load-packages'](#chunk-load-packages) chunk.
 
 See the [Google Style Guide](https://google.github.io/styleguide/Rguide.html#qualifying-namespaces) for more about qualifying functions
+
+### Date Arithmetic {#coding-defensive-date-arithmetic}
+
+Don't use the minus operator (*i.e.*, `-`) to subtract dates.  Instead use `as.integer(difftime(stop, start, units="days"))`.  It's longer but protects from the scneario that `start` or `stop` are changed upstream to a datetime.  In that case, `stop - start` equals the number of *seconds* between the two points, not the number of *days*.

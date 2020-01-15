@@ -6,7 +6,9 @@ https://github.com/wibeasley/RAnalysisSkeleton
 Root {#repo-root}
 ------------------------------------
 
-1. `config.R`  is simply a plain-text yaml file read by the [config](https://CRAN.R-project.org/package=config) package.  It is great when a value has to be coordinated across multiple file
+### `config.R` {#repo-config}
+  
+The configuration file is simply a plain-text yaml file read by the [config](https://CRAN.R-project.org/package=config) package.  It is great when a value has to be coordinated across multiple file
 
     ```yaml
     default:
@@ -33,18 +35,25 @@ Root {#repo-root}
     range_dob               : !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))
     range_datetime_entry    : !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())
     max_age                 : 25
-    pattern_mrn_centricity  : "^\\d{16}$"        # The 64-bit int is more easily validated as a character.
+    pattern_mrn             : "^E\\d{9}$"  # An 'E', followed by 9 digits.
     ```
     
-1. `flow.R`
-1. `README.md`
-1. `*.Rproj`
+### `flow.R` {#repo-flow}
 
-Analysis
+The workflow of the repo is determined by `flow.R`.  It calls (typically R and SQL) files in a specific order, while sending the log messages to a file.
+
+See also the [automation mediators](#automation-flow).
+
+### `README.md` {#repo-readme}
+
+### `*.Rproj` {#repo-rproj}
+
+Analysis {#repo-analysis}
 ------------------------------------
 
-Data Public
+Data Public {#repo-data-public}
 ------------------------------------
+
 1. Raw
 1. Derived
 1. Metadata
@@ -52,17 +61,17 @@ Data Public
 1. Original
 
 
-Data Unshared
+Data Unshared {#repo-data-unshared}
 ------------------------------------
 
-Documentation
+Documentation {#repo-documentation}
 ------------------------------------
 
-Manipulation
+Manipulation {#repo-manipulation}
 ------------------------------------
 
-Stitched Output
+Stitched Output {#repo-stitched}
 ------------------------------------
 
-Utility
+Utility {#repo-utility}
 ------------------------------------
