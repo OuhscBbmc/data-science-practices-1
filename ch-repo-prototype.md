@@ -42,7 +42,7 @@ The configuration file is simply a plain-text yaml file read by the [config](htt
 
 The workflow of the repo is determined by `flow.R`.  It calls (typically R and SQL) files in a specific order, while sending the log messages to a file.
 
-See also the [automation mediators](#automation-flow).
+See [automation mediators](#automation-flow) for more details.
 
 ### `README.md` {#repo-readme}
 
