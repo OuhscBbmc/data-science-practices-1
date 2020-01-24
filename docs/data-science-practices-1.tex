@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-01-12}
+\date{2020-01-24}
 
 \begin{document}
 \maketitle
@@ -637,8 +637,8 @@ This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} becaus
 \hypertarget{utility}{%
 \section{Utility}\label{utility}}
 
-\hypertarget{data-at-rest}{%
-\chapter{Data at Rest}\label{data-at-rest}}
+\hypertarget{data-rest}{%
+\chapter{Data at Rest}\label{data-rest}}
 
 \hypertarget{data-states}{%
 \section{Data States}\label{data-states}}
@@ -670,29 +670,120 @@ This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} becaus
 \hypertarget{data-containers}{%
 \section{Data Containers}\label{data-containers}}
 
+\hypertarget{data-rest-csv}{%
+\subsection{csv}\label{data-rest-csv}}
+
+When exchanging data between two different systems, the preferred format is frequently plain text. As opposed to proprietary formats like xlsx or sas7bdat, the file is easily opened and parsable by most statistical software, and even conventional text editors.
+
+Incoming files should be plain-text \href{https://en.wikipedia.org/wiki/Comma-separated_values}{csv} --not Excel or other proprietary or binary format.
+
+\hypertarget{data-rest-rds}{%
+\subsection{rds}\label{data-rest-rds}}
+
+\hypertarget{data-rest-sqlite}{%
+\subsection{SQLite}\label{data-rest-sqlite}}
+
+\hypertarget{data-rest-database}{%
+\subsection{Central Enterprise database}\label{data-rest-database}}
+
+\hypertarget{data-rest-redcap}{%
+\subsection{Central REDCap database}\label{data-rest-redcap}}
+
+\hypertarget{data-rest-avoid}{%
+\subsection{Containers to avoid for raw/input}\label{data-rest-avoid}}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  csv
+  Proprietary like xlsx, sas7bdat
+\end{enumerate}
+
+\hypertarget{data-rest-conventions}{%
+\section{Storage Conventions}\label{data-rest-conventions}}
+
+\hypertarget{data-rest-conventions-all}{%
+\subsection{All Sources}\label{data-rest-conventions-all}}
+
+Across all file formats, these conventions usually work best.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \item
-  rds
+  \textbf{date format}: use \texttt{YYYY-MM-DD} (\href{https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601}{ISO-8601})
 \item
-  SQLite
+  \textbf{time format}: use \texttt{HH:MM} or \texttt{HH:MM:SS}. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (\emph{i.e.}, \textbf{0}9:59am)
 \item
-  Central Enterprise database
+  \textbf{patient names}: separate the \texttt{name\_last}, \texttt{name\_first}, and \texttt{name\_middle} when possible.
 \item
-  Central REDCap database
+  \textbf{consistency across versions}: Use a script to produce the data sent to us, and inform us when changes occur. Most of our processes are automated, and changes that are trivial to humans (\emph{e.g.}, \texttt{yyyy-mm-dd} to \texttt{mm/dd-yy}) cause problems for the automation.
 \item
-  Containers to avoid for raw/input
+  \textbf{currency}: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like \texttt{max()} or \texttt{mean()}) to be performed directly. Avoid commas and symbols like ``\$''. If there is a possibility of ambiguity, indicate the denomination in the variable name (\emph{e.g.}, \texttt{payment\_dollars} or \texttt{payment\_euros}).
+\end{enumerate}
+
+\hypertarget{data-rest-conventions-text}{%
+\subsection{Text}\label{data-rest-conventions-text}}
+
+These conventions usually work best within plain-text formats.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{csv}: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons. However, if you are receiving a well-behaved file separated by these characters, just go with the flow.
+\item
+  \textbf{cells enclosed in quotes}: a `cell' should be enclosed in double quotes, especially if it's a string/character variable.
+\end{enumerate}
+
+\hypertarget{data-rest-conventions-excel}{%
+\subsection{Excel Exceptions}\label{data-rest-conventions-excel}}
+
+If Excel is necessary for some reason,
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{avoid multiple tabs/worksheets}: they are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.
+\end{enumerate}
+
+\hypertarget{data-rest-conventions-meditech}{%
+\subsection{Meditech}\label{data-rest-conventions-meditech}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{patient identifier}: \texttt{mrn\_meditech} instead of \texttt{mrn}, \texttt{MRN\ Rec\#}, or \texttt{Med\ Rec\#}.
+\item
+  \textbf{account/admission identifier}: \texttt{account\_number} instead of \texttt{mrn}, \texttt{Acct\#}, or \texttt{Account\#}.
+\item
+  \textbf{patient's full name}: \texttt{name\_full} instead of \texttt{Patient\ Name} or \texttt{Name}.
+\item
+  \textbf{long/tall format}: one row per dx per patient (up to 50 dxs) instead of 50 \emph{columns} of \texttt{dx} per patient. Applies to
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
-  \tightlist
   \item
-    Proprietary like xlsx, sas7bdat
+    diagnosis code \& description
+  \item
+    order date \& number
+  \item
+    procedure name \& number
   \end{enumerate}
 \end{enumerate}
+
+Meditech Idiosyncracies:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{blood pressure}: in most systems the \texttt{bp\_diastolic} and \texttt{bp\_systolic} values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a foward slash.
+\end{enumerate}
+
+\hypertarget{data-rest-conventions-database}{%
+\subsection{Databases}\label{data-rest-conventions-database}}
+
+When exchanging data between two different systems, \ldots{}
 
 \hypertarget{patterns}{%
 \chapter{Patterns}\label{patterns}}

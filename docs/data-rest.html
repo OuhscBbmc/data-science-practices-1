@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Automation | Collaborative Data Science Practices</title>
+  <title>Chapter 6 Data at Rest | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Automation | Collaborative Data Science Practices" />
+  <meta property="og:title" content="Chapter 6 Data at Rest | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Automation | Collaborative Data Science Practices" />
+  <meta name="twitter:title" content="Chapter 6 Data at Rest | Collaborative Data Science Practices" />
   
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="security.html"/>
-<link rel="next" href="scaling-up.html"/>
+<link rel="prev" href="repo-prototype.html"/>
+<link rel="next" href="patterns.html"/>
 <script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -430,23 +430,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="automation" class="section level1" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Automation</h1>
-<div id="flow-file-in-r" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> Flow File in R</h2>
+<div id="data-rest" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Data at Rest</h1>
+<div id="data-states" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Data States</h2>
+<ol style="list-style-type: decimal">
+<li>Raw</li>
+<li>Derived
+<ol style="list-style-type: decimal">
+<li>Project-wide File on Repo</li>
+<li>Project-wide File on Protected File Server</li>
+<li>User-specific File on Protected File Server</li>
+<li>Project-wide Database</li>
+</ol></li>
+<li>Original</li>
+</ol>
 </div>
-<div id="makefile" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Makefile</h2>
+<div id="data-containers" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Data Containers</h2>
+<div id="data-rest-csv" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> csv</h3>
+<p>When exchanging data between two different systems, the preferred format is frequently plain text. As opposed to proprietary formats like xlsx or sas7bdat, the file is easily opened and parsable by most statistical software, and even conventional text editors.</p>
+<p>Incoming files should be plain-text <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> –not Excel or other proprietary or binary format.</p>
 </div>
-<div id="ssis" class="section level2" number="9.3">
-<h2><span class="header-section-number">9.3</span> SSIS</h2>
+<div id="data-rest-rds" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> rds</h3>
 </div>
-<div id="cron-jobs-task-scheduler" class="section level2" number="9.4">
-<h2><span class="header-section-number">9.4</span> cron Jobs &amp; Task Scheduler</h2>
+<div id="data-rest-sqlite" class="section level3" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> SQLite</h3>
 </div>
-<div id="sink-log-files" class="section level2" number="9.5">
-<h2><span class="header-section-number">9.5</span> Sink Log Files</h2>
+<div id="data-rest-database" class="section level3" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Central Enterprise database</h3>
+</div>
+<div id="data-rest-redcap" class="section level3" number="6.2.5">
+<h3><span class="header-section-number">6.2.5</span> Central REDCap database</h3>
+</div>
+<div id="data-rest-avoid" class="section level3" number="6.2.6">
+<h3><span class="header-section-number">6.2.6</span> Containers to avoid for raw/input</h3>
+<ol style="list-style-type: decimal">
+<li>Proprietary like xlsx, sas7bdat</li>
+</ol>
+</div>
+</div>
+<div id="data-rest-conventions" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Storage Conventions</h2>
+<div id="data-rest-conventions-all" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> All Sources</h3>
+<p>Across all file formats, these conventions usually work best.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>date format</strong>: use <code>YYYY-MM-DD</code> (<a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a>)</p></li>
+<li><p><strong>time format</strong>: use <code>HH:MM</code> or <code>HH:MM:SS</code>. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (<em>i.e.</em>, <strong>0</strong>9:59am)</p></li>
+<li><p><strong>patient names</strong>: separate the <code>name_last</code>, <code>name_first</code>, and <code>name_middle</code> when possible.</p></li>
+<li><p><strong>consistency across versions</strong>: Use a script to produce the data sent to us, and inform us when changes occur. Most of our processes are automated, and changes that are trivial to humans (<em>e.g.</em>, <code>yyyy-mm-dd</code> to <code>mm/dd-yy</code>) cause problems for the automation.</p></li>
+<li><p><strong>currency</strong>: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like <code>max()</code> or <code>mean()</code>) to be performed directly. Avoid commas and symbols like “$”. If there is a possibility of ambiguity, indicate the denomination in the variable name (<em>e.g.</em>, <code>payment_dollars</code> or <code>payment_euros</code>).</p></li>
+</ol>
+</div>
+<div id="data-rest-conventions-text" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Text</h3>
+<p>These conventions usually work best within plain-text formats.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>csv</strong>: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons. However, if you are receiving a well-behaved file separated by these characters, just go with the flow.</p></li>
+<li><p><strong>cells enclosed in quotes</strong>: a ‘cell’ should be enclosed in double quotes, especially if it’s a string/character variable.</p></li>
+</ol>
+</div>
+<div id="data-rest-conventions-excel" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Excel Exceptions</h3>
+<p>If Excel is necessary for some reason,</p>
+<ol style="list-style-type: decimal">
+<li><strong>avoid multiple tabs/worksheets</strong>: they are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.</li>
+</ol>
+</div>
+<div id="data-rest-conventions-meditech" class="section level3" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Meditech</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>patient identifier</strong>: <code>mrn_meditech</code> instead of <code>mrn</code>, <code>MRN Rec#</code>, or <code>Med Rec#</code>.</p></li>
+<li><p><strong>account/admission identifier</strong>: <code>account_number</code> instead of <code>mrn</code>, <code>Acct#</code>, or <code>Account#</code>.</p></li>
+<li><p><strong>patient’s full name</strong>: <code>name_full</code> instead of <code>Patient Name</code> or <code>Name</code>.</p></li>
+<li><p><strong>long/tall format</strong>: one row per dx per patient (up to 50 dxs) instead of 50 <em>columns</em> of <code>dx</code> per patient. Applies to</p>
+<ol style="list-style-type: decimal">
+<li><p>diagnosis code &amp; description</p></li>
+<li><p>order date &amp; number</p></li>
+<li><p>procedure name &amp; number</p></li>
+</ol></li>
+</ol>
+<p>Meditech Idiosyncracies:</p>
+<ol style="list-style-type: decimal">
+<li><strong>blood pressure</strong>: in most systems the <code>bp_diastolic</code> and <code>bp_systolic</code> values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a foward slash.</li>
+</ol>
+</div>
+<div id="data-rest-conventions-database" class="section level3" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> Databases</h3>
+<p>When exchanging data between two different systems, …</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -454,8 +530,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="security.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="scaling-up.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="repo-prototype.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="patterns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -486,7 +562,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-automation.md",
+"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-data-persisted.md",
 "text": "Edit"
 },
 "history": {
