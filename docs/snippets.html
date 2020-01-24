@@ -145,6 +145,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#coding-defensive"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -183,14 +185,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>5</b> Prototypical Repository</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>5.1</b> Root</a></li>
-<li class="chapter" data-level="5.2" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>5.2</b> Analysis</a></li>
-<li class="chapter" data-level="5.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>5.3</b> Data Public</a></li>
-<li class="chapter" data-level="5.4" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>5.4</b> Data Unshared</a></li>
-<li class="chapter" data-level="5.5" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>5.5</b> Documentation</a></li>
-<li class="chapter" data-level="5.6" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>5.6</b> Manipulation</a></li>
-<li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
-<li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
+<li class="chapter" data-level="5.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>5.1</b> Root</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-config"><i class="fa fa-check"></i><b>5.1.1</b> <code>config.R</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-flow"><i class="fa fa-check"></i><b>5.1.2</b> <code>flow.R</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-readme"><i class="fa fa-check"></i><b>5.1.3</b> <code>README.md</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-rproj"><i class="fa fa-check"></i><b>5.1.4</b> <code>*.Rproj</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-analysis"><i class="fa fa-check"></i><b>5.2</b> Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-public"><i class="fa fa-check"></i><b>5.3</b> Data Public</a></li>
+<li class="chapter" data-level="5.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-unshared"><i class="fa fa-check"></i><b>5.4</b> Data Unshared</a></li>
+<li class="chapter" data-level="5.5" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-documentation"><i class="fa fa-check"></i><b>5.5</b> Documentation</a></li>
+<li class="chapter" data-level="5.6" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-manipulation"><i class="fa fa-check"></i><b>5.6</b> Manipulation</a></li>
+<li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
+<li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="data-rest.html"><a href="data-rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
 <ul>
@@ -244,13 +252,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.1" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>8.3.1</b> Scrubbing GitHub history</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>9</b> Automation</a>
+<li class="chapter" data-level="9" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>9</b> Automation &amp; Reproducibility</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="automation.html"><a href="automation.html#flow-file-in-r"><i class="fa fa-check"></i><b>9.1</b> Flow File in R</a></li>
-<li class="chapter" data-level="9.2" data-path="automation.html"><a href="automation.html#makefile"><i class="fa fa-check"></i><b>9.2</b> Makefile</a></li>
-<li class="chapter" data-level="9.3" data-path="automation.html"><a href="automation.html#ssis"><i class="fa fa-check"></i><b>9.3</b> SSIS</a></li>
-<li class="chapter" data-level="9.4" data-path="automation.html"><a href="automation.html#cron-jobs-task-scheduler"><i class="fa fa-check"></i><b>9.4</b> cron Jobs &amp; Task Scheduler</a></li>
-<li class="chapter" data-level="9.5" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>9.5</b> Sink Log Files</a></li>
+<li class="chapter" data-level="9.1" data-path="automation.html"><a href="automation.html#automation-mediator"><i class="fa fa-check"></i><b>9.1</b> Mediator</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="automation.html"><a href="automation.html#automation-flow"><i class="fa fa-check"></i><b>9.1.1</b> Flow File in R</a></li>
+<li class="chapter" data-level="9.1.2" data-path="automation.html"><a href="automation.html#automation-makefile"><i class="fa fa-check"></i><b>9.1.2</b> Makefile</a></li>
+<li class="chapter" data-level="9.1.3" data-path="automation.html"><a href="automation.html#automation-ssis"><i class="fa fa-check"></i><b>9.1.3</b> SSIS</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="automation.html"><a href="automation.html#automation-scheduling"><i class="fa fa-check"></i><b>9.2</b> Scheduling</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="automation.html"><a href="automation.html#automation-cron"><i class="fa fa-check"></i><b>9.2.1</b> cron</a></li>
+<li class="chapter" data-level="9.2.2" data-path="automation.html"><a href="automation.html#automation-task-scheduler"><i class="fa fa-check"></i><b>9.2.2</b> Task Scheduler</a></li>
+<li class="chapter" data-level="9.2.3" data-path="automation.html"><a href="automation.html#automation-sql-server-agent"><i class="fa fa-check"></i><b>9.2.3</b> SQL Server Agent</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="automation.html"><a href="automation.html#auxiliary-issues"><i class="fa fa-check"></i><b>9.3</b> Auxiliary Issues</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>9.3.1</b> Sink Log Files</a></li>
+<li class="chapter" data-level="9.3.2" data-path="automation.html"><a href="automation.html#package-versions"><i class="fa fa-check"></i><b>9.3.2</b> Package Versions</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="scaling-up.html"><a href="scaling-up.html"><i class="fa fa-check"></i><b>10</b> Scaling Up</a>
 <ul>
@@ -274,7 +294,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>12.1</b> Team-wide</a></li>
 <li class="chapter" data-level="12.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>12.2</b> Project-specific</a></li>
 <li class="chapter" data-level="12.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>12.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>12.4.1</b> GitHub Issue Template</a></li>
+</ul></li>
 <li class="chapter" data-level="12.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>12.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="12.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>12.6</b> Setting up new machine</a></li>
 </ul></li>
@@ -402,10 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="D" data-path="scratch-pad.html"><a href="scratch-pad.html"><i class="fa fa-check"></i><b>D</b> Scratch Pad of Loose Ideas</a>
 <ul>
 <li class="chapter" data-level="D.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>D.1</b> Chapters &amp; Sections to Form</a></li>
-<li class="chapter" data-level="D.2" data-path="scratch-pad.html"><a href="scratch-pad.html#practices"><i class="fa fa-check"></i><b>D.2</b> Practices</a>
-<ul>
-<li class="chapter" data-level="D.2.1" data-path="scratch-pad.html"><a href="scratch-pad.html#date-arithmetic"><i class="fa fa-check"></i><b>D.2.1</b> Date Arithmetic</a></li>
-</ul></li>
+<li class="chapter" data-level="D.2" data-path="scratch-pad.html"><a href="scratch-pad.html#practices"><i class="fa fa-check"></i><b>D.2</b> Practices</a></li>
 </ul></li>
 <li class="chapter" data-level="E" data-path="example-bookdown.html"><a href="example-bookdown.html"><i class="fa fa-check"></i><b>E</b> Example</a></li>
 <li class="chapter" data-level="F" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>F</b> Acknowledgements</a></li>
@@ -438,27 +458,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">B.1.1</span> Reading from Excel</h3>
 <p><em>Background</em>: Avoid Excel for so many reasons. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roamining columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="snippets.html#cb43-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb43-2"><a href="snippets.html#cb43-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
-<span id="cb43-3"><a href="snippets.html#cb43-3"></a></span>
-<span id="cb43-4"><a href="snippets.html#cb43-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
-<span id="cb43-5"><a href="snippets.html#cb43-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb43-6"><a href="snippets.html#cb43-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>        =<span class="st"> &quot;text&quot;</span>,</span>
-<span id="cb43-7"><a href="snippets.html#cb43-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>         =<span class="st"> &quot;date&quot;</span>,</span>
-<span id="cb43-8"><a href="snippets.html#cb43-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>      =<span class="st"> &quot;numeric&quot;</span></span>
-<span id="cb43-9"><a href="snippets.html#cb43-9"></a>)</span>
-<span id="cb43-10"><a href="snippets.html#cb43-10"></a></span>
-<span id="cb43-11"><a href="snippets.html#cb43-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb43-12"><a href="snippets.html#cb43-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
-<span id="cb43-13"><a href="snippets.html#cb43-13"></a>  <span class="dt">path       =</span> config<span class="op">$</span>path_admission_charge,</span>
-<span id="cb43-14"><a href="snippets.html#cb43-14"></a>  <span class="dt">col_types  =</span> col_types</span>
-<span id="cb43-15"><a href="snippets.html#cb43-15"></a>  <span class="co"># sheet    = &quot;dont-use-sheets-if-possible&quot;</span></span>
-<span id="cb43-16"><a href="snippets.html#cb43-16"></a>)</span>
-<span id="cb43-17"><a href="snippets.html#cb43-17"></a></span>
-<span id="cb43-18"><a href="snippets.html#cb43-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
-<span id="cb43-19"><a href="snippets.html#cb43-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
-<span id="cb43-20"><a href="snippets.html#cb43-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
-<span id="cb43-21"><a href="snippets.html#cb43-21"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="snippets.html#cb51-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb51-2"><a href="snippets.html#cb51-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
+<span id="cb51-3"><a href="snippets.html#cb51-3"></a></span>
+<span id="cb51-4"><a href="snippets.html#cb51-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
+<span id="cb51-5"><a href="snippets.html#cb51-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb51-6"><a href="snippets.html#cb51-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>        =<span class="st"> &quot;text&quot;</span>,</span>
+<span id="cb51-7"><a href="snippets.html#cb51-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>         =<span class="st"> &quot;date&quot;</span>,</span>
+<span id="cb51-8"><a href="snippets.html#cb51-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>      =<span class="st"> &quot;numeric&quot;</span></span>
+<span id="cb51-9"><a href="snippets.html#cb51-9"></a>)</span>
+<span id="cb51-10"><a href="snippets.html#cb51-10"></a></span>
+<span id="cb51-11"><a href="snippets.html#cb51-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb51-12"><a href="snippets.html#cb51-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
+<span id="cb51-13"><a href="snippets.html#cb51-13"></a>  <span class="dt">path       =</span> config<span class="op">$</span>path_admission_charge,</span>
+<span id="cb51-14"><a href="snippets.html#cb51-14"></a>  <span class="dt">col_types  =</span> col_types</span>
+<span id="cb51-15"><a href="snippets.html#cb51-15"></a>  <span class="co"># sheet    = &quot;dont-use-sheets-if-possible&quot;</span></span>
+<span id="cb51-16"><a href="snippets.html#cb51-16"></a>)</span>
+<span id="cb51-17"><a href="snippets.html#cb51-17"></a></span>
+<span id="cb51-18"><a href="snippets.html#cb51-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
+<span id="cb51-19"><a href="snippets.html#cb51-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
+<span id="cb51-20"><a href="snippets.html#cb51-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
+<span id="cb51-21"><a href="snippets.html#cb51-21"></a>)</span></code></pre></div>
 </div>
 <div id="removing-trailing-comma-from-header" class="section level3" number="21.1.2">
 <h3><span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header</h3>
@@ -467,11 +487,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="snippets.html#cb44-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
-<span id="cb44-2"><a href="snippets.html#cb44-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
-<span id="cb44-3"><a href="snippets.html#cb44-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
-<span id="cb44-4"><a href="snippets.html#cb44-4"></a></span>
-<span id="cb44-5"><a href="snippets.html#cb44-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="snippets.html#cb52-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
+<span id="cb52-2"><a href="snippets.html#cb52-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
+<span id="cb52-3"><a href="snippets.html#cb52-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
+<span id="cb52-4"><a href="snippets.html#cb52-4"></a></span>
+<span id="cb52-5"><a href="snippets.html#cb52-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
 </div>
 </div>
 <div id="grooming" class="section level2" number="21.2">
@@ -482,10 +502,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="snippets.html#cb45-1"></a> ds <span class="op">%&gt;%</span></span>
-<span id="cb45-2"><a href="snippets.html#cb45-2"></a><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
-<span id="cb45-3"><a href="snippets.html#cb45-3"></a>    <span class="dt">dob   =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(dob <span class="op">&lt;=</span><span class="st"> </span><span class="kw">Sys.Date</span>(), dob, dob <span class="op">-</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">years</span>(<span class="dv">100</span>))</span>
-<span id="cb45-4"><a href="snippets.html#cb45-4"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="snippets.html#cb53-1"></a> ds <span class="op">%&gt;%</span></span>
+<span id="cb53-2"><a href="snippets.html#cb53-2"></a><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
+<span id="cb53-3"><a href="snippets.html#cb53-3"></a>    <span class="dt">dob   =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(dob <span class="op">&lt;=</span><span class="st"> </span><span class="kw">Sys.Date</span>(), dob, dob <span class="op">-</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">years</span>(<span class="dv">100</span>))</span>
+<span id="cb53-4"><a href="snippets.html#cb53-4"></a>  )</span></code></pre></div>
 </div>
 </div>
 <div id="identification" class="section level2" number="21.3">
@@ -496,24 +516,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Explanation</em>: This snippet will create a 5-row csv with random 7-character “tags” to send to the research team collecting patients. The</p>
 <p><em>Instruction</em>: Set <code>pt_count</code>, <code>tag_length</code>, <code>path_out</code>, and execute. Add and rename the columns to be more appropriate for your domain (<em>e.g.</em>, change “patient tag” to “store tag”).</p>
 <p><em>Last Modified</em>: 2019-12-30 by Will</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="snippets.html#cb46-1"></a>pt_count    &lt;-<span class="st"> </span>5L   <span class="co"># The number of rows in the dataset.</span></span>
-<span id="cb46-2"><a href="snippets.html#cb46-2"></a>tag_length  &lt;-<span class="st"> </span>7L   <span class="co"># The number of characters in each tag.</span></span>
-<span id="cb46-3"><a href="snippets.html#cb46-3"></a>path_out    &lt;-<span class="st"> &quot;data-private/derived/pt-pool.csv&quot;</span></span>
-<span id="cb46-4"><a href="snippets.html#cb46-4"></a></span>
-<span id="cb46-5"><a href="snippets.html#cb46-5"></a>draw_tag &lt;-<span class="st"> </span><span class="cf">function</span> (<span class="dt">tag_length =</span> 4L, <span class="dt">urn =</span> <span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, letters)) {</span>
-<span id="cb46-6"><a href="snippets.html#cb46-6"></a>  <span class="kw">paste</span>(<span class="kw">sample</span>(urn, <span class="dt">size =</span> tag_length, <span class="dt">replace =</span> T), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb46-7"><a href="snippets.html#cb46-7"></a>}</span>
-<span id="cb46-8"><a href="snippets.html#cb46-8"></a></span>
-<span id="cb46-9"><a href="snippets.html#cb46-9"></a>ds_pt_pool &lt;-<span class="st"> </span></span>
-<span id="cb46-10"><a href="snippets.html#cb46-10"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">tibble</span>(</span>
-<span id="cb46-11"><a href="snippets.html#cb46-11"></a>    <span class="dt">pt_index    =</span> <span class="kw">seq_len</span>(pt_count),</span>
-<span id="cb46-12"><a href="snippets.html#cb46-12"></a>    <span class="dt">pt_tag      =</span> <span class="kw">vapply</span>(<span class="kw">rep</span>(tag_length, pt_count), draw_tag, <span class="kw">character</span>(<span class="dv">1</span>)),</span>
-<span id="cb46-13"><a href="snippets.html#cb46-13"></a>    <span class="dt">assigned    =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb46-14"><a href="snippets.html#cb46-14"></a>    <span class="dt">name_last   =</span> <span class="st">&quot;--&quot;</span>,</span>
-<span id="cb46-15"><a href="snippets.html#cb46-15"></a>    <span class="dt">name_first  =</span> <span class="st">&quot;--&quot;</span></span>
-<span id="cb46-16"><a href="snippets.html#cb46-16"></a>  )</span>
-<span id="cb46-17"><a href="snippets.html#cb46-17"></a></span>
-<span id="cb46-18"><a href="snippets.html#cb46-18"></a>readr<span class="op">::</span><span class="kw">write_csv</span>(ds_pt_pool, path_out)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="snippets.html#cb54-1"></a>pt_count    &lt;-<span class="st"> </span>5L   <span class="co"># The number of rows in the dataset.</span></span>
+<span id="cb54-2"><a href="snippets.html#cb54-2"></a>tag_length  &lt;-<span class="st"> </span>7L   <span class="co"># The number of characters in each tag.</span></span>
+<span id="cb54-3"><a href="snippets.html#cb54-3"></a>path_out    &lt;-<span class="st"> &quot;data-private/derived/pt-pool.csv&quot;</span></span>
+<span id="cb54-4"><a href="snippets.html#cb54-4"></a></span>
+<span id="cb54-5"><a href="snippets.html#cb54-5"></a>draw_tag &lt;-<span class="st"> </span><span class="cf">function</span> (<span class="dt">tag_length =</span> 4L, <span class="dt">urn =</span> <span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, letters)) {</span>
+<span id="cb54-6"><a href="snippets.html#cb54-6"></a>  <span class="kw">paste</span>(<span class="kw">sample</span>(urn, <span class="dt">size =</span> tag_length, <span class="dt">replace =</span> T), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb54-7"><a href="snippets.html#cb54-7"></a>}</span>
+<span id="cb54-8"><a href="snippets.html#cb54-8"></a></span>
+<span id="cb54-9"><a href="snippets.html#cb54-9"></a>ds_pt_pool &lt;-<span class="st"> </span></span>
+<span id="cb54-10"><a href="snippets.html#cb54-10"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">tibble</span>(</span>
+<span id="cb54-11"><a href="snippets.html#cb54-11"></a>    <span class="dt">pt_index    =</span> <span class="kw">seq_len</span>(pt_count),</span>
+<span id="cb54-12"><a href="snippets.html#cb54-12"></a>    <span class="dt">pt_tag      =</span> <span class="kw">vapply</span>(<span class="kw">rep</span>(tag_length, pt_count), draw_tag, <span class="kw">character</span>(<span class="dv">1</span>)),</span>
+<span id="cb54-13"><a href="snippets.html#cb54-13"></a>    <span class="dt">assigned    =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb54-14"><a href="snippets.html#cb54-14"></a>    <span class="dt">name_last   =</span> <span class="st">&quot;--&quot;</span>,</span>
+<span id="cb54-15"><a href="snippets.html#cb54-15"></a>    <span class="dt">name_first  =</span> <span class="st">&quot;--&quot;</span></span>
+<span id="cb54-16"><a href="snippets.html#cb54-16"></a>  )</span>
+<span id="cb54-17"><a href="snippets.html#cb54-17"></a></span>
+<span id="cb54-18"><a href="snippets.html#cb54-18"></a>readr<span class="op">::</span><span class="kw">write_csv</span>(ds_pt_pool, path_out)</span></code></pre></div>
 <p>The resulting dataset will look like this, but with different randomly-generated tags.</p>
 <pre class="csv"><code># A tibble: 5 x 5
   pt_index pt_tag  assigned name_last name_first

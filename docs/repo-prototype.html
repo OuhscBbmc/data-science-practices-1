@@ -145,6 +145,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#coding-defensive"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -183,14 +185,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>5</b> Prototypical Repository</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>5.1</b> Root</a></li>
-<li class="chapter" data-level="5.2" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>5.2</b> Analysis</a></li>
-<li class="chapter" data-level="5.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>5.3</b> Data Public</a></li>
-<li class="chapter" data-level="5.4" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>5.4</b> Data Unshared</a></li>
-<li class="chapter" data-level="5.5" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>5.5</b> Documentation</a></li>
-<li class="chapter" data-level="5.6" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>5.6</b> Manipulation</a></li>
-<li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
-<li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
+<li class="chapter" data-level="5.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>5.1</b> Root</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-config"><i class="fa fa-check"></i><b>5.1.1</b> <code>config.R</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-flow"><i class="fa fa-check"></i><b>5.1.2</b> <code>flow.R</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-readme"><i class="fa fa-check"></i><b>5.1.3</b> <code>README.md</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-rproj"><i class="fa fa-check"></i><b>5.1.4</b> <code>*.Rproj</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-analysis"><i class="fa fa-check"></i><b>5.2</b> Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-public"><i class="fa fa-check"></i><b>5.3</b> Data Public</a></li>
+<li class="chapter" data-level="5.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-unshared"><i class="fa fa-check"></i><b>5.4</b> Data Unshared</a></li>
+<li class="chapter" data-level="5.5" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-documentation"><i class="fa fa-check"></i><b>5.5</b> Documentation</a></li>
+<li class="chapter" data-level="5.6" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-manipulation"><i class="fa fa-check"></i><b>5.6</b> Manipulation</a></li>
+<li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
+<li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="data-rest.html"><a href="data-rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
 <ul>
@@ -244,13 +252,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.1" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>8.3.1</b> Scrubbing GitHub history</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>9</b> Automation</a>
+<li class="chapter" data-level="9" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>9</b> Automation &amp; Reproducibility</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="automation.html"><a href="automation.html#flow-file-in-r"><i class="fa fa-check"></i><b>9.1</b> Flow File in R</a></li>
-<li class="chapter" data-level="9.2" data-path="automation.html"><a href="automation.html#makefile"><i class="fa fa-check"></i><b>9.2</b> Makefile</a></li>
-<li class="chapter" data-level="9.3" data-path="automation.html"><a href="automation.html#ssis"><i class="fa fa-check"></i><b>9.3</b> SSIS</a></li>
-<li class="chapter" data-level="9.4" data-path="automation.html"><a href="automation.html#cron-jobs-task-scheduler"><i class="fa fa-check"></i><b>9.4</b> cron Jobs &amp; Task Scheduler</a></li>
-<li class="chapter" data-level="9.5" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>9.5</b> Sink Log Files</a></li>
+<li class="chapter" data-level="9.1" data-path="automation.html"><a href="automation.html#automation-mediator"><i class="fa fa-check"></i><b>9.1</b> Mediator</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="automation.html"><a href="automation.html#automation-flow"><i class="fa fa-check"></i><b>9.1.1</b> Flow File in R</a></li>
+<li class="chapter" data-level="9.1.2" data-path="automation.html"><a href="automation.html#automation-makefile"><i class="fa fa-check"></i><b>9.1.2</b> Makefile</a></li>
+<li class="chapter" data-level="9.1.3" data-path="automation.html"><a href="automation.html#automation-ssis"><i class="fa fa-check"></i><b>9.1.3</b> SSIS</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="automation.html"><a href="automation.html#automation-scheduling"><i class="fa fa-check"></i><b>9.2</b> Scheduling</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="automation.html"><a href="automation.html#automation-cron"><i class="fa fa-check"></i><b>9.2.1</b> cron</a></li>
+<li class="chapter" data-level="9.2.2" data-path="automation.html"><a href="automation.html#automation-task-scheduler"><i class="fa fa-check"></i><b>9.2.2</b> Task Scheduler</a></li>
+<li class="chapter" data-level="9.2.3" data-path="automation.html"><a href="automation.html#automation-sql-server-agent"><i class="fa fa-check"></i><b>9.2.3</b> SQL Server Agent</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="automation.html"><a href="automation.html#auxiliary-issues"><i class="fa fa-check"></i><b>9.3</b> Auxiliary Issues</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>9.3.1</b> Sink Log Files</a></li>
+<li class="chapter" data-level="9.3.2" data-path="automation.html"><a href="automation.html#package-versions"><i class="fa fa-check"></i><b>9.3.2</b> Package Versions</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="scaling-up.html"><a href="scaling-up.html"><i class="fa fa-check"></i><b>10</b> Scaling Up</a>
 <ul>
@@ -274,7 +294,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>12.1</b> Team-wide</a></li>
 <li class="chapter" data-level="12.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>12.2</b> Project-specific</a></li>
 <li class="chapter" data-level="12.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>12.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>12.4.1</b> GitHub Issue Template</a></li>
+</ul></li>
 <li class="chapter" data-level="12.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>12.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="12.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>12.6</b> Setting up new machine</a></li>
 </ul></li>
@@ -402,10 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="D" data-path="scratch-pad.html"><a href="scratch-pad.html"><i class="fa fa-check"></i><b>D</b> Scratch Pad of Loose Ideas</a>
 <ul>
 <li class="chapter" data-level="D.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>D.1</b> Chapters &amp; Sections to Form</a></li>
-<li class="chapter" data-level="D.2" data-path="scratch-pad.html"><a href="scratch-pad.html#practices"><i class="fa fa-check"></i><b>D.2</b> Practices</a>
-<ul>
-<li class="chapter" data-level="D.2.1" data-path="scratch-pad.html"><a href="scratch-pad.html#date-arithmetic"><i class="fa fa-check"></i><b>D.2.1</b> Date Arithmetic</a></li>
-</ul></li>
+<li class="chapter" data-level="D.2" data-path="scratch-pad.html"><a href="scratch-pad.html#practices"><i class="fa fa-check"></i><b>D.2</b> Practices</a></li>
 </ul></li>
 <li class="chapter" data-level="E" data-path="example-bookdown.html"><a href="example-bookdown.html"><i class="fa fa-check"></i><b>E</b> Example</a></li>
 <li class="chapter" data-level="F" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>F</b> Acknowledgements</a></li>
@@ -435,42 +455,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://github.com/wibeasley/RAnalysisSkeleton" class="uri">https://github.com/wibeasley/RAnalysisSkeleton</a></p>
 <div id="repo-root" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Root</h2>
-<ol style="list-style-type: decimal">
-<li><p><code>config.R</code> is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is great when a value has to be coordinated across multiple file</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="repo-prototype.html#cb13-1"></a><span class="fu">default</span><span class="kw">:</span></span>
-<span id="cb13-2"><a href="repo-prototype.html#cb13-2"></a><span class="co"># To be processed by Ellis lanes</span></span>
-<span id="cb13-3"><a href="repo-prototype.html#cb13-3"></a><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/raw/subject-1.csv&quot;</span></span>
-<span id="cb13-4"><a href="repo-prototype.html#cb13-4"></a><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">&quot;data-public/raw/mlm-1.csv&quot;</span></span>
-<span id="cb13-5"><a href="repo-prototype.html#cb13-5"></a></span>
-<span id="cb13-6"><a href="repo-prototype.html#cb13-6"></a><span class="co"># Central Database (produced by Ellis lanes).</span></span>
-<span id="cb13-7"><a href="repo-prototype.html#cb13-7"></a><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">&quot;data-public/derived/db.sqlite3&quot;</span></span>
-<span id="cb13-8"><a href="repo-prototype.html#cb13-8"></a></span>
-<span id="cb13-9"><a href="repo-prototype.html#cb13-9"></a><span class="co"># Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
-<span id="cb13-10"><a href="repo-prototype.html#cb13-10"></a><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/derived/mlm-1.rds&quot;</span></span>
-<span id="cb13-11"><a href="repo-prototype.html#cb13-11"></a></span>
-<span id="cb13-12"><a href="repo-prototype.html#cb13-12"></a><span class="co"># Metadata</span></span>
-<span id="cb13-13"><a href="repo-prototype.html#cb13-13"></a><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">&quot;data-public/metadata/cqi-annotation.csv&quot;</span></span>
-<span id="cb13-14"><a href="repo-prototype.html#cb13-14"></a></span>
-<span id="cb13-15"><a href="repo-prototype.html#cb13-15"></a><span class="co"># Logging errors and messages from automated execution.</span></span>
-<span id="cb13-16"><a href="repo-prototype.html#cb13-16"></a><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)</span></span>
-<span id="cb13-17"><a href="repo-prototype.html#cb13-17"></a></span>
-<span id="cb13-18"><a href="repo-prototype.html#cb13-18"></a><span class="co"># time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.</span></span>
-<span id="cb13-19"><a href="repo-prototype.html#cb13-19"></a></span>
-<span id="cb13-20"><a href="repo-prototype.html#cb13-20"></a><span class="co"># ---- Validation Ranges &amp; Patterns ----</span></span>
-<span id="cb13-21"><a href="repo-prototype.html#cb13-21"></a><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
-<span id="cb13-22"><a href="repo-prototype.html#cb13-22"></a><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span>
-<span id="cb13-23"><a href="repo-prototype.html#cb13-23"></a><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct(&quot;2019-01-01&quot;, tz=&quot;America/Chicago&quot;), Sys.time())</span></span>
-<span id="cb13-24"><a href="repo-prototype.html#cb13-24"></a><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
-<span id="cb13-25"><a href="repo-prototype.html#cb13-25"></a><span class="fu">pattern_mrn_centricity  </span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^</span><span class="sc">\\</span><span class="st">d{16}$&quot;</span><span class="co">        # The 64-bit int is more easily validated as a character.</span></span></code></pre></div></li>
-<li><p><code>flow.R</code></p></li>
-<li><p><code>README.md</code></p></li>
-<li><p><code>*.Rproj</code></p></li>
-</ol>
+<div id="repo-config" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> <code>config.R</code></h3>
+<p>The configuration file is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is great when a value has to be coordinated across multiple file</p>
+<pre><code>```yaml
+default:
+# To be processed by Ellis lanes
+path_subject_1_raw:  &quot;data-public/raw/subject-1.csv&quot;
+path_mlm_1_raw:      &quot;data-public/raw/mlm-1.csv&quot;
+
+# Central Database (produced by Ellis lanes).
+path_database:       &quot;data-public/derived/db.sqlite3&quot;
+
+# Analysis-ready datasets (produced by scribes &amp; consumed by analyses).
+path_mlm_1_derived:  &quot;data-public/derived/mlm-1.rds&quot;
+
+# Metadata
+path_annotation:     &quot;data-public/metadata/cqi-annotation.csv&quot;
+
+# Logging errors and messages from automated execution.
+path_log_flow:       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)
+
+# time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.
+
+# ---- Validation Ranges &amp; Patterns ----
+range_record_id         : !expr c(1L, 999999L)
+range_dob               : !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))
+range_datetime_entry    : !expr c(as.POSIXct(&quot;2019-01-01&quot;, tz=&quot;America/Chicago&quot;), Sys.time())
+max_age                 : 25
+pattern_mrn             : &quot;^E\\d{9}$&quot;  # An &#39;E&#39;, followed by 9 digits.
+```</code></pre>
 </div>
-<div id="analysis" class="section level2" number="5.2">
+<div id="repo-flow" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> <code>flow.R</code></h3>
+<p>The workflow of the repo is determined by <code>flow.R</code>. It calls (typically R and SQL) files in a specific order, while sending the log messages to a file.</p>
+<p>See <a href="automation.html#automation-flow">automation mediators</a> for more details.</p>
+</div>
+<div id="repo-readme" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> <code>README.md</code></h3>
+</div>
+<div id="repo-rproj" class="section level3" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> <code>*.Rproj</code></h3>
+</div>
+</div>
+<div id="repo-analysis" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Analysis</h2>
 </div>
-<div id="data-public" class="section level2" number="5.3">
+<div id="repo-data-public" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Data Public</h2>
 <ol style="list-style-type: decimal">
 <li>Raw</li>
@@ -480,19 +511,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Original</li>
 </ol>
 </div>
-<div id="data-unshared" class="section level2" number="5.4">
+<div id="repo-data-unshared" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Data Unshared</h2>
 </div>
-<div id="documentation" class="section level2" number="5.5">
+<div id="repo-documentation" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Documentation</h2>
 </div>
-<div id="manipulation" class="section level2" number="5.6">
+<div id="repo-manipulation" class="section level2" number="5.6">
 <h2><span class="header-section-number">5.6</span> Manipulation</h2>
 </div>
-<div id="stitched-output" class="section level2" number="5.7">
+<div id="repo-stitched" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> Stitched Output</h2>
 </div>
-<div id="utility" class="section level2" number="5.8">
+<div id="repo-utility" class="section level2" number="5.8">
 <h2><span class="header-section-number">5.8</span> Utility</h2>
 
 </div>

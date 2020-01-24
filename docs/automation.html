@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Automation | Collaborative Data Science Practices</title>
+  <title>Chapter 9 Automation &amp; Reproducibility | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Automation | Collaborative Data Science Practices" />
+  <meta property="og:title" content="Chapter 9 Automation &amp; Reproducibility | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Automation | Collaborative Data Science Practices" />
+  <meta name="twitter:title" content="Chapter 9 Automation &amp; Reproducibility | Collaborative Data Science Practices" />
   
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
@@ -145,6 +145,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#coding-defensive"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
+<li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -183,14 +185,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>5</b> Prototypical Repository</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>5.1</b> Root</a></li>
-<li class="chapter" data-level="5.2" data-path="repo-prototype.html"><a href="repo-prototype.html#analysis"><i class="fa fa-check"></i><b>5.2</b> Analysis</a></li>
-<li class="chapter" data-level="5.3" data-path="repo-prototype.html"><a href="repo-prototype.html#data-public"><i class="fa fa-check"></i><b>5.3</b> Data Public</a></li>
-<li class="chapter" data-level="5.4" data-path="repo-prototype.html"><a href="repo-prototype.html#data-unshared"><i class="fa fa-check"></i><b>5.4</b> Data Unshared</a></li>
-<li class="chapter" data-level="5.5" data-path="repo-prototype.html"><a href="repo-prototype.html#documentation"><i class="fa fa-check"></i><b>5.5</b> Documentation</a></li>
-<li class="chapter" data-level="5.6" data-path="repo-prototype.html"><a href="repo-prototype.html#manipulation"><i class="fa fa-check"></i><b>5.6</b> Manipulation</a></li>
-<li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#stitched-output"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
-<li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
+<li class="chapter" data-level="5.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>5.1</b> Root</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-config"><i class="fa fa-check"></i><b>5.1.1</b> <code>config.R</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-flow"><i class="fa fa-check"></i><b>5.1.2</b> <code>flow.R</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-readme"><i class="fa fa-check"></i><b>5.1.3</b> <code>README.md</code></a></li>
+<li class="chapter" data-level="5.1.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-rproj"><i class="fa fa-check"></i><b>5.1.4</b> <code>*.Rproj</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-analysis"><i class="fa fa-check"></i><b>5.2</b> Analysis</a></li>
+<li class="chapter" data-level="5.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-public"><i class="fa fa-check"></i><b>5.3</b> Data Public</a></li>
+<li class="chapter" data-level="5.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-unshared"><i class="fa fa-check"></i><b>5.4</b> Data Unshared</a></li>
+<li class="chapter" data-level="5.5" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-documentation"><i class="fa fa-check"></i><b>5.5</b> Documentation</a></li>
+<li class="chapter" data-level="5.6" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-manipulation"><i class="fa fa-check"></i><b>5.6</b> Manipulation</a></li>
+<li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
+<li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="data-rest.html"><a href="data-rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
 <ul>
@@ -244,13 +252,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.1" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>8.3.1</b> Scrubbing GitHub history</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>9</b> Automation</a>
+<li class="chapter" data-level="9" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>9</b> Automation &amp; Reproducibility</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="automation.html"><a href="automation.html#flow-file-in-r"><i class="fa fa-check"></i><b>9.1</b> Flow File in R</a></li>
-<li class="chapter" data-level="9.2" data-path="automation.html"><a href="automation.html#makefile"><i class="fa fa-check"></i><b>9.2</b> Makefile</a></li>
-<li class="chapter" data-level="9.3" data-path="automation.html"><a href="automation.html#ssis"><i class="fa fa-check"></i><b>9.3</b> SSIS</a></li>
-<li class="chapter" data-level="9.4" data-path="automation.html"><a href="automation.html#cron-jobs-task-scheduler"><i class="fa fa-check"></i><b>9.4</b> cron Jobs &amp; Task Scheduler</a></li>
-<li class="chapter" data-level="9.5" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>9.5</b> Sink Log Files</a></li>
+<li class="chapter" data-level="9.1" data-path="automation.html"><a href="automation.html#automation-mediator"><i class="fa fa-check"></i><b>9.1</b> Mediator</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="automation.html"><a href="automation.html#automation-flow"><i class="fa fa-check"></i><b>9.1.1</b> Flow File in R</a></li>
+<li class="chapter" data-level="9.1.2" data-path="automation.html"><a href="automation.html#automation-makefile"><i class="fa fa-check"></i><b>9.1.2</b> Makefile</a></li>
+<li class="chapter" data-level="9.1.3" data-path="automation.html"><a href="automation.html#automation-ssis"><i class="fa fa-check"></i><b>9.1.3</b> SSIS</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="automation.html"><a href="automation.html#automation-scheduling"><i class="fa fa-check"></i><b>9.2</b> Scheduling</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="automation.html"><a href="automation.html#automation-cron"><i class="fa fa-check"></i><b>9.2.1</b> cron</a></li>
+<li class="chapter" data-level="9.2.2" data-path="automation.html"><a href="automation.html#automation-task-scheduler"><i class="fa fa-check"></i><b>9.2.2</b> Task Scheduler</a></li>
+<li class="chapter" data-level="9.2.3" data-path="automation.html"><a href="automation.html#automation-sql-server-agent"><i class="fa fa-check"></i><b>9.2.3</b> SQL Server Agent</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="automation.html"><a href="automation.html#auxiliary-issues"><i class="fa fa-check"></i><b>9.3</b> Auxiliary Issues</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>9.3.1</b> Sink Log Files</a></li>
+<li class="chapter" data-level="9.3.2" data-path="automation.html"><a href="automation.html#package-versions"><i class="fa fa-check"></i><b>9.3.2</b> Package Versions</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="scaling-up.html"><a href="scaling-up.html"><i class="fa fa-check"></i><b>10</b> Scaling Up</a>
 <ul>
@@ -274,7 +294,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>12.1</b> Team-wide</a></li>
 <li class="chapter" data-level="12.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>12.2</b> Project-specific</a></li>
 <li class="chapter" data-level="12.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>12.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>12.4.1</b> GitHub Issue Template</a></li>
+</ul></li>
 <li class="chapter" data-level="12.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>12.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="12.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>12.6</b> Setting up new machine</a></li>
 </ul></li>
@@ -402,10 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="D" data-path="scratch-pad.html"><a href="scratch-pad.html"><i class="fa fa-check"></i><b>D</b> Scratch Pad of Loose Ideas</a>
 <ul>
 <li class="chapter" data-level="D.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>D.1</b> Chapters &amp; Sections to Form</a></li>
-<li class="chapter" data-level="D.2" data-path="scratch-pad.html"><a href="scratch-pad.html#practices"><i class="fa fa-check"></i><b>D.2</b> Practices</a>
-<ul>
-<li class="chapter" data-level="D.2.1" data-path="scratch-pad.html"><a href="scratch-pad.html#date-arithmetic"><i class="fa fa-check"></i><b>D.2.1</b> Date Arithmetic</a></li>
-</ul></li>
+<li class="chapter" data-level="D.2" data-path="scratch-pad.html"><a href="scratch-pad.html#practices"><i class="fa fa-check"></i><b>D.2</b> Practices</a></li>
 </ul></li>
 <li class="chapter" data-level="E" data-path="example-bookdown.html"><a href="example-bookdown.html"><i class="fa fa-check"></i><b>E</b> Example</a></li>
 <li class="chapter" data-level="F" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>F</b> Acknowledgements</a></li>
@@ -431,23 +451,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="automation" class="section level1" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Automation</h1>
-<div id="flow-file-in-r" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> Flow File in R</h2>
+<h1><span class="header-section-number">Chapter 9</span> Automation &amp; Reproducibility</h1>
+<p>Automation is an important prerequisite of reproducibility.</p>
+<div id="automation-mediator" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Mediator</h2>
+<p>A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. The single file makes the project more protable, and also clearly documents the process.</p>
+<p>This single file is a special cases of the <a href="https://en.wikipedia.org/wiki/Mediator_pattern">mediator pattern</a>, in the sense that it defines how each piece relates to each other.</p>
+<div id="automation-flow" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Flow File in R</h3>
+<p>{Describe <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/flow.R" class="uri">https://github.com/wibeasley/RAnalysisSkeleton/blob/master/flow.R</a>.}</p>
+<p>See also the <a href="repo-prototype.html#repo-flow">prototypical repo</a>.</p>
 </div>
-<div id="makefile" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Makefile</h2>
+<div id="automation-makefile" class="section level3" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Makefile</h3>
+<p>{Briefly describe this language, how it can be more efficient, and what additional obstacles it presents.}</p>
 </div>
-<div id="ssis" class="section level2" number="9.3">
-<h2><span class="header-section-number">9.3</span> SSIS</h2>
+<div id="automation-ssis" class="section level3" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> SSIS</h3>
+<p>{Describe SSIS package development.}</p>
 </div>
-<div id="cron-jobs-task-scheduler" class="section level2" number="9.4">
-<h2><span class="header-section-number">9.4</span> cron Jobs &amp; Task Scheduler</h2>
 </div>
-<div id="sink-log-files" class="section level2" number="9.5">
-<h2><span class="header-section-number">9.5</span> Sink Log Files</h2>
+<div id="automation-scheduling" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Scheduling</h2>
+<div id="automation-cron" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> cron</h3>
+<p><a href="https://en.wikipedia.org/wiki/Cron">cron</a> is the common choice when scheduling tasks on Linux. A plain text file specifies which file to run, and on what recurring schedule. A lot of <a href="https://www.computerhope.com/unix/ucrontab.htm">helpful documentation and tutorials</a> exists, as well as sites that help construct and validate your entries like <a href="https://crontab.guru/">crontab guru</a>.</p>
+</div>
+<div id="automation-task-scheduler" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Task Scheduler</h3>
+<p><a href="https://en.wikipedia.org/wiki/Windows_Task_Scheduler">Windows Task Scheduler</a> is the common choice when scheduling tasks on Windows.</p>
+<p>Many of the GUI options are easy to specify, but three are error-prone, and must be specified carefully. The exist under “Actions” | “Start a program”.</p>
+<ul>
+<li><p><strong>Program/script:</strong> is the absolute path to <code>Rscript.exe</code>. It needs to be updated every time you upgrade R (unless you’re doing something tricky with the <code>PATH</code> environmental OS variable). Notice we are using the “patched” version of R. The entry should be enclosed in quotes.</p>
+<pre><code>&quot;C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe&quot;</code></pre></li>
+<li><p><strong>Add arguments (optional):</strong> specifies the flow file to run. In this case, the repo ‘butcher-hearing-screen-1’ is under in the ’Documents/cdw/` directory; the <a href="automation.html#automation-flow">flow file</a> is located in the repo’s root directory, as discussed in the <a href="repo-prototype.html#repo-flow">prototypical repo</a>. The entry should be enclosed in quotes.</p>
+<pre><code>&quot;C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R&quot;</code></pre></li>
+<li><p><strong>Start in (optional):</strong> sets the working directory. If not properly set, the relative paths of the files will not point to the correct locations. It should be identical to the entry above, but (a) does not include ‘/flow.R’ and (b) does NOT contains quotes.</p>
+<pre><code>C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1</code></pre></li>
+</ul>
+<p>Other options we typically specify are:</p>
+<ol style="list-style-type: decimal">
+<li>“Run whether the user is logged in or not.”</li>
+<li>“Run as the highest available version of Windows.”</li>
+<li>“Wake the computer to run this task” is probably necessary if this is located on a normal desktop. It is not something we specify, because our tasks are located on a <a href="https://en.wikipedia.org/wiki/System_virtual_machine">VM</a>-based workstation that is never turned off.</li>
+</ol>
+<p>Following these instructions, you are required to enter your password every time you modify the task, and every time you update your password. If you are using network credentials, you probably should specify your account like “domain/username”. Be careful: when you modify a task and are prompted for a password, the GUI subtly alters the account entry to just “username” (instead of “domain/username”). Make sure you prepend the username with the domain, as you enter the password.</p>
+</div>
+<div id="automation-sql-server-agent" class="section level3" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> SQL Server Agent</h3>
+<p><a href="https://docs.microsoft.com/en-us/sql/ssms/agent/sql-server-agent">SQL Server Agent</a> executes jobs on a specified schedule. It also naturally interfaces with <a href="automation.html#automation-ssis">SSIS packages</a> deployed to the server, but can also execute other formats, like a plain sql file.</p>
+<p>An important distinction is that it runs as a service <em>on the database server</em>, as opposed to Task Scheduler, which runs as a service on the client machine. We prefer running jobs on the server when the job either:</p>
+<ol style="list-style-type: decimal">
+<li>requires elevated/administrative privileges (for instance, to access sensitive data),</li>
+<li>would require a lot of network constraints when passing large amounts of data between the server and client, or</li>
+<li>feels like it is the server’s responsibility, such as rebuilding a database index, or archiving server logs.</li>
+</ol>
+</div>
+</div>
+<div id="auxiliary-issues" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Auxiliary Issues</h2>
+<p>The following subsections do not execute or schedule any code, but should be considered.</p>
+<div id="sink-log-files" class="section level3" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Sink Log Files</h3>
+<p>{Describe how to sink output to a file that can be examined easily.}</p>
+</div>
+<div id="package-versions" class="section level3" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Package Versions</h3>
+<p>When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems. And when they are, the error messages may not be as clear as when you are running the procedure in RStudio. For these and other reasons, plan your strategy for maintaining the version of R and its packages. Here are some approaches, with different tradeoffs.</p>
+<ol style="list-style-type: decimal">
+<li>For most conventional projects, we keep all packages up to date, and live with the occasional breaks. We stick to a practice of (a) run our daily workflow, (b) update the packages (and R &amp; RStudio if necessary), (c) rereun that same week’s workflow, and finally (d) verify that the results from a &amp; c are the same. If something is different, we have a day to adapt the pipeline code to the breaking changes in the packages.</li>
+</ol>
+<p>Before updating a package, read the NEWS file for changes that are not backwards-compatible (commonly called “breaking changes” in the <a href="https://style.tidyverse.org/news.html#breaking-changes">news file</a>).</p>
+<p>If the changes to the pipeline code are too difficult to complete in a day, we can roll back to a previous version with <a href="https://remotes.r-lib.org/reference/install_version.html"><code>remotes::install_version()</code></a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>On the other side of the spectrum, you can meticulously specify the desired version of each R package. This approach reduces the chance of a new version of a package breaking existing pipeline code. We recommend this approach when uptime is very important.</p>
+<p>The most intuitive implementation is to install with explicit code in a file like <code>utility/install-dependencies.R</code>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="automation.html#cb34-1"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;dplyr&quot;</span>     , <span class="dt">version =</span> <span class="st">&quot;0.4.3&quot;</span> )</span>
+<span id="cb34-2"><a href="automation.html#cb34-2"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;ggplot2&quot;</span>   , <span class="dt">version =</span> <span class="st">&quot;2.0.0&quot;</span> )</span>
+<span id="cb34-3"><a href="automation.html#cb34-3"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;data.table&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;1.10.4&quot;</span>)</span>
+<span id="cb34-4"><a href="automation.html#cb34-4"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;lubridate&quot;</span> , <span class="dt">version =</span> <span class="st">&quot;1.6.0&quot;</span> )</span>
+<span id="cb34-5"><a href="automation.html#cb34-5"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;openxlsx&quot;</span>  , <span class="dt">version =</span> <span class="st">&quot;4.0.17&quot;</span>)</span>
+<span id="cb34-6"><a href="automation.html#cb34-6"></a><span class="co"># ... package list continues ...</span></span></code></pre></div>
+<p>Another implementation is to convert the repo to a package itself, and <a href="http://r-pkgs.had.co.nz/description.html#dependencies">specify the versions</a> in the <code>DESCRIPTION</code> file.</p>
+<pre><code>Imports:
+   dplyr       (== 0.4.3 )
+   ggplot2     (== 2.0.0 )
+   data.table  (== 1.10.4)
+   lubridate   (== 1.6.0 )
+   openxlsx    (== 4.0.17)</code></pre>
+<p>A downside is that it can be difficult to set up a identical machine in a few months. Sometimes these packages have depend on packages that are incompatible with other package versions. For example, at one point, the current version of dplyr was 0.4.3. A few months later, the rlang package (which wasn’t explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr. The developer on the new machine needs to decide whether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.</p>
+<p>A second important downside is that this approach can lock all the user’s projects to specific outdated package version.</p>
+<p>We and others<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> advocate this approach when your team is experienced with only R, and has a machine dedicated to an important line-of-business workflow.</p>
+<p>When uptime is important and your team is experienced with other languages like Java, Python, or C#, consider if those would be better suited.</p></li>
+<li><p>A compromise between these two previous approaches in the <a href="https://rstudio.github.io/renv">renv</a> package - R Environmentals. It is a successor to <a href="https://rstudio.github.io/packrat/">packrat</a>. It requires some learning and cognitive overhead. But this investment becomes very appealing if (a) you were running hourly predictions and downtime is a big deal, or (b) your machine contains multiple projects that require different versions of the same package (such as dplyr 0.4.3 and dplyr 0.8.0).</p></li>
+</ol>
 
 </div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="5">
+<li id="fn5"><p><a href="https://insightindustry.com/">Chris Modzelewski</a><a href="automation.html#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
