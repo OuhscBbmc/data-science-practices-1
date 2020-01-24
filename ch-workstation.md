@@ -149,6 +149,16 @@ The order does not matter.
 
 * **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
 
+* **Python** is used by some analysts.  The prototypical installation involves two options
+
+    * **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
+    
+       ```python
+       conda install numpy pandas scikit-learn matplotlib
+       ```
+    
+    * **Standard Python**, while installing packages through pip3 in the terminal
+
 
 Ubuntu Installation {#installation-ubuntu}
 -----------------------------------
