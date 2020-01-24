@@ -24,29 +24,40 @@ Chapters & Sections to Form
 
 1. documentation - bookdown
 
-> Bookdown has worked well for us so far.  It's basically independent markdown documents stored on a dedicated git repo.  Then you click "build" in RStudio and it converts all the markdown files to static html files.  Because GitHub is essentially serving as the backend, everyone can make changes to sections and we don't have to be too worried about
-> 
-> Here's a version that's hosted publicly, but I tested that it can be hosted on our shared file server.  (It's possible because the html files are so static.)  If this is what you guys want for OU's collective CDW, please tell me:
-> 
-> * who you want to be able to edit the documents without review.  I'll add them to the GitHub repo.
-> * who you want to be able to view the documents.  I'll add them to a dedicate file server space.
-> 
-> 
-> https://ouhscbbmc.github.io/data-science-practices-1/workstation.html#installation-required
-> 
-> I was thinking that each individual database gets it own chapter.  The BBMC has ~4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database.  Then there are ~3 sections within each chapter: (a) a black-and-white description of the tables, columns, & indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers & admins).
-> 
-> My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor & commit, and let someone else click "build" in RStudio on their machine).  But I'm very flexible on all this.  I'll support & contribute to any system that you guys feel will work well across the teams.  
+    > Bookdown has worked well for us so far.  It's basically independent markdown documents stored on a dedicated git repo.  Then you click "build" in RStudio and it converts all the markdown files to static html files.  Because GitHub is essentially serving as the backend, everyone can make changes to sections and we don't have to be too worried about
+    > 
+    > Here's a version that's hosted publicly, but I tested that it can be hosted on our shared file server.  (It's possible because the html files are so static.)  If this is what you guys want for OU's collective CDW, please tell me:
+    > 
+    > * who you want to be able to edit the documents without review.  I'll add them to the GitHub repo.
+    > * who you want to be able to view the documents.  I'll add them to a dedicate file server space.
+    > 
+    > 
+    > https://ouhscbbmc.github.io/data-science-practices-1/workstation.html#installation-required
+    > 
+    > I was thinking that each individual database gets it own chapter.  The BBMC has ~4 databases in this sense: a Centricity staging database, a GECB staging database, the central warehouse, and the (fledgling) downstream OMOP database.  Then there are ~3 sections within each chapter: (a) a black-and-white description of the tables, columns, & indexes (written mostly for consumers), (b) recommendations how to use each table (written mostly for consumers), and (c) a description of the ETL process (written mostly for developers & admins).
+    > 
+    > My proposal uses GitHub and Markdown because they're so universal (no knowledge of R is required --really you could write it with any text editor & commit, and let someone else click "build" in RStudio on their machine).  But I'm very flexible on all this.  I'll support & contribute to any system that you guys feel will work well across the teams.  
 
 1. developing packages
 
-* [*R packages*](http://r-pkgs.had.co.nz/) by Hadley Wickham
+    * [*R packages*](http://r-pkgs.had.co.nz/) by Hadley Wickham
 
-* http://mangothecat.github.io/goodpractice/
+    * http://mangothecat.github.io/goodpractice/
+
+1. Cargo cult programming "is a style of computer programming characterized by the ritual inclusion of code or program structures that serve no real purpose." ([Wikipedia](https://en.wikipedia.org/wiki/Cargo_cult_programming))
+
+    Your team should decide which elements of [a file prototype](https://ouhscbbmc.github.io/data-science-practices-1/file-prototype.html) and [repo prototype](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html) are best for you.
 
 Practices
 ------------------------------------
 
-### Date Arithmetic {#date-arithmetic}
+1. Don't use Excel for data storage
 
-Don't use `-` to subtract dates, use `difftime(stop, start, units="days")`.  It's longer but protects from the scneario that `start` or `stop` are changed upstream to a date time.  In that case, `stop - start` equals the number of *seconds* between the two points, not the number of *days*.
+    > Sorry to be tedious, but could you please resend the extract as a CSV file?
+    >
+    > Excel is being too helpful with some of the values, and essentially corrupting them.  For example, the value of "519.19" in cell L14 is being read as a number.  Because of limitations of finite precision in binary machines, this is being read as "519.19000000000005".  We can't round it, because there are other values in this column that cannot be cast to numbers, such as "V55.0".  Furthermore, the "E"s in some icd-10s are incorrectly interpreted as the exponent operator.  
+    >
+    > As much as Excel interferes with our EMR work, we’re lucky.  It has messed with other branches of science much worse.  Genomics were using it far too late before they realized their mistakes.  I’m guessing some of them still haven’t learned.  https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/
+    >
+    > >What happened? By default, Excel and other popular spreadsheet applications convert some gene symbols to dates and numbers. For example, instead of writing out “Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase,” researchers have dubbed the gene MARCH1. Excel converts this into a date—03/01/2016, say—because that’s probably what the majority of spreadsheet users mean when they type it into a cell. Similarly, gene identifiers like “2310009E13” are converted to exponential numbers (2.31E+19). In both cases, the conversions strip out valuable information about the genes in question.
+

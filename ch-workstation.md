@@ -105,6 +105,7 @@ The order does not matter.
     1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
     1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
     1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
+    1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
     1. Data | Sql | **Copy Includes Headers: check** {`"sql.copyIncludeHeaders": true`}
 
 * **[Pulse Secure](https://connect.ouhsc.edu)** is VPN client for OUHSC researchers.  It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.

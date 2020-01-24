@@ -155,6 +155,8 @@ Dates {#style-dates}
 
 * `birth_month_index` can be values 1 through 12, while `birth_month` (or commonly `mob`) contains the year (*e.g.*, 2014-07-15).
 
+* Don't use the minus operator (*i.e.*, `-`).  See [Defensive Date Arithmetic](#coding-defensive-date-arithmetic).
+
 Naming
 ------------------------------------
 

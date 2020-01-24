@@ -100,3 +100,37 @@ Defensive Style {#coding-defensive}
 Try to prepend each function with its package.  Write `dplyr::filter()` instead of `filter()`.  When two packages contain public functions with the same name, the package that was most recently called with `library()` takes precedent.  When multiple R files are executed, the packages' precedents may not be predictable.  Specifying the package eliminates the ambiguity, while also making the code easier to follow.  For this reason, we recommend that almost all R files contain a ['load-packages'](#chunk-load-packages) chunk.
 
 See the [Google Style Guide](https://google.github.io/styleguide/Rguide.html#qualifying-namespaces) for more about qualifying functions
+
+### Date Arithmetic {#coding-defensive-date-arithmetic}
+
+Don't use the minus operator (*i.e.*, `-`) to subtract dates.  Instead use `as.integer(difftime(stop, start, units="days"))`.  It's longer but protects from the scneario that `start` or `stop` are changed upstream to a datetime.  In that case, `stop - start` equals the number of *seconds* between the two points, not the number of *days*.
+
+### Excluding Bad Cases
+
+Some variables are critical to the record, and if it's missing, you don't want or trust any of its other values.  For instance, a hospital visit record rarely useful if missing the patient ID.  In these cases, prevent the record from passing through the [ellis](#pattern-ellis).
+
+In this example, we'll presume we can't trust a patient record if it lacks a clean date of birth (`dob`). 
+
+1. Define the permissible range, in either the ellis's [declare-gobals](#chunk-declare) chunk, or in the [config-file](#repo-config).  (We'll use the config file for this example.)  We'll exclude anyone born before 2000, or after tomorrow.  Even though it's illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.
+    
+    ```yaml
+    range_dob   : !expr c(as.Date("2000-01-01"), Sys.Date() + lubridate::days(1))
+    ```
+    
+1. In the [tweak-data](#chunk-tweak-data) chunk, use [`OuhscMunge::trim_date()`](https://ouhscbbmc.github.io/OuhscMunge/reference/trim.html) to set the cell to `NA` if it falls outside an acceptable range.  After [`dplyr::mutate()`](https://dplyr.tidyverse.org/reference/mutate.html), call [`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) to exclude the entire record, regardless if (a) it was already `NA`, or (b) was "trimmed" to `NA`.
+    
+    ```r
+    ds <- 
+      ds %>%
+      dplyr::mutate(
+        dob = OuhscMunge::trim_date(dob, config$range_dob)
+      ) %>%
+      tidyr::drop_na(dob)
+    ```
+    
+1. Near the end of the file, verify the variable for three reasons: (a) there's a chance that the code above isn't working as expected, (b) some later code later might have introduced bad values, and (c) it clearly documents to a reader that `dob` was included in this range at this stage of the pipeline.
+
+    ```r
+    checkmate::assert_date(ds$dob, any.missing=F, lower=config$range_dob[1], upper=config$range_dob[2])
+    ```
+    
