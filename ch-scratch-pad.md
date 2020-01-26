@@ -51,13 +51,3 @@ Chapters & Sections to Form
 Practices
 ------------------------------------
 
-1. Don't use Excel for data storage
-
-    > Sorry to be tedious, but could you please resend the extract as a CSV file?
-    >
-    > Excel is being too helpful with some of the values, and essentially corrupting them.  For example, the value of "519.19" in cell L14 is being read as a number.  Because of limitations of finite precision in binary machines, this is being read as "519.19000000000005".  We can't round it, because there are other values in this column that cannot be cast to numbers, such as "V55.0".  Furthermore, the "E"s in some icd-10s are incorrectly interpreted as the exponent operator.  
-    >
-    > As much as Excel interferes with our EMR work, we’re lucky.  It has messed with other branches of science much worse.  Genomics were using it far too late before they realized their mistakes.  I’m guessing some of them still haven’t learned.  https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/
-    >
-    > >What happened? By default, Excel and other popular spreadsheet applications convert some gene symbols to dates and numbers. For example, instead of writing out “Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase,” researchers have dubbed the gene MARCH1. Excel converts this into a date—03/01/2016, say—because that’s probably what the majority of spreadsheet users mean when they type it into a cell. Similarly, gene identifiers like “2310009E13” are converted to exponential numbers (2.31E+19). In both cases, the conversions strip out valuable information about the genes in question.
-
