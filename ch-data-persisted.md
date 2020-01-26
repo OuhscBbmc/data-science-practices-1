@@ -41,13 +41,15 @@ Storage Conventions {#data-rest-conventions}
 
 Across all file formats, these conventions usually work best.
 
-1. **date format**: use `YYYY-MM-DD` ([ISO-8601](https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601))
+1. **consistency across versions**: use a script to produce the dataset, and inform the recipient if the datasets's structure changes.  Most of our processes are automated, and changes that are trivial to humans (*e.g.*, `yyyy-mm-dd` to `mm/dd-yy`) will break the automation.  
 
-1. **time format**: use `HH:MM` or `HH:MM:SS`.  Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (*i.e.*, **0**9:59am) 
+    The specificity in our automation is intentional.  We install guards on our processes so that bad values in future datasets do not pass.  For instance, we may place bounds on the toddlers' age at 12 and 36 months.  We *want* our automation to break if the next dataset contains age values between 1 and 3 (years).  Our downstream analysis (say, a regression model where age is a predictor variable) would produce misleading results if the shift between months and years went undetected.
 
-1. **patient names**: separate the `name_last`, `name_first`, and `name_middle` when possible.
+1. **date format**: specify as `YYYY-MM-DD` ([ISO-8601](https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601))
 
-1. **consistency across versions**: Use a script to produce the data sent to us, and inform us when changes occur.  Most of our processes are automated, and changes that are trivial to humans (*e.g.*, `yyyy-mm-dd` to `mm/dd-yy`) cause problems for the automation.
+1. **time format**: specify as `HH:MM` or `HH:MM:SS`, preferably in 24-hour time.  Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (*i.e.*, **0**9:59) 
+
+1. **patient names**: separate the `name_last`, `name_first`, and `name_middle` as three distinct variables when possible.
 
 1. **currency**: represent money as an integer or floating-point variable.  This representation is more easily parsable by software, and enables mathematical operations (like `max()` or `mean()`) to be performed directly.  Avoid commas and symbols like "$".  If there is a possibility of ambiguity, indicate the denomination in the variable name (*e.g.*, `payment_dollars` or `payment_euros`).
 
@@ -56,7 +58,7 @@ Across all file formats, these conventions usually work best.
 
 These conventions usually work best within plain-text formats.
 
-1. **csv**: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons.  However, if you are receiving a well-behaved file separated by these characters, just go with the flow.
+1. **csv**: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons.  However, if you are receiving a well-behaved file separated by these characters, be thankful and go with the flow.
 
 1. **cells enclosed in quotes**: a 'cell' should be enclosed in double quotes, especially if it's a string/character variable.
 
@@ -65,7 +67,7 @@ These conventions usually work best within plain-text formats.
 
 If Excel is necessary for some reason, 
 
-1. **avoid multiple tabs/worksheets**: they are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.
+1. **avoid multiple tabs/worksheets**: Excel files containing multiple worksheets are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.
 
 
 ### Meditech {#data-rest-conventions-meditech}
