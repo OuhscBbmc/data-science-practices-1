@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-01-24}
+\date{2020-01-26}
 
 \begin{document}
 \maketitle
@@ -688,8 +688,8 @@ See \protect\hyperlink{automation-flow}{automation mediators} for more details.
 \hypertarget{repo-utility}{%
 \section{Utility}\label{repo-utility}}
 
-\hypertarget{data-rest}{%
-\chapter{Data at Rest}\label{data-rest}}
+\hypertarget{rest}{%
+\chapter{Data at Rest}\label{rest}}
 
 \hypertarget{data-states}{%
 \section{Data States}\label{data-states}}
@@ -721,84 +721,108 @@ See \protect\hyperlink{automation-flow}{automation mediators} for more details.
 \hypertarget{data-containers}{%
 \section{Data Containers}\label{data-containers}}
 
-\hypertarget{data-rest-csv}{%
-\subsection{csv}\label{data-rest-csv}}
+\hypertarget{data-containers-csv}{%
+\subsection{csv}\label{data-containers-csv}}
 
-When exchanging data between two different systems, the preferred format is frequently plain text. As opposed to proprietary formats like xlsx or sas7bdat, the file is easily opened and parsable by most statistical software, and even conventional text editors.
+When exchanging data between two different systems, the preferred format is frequently plain text, where each cell in a record is separated by a comma. This is commonly called a csv --a \href{https://en.wikipedia.org/wiki/Comma-separated_values}{comma separated value} file. As opposed to \protect\hyperlink{data-containers-avoid}{proprietary formats} like xlsx or sas7bdat, a csv file is easily opened and parsable by most statistical software, and even conventional text editors and \href{https://help.github.com/en/github/managing-files-in-a-repository/rendering-csv-and-tsv-data}{GitHub}.
 
-Incoming files should be plain-text \href{https://en.wikipedia.org/wiki/Comma-separated_values}{csv} --not Excel or other proprietary or binary format.
+\hypertarget{data-containers-rds}{%
+\subsection{rds}\label{data-containers-rds}}
 
-\hypertarget{data-rest-rds}{%
-\subsection{rds}\label{data-rest-rds}}
+\hypertarget{data-containers-json}{%
+\subsection{JSON and XML}\label{data-containers-json}}
 
-\hypertarget{data-rest-sqlite}{%
-\subsection{SQLite}\label{data-rest-sqlite}}
+The plain-text format is typically preferred when the data structures cannot be represented by nice rectangles. qqq
 
-\hypertarget{data-rest-database}{%
-\subsection{Central Enterprise database}\label{data-rest-database}}
+\hypertarget{data-containers-arrow}{%
+\subsection{Arrow}\label{data-containers-arrow}}
 
-\hypertarget{data-rest-redcap}{%
-\subsection{Central REDCap database}\label{data-rest-redcap}}
+\href{https://arrow.apache.org/}{Apache Arrow} is an open source specification that is developed to work with many languages such as \href{https://arrow.apache.org/docs/r/}{R}, \href{https://towardsdatascience.com/a-gentle-introduction-to-apache-arrow-with-apache-spark-and-pandas-bb19ffe0ddae}{Spark}, \href{https://spark.apache.org/docs/latest/sql-pyspark-pandas-with-arrow.html}{Python}, and many others. It accommodates nice rectangles where CSVs are used, and hierarchical nesting where json and xml are used.
 
-\hypertarget{data-rest-avoid}{%
-\subsection{Containers to avoid for raw/input}\label{data-rest-avoid}}
+It is both an in-memory specification (which allows a Python process to directly access an R object), and an on-disk specification (which allows a Python process to read a saved R file). The file format is compressed, so it takes much less space to store on disk and less time to transfer over a network.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Proprietary like xlsx, sas7bdat
-\end{enumerate}
+Its downside is the file is not plain-text, but binary. That means the file is not readable and editable by as many programs, which hurts your project's portability. You wouldn't want to store most metadata files as arrow because then your collaborators couldn't easily help you map the values to qqq
 
-\hypertarget{data-rest-conventions}{%
-\section{Storage Conventions}\label{data-rest-conventions}}
+\hypertarget{data-containers-sqlite}{%
+\subsection{SQLite}\label{data-containers-sqlite}}
 
-\hypertarget{data-rest-conventions-all}{%
-\subsection{All Sources}\label{data-rest-conventions-all}}
+\hypertarget{data-containers-database}{%
+\subsection{Central Enterprise database}\label{data-containers-database}}
+
+\hypertarget{data-containers-redcap}{%
+\subsection{Central REDCap database}\label{data-containers-redcap}}
+
+\hypertarget{data-containers-avoid}{%
+\subsection{Containers to avoid}\label{data-containers-avoid}}
+
+\hypertarget{data-containers-avoid-spreadsheets}{%
+\subsubsection{Spreadsheets}\label{data-containers-avoid-spreadsheets}}
+
+Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and protyping equations --but is should not be trusted to transport serious information. Other spreadsheet software like \href{https://en.wikipedia.org/wiki/LibreOffice_Calc}{LibreOffice Calc} is less problematic in our epxerience, but still less desirable than the formats mentioned above.
+
+If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values. After you close the spreadsheet, \protect\hyperlink{git-stability}{review the Git commits} to verify no values were corrupted.
+
+See \protect\hyperlink{snippets-correspondence-excel}{the appendix} for a list of the ways your analyses can be undermined when receiving Excel files, as well as a template to correspond with your less-experienced colleagues that is sending your team Excel files.
+
+\hypertarget{data-containers-avoid-proprietary}{%
+\subsubsection{Proprietary}\label{data-containers-avoid-proprietary}}
+
+Proprietary formats like \href{https://en.wikipedia.org/wiki/SAS_(software)}{SAS}'s ``sas7bdat'' are less accesible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project's impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project's failure.
+
+We formerly distributed sas7bdat files to supplement (otherwise identical) csvs, in order to cater to the suprisingly large population of SAS users who were unfamiliar with \href{https://documentation.sas.com/?docsetId=proc\&docsetTarget=n18jyszn33umngn14czw2qfw7thc.htm\&docsetVersion=9.4\&locale=en}{proc import} or the Google search engine. Recently we have distributed only the csvs, with example code for reading the file from SAS.
+
+\hypertarget{data-conventions}{%
+\section{Storage Conventions}\label{data-conventions}}
+
+\hypertarget{data-conventions-all}{%
+\subsection{All Sources}\label{data-conventions-all}}
 
 Across all file formats, these conventions usually work best.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{date format}: use \texttt{YYYY-MM-DD} (\href{https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601}{ISO-8601})
+  \textbf{consistency across versions}: use a script to produce the dataset, and inform the recipient if the datasets's structure changes. Most of our processes are automated, and changes that are trivial to humans (\emph{e.g.}, \texttt{yyyy-mm-dd} to \texttt{mm/dd-yy}) will break the automation.
+
+  The specificity in our automation is intentional. We install guards on our processes so that bad values do not pass. For instance, we may place bounds on the toddlers' age at 12 and 36 months. We \emph{want} our automation to break if the next dataset contains age values between 1 and 3 (years). Our downstream analysis (say, a regression model where age is a predictor variable) would produce misleading results if the shift between months and years went undetected.
 \item
-  \textbf{time format}: use \texttt{HH:MM} or \texttt{HH:MM:SS}. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (\emph{i.e.}, \textbf{0}9:59am)
+  \textbf{date format}: specify as \texttt{YYYY-MM-DD} (\href{https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601}{ISO-8601})
 \item
-  \textbf{patient names}: separate the \texttt{name\_last}, \texttt{name\_first}, and \texttt{name\_middle} when possible.
+  \textbf{time format}: specify as \texttt{HH:MM} or \texttt{HH:MM:SS}, preferably in 24-hour time. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (\emph{i.e.}, \textbf{0}9:59)
 \item
-  \textbf{consistency across versions}: Use a script to produce the data sent to us, and inform us when changes occur. Most of our processes are automated, and changes that are trivial to humans (\emph{e.g.}, \texttt{yyyy-mm-dd} to \texttt{mm/dd-yy}) cause problems for the automation.
+  \textbf{patient names}: separate the \texttt{name\_last}, \texttt{name\_first}, and \texttt{name\_middle} as three distinct variables when possible.
 \item
   \textbf{currency}: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like \texttt{max()} or \texttt{mean()}) to be performed directly. Avoid commas and symbols like ``\$''. If there is a possibility of ambiguity, indicate the denomination in the variable name (\emph{e.g.}, \texttt{payment\_dollars} or \texttt{payment\_euros}).
 \end{enumerate}
 
-\hypertarget{data-rest-conventions-text}{%
-\subsection{Text}\label{data-rest-conventions-text}}
+\hypertarget{data-conventions-text}{%
+\subsection{Text}\label{data-conventions-text}}
 
 These conventions usually work best within plain-text formats.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{csv}: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons. However, if you are receiving a well-behaved file separated by these characters, just go with the flow.
+  \textbf{csv}: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons. However, if you are receiving a well-behaved file separated by these characters, be thankful and go with the flow.
 \item
   \textbf{cells enclosed in quotes}: a `cell' should be enclosed in double quotes, especially if it's a string/character variable.
 \end{enumerate}
 
-\hypertarget{data-rest-conventions-excel}{%
-\subsection{Excel Exceptions}\label{data-rest-conventions-excel}}
+\hypertarget{data-conventions-excel}{%
+\subsection{Excel}\label{data-conventions-excel}}
 
-If Excel is necessary for some reason,
+As \href{\%7B\#data-containers-avoid}{discussed above} avoid Excel. When that is not possible, these conventions helps reduce ambiguity and corrupted values. See \protect\hyperlink{snippets-reading-excel}{the appendix} for our preferred approach to reading Excel files.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
-  \textbf{avoid multiple tabs/worksheets}: they are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.
+  \textbf{avoid multiple tabs/worksheets}: Excel files containing multiple worksheets are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.
+\item
+  \textbf{save the cells as text}: avoiding Excel attempting to save cells as dates or numbers. Admitedly, this is a last-ditch effort. If someone is using Excel to convert cells to text, the values are probably already corrupted.
 \end{enumerate}
 
-\hypertarget{data-rest-conventions-meditech}{%
-\subsection{Meditech}\label{data-rest-conventions-meditech}}
+\hypertarget{data-conventions-meditech}{%
+\subsection{Meditech}\label{data-conventions-meditech}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -831,8 +855,8 @@ Meditech Idiosyncracies:
   \textbf{blood pressure}: in most systems the \texttt{bp\_diastolic} and \texttt{bp\_systolic} values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a foward slash.
 \end{enumerate}
 
-\hypertarget{data-rest-conventions-database}{%
-\subsection{Databases}\label{data-rest-conventions-database}}
+\hypertarget{data-conventions-database}{%
+\subsection{Databases}\label{data-conventions-database}}
 
 When exchanging data between two different systems, \ldots{}
 
@@ -2374,6 +2398,21 @@ The order does not matter.
 \end{Shaded}
 \item
   \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
+\item
+  \textbf{Python} is used by some analysts. The prototypical installation involves two options
+
+  \begin{itemize}
+  \item
+    \textbf{\href{https://www.anaconda.com/distribution/\#download-section}{Anaconda}}, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open ``Anaconda Prompt'' with administrative privileges
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{conda install numpy pandas scikit}\OperatorTok{{-}}\NormalTok{learn matplotlib}
+\end{Highlighting}
+\end{Shaded}
+  \item
+    \textbf{Standard Python}, while installing packages through pip3 in the terminal
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{installation-ubuntu}{%
@@ -2714,19 +2753,19 @@ Finally, consider how much traffic passes through the dependency A brittle depen
 \appendix}
 
 
-\hypertarget{git-github}{%
-\chapter{Git \& GitHub}\label{git-github}}
+\hypertarget{git}{%
+\chapter{Git \& GitHub}\label{git}}
 
-\hypertarget{for-code-development}{%
-\section{for Code Development}\label{for-code-development}}
+\hypertarget{git-code}{%
+\section{for Code Development}\label{git-code}}
 
 \href{https://github.com/jennybc}{Jenny Bryan} and \href{https://github.com/jimhester}{Jim Hester} have published a thorough description of using Git from a data scientist's perspective (\href{https://happygitwithr.com/}{Happy Git and GitHub for the useR}), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is \emph{\href{https://smile.amazon.com/dp/1449302440}{Team Geek}}, which has insightful advice for the human and collaborative aspects of version control.
 
 Other Resources
 1. \href{https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github}{Setting up a CI/CD Process on GitHub with Travis CI}. Travis-CI blob from August 2019.
 
-\hypertarget{for-collaboration}{%
-\section{for Collaboration}\label{for-collaboration}}
+\hypertarget{git-collaboration}{%
+\section{for Collaboration}\label{git-collaboration}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2766,12 +2805,11 @@ Here are some tips from our experiences with projects involving between 2 and 10
   \end{enumerate}
 \end{enumerate}
 
-\hypertarget{for-stability}{%
-\section{for Stability}\label{for-stability}}
+\hypertarget{git-stability}{%
+\section{for Stability}\label{git-stability}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Review Git commits closely
 
@@ -2783,20 +2821,20 @@ Here are some tips from our experiences with projects involving between 2 and 10
   \item
     No PHI snuck in (\emph{e.g.}, a patient ID used while isolating and debugging).
   \item
-    The metadata format didn't change (\emph{e.g.}, Excel sometimes changes the string `010' to the number `10').
+    The metadata format didn't change (\emph{e.g.}, Excel sometimes changes the string `010' to the number `10'). See \protect\hyperlink{snippets-correspondence-excel}{the appendix} for a longer discussion about the problems that Excel typically introduces.
   \end{enumerate}
 \end{enumerate}
 
 \hypertarget{snippets}{%
 \chapter{Snippets}\label{snippets}}
 
-\hypertarget{reading-external-data}{%
-\section{Reading External Data}\label{reading-external-data}}
+\hypertarget{snippets-reading}{%
+\section{Reading External Data}\label{snippets-reading}}
 
-\hypertarget{reading-from-excel}{%
-\subsection{Reading from Excel}\label{reading-from-excel}}
+\hypertarget{snippets-reading-excel}{%
+\subsection{Reading from Excel}\label{snippets-reading-excel}}
 
-\emph{Background}: Avoid Excel for so many reasons. But if there isn't another good option, be protective. \href{https://readxl.tidyverse.org/reference/read_excel.html}{\texttt{readxl::read\_excel()}} allows you to specify column types, but not column order. The names of \texttt{col\_types} is ignored by \texttt{readxl::read\_excel()}. To defend against roamining columns (\emph{e.g.}, the files changed over time), \texttt{tesit::assert()} that the order is what you expect.
+\emph{Background}: Avoid Excel for the \href{\%7B\#data-containers-avoid}{reasons previously discussed}. But if there isn't another good option, be protective. \href{https://readxl.tidyverse.org/reference/read_excel.html}{\texttt{readxl::read\_excel()}} allows you to specify column types, but not column order. The names of \texttt{col\_types} is ignored by \texttt{readxl::read\_excel()}. To defend against roamining columns (\emph{e.g.}, the files changed over time), \texttt{tesit::assert()} that the order is what you expect.
 
 \emph{Last Modified}: 2019-12-12 by Will
 
@@ -2807,16 +2845,16 @@ Here are some tips from our experiences with projects involving between 2 and 10
 
 \CommentTok{\# cat(sprintf(\textquotesingle{}  \textasciigrave{}\%s\textasciigrave{}             = "text",\textbackslash{}n\textquotesingle{}, colnames(ds)), sep="") \# \textquotesingle{}text\textquotesingle{} by default {-}{-}then change where appropriate.}
 \NormalTok{col\_types <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}
-  \StringTok{\textasciigrave{}}\DataTypeTok{Med Rec Num}\StringTok{\textasciigrave{}}\NormalTok{        =}\StringTok{ "text"}\NormalTok{,}
-  \StringTok{\textasciigrave{}}\DataTypeTok{Admit Date}\StringTok{\textasciigrave{}}\NormalTok{         =}\StringTok{ "date"}\NormalTok{,}
-  \StringTok{\textasciigrave{}}\DataTypeTok{Tot Cash Pymt}\StringTok{\textasciigrave{}}\NormalTok{      =}\StringTok{ "numeric"}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Med Rec Num}\StringTok{\textasciigrave{}}\NormalTok{     =}\StringTok{ "text"}\NormalTok{,}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Admit Date}\StringTok{\textasciigrave{}}\NormalTok{      =}\StringTok{ "date"}\NormalTok{,}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Tot Cash Pymt}\StringTok{\textasciigrave{}}\NormalTok{   =}\StringTok{ "numeric"}
 \NormalTok{)}
 
 \CommentTok{\# {-}{-}{-}{-} load{-}data {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{ds <{-}}\StringTok{ }\NormalTok{readxl}\OperatorTok{::}\KeywordTok{read\_excel}\NormalTok{(}
-  \DataTypeTok{path       =}\NormalTok{ config}\OperatorTok{$}\NormalTok{path\_admission\_charge,}
-  \DataTypeTok{col\_types  =}\NormalTok{ col\_types}
-  \CommentTok{\# sheet    = "dont{-}use{-}sheets{-}if{-}possible"}
+  \DataTypeTok{path      =}\NormalTok{ config}\OperatorTok{$}\NormalTok{path\_admission\_charge,}
+  \DataTypeTok{col\_types =}\NormalTok{ col\_types}
+  \CommentTok{\# sheet   = "dont{-}use{-}sheets{-}if{-}possible"}
 \NormalTok{)}
 
 \NormalTok{testit}\OperatorTok{::}\KeywordTok{assert}\NormalTok{(}
@@ -2826,8 +2864,8 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{removing-trailing-comma-from-header}{%
-\subsection{Removing Trailing Comma from Header}\label{removing-trailing-comma-from-header}}
+\hypertarget{snippets-reading-trailing-comma}{%
+\subsection{Removing Trailing Comma from Header}\label{snippets-reading-trailing-comma}}
 
 \emph{Background}: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, \href{https://readr.tidyverse.org/reference/read_delim.html}{\texttt{readr:read\_csv()}} appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.
 
@@ -2849,11 +2887,11 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{grooming}{%
-\section{Grooming}\label{grooming}}
+\hypertarget{snippets-grooming}{%
+\section{Grooming}\label{snippets-grooming}}
 
-\hypertarget{correct-for-misinterpreted-two-digit-year}{%
-\subsection{Correct for misinterpreted two-digit year}\label{correct-for-misinterpreted-two-digit-year}}
+\hypertarget{snippets-grooming-two-year}{%
+\subsection{Correct for misinterpreted two-digit year}\label{snippets-grooming-two-year}}
 
 \emph{Background}: Sometimes the Meditech dates are specified like \texttt{1/6/54} instead of \texttt{1/6/1954}. \texttt{readr::read\_csv()} has to choose if the year is supposed to be `1954' or `2054'. A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can't (so it guesses 2054). For avoid this and other problems, request dates in an \href{https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601}{ISO-8601} format.
 
@@ -2867,16 +2905,16 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \begin{Highlighting}[]
 \NormalTok{ ds }\OperatorTok{\%>\%}
 \StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{dob   =}\NormalTok{ dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(dob }\OperatorTok{<=}\StringTok{ }\KeywordTok{Sys.Date}\NormalTok{(), dob, dob }\OperatorTok{{-}}\StringTok{ }\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{years}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+    \DataTypeTok{dob =}\NormalTok{ dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(dob }\OperatorTok{<=}\StringTok{ }\KeywordTok{Sys.Date}\NormalTok{(), dob, dob }\OperatorTok{{-}}\StringTok{ }\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{years}\NormalTok{(}\DecValTok{100}\NormalTok{))}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{identification}{%
-\section{Identification}\label{identification}}
+\hypertarget{snippets-identification}{%
+\section{Identification}\label{snippets-identification}}
 
-\hypertarget{snippet-tag}{%
-\subsection{Generating ``tags''}\label{snippet-tag}}
+\hypertarget{snippets-identification-tags}{%
+\subsection{Generating ``tags''}\label{snippets-identification-tags}}
 
 \emph{Background}: When you need to generate unique identification values for future people/clients/patients, as described in the \protect\hyperlink{style-number}{style guide}.
 
@@ -2921,6 +2959,36 @@ The resulting dataset will look like this, but with different randomly-generated
 4        4 jl0dg84 FALSE    --        --        
 5        5 r5ei5ph FALSE    --        --        
 \end{verbatim}
+
+\hypertarget{snippets-correspondence}{%
+\section{Correspondence with Collaborators}\label{snippets-correspondence}}
+
+\hypertarget{snippets-correspondence-excel}{%
+\subsection{Excel files}\label{snippets-correspondence-excel}}
+
+Receiving and storing \protect\hyperlink{data-containers-avoid}{Excel files should almost always be avoided} for the reasons explained in this letter.
+
+We receive extracts as Excel files frequently, and have the following request ready to email the person sending us Excel files. Adapt the bold values like ``109.19'' to your situation. If you are familiar with their tools, suggest an alternative for saving the file as a csv. Once presented with these Excel gotchas, almost everyone has an `aha' moment and recognizes the problem. Unfortunately, not everyone has flexible software and can adapt easily.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+{[}Start of the letter{]}
+
+Sorry to be tedious, but could you please resend the extract as a \href{https://en.wikipedia.org/wiki/Comma-separated_values}{csv} file? Please call me if you have questions.
+
+Excel is being too helpful with some of the values, and essentially corrupting them. For example, values like \textbf{109.19} is interpreted as a number, not a character code (\emph{e.g.}, see cell \textbf{L14}). Because of \href{https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html}{limitations of finite precision}, this becomes \textbf{109.18999999999999773}. We can't round it, because there are other values in this column that cannot be cast to numbers, such as \textbf{V55.0}. Furthermore, the ``E''s in some codes are incorrectly interpreted as the exponent operator (\emph{e.g.}, ``4E5'' is converted to 400,000). Finally, values like \textbf{41.0} are being converted to a number and the trailing zero is dropped (so cells like ``41'' are not distinguishable from ``41.0'').
+
+Unfortunately the problems exist in the Excel file itself. When we import the columns \href{https://readxl.tidyverse.org/reference/read_excel.html}{as text}, the values are already in their corrupted state.
+
+Please compress/zip the csv if the file is be too large to email. We've found that an Excel file is typically 5-10 times larger than a compressed csv.
+
+As much as Excel interferes with our medical variables, we're lucky. It has messed with other branches of science much worse. Genomics were using it far too late \href{https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/}{before they realized their mistakes}.
+
+\begin{quote}
+What happened? By default, Excel and other popular spreadsheet applications convert some gene symbols to dates and numbers. For example, instead of writing out ``Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase,'' researchers have dubbed the gene MARCH1. Excel converts this into a date---03/01/2016, say---because that's probably what the majority of spreadsheet users mean when they type it into a cell. Similarly, gene identifiers like ``2310009E13'' are converted to exponential numbers (2.31E+19). In both cases, the conversions strip out valuable information about the genes in question.
+\end{quote}
+
+{[}End of the letter{]}
 
 \hypertarget{presentations}{%
 \chapter{Presentations}\label{presentations}}
@@ -3148,24 +3216,6 @@ Here is a collection of presentations by the BBMC and friends that may help demo
 
 \hypertarget{practices}{%
 \section{Practices}\label{practices}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Don't use Excel for data storage
-
-  \begin{quote}
-  Sorry to be tedious, but could you please resend the extract as a CSV file?
-
-  Excel is being too helpful with some of the values, and essentially corrupting them. For example, the value of ``519.19'' in cell L14 is being read as a number. Because of limitations of finite precision in binary machines, this is being read as ``519.19000000000005''. We can't round it, because there are other values in this column that cannot be cast to numbers, such as ``V55.0''. Furthermore, the ``E''s in some icd-10s are incorrectly interpreted as the exponent operator.
-
-  As much as Excel interferes with our EMR work, we're lucky. It has messed with other branches of science much worse. Genomics were using it far too late before they realized their mistakes. I'm guessing some of them still haven't learned. \url{https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/}
-
-  \begin{quote}
-  What happened? By default, Excel and other popular spreadsheet applications convert some gene symbols to dates and numbers. For example, instead of writing out ``Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase,'' researchers have dubbed the gene MARCH1. Excel converts this into a date---03/01/2016, say---because that's probably what the majority of spreadsheet users mean when they type it into a cell. Similarly, gene identifiers like ``2310009E13'' are converted to exponential numbers (2.31E+19). In both cases, the conversions strip out valuable information about the genes in question.
-  \end{quote}
-  \end{quote}
-\end{enumerate}
 
 \hypertarget{example-bookdown}{%
 \chapter{Example}\label{example-bookdown}}
