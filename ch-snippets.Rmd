@@ -2,12 +2,12 @@ Snippets {#snippets}
 ====================================
 
 
-Reading External Data
+Reading External Data {#snippets-reading}
 ------------------------------------
 
-### Reading from Excel
+### Reading from Excel {#snippets-reading-excel}
 
-*Background*: Avoid Excel for so many reasons.  But if there isn't another good option, be protective.  [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html) allows you to specify column types, but not column order.  The names of `col_types` is ignored by `readxl::read_excel()`.  To defend against roamining columns (*e.g.*, the files changed over time), `tesit::assert()` that the order is what you expect. 
+*Background*: Avoid Excel for the [reasons previously discussed]({#data-containers-avoid).  But if there isn't another good option, be protective.  [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html) allows you to specify column types, but not column order.  The names of `col_types` is ignored by `readxl::read_excel()`.  To defend against roamining columns (*e.g.*, the files changed over time), `tesit::assert()` that the order is what you expect. 
 
 *Last Modified*: 2019-12-12 by Will
 
@@ -17,16 +17,16 @@ config                         <- config::get()
 
 # cat(sprintf('  `%s`             = "text",\n', colnames(ds)), sep="") # 'text' by default --then change where appropriate.
 col_types <- c(
-  `Med Rec Num`        = "text",
-  `Admit Date`         = "date",
-  `Tot Cash Pymt`      = "numeric"
+  `Med Rec Num`     = "text",
+  `Admit Date`      = "date",
+  `Tot Cash Pymt`   = "numeric"
 )
 
 # ---- load-data ---------------------------------------------------------------
 ds <- readxl::read_excel(
-  path       = config$path_admission_charge,
-  col_types  = col_types
-  # sheet    = "dont-use-sheets-if-possible"
+  path      = config$path_admission_charge,
+  col_types = col_types
+  # sheet   = "dont-use-sheets-if-possible"
 )
 
 testit::assert(
@@ -35,7 +35,7 @@ testit::assert(
 )
 ```
 
-### Removing Trailing Comma from Header
+### Removing Trailing Comma from Header {#snippets-reading-trailing-comma}
 
 *Background*: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line.  For each subsequent line, [`readr:read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) appropriately throws a new warning that it is missing a column.  This warning flood can mask real problems.
 
@@ -56,10 +56,10 @@ ds        <- readr::read_csv(raw_text, col_types=col_types)
 ```
 
 
-Grooming
+Grooming {#snippets-grooming}
 ------------------------------------
 
-### Correct for misinterpreted two-digit year
+### Correct for misinterpreted two-digit year {#snippets-grooming-two-year}
 
 *Background*: Sometimes the Meditech dates are specified like `1/6/54` instead of `1/6/1954`.  `readr::read_csv()` has to choose if the year is supposed to be '1954' or '2054'.  A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can't (so it guesses 2054).  For avoid this and other problems, request dates in an [ISO-8601](https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601) format.
 
@@ -72,14 +72,14 @@ Grooming
 ```r
  ds %>%
  dplyr::mutate(
-    dob   = dplyr::if_else(dob <= Sys.Date(), dob, dob - lubridate::years(100))
+    dob = dplyr::if_else(dob <= Sys.Date(), dob, dob - lubridate::years(100))
   )
 ```
 
-Identification
+Identification {#snippets-identification}
 ------------------------------------
 
-### Generating "tags" {#snippet-tag}
+### Generating "tags"  {#snippets-identification-tags}
 
 *Background*: When you need to generate unique identification values for future people/clients/patients, as described in the [style guide](#style-number).
 
@@ -122,3 +122,31 @@ The resulting dataset will look like this, but with different randomly-generated
 4        4 jl0dg84 FALSE    --        --        
 5        5 r5ei5ph FALSE    --        --        
 ```
+
+Correspondence with Collaborators {#snippets-correspondence}
+------------------------------------
+
+### Excel files {#snippets-correspondence-excel}
+
+Receiving and storing [Excel files should almost always be avoided](#data-containers-avoid) for the reasons explained in this letter.
+
+We receive extracts as Excel files frequently, and have the following request ready to email the person sending us Excel files.  Adapt the bold values like "109.19" to your situation.  If you are familiar with their tools, suggest an alternative for saving the file as a csv.  Once presented with these Excel gotchas, almost everyone has an 'aha' moment and recognizes the problem.  Unfortunately, not everyone has flexible software and can adapt easily.
+
+---
+
+[Start of the letter]
+
+Sorry to be tedious, but could you please resend the extract as a [csv](https://en.wikipedia.org/wiki/Comma-separated_values) file?  Please call me if you have questions.
+
+Excel is being too helpful with some of the values, and essentially corrupting them.  For example, values like **109.19** is interpreted as a number, not a character code (*e.g.*, see cell **L14**).  Because of [limitations of finite precision](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html), this becomes **109.18999999999999773**.  We can't round it, because there are other values in this column that cannot be cast to numbers, such as **V55.0**.  Furthermore, the "E"s in some codes are incorrectly interpreted as the exponent operator (*e.g.*, "4E5" is converted to 400,000).  Finally, values like **41.0** are being converted to a number and the trailing zero is dropped (so cells like "41" are not distinguishable from "41.0").
+
+Unfortunately the problems exist in the Excel file itself.  When we import the columns [as text](https://readxl.tidyverse.org/reference/read_excel.html), the values are already in their corrupted state.
+
+Please compress/zip the csv if the file is be too large to email.  We've found that an Excel file is typically 5-10 times larger than a compressed csv. 
+
+As much as Excel interferes with our medical variables, we’re lucky.  It has messed with other branches of science much worse.  Genomics were using it far too late [before they realized their mistakes](https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/).  
+
+> What happened? By default, Excel and other popular spreadsheet applications convert some gene symbols to dates and numbers. For example, instead of writing out “Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase,” researchers have dubbed the gene MARCH1. Excel converts this into a date—03/01/2016, say—because that’s probably what the majority of spreadsheet users mean when they type it into a cell. Similarly, gene identifiers like “2310009E13” are converted to exponential numbers (2.31E+19). In both cases, the conversions strip out valuable information about the genes in question.
+
+[End of the letter]
+

@@ -1,4 +1,4 @@
-Data at Rest {#data-rest}
+Data at Rest {#rest}
 ====================================
 
 Data States
@@ -15,29 +15,53 @@ Data States
 Data Containers
 ------------------------------------
 
-### csv {#data-rest-csv}
+### csv {#data-containers-csv}
 
-When exchanging data between two different systems, the preferred format is frequently plain text.  As opposed to proprietary formats like xlsx or sas7bdat, the file is easily opened and parsable by most statistical software, and even conventional text editors.
-
-Incoming files should be plain-text [csv](https://en.wikipedia.org/wiki/Comma-separated_values) --not Excel or other proprietary or binary format.
-
-### rds {#data-rest-rds}
-
-### SQLite {#data-rest-sqlite}
-
-### Central Enterprise database {#data-rest-database}
-
-### Central REDCap database {#data-rest-redcap}
-
-### Containers to avoid for raw/input {#data-rest-avoid}
-    
-1. Proprietary like xlsx, sas7bdat
+When exchanging data between two different systems, the preferred format is frequently plain text, where each cell in a record is separated by a comma.  This is commonly called a csv --a [comma separated value](https://en.wikipedia.org/wiki/Comma-separated_values) file.  As opposed to [proprietary formats](#data-containers-avoid) like xlsx or sas7bdat, a csv file is easily opened and parsable by most statistical software, and even conventional text editors and [GitHub](https://help.github.com/en/github/managing-files-in-a-repository/rendering-csv-and-tsv-data).
 
 
-Storage Conventions {#data-rest-conventions}
+### rds {#data-containers-rds}
+
+
+### JSON and XML {#data-containers-json}
+
+The plain-text format is typically preferred when the data structures cannot be represented by nice rectangles. qqq
+
+### Arrow {#data-containers-arrow}
+
+[Apache Arrow](https://arrow.apache.org/) is an open source specification that is developed to work with many languages such as [R](https://arrow.apache.org/docs/r/), [Spark](https://towardsdatascience.com/a-gentle-introduction-to-apache-arrow-with-apache-spark-and-pandas-bb19ffe0ddae), [Python](https://spark.apache.org/docs/latest/sql-pyspark-pandas-with-arrow.html), and many others.  It accommodates nice rectangles where CSVs are used, and hierarchical nesting where json and xml are used.  
+
+It is both an in-memory specification (which allows a Python process to directly access an R object), and an on-disk specification (which allows a Python process to read a saved R file).  The file format is compressed, so it takes much less space to store on disk and less time to transfer over a network.  
+
+Its downside is the file is not plain-text, but binary.  That means the file is not readable and editable by as many programs, which hurts your project's portability.  You wouldn't want to store most metadata files as arrow because then your collaborators couldn't easily help you map the values to qqq
+
+### SQLite {#data-containers-sqlite}
+
+### Central Enterprise database {#data-containers-database}
+
+### Central REDCap database {#data-containers-redcap}
+
+### Containers to avoid {#data-containers-avoid}
+
+#### Spreadsheets {#data-containers-avoid-spreadsheets}
+
+Try not to receive data in Excel files.  We think Excel can be useful for light brainstorming and protyping equations --but is should not be trusted to transport serious information.  Other spreadsheet software like [LibreOffice Calc](https://en.wikipedia.org/wiki/LibreOffice_Calc) is less problematic in our epxerience, but still less desirable than the formats mentioned above.
+
+If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values.  After you close the spreadsheet, [review the Git commits](#git-stability) to verify no values were corrupted.
+
+See [the appendix](#snippets-correspondence-excel) for a list of the ways your analyses can be undermined when receiving Excel files, as well as a template to correspond with your less-experienced colleagues that is sending your team Excel files. 
+
+#### Proprietary {#data-containers-avoid-proprietary}
+
+Proprietary formats like [SAS](https://en.wikipedia.org/wiki/SAS_(software))'s "sas7bdat" are less accesible to people without the current expensive software licenses.  Therefore distributing proprietary file formats hurts reproducibility and decreases your project's impact.  On the other hand, using proprietary formats may be advantageous when you need to conceal the project's failure.
+
+We formerly distributed sas7bdat files to supplement (otherwise identical) csvs, in order to cater to the suprisingly large population of SAS users who were unfamiliar with [proc import](https://documentation.sas.com/?docsetId=proc&docsetTarget=n18jyszn33umngn14czw2qfw7thc.htm&docsetVersion=9.4&locale=en) or the Google search engine.  Recently we have distributed only the csvs, with example code for reading the file from SAS.
+
+
+Storage Conventions {#data-conventions}
 ------------------------------------
 
-### All Sources {#data-rest-conventions-all}
+### All Sources {#data-conventions-all}
 
 Across all file formats, these conventions usually work best.
 
@@ -54,7 +78,7 @@ Across all file formats, these conventions usually work best.
 1. **currency**: represent money as an integer or floating-point variable.  This representation is more easily parsable by software, and enables mathematical operations (like `max()` or `mean()`) to be performed directly.  Avoid commas and symbols like "$".  If there is a possibility of ambiguity, indicate the denomination in the variable name (*e.g.*, `payment_dollars` or `payment_euros`).
 
 
-### Text {#data-rest-conventions-text}
+### Text {#data-conventions-text}
 
 These conventions usually work best within plain-text formats.
 
@@ -63,50 +87,19 @@ These conventions usually work best within plain-text formats.
 1. **cells enclosed in quotes**: a 'cell' should be enclosed in double quotes, especially if it's a string/character variable.
 
 
-### Excel {#data-rest-conventions-excel}
+### Excel {#data-conventions-excel}
 
-Although it may feel that you are fighting a losing battle, try not to receive data in Excel files.  I think Excel can be useful for light brainstorming and protyping equations --but is should not be used to contain serious data.  When avoiding Excel is not possible: 
+As [discussed above]({#data-containers-avoid) avoid Excel.  When that is not possible, these conventions helps reduce ambiguity and corrupted values.  See [the appendix](#snippets-reading-excel) for our preferred approach to reading Excel files.
 
 1. **avoid multiple tabs/worksheets**: Excel files containing multiple worksheets are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.
 
 1. **save the cells as text**: avoiding Excel attempting to save cells as dates or numbers.  Admitedly, this is a last-ditch effort.  If someone is using Excel to convert cells to text, the values are probably already corrupted.
 
-We receive extracts as Excel files frequently, and have the following request ready to email the person sending us Excel files.  Adapt the bold values like "109.19" to your situation.  If you are familiar with their tools, suggest an alternative for saving the file as a csv.  Once presented with these Excel gotchas, almost everyone has an 'aha' moment and recognizes the problem.  Unfortunately, not everyone has the capability to adapt easily.
-
----
-
-[Start of the letter]
-
-Sorry to be tedious, but could you please resend the extract as a [csv](https://en.wikipedia.org/wiki/Comma-separated_values) file?  Please call me if you have questions.
-
-Excel is being too helpful with some of the values, and essentially corrupting them.  For example, values like **109.19** is interpreted as a number, not a character code (*e.g.*, see cell **L14**).  Because of [limitations of finite precision](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html), this becomes **109.18999999999999773**.  We can't round it, because there are other values in this column that cannot be cast to numbers, such as **V55.0**.  Furthermore, the "E"s in some codes are incorrectly interpreted as the exponent operator (*e.g.*, "4E5" is converted to 400,000).  Finally, values like **41.0** are being converted to a number and the trailing zero is dropped (so cells like "41" are not distinguishable from "41.0").
-
-Unfortunately the problems exist in the Excel file itself.  When we import the columns [as text](https://readxl.tidyverse.org/reference/read_excel.html), the values are already in their corrupted state.
-
-Please compress/zip the csv file if it might be too big to fit into an email.  We've found that an Excel file is 5-10 times larger than a compressed csv. 
-
-As much as Excel interferes with our medical variables, we’re lucky.  It has messed with other branches of science much worse.  Genomics were using it far too late [before they realized their mistakes](https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/).  I’m guessing some still use it.  
-
-> What happened? By default, Excel and other popular spreadsheet applications convert some gene symbols to dates and numbers. For example, instead of writing out “Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase,” researchers have dubbed the gene MARCH1. Excel converts this into a date—03/01/2016, say—because that’s probably what the majority of spreadsheet users mean when they type it into a cell. Similarly, gene identifiers like “2310009E13” are converted to exponential numbers (2.31E+19). In both cases, the conversions strip out valuable information about the genes in question.
-
-[End of the letter]
----
 
 
-### JSON and XML {#data-rest-conventions-json}
-
-The plain-text format is typically preferred when the data structures cannot be represented by nice rectangles. qqq
-
-### Arrow {#data-rest-conventions-arrow}
-
-[Apache Arrow](https://arrow.apache.org/) is an open source specification that is developed to work with many languages such as [R](https://arrow.apache.org/docs/r/), [Spark](https://towardsdatascience.com/a-gentle-introduction-to-apache-arrow-with-apache-spark-and-pandas-bb19ffe0ddae), [Python](https://spark.apache.org/docs/latest/sql-pyspark-pandas-with-arrow.html), and many others.  It accommodates nice rectangles where CSVs are used, and hierarchical nesting where json and xml are used.  
-
-It is both an in-memory specification (which allows a Python process to directly access an R object), and an on-disk pspecification (which allows a Python process to read a saved R file).  The file format is compressed, so it takes much less space to store on disk and less time to transfer over a network.  
-
-Its downside is the file is not plain-text, but binary.  That means the file is not readable and editable by as many programs, which hurts your project's portability.  You wouldn't want to store most metadata files as arrow because then your collaborators couldn't easily help you map the values to qqq
 
         
-### Meditech {#data-rest-conventions-meditech}
+### Meditech {#data-conventions-meditech}
 
 1. **patient identifier**: `mrn_meditech` instead of `mrn`, `MRN Rec#`, or `Med Rec#`.
 
@@ -126,6 +119,6 @@ Meditech Idiosyncracies:
 
 1. **blood pressure**: in most systems the `bp_diastolic` and `bp_systolic` values are stored in separate integer variables.  In Meditech, they are stored in a single character variable, separated by a foward slash.
 
-### Databases {#data-rest-conventions-database}
+### Databases {#data-conventions-database}
 
 When exchanging data between two different systems, ...
