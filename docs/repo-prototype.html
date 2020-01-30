@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-26" />
+<meta name="date" content="2020-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -207,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
 <li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
-<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-yaml"><i class="fa fa-check"></i><b>6.2.3</b> yaml, json, and xml</a></li>
 <li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
 <li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
 <li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
@@ -463,34 +463,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Root</h2>
 <div id="repo-config" class="section level3" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> <code>config.R</code></h3>
-<p>The configuration file is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is great when a value has to be coordinated across multiple file</p>
-<pre><code>```yaml
-default:
-# To be processed by Ellis lanes
-path_subject_1_raw:  &quot;data-public/raw/subject-1.csv&quot;
-path_mlm_1_raw:      &quot;data-public/raw/mlm-1.csv&quot;
-
-# Central Database (produced by Ellis lanes).
-path_database:       &quot;data-public/derived/db.sqlite3&quot;
-
-# Analysis-ready datasets (produced by scribes &amp; consumed by analyses).
-path_mlm_1_derived:  &quot;data-public/derived/mlm-1.rds&quot;
-
-# Metadata
-path_annotation:     &quot;data-public/metadata/cqi-annotation.csv&quot;
-
-# Logging errors and messages from automated execution.
-path_log_flow:       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)
-
-# time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.
-
-# ---- Validation Ranges &amp; Patterns ----
-range_record_id         : !expr c(1L, 999999L)
-range_dob               : !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))
-range_datetime_entry    : !expr c(as.POSIXct(&quot;2019-01-01&quot;, tz=&quot;America/Chicago&quot;), Sys.time())
-max_age                 : 25
-pattern_mrn             : &quot;^E\\d{9}$&quot;  # An &#39;E&#39;, followed by 9 digits.
-```</code></pre>
+<p>The configuration file is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is great when a value has to be coordinated across multiple files.</p>
+<p>Also see the discussion of how we use the config file for <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases">excluding bad data values</a> and of how the config file <a href="rest.html#data-containers-yaml">relates to yaml</a>, json, and xml.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb16-1"><a href="repo-prototype.html#cb16-1"></a><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb16-2"><a href="repo-prototype.html#cb16-2"></a><span class="co">  # To be processed by Ellis lanes</span></span>
+<span id="cb16-3"><a href="repo-prototype.html#cb16-3"></a><span class="at">  </span><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/raw/subject-1.csv&quot;</span></span>
+<span id="cb16-4"><a href="repo-prototype.html#cb16-4"></a><span class="at">  </span><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">&quot;data-public/raw/mlm-1.csv&quot;</span></span>
+<span id="cb16-5"><a href="repo-prototype.html#cb16-5"></a><span class="at">  </span></span>
+<span id="cb16-6"><a href="repo-prototype.html#cb16-6"></a><span class="co">  # Central Database (produced by Ellis lanes).</span></span>
+<span id="cb16-7"><a href="repo-prototype.html#cb16-7"></a><span class="at">  </span><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">&quot;data-public/derived/db.sqlite3&quot;</span></span>
+<span id="cb16-8"><a href="repo-prototype.html#cb16-8"></a><span class="at">  </span></span>
+<span id="cb16-9"><a href="repo-prototype.html#cb16-9"></a><span class="co">  # Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
+<span id="cb16-10"><a href="repo-prototype.html#cb16-10"></a><span class="at">  </span><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/derived/mlm-1.rds&quot;</span></span>
+<span id="cb16-11"><a href="repo-prototype.html#cb16-11"></a><span class="at">  </span></span>
+<span id="cb16-12"><a href="repo-prototype.html#cb16-12"></a><span class="co">  # Metadata</span></span>
+<span id="cb16-13"><a href="repo-prototype.html#cb16-13"></a><span class="at">  </span><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">&quot;data-public/metadata/cqi-annotation.csv&quot;</span></span>
+<span id="cb16-14"><a href="repo-prototype.html#cb16-14"></a><span class="at">  </span></span>
+<span id="cb16-15"><a href="repo-prototype.html#cb16-15"></a><span class="co">  # Logging errors and messages from automated execution.</span></span>
+<span id="cb16-16"><a href="repo-prototype.html#cb16-16"></a><span class="at">  </span><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)</span></span>
+<span id="cb16-17"><a href="repo-prototype.html#cb16-17"></a><span class="at">  </span></span>
+<span id="cb16-18"><a href="repo-prototype.html#cb16-18"></a><span class="co">  # time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.</span></span>
+<span id="cb16-19"><a href="repo-prototype.html#cb16-19"></a><span class="at">  </span></span>
+<span id="cb16-20"><a href="repo-prototype.html#cb16-20"></a><span class="co">  # ---- Validation Ranges &amp; Patterns ----</span></span>
+<span id="cb16-21"><a href="repo-prototype.html#cb16-21"></a><span class="at">  </span><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
+<span id="cb16-22"><a href="repo-prototype.html#cb16-22"></a><span class="at">  </span><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span>
+<span id="cb16-23"><a href="repo-prototype.html#cb16-23"></a><span class="at">  </span><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct(&quot;2019-01-01&quot;, tz=&quot;America/Chicago&quot;), Sys.time())</span></span>
+<span id="cb16-24"><a href="repo-prototype.html#cb16-24"></a><span class="at">  </span><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
+<span id="cb16-25"><a href="repo-prototype.html#cb16-25"></a><span class="at">  </span><span class="fu">pattern_mrn             </span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;^E</span><span class="sc">\\</span><span class="st">d{9}$&quot;</span><span class="co">  # An &#39;E&#39;, followed by 9 digits.</span></span></code></pre></div>
 </div>
 <div id="repo-flow" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> <code>flow.R</code></h3>
@@ -502,6 +501,7 @@ pattern_mrn             : &quot;^E\\d{9}$&quot;  # An &#39;E&#39;, followed by 9
 </div>
 <div id="repo-rproj" class="section level3" number="5.1.4">
 <h3><span class="header-section-number">5.1.4</span> <code>*.Rproj</code></h3>
+<p>The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled. The file’s major benefit is that it sets the R session’s working directory, which facilitates good discipline about setting a constant location for all files in the repo. Although the plain-text file can be edited directly, we recommend using RStudio’s dialog box. There is good documentation about Rproj settings. If you are unsure, copy <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj">this file</a> to the repo’s root directory and rename it to match the repo exactly.</p>
 </div>
 </div>
 <div id="repo-analysis" class="section level2" number="5.2">

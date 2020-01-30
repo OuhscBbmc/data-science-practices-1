@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-26" />
+<meta name="date" content="2020-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -207,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
 <li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
-<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-yaml"><i class="fa fa-check"></i><b>6.2.3</b> yaml, json, and xml</a></li>
 <li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
 <li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
 <li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
@@ -481,9 +481,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-containers-rds" class="section level3" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> rds</h3>
 </div>
-<div id="data-containers-json" class="section level3" number="6.2.3">
-<h3><span class="header-section-number">6.2.3</span> JSON and XML</h3>
-<p>The plain-text format is typically preferred when the data structures cannot be represented by nice rectangles. qqq</p>
+<div id="data-containers-yaml" class="section level3" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> yaml, json, and xml</h3>
+<p><a href="https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/">yaml</a>, <a href="https://www.w3schools.com/js/js_json_intro.asp">json</a>, and <a href="https://www.w3schools.com/xml/">xml</a> are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds).</p>
+<p>In the same way we advocate for the <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-recoding">simplest recoding</a> function that is adequate for the task, we prefer yaml over json, and json over xml. Yaml accommodates most, but not all our needs. Initially it may be tricky to correctly use whitespacing to specify the correct nesting structure in yaml, but once you are familar, the file is easy to read and edit, and the Git diffs can be quickly reviewed. The <a href="http://biostat.mc.vanderbilt.edu/wiki/Main/YamlR">yaml</a> package reads a yaml file, and returns a (nested) <a href="https://www.tutorialspoint.com/r/r_lists.htm">R list</a>; it can also convert an R list into a yaml file.</p>
+<p>The <a href="https://github.com/rstudio/config">config</a> package wraps the yaml package to fill a common need: retrieving repository configuration information from a yaml file. We recommend using the config package when it fits. In some ways its functionality is a simplification of the yaml package, but it is an extension in other ways. For example, when a value follows <code>!expr</code>, R will evaluate the expression. We commonly specify the allowable ranges for variables in <a href="https://github.com/OuhscBbmc/cdw-skeleton-1/blob/master/config.yml"><code>config.yml</code></a></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="rest.html#cb17-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span></code></pre></div>
+<p>See the discussion of the <a href="https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html#repo-config"><code>config.yml</code></a> in our prototypical repository, as well</p>
 </div>
 <div id="data-containers-arrow" class="section level3" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Arrow</h3>

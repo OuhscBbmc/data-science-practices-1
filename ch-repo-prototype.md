@@ -50,7 +50,7 @@ See [automation mediators](#automation-flow) for more details.
 
 ### `*.Rproj` {#repo-rproj}
 
-The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled.  The file's major benefit is that it sets the R session's working directory, which facilitates good discipline about setting a constant location for all files in the repo.  Although the plain-text file can be edited directly, we recommend using RStudio's dialog box.  There is good documentation about Rproj settings.  If you are unsure, copy [this file]() to the repo's root directory and rename it to match the repo exactly.
+The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled.  The file's major benefit is that it sets the R session's working directory, which facilitates good discipline about setting a constant location for all files in the repo.  Although the plain-text file can be edited directly, we recommend using RStudio's dialog box.  There is good documentation about Rproj settings.  If you are unsure, copy [this file](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj) to the repo's root directory and rename it to match the repo exactly.
 
 Analysis {#repo-analysis}
 ------------------------------------

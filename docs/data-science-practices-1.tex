@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-01-26}
+\date{2020-01-29}
 
 \begin{document}
 \maketitle
@@ -607,37 +607,39 @@ This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} becaus
 \hypertarget{repo-config}{%
 \subsection{\texorpdfstring{\texttt{config.R}}{config.R}}\label{repo-config}}
 
-The configuration file is simply a plain-text yaml file read by the \href{https://CRAN.R-project.org/package=config}{config} package. It is great when a value has to be coordinated across multiple file
+The configuration file is simply a plain-text yaml file read by the \href{https://CRAN.R-project.org/package=config}{config} package. It is great when a value has to be coordinated across multiple files.
 
-\begin{verbatim}
-```yaml
-default:
-# To be processed by Ellis lanes
-path_subject_1_raw:  "data-public/raw/subject-1.csv"
-path_mlm_1_raw:      "data-public/raw/mlm-1.csv"
+Also see the discussion of how we use the config file for \href{https://ouhscbbmc.github.io/data-science-practices-1/coding.html\#excluding-bad-cases}{excluding bad data values} and of how the config file \protect\hyperlink{data-containers-yaml}{relates to yaml}, json, and xml.
 
-# Central Database (produced by Ellis lanes).
-path_database:       "data-public/derived/db.sqlite3"
-
-# Analysis-ready datasets (produced by scribes & consumed by analyses).
-path_mlm_1_derived:  "data-public/derived/mlm-1.rds"
-
-# Metadata
-path_annotation:     "data-public/metadata/cqi-annotation.csv"
-
-# Logging errors and messages from automated execution.
-path_log_flow:       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")
-
-# time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.
-
-# ---- Validation Ranges & Patterns ----
-range_record_id         : !expr c(1L, 999999L)
-range_dob               : !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))
-range_datetime_entry    : !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())
-max_age                 : 25
-pattern_mrn             : "^E\\d{9}$"  # An 'E', followed by 9 digits.
-```
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{default}\KeywordTok{:}
+\CommentTok{  \# To be processed by Ellis lanes}
+\AttributeTok{  }\FunctionTok{path\_subject\_1\_raw}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/raw/subject{-}1.csv"}
+\AttributeTok{  }\FunctionTok{path\_mlm\_1\_raw}\KeywordTok{:}\AttributeTok{      }\StringTok{"data{-}public/raw/mlm{-}1.csv"}
+\AttributeTok{  }
+\CommentTok{  \# Central Database (produced by Ellis lanes).}
+\AttributeTok{  }\FunctionTok{path\_database}\KeywordTok{:}\AttributeTok{       }\StringTok{"data{-}public/derived/db.sqlite3"}
+\AttributeTok{  }
+\CommentTok{  \# Analysis{-}ready datasets (produced by scribes \& consumed by analyses).}
+\AttributeTok{  }\FunctionTok{path\_mlm\_1\_derived}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/derived/mlm{-}1.rds"}
+\AttributeTok{  }
+\CommentTok{  \# Metadata}
+\AttributeTok{  }\FunctionTok{path\_annotation}\KeywordTok{:}\AttributeTok{     }\StringTok{"data{-}public/metadata/cqi{-}annotation.csv"}
+\AttributeTok{  }
+\CommentTok{  \# Logging errors and messages from automated execution.}
+\AttributeTok{  }\FunctionTok{path\_log\_flow}\KeywordTok{:}\AttributeTok{       !expr strftime(Sys.time(), "data{-}unshared/log/flow{-}\%Y{-}\%m{-}\%d{-}{-}\%H{-}\%M{-}\%S.log")}
+\AttributeTok{  }
+\CommentTok{  \# time\_zone\_local       :  "America/Chicago" \# Force local time, in case remotely run.}
+\AttributeTok{  }
+\CommentTok{  \# {-}{-}{-}{-} Validation Ranges \& Patterns {-}{-}{-}{-}}
+\AttributeTok{  }\FunctionTok{range\_record\_id         }\KeywordTok{:}\AttributeTok{ !expr c(1L, 999999L)}
+\AttributeTok{  }\FunctionTok{range\_dob               }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2010{-}01{-}01"), Sys.Date() + lubridate::days(1))}
+\AttributeTok{  }\FunctionTok{range\_datetime\_entry    }\KeywordTok{:}\AttributeTok{ !expr c(as.POSIXct("2019{-}01{-}01", tz="America/Chicago"), Sys.time())}
+\AttributeTok{  }\FunctionTok{max\_age                 }\KeywordTok{:}\AttributeTok{ }\DecValTok{25}
+\AttributeTok{  }\FunctionTok{pattern\_mrn             }\KeywordTok{:}\AttributeTok{ }\StringTok{"\^{}E}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{9\}$"}\CommentTok{  \# An \textquotesingle{}E\textquotesingle{}, followed by 9 digits.}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{repo-flow}{%
 \subsection{\texorpdfstring{\texttt{flow.R}}{flow.R}}\label{repo-flow}}
@@ -651,6 +653,8 @@ See \protect\hyperlink{automation-flow}{automation mediators} for more details.
 
 \hypertarget{repo-rproj}{%
 \subsection{\texorpdfstring{\texttt{*.Rproj}}{*.Rproj}}\label{repo-rproj}}
+
+The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled. The file's major benefit is that it sets the R session's working directory, which facilitates good discipline about setting a constant location for all files in the repo. Although the plain-text file can be edited directly, we recommend using RStudio's dialog box. There is good documentation about Rproj settings. If you are unsure, copy \href{https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj}{this file} to the repo's root directory and rename it to match the repo exactly.
 
 \hypertarget{repo-analysis}{%
 \section{Analysis}\label{repo-analysis}}
@@ -729,10 +733,22 @@ When exchanging data between two different systems, the preferred format is freq
 \hypertarget{data-containers-rds}{%
 \subsection{rds}\label{data-containers-rds}}
 
-\hypertarget{data-containers-json}{%
-\subsection{JSON and XML}\label{data-containers-json}}
+\hypertarget{data-containers-yaml}{%
+\subsection{yaml, json, and xml}\label{data-containers-yaml}}
 
-The plain-text format is typically preferred when the data structures cannot be represented by nice rectangles. qqq
+\href{https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/}{yaml}, \href{https://www.w3schools.com/js/js_json_intro.asp}{json}, and \href{https://www.w3schools.com/xml/}{xml} are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds).
+
+In the same way we advocate for the \href{https://ouhscbbmc.github.io/data-science-practices-1/coding.html\#coding-simplify-recoding}{simplest recoding} function that is adequate for the task, we prefer yaml over json, and json over xml. Yaml accommodates most, but not all our needs. Initially it may be tricky to correctly use whitespacing to specify the correct nesting structure in yaml, but once you are familar, the file is easy to read and edit, and the Git diffs can be quickly reviewed. The \href{http://biostat.mc.vanderbilt.edu/wiki/Main/YamlR}{yaml} package reads a yaml file, and returns a (nested) \href{https://www.tutorialspoint.com/r/r_lists.htm}{R list}; it can also convert an R list into a yaml file.
+
+The \href{https://github.com/rstudio/config}{config} package wraps the yaml package to fill a common need: retrieving repository configuration information from a yaml file. We recommend using the config package when it fits. In some ways its functionality is a simplification of the yaml package, but it is an extension in other ways. For example, when a value follows \texttt{!expr}, R will evaluate the expression. We commonly specify the allowable ranges for variables in \href{https://github.com/OuhscBbmc/cdw-skeleton-1/blob/master/config.yml}{\texttt{config.yml}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{range\_dob   }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2010{-}01{-}01"), Sys.Date() + lubridate::days(1))}
+\end{Highlighting}
+\end{Shaded}
+
+See the discussion of the \href{https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html\#repo-config}{\texttt{config.yml}} in our prototypical repository, as well
 
 \hypertarget{data-containers-arrow}{%
 \subsection{Arrow}\label{data-containers-arrow}}
@@ -2383,6 +2399,12 @@ The order does not matter.
     \href{https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql}{SQL Server} allows you to execute against a database, and view/copy/save the grid results. It doesn't replicate all SSMS features, but is nice as your scanning through files. \{added Dec 2018\}
   \item
     \href{https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker}{Code Spell Checker} produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.
+  \item
+    \href{https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one}{Markdown All in One} has some useful markdown capbilities, such as converting the file to html.
+  \item
+    \href{https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf}{Markdown PDF} has some useful markdown capbilities, such as converting the file to pdf.
+  \item
+    \href{https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint}{markdownlint} has linting and style checking.
   \end{itemize}
 
   These extensions \href{https://code.visualstudio.com/docs/editor/command-line\#_working-with-extensions}{can be installed by command line}.
@@ -2394,6 +2416,9 @@ The order does not matter.
 \ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension mechatroner.rainbow{-}csv}
 \ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension ms{-}mssql.mssql}
 \ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension streetsidesoftware.code{-}spell{-}checker}
+\ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension yzhang.markdown{-}all{-}in{-}one}
+\ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension yzane.markdown{-}pdf}
+\ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension DavidAnson.vscode{-}markdownlint}
 \end{Highlighting}
 \end{Shaded}
 \item

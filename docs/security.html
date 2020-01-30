@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-26" />
+<meta name="date" content="2020-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -207,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
 <li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
-<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-yaml"><i class="fa fa-check"></i><b>6.2.3</b> yaml, json, and xml</a></li>
 <li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
 <li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
 <li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
@@ -479,18 +479,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Download and install the most recent Java JRE from the Oracle site.</p></li>
 <li><p>Download the most recent jar file from the BFG site to the home directory.</p></li>
 <li><p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="security.html#cb26-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb26-2"><a href="security.html#cb26-2"></a><span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</span></code></pre></div></li>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="security.html#cb27-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb27-2"><a href="security.html#cb27-2"></a><span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</span></code></pre></div></li>
 <li><p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="security.html#cb27-1"></a><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</span></code></pre></div></li>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="security.html#cb28-1"></a><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</span></code></pre></div></li>
 <li><p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="security.html#cb28-1"></a><span class="bu">cd</span> bloated.git</span>
-<span id="cb28-2"><a href="security.html#cb28-2"></a><span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</span></code></pre></div></li>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="security.html#cb29-1"></a><span class="bu">cd</span> bloated.git</span>
+<span id="cb29-2"><a href="security.html#cb29-2"></a><span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</span></code></pre></div></li>
 <li><p>Push your local changes to the GitHub server.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="security.html#cb29-1"></a><span class="fu">git</span> push</span></code></pre></div></li>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="security.html#cb30-1"></a><span class="fu">git</span> push</span></code></pre></div></li>
 <li><p>Delete the bfg jar from the home directory.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="security.html#cb30-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb30-2"><a href="security.html#cb30-2"></a><span class="fu">rm</span> bfg-*.jar</span></code></pre></div></li>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="security.html#cb31-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb31-2"><a href="security.html#cb31-2"></a><span class="fu">rm</span> bfg-*.jar</span></code></pre></div></li>
 <li><p>Ask your collaborators to reclone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>

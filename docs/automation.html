@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-26" />
+<meta name="date" content="2020-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -207,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
 <li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
-<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-yaml"><i class="fa fa-check"></i><b>6.2.3</b> yaml, json, and xml</a></li>
 <li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
 <li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
 <li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
@@ -532,12 +532,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><p>On the other side of the spectrum, you can meticulously specify the desired version of each R package. This approach reduces the chance of a new version of a package breaking existing pipeline code. We recommend this approach when uptime is very important.</p>
 <p>The most intuitive implementation is to install with explicit code in a file like <code>utility/install-dependencies.R</code>:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="automation.html#cb34-1"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;dplyr&quot;</span>     , <span class="dt">version =</span> <span class="st">&quot;0.4.3&quot;</span> )</span>
-<span id="cb34-2"><a href="automation.html#cb34-2"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;ggplot2&quot;</span>   , <span class="dt">version =</span> <span class="st">&quot;2.0.0&quot;</span> )</span>
-<span id="cb34-3"><a href="automation.html#cb34-3"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;data.table&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;1.10.4&quot;</span>)</span>
-<span id="cb34-4"><a href="automation.html#cb34-4"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;lubridate&quot;</span> , <span class="dt">version =</span> <span class="st">&quot;1.6.0&quot;</span> )</span>
-<span id="cb34-5"><a href="automation.html#cb34-5"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;openxlsx&quot;</span>  , <span class="dt">version =</span> <span class="st">&quot;4.0.17&quot;</span>)</span>
-<span id="cb34-6"><a href="automation.html#cb34-6"></a><span class="co"># ... package list continues ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="automation.html#cb35-1"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;dplyr&quot;</span>     , <span class="dt">version =</span> <span class="st">&quot;0.4.3&quot;</span> )</span>
+<span id="cb35-2"><a href="automation.html#cb35-2"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;ggplot2&quot;</span>   , <span class="dt">version =</span> <span class="st">&quot;2.0.0&quot;</span> )</span>
+<span id="cb35-3"><a href="automation.html#cb35-3"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;data.table&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;1.10.4&quot;</span>)</span>
+<span id="cb35-4"><a href="automation.html#cb35-4"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;lubridate&quot;</span> , <span class="dt">version =</span> <span class="st">&quot;1.6.0&quot;</span> )</span>
+<span id="cb35-5"><a href="automation.html#cb35-5"></a>remotes<span class="op">::</span><span class="kw">install_version</span>(<span class="st">&quot;openxlsx&quot;</span>  , <span class="dt">version =</span> <span class="st">&quot;4.0.17&quot;</span>)</span>
+<span id="cb35-6"><a href="automation.html#cb35-6"></a><span class="co"># ... package list continues ...</span></span></code></pre></div>
 <p>Another implementation is to convert the repo to a package itself, and <a href="http://r-pkgs.had.co.nz/description.html#dependencies">specify the versions</a> in the <code>DESCRIPTION</code> file.</p>
 <pre><code>Imports:
    dplyr       (== 0.4.3 )
