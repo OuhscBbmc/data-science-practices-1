@@ -40,9 +40,9 @@ Chapters & Sections to Form
 
 1. developing packages
 
-* [*R packages*](http://r-pkgs.had.co.nz/) by Hadley Wickham
+    * [*R packages*](http://r-pkgs.had.co.nz/) by Hadley Wickham
 
-* http://mangothecat.github.io/goodpractice/
+    * http://mangothecat.github.io/goodpractice/
 
 1. Cargo cult programming "is a style of computer programming characterized by the ritual inclusion of code or program structures that serve no real purpose." ([Wikipedia](https://en.wikipedia.org/wiki/Cargo_cult_programming))
 
@@ -50,5 +50,4 @@ Chapters & Sections to Form
 
 Practices
 ------------------------------------
-
 

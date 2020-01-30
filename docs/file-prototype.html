@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="architecture.html"/>
 <link rel="next" href="repo-prototype.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -146,6 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
 <li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -199,10 +200,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
 <li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
+<li class="chapter" data-level="6" data-path="rest.html"><a href="rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
-<li class="chapter" data-level="6.2" data-path="data-at-rest.html"><a href="data-at-rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a></li>
+<li class="chapter" data-level="6.1" data-path="rest.html"><a href="rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
+<li class="chapter" data-level="6.2" data-path="rest.html"><a href="rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
+<li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
+<li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
+<li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
+<li class="chapter" data-level="6.2.7" data-path="rest.html"><a href="rest.html#data-containers-redcap"><i class="fa fa-check"></i><b>6.2.7</b> Central REDCap database</a></li>
+<li class="chapter" data-level="6.2.8" data-path="rest.html"><a href="rest.html#data-containers-avoid"><i class="fa fa-check"></i><b>6.2.8</b> Containers to avoid</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="rest.html"><a href="rest.html#data-conventions"><i class="fa fa-check"></i><b>6.3</b> Storage Conventions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="rest.html"><a href="rest.html#data-conventions-all"><i class="fa fa-check"></i><b>6.3.1</b> All Sources</a></li>
+<li class="chapter" data-level="6.3.2" data-path="rest.html"><a href="rest.html#data-conventions-text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="rest.html"><a href="rest.html#data-conventions-excel"><i class="fa fa-check"></i><b>6.3.3</b> Excel</a></li>
+<li class="chapter" data-level="6.3.4" data-path="rest.html"><a href="rest.html#data-conventions-meditech"><i class="fa fa-check"></i><b>6.3.4</b> Meditech</a></li>
+<li class="chapter" data-level="6.3.5" data-path="rest.html"><a href="rest.html#data-conventions-database"><i class="fa fa-check"></i><b>6.3.5</b> Databases</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>7</b> Patterns</a>
 <ul>
@@ -277,7 +296,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>12.1</b> Team-wide</a></li>
 <li class="chapter" data-level="12.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>12.2</b> Project-specific</a></li>
 <li class="chapter" data-level="12.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>12.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>12.4.1</b> GitHub Issue Template</a></li>
+</ul></li>
 <li class="chapter" data-level="12.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>12.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="12.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>12.6</b> Setting up new machine</a></li>
 </ul></li>
@@ -369,26 +391,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>19.3</b> Bridges Outside the Team</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="git-github.html"><a href="git-github.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
+<li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git-github.html"><a href="git-github.html#for-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#reading-external-data"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
+<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#snippets-reading"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
 <ul>
-<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#reading-from-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
-<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#removing-trailing-comma-from-header"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
+<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#snippets-reading-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
+<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#snippets-reading-trailing-comma"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
 </ul></li>
-<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
+<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#snippets-grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
 <ul>
-<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#correct-for-misinterpreted-two-digit-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
+<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#snippets-grooming-two-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
+<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#snippets-identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
 <ul>
-<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippet-tag"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippets-identification-tags"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="snippets.html"><a href="snippets.html#snippets-correspondence"><i class="fa fa-check"></i><b>B.4</b> Correspondence with Collaborators</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="snippets.html"><a href="snippets.html#snippets-correspondence-excel"><i class="fa fa-check"></i><b>B.4.1</b> Excel files</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>C</b> Presentations</a>
@@ -439,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developig and debugging because it prevents previous runs from contaminating subsequent runs. However it has little effect during production; we’ll look at manipulation files separately from analysis files.</p>
 <p>Manipulation R files are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d with the argument <code>local=new.env()</code>. The file is executed in a fresh environment, so there are no variables to clear. Analysis R files are typically called from an Rmd file’s <code>knitr::read_chunk()</code>, and code positioned above the first chunk is not called by knitr.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>However typically do not clear the memory in R files that are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d in the same environment as the caller, as it will interfere with the caller’s variables.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="file-prototype.html#cb6-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="file-prototype.html#cb9-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>(<span class="dt">all.names =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
 </div>
 <div id="chunk-load-sources" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Load Sources</h2>
@@ -447,8 +473,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We prefer not to have <code>source</code>d files perform any real action, such as importing data or manipulating a file. One reason is because it is difficult to be consistent about the environmental variables when the sourced file’s functions are run. A second reason is that it more cognitively difficult to understand how the files are connected.</p>
 <p>When the sourced file contains only function definitions, these operations can be called at any time in the current file with much tighter control of which variables are modfied. A bonus of the discipline of defining functions (instead of executing functions) is that the operations are typically more robust and generalizable.</p>
 <p>Keep the chunk even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced. This applies recommendation applies to all the chunks discussed in this chapter. As always, your team should agree on its own set of standards.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="file-prototype.html#cb7-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
-<span id="cb7-2"><a href="file-prototype.html#cb7-2"></a>base<span class="op">::</span><span class="kw">source</span>(<span class="dt">file=</span><span class="st">&quot;./analysis/common/display-1.R&quot;</span>)      <span class="co"># Load common graphing functions.</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="file-prototype.html#cb10-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
+<span id="cb10-2"><a href="file-prototype.html#cb10-2"></a>base<span class="op">::</span><span class="kw">source</span>(<span class="dt">file=</span><span class="st">&quot;./analysis/common/display-1.R&quot;</span>)      <span class="co"># Load common graphing functions.</span></span></code></pre></div>
 </div>
 <div id="chunk-load-packages" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Load Packages</h2>
@@ -464,34 +490,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>source</code>d files above may load their own packages (by calling <code>library()</code>). It is important that the <code>library()</code> calls in this file follow the ‘load-sources’ chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.</p>
 <p>Read <a href="http://r-pkgs.had.co.nz/namespace.html#search-path">R Packages</a> for more about <code>library()</code>, <code>requireNamespace()</code>, and their siblings, as well as the larger concepts such as attaching functions into the search path.</p>
 <p>Here are packages found in most of our manipulation files. Notice the lesser-known packages have a quick explanation; this helps maintainers decide if the declaration is still necessary. Also notice the packages distributed outside of CRAN (<em>e.g.</em>, GitHub) have a quick commented line to help the user install or update the package.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="file-prototype.html#cb8-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
-<span id="cb8-2"><a href="file-prototype.html#cb8-2"></a>import<span class="op">::</span><span class="kw">from</span>(magrittr, <span class="st">&quot;%&gt;%&quot;</span> )</span>
-<span id="cb8-3"><a href="file-prototype.html#cb8-3"></a></span>
-<span id="cb8-4"><a href="file-prototype.html#cb8-4"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>     )</span>
-<span id="cb8-5"><a href="file-prototype.html#cb8-5"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>     )</span>
-<span id="cb8-6"><a href="file-prototype.html#cb8-6"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>     ) </span>
-<span id="cb8-7"><a href="file-prototype.html#cb8-7"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;config&quot;</span>    ) </span>
-<span id="cb8-8"><a href="file-prototype.html#cb8-8"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span> ) <span class="co"># Asserts expected conditions </span></span>
-<span id="cb8-9"><a href="file-prototype.html#cb8-9"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co"># remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="file-prototype.html#cb11-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
+<span id="cb11-2"><a href="file-prototype.html#cb11-2"></a>import<span class="op">::</span><span class="kw">from</span>(magrittr, <span class="st">&quot;%&gt;%&quot;</span> )</span>
+<span id="cb11-3"><a href="file-prototype.html#cb11-3"></a></span>
+<span id="cb11-4"><a href="file-prototype.html#cb11-4"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>     )</span>
+<span id="cb11-5"><a href="file-prototype.html#cb11-5"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>     )</span>
+<span id="cb11-6"><a href="file-prototype.html#cb11-6"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>     ) </span>
+<span id="cb11-7"><a href="file-prototype.html#cb11-7"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;config&quot;</span>    ) </span>
+<span id="cb11-8"><a href="file-prototype.html#cb11-8"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span> ) <span class="co"># Asserts expected conditions </span></span>
+<span id="cb11-9"><a href="file-prototype.html#cb11-9"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co"># remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div>
 </div>
 <div id="chunk-declare" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Declare Globals</h2>
 <p>When values are repeatedly used within a file, consider dedicating a variable so it’s defined and set only once. This is also a good place for variables that are used only once, but whose value are central to the file’s mission. Typical variables in our ‘declare-globals’ chunk include data file paths, data file variables, color palettes, and values in the <em>config</em> file.</p>
 <p>The <a href="repo-prototype.html#repo-root">config file</a> can coordinate a static variable across multiple files. Centrally</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="file-prototype.html#cb9-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb9-2"><a href="file-prototype.html#cb9-2"></a><span class="co"># Constant values that won&#39;t change.</span></span>
-<span id="cb9-3"><a href="file-prototype.html#cb9-3"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
-<span id="cb9-4"><a href="file-prototype.html#cb9-4"></a>path_db                        &lt;-<span class="st"> </span>config<span class="op">$</span>path_database</span>
-<span id="cb9-5"><a href="file-prototype.html#cb9-5"></a></span>
-<span id="cb9-6"><a href="file-prototype.html#cb9-6"></a><span class="co"># Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).</span></span>
-<span id="cb9-7"><a href="file-prototype.html#cb9-7"></a><span class="co">#   OuhscMunge::readr_spec_aligned(config$path_subject_1_raw)</span></span>
-<span id="cb9-8"><a href="file-prototype.html#cb9-8"></a>col_types &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">cols_only</span>(</span>
-<span id="cb9-9"><a href="file-prototype.html#cb9-9"></a>  <span class="dt">subject_id          =</span> readr<span class="op">::</span><span class="kw">col_integer</span>(),</span>
-<span id="cb9-10"><a href="file-prototype.html#cb9-10"></a>  <span class="dt">county_id           =</span> readr<span class="op">::</span><span class="kw">col_integer</span>(),</span>
-<span id="cb9-11"><a href="file-prototype.html#cb9-11"></a>  <span class="dt">gender_id           =</span> readr<span class="op">::</span><span class="kw">col_double</span>(),</span>
-<span id="cb9-12"><a href="file-prototype.html#cb9-12"></a>  <span class="dt">race                =</span> readr<span class="op">::</span><span class="kw">col_character</span>(),</span>
-<span id="cb9-13"><a href="file-prototype.html#cb9-13"></a>  <span class="dt">ethnicity           =</span> readr<span class="op">::</span><span class="kw">col_character</span>()</span>
-<span id="cb9-14"><a href="file-prototype.html#cb9-14"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="file-prototype.html#cb12-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb12-2"><a href="file-prototype.html#cb12-2"></a><span class="co"># Constant values that won&#39;t change.</span></span>
+<span id="cb12-3"><a href="file-prototype.html#cb12-3"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
+<span id="cb12-4"><a href="file-prototype.html#cb12-4"></a>path_db                        &lt;-<span class="st"> </span>config<span class="op">$</span>path_database</span>
+<span id="cb12-5"><a href="file-prototype.html#cb12-5"></a></span>
+<span id="cb12-6"><a href="file-prototype.html#cb12-6"></a><span class="co"># Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).</span></span>
+<span id="cb12-7"><a href="file-prototype.html#cb12-7"></a><span class="co">#   OuhscMunge::readr_spec_aligned(config$path_subject_1_raw)</span></span>
+<span id="cb12-8"><a href="file-prototype.html#cb12-8"></a>col_types &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">cols_only</span>(</span>
+<span id="cb12-9"><a href="file-prototype.html#cb12-9"></a>  <span class="dt">subject_id          =</span> readr<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb12-10"><a href="file-prototype.html#cb12-10"></a>  <span class="dt">county_id           =</span> readr<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb12-11"><a href="file-prototype.html#cb12-11"></a>  <span class="dt">gender_id           =</span> readr<span class="op">::</span><span class="kw">col_double</span>(),</span>
+<span id="cb12-12"><a href="file-prototype.html#cb12-12"></a>  <span class="dt">race                =</span> readr<span class="op">::</span><span class="kw">col_character</span>(),</span>
+<span id="cb12-13"><a href="file-prototype.html#cb12-13"></a>  <span class="dt">ethnicity           =</span> readr<span class="op">::</span><span class="kw">col_character</span>()</span>
+<span id="cb12-14"><a href="file-prototype.html#cb12-14"></a>)</span></code></pre></div>
 </div>
 <div id="chunk-load-data" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Load Data</h2>
@@ -508,21 +534,21 @@ the chunk reads all data (<em>e.g.</em>, database table, networked CSV, local lo
 <h2><span class="header-section-number">4.6</span> Tweak Data</h2>
 <p><em>loose scrap</em>:
 It’s best to rename the dataset (a) in a single place and (b) early in the pipeline, so the bad variable are never referenced.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="file-prototype.html#cb10-1"></a><span class="co"># OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.</span></span>
-<span id="cb10-2"><a href="file-prototype.html#cb10-2"></a>ds &lt;-</span>
-<span id="cb10-3"><a href="file-prototype.html#cb10-3"></a><span class="st">  </span>ds <span class="op">%&gt;%</span></span>
-<span id="cb10-4"><a href="file-prototype.html#cb10-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(    <span class="co"># `dplyr::select()` drops columns not included.</span></span>
-<span id="cb10-5"><a href="file-prototype.html#cb10-5"></a>    subject_id,</span>
-<span id="cb10-6"><a href="file-prototype.html#cb10-6"></a>    county_id,</span>
-<span id="cb10-7"><a href="file-prototype.html#cb10-7"></a>    gender_id,</span>
-<span id="cb10-8"><a href="file-prototype.html#cb10-8"></a>    race,</span>
-<span id="cb10-9"><a href="file-prototype.html#cb10-9"></a>    ethnicity</span>
-<span id="cb10-10"><a href="file-prototype.html#cb10-10"></a>  ) <span class="op">%&gt;%</span></span>
-<span id="cb10-11"><a href="file-prototype.html#cb10-11"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
-<span id="cb10-12"><a href="file-prototype.html#cb10-12"></a></span>
-<span id="cb10-13"><a href="file-prototype.html#cb10-13"></a>  )  <span class="op">%&gt;%</span></span>
-<span id="cb10-14"><a href="file-prototype.html#cb10-14"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(subject_id) <span class="co"># %&gt;%</span></span>
-<span id="cb10-15"><a href="file-prototype.html#cb10-15"></a>  <span class="co"># tibble::rowid_to_column(&quot;subject_id&quot;) # Add a unique index if necessary</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="file-prototype.html#cb13-1"></a><span class="co"># OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.</span></span>
+<span id="cb13-2"><a href="file-prototype.html#cb13-2"></a>ds &lt;-</span>
+<span id="cb13-3"><a href="file-prototype.html#cb13-3"></a><span class="st">  </span>ds <span class="op">%&gt;%</span></span>
+<span id="cb13-4"><a href="file-prototype.html#cb13-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(    <span class="co"># `dplyr::select()` drops columns not included.</span></span>
+<span id="cb13-5"><a href="file-prototype.html#cb13-5"></a>    subject_id,</span>
+<span id="cb13-6"><a href="file-prototype.html#cb13-6"></a>    county_id,</span>
+<span id="cb13-7"><a href="file-prototype.html#cb13-7"></a>    gender_id,</span>
+<span id="cb13-8"><a href="file-prototype.html#cb13-8"></a>    race,</span>
+<span id="cb13-9"><a href="file-prototype.html#cb13-9"></a>    ethnicity</span>
+<span id="cb13-10"><a href="file-prototype.html#cb13-10"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb13-11"><a href="file-prototype.html#cb13-11"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
+<span id="cb13-12"><a href="file-prototype.html#cb13-12"></a></span>
+<span id="cb13-13"><a href="file-prototype.html#cb13-13"></a>  )  <span class="op">%&gt;%</span></span>
+<span id="cb13-14"><a href="file-prototype.html#cb13-14"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>(subject_id) <span class="co"># %&gt;%</span></span>
+<span id="cb13-15"><a href="file-prototype.html#cb13-15"></a>  <span class="co"># tibble::rowid_to_column(&quot;subject_id&quot;) # Add a unique index if necessary</span></span></code></pre></div>
 </div>
 <div id="chunk-unique" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> (Unique Content)</h2>
@@ -532,20 +558,20 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <div id="chunk-verify-values" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Verify Values</h2>
 <p>Running <code>OuhscMunge::verify_value_headstart(ds)</code> will</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="file-prototype.html#cb11-1"></a><span class="co"># ---- verify-values -----------------------------------------------------------</span></span>
-<span id="cb11-2"><a href="file-prototype.html#cb11-2"></a><span class="co"># Sniff out problems</span></span>
-<span id="cb11-3"><a href="file-prototype.html#cb11-3"></a><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
-<span id="cb11-4"><a href="file-prototype.html#cb11-4"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>county_month_id    , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">3080</span>                , <span class="dt">unique=</span>T)</span>
-<span id="cb11-5"><a href="file-prototype.html#cb11-5"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>county_id          , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">77</span>                            )</span>
-<span id="cb11-6"><a href="file-prototype.html#cb11-6"></a>checkmate<span class="op">::</span><span class="kw">assert_date</span>(     ds<span class="op">$</span>month              , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="kw">as.Date</span>(<span class="st">&quot;2012-06-15&quot;</span>), <span class="dt">upper=</span><span class="kw">Sys.Date</span>())</span>
-<span id="cb11-7"><a href="file-prototype.html#cb11-7"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>county_name        , <span class="dt">any.missing=</span>F , <span class="dt">pattern=</span><span class="st">&quot;^.{3,12}$&quot;</span>                          )</span>
-<span id="cb11-8"><a href="file-prototype.html#cb11-8"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>region_id          , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">20</span>                            )</span>
-<span id="cb11-9"><a href="file-prototype.html#cb11-9"></a>checkmate<span class="op">::</span><span class="kw">assert_numeric</span>(  ds<span class="op">$</span>fte                , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">0</span>, <span class="dt">upper=</span><span class="dv">40</span>                            )</span>
-<span id="cb11-10"><a href="file-prototype.html#cb11-10"></a>checkmate<span class="op">::</span><span class="kw">assert_logical</span>(  ds<span class="op">$</span>fte_approximated   , <span class="dt">any.missing=</span>F                                                )</span>
-<span id="cb11-11"><a href="file-prototype.html#cb11-11"></a>checkmate<span class="op">::</span><span class="kw">assert_numeric</span>(  ds<span class="op">$</span>fte_rolling_median , <span class="dt">any.missing=</span>T , <span class="dt">lower=</span><span class="dv">0</span>, <span class="dt">upper=</span><span class="dv">40</span>                            )</span>
-<span id="cb11-12"><a href="file-prototype.html#cb11-12"></a></span>
-<span id="cb11-13"><a href="file-prototype.html#cb11-13"></a>county_month_combo   &lt;-<span class="st"> </span><span class="kw">paste</span>(ds<span class="op">$</span>county_id, ds<span class="op">$</span>month)</span>
-<span id="cb11-14"><a href="file-prototype.html#cb11-14"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(county_month_combo, <span class="dt">pattern  =</span><span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2} </span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}$&quot;</span>, <span class="dt">any.missing=</span>F, <span class="dt">unique=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="file-prototype.html#cb14-1"></a><span class="co"># ---- verify-values -----------------------------------------------------------</span></span>
+<span id="cb14-2"><a href="file-prototype.html#cb14-2"></a><span class="co"># Sniff out problems</span></span>
+<span id="cb14-3"><a href="file-prototype.html#cb14-3"></a><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
+<span id="cb14-4"><a href="file-prototype.html#cb14-4"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>county_month_id    , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">3080</span>                , <span class="dt">unique=</span>T)</span>
+<span id="cb14-5"><a href="file-prototype.html#cb14-5"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>county_id          , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">77</span>                            )</span>
+<span id="cb14-6"><a href="file-prototype.html#cb14-6"></a>checkmate<span class="op">::</span><span class="kw">assert_date</span>(     ds<span class="op">$</span>month              , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="kw">as.Date</span>(<span class="st">&quot;2012-06-15&quot;</span>), <span class="dt">upper=</span><span class="kw">Sys.Date</span>())</span>
+<span id="cb14-7"><a href="file-prototype.html#cb14-7"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(ds<span class="op">$</span>county_name        , <span class="dt">any.missing=</span>F , <span class="dt">pattern=</span><span class="st">&quot;^.{3,12}$&quot;</span>                          )</span>
+<span id="cb14-8"><a href="file-prototype.html#cb14-8"></a>checkmate<span class="op">::</span><span class="kw">assert_integer</span>(  ds<span class="op">$</span>region_id          , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">1</span>, <span class="dt">upper=</span><span class="dv">20</span>                            )</span>
+<span id="cb14-9"><a href="file-prototype.html#cb14-9"></a>checkmate<span class="op">::</span><span class="kw">assert_numeric</span>(  ds<span class="op">$</span>fte                , <span class="dt">any.missing=</span>F , <span class="dt">lower=</span><span class="dv">0</span>, <span class="dt">upper=</span><span class="dv">40</span>                            )</span>
+<span id="cb14-10"><a href="file-prototype.html#cb14-10"></a>checkmate<span class="op">::</span><span class="kw">assert_logical</span>(  ds<span class="op">$</span>fte_approximated   , <span class="dt">any.missing=</span>F                                                )</span>
+<span id="cb14-11"><a href="file-prototype.html#cb14-11"></a>checkmate<span class="op">::</span><span class="kw">assert_numeric</span>(  ds<span class="op">$</span>fte_rolling_median , <span class="dt">any.missing=</span>T , <span class="dt">lower=</span><span class="dv">0</span>, <span class="dt">upper=</span><span class="dv">40</span>                            )</span>
+<span id="cb14-12"><a href="file-prototype.html#cb14-12"></a></span>
+<span id="cb14-13"><a href="file-prototype.html#cb14-13"></a>county_month_combo   &lt;-<span class="st"> </span><span class="kw">paste</span>(ds<span class="op">$</span>county_id, ds<span class="op">$</span>month)</span>
+<span id="cb14-14"><a href="file-prototype.html#cb14-14"></a>checkmate<span class="op">::</span><span class="kw">assert_character</span>(county_month_combo, <span class="dt">pattern  =</span><span class="st">&quot;^</span><span class="ch">\\</span><span class="st">d{1,2} </span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}$&quot;</span>, <span class="dt">any.missing=</span>F, <span class="dt">unique=</span>T)</span></code></pre></div>
 </div>
 <div id="chunk-specify-columns" class="section level2" number="4.9">
 <h2><span class="header-section-number">4.9</span> Specify Output Columns</h2>
@@ -559,24 +585,24 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <p>We use the term ‘slim’ because typically this output has fewer variables than the full dataset processed by the file.</p>
 <p>If you doubt the variable will be needed downstream, leave it in the <code>dplyr::select()</code>, but commented out. If someone needs it in the future, they’ll easily determine where it might come from, and then uncomment the line (and possibly modify the database table). Once you import a column into a warehouse that multiple people are using, it can be tough to remove without breaking their code.</p>
 <p>This chunk follows <a href="file-prototype.html#chunk-verify-values">verify-values</a> because sometimesyou want to check the validity of variables that are not consumed downstream. These variables are not important themselves, but an illegal value may reveal a larger problem with the dataset.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="file-prototype.html#cb12-1"></a><span class="co"># Print colnames that `dplyr::select()`  should contain below:</span></span>
-<span id="cb12-2"><a href="file-prototype.html#cb12-2"></a><span class="co">#   cat(paste0(&quot;    &quot;, colnames(ds), collapse=&quot;,\n&quot;))</span></span>
-<span id="cb12-3"><a href="file-prototype.html#cb12-3"></a></span>
-<span id="cb12-4"><a href="file-prototype.html#cb12-4"></a><span class="co"># Define the subset of columns that will be needed in the analyses.</span></span>
-<span id="cb12-5"><a href="file-prototype.html#cb12-5"></a><span class="co">#   The fewer columns that are exported, the fewer things that can break downstream.</span></span>
-<span id="cb12-6"><a href="file-prototype.html#cb12-6"></a></span>
-<span id="cb12-7"><a href="file-prototype.html#cb12-7"></a>ds_slim &lt;-</span>
-<span id="cb12-8"><a href="file-prototype.html#cb12-8"></a><span class="st">  </span>ds <span class="op">%&gt;%</span></span>
-<span id="cb12-9"><a href="file-prototype.html#cb12-9"></a><span class="st">  </span><span class="co"># dplyr::slice(1:100) %&gt;%</span></span>
-<span id="cb12-10"><a href="file-prototype.html#cb12-10"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(</span>
-<span id="cb12-11"><a href="file-prototype.html#cb12-11"></a>    subject_id,</span>
-<span id="cb12-12"><a href="file-prototype.html#cb12-12"></a>    county_id,</span>
-<span id="cb12-13"><a href="file-prototype.html#cb12-13"></a>    gender_id,</span>
-<span id="cb12-14"><a href="file-prototype.html#cb12-14"></a>    race,</span>
-<span id="cb12-15"><a href="file-prototype.html#cb12-15"></a>    ethnicity</span>
-<span id="cb12-16"><a href="file-prototype.html#cb12-16"></a>  )</span>
-<span id="cb12-17"><a href="file-prototype.html#cb12-17"></a></span>
-<span id="cb12-18"><a href="file-prototype.html#cb12-18"></a>ds_slim</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="file-prototype.html#cb15-1"></a><span class="co"># Print colnames that `dplyr::select()`  should contain below:</span></span>
+<span id="cb15-2"><a href="file-prototype.html#cb15-2"></a><span class="co">#   cat(paste0(&quot;    &quot;, colnames(ds), collapse=&quot;,\n&quot;))</span></span>
+<span id="cb15-3"><a href="file-prototype.html#cb15-3"></a></span>
+<span id="cb15-4"><a href="file-prototype.html#cb15-4"></a><span class="co"># Define the subset of columns that will be needed in the analyses.</span></span>
+<span id="cb15-5"><a href="file-prototype.html#cb15-5"></a><span class="co">#   The fewer columns that are exported, the fewer things that can break downstream.</span></span>
+<span id="cb15-6"><a href="file-prototype.html#cb15-6"></a></span>
+<span id="cb15-7"><a href="file-prototype.html#cb15-7"></a>ds_slim &lt;-</span>
+<span id="cb15-8"><a href="file-prototype.html#cb15-8"></a><span class="st">  </span>ds <span class="op">%&gt;%</span></span>
+<span id="cb15-9"><a href="file-prototype.html#cb15-9"></a><span class="st">  </span><span class="co"># dplyr::slice(1:100) %&gt;%</span></span>
+<span id="cb15-10"><a href="file-prototype.html#cb15-10"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(</span>
+<span id="cb15-11"><a href="file-prototype.html#cb15-11"></a>    subject_id,</span>
+<span id="cb15-12"><a href="file-prototype.html#cb15-12"></a>    county_id,</span>
+<span id="cb15-13"><a href="file-prototype.html#cb15-13"></a>    gender_id,</span>
+<span id="cb15-14"><a href="file-prototype.html#cb15-14"></a>    race,</span>
+<span id="cb15-15"><a href="file-prototype.html#cb15-15"></a>    ethnicity</span>
+<span id="cb15-16"><a href="file-prototype.html#cb15-16"></a>  )</span>
+<span id="cb15-17"><a href="file-prototype.html#cb15-17"></a></span>
+<span id="cb15-18"><a href="file-prototype.html#cb15-18"></a>ds_slim</span></code></pre></div>
 </div>
 <div id="save-to-disk-or-database" class="section level2" number="4.10">
 <h2><span class="header-section-number">4.10</span> Save to Disk or Database</h2>

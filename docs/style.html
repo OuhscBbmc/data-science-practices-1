@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="document.html"/>
 <link rel="next" href="publication.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -146,6 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
 <li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -199,10 +200,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
 <li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
+<li class="chapter" data-level="6" data-path="rest.html"><a href="rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
-<li class="chapter" data-level="6.2" data-path="data-at-rest.html"><a href="data-at-rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a></li>
+<li class="chapter" data-level="6.1" data-path="rest.html"><a href="rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
+<li class="chapter" data-level="6.2" data-path="rest.html"><a href="rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
+<li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
+<li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
+<li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
+<li class="chapter" data-level="6.2.7" data-path="rest.html"><a href="rest.html#data-containers-redcap"><i class="fa fa-check"></i><b>6.2.7</b> Central REDCap database</a></li>
+<li class="chapter" data-level="6.2.8" data-path="rest.html"><a href="rest.html#data-containers-avoid"><i class="fa fa-check"></i><b>6.2.8</b> Containers to avoid</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="rest.html"><a href="rest.html#data-conventions"><i class="fa fa-check"></i><b>6.3</b> Storage Conventions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="rest.html"><a href="rest.html#data-conventions-all"><i class="fa fa-check"></i><b>6.3.1</b> All Sources</a></li>
+<li class="chapter" data-level="6.3.2" data-path="rest.html"><a href="rest.html#data-conventions-text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="rest.html"><a href="rest.html#data-conventions-excel"><i class="fa fa-check"></i><b>6.3.3</b> Excel</a></li>
+<li class="chapter" data-level="6.3.4" data-path="rest.html"><a href="rest.html#data-conventions-meditech"><i class="fa fa-check"></i><b>6.3.4</b> Meditech</a></li>
+<li class="chapter" data-level="6.3.5" data-path="rest.html"><a href="rest.html#data-conventions-database"><i class="fa fa-check"></i><b>6.3.5</b> Databases</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>7</b> Patterns</a>
 <ul>
@@ -277,7 +296,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>12.1</b> Team-wide</a></li>
 <li class="chapter" data-level="12.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>12.2</b> Project-specific</a></li>
 <li class="chapter" data-level="12.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>12.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>12.4.1</b> GitHub Issue Template</a></li>
+</ul></li>
 <li class="chapter" data-level="12.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>12.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="12.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>12.6</b> Setting up new machine</a></li>
 </ul></li>
@@ -369,26 +391,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>19.3</b> Bridges Outside the Team</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="git-github.html"><a href="git-github.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
+<li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git-github.html"><a href="git-github.html#for-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#reading-external-data"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
+<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#snippets-reading"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
 <ul>
-<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#reading-from-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
-<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#removing-trailing-comma-from-header"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
+<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#snippets-reading-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
+<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#snippets-reading-trailing-comma"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
 </ul></li>
-<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
+<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#snippets-grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
 <ul>
-<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#correct-for-misinterpreted-two-digit-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
+<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#snippets-grooming-two-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
+<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#snippets-identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
 <ul>
-<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippet-tag"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippets-identification-tags"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="snippets.html"><a href="snippets.html#snippets-correspondence"><i class="fa fa-check"></i><b>B.4</b> Correspondence with Collaborators</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="snippets.html"><a href="snippets.html#snippets-correspondence-excel"><i class="fa fa-check"></i><b>B.4.1</b> Excel files</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>C</b> Presentations</a>
@@ -443,7 +469,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>count</strong>: the number of discrete objects or events, such as <code>visit_count</code>, <code>pt_count</code>, <code>dx_count</code>.</li>
 <li><strong>id</strong>: a value that uniquely identifies an entity that doesn’t change over time, such as <code>pt_id</code>, <code>clinic_id</code>, <code>client_id</code>,</li>
 <li><strong>index</strong>: a 1-based sequence that’s typically temporary, but unique within the dataset. For instance, <code>pt_index</code> 195 in Tuesday’s dataset is likey a different person than <code>pt_index</code> 195 on Wednesday. On any given day, there is only one value of 195.</li>
-<li><strong>tag</strong>: it is persistent across time like “id”, but typically created by the analysts and send to the research team. See <a href="snippets.html#snippet-tag">the snippet</a> in the appendix for an example.</li>
+<li><strong>tag</strong>: it is persistent across time like “id”, but typically created by the analysts and send to the research team. See <a href="#snippet-tag">the snippet</a> in the appendix for an example.</li>
 <li><strong>tally</strong>: a running count</li>
 <li><strong>duration</strong>: a length of time. Specify the units if it not self-evident.</li>
 <li>physical and statistical quantities like
@@ -482,16 +508,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="style-filter-drop_na" class="section level4" number="13.2.1.1">
 <h4><span class="header-section-number">13.2.1.1</span> Dropping rows with missing values</h4>
 <p><a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> drops rows with a missing value in a specific column.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="style.html#cb33-1"></a><span class="co"># Good</span></span>
-<span id="cb33-2"><a href="style.html#cb33-2"></a>ds <span class="op">%&gt;%</span></span>
-<span id="cb33-3"><a href="style.html#cb33-3"></a><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">drop_na</span>(dob)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="style.html#cb36-1"></a><span class="co"># Good</span></span>
+<span id="cb36-2"><a href="style.html#cb36-2"></a>ds <span class="op">%&gt;%</span></span>
+<span id="cb36-3"><a href="style.html#cb36-3"></a><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">drop_na</span>(dob)</span></code></pre></div>
 <p>is cleaner to read and write than these two styles. In particular, it’s easy to forget/overlook a <code>!</code>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="style.html#cb34-1"></a><span class="co"># Worse</span></span>
-<span id="cb34-2"><a href="style.html#cb34-2"></a>ds <span class="op">%&gt;%</span></span>
-<span id="cb34-3"><a href="style.html#cb34-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dob))</span>
-<span id="cb34-4"><a href="style.html#cb34-4"></a></span>
-<span id="cb34-5"><a href="style.html#cb34-5"></a><span class="co"># Worst</span></span>
-<span id="cb34-6"><a href="style.html#cb34-6"></a>ds[<span class="op">!</span><span class="kw">is.na</span>(ds<span class="op">$</span>dob), ]  </span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="style.html#cb37-1"></a><span class="co"># Worse</span></span>
+<span id="cb37-2"><a href="style.html#cb37-2"></a>ds <span class="op">%&gt;%</span></span>
+<span id="cb37-3"><a href="style.html#cb37-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dob))</span>
+<span id="cb37-4"><a href="style.html#cb37-4"></a></span>
+<span id="cb37-5"><a href="style.html#cb37-5"></a><span class="co"># Worst</span></span>
+<span id="cb37-6"><a href="style.html#cb37-6"></a>ds[<span class="op">!</span><span class="kw">is.na</span>(ds<span class="op">$</span>dob), ]  </span></code></pre></div>
 </div>
 <div id="style-filter-number-line" class="section level4" number="13.2.1.2">
 <h4><span class="header-section-number">13.2.1.2</span> Mimic number line</h4>
@@ -521,42 +547,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="style-factor-granularity" class="section level3" number="13.3.2">
 <h3><span class="header-section-number">13.3.2</span> Granularity</h3>
 <p>Sometimes it helps to represent the values differently, say a granular and a coarse way. We say <code>cut7</code> or <code>cut3</code> to denotes the number of levels; this is related to <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a>. ‘unknown’ and ‘other’ are frequently levels, and they count toward the quantity.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="style.html#cb35-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
-<span id="cb35-2"><a href="style.html#cb35-2"></a>education_cut7      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
-<span id="cb35-3"><a href="style.html#cb35-3"></a>  education_cut7,</span>
-<span id="cb35-4"><a href="style.html#cb35-4"></a>  <span class="st">&quot;No Highschool Degree / GED&quot;</span>  =<span class="st"> &quot;no diploma&quot;</span>,</span>
-<span id="cb35-5"><a href="style.html#cb35-5"></a>  <span class="st">&quot;High School Degree / GED&quot;</span>    =<span class="st"> &quot;diploma&quot;</span>,</span>
-<span id="cb35-6"><a href="style.html#cb35-6"></a>  <span class="st">&quot;Some College&quot;</span>                =<span class="st"> &quot;some college&quot;</span>,</span>
-<span id="cb35-7"><a href="style.html#cb35-7"></a>  <span class="st">&quot;Associate&#39;s Degree&quot;</span>          =<span class="st"> &quot;associate&quot;</span>,</span>
-<span id="cb35-8"><a href="style.html#cb35-8"></a>  <span class="st">&quot;Bachelor&#39;s Degree&quot;</span>           =<span class="st"> &quot;bachelor&quot;</span>,</span>
-<span id="cb35-9"><a href="style.html#cb35-9"></a>  <span class="st">&quot;Post-graduate degree&quot;</span>        =<span class="st"> &quot;post-grad&quot;</span>,</span>
-<span id="cb35-10"><a href="style.html#cb35-10"></a>  <span class="st">&quot;Unknown&quot;</span>                     =<span class="st"> &quot;unknown&quot;</span>,</span>
-<span id="cb35-11"><a href="style.html#cb35-11"></a>  <span class="dt">.missing                      =</span> <span class="st">&quot;unknown&quot;</span>,</span>
-<span id="cb35-12"><a href="style.html#cb35-12"></a>),</span>
-<span id="cb35-13"><a href="style.html#cb35-13"></a>education_cut3      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
-<span id="cb35-14"><a href="style.html#cb35-14"></a>  education_cut7,</span>
-<span id="cb35-15"><a href="style.html#cb35-15"></a>  <span class="st">&quot;no diploma&quot;</span>    =<span class="st"> &quot;no bachelor&quot;</span>,</span>
-<span id="cb35-16"><a href="style.html#cb35-16"></a>  <span class="st">&quot;diploma&quot;</span>       =<span class="st"> &quot;no bachelor&quot;</span>,</span>
-<span id="cb35-17"><a href="style.html#cb35-17"></a>  <span class="st">&quot;some college&quot;</span>  =<span class="st"> &quot;no bachelor&quot;</span>,</span>
-<span id="cb35-18"><a href="style.html#cb35-18"></a>  <span class="st">&quot;associate&quot;</span>     =<span class="st"> &quot;no bachelor&quot;</span>,</span>
-<span id="cb35-19"><a href="style.html#cb35-19"></a>  <span class="st">&quot;bachelor&quot;</span>      =<span class="st"> &quot;bachelor&quot;</span>,</span>
-<span id="cb35-20"><a href="style.html#cb35-20"></a>  <span class="st">&quot;post-grad&quot;</span>     =<span class="st"> &quot;bachelor&quot;</span>,</span>
-<span id="cb35-21"><a href="style.html#cb35-21"></a>  <span class="st">&quot;unknown&quot;</span>       =<span class="st"> &quot;unknown&quot;</span>,</span>
-<span id="cb35-22"><a href="style.html#cb35-22"></a>),</span>
-<span id="cb35-23"><a href="style.html#cb35-23"></a>education_cut7 =<span class="st"> </span><span class="kw">factor</span>(education_cut7, <span class="dt">levels=</span><span class="kw">c</span>(</span>
-<span id="cb35-24"><a href="style.html#cb35-24"></a>  <span class="st">&quot;no diploma&quot;</span>,</span>
-<span id="cb35-25"><a href="style.html#cb35-25"></a>  <span class="st">&quot;diploma&quot;</span>,</span>
-<span id="cb35-26"><a href="style.html#cb35-26"></a>  <span class="st">&quot;some college&quot;</span>,</span>
-<span id="cb35-27"><a href="style.html#cb35-27"></a>  <span class="st">&quot;associate&quot;</span>,</span>
-<span id="cb35-28"><a href="style.html#cb35-28"></a>  <span class="st">&quot;bachelor&quot;</span>,</span>
-<span id="cb35-29"><a href="style.html#cb35-29"></a>  <span class="st">&quot;post-grad&quot;</span>,</span>
-<span id="cb35-30"><a href="style.html#cb35-30"></a>  <span class="st">&quot;unknown&quot;</span></span>
-<span id="cb35-31"><a href="style.html#cb35-31"></a>)),</span>
-<span id="cb35-32"><a href="style.html#cb35-32"></a>education_cut3 =<span class="st"> </span><span class="kw">factor</span>(education_cut3, <span class="dt">levels=</span><span class="kw">c</span>(</span>
-<span id="cb35-33"><a href="style.html#cb35-33"></a>  <span class="st">&quot;no bachelor&quot;</span>,</span>
-<span id="cb35-34"><a href="style.html#cb35-34"></a>  <span class="st">&quot;bachelor&quot;</span>,</span>
-<span id="cb35-35"><a href="style.html#cb35-35"></a>  <span class="st">&quot;unknown&quot;</span></span>
-<span id="cb35-36"><a href="style.html#cb35-36"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="style.html#cb38-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
+<span id="cb38-2"><a href="style.html#cb38-2"></a>education_cut7      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
+<span id="cb38-3"><a href="style.html#cb38-3"></a>  education_cut7,</span>
+<span id="cb38-4"><a href="style.html#cb38-4"></a>  <span class="st">&quot;No Highschool Degree / GED&quot;</span>  =<span class="st"> &quot;no diploma&quot;</span>,</span>
+<span id="cb38-5"><a href="style.html#cb38-5"></a>  <span class="st">&quot;High School Degree / GED&quot;</span>    =<span class="st"> &quot;diploma&quot;</span>,</span>
+<span id="cb38-6"><a href="style.html#cb38-6"></a>  <span class="st">&quot;Some College&quot;</span>                =<span class="st"> &quot;some college&quot;</span>,</span>
+<span id="cb38-7"><a href="style.html#cb38-7"></a>  <span class="st">&quot;Associate&#39;s Degree&quot;</span>          =<span class="st"> &quot;associate&quot;</span>,</span>
+<span id="cb38-8"><a href="style.html#cb38-8"></a>  <span class="st">&quot;Bachelor&#39;s Degree&quot;</span>           =<span class="st"> &quot;bachelor&quot;</span>,</span>
+<span id="cb38-9"><a href="style.html#cb38-9"></a>  <span class="st">&quot;Post-graduate degree&quot;</span>        =<span class="st"> &quot;post-grad&quot;</span>,</span>
+<span id="cb38-10"><a href="style.html#cb38-10"></a>  <span class="st">&quot;Unknown&quot;</span>                     =<span class="st"> &quot;unknown&quot;</span>,</span>
+<span id="cb38-11"><a href="style.html#cb38-11"></a>  <span class="dt">.missing                      =</span> <span class="st">&quot;unknown&quot;</span>,</span>
+<span id="cb38-12"><a href="style.html#cb38-12"></a>),</span>
+<span id="cb38-13"><a href="style.html#cb38-13"></a>education_cut3      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
+<span id="cb38-14"><a href="style.html#cb38-14"></a>  education_cut7,</span>
+<span id="cb38-15"><a href="style.html#cb38-15"></a>  <span class="st">&quot;no diploma&quot;</span>    =<span class="st"> &quot;no bachelor&quot;</span>,</span>
+<span id="cb38-16"><a href="style.html#cb38-16"></a>  <span class="st">&quot;diploma&quot;</span>       =<span class="st"> &quot;no bachelor&quot;</span>,</span>
+<span id="cb38-17"><a href="style.html#cb38-17"></a>  <span class="st">&quot;some college&quot;</span>  =<span class="st"> &quot;no bachelor&quot;</span>,</span>
+<span id="cb38-18"><a href="style.html#cb38-18"></a>  <span class="st">&quot;associate&quot;</span>     =<span class="st"> &quot;no bachelor&quot;</span>,</span>
+<span id="cb38-19"><a href="style.html#cb38-19"></a>  <span class="st">&quot;bachelor&quot;</span>      =<span class="st"> &quot;bachelor&quot;</span>,</span>
+<span id="cb38-20"><a href="style.html#cb38-20"></a>  <span class="st">&quot;post-grad&quot;</span>     =<span class="st"> &quot;bachelor&quot;</span>,</span>
+<span id="cb38-21"><a href="style.html#cb38-21"></a>  <span class="st">&quot;unknown&quot;</span>       =<span class="st"> &quot;unknown&quot;</span>,</span>
+<span id="cb38-22"><a href="style.html#cb38-22"></a>),</span>
+<span id="cb38-23"><a href="style.html#cb38-23"></a>education_cut7 =<span class="st"> </span><span class="kw">factor</span>(education_cut7, <span class="dt">levels=</span><span class="kw">c</span>(</span>
+<span id="cb38-24"><a href="style.html#cb38-24"></a>  <span class="st">&quot;no diploma&quot;</span>,</span>
+<span id="cb38-25"><a href="style.html#cb38-25"></a>  <span class="st">&quot;diploma&quot;</span>,</span>
+<span id="cb38-26"><a href="style.html#cb38-26"></a>  <span class="st">&quot;some college&quot;</span>,</span>
+<span id="cb38-27"><a href="style.html#cb38-27"></a>  <span class="st">&quot;associate&quot;</span>,</span>
+<span id="cb38-28"><a href="style.html#cb38-28"></a>  <span class="st">&quot;bachelor&quot;</span>,</span>
+<span id="cb38-29"><a href="style.html#cb38-29"></a>  <span class="st">&quot;post-grad&quot;</span>,</span>
+<span id="cb38-30"><a href="style.html#cb38-30"></a>  <span class="st">&quot;unknown&quot;</span></span>
+<span id="cb38-31"><a href="style.html#cb38-31"></a>)),</span>
+<span id="cb38-32"><a href="style.html#cb38-32"></a>education_cut3 =<span class="st"> </span><span class="kw">factor</span>(education_cut3, <span class="dt">levels=</span><span class="kw">c</span>(</span>
+<span id="cb38-33"><a href="style.html#cb38-33"></a>  <span class="st">&quot;no bachelor&quot;</span>,</span>
+<span id="cb38-34"><a href="style.html#cb38-34"></a>  <span class="st">&quot;bachelor&quot;</span>,</span>
+<span id="cb38-35"><a href="style.html#cb38-35"></a>  <span class="st">&quot;unknown&quot;</span></span>
+<span id="cb38-36"><a href="style.html#cb38-36"></a>))</span></code></pre></div>
 </div>
 </div>
 <div id="style-dates" class="section level2" number="13.4">
@@ -575,23 +601,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="style-naming-datasets-prefix" class="section level4" number="13.5.1.1">
 <h4><span class="header-section-number">13.5.1.1</span> Prefix with <code>ds_</code> and <code>d_</code></h4>
 <p>Datasets are handled so differently than other variables that we find it’s easier to identify its type and scope. The prefix <code>ds_</code> indicates the dataset is available to the entire file, while <code>d_</code> indicates the scope is localized to a function.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="style.html#cb36-1"></a>count_elements &lt;-<span class="st"> </span><span class="cf">function</span> (d) {</span>
-<span id="cb36-2"><a href="style.html#cb36-2"></a>  <span class="kw">nrow</span>(d) <span class="op">*</span><span class="st"> </span><span class="kw">ncol</span>(d)</span>
-<span id="cb36-3"><a href="style.html#cb36-3"></a>}</span>
-<span id="cb36-4"><a href="style.html#cb36-4"></a></span>
-<span id="cb36-5"><a href="style.html#cb36-5"></a>ds &lt;-<span class="st"> </span>mtcars</span>
-<span id="cb36-6"><a href="style.html#cb36-6"></a><span class="kw">count_elements</span>(<span class="dt">d =</span> ds)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="style.html#cb39-1"></a>count_elements &lt;-<span class="st"> </span><span class="cf">function</span> (d) {</span>
+<span id="cb39-2"><a href="style.html#cb39-2"></a>  <span class="kw">nrow</span>(d) <span class="op">*</span><span class="st"> </span><span class="kw">ncol</span>(d)</span>
+<span id="cb39-3"><a href="style.html#cb39-3"></a>}</span>
+<span id="cb39-4"><a href="style.html#cb39-4"></a></span>
+<span id="cb39-5"><a href="style.html#cb39-5"></a>ds &lt;-<span class="st"> </span>mtcars</span>
+<span id="cb39-6"><a href="style.html#cb39-6"></a><span class="kw">count_elements</span>(<span class="dt">d =</span> ds)</span></code></pre></div>
 </div>
 <div id="style-naming-datasets-grain" class="section level4" number="13.5.1.2">
 <h4><span class="header-section-number">13.5.1.2</span> Express the grain</h4>
 <p>The <a href="https://gerardnico.com/olap/dimensional_modeling/grain#grain">grain</a> of a dataset describes what each row represents, which is a similar idea to the statistician’s concept of “unit of analysis”. Essentially it the the most granular entity described. Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy</a> dataset with a clear grain.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="style.html#cb37-1"></a>ds_student          <span class="co"># One row per student</span></span>
-<span id="cb37-2"><a href="style.html#cb37-2"></a>ds_teacher          <span class="co"># One row per teacher</span></span>
-<span id="cb37-3"><a href="style.html#cb37-3"></a>ds_course           <span class="co"># One row per course</span></span>
-<span id="cb37-4"><a href="style.html#cb37-4"></a>ds_course_student   <span class="co"># One row per student-course combination</span></span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="style.html#cb38-1"></a>ds_pt         <span class="co"># One row per patient</span></span>
-<span id="cb38-2"><a href="style.html#cb38-2"></a>ds_pt_visit   <span class="co"># One row per patient-visit combination</span></span>
-<span id="cb38-3"><a href="style.html#cb38-3"></a>ds_visit      <span class="co"># Same as above, since it&#39;s clear a visit is connected w/ a pt</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="style.html#cb40-1"></a>ds_student          <span class="co"># One row per student</span></span>
+<span id="cb40-2"><a href="style.html#cb40-2"></a>ds_teacher          <span class="co"># One row per teacher</span></span>
+<span id="cb40-3"><a href="style.html#cb40-3"></a>ds_course           <span class="co"># One row per course</span></span>
+<span id="cb40-4"><a href="style.html#cb40-4"></a>ds_course_student   <span class="co"># One row per student-course combination</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="style.html#cb41-1"></a>ds_pt         <span class="co"># One row per patient</span></span>
+<span id="cb41-2"><a href="style.html#cb41-2"></a>ds_pt_visit   <span class="co"># One row per patient-visit combination</span></span>
+<span id="cb41-3"><a href="style.html#cb41-3"></a>ds_visit      <span class="co"># Same as above, since it&#39;s clear a visit is connected w/ a pt</span></span></code></pre></div>
 <p>For more insight into grains, <a href="https://www.kimballgroup.com/2003/03/declaring-the-grain/">Ralph Kimball writes</a></p>
 <blockquote>
 <p>In debugging literally thousands of dimensional designs from my students over the years, I have found that the most frequent design error by far is not declaring the grain of the fact table at the beginning of the design process. If the grain isn’t clearly defined, the whole design rests on quicksand. Discussions about candidate dimensions go around in circles, and rogue facts that introduce application errors sneak into the design.
@@ -619,11 +645,11 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <div id="style-naming-datasets-define" class="section level4" number="13.5.1.6">
 <h4><span class="header-section-number">13.5.1.6</span> Define the dataset when in doubt</h4>
 <p>If it’s potentially unclear to a new reader, use a comment immediately before the dataset’s initial use.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="style.html#cb39-1"></a><span class="co"># `ds_client_enroll`:</span></span>
-<span id="cb39-2"><a href="style.html#cb39-2"></a><span class="co">#    grain: one row per client</span></span>
-<span id="cb39-3"><a href="style.html#cb39-3"></a><span class="co">#    subset: only clients who have successfully enrolled are included</span></span>
-<span id="cb39-4"><a href="style.html#cb39-4"></a><span class="co">#    source: the `client` database table, where `enroll_count` is 1+.</span></span>
-<span id="cb39-5"><a href="style.html#cb39-5"></a>ds_client_enroll &lt;-<span class="st"> </span>...</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="style.html#cb42-1"></a><span class="co"># `ds_client_enroll`:</span></span>
+<span id="cb42-2"><a href="style.html#cb42-2"></a><span class="co">#    grain: one row per client</span></span>
+<span id="cb42-3"><a href="style.html#cb42-3"></a><span class="co">#    subset: only clients who have successfully enrolled are included</span></span>
+<span id="cb42-4"><a href="style.html#cb42-4"></a><span class="co">#    source: the `client` database table, where `enroll_count` is 1+.</span></span>
+<span id="cb42-5"><a href="style.html#cb42-5"></a>ds_client_enroll &lt;-<span class="st"> </span>...</span></code></pre></div>
 </div>
 </div>
 <div id="style-naming-semantic" class="section level3" number="13.5.2">

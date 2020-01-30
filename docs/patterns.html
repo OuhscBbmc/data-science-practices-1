@@ -24,17 +24,17 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data-at-rest.html"/>
+<link rel="prev" href="rest.html"/>
 <link rel="next" href="security.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -146,6 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
 <li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -199,10 +200,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
 <li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
+<li class="chapter" data-level="6" data-path="rest.html"><a href="rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
-<li class="chapter" data-level="6.2" data-path="data-at-rest.html"><a href="data-at-rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a></li>
+<li class="chapter" data-level="6.1" data-path="rest.html"><a href="rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
+<li class="chapter" data-level="6.2" data-path="rest.html"><a href="rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
+<li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
+<li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
+<li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
+<li class="chapter" data-level="6.2.7" data-path="rest.html"><a href="rest.html#data-containers-redcap"><i class="fa fa-check"></i><b>6.2.7</b> Central REDCap database</a></li>
+<li class="chapter" data-level="6.2.8" data-path="rest.html"><a href="rest.html#data-containers-avoid"><i class="fa fa-check"></i><b>6.2.8</b> Containers to avoid</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="rest.html"><a href="rest.html#data-conventions"><i class="fa fa-check"></i><b>6.3</b> Storage Conventions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="rest.html"><a href="rest.html#data-conventions-all"><i class="fa fa-check"></i><b>6.3.1</b> All Sources</a></li>
+<li class="chapter" data-level="6.3.2" data-path="rest.html"><a href="rest.html#data-conventions-text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="rest.html"><a href="rest.html#data-conventions-excel"><i class="fa fa-check"></i><b>6.3.3</b> Excel</a></li>
+<li class="chapter" data-level="6.3.4" data-path="rest.html"><a href="rest.html#data-conventions-meditech"><i class="fa fa-check"></i><b>6.3.4</b> Meditech</a></li>
+<li class="chapter" data-level="6.3.5" data-path="rest.html"><a href="rest.html#data-conventions-database"><i class="fa fa-check"></i><b>6.3.5</b> Databases</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>7</b> Patterns</a>
 <ul>
@@ -277,7 +296,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>12.1</b> Team-wide</a></li>
 <li class="chapter" data-level="12.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>12.2</b> Project-specific</a></li>
 <li class="chapter" data-level="12.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>12.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>12.4.1</b> GitHub Issue Template</a></li>
+</ul></li>
 <li class="chapter" data-level="12.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>12.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="12.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>12.6</b> Setting up new machine</a></li>
 </ul></li>
@@ -369,26 +391,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>19.3</b> Bridges Outside the Team</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="git-github.html"><a href="git-github.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
+<li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git-github.html"><a href="git-github.html#for-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#reading-external-data"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
+<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#snippets-reading"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
 <ul>
-<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#reading-from-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
-<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#removing-trailing-comma-from-header"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
+<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#snippets-reading-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
+<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#snippets-reading-trailing-comma"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
 </ul></li>
-<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
+<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#snippets-grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
 <ul>
-<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#correct-for-misinterpreted-two-digit-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
+<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#snippets-grooming-two-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
+<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#snippets-identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
 <ul>
-<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippet-tag"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippets-identification-tags"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="snippets.html"><a href="snippets.html#snippets-correspondence"><i class="fa fa-check"></i><b>B.4</b> Correspondence with Collaborators</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="snippets.html"><a href="snippets.html#snippets-correspondence-excel"><i class="fa fa-check"></i><b>B.4.1</b> Excel files</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>C</b> Presentations</a>
@@ -476,39 +502,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">7.1.5</span> Elements</h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>Clear memory</strong> In scripting languages like R (unlike compiled languages like Java), it’s easy for old variables to hang around. Explicitly clear them before you run the file again.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="patterns.html#cb14-1"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="patterns.html#cb17-1"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></span></code></pre></div></li>
 <li><p><strong>Load Sources</strong> In R, a <code>source()</code>d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.</p>
 <p>The first approach is better suited for quick &amp; easy development. The second allows you to add documention and unit tests.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="patterns.html#cb15-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
-<span id="cb15-2"><a href="patterns.html#cb15-2"></a><span class="kw">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="patterns.html#cb18-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
+<span id="cb18-2"><a href="patterns.html#cb18-2"></a><span class="kw">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</span></code></pre></div></li>
 <li><p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code>library()</code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code>dplyr::intersect()</code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="patterns.html#cb16-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
-<span id="cb16-2"><a href="patterns.html#cb16-2"></a><span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
-<span id="cb16-3"><a href="patterns.html#cb16-3"></a><span class="kw">library</span>(magrittr            , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</span>
-<span id="cb16-4"><a href="patterns.html#cb16-4"></a><span class="kw">library</span>(DBI                 , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</span>
-<span id="cb16-5"><a href="patterns.html#cb16-5"></a></span>
-<span id="cb16-6"><a href="patterns.html#cb16-6"></a><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
-<span id="cb16-7"><a href="patterns.html#cb16-7"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</span>
-<span id="cb16-8"><a href="patterns.html#cb16-8"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</span>
-<span id="cb16-9"><a href="patterns.html#cb16-9"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></span>
-<span id="cb16-10"><a href="patterns.html#cb16-10"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</span>
-<span id="cb16-11"><a href="patterns.html#cb16-11"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</span>
-<span id="cb16-12"><a href="patterns.html#cb16-12"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co">#devtools::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="patterns.html#cb19-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
+<span id="cb19-2"><a href="patterns.html#cb19-2"></a><span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
+<span id="cb19-3"><a href="patterns.html#cb19-3"></a><span class="kw">library</span>(magrittr            , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</span>
+<span id="cb19-4"><a href="patterns.html#cb19-4"></a><span class="kw">library</span>(DBI                 , <span class="dt">quietly=</span><span class="ot">TRUE</span>)</span>
+<span id="cb19-5"><a href="patterns.html#cb19-5"></a></span>
+<span id="cb19-6"><a href="patterns.html#cb19-6"></a><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
+<span id="cb19-7"><a href="patterns.html#cb19-7"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</span>
+<span id="cb19-8"><a href="patterns.html#cb19-8"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</span>
+<span id="cb19-9"><a href="patterns.html#cb19-9"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></span>
+<span id="cb19-10"><a href="patterns.html#cb19-10"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</span>
+<span id="cb19-11"><a href="patterns.html#cb19-11"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</span>
+<span id="cb19-12"><a href="patterns.html#cb19-12"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co">#devtools::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div></li>
 <li><p><strong>Declare Global Variables and Functions</strong>. This includes defining the expected column names and types of the data sources; use <code>readr::cols_only()</code> (as opposed to <code>readr::cols()</code>) to ignore any new columns that may be been added since the dataset’s last refresh.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="patterns.html#cb17-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="patterns.html#cb20-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Load Data Source(s)</strong> See <a href="file-prototype.html#chunk-load-data">load-data</a> chunk described in the prototypical file.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="patterns.html#cb18-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="patterns.html#cb21-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Tweak Data</strong></p>
 <p>See <a href="file-prototype.html#chunk-tweak-data">tweak-data</a> chunk described in the prototypical file.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="patterns.html#cb19-1"></a><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="patterns.html#cb22-1"></a><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Body of the Ellis</strong></p></li>
 <li><p><strong>Verify</strong></p></li>
 <li><p><strong>Specify Columns</strong></p>
 <p>See <a href="file-prototype.html#chunk-specify-columns">specify-columns-to-upload</a> chunk described in the prototypical file.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="patterns.html#cb20-1"></a><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="patterns.html#cb23-1"></a><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Welcome</strong> into your warehouse. Until this chunk, nothing should be persisted.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="patterns.html#cb21-1"></a><span class="co"># ---- save-to-db --------------------------------------------------------------</span></span>
-<span id="cb21-2"><a href="patterns.html#cb21-2"></a><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="patterns.html#cb24-1"></a><span class="co"># ---- save-to-db --------------------------------------------------------------</span></span>
+<span id="cb24-2"><a href="patterns.html#cb24-2"></a><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></span></code></pre></div></li>
 </ol>
 </div>
 </div>
@@ -716,7 +742,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="data-at-rest.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rest.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="security.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

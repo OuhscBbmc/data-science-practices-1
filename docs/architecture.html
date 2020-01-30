@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="coding.html"/>
 <link rel="next" href="file-prototype.html"/>
+<script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -146,6 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
 <li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
@@ -199,10 +200,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>5.7</b> Stitched Output</a></li>
 <li class="chapter" data-level="5.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>5.8</b> Utility</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-at-rest.html"><a href="data-at-rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
+<li class="chapter" data-level="6" data-path="rest.html"><a href="rest.html"><i class="fa fa-check"></i><b>6</b> Data at Rest</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="data-at-rest.html"><a href="data-at-rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
-<li class="chapter" data-level="6.2" data-path="data-at-rest.html"><a href="data-at-rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a></li>
+<li class="chapter" data-level="6.1" data-path="rest.html"><a href="rest.html#data-states"><i class="fa fa-check"></i><b>6.1</b> Data States</a></li>
+<li class="chapter" data-level="6.2" data-path="rest.html"><a href="rest.html#data-containers"><i class="fa fa-check"></i><b>6.2</b> Data Containers</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>6.2.1</b> csv</a></li>
+<li class="chapter" data-level="6.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>6.2.2</b> rds</a></li>
+<li class="chapter" data-level="6.2.3" data-path="rest.html"><a href="rest.html#data-containers-json"><i class="fa fa-check"></i><b>6.2.3</b> JSON and XML</a></li>
+<li class="chapter" data-level="6.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>6.2.4</b> Arrow</a></li>
+<li class="chapter" data-level="6.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>6.2.5</b> SQLite</a></li>
+<li class="chapter" data-level="6.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>6.2.6</b> Central Enterprise database</a></li>
+<li class="chapter" data-level="6.2.7" data-path="rest.html"><a href="rest.html#data-containers-redcap"><i class="fa fa-check"></i><b>6.2.7</b> Central REDCap database</a></li>
+<li class="chapter" data-level="6.2.8" data-path="rest.html"><a href="rest.html#data-containers-avoid"><i class="fa fa-check"></i><b>6.2.8</b> Containers to avoid</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="rest.html"><a href="rest.html#data-conventions"><i class="fa fa-check"></i><b>6.3</b> Storage Conventions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="rest.html"><a href="rest.html#data-conventions-all"><i class="fa fa-check"></i><b>6.3.1</b> All Sources</a></li>
+<li class="chapter" data-level="6.3.2" data-path="rest.html"><a href="rest.html#data-conventions-text"><i class="fa fa-check"></i><b>6.3.2</b> Text</a></li>
+<li class="chapter" data-level="6.3.3" data-path="rest.html"><a href="rest.html#data-conventions-excel"><i class="fa fa-check"></i><b>6.3.3</b> Excel</a></li>
+<li class="chapter" data-level="6.3.4" data-path="rest.html"><a href="rest.html#data-conventions-meditech"><i class="fa fa-check"></i><b>6.3.4</b> Meditech</a></li>
+<li class="chapter" data-level="6.3.5" data-path="rest.html"><a href="rest.html#data-conventions-database"><i class="fa fa-check"></i><b>6.3.5</b> Databases</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>7</b> Patterns</a>
 <ul>
@@ -277,7 +296,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>12.1</b> Team-wide</a></li>
 <li class="chapter" data-level="12.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>12.2</b> Project-specific</a></li>
 <li class="chapter" data-level="12.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>12.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a></li>
+<li class="chapter" data-level="12.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>12.4</b> Issues &amp; Tasks</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>12.4.1</b> GitHub Issue Template</a></li>
+</ul></li>
 <li class="chapter" data-level="12.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>12.5</b> Flow Diagrams</a></li>
 <li class="chapter" data-level="12.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>12.6</b> Setting up new machine</a></li>
 </ul></li>
@@ -369,26 +391,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>19.3</b> Bridges Outside the Team</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="git-github.html"><a href="git-github.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
+<li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git-github.html"><a href="git-github.html#for-code-development"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git-github.html"><a href="git-github.html#for-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git-github.html"><a href="git-github.html#for-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#reading-external-data"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
+<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#snippets-reading"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
 <ul>
-<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#reading-from-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
-<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#removing-trailing-comma-from-header"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
+<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#snippets-reading-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
+<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#snippets-reading-trailing-comma"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
 </ul></li>
-<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
+<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#snippets-grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
 <ul>
-<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#correct-for-misinterpreted-two-digit-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
+<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#snippets-grooming-two-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
 </ul></li>
-<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
+<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#snippets-identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
 <ul>
-<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippet-tag"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippets-identification-tags"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
+</ul></li>
+<li class="chapter" data-level="B.4" data-path="snippets.html"><a href="snippets.html#snippets-correspondence"><i class="fa fa-check"></i><b>B.4</b> Correspondence with Collaborators</a>
+<ul>
+<li class="chapter" data-level="B.4.1" data-path="snippets.html"><a href="snippets.html#snippets-correspondence-excel"><i class="fa fa-check"></i><b>B.4.1</b> Excel files</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>C</b> Presentations</a>

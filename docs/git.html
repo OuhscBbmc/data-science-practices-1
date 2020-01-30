@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 Growing a Team | Collaborative Data Science Practices</title>
+  <title>A Git &amp; GitHub | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 Growing a Team | Collaborative Data Science Practices" />
+  <meta property="og:title" content="A Git &amp; GitHub | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Growing a Team | Collaborative Data Science Practices" />
+  <meta name="twitter:title" content="A Git &amp; GitHub | Collaborative Data Science Practices" />
   
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tools.html"/>
-<link rel="next" href="git.html"/>
+<link rel="prev" href="team.html"/>
+<link rel="next" href="snippets.html"/>
 <script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -456,39 +456,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="team" class="section level1" number="19">
-<h1><span class="header-section-number">Chapter 19</span> Growing a Team</h1>
-<div id="recruiting" class="section level2" number="19.1">
-<h2><span class="header-section-number">19.1</span> Recruiting</h2>
+<div id="git" class="section level1" number="20">
+<h1><span class="header-section-number">A</span> Git &amp; GitHub</h1>
+<div id="git-code" class="section level2" number="20.1">
+<h2><span class="header-section-number">A.1</span> for Code Development</h2>
+<p><a href="https://github.com/jennybc">Jenny Bryan</a> and <a href="https://github.com/jimhester">Jim Hester</a> have published a thorough description of using Git from a data scientist’s perspective (<a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a>), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is <em><a href="https://smile.amazon.com/dp/1449302440">Team Geek</a></em>, which has insightful advice for the human and collaborative aspects of version control.</p>
+<p>Other Resources
+1. <a href="https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github">Setting up a CI/CD Process on GitHub with Travis CI</a>. Travis-CI blob from August 2019.</p>
 </div>
-<div id="training-to-data-science" class="section level2" number="19.2">
-<h2><span class="header-section-number">19.2</span> Training to Data Science</h2>
+<div id="git-collaboration" class="section level2" number="20.2">
+<h2><span class="header-section-number">A.2</span> for Collaboration</h2>
 <ol style="list-style-type: decimal">
-<li>Starting with a Researcher</li>
-<li>Starting with a Statistician</li>
-<li>Starting with a DBA</li>
-<li>Starting with a Software Developer</li>
+<li><p>Somewhat separate from it’s version control capabilities, GitHub provides built-in tools for coordinating projects across people and time. This tools revolves around <a href="https://guides.github.com/features/issues/">GitHub Issues</a>, which allow teammates to</p></li>
+<li><p>track issues assigned to them and others</p></li>
+<li><p>search if other teammates have encountered similar problems that their facing now (<em>e.g.</em>, the new computer can’t install the <a href="https://CRAN.R-project.org/package=rJava">rJava</a> package).</p></li>
 </ol>
-</div>
-<div id="bridges-outside-the-team" class="section level2" number="19.3">
-<h2><span class="header-section-number">19.3</span> Bridges Outside the Team</h2>
+<p>There’s nothing magical about GitHub issues, but if you don’t use them, consider using a similar or more capable tools like those offered by <a href="https://www.atlassian.com/">Atlassian</a>, <a href="https://asana.com/">Asana</a>, <a href="https://basecamp.com/">Basecamp</a>, and many others.</p>
+<p>Here are some tips from our experiences with projects involving between 2 and 10 statisticians are working with an upcoming deadline.</p>
 <ol style="list-style-type: decimal">
-<li>Monthly User Groups</li>
-<li>Annual Conferences</li>
+<li><p>If you create an error that describes a problem blocking your progress, include both the raw text (<em>e.g.</em>, <code>error: JAVA_HOME cannot be determined from the Registry</code>) and possibly a screenshot. The text allows the problem to be more easily searched by people later; the screenshot usually provides extra context that allows other to understand the situation and help more quickly.</p></li>
+<li><p>Include enough broad context and enough specific details that teammates can quickly understand the problem. Ideally they can even run your code and debug it. Good recommendations can be found in the Stack Overflow posts, <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example?rq=1">‘How to make a great R reproducible example’</a> and <a href="https://stackoverflow.com/help/how-to-ask">‘How do I ask a good question?’</a>. The issues don’t need to be as thorough, because your teammates start with more context than a Stack Overflow reader.</p>
+<p>We typically include</p>
+<ol style="list-style-type: decimal">
+<li><p>a description of the problem or fishy behavior.</p></li>
+<li><p>the exact error message (or a good description of the fishy behavior).</p></li>
+<li><p>a snippet of the 1-10 lines of code suspected of causing the problem.</p></li>
+<li><p>a link to the code’s file (and ideally the line number, such as <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-version.R#L40"><code>https://github.com/OuhscBbmc/REDCapR/blob/master/R/redcap-version.R#L40</code></a>) so the reader can hop over to the entire file.</p></li>
+<li><p>references to similar GitHub Issues or Stack Overflow questions that could aid troubleshooting.</p></li>
+</ol></li>
+</ol>
+<!-- Consider including good examples, like https://github.com/OuhscBbmc/miechv-3/issues/2073.  Probably shorten some for clarity. -->
+</div>
+<div id="git-stability" class="section level2" number="20.3">
+<h2><span class="header-section-number">A.3</span> for Stability</h2>
+<ol style="list-style-type: decimal">
+<li><p>Review Git commits closely</p>
+<ol style="list-style-type: decimal">
+<li>No unintended functional difference (<em>e.g.</em>, <code>!match</code> accidentally changed to <code>match</code>).</li>
+<li>No PHI snuck in (<em>e.g.</em>, a patient ID used while isolating and debugging).</li>
+<li>The metadata format didn’t change (<em>e.g.</em>, Excel sometimes changes the string ‘010’ to the number ‘10’). See <a href="snippets.html#snippets-correspondence-excel">the appendix</a> for a longer discussion about the problems that Excel typically introduces.</li>
+</ol></li>
 </ol>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="tools.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="git.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="team.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="snippets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -519,7 +537,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-team.md",
+"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-git.md",
 "text": "Edit"
 },
 "history": {

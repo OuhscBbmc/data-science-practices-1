@@ -133,4 +133,3 @@ In this example, we'll presume we can't trust a patient record if it lacks a cle
     ```r
     checkmate::assert_date(ds$dob, any.missing=F, lower=config$range_dob[1], upper=config$range_dob[2])
     ```
-    

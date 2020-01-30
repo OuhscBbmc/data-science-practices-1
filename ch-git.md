@@ -3,10 +3,10 @@
 (APPENDIX) Appendix {-}
 ====================================
 
-Git & GitHub
+Git & GitHub {#git}
 ====================================
 
-for Code Development
+for Code Development {#git-code}
 ------------------------------------
 
 [Jenny Bryan](https://github.com/jennybc) and [Jim Hester](https://github.com/jimhester) have published a thorough description of using Git from a data scientist's perspective ([Happy Git and GitHub for the useR](https://happygitwithr.com/)), and we recommend following their guidance.  It is consistent with our approach, with a few exceptions noted below.  A complementary resource is *[Team Geek](https://smile.amazon.com/dp/1449302440)*, which has insightful advice for the human and collaborative aspects of version control.
@@ -16,7 +16,7 @@ Other Resources
 1. [Setting up a CI/CD Process on GitHub with Travis CI](https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github).  Travis-CI blob from August 2019.
 
 
-for Collaboration
+for Collaboration {#git-collaboration}
 ------------------------------------
 
 1. Somewhat separate from it's version control capabilities, GitHub provides built-in tools for coordinating projects across people and time.  This tools revolves around [GitHub Issues](https://guides.github.com/features/issues/), which allow teammates to 
@@ -49,10 +49,11 @@ Here are some tips from our experiences with projects involving between 2 and 10
 <!-- Consider including good examples, like https://github.com/OuhscBbmc/miechv-3/issues/2073.  Probably shorten some for clarity. -->
 
 
-for Stability
+for Stability {#git-stability}
 ------------------------------------
 
 1. Review Git commits closely
+
     1. No unintended functional difference (*e.g.*, `!match` accidentally changed to `match`).
     1. No PHI snuck in (*e.g.*, a patient ID used while isolating and debugging).
-    1. The metadata format didn't change (*e.g.*, Excel sometimes changes the string '010' to the number '10').
+    1. The metadata format didn't change (*e.g.*, Excel sometimes changes the string '010' to the number '10').  See [the appendix](#snippets-correspondence-excel) for a longer discussion about the problems that Excel typically introduces.

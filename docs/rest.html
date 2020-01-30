@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 Growing a Team | Collaborative Data Science Practices</title>
+  <title>Chapter 6 Data at Rest | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 Growing a Team | Collaborative Data Science Practices" />
+  <meta property="og:title" content="Chapter 6 Data at Rest | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Growing a Team | Collaborative Data Science Practices" />
+  <meta name="twitter:title" content="Chapter 6 Data at Rest | Collaborative Data Science Practices" />
   
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tools.html"/>
-<link rel="next" href="git.html"/>
+<link rel="prev" href="repo-prototype.html"/>
+<link rel="next" href="patterns.html"/>
 <script src="libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -456,39 +456,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="team" class="section level1" number="19">
-<h1><span class="header-section-number">Chapter 19</span> Growing a Team</h1>
-<div id="recruiting" class="section level2" number="19.1">
-<h2><span class="header-section-number">19.1</span> Recruiting</h2>
-</div>
-<div id="training-to-data-science" class="section level2" number="19.2">
-<h2><span class="header-section-number">19.2</span> Training to Data Science</h2>
+<div id="rest" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Data at Rest</h1>
+<div id="data-states" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Data States</h2>
 <ol style="list-style-type: decimal">
-<li>Starting with a Researcher</li>
-<li>Starting with a Statistician</li>
-<li>Starting with a DBA</li>
-<li>Starting with a Software Developer</li>
+<li>Raw</li>
+<li>Derived
+<ol style="list-style-type: decimal">
+<li>Project-wide File on Repo</li>
+<li>Project-wide File on Protected File Server</li>
+<li>User-specific File on Protected File Server</li>
+<li>Project-wide Database</li>
+</ol></li>
+<li>Original</li>
 </ol>
 </div>
-<div id="bridges-outside-the-team" class="section level2" number="19.3">
-<h2><span class="header-section-number">19.3</span> Bridges Outside the Team</h2>
+<div id="data-containers" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Data Containers</h2>
+<div id="data-containers-csv" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> csv</h3>
+<p>When exchanging data between two different systems, the preferred format is frequently plain text, where each cell in a record is separated by a comma. This is commonly called a csv –a <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma separated value</a> file. As opposed to <a href="rest.html#data-containers-avoid">proprietary formats</a> like xlsx or sas7bdat, a csv file is easily opened and parsable by most statistical software, and even conventional text editors and <a href="https://help.github.com/en/github/managing-files-in-a-repository/rendering-csv-and-tsv-data">GitHub</a>.</p>
+</div>
+<div id="data-containers-rds" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> rds</h3>
+</div>
+<div id="data-containers-json" class="section level3" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> JSON and XML</h3>
+<p>The plain-text format is typically preferred when the data structures cannot be represented by nice rectangles. qqq</p>
+</div>
+<div id="data-containers-arrow" class="section level3" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Arrow</h3>
+<p><a href="https://arrow.apache.org/">Apache Arrow</a> is an open source specification that is developed to work with many languages such as <a href="https://arrow.apache.org/docs/r/">R</a>, <a href="https://towardsdatascience.com/a-gentle-introduction-to-apache-arrow-with-apache-spark-and-pandas-bb19ffe0ddae">Spark</a>, <a href="https://spark.apache.org/docs/latest/sql-pyspark-pandas-with-arrow.html">Python</a>, and many others. It accommodates nice rectangles where CSVs are used, and hierarchical nesting where json and xml are used.</p>
+<p>It is both an in-memory specification (which allows a Python process to directly access an R object), and an on-disk specification (which allows a Python process to read a saved R file). The file format is compressed, so it takes much less space to store on disk and less time to transfer over a network.</p>
+<p>Its downside is the file is not plain-text, but binary. That means the file is not readable and editable by as many programs, which hurts your project’s portability. You wouldn’t want to store most metadata files as arrow because then your collaborators couldn’t easily help you map the values to qqq</p>
+</div>
+<div id="data-containers-sqlite" class="section level3" number="6.2.5">
+<h3><span class="header-section-number">6.2.5</span> SQLite</h3>
+</div>
+<div id="data-containers-database" class="section level3" number="6.2.6">
+<h3><span class="header-section-number">6.2.6</span> Central Enterprise database</h3>
+</div>
+<div id="data-containers-redcap" class="section level3" number="6.2.7">
+<h3><span class="header-section-number">6.2.7</span> Central REDCap database</h3>
+</div>
+<div id="data-containers-avoid" class="section level3" number="6.2.8">
+<h3><span class="header-section-number">6.2.8</span> Containers to avoid</h3>
+<div id="data-containers-avoid-spreadsheets" class="section level4" number="6.2.8.1">
+<h4><span class="header-section-number">6.2.8.1</span> Spreadsheets</h4>
+<p>Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and protyping equations –but is should not be trusted to transport serious information. Other spreadsheet software like <a href="https://en.wikipedia.org/wiki/LibreOffice_Calc">LibreOffice Calc</a> is less problematic in our epxerience, but still less desirable than the formats mentioned above.</p>
+<p>If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values. After you close the spreadsheet, <a href="git.html#git-stability">review the Git commits</a> to verify no values were corrupted.</p>
+<p>See <a href="snippets.html#snippets-correspondence-excel">the appendix</a> for a list of the ways your analyses can be undermined when receiving Excel files, as well as a template to correspond with your less-experienced colleagues that is sending your team Excel files.</p>
+</div>
+<div id="data-containers-avoid-proprietary" class="section level4" number="6.2.8.2">
+<h4><span class="header-section-number">6.2.8.2</span> Proprietary</h4>
+<p>Proprietary formats like <a href="https://en.wikipedia.org/wiki/SAS_(software)">SAS</a>’s “sas7bdat” are less accesible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project’s impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project’s failure.</p>
+<p>We formerly distributed sas7bdat files to supplement (otherwise identical) csvs, in order to cater to the suprisingly large population of SAS users who were unfamiliar with <a href="https://documentation.sas.com/?docsetId=proc&amp;docsetTarget=n18jyszn33umngn14czw2qfw7thc.htm&amp;docsetVersion=9.4&amp;locale=en">proc import</a> or the Google search engine. Recently we have distributed only the csvs, with example code for reading the file from SAS.</p>
+</div>
+</div>
+</div>
+<div id="data-conventions" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Storage Conventions</h2>
+<div id="data-conventions-all" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> All Sources</h3>
+<p>Across all file formats, these conventions usually work best.</p>
 <ol style="list-style-type: decimal">
-<li>Monthly User Groups</li>
-<li>Annual Conferences</li>
+<li><p><strong>consistency across versions</strong>: use a script to produce the dataset, and inform the recipient if the datasets’s structure changes. Most of our processes are automated, and changes that are trivial to humans (<em>e.g.</em>, <code>yyyy-mm-dd</code> to <code>mm/dd-yy</code>) will break the automation.</p>
+<p>The specificity in our automation is intentional. We install guards on our processes so that bad values do not pass. For instance, we may place bounds on the toddlers’ age at 12 and 36 months. We <em>want</em> our automation to break if the next dataset contains age values between 1 and 3 (years). Our downstream analysis (say, a regression model where age is a predictor variable) would produce misleading results if the shift between months and years went undetected.</p></li>
+<li><p><strong>date format</strong>: specify as <code>YYYY-MM-DD</code> (<a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a>)</p></li>
+<li><p><strong>time format</strong>: specify as <code>HH:MM</code> or <code>HH:MM:SS</code>, preferably in 24-hour time. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (<em>i.e.</em>, <strong>0</strong>9:59)</p></li>
+<li><p><strong>patient names</strong>: separate the <code>name_last</code>, <code>name_first</code>, and <code>name_middle</code> as three distinct variables when possible.</p></li>
+<li><p><strong>currency</strong>: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like <code>max()</code> or <code>mean()</code>) to be performed directly. Avoid commas and symbols like “$”. If there is a possibility of ambiguity, indicate the denomination in the variable name (<em>e.g.</em>, <code>payment_dollars</code> or <code>payment_euros</code>).</p></li>
 </ol>
+</div>
+<div id="data-conventions-text" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Text</h3>
+<p>These conventions usually work best within plain-text formats.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>csv</strong>: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons. However, if you are receiving a well-behaved file separated by these characters, be thankful and go with the flow.</p></li>
+<li><p><strong>cells enclosed in quotes</strong>: a ‘cell’ should be enclosed in double quotes, especially if it’s a string/character variable.</p></li>
+</ol>
+</div>
+<div id="data-conventions-excel" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Excel</h3>
+<p>As <a href="%7B#data-containers-avoid">discussed above</a> avoid Excel. When that is not possible, these conventions helps reduce ambiguity and corrupted values. See <a href="snippets.html#snippets-reading-excel">the appendix</a> for our preferred approach to reading Excel files.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>avoid multiple tabs/worksheets</strong>: Excel files containing multiple worksheets are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.</p></li>
+<li><p><strong>save the cells as text</strong>: avoiding Excel attempting to save cells as dates or numbers. Admitedly, this is a last-ditch effort. If someone is using Excel to convert cells to text, the values are probably already corrupted.</p></li>
+</ol>
+</div>
+<div id="data-conventions-meditech" class="section level3" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Meditech</h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>patient identifier</strong>: <code>mrn_meditech</code> instead of <code>mrn</code>, <code>MRN Rec#</code>, or <code>Med Rec#</code>.</p></li>
+<li><p><strong>account/admission identifier</strong>: <code>account_number</code> instead of <code>mrn</code>, <code>Acct#</code>, or <code>Account#</code>.</p></li>
+<li><p><strong>patient’s full name</strong>: <code>name_full</code> instead of <code>Patient Name</code> or <code>Name</code>.</p></li>
+<li><p><strong>long/tall format</strong>: one row per dx per patient (up to 50 dxs) instead of 50 <em>columns</em> of <code>dx</code> per patient. Applies to</p>
+<ol style="list-style-type: decimal">
+<li><p>diagnosis code &amp; description</p></li>
+<li><p>order date &amp; number</p></li>
+<li><p>procedure name &amp; number</p></li>
+</ol></li>
+</ol>
+<p>Meditech Idiosyncracies:</p>
+<ol style="list-style-type: decimal">
+<li><strong>blood pressure</strong>: in most systems the <code>bp_diastolic</code> and <code>bp_systolic</code> values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a foward slash.</li>
+</ol>
+</div>
+<div id="data-conventions-database" class="section level3" number="6.3.5">
+<h3><span class="header-section-number">6.3.5</span> Databases</h3>
+<p>When exchanging data between two different systems, …</p>
 
 </div>
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tools.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="git.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="repo-prototype.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="patterns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -519,7 +607,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-team.md",
+"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-rest.md",
 "text": "Edit"
 },
 "history": {

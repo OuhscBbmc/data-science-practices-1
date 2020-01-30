@@ -136,6 +136,12 @@ The order does not matter.
     * [SQL Server](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) allows you to execute against a database, and view/copy/save the grid results.  It doesn't replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}
 
     * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) produces  green squiggly lines under words not in its dictionary.  You can add words to your user dictionary, or a project dictionary.
+    
+    * [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) has some useful markdown capbilities, such as converting the file to html.
+    
+    * [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) has some useful markdown capbilities, such as converting the file to pdf.
+    
+    * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) has linting and style checking.
 
     These extensions [can be installed by command line](https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions).
 
@@ -145,9 +151,22 @@ The order does not matter.
     code --install-extension mechatroner.rainbow-csv
     code --install-extension ms-mssql.mssql
     code --install-extension streetsidesoftware.code-spell-checker
+    code --install-extension yzhang.markdown-all-in-one
+    code --install-extension yzane.markdown-pdf
+    code --install-extension DavidAnson.vscode-markdownlint
     ```
 
 * **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
+
+* **Python** is used by some analysts.  The prototypical installation involves two options
+
+    * **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
+    
+       ```python
+       conda install numpy pandas scikit-learn matplotlib
+       ```
+    
+    * **Standard Python**, while installing packages through pip3 in the terminal
 
 
 Ubuntu Installation {#installation-ubuntu}

@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-01-15}
+\date{2020-01-26}
 
 \begin{document}
 \maketitle
@@ -277,6 +277,46 @@ See the \href{https://google.github.io/styleguide/Rguide.html\#qualifying-namesp
 \subsection{Date Arithmetic}\label{coding-defensive-date-arithmetic}}
 
 Don't use the minus operator (\emph{i.e.}, \texttt{-}) to subtract dates. Instead use \texttt{as.integer(difftime(stop,\ start,\ units="days"))}. It's longer but protects from the scneario that \texttt{start} or \texttt{stop} are changed upstream to a datetime. In that case, \texttt{stop\ -\ start} equals the number of \emph{seconds} between the two points, not the number of \emph{days}.
+
+\hypertarget{excluding-bad-cases}{%
+\subsection{Excluding Bad Cases}\label{excluding-bad-cases}}
+
+Some variables are critical to the record, and if it's missing, you don't want or trust any of its other values. For instance, a hospital visit record rarely useful if missing the patient ID. In these cases, prevent the record from passing through the \protect\hyperlink{pattern-ellis}{ellis}.
+
+In this example, we'll presume we can't trust a patient record if it lacks a clean date of birth (\texttt{dob}).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Define the permissible range, in either the ellis's \protect\hyperlink{chunk-declare}{declare-gobals} chunk, or in the \protect\hyperlink{repo-config}{config-file}. (We'll use the config file for this example.) We'll exclude anyone born before 2000, or after tomorrow. Even though it's illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{range\_dob   }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2000{-}01{-}01"), Sys.Date() + lubridate::days(1))}
+\end{Highlighting}
+\end{Shaded}
+\item
+  In the \protect\hyperlink{chunk-tweak-data}{tweak-data} chunk, use \href{https://ouhscbbmc.github.io/OuhscMunge/reference/trim.html}{\texttt{OuhscMunge::trim\_date()}} to set the cell to \texttt{NA} if it falls outside an acceptable range. After \href{https://dplyr.tidyverse.org/reference/mutate.html}{\texttt{dplyr::mutate()}}, call \href{https://tidyr.tidyverse.org/reference/drop_na.html}{\texttt{tidyr::drop\_na()}} to exclude the entire record, regardless if (a) it was already \texttt{NA}, or (b) was ``trimmed'' to \texttt{NA}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ds <{-}}\StringTok{ }
+\StringTok{  }\NormalTok{ds }\OperatorTok{\%>\%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{dob =}\NormalTok{ OuhscMunge}\OperatorTok{::}\KeywordTok{trim\_date}\NormalTok{(dob, config}\OperatorTok{$}\NormalTok{range\_dob)}
+\NormalTok{  ) }\OperatorTok{\%>\%}
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{drop\_na}\NormalTok{(dob)}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Near the end of the file, verify the variable for three reasons: (a) there's a chance that the code above isn't working as expected, (b) some later code later might have introduced bad values, and (c) it clearly documents to a reader that \texttt{dob} was included in this range at this stage of the pipeline.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_date}\NormalTok{(ds}\OperatorTok{$}\NormalTok{dob, }\DataTypeTok{any.missing=}\NormalTok{F, }\DataTypeTok{lower=}\NormalTok{config}\OperatorTok{$}\NormalTok{range\_dob[}\DecValTok{1}\NormalTok{], }\DataTypeTok{upper=}\NormalTok{config}\OperatorTok{$}\NormalTok{range\_dob[}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
 
 \hypertarget{architecture}{%
 \chapter{Architecture Principles}\label{architecture}}
@@ -604,7 +644,7 @@ pattern_mrn             : "^E\\d{9}$"  # An 'E', followed by 9 digits.
 
 The workflow of the repo is determined by \texttt{flow.R}. It calls (typically R and SQL) files in a specific order, while sending the log messages to a file.
 
-See also the \protect\hyperlink{automation-flow}{automation mediators}.
+See \protect\hyperlink{automation-flow}{automation mediators} for more details.
 
 \hypertarget{repo-readme}{%
 \subsection{\texorpdfstring{\texttt{README.md}}{README.md}}\label{repo-readme}}
@@ -648,8 +688,8 @@ See also the \protect\hyperlink{automation-flow}{automation mediators}.
 \hypertarget{repo-utility}{%
 \section{Utility}\label{repo-utility}}
 
-\hypertarget{data-at-rest}{%
-\chapter{Data at Rest}\label{data-at-rest}}
+\hypertarget{rest}{%
+\chapter{Data at Rest}\label{rest}}
 
 \hypertarget{data-states}{%
 \section{Data States}\label{data-states}}
@@ -681,29 +721,144 @@ See also the \protect\hyperlink{automation-flow}{automation mediators}.
 \hypertarget{data-containers}{%
 \section{Data Containers}\label{data-containers}}
 
+\hypertarget{data-containers-csv}{%
+\subsection{csv}\label{data-containers-csv}}
+
+When exchanging data between two different systems, the preferred format is frequently plain text, where each cell in a record is separated by a comma. This is commonly called a csv --a \href{https://en.wikipedia.org/wiki/Comma-separated_values}{comma separated value} file. As opposed to \protect\hyperlink{data-containers-avoid}{proprietary formats} like xlsx or sas7bdat, a csv file is easily opened and parsable by most statistical software, and even conventional text editors and \href{https://help.github.com/en/github/managing-files-in-a-repository/rendering-csv-and-tsv-data}{GitHub}.
+
+\hypertarget{data-containers-rds}{%
+\subsection{rds}\label{data-containers-rds}}
+
+\hypertarget{data-containers-json}{%
+\subsection{JSON and XML}\label{data-containers-json}}
+
+The plain-text format is typically preferred when the data structures cannot be represented by nice rectangles. qqq
+
+\hypertarget{data-containers-arrow}{%
+\subsection{Arrow}\label{data-containers-arrow}}
+
+\href{https://arrow.apache.org/}{Apache Arrow} is an open source specification that is developed to work with many languages such as \href{https://arrow.apache.org/docs/r/}{R}, \href{https://towardsdatascience.com/a-gentle-introduction-to-apache-arrow-with-apache-spark-and-pandas-bb19ffe0ddae}{Spark}, \href{https://spark.apache.org/docs/latest/sql-pyspark-pandas-with-arrow.html}{Python}, and many others. It accommodates nice rectangles where CSVs are used, and hierarchical nesting where json and xml are used.
+
+It is both an in-memory specification (which allows a Python process to directly access an R object), and an on-disk specification (which allows a Python process to read a saved R file). The file format is compressed, so it takes much less space to store on disk and less time to transfer over a network.
+
+Its downside is the file is not plain-text, but binary. That means the file is not readable and editable by as many programs, which hurts your project's portability. You wouldn't want to store most metadata files as arrow because then your collaborators couldn't easily help you map the values to qqq
+
+\hypertarget{data-containers-sqlite}{%
+\subsection{SQLite}\label{data-containers-sqlite}}
+
+\hypertarget{data-containers-database}{%
+\subsection{Central Enterprise database}\label{data-containers-database}}
+
+\hypertarget{data-containers-redcap}{%
+\subsection{Central REDCap database}\label{data-containers-redcap}}
+
+\hypertarget{data-containers-avoid}{%
+\subsection{Containers to avoid}\label{data-containers-avoid}}
+
+\hypertarget{data-containers-avoid-spreadsheets}{%
+\subsubsection{Spreadsheets}\label{data-containers-avoid-spreadsheets}}
+
+Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and protyping equations --but is should not be trusted to transport serious information. Other spreadsheet software like \href{https://en.wikipedia.org/wiki/LibreOffice_Calc}{LibreOffice Calc} is less problematic in our epxerience, but still less desirable than the formats mentioned above.
+
+If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values. After you close the spreadsheet, \protect\hyperlink{git-stability}{review the Git commits} to verify no values were corrupted.
+
+See \protect\hyperlink{snippets-correspondence-excel}{the appendix} for a list of the ways your analyses can be undermined when receiving Excel files, as well as a template to correspond with your less-experienced colleagues that is sending your team Excel files.
+
+\hypertarget{data-containers-avoid-proprietary}{%
+\subsubsection{Proprietary}\label{data-containers-avoid-proprietary}}
+
+Proprietary formats like \href{https://en.wikipedia.org/wiki/SAS_(software)}{SAS}'s ``sas7bdat'' are less accesible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project's impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project's failure.
+
+We formerly distributed sas7bdat files to supplement (otherwise identical) csvs, in order to cater to the suprisingly large population of SAS users who were unfamiliar with \href{https://documentation.sas.com/?docsetId=proc\&docsetTarget=n18jyszn33umngn14czw2qfw7thc.htm\&docsetVersion=9.4\&locale=en}{proc import} or the Google search engine. Recently we have distributed only the csvs, with example code for reading the file from SAS.
+
+\hypertarget{data-conventions}{%
+\section{Storage Conventions}\label{data-conventions}}
+
+\hypertarget{data-conventions-all}{%
+\subsection{All Sources}\label{data-conventions-all}}
+
+Across all file formats, these conventions usually work best.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{consistency across versions}: use a script to produce the dataset, and inform the recipient if the datasets's structure changes. Most of our processes are automated, and changes that are trivial to humans (\emph{e.g.}, \texttt{yyyy-mm-dd} to \texttt{mm/dd-yy}) will break the automation.
+
+  The specificity in our automation is intentional. We install guards on our processes so that bad values do not pass. For instance, we may place bounds on the toddlers' age at 12 and 36 months. We \emph{want} our automation to break if the next dataset contains age values between 1 and 3 (years). Our downstream analysis (say, a regression model where age is a predictor variable) would produce misleading results if the shift between months and years went undetected.
+\item
+  \textbf{date format}: specify as \texttt{YYYY-MM-DD} (\href{https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601}{ISO-8601})
+\item
+  \textbf{time format}: specify as \texttt{HH:MM} or \texttt{HH:MM:SS}, preferably in 24-hour time. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (\emph{i.e.}, \textbf{0}9:59)
+\item
+  \textbf{patient names}: separate the \texttt{name\_last}, \texttt{name\_first}, and \texttt{name\_middle} as three distinct variables when possible.
+\item
+  \textbf{currency}: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like \texttt{max()} or \texttt{mean()}) to be performed directly. Avoid commas and symbols like ``\$''. If there is a possibility of ambiguity, indicate the denomination in the variable name (\emph{e.g.}, \texttt{payment\_dollars} or \texttt{payment\_euros}).
+\end{enumerate}
+
+\hypertarget{data-conventions-text}{%
+\subsection{Text}\label{data-conventions-text}}
+
+These conventions usually work best within plain-text formats.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{csv}: comma separated values are the most common plain-text format, so they have better support than similar formats where cells are separated by tabs or semi-colons. However, if you are receiving a well-behaved file separated by these characters, be thankful and go with the flow.
+\item
+  \textbf{cells enclosed in quotes}: a `cell' should be enclosed in double quotes, especially if it's a string/character variable.
+\end{enumerate}
+
+\hypertarget{data-conventions-excel}{%
+\subsection{Excel}\label{data-conventions-excel}}
+
+As \href{\%7B\#data-containers-avoid}{discussed above} avoid Excel. When that is not possible, these conventions helps reduce ambiguity and corrupted values. See \protect\hyperlink{snippets-reading-excel}{the appendix} for our preferred approach to reading Excel files.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{avoid multiple tabs/worksheets}: Excel files containing multiple worksheets are more complicated to read with automation, and the produces the opportunities for inconsistent variables across tabs/worksheets.
+\item
+  \textbf{save the cells as text}: avoiding Excel attempting to save cells as dates or numbers. Admitedly, this is a last-ditch effort. If someone is using Excel to convert cells to text, the values are probably already corrupted.
+\end{enumerate}
+
+\hypertarget{data-conventions-meditech}{%
+\subsection{Meditech}\label{data-conventions-meditech}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{patient identifier}: \texttt{mrn\_meditech} instead of \texttt{mrn}, \texttt{MRN\ Rec\#}, or \texttt{Med\ Rec\#}.
+\item
+  \textbf{account/admission identifier}: \texttt{account\_number} instead of \texttt{mrn}, \texttt{Acct\#}, or \texttt{Account\#}.
+\item
+  \textbf{patient's full name}: \texttt{name\_full} instead of \texttt{Patient\ Name} or \texttt{Name}.
+\item
+  \textbf{long/tall format}: one row per dx per patient (up to 50 dxs) instead of 50 \emph{columns} of \texttt{dx} per patient. Applies to
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    diagnosis code \& description
+  \item
+    order date \& number
+  \item
+    procedure name \& number
+  \end{enumerate}
+\end{enumerate}
+
+Meditech Idiosyncracies:
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  csv
-\item
-  rds
-\item
-  SQLite
-\item
-  Central Enterprise database
-\item
-  Central REDCap database
-\item
-  Containers to avoid for raw/input
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Proprietary like xlsx, sas7bdat
-  \end{enumerate}
+  \textbf{blood pressure}: in most systems the \texttt{bp\_diastolic} and \texttt{bp\_systolic} values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a foward slash.
 \end{enumerate}
+
+\hypertarget{data-conventions-database}{%
+\subsection{Databases}\label{data-conventions-database}}
+
+When exchanging data between two different systems, \ldots{}
 
 \hypertarget{patterns}{%
 \chapter{Patterns}\label{patterns}}
@@ -1274,18 +1429,26 @@ Automation is an important prerequisite of reproducibility.
 \hypertarget{automation-mediator}{%
 \section{Mediator}\label{automation-mediator}}
 
-A nontirivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. This single file is a special cases of the \href{https://en.wikipedia.org/wiki/Mediator_pattern}{mediator pattern}, in the sense that it defines how each piece relates to each other.
+A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. The single file makes the project more protable, and also clearly documents the process.
+
+This single file is a special cases of the \href{https://en.wikipedia.org/wiki/Mediator_pattern}{mediator pattern}, in the sense that it defines how each piece relates to each other.
 
 \hypertarget{automation-flow}{%
 \subsection{Flow File in R}\label{automation-flow}}
+
+\{Describe \url{https://github.com/wibeasley/RAnalysisSkeleton/blob/master/flow.R}.\}
 
 See also the \protect\hyperlink{repo-flow}{prototypical repo}.
 
 \hypertarget{automation-makefile}{%
 \subsection{Makefile}\label{automation-makefile}}
 
+\{Briefly describe this language, how it can be more efficient, and what additional obstacles it presents.\}
+
 \hypertarget{automation-ssis}{%
 \subsection{SSIS}\label{automation-ssis}}
+
+\{Describe SSIS package development.\}
 
 \hypertarget{automation-scheduling}{%
 \section{Scheduling}\label{automation-scheduling}}
@@ -1304,7 +1467,7 @@ Many of the GUI options are easy to specify, but three are error-prone, and must
 
 \begin{itemize}
 \item
-  \textbf{Program/script:} is the absolute path to \texttt{Rscript.exe}. It needs to be updated every time you upgrade R (unless you're doing something tricky with the \texttt{PATH} environmental OS variable.). Notice we are using the ``patched'' version of R. The entry should be enclosed in quotes.
+  \textbf{Program/script:} is the absolute path to \texttt{Rscript.exe}. It needs to be updated every time you upgrade R (unless you're doing something tricky with the \texttt{PATH} environmental OS variable). Notice we are using the ``patched'' version of R. The entry should be enclosed in quotes.
 
 \begin{verbatim}
 "C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe"
@@ -1316,7 +1479,7 @@ Many of the GUI options are easy to specify, but three are error-prone, and must
 "C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R"
 \end{verbatim}
 \item
-  \textbf{Start in (optional):} sets the working directory. If not properly set, the relative paths of the files will not point to the correct locations. This should be identical to the entry above, but (a) do not include `/flow.R' and (b) does not contains quotes. We repeate, the entry should NOT be enclosed in quotes.
+  \textbf{Start in (optional):} sets the working directory. If not properly set, the relative paths of the files will not point to the correct locations. It should be identical to the entry above, but (a) does not include `/flow.R' and (b) does NOT contains quotes.
 
 \begin{verbatim}
 C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1
@@ -1333,7 +1496,7 @@ Other options we typically specify are:
 \item
   ``Run as the highest available version of Windows.''
 \item
-  ``Wake the computer ot run this task'' is probably necessary if this is located on a normal desktop. It is not something we specify, because our tasks are located on a \href{https://en.wikipedia.org/wiki/System_virtual_machine}{VM}-based workstation that is never turned off.
+  ``Wake the computer to run this task'' is probably necessary if this is located on a normal desktop. It is not something we specify, because our tasks are located on a \href{https://en.wikipedia.org/wiki/System_virtual_machine}{VM}-based workstation that is never turned off.
 \end{enumerate}
 
 Following these instructions, you are required to enter your password every time you modify the task, and every time you update your password. If you are using network credentials, you probably should specify your account like ``domain/username''. Be careful: when you modify a task and are prompted for a password, the GUI subtly alters the account entry to just ``username'' (instead of ``domain/username''). Make sure you prepend the username with the domain, as you enter the password.
@@ -1343,28 +1506,49 @@ Following these instructions, you are required to enter your password every time
 
 \href{https://docs.microsoft.com/en-us/sql/ssms/agent/sql-server-agent}{SQL Server Agent} executes jobs on a specified schedule. It also naturally interfaces with \protect\hyperlink{automation-ssis}{SSIS packages} deployed to the server, but can also execute other formats, like a plain sql file.
 
-An important distinction is that it runs as a service \emph{on the database server}, as opposed to Task Schedular, which runs as a service on the client machine. We prefer running jobs on the server when the job either
-1. requires elevated/administrative privileges,
-1. would require a lot of network constraints when passing large amount of data between the server and client, or
-1. ``feels'' like it is the server's responsibility, such as rebuilding a database index, or archiving server logs.
+An important distinction is that it runs as a service \emph{on the database server}, as opposed to Task Scheduler, which runs as a service on the client machine. We prefer running jobs on the server when the job either:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  requires elevated/administrative privileges (for instance, to access sensitive data),
+\item
+  would require a lot of network constraints when passing large amounts of data between the server and client, or
+\item
+  feels like it is the server's responsibility, such as rebuilding a database index, or archiving server logs.
+\end{enumerate}
 
 \hypertarget{auxiliary-issues}{%
 \section{Auxiliary Issues}\label{auxiliary-issues}}
 
-The following subsections do not execute or scheule any code, but should be considered.
+The following subsections do not execute or schedule any code, but should be considered.
 
 \hypertarget{sink-log-files}{%
 \subsection{Sink Log Files}\label{sink-log-files}}
 
+\{Describe how to sink output to a file that can be examined easily.\}
+
 \hypertarget{package-versions}{%
 \subsection{Package Versions}\label{package-versions}}
 
-When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected, and when they are, the error messages may not be as clear as when you are running the procedure in RStudio. For these and other reasons, plan your strategy for maintaining the version of R and its packages. Here are some approaches, with different tradeoffs.
+When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems. And when they are, the error messages may not be as clear as when you are running the procedure in RStudio. For these and other reasons, plan your strategy for maintaining the version of R and its packages. Here are some approaches, with different tradeoffs.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  For most conventional projects, we keep all packages up to date, and live with the occasional breaks. We stick to a practice of (a) run our daily workflow, (b) update the packages (and R \& RStudio if necessary), (c) rereun that same week's workflow, and finally (d) verify that the results from a \& c are the same. If something is different, we have a day to adapt the pipeline code to the breaking changes in the packages.
+\end{enumerate}
+
+Before updating a package, read the NEWS file for changes that are not backwards-compatible (commonly called ``breaking changes'' in the \href{https://style.tidyverse.org/news.html\#breaking-changes}{news file}).
+
+If the changes to the pipeline code are too difficult to complete in a day, we can roll back to a previous version with \href{https://remotes.r-lib.org/reference/install_version.html}{\texttt{remotes::install\_version()}}.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Meticulously specifies the desired version of each R package. Packages sometimes release backwards-incompatibilities (commonly called ``breaking changes'' in the \href{https://style.tidyverse.org/news.html\#breaking-changes}{news file}). This approach reduces the chance of a new version of a package breaking existing pipeline code. We recommend this approach when uptime is important.
+  On the other side of the spectrum, you can meticulously specify the desired version of each R package. This approach reduces the chance of a new version of a package breaking existing pipeline code. We recommend this approach when uptime is very important.
 
   The most intuitive implementation is to install with explicit code in a file like \texttt{utility/install-dependencies.R}:
 
@@ -1390,15 +1574,15 @@ Imports:
    openxlsx    (== 4.0.17)
 \end{verbatim}
 
-  A downside is that it can be difficult to set up a identical machine in a few months. Sometimes these packages have depend on packages that are incompatible with other package versions. For example, at one point, the current version of dplyr was 0.4.3. A few months later, the rlang package (which wasn't explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr. The developer on the new machine needs to decide wether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.
+  A downside is that it can be difficult to set up a identical machine in a few months. Sometimes these packages have depend on packages that are incompatible with other package versions. For example, at one point, the current version of dplyr was 0.4.3. A few months later, the rlang package (which wasn't explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr. The developer on the new machine needs to decide whether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.
 
-  A second important downside is that this approach can lock all the user's projects to specific outdate package version.
+  A second important downside is that this approach can lock all the user's projects to specific outdated package version.
 
   We and others\footnote{\href{https://insightindustry.com/}{Chris Modzelewski}} advocate this approach when your team is experienced with only R, and has a machine dedicated to an important line-of-business workflow.
+
+  When uptime is important and your team is experienced with other languages like Java, Python, or C\#, consider if those would be better suited.
 \item
-  For most conventional projects, we keep all packages up to date, and live with the occasional breaks. Stick to a practice of (a) run our weekly workflow, (b) update the packages (and R \& RStudio if necessary), (c) rereun that same week's workflow, and finally (d) verify that the results from a \& c are the same. If something is different, we have a week to adapt the pipeline code to the breaking changes in the packages.
-\item
-  A compromise between these two approaches in the `renv' - R Environmentals package (\url{https://rstudio.github.io/renv}). It is a successor to \href{https://rstudio.github.io/packrat/}{packrat}. It requires some learning and cognitive overhead. But if you were running hourly predictions and downtime is a big deal, this investment becomes a lot more appealing.
+  A compromise between these two previous approaches in the \href{https://rstudio.github.io/renv}{renv} package - R Environmentals. It is a successor to \href{https://rstudio.github.io/packrat/}{packrat}. It requires some learning and cognitive overhead. But this investment becomes very appealing if (a) you were running hourly predictions and downtime is a big deal, or (b) your machine contains multiple projects that require different versions of the same package (such as dplyr 0.4.3 and dplyr 0.8.0).
 \end{enumerate}
 
 \hypertarget{scaling-up}{%
@@ -1540,6 +1724,23 @@ This involves code/files that multiple people use, like the REDCap arches.
 
 \hypertarget{issues-tasks}{%
 \section{Issues \& Tasks}\label{issues-tasks}}
+
+\hypertarget{documentation-issue-template}{%
+\subsection{GitHub Issue Template}\label{documentation-issue-template}}
+
+If you are going to open up a repo/package to the public, consider creating a \href{https://help.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates}{template for GitHub Issues} that's tailored to the repo's unique characteristics. Furthermore, invite feedback from your userbase to improve the template. Here is our appeal in \href{https://github.com/OuhscBbmc/REDCapR/issues/291}{REDCapR} that produced the \href{https://github.com/OuhscBbmc/REDCapR/blob/master/.github/ISSUE_TEMPLATE/unexpected-behavior-issue-template.md}{Unexpected Behavior issue template}:
+
+\begin{quote}
+@nutterb @haozhu233, @rparrish, @sybandrew, and any one else, if you have time, please look at the \href{https://github.com/OuhscBbmc/REDCapR/blob/master/.github/ISSUE_TEMPLATE/unexpected-behavior-issue-template.md}{new issue template} that is customized for REDCapR/redcapAPI. I'd appreciate any feedback that could improve the experience for someone encountering a problem.
+
+I'd like something to (a) make it easier for the user to provide useful information with less effort and (b) make it easier for us to help more accurately with fewer back-and-forths. And if the template happens to help the user identify and solve the problem without creating the issue \ldots then I think everyone is happier too.
+
+I think the issue should leverage the \href{https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html}{Troubleshooter} that 10+ people have contributed to. It should help locate the problematic area more quickly.
+
+@haozhu233, it seems you've liked the \href{https://github.com/haozhu233/kableExtra/issues/new?template=bug_report.md}{template in kableExtra}. REDCapR is different in the sense it's more difficult to provide a minimal \& self-contained example to reproduce the problem. But with your experience with so many users and issues, I'd love any advice.
+
+@nutterb, I'd like this template to be helpful to \href{https://github.com/nutterb/redcapAPI}{redcapAPI} too. There are only three quick find-and-replace occurrences of `REDCapR' -\textgreater{} `redcapAPI'. And those were mostly to distinguish the R package from REDCap itself.
+\end{quote}
 
 \hypertarget{flow-diagrams}{%
 \section{Flow Diagrams}\label{flow-diagrams}}
@@ -2197,6 +2398,21 @@ The order does not matter.
 \end{Shaded}
 \item
   \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
+\item
+  \textbf{Python} is used by some analysts. The prototypical installation involves two options
+
+  \begin{itemize}
+  \item
+    \textbf{\href{https://www.anaconda.com/distribution/\#download-section}{Anaconda}}, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open ``Anaconda Prompt'' with administrative privileges
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{conda install numpy pandas scikit}\OperatorTok{{-}}\NormalTok{learn matplotlib}
+\end{Highlighting}
+\end{Shaded}
+  \item
+    \textbf{Standard Python}, while installing packages through pip3 in the terminal
+  \end{itemize}
 \end{itemize}
 
 \hypertarget{installation-ubuntu}{%
@@ -2537,19 +2753,19 @@ Finally, consider how much traffic passes through the dependency A brittle depen
 \appendix}
 
 
-\hypertarget{git-github}{%
-\chapter{Git \& GitHub}\label{git-github}}
+\hypertarget{git}{%
+\chapter{Git \& GitHub}\label{git}}
 
-\hypertarget{for-code-development}{%
-\section{for Code Development}\label{for-code-development}}
+\hypertarget{git-code}{%
+\section{for Code Development}\label{git-code}}
 
 \href{https://github.com/jennybc}{Jenny Bryan} and \href{https://github.com/jimhester}{Jim Hester} have published a thorough description of using Git from a data scientist's perspective (\href{https://happygitwithr.com/}{Happy Git and GitHub for the useR}), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is \emph{\href{https://smile.amazon.com/dp/1449302440}{Team Geek}}, which has insightful advice for the human and collaborative aspects of version control.
 
 Other Resources
 1. \href{https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github}{Setting up a CI/CD Process on GitHub with Travis CI}. Travis-CI blob from August 2019.
 
-\hypertarget{for-collaboration}{%
-\section{for Collaboration}\label{for-collaboration}}
+\hypertarget{git-collaboration}{%
+\section{for Collaboration}\label{git-collaboration}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2589,12 +2805,11 @@ Here are some tips from our experiences with projects involving between 2 and 10
   \end{enumerate}
 \end{enumerate}
 
-\hypertarget{for-stability}{%
-\section{for Stability}\label{for-stability}}
+\hypertarget{git-stability}{%
+\section{for Stability}\label{git-stability}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Review Git commits closely
 
@@ -2606,20 +2821,20 @@ Here are some tips from our experiences with projects involving between 2 and 10
   \item
     No PHI snuck in (\emph{e.g.}, a patient ID used while isolating and debugging).
   \item
-    The metadata format didn't change (\emph{e.g.}, Excel sometimes changes the string `010' to the number `10').
+    The metadata format didn't change (\emph{e.g.}, Excel sometimes changes the string `010' to the number `10'). See \protect\hyperlink{snippets-correspondence-excel}{the appendix} for a longer discussion about the problems that Excel typically introduces.
   \end{enumerate}
 \end{enumerate}
 
 \hypertarget{snippets}{%
 \chapter{Snippets}\label{snippets}}
 
-\hypertarget{reading-external-data}{%
-\section{Reading External Data}\label{reading-external-data}}
+\hypertarget{snippets-reading}{%
+\section{Reading External Data}\label{snippets-reading}}
 
-\hypertarget{reading-from-excel}{%
-\subsection{Reading from Excel}\label{reading-from-excel}}
+\hypertarget{snippets-reading-excel}{%
+\subsection{Reading from Excel}\label{snippets-reading-excel}}
 
-\emph{Background}: Avoid Excel for so many reasons. But if there isn't another good option, be protective. \href{https://readxl.tidyverse.org/reference/read_excel.html}{\texttt{readxl::read\_excel()}} allows you to specify column types, but not column order. The names of \texttt{col\_types} is ignored by \texttt{readxl::read\_excel()}. To defend against roamining columns (\emph{e.g.}, the files changed over time), \texttt{tesit::assert()} that the order is what you expect.
+\emph{Background}: Avoid Excel for the \href{\%7B\#data-containers-avoid}{reasons previously discussed}. But if there isn't another good option, be protective. \href{https://readxl.tidyverse.org/reference/read_excel.html}{\texttt{readxl::read\_excel()}} allows you to specify column types, but not column order. The names of \texttt{col\_types} is ignored by \texttt{readxl::read\_excel()}. To defend against roamining columns (\emph{e.g.}, the files changed over time), \texttt{tesit::assert()} that the order is what you expect.
 
 \emph{Last Modified}: 2019-12-12 by Will
 
@@ -2630,16 +2845,16 @@ Here are some tips from our experiences with projects involving between 2 and 10
 
 \CommentTok{\# cat(sprintf(\textquotesingle{}  \textasciigrave{}\%s\textasciigrave{}             = "text",\textbackslash{}n\textquotesingle{}, colnames(ds)), sep="") \# \textquotesingle{}text\textquotesingle{} by default {-}{-}then change where appropriate.}
 \NormalTok{col\_types <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}
-  \StringTok{\textasciigrave{}}\DataTypeTok{Med Rec Num}\StringTok{\textasciigrave{}}\NormalTok{        =}\StringTok{ "text"}\NormalTok{,}
-  \StringTok{\textasciigrave{}}\DataTypeTok{Admit Date}\StringTok{\textasciigrave{}}\NormalTok{         =}\StringTok{ "date"}\NormalTok{,}
-  \StringTok{\textasciigrave{}}\DataTypeTok{Tot Cash Pymt}\StringTok{\textasciigrave{}}\NormalTok{      =}\StringTok{ "numeric"}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Med Rec Num}\StringTok{\textasciigrave{}}\NormalTok{     =}\StringTok{ "text"}\NormalTok{,}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Admit Date}\StringTok{\textasciigrave{}}\NormalTok{      =}\StringTok{ "date"}\NormalTok{,}
+  \StringTok{\textasciigrave{}}\DataTypeTok{Tot Cash Pymt}\StringTok{\textasciigrave{}}\NormalTok{   =}\StringTok{ "numeric"}
 \NormalTok{)}
 
 \CommentTok{\# {-}{-}{-}{-} load{-}data {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \NormalTok{ds <{-}}\StringTok{ }\NormalTok{readxl}\OperatorTok{::}\KeywordTok{read\_excel}\NormalTok{(}
-  \DataTypeTok{path       =}\NormalTok{ config}\OperatorTok{$}\NormalTok{path\_admission\_charge,}
-  \DataTypeTok{col\_types  =}\NormalTok{ col\_types}
-  \CommentTok{\# sheet    = "dont{-}use{-}sheets{-}if{-}possible"}
+  \DataTypeTok{path      =}\NormalTok{ config}\OperatorTok{$}\NormalTok{path\_admission\_charge,}
+  \DataTypeTok{col\_types =}\NormalTok{ col\_types}
+  \CommentTok{\# sheet   = "dont{-}use{-}sheets{-}if{-}possible"}
 \NormalTok{)}
 
 \NormalTok{testit}\OperatorTok{::}\KeywordTok{assert}\NormalTok{(}
@@ -2649,8 +2864,8 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{removing-trailing-comma-from-header}{%
-\subsection{Removing Trailing Comma from Header}\label{removing-trailing-comma-from-header}}
+\hypertarget{snippets-reading-trailing-comma}{%
+\subsection{Removing Trailing Comma from Header}\label{snippets-reading-trailing-comma}}
 
 \emph{Background}: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, \href{https://readr.tidyverse.org/reference/read_delim.html}{\texttt{readr:read\_csv()}} appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.
 
@@ -2672,11 +2887,11 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{grooming}{%
-\section{Grooming}\label{grooming}}
+\hypertarget{snippets-grooming}{%
+\section{Grooming}\label{snippets-grooming}}
 
-\hypertarget{correct-for-misinterpreted-two-digit-year}{%
-\subsection{Correct for misinterpreted two-digit year}\label{correct-for-misinterpreted-two-digit-year}}
+\hypertarget{snippets-grooming-two-year}{%
+\subsection{Correct for misinterpreted two-digit year}\label{snippets-grooming-two-year}}
 
 \emph{Background}: Sometimes the Meditech dates are specified like \texttt{1/6/54} instead of \texttt{1/6/1954}. \texttt{readr::read\_csv()} has to choose if the year is supposed to be `1954' or `2054'. A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can't (so it guesses 2054). For avoid this and other problems, request dates in an \href{https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601}{ISO-8601} format.
 
@@ -2690,16 +2905,16 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \begin{Highlighting}[]
 \NormalTok{ ds }\OperatorTok{\%>\%}
 \StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{dob   =}\NormalTok{ dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(dob }\OperatorTok{<=}\StringTok{ }\KeywordTok{Sys.Date}\NormalTok{(), dob, dob }\OperatorTok{{-}}\StringTok{ }\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{years}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+    \DataTypeTok{dob =}\NormalTok{ dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(dob }\OperatorTok{<=}\StringTok{ }\KeywordTok{Sys.Date}\NormalTok{(), dob, dob }\OperatorTok{{-}}\StringTok{ }\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{years}\NormalTok{(}\DecValTok{100}\NormalTok{))}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{identification}{%
-\section{Identification}\label{identification}}
+\hypertarget{snippets-identification}{%
+\section{Identification}\label{snippets-identification}}
 
-\hypertarget{snippet-tag}{%
-\subsection{Generating ``tags''}\label{snippet-tag}}
+\hypertarget{snippets-identification-tags}{%
+\subsection{Generating ``tags''}\label{snippets-identification-tags}}
 
 \emph{Background}: When you need to generate unique identification values for future people/clients/patients, as described in the \protect\hyperlink{style-number}{style guide}.
 
@@ -2744,6 +2959,36 @@ The resulting dataset will look like this, but with different randomly-generated
 4        4 jl0dg84 FALSE    --        --        
 5        5 r5ei5ph FALSE    --        --        
 \end{verbatim}
+
+\hypertarget{snippets-correspondence}{%
+\section{Correspondence with Collaborators}\label{snippets-correspondence}}
+
+\hypertarget{snippets-correspondence-excel}{%
+\subsection{Excel files}\label{snippets-correspondence-excel}}
+
+Receiving and storing \protect\hyperlink{data-containers-avoid}{Excel files should almost always be avoided} for the reasons explained in this letter.
+
+We receive extracts as Excel files frequently, and have the following request ready to email the person sending us Excel files. Adapt the bold values like ``109.19'' to your situation. If you are familiar with their tools, suggest an alternative for saving the file as a csv. Once presented with these Excel gotchas, almost everyone has an `aha' moment and recognizes the problem. Unfortunately, not everyone has flexible software and can adapt easily.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+{[}Start of the letter{]}
+
+Sorry to be tedious, but could you please resend the extract as a \href{https://en.wikipedia.org/wiki/Comma-separated_values}{csv} file? Please call me if you have questions.
+
+Excel is being too helpful with some of the values, and essentially corrupting them. For example, values like \textbf{109.19} is interpreted as a number, not a character code (\emph{e.g.}, see cell \textbf{L14}). Because of \href{https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html}{limitations of finite precision}, this becomes \textbf{109.18999999999999773}. We can't round it, because there are other values in this column that cannot be cast to numbers, such as \textbf{V55.0}. Furthermore, the ``E''s in some codes are incorrectly interpreted as the exponent operator (\emph{e.g.}, ``4E5'' is converted to 400,000). Finally, values like \textbf{41.0} are being converted to a number and the trailing zero is dropped (so cells like ``41'' are not distinguishable from ``41.0'').
+
+Unfortunately the problems exist in the Excel file itself. When we import the columns \href{https://readxl.tidyverse.org/reference/read_excel.html}{as text}, the values are already in their corrupted state.
+
+Please compress/zip the csv if the file is be too large to email. We've found that an Excel file is typically 5-10 times larger than a compressed csv.
+
+As much as Excel interferes with our medical variables, we're lucky. It has messed with other branches of science much worse. Genomics were using it far too late \href{https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/}{before they realized their mistakes}.
+
+\begin{quote}
+What happened? By default, Excel and other popular spreadsheet applications convert some gene symbols to dates and numbers. For example, instead of writing out ``Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase,'' researchers have dubbed the gene MARCH1. Excel converts this into a date---03/01/2016, say---because that's probably what the majority of spreadsheet users mean when they type it into a cell. Similarly, gene identifiers like ``2310009E13'' are converted to exponential numbers (2.31E+19). In both cases, the conversions strip out valuable information about the genes in question.
+\end{quote}
+
+{[}End of the letter{]}
 
 \hypertarget{presentations}{%
 \chapter{Presentations}\label{presentations}}
@@ -2956,17 +3201,13 @@ Here is a collection of presentations by the BBMC and friends that may help demo
   \end{quote}
 \item
   developing packages
-\end{enumerate}
 
-\begin{itemize}
-\item
-  \href{http://r-pkgs.had.co.nz/}{\emph{R packages}} by Hadley Wickham
-\item
-  \url{http://mangothecat.github.io/goodpractice/}
-\end{itemize}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+  \begin{itemize}
+  \item
+    \href{http://r-pkgs.had.co.nz/}{\emph{R packages}} by Hadley Wickham
+  \item
+    \url{http://mangothecat.github.io/goodpractice/}
+  \end{itemize}
 \item
   Cargo cult programming ``is a style of computer programming characterized by the ritual inclusion of code or program structures that serve no real purpose.'' (\href{https://en.wikipedia.org/wiki/Cargo_cult_programming}{Wikipedia})
 
