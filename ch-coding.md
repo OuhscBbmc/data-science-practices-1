@@ -99,7 +99,10 @@ Defensive Style {#coding-defensive}
 
 Try to prepend each function with its package.  Write `dplyr::filter()` instead of `filter()`.  When two packages contain public functions with the same name, the package that was most recently called with `library()` takes precedent.  When multiple R files are executed, the packages' precedents may not be predictable.  Specifying the package eliminates the ambiguity, while also making the code easier to follow.  For this reason, we recommend that almost all R files contain a ['load-packages'](#chunk-load-packages) chunk.
 
-See the [Google Style Guide](https://google.github.io/styleguide/Rguide.html#qualifying-namespaces) for more about qualifying functions
+See the [Google Style Guide](https://google.github.io/styleguide/Rguide.html#qualifying-namespaces) for more about qualifying functions.
+
+Some exceptions exist, including:
+* The [sf](https://r-spatial.github.io/sf/) package if you're using its objects [with dplyr verbs](https://r-spatial.github.io/sf/articles/sf6.html#why-do-dplyr-verbs-not-work-for-sf-objects).
 
 ### Date Arithmetic {#coding-defensive-date-arithmetic}
 
