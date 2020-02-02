@@ -51,3 +51,18 @@ Chapters & Sections to Form
 Practices
 ------------------------------------
 
+* `on.exit()` should have `add = TRUE` (@wickham-advanced-r, https://adv-r.hadley.nz/functions.html#on-exit)
+
+Good Sites
+------------------------------------
+
+Posts on these sites are almost always worth your time reading.  The frequently improve how you develop with the common components used in our data pipelines.
+
+* [Yihui Xie](https://yihui.org/en/), created [knitr](https://yihui.org/knitr/) and other important contributions to reproducible research.
+* [RStudio](https://blog.rstudio.com/), in addition to their IDE, many of the packages used here were created by their developers.
+* [Explain xkcd](www.explainxkcd.com) because it's good.
+
+Occassionally skim the titles on these sites and pick a few relevant to your interests.  We think it helps keep you aware of developments in the field, so your skills continually grow and our approaches don't become stagnant.
+
+* [O'Reilly's Data science ideas and resources]()https://www.oreilly.com/topics/data-science
+* [Towards Data Science](https://towardsdatascience.com/)
