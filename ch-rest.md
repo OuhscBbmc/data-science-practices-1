@@ -25,7 +25,7 @@ When exchanging data between two different systems, the preferred format is freq
 
 ### yaml, json, and xml {#data-containers-yaml}
 
-[yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/), [json](https://www.w3schools.com/js/js_json_intro.asp), and [xml](https://www.w3schools.com/xml/) are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds).  
+[yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/), [json](https://www.w3schools.com/js/js_json_intro.asp), and [xml](https://www.w3schools.com/xml/) are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds).  If you are unsure where to start with a nested dataset, see tidyr's [Rectangling vignette](https://tidyr.tidyverse.org/articles/rectangle.html).
 
 In the same way we advocate for the [simplest recoding](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-recoding) function that is adequate for the task, we prefer yaml over json, and json over xml.  Yaml accommodates most, but not all our needs.  Initially it may be tricky to correctly use whitespacing to specify the correct nesting structure in yaml, but once you are familar, the file is easy to read and edit, and the Git diffs can be quickly reviewed.  The [yaml](http://biostat.mc.vanderbilt.edu/wiki/Main/YamlR) package reads a yaml file, and returns a (nested) [R list](https://www.tutorialspoint.com/r/r_lists.htm); it can also convert an R list into a yaml file.
 
@@ -34,7 +34,7 @@ The [config](https://github.com/rstudio/config) package wraps the yaml package t
 ```yaml
 range_dob   : !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))
 ```
-See the discussion of the [`config.yml`](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html#repo-config) in our prototypical repository, as well
+See the discussion of the [`config.yml`](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html#repo-config) in our prototypical repository, as well.
 
 ### Arrow {#data-containers-arrow}
 
