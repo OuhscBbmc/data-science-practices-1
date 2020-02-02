@@ -51,7 +51,7 @@ Chapters & Sections to Form
 Practices
 ------------------------------------
 
-* `on.exit()` should have `add = TRUE` (@wickham-advanced-r, https://adv-r.hadley.nz/functions.html#on-exit)
+* `on.exit()` should have `add = TRUE` (@wickham-advanced-r, [Exit handlers](https://adv-r.hadley.nz/functions.html#on-exit)).
 
 Good Sites
 ------------------------------------
