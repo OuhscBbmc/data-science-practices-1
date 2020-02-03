@@ -66,3 +66,9 @@ Occassionally skim the titles on these sites and pick a few relevant to your int
 
 * [O'Reilly's Data science ideas and resources]()https://www.oreilly.com/topics/data-science
 * [Towards Data Science](https://towardsdatascience.com/)
+
+These books haven't been referenced (yet), but have good guidance and could be worth your time skimming to see what is relevant.
+
+* [*The Tidynomicon*](http://tidynomicon.tech/) by Dhavide Aruliah & Greg Wilson
+
+* [*Efficient R programming*](https://bookdown.org/csgillespie/efficientR/) by Colin Gillespie & Robin Lovelace
