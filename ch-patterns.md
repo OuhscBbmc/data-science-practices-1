@@ -11,20 +11,21 @@ To incorporate outside data source into your system safely.
 ### Philosophy
 
 * Without data immigration, all warehouses are useless.  Embrace the power of fresh information in a way that is:
-    * repeatable when the datasource is updated (and you have to refresh your warehouse)
-    * similar to other Ellis lanes (that are designed for other data sources) so you don't have to learn/remember an entirely new pattern. (Like Rubiks cube instructions.)
+
+  * repeatable when the data source is updated (and you have to refresh your warehouse)
+  * similar to other Ellis lanes (that are designed for other data sources) so you don't have to learn/remember an entirely new pattern. (Like Rubiks cube instructions.)
 
 ### Guidelines
 
-* Take small bites.  
-    * Like all software development, don't tackle all the complexity the first time.  Start by processing only the important columns before incorporating move.
-    * Use only the variables you need in the short-term, especially for new projects.  As everyone knows, the variables from the upstream source can change.  Don't spend effort writing code for variables you won't need for a few months/years; they'll likely change before you need them.
-    * After a row passes through the `verify-values` chunk, you're accountable for any failures it causes in your warehouse.  All analysts know that external data is messy, so don't be surprised.  Sometimes I'll spend an hour writing an Ellis for 6 columns.
+* Take small bites.
+
+  * Like all software development, don't tackle all the complexity the first time.  Start by processing only the important columns before incorporating move.
+  * Use only the variables you need in the short-term, especially for new projects.  As everyone knows, the variables from the upstream source can change.  Don't spend effort writing code for variables you won't need for a few months/years; they'll likely change before you need them.
+  * After a row passes through the `verify-values` chunk, you're accountable for any failures it causes in your warehouse.  All analysts know that external data is messy, so don't be surprised.  Sometimes I'll spend an hour writing an Ellis for 6 columns.
 
 * Narrowly define each Ellis lane.  One code file should strive to (a) consume only one CSV and (b) produce only one table.  Exceptions include:
     1. if multiple input files are related, and really belong together (*e.g.*, one CSV per month, or one CSV per clinic).  This scenario is pretty common.
     1. if the CSV should legitimately produce two different tables after munging.  This happens infrequently, such as one warehouse table needs to be wide, and another long.
-
 
 ### Examples
 
@@ -42,7 +43,7 @@ To incorporate outside data source into your system safely.
 
 1. **Load Sources** In R, a `source()`d file is run to execute its code.  We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation.  There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like.  The first is collecting those common functions into a single file (and then sourcing it in the callers).  The second is to make the repo a legitimate R package.
 
-    The first approach is better suited for quick & easy development.  The second allows you to add documention and unit tests.
+    The first approach is better suited for quick & easy development.  The second allows you to add documentation and unit tests.
 
     ```r
     # ---- load-sources ------------------------------------------------------------
@@ -63,7 +64,7 @@ To incorporate outside data source into your system safely.
     requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
     requireNamespace("testit")
     requireNamespace("checkmate")
-    requireNamespace("OuhscMunge") #devtools::install_github(repo="OuhscBbmc/OuhscMunge")
+    requireNamespace("OuhscMunge") # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
 
     ```
 
@@ -75,9 +76,6 @@ To incorporate outside data source into your system safely.
 
 1. **Load Data Source(s)** See [load-data](#chunk-load-data) chunk described in the prototypical file.
 
-
-    
-    
     ```r
     # ---- load-data ---------------------------------------------------------------
     ```
@@ -85,21 +83,16 @@ To incorporate outside data source into your system safely.
 1. **Tweak Data**
 
     See [tweak-data](#chunk-tweak-data) chunk described in the prototypical file.
-    
-    
+
     ```r
     # ---- tweak-data --------------------------------------------------------------
     ```
-
 
 1. **Body of the Ellis**
 
 1. **Verify**
 
-
-
-1. **Specify Columns** 
-
+1. **Specify Columns**
 
     See [specify-columns-to-upload](#chunk-specify-columns) chunk described in the prototypical file.
 
@@ -113,7 +106,6 @@ To incorporate outside data source into your system safely.
     # ---- save-to-db --------------------------------------------------------------
     # ---- save-to-disk ------------------------------------------------------------
     ```
-
 
 Arch {#pattern-arch}
 ------------------------------------
@@ -168,7 +160,6 @@ A few important rules are necessary to map concepts in this multidimensional spa
 1. each **survey wave** gets its own **column** within the csv, such as `code_2011` and `code_2016`.
 
 1. each **level** within a variable-wave gets its own **row**, like `Jefe`, `Esposo`, and `Hijo`.
-
 
 ### Secondary Rules for Mapping
 

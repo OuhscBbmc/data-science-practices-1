@@ -27,10 +27,10 @@ If you are going to open up a repo/package to the public, consider creating a [t
 >
 > \@nutterb, I'd like this template to be helpful to [redcapAPI](https://github.com/nutterb/redcapAPI) too.  There are only three quick find-and-replace occurrences of 'REDCapR' -> 'redcapAPI'.  And those were mostly to distinguish the R package from REDCap itself.
 
-
 Flow Diagrams
 ------------------------------------
 
 Setting up new machine
 ------------------------------------
+
 ([example](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md))

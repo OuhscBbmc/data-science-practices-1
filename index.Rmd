@@ -15,7 +15,6 @@ Introduction {#intro}
 
 This collection of documents describe practices used by the OUHSC [BBMC](https://ouhsc.edu/bbmc) in our analytics projects.
 
-
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(

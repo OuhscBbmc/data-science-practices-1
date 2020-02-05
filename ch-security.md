@@ -12,9 +12,9 @@ Public & Private Repositories
 
 ### Scrubbing GitHub history
 
-Occassionaly files may be committed to your git repository that need to be removed completely.  Not just from the current collections of files (*i.e.*, the branch's [head](https://git-scm.com/docs/gitglossary#gitglossary-aiddefHEADaHEAD)), but from the entire history of the repo.  
+Occasionally files may be committed to your git repository that need to be removed completely.  Not just from the current collections of files (*i.e.*, the branch's [head](https://git-scm.com/docs/gitglossary#gitglossary-aiddefHEADaHEAD)), but from the entire history of the repo.
 
-Scrubbing is require typically when (a) a sensitive file has been accidentally commited and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.
+Scrubbing is require typically when (a) a sensitive file has been accidentally committed and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.
 
 The two suitable scrubbing approaches both require the command line.  The first is the `git-filter-branch` command within git, and the second is the [BFG repo-cleaner](https://rtyley.github.io/bfg-repo-cleaner/).  We use the second approach, which is [recommended by GitHub]; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.
 
@@ -31,13 +31,13 @@ The [bash](https://www.gnu.org/software/bash/)-centric steps below remove any fi
     cd ~
     git clone --mirror https://github.com/your-org/bloated.git
     ```
-    
+
 1. Remove all files (in any directory) called 'monster-data.csv'.
 
     ```bash
     java -jar bfg-*.jar --delete-files monster-data.csv bloated.git
     ```
-    
+
 1. [Reflog](https://git-scm.com/docs/git-reflog) and [garbage collect](https://git-scm.com/docs/git-gc) the repo.
 
     ```bash
@@ -50,13 +50,15 @@ The [bash](https://www.gnu.org/software/bash/)-centric steps below remove any fi
     ```bash
     git push
     ```
+
 1. Delete the bfg jar from the home directory.
 
     ```bash
     cd ~
     rm bfg-*.jar
     ```
-1. Ask your collaborators to reclone the repo to their local machine.  It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo's history. 
+
+1. Ask your collaborators to re-clone the repo to their local machine.  It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo's history.
 
 1. If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file's history isn't accessible through their website, even if the repo is private.
 

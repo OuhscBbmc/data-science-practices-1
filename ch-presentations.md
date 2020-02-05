@@ -39,6 +39,7 @@ GitHub
 
 Software
 ------------------------------------
+
 1. **[REDCapR](https://ouhscbbmc.github.io/REDCapR/)**: Interaction Between R and REDCap.
 1. **[OuhscMunge](https://ouhscbbmc.github.io/OuhscMunge/)**: Data manipulation operations commonly used by the [Biomedical and Behavioral Methodology Core](http://www.ouhsc.edu/bbmc/) within the [Department of Pediatrics](http://www.oumedicine.com/pediatrics) of the [University of Oklahoma Health Sciences Center](http://ouhsc.edu/).
 1. **[codified](https://ouhscbbmc.github.io/codified/)**: Produce standard/formalized demographics tables.
@@ -46,26 +47,27 @@ Software
 
 Architectures
 ------------------------------------
+
 1. Linear Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
     <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png">
       <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png?raw=true" style="width: 500px;"/>.
     </a>
-    
+
 1. Many-to-many Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
     <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png">
       <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
     </a>
 
-1. Immunization transfer 
+1. Immunization transfer
 
     <a href="resources/immunization-flow.pdf">
       <img src="resources/immunization-flow.png" style="width: 2000px;"/>.
     </a>
 
 1. [IALSA](http://www.ialsa.org/): [A Collaborative Modeling Framework for Multi-study Replication](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)
-  
+
     <a href = "https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png">
       <img src="https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png?raw=true" style="width: 2000px;"/>.
     </a>
@@ -78,6 +80,7 @@ Architectures
 
 Components
 ------------------------------------
+
 1. **[Customizing display tables: using css with DT and kableExtra](https://raw.githack.com/OuhscBbmc/StatisticalComputing/master/2018-presentations/10-october/table-styling.html#/)**.  [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2018.
 1. **[yaml](https://github.com/wibeasley/class-yaml-2017/blob/master/data-public/raw/miechv-3-outcome-measure.yml)** and **[expandable trees](
 https://rawcdn.githack.com/wibeasley/class-yaml-2017/55ad75a9f69b03fde929c06bb3ec129f25c816a9/analysis/miechv-3-measures/miechv-3-measures.html#4_trees)** that selectively show subsets of hierarchy, 2017.

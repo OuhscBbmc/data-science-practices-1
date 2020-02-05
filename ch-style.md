@@ -10,21 +10,20 @@ Readability
 
 ### Number {#style-number}
 
-The word "number" is ambiguous, especially in data science.  Try for these more specific terms 
+The word "number" is ambiguous, especially in data science.  Try for these more specific terms:
 
 * **count**: the number of discrete objects or events, such as `visit_count`, `pt_count`, `dx_count`.
-* **id**: a value that uniquely identifies an entity that doesn't change over time, such as `pt_id`, `clinic_id`, `client_id`, 
-* **index**: a 1-based sequence that's typically temporary, but unique within the dataset.  For instance, `pt_index` 195 in Tuesday's dataset is likey a different person than `pt_index` 195 on Wednesday.  On any given day, there is only one value of 195.
+* **id**: a value that uniquely identifies an entity that doesn't change over time, such as `pt_id`, `clinic_id`, `client_id`,
+* **index**: a 1-based sequence that's typically temporary, but unique within the dataset.  For instance, `pt_index` 195 in Tuesday's dataset is like;y a different person than `pt_index` 195 on Wednesday.  On any given day, there is only one value of 195.
 * **tag**: it is persistent across time like "id", but typically created by the analysts and send to the research team.  See [the snippet](#snippet-tag) in the appendix for an example.
 * **tally**: a running count
 * **duration**: a length of time. Specify the units if it not self-evident.
-* physical and statistical quantities like 
+* physical and statistical quantities like
 "depth",
-"length", 
+"length",
 "mass",
 "mean", and
 "sum".
-
 
 ### Abbreviations {#style-abbreviation}
 
@@ -35,9 +34,9 @@ However, some terms are too long to reasonably use without shortening.  We make 
 1. humans commonly use the term orally.  For instance, people tend to say "OR" instead of "operating room".
 
 1. your team has agreed on set list of abbreviations.  The list for our [CDW](https://github.com/OuhscBbmc/prairie-outpost-public#readme) team includes:
-[appt](https://www.merriam-webster.com/dictionary/appointment) (not "apt"), 
-[cdw](https://en.wikipedia.org/wiki/Clinical_data_repository), 
-[cpt](https://en.wikipedia.org/wiki/Current_Procedural_Terminology), 
+[appt](https://www.merriam-webster.com/dictionary/appointment) (not "apt"),
+[cdw](https://en.wikipedia.org/wiki/Clinical_data_repository),
+[cpt](https://en.wikipedia.org/wiki/Current_Procedural_Terminology),
 [drg](https://en.wikipedia.org/wiki/Diagnosis-related_group) (stands for diagnosis-related group),
 [dx](https://www.medicinenet.com/script/main/art.asp?articlekey=33829),
 [hx](https://medical-dictionary.thefreedictionary.com/Hx),
@@ -47,17 +46,16 @@ However, some terms are too long to reasonably use without shortening.  We make 
 
 When your team choose terms (*e.g.*, 'apt' vs 'appt'), try to use a standard vocabulary, such as [MedTerms Medical Dictionary](https://www.medicinenet.com/medterms-medical-dictionary/article.htm).
 
-
 Datasets
 ------------------------------------
 
 ### Filtering Rows {#style-filter}
 
-Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices have hopefully reduced our mistakes and improved maintainability.  
+Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices have hopefully reduced our mistakes and improved maintainability.
 
 #### Dropping rows with missing values {#style-filter-drop_na}
 
-[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.  
+[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.
 
 ```r
 # Good
@@ -73,14 +71,12 @@ ds %>%
   dplyr::filter(!is.na(dob))
 
 # Worst
-ds[!is.na(ds$dob), ]  
+ds[!is.na(ds$dob), ]
 ```
-
 
 #### Mimic number line {#style-filter-number-line}
 
 When ordering quantities, go smallest-to-largest as you type left-to-right.
-
 
 #### Searchable verbs {#style-filter-searchable}
 
@@ -91,7 +87,6 @@ You've probably asked in frustration, "Where did all the rows go?  I had 1,000 i
 
 It's more difficult to highlight the When using the base R's filtering style, (*e.g.*, `ds <- ds[4 <= ds$count, ]`).
 
-
 ### Don't attach {#style-attach}
 
 As the [Google Stylesheet](https://google.github.io/styleguide/Rguide.html#dont-use-attach) says, "The possibilities for creating errors when using [`attach()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html) are numerous."
@@ -99,7 +94,7 @@ As the [Google Stylesheet](https://google.github.io/styleguide/Rguide.html#dont-
 Categorical Variables {#style-factor}
 ------------------------------------
 
-There are lots of names for a categorical variable across the different disciplines (*e.g.*, factor, categorical, ...).  
+There are lots of names for a categorical variable across the different disciplines (*e.g.*, factor, categorical, ...).
 
 ### Explicit Missing Values {#style-factor-unknown}
 
@@ -212,7 +207,7 @@ I think it's acceptable if the R vectors follow a different style than R `data.f
 
 #### Use `ds` when definition is clear {#style-naming-datasets-ds-only}
 
-Many times an [ellis file](#pattern-ellis) handles with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.  
+Many times an [ellis file](#pattern-ellis) handles with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.
 
 #### Use an adjective after the grain, if necessary {#style-naming-datasets-adjective}
 
@@ -234,11 +229,9 @@ If it's potentially unclear to a new reader, use a comment immediately before th
 ds_client_enroll <- ...
 ```
 
-
 ### Semantic sorting {#style-naming-semantic}
 
 Put the "biggest" term on the left side of the variable.
-
 
 Whitespace {#style-whitespace}
 ------------------------------------
@@ -262,7 +255,7 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 
 1. Favor CTEs
 
-1. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `empoyee_id`, not `id`.
+1. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `employee_id`, not `id`.
 
 <!-- 1. When a boolean variable might be ambiguous, -->
 
@@ -272,7 +265,6 @@ ggplot2 {#style-ggplot}
 The expressiveness of [ggplot2](https://ggplot2.tidyverse.org/) allows someone to quickly develop precise scientific graphics.  One graph can be specified in many equivalent styles, which increases the opportunity for confusion.  We formalized much of this style while writing a [textbook for introductory statistics](https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md) (@deshea); the 200+ graphs and their code is publicly available.
 
 There are a few additional ggplot2 tips in the [tidyverse style guide](https://style.tidyverse.org/ggplot2.html).
-
 
 ### Order of commands {#style-ggplot-order}
 

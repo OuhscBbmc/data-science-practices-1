@@ -3,7 +3,6 @@ Workstation {#workstation}
 
 We believe it is important to keep software updated and consistent across workstations in your project.  This material was originally posted at https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md.  It should help establish our tools on a new development computer.
 
-
 Required Installation {#installation-required}
 ------------------------------------
 
@@ -13,13 +12,13 @@ The order matters.
 
 [R](http://cran.r-project.org/) is the centerpiece of the analysis. Every few months, you'll need to download the most recent version.  {added Sept 2012}
 
-### RStudio 
+### RStudio
 
 [RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.
 
 ### Installing R Packages
 
-Dozens of R Packages will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least fifteen minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated. 
+Dozens of R Packages will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least fifteen minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated.
 
 To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3), which defines the `package_janitor_remote()` function.  The final line calls the function (and passes a specific CSV of packages)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R) (located in the `utility/` directory) that lives in this repository.  The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R).].
 
@@ -29,7 +28,7 @@ devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-jani
 
 package_janitor_remote(
   "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"
-)        
+)
 ```
 
 Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper [DESCRIPTION](http://r-pkgs.had.co.nz/description.html) file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION) for an example.
@@ -54,11 +53,10 @@ Several R packages will need to be updated every weeks.  Unless you have been to
 
 [GitHub for Windows Client](http://windows.github.com/) does the basic tasks a little easier than the git features built into RStudio.  Occasionally, someone might need to use git form the command line to fix problems.
 
-
 Recommended Installation {#installation-recommended}
 ------------------------------------
 
-The order does not matter.     
+The order does not matter.
 
 * **[ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)** is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 17 is the most recent driver version.  See if a new one exists. {updated Apr 2018}
 
@@ -66,7 +64,7 @@ The order does not matter.
 
 * **[Notepad++](http://notepad-plus-plus.org/)** is a text editor that allows you look at the raw text files, such as code and CSVs.  For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks & causes some issues).  {added Sept 2012}
 
-* **[Atom](https://atom.io/)** is a text editor, similar to Notepad++.  Notepad++ appears more efficient opening large CSVs.  Atom is better suited when editing a lot of files in a repository.  For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.  
+* **[Atom](https://atom.io/)** is a text editor, similar to Notepad++.  Notepad++ appears more efficient opening large CSVs.  Atom is better suited when editing a lot of files in a repository.  For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
 
     Productivity is enhanced with the following [Atom packages](https://atom.io/packages):
 
@@ -97,10 +95,10 @@ The order does not matter.
     1. File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
     1. File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when 'Tab' is pressed)
 
-* **[Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download)** is now recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Managment Studio. 
+* **[Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download)** is now recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Managment Studio.
 
-    Note: here are some non-default changes that facilitate our workflow. 
-    
+    Note: here are some non-default changes that facilitate our workflow.
+
     1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
     1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
     1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
@@ -118,7 +116,7 @@ The order does not matter.
 * **[Git](https://git-scm.com/downloads)** command-line utility enables some advanced operations that the GitHub client doesn't support.  Use the default installation options, except these preferences of ours:
     1. Nano is the default text editor.
 
-* **GitLab SSL Certificate** isn't software, but still needs to be configured.  
+* **GitLab SSL Certificate** isn't software, but still needs to be configured.
     1. Talk to Will for the server URL and the `*.cer` file.
     1. Save the file in something like `~/keys/ca-bundle-gitlab.cer`
     1. Associate the file with `git config --global http.sslCAInfo ...path.../ca-bundle-gitlab.cer` (but replace `...path...`).
@@ -129,45 +127,44 @@ The order does not matter.
 
 * **[Visual Studio Code](https://code.visualstudio.com/)** is an extensible text editor that runs on Windows and Linux, similar to [Atom](https://atom.io/) (described above).  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown.  Currently, it supports searching CSVs better than Atom.  Productivity is enhanced with the following extensions:  {added Dec 2018}
 
-    * [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) isn't a good name, but I've liked the capability.  It displays CSVs and other files in a grid. {added Dec 2018}
+  * [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) isn't a good name, but I've liked the capability.  It displays CSVs and other files in a grid. {added Dec 2018}
 
-    * [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv) color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}
+  * [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv) color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}
 
-    * [SQL Server](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) allows you to execute against a database, and view/copy/save the grid results.  It doesn't replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}
+  * [SQL Server](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) allows you to execute against a database, and view/copy/save the grid results.  It doesn't replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}
 
-    * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) produces  green squiggly lines under words not in its dictionary.  You can add words to your user dictionary, or a project dictionary.
-    
-    * [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) has some useful markdown capbilities, such as converting the file to html.
-    
-    * [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) has some useful markdown capbilities, such as converting the file to pdf.
-    
-    * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) has linting and style checking.
+  * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) produces  green squiggly lines under words not in its dictionary.  You can add words to your user dictionary, or a project dictionary.
 
-    These extensions [can be installed by command line](https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions).
+  * [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) has some useful markdown capbilities, such as converting the file to html.
 
-    ```sh
-    code --list-extensions
-    code --install-extension GrapeCity.gc-excelviewer
-    code --install-extension mechatroner.rainbow-csv
-    code --install-extension ms-mssql.mssql
-    code --install-extension streetsidesoftware.code-spell-checker
-    code --install-extension yzhang.markdown-all-in-one
-    code --install-extension yzane.markdown-pdf
-    code --install-extension DavidAnson.vscode-markdownlint
-    ```
+  * [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) has some useful markdown capbilities, such as converting the file to pdf.
+
+  * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) has linting and style checking.
+
+  These extensions [can be installed by command line](https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions).
+
+  ```sh
+  code --list-extensions
+  code --install-extension GrapeCity.gc-excelviewer
+  code --install-extension mechatroner.rainbow-csv
+  code --install-extension ms-mssql.mssql
+  code --install-extension streetsidesoftware.code-spell-checker
+  code --install-extension yzhang.markdown-all-in-one
+  code --install-extension yzane.markdown-pdf
+  code --install-extension DavidAnson.vscode-markdownlint
+  ```
 
 * **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
 
 * **Python** is used by some analysts.  The prototypical installation involves two options
 
-    * **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
-    
-       ```python
-       conda install numpy pandas scikit-learn matplotlib
-       ```
-    
-    * **Standard Python**, while installing packages through pip3 in the terminal
+  * **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
 
+     ```python
+     conda install numpy pandas scikit-learn matplotlib
+     ```
+
+  * **Standard Python**, while installing packages through pip3 in the terminal
 
 Ubuntu Installation {#installation-ubuntu}
 -----------------------------------
@@ -177,8 +174,8 @@ Ubuntu desktop 19.04 follows [these instructions](https://askubuntu.com/a/862520
 Add the following to the sources with `sudo nano /etc/apt/sources.list`.  The 'eoan' version may be updated; The 'metrocast' part could be modified too from [this list](https://launchpad.net/ubuntu/+archivemirrors).  I found it worked better for a new Ubuntu release than 'cloud.r-project.org'.
 
 ```sh
-deb https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ 
-deb-src https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ 
+deb https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/
+deb-src https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/
 deb http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe
 ```
 
@@ -190,7 +187,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
   sudo apt-get update
   sudo apt-get install r-base r-base-dev
-  
+
   ### Git
   sudo apt-get install git-core
   git config --global user.email "wibeasley@hotmail.com"
@@ -204,13 +201,13 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The genefilter package is needed for 'modeest' on CRAN.
   # No longer a modeest dependency: Rscript -e 'BiocManager::install("genefilter")'
-  
+
   ### CRAN packages that are also on the Ubuntu repositories
-  
-  # The 'xml2' package; https://CRAN.R-project.org/package=xml2 
+
+  # The 'xml2' package; https://CRAN.R-project.org/package=xml2
   sudo apt-get --yes install libxml2-dev r-cran-xml
 
-  # The 'curl' package, and others; https://CRAN.R-project.org/package=curl 
+  # The 'curl' package, and others; https://CRAN.R-project.org/package=curl
   sudo apt-get --yes install libssl-dev libcurl4-openssl-dev
 
   # The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html
@@ -236,7 +233,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208
   sudo apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev
-  
+
   # For Cairo package, a dependency of Shiny & plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/
   sudo apt-get --yes install libcairo2-dev
 
@@ -257,7 +254,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # pandoc
   sudo apt-get --yes install pandoc
-  
+
   # For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.
   sudo apt-get install texinfo
 }
@@ -292,8 +289,6 @@ Asset Locations
 
 * **ODBC UserDsn** The name depends on your specific repository, and SQL Server database.  Ask Thomas, Will or David for how to set it up.
 
-
-
 Administrator Installation {#installation-administrator}
 -----------------------------------
 
@@ -310,13 +305,13 @@ Administrator Installation {#installation-administrator}
     1. Text Editor | All Languages | Tabs | Tab size: 2
     1. Text Editor | All Languages | Tabs | Indent size: 2
     1. Text Editor | All Languages | Tabs | Insert Spaces: true
-    
-    These dont affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
+
+    These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
 
     1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
     1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
     1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
-    
+
     1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false
     1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false
     1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false
@@ -333,10 +328,8 @@ Installation Troubleshooting
 
 * **RStudio** If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings`. {added Sept 2012}
 
-
 Retired Tools
 -----------------------------------
-
 
 We previously installed this software in this list.  Most have been replaced by software above that's either newer or more natural to use.
 
@@ -352,4 +345,4 @@ We previously installed this software in this list.  Most have been replaced by 
 
 * **[GitHub for Eclipse](http://eclipse.github.com/)** is something I discourage for a beginner, and I strongly recommend you start with RStudio (and [GitHub Client](http://windows.github.com/) or the git capabilities within RStudio) for a few months before you even consider Eclipse.  It's included in this list for the sake of completeness. When installing EGit plug-in, ignore eclipse site and check out this youtube video:http://www.youtube.com/watch?v=I7fbCE5nWPU.
 
-* **[Color Oracle](http://colororacle.org/)** simulates the three most common types of color blindness.  If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too).  If it's already installed, it takes less than 10 second to check it against all three types of color blindness. If it's not installed, extra work may be necessary if Java isn't already installed.  When you download the zip, extract the `ColorOracle.exe` program where you like. {added Sept 2012}  
+* **[Color Oracle](http://colororacle.org/)** simulates the three most common types of color blindness.  If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too).  If it's already installed, it takes less than 10 second to check it against all three types of color blindness. If it's not installed, extra work may be necessary if Java isn't already installed.  When you download the zip, extract the `ColorOracle.exe` program where you like. {added Sept 2012}
