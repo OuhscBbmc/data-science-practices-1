@@ -104,8 +104,6 @@ In some large-scale scenarios, there may be a series of datasets that cannot be 
 
 An R solution may be to losen the restriction that dataset enter the R file only during the 'load-data' chunk.  Once a dataset is processed and no longer needed, `rm()` *r*e*m*oves it from RAM.  Now another dataset can be read from a file and manipulated.
 
-
-
 *loose scrap*: 
 the chunk reads all data (*e.g.*, database table, networked CSV, local lookup table).  After this chunk, no new data should be introduced.  This is for the sake of reducing human cognition load.  Everything below this chunk is derived from these first four chunks.
 

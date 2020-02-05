@@ -1,7 +1,7 @@
 Acknowledgements {#acknowledgements}
 ====================================
 
-The authors thank all our colleauges for the discussions and experiences about data science that lead to this book.  At OUHSC, this includes 
+The authors thank all our colleagues for the discussions and experiences about data science that lead to this book.  At OUHSC, this includes 
 [\@adrose](https://github.com/adrose),
 [\@aggie-dbc](https://github.com/aggie-dbc),
 [\@ARPeters](https://github.com/ARPeters),

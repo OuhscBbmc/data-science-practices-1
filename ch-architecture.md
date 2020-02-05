@@ -4,7 +4,7 @@ Architecture Principles {#architecture}
 Encapsulation
 ------------------------------------
 
-Leverage team member's strenghts & avoid weaknesses
+Leverage team member's strengths & avoid weaknesses
 ------------------------------------
 
 ### Focused code files
@@ -26,4 +26,3 @@ Consistency {#architecture-consistency}
 ### Across Languages
 
 ### Across Projects
-

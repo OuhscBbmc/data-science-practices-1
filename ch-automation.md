@@ -6,7 +6,7 @@ Automation is an important prerequisite of reproducibility.
 Mediator {#automation-mediator}
 ------------------------------------
 
-A nontrivial project usually has multiple stages in its pipeline.  Instead of a human deciding when to execute which piece, a single file should execute the pieces.  The single file makes the project more protable, and also clearly documents the process.
+A nontrivial project usually has multiple stages in its pipeline.  Instead of a human deciding when to execute which piece, a single file should execute the pieces.  The single file makes the project more portable, and also clearly documents the process.
 
 This single file is a special cases of the [mediator pattern](https://en.wikipedia.org/wiki/Mediator_pattern), in the sense that it defines how each piece relates to each other.
 
@@ -39,19 +39,19 @@ Many of the GUI options are easy to specify, but three are error-prone, and must
 
 * **Program/script:** is the absolute path to `Rscript.exe`.  It needs to be updated every time you upgrade R (unless you're doing something tricky with the `PATH` environmental OS variable).  Notice we are using the "patched" version of R.  The entry should be enclosed in quotes.
 
-    ```
+    ```sh
     "C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe"
     ```
 
 * **Add arguments (optional):** specifies the flow file to run.  In this case, the repo 'butcher-hearing-screen-1' is under in the 'Documents/cdw/` directory; the [flow file](#automation-flow) is located in the repo's root directory, as discussed in the [prototypical repo](#repo-flow).  The entry should be enclosed in quotes.
 
-    ```
+    ```shell
     "C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R"
     ```
-    
+
 * **Start in (optional):** sets the working directory.  If not properly set, the relative paths of the files will not point to the correct locations.  It should be identical to the entry above, but (a) does not include '/flow.R' and (b) does NOT contains quotes.
 
-    ```
+    ```shell
     C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1
     ```
 
@@ -62,7 +62,7 @@ Other options we typically specify are:
 1. "Wake the computer to run this task" is probably necessary if this is located on a normal desktop.  It is not something we specify, because our tasks are located on a [VM](https://en.wikipedia.org/wiki/System_virtual_machine)-based workstation that is never turned off.
 
 Following these instructions, you are required to enter your password every time you modify the task, and every time you update your password.  If you are using network credentials, you probably should specify your account like "domain/username".  Be careful: when you modify a task and are prompted for a password, the GUI subtly alters the account entry to just "username" (instead of "domain/username").  Make sure you prepend the username with the domain, as you enter the password.
-  
+
 ### SQL Server Agent  {#automation-sql-server-agent}
 
 [SQL Server Agent](https://docs.microsoft.com/en-us/sql/ssms/agent/sql-server-agent) executes jobs on a specified schedule.  It also naturally interfaces with [SSIS packages](#automation-ssis) deployed to the server, but can also execute other formats, like a plain sql file.
@@ -82,14 +82,13 @@ The following subsections do not execute or schedule any code, but should be con
 
 {Describe how to sink output to a file that can be examined easily.}
 
-
 ### Package Versions
 
 When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems.  And when they are, the error messages may not be as clear as when you are running the procedure in RStudio.  For these and other reasons, plan your strategy for maintaining the version of R and its packages.  Here are some approaches, with different tradeoffs.
 
 1. For most conventional projects, we keep all packages up to date, and live with the occasional breaks.  We stick to a practice of (a) run our daily workflow, (b) update the packages (and R & RStudio if necessary), (c) rereun that same week's workflow, and finally (d) verify that the results from a & c are the same.  If something is different, we have a day to adapt the pipeline code to the breaking changes in the packages.
 
-Before updating a package, read the NEWS file for changes that are not  backwards-compatible (commonly called "breaking changes" in the [news file](https://style.tidyverse.org/news.html#breaking-changes)). 
+Before updating a package, read the NEWS file for changes that are not  backwards-compatible (commonly called "breaking changes" in the [news file](https://style.tidyverse.org/news.html#breaking-changes)).
 
 If the changes to the pipeline code are too difficult to complete in a day, we can roll back to a previous version with [`remotes::install_version()`](https://remotes.r-lib.org/reference/install_version.html).
 
@@ -105,9 +104,9 @@ If the changes to the pipeline code are too difficult to complete in a day, we c
     remotes::install_version("openxlsx"  , version = "4.0.17")
     # ... package list continues ...
     ```
-    
+
     Another implementation is to convert the repo to a package itself, and [specify the versions](http://r-pkgs.had.co.nz/description.html#dependencies) in the `DESCRIPTION` file.
-    
+
     ```
     Imports:
        dplyr       (== 0.4.3 )
@@ -122,7 +121,7 @@ If the changes to the pipeline code are too difficult to complete in a day, we c
     A second important downside is that this approach can lock all the user's projects to specific outdated package version.
 
     We and others^[[Chris Modzelewski](https://insightindustry.com/)] advocate this approach when your team is experienced with only R, and has a machine dedicated to an important line-of-business workflow.
-    
+
     When uptime is important and your team is experienced with other languages like Java, Python, or C#, consider if those would be better suited.
 
 1. A compromise between these two previous approaches in the [renv](https://rstudio.github.io/renv) package - R Environmentals.  It is a successor to [packrat](https://rstudio.github.io/packrat/).  It requires some learning and cognitive overhead.  But this investment becomes very appealing if (a) you were running hourly predictions and downtime is a big deal, or (b) your machine contains multiple projects that require different versions of the same package (such as dplyr 0.4.3 and dplyr 0.8.0).

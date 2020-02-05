@@ -3,24 +3,25 @@ Parallel Collaboration {#collaboration}
 
 Social Contract
 ------------------------------------
+
 1. Issues
 1. Organized Commits & Coherent Diffs
 1. Branch & Merge Strategy
 
 Code Reviews
 ------------------------------------
+
 1. Daily Reviews of PRs
 1. Periodic Reviews of Files
 
 Remote
 ------------------------------------
+
 1. Headset & sharing screens
-
-
-
 
 Additional Resources
 ------------------------------------
+
 * [@gillespie], particularly the "Efficient collaboration" chapter.
 * [@fitzpatrick]
 
@@ -39,7 +40,6 @@ Loose Notes
         * what low-level file & line of code threw the error.
         * how you have tried to solve it.
     * If there's a questionable line/chunk of code, [trace](https://help.github.com/articles/tracing-changes-in-a-file/) its origin.  Not for the sake of pointing the finger at someone, but for the sake of understanding its origin and history.
-
 
 ### Common Code
 

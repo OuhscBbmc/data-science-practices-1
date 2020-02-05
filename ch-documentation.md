@@ -13,8 +13,8 @@ Dataset Origin & Structure
 Issues & Tasks
 ------------------------------------
 
-
 ### GitHub Issue Template {#documentation-issue-template}
+
 If you are going to open up a repo/package to the public, consider creating a [template for GitHub Issues](https://help.github.com/en/github/building-a-strong-community/about-issue-and-pull-request-templates) that's tailored to the repo's unique characteristics.  Furthermore, invite feedback from your userbase to improve the template.  Here is our appeal in [REDCapR](https://github.com/OuhscBbmc/REDCapR/issues/291) that produced the [Unexpected Behavior issue template](https://github.com/OuhscBbmc/REDCapR/blob/master/.github/ISSUE_TEMPLATE/unexpected-behavior-issue-template.md):
 
 > \@nutterb \@haozhu233, \@rparrish, \@sybandrew, and any one else, if you have time, please look at the [new issue template](https://github.com/OuhscBbmc/REDCapR/blob/master/.github/ISSUE_TEMPLATE/unexpected-behavior-issue-template.md) that is customized for REDCapR/redcapAPI.  I'd appreciate any feedback that could improve the experience for someone encountering a problem.

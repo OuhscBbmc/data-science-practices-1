@@ -2,12 +2,23 @@
     "cSpell.words": [
         "Dataverse",
         "Ouhsc",
+        "Postgres",
+        "SSIS",
         "dataset",
         "datasets",
+        "difftime",
         "dplyr",
+        "ggplot",
+        "lubridate",
         "munge",
+        "nonmissing",
+        "openxlsx",
+        "prepend",
         "readr",
+        "rereun",
+        "rlang",
         "scatterplot",
-        "tidyr"
+        "tidyr",
+        "tidyverse"
     ]
 }
