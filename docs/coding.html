@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -464,7 +464,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="coding-simplify-types" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Data Types</h3>
 <p>Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called <code>gender</code> can simultaneously contain the values “m”, “f”, “F”, “Female”, “MALE”, “0”, “1”, “2”, “Latino”, "", and <code>NA</code>. On the other hand, a boolean variable <code>gender_male</code> can be only <code>FALSE</code>, <code>TRUE</code>, and <code>NA</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p><a href="https://www.sqlite.org/datatype3.html">SQLite</a> does not have a dedicated datatype, so you must resort to storing it as <code>0</code>, <code>1</code> and <code>NULL</code> values. Because a caller can’t assume that an obstensible boolean SQLite variable contains only those three values, the variable should be checked.]</p>
+<p><a href="https://www.sqlite.org/datatype3.html">SQLite</a> does not have a dedicated datatype, so you must resort to storing it as <code>0</code>, <code>1</code> and <code>NULL</code> values. Because a caller can’t assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.]</p>
 <p>Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
 <p>Within R, the preference for numeric-ish variables is</p>
 <ol style="list-style-type: decimal">
@@ -492,7 +492,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.1.3</span> Recoding</h3>
 <p>Almost every project recodes many variables. Choose the simplest function possible. The functions at the top are much easier to read and harder to mess up.</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Leverage exising booleans:</strong> Suppose you have the logical variable <code>gender_male</code> (which can be only <code>TRUE</code>, <code>FALSE</code>, or <code>NA</code>). Writing <code>gender_male == TRUE</code> or <code>gender_male == FALSE</code> will evaluate to a boolean –that’s unnecessary because <code>gender_male</code> is already a boolean.</p>
+<li><p><strong>Leverage existing booleans:</strong> Suppose you have the logical variable <code>gender_male</code> (which can be only <code>TRUE</code>, <code>FALSE</code>, or <code>NA</code>). Writing <code>gender_male == TRUE</code> or <code>gender_male == FALSE</code> will evaluate to a boolean –that’s unnecessary because <code>gender_male</code> is already a boolean.</p>
 <ol style="list-style-type: decimal">
 <li><p><em>Testing for <code>TRUE</code></em>: use the variable by itself (<em>i.e.</em>, <code>gender_male</code> instead of <code>gender_male == TRUE</code>).</p></li>
 <li><p><em>Testing for <code>FALSE</code></em>: use <code>!</code>. Write <code>!gender_male</code> instead of <code>gender_male == FALSE</code> or <code>gender_male != TRUE</code>.</p></li>
@@ -516,8 +516,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-5"><a href="coding.html#cb5-5"></a></span>
 <span id="cb5-6"><a href="coding.html#cb5-6"></a><span class="co"># Otherwise a simple boolean output is sufficient.</span></span>
 <span id="cb5-7"><a href="coding.html#cb5-7"></a>stage_post  =<span class="st"> </span>(date_start <span class="op">&lt;=</span><span class="st"> </span>month)</span></code></pre></div></li>
-<li><p>**<code>base::cut()</code>*: The function evaluations only a single numeric variable. It’s range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).</p></li>
-<li><p>*<code>dplyr::recode()</code>**: The function evaluates a single integer or character variable. The output branches to a single discrete value.</p></li>
+<li><p><strong><code>base::cut()</code></strong>: The function evaluations only a single numeric variable. It’s range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).</p></li>
+<li><p><strong><code>dplyr::recode()</code></strong>: The function evaluates a single integer or character variable. The output branches to a single discrete value.</p></li>
 <li><p><strong>lookup table</strong>: It feasible recode 6 levels of race directly in R. It’s less feasible to recode 200 provider names. Specify the mapping in a csv, <code>readr</code> the csv to a data.frame, and left-join it.</p></li>
 <li><p><strong><code>dplyr::case_when()</code></strong>: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This ‘water fall’ execution helps in complicated scenarios, but is overkill for most.</p></li>
 </ol>
@@ -529,22 +529,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.2.1</span> Qualify functions</h3>
 <p>Try to prepend each function with its package. Write <code>dplyr::filter()</code> instead of <code>filter()</code>. When two packages contain public functions with the same name, the package that was most recently called with <code>library()</code> takes precedent. When multiple R files are executed, the packages’ precedents may not be predictable. Specifying the package eliminates the ambiguity, while also making the code easier to follow. For this reason, we recommend that almost all R files contain a <a href="file-prototype.html#chunk-load-packages">‘load-packages’</a> chunk.</p>
 <p>See the <a href="https://google.github.io/styleguide/Rguide.html#qualifying-namespaces">Google Style Guide</a> for more about qualifying functions.</p>
-<p>Some exceptions exist, including:
-* The <a href="https://r-spatial.github.io/sf/">sf</a> package if you’re using its objects <a href="https://r-spatial.github.io/sf/articles/sf6.html#why-do-dplyr-verbs-not-work-for-sf-objects">with dplyr verbs</a>.</p>
+<p>Some exceptions exist, including:</p>
+<ul>
+<li>The <a href="https://r-spatial.github.io/sf/">sf</a> package if you’re using its objects <a href="https://r-spatial.github.io/sf/articles/sf6.html#why-do-dplyr-verbs-not-work-for-sf-objects">with dplyr verbs</a>.</li>
+</ul>
 </div>
 <div id="coding-defensive-date-arithmetic" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Date Arithmetic</h3>
-<p>Don’t use the minus operator (<em>i.e.</em>, <code>-</code>) to subtract dates. Instead use <code>as.integer(difftime(stop, start, units="days"))</code>. It’s longer but protects from the scneario that <code>start</code> or <code>stop</code> are changed upstream to a datetime. In that case, <code>stop - start</code> equals the number of <em>seconds</em> between the two points, not the number of <em>days</em>.</p>
+<p>Don’t use the minus operator (<em>i.e.</em>, <code>-</code>) to subtract dates. Instead use <code>as.integer(difftime(stop, start, units="days"))</code>. It’s longer but protects from the scenario that <code>start</code> or <code>stop</code> are changed upstream to a datetime. In that case, <code>stop - start</code> equals the number of <em>seconds</em> between the two points, not the number of <em>days</em>.</p>
 </div>
 <div id="excluding-bad-cases" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Excluding Bad Cases</h3>
 <p>Some variables are critical to the record, and if it’s missing, you don’t want or trust any of its other values. For instance, a hospital visit record rarely useful if missing the patient ID. In these cases, prevent the record from passing through the <a href="patterns.html#pattern-ellis">ellis</a>.</p>
 <p>In this example, we’ll presume we can’t trust a patient record if it lacks a clean date of birth (<code>dob</code>).</p>
 <ol style="list-style-type: decimal">
-<li><p>Define the permissible range, in either the ellis’s <a href="file-prototype.html#chunk-declare">declare-gobals</a> chunk, or in the <a href="repo-prototype.html#repo-config">config-file</a>. (We’ll use the config file for this example.) We’ll exclude anyone born before 2000, or after tomorrow. Even though it’s illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.</p>
+<li><p>Define the permissible range, in either the ellis’s <a href="file-prototype.html#chunk-declare">declare-globals</a> chunk, or in the <a href="repo-prototype.html#repo-config">config-file</a>. (We’ll use the config file for this example.) We’ll exclude anyone born before 2000, or after tomorrow. Even though it’s illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="coding.html#cb6-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2000-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span></code></pre></div></li>
 <li><p>In the <a href="file-prototype.html#chunk-tweak-data">tweak-data</a> chunk, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/trim.html"><code>OuhscMunge::trim_date()</code></a> to set the cell to <code>NA</code> if it falls outside an acceptable range. After <a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>dplyr::mutate()</code></a>, call <a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> to exclude the entire record, regardless if (a) it was already <code>NA</code>, or (b) was “trimmed” to <code>NA</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coding.html#cb7-1"></a>ds &lt;-<span class="st"> </span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coding.html#cb7-1"></a>ds &lt;-</span>
 <span id="cb7-2"><a href="coding.html#cb7-2"></a><span class="st">  </span>ds <span class="op">%&gt;%</span></span>
 <span id="cb7-3"><a href="coding.html#cb7-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
 <span id="cb7-4"><a href="coding.html#cb7-4"></a>    <span class="dt">dob =</span> OuhscMunge<span class="op">::</span><span class="kw">trim_date</span>(dob, config<span class="op">$</span>range_dob)</span>

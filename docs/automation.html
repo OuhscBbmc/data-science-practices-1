@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -462,7 +462,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Automation is an important prerequisite of reproducibility.</p>
 <div id="automation-mediator" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Mediator</h2>
-<p>A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. The single file makes the project more protable, and also clearly documents the process.</p>
+<p>A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. The single file makes the project more portable, and also clearly documents the process.</p>
 <p>This single file is a special cases of the <a href="https://en.wikipedia.org/wiki/Mediator_pattern">mediator pattern</a>, in the sense that it defines how each piece relates to each other.</p>
 <div id="automation-flow" class="section level3" number="9.1.1">
 <h3><span class="header-section-number">9.1.1</span> Flow File in R</h3>
@@ -490,11 +490,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Many of the GUI options are easy to specify, but three are error-prone, and must be specified carefully. The exist under “Actions” | “Start a program”.</p>
 <ul>
 <li><p><strong>Program/script:</strong> is the absolute path to <code>Rscript.exe</code>. It needs to be updated every time you upgrade R (unless you’re doing something tricky with the <code>PATH</code> environmental OS variable). Notice we are using the “patched” version of R. The entry should be enclosed in quotes.</p>
-<pre><code>&quot;C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe&quot;</code></pre></li>
+<div class="sourceCode" id="cb32"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb32-1"><a href="automation.html#cb32-1"></a><span class="st">&quot;C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe&quot;</span></span></code></pre></div></li>
 <li><p><strong>Add arguments (optional):</strong> specifies the flow file to run. In this case, the repo ‘butcher-hearing-screen-1’ is under in the ’Documents/cdw/` directory; the <a href="automation.html#automation-flow">flow file</a> is located in the repo’s root directory, as discussed in the <a href="repo-prototype.html#repo-flow">prototypical repo</a>. The entry should be enclosed in quotes.</p>
-<pre><code>&quot;C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R&quot;</code></pre></li>
+<pre class="shell"><code>&quot;C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R&quot;</code></pre></li>
 <li><p><strong>Start in (optional):</strong> sets the working directory. If not properly set, the relative paths of the files will not point to the correct locations. It should be identical to the entry above, but (a) does not include ‘/flow.R’ and (b) does NOT contains quotes.</p>
-<pre><code>C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1</code></pre></li>
+<pre class="shell"><code>C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1</code></pre></li>
 </ul>
 <p>Other options we typically specify are:</p>
 <ol style="list-style-type: decimal">

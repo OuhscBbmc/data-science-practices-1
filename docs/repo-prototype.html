@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -470,21 +470,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-2"><a href="repo-prototype.html#cb16-2"></a><span class="co">  # To be processed by Ellis lanes</span></span>
 <span id="cb16-3"><a href="repo-prototype.html#cb16-3"></a><span class="at">  </span><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/raw/subject-1.csv&quot;</span></span>
 <span id="cb16-4"><a href="repo-prototype.html#cb16-4"></a><span class="at">  </span><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">&quot;data-public/raw/mlm-1.csv&quot;</span></span>
-<span id="cb16-5"><a href="repo-prototype.html#cb16-5"></a><span class="at">  </span></span>
+<span id="cb16-5"><a href="repo-prototype.html#cb16-5"></a></span>
 <span id="cb16-6"><a href="repo-prototype.html#cb16-6"></a><span class="co">  # Central Database (produced by Ellis lanes).</span></span>
 <span id="cb16-7"><a href="repo-prototype.html#cb16-7"></a><span class="at">  </span><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">&quot;data-public/derived/db.sqlite3&quot;</span></span>
-<span id="cb16-8"><a href="repo-prototype.html#cb16-8"></a><span class="at">  </span></span>
+<span id="cb16-8"><a href="repo-prototype.html#cb16-8"></a></span>
 <span id="cb16-9"><a href="repo-prototype.html#cb16-9"></a><span class="co">  # Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
 <span id="cb16-10"><a href="repo-prototype.html#cb16-10"></a><span class="at">  </span><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">&quot;data-public/derived/mlm-1.rds&quot;</span></span>
-<span id="cb16-11"><a href="repo-prototype.html#cb16-11"></a><span class="at">  </span></span>
+<span id="cb16-11"><a href="repo-prototype.html#cb16-11"></a></span>
 <span id="cb16-12"><a href="repo-prototype.html#cb16-12"></a><span class="co">  # Metadata</span></span>
 <span id="cb16-13"><a href="repo-prototype.html#cb16-13"></a><span class="at">  </span><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">&quot;data-public/metadata/cqi-annotation.csv&quot;</span></span>
-<span id="cb16-14"><a href="repo-prototype.html#cb16-14"></a><span class="at">  </span></span>
+<span id="cb16-14"><a href="repo-prototype.html#cb16-14"></a></span>
 <span id="cb16-15"><a href="repo-prototype.html#cb16-15"></a><span class="co">  # Logging errors and messages from automated execution.</span></span>
 <span id="cb16-16"><a href="repo-prototype.html#cb16-16"></a><span class="at">  </span><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), &quot;data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log&quot;)</span></span>
-<span id="cb16-17"><a href="repo-prototype.html#cb16-17"></a><span class="at">  </span></span>
+<span id="cb16-17"><a href="repo-prototype.html#cb16-17"></a></span>
 <span id="cb16-18"><a href="repo-prototype.html#cb16-18"></a><span class="co">  # time_zone_local       :  &quot;America/Chicago&quot; # Force local time, in case remotely run.</span></span>
-<span id="cb16-19"><a href="repo-prototype.html#cb16-19"></a><span class="at">  </span></span>
+<span id="cb16-19"><a href="repo-prototype.html#cb16-19"></a></span>
 <span id="cb16-20"><a href="repo-prototype.html#cb16-20"></a><span class="co">  # ---- Validation Ranges &amp; Patterns ----</span></span>
 <span id="cb16-21"><a href="repo-prototype.html#cb16-21"></a><span class="at">  </span><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
 <span id="cb16-22"><a href="repo-prototype.html#cb16-22"></a><span class="at">  </span><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span>

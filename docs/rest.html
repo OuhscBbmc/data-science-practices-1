@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -484,11 +484,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data-containers-yaml" class="section level3" number="6.2.3">
 <h3><span class="header-section-number">6.2.3</span> yaml, json, and xml</h3>
-<p><a href="https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/">yaml</a>, <a href="https://www.w3schools.com/js/js_json_intro.asp">json</a>, and <a href="https://www.w3schools.com/xml/">xml</a> are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds).</p>
+<p><a href="https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/">yaml</a>, <a href="https://www.w3schools.com/js/js_json_intro.asp">json</a>, and <a href="https://www.w3schools.com/xml/">xml</a> are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds). If you are unsure where to start with a nested dataset, see tidyr’s <a href="https://tidyr.tidyverse.org/articles/rectangle.html">Rectangling vignette</a>.</p>
 <p>In the same way we advocate for the <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-recoding">simplest recoding</a> function that is adequate for the task, we prefer yaml over json, and json over xml. Yaml accommodates most, but not all our needs. Initially it may be tricky to correctly use whitespacing to specify the correct nesting structure in yaml, but once you are familar, the file is easy to read and edit, and the Git diffs can be quickly reviewed. The <a href="http://biostat.mc.vanderbilt.edu/wiki/Main/YamlR">yaml</a> package reads a yaml file, and returns a (nested) <a href="https://www.tutorialspoint.com/r/r_lists.htm">R list</a>; it can also convert an R list into a yaml file.</p>
 <p>The <a href="https://github.com/rstudio/config">config</a> package wraps the yaml package to fill a common need: retrieving repository configuration information from a yaml file. We recommend using the config package when it fits. In some ways its functionality is a simplification of the yaml package, but it is an extension in other ways. For example, when a value follows <code>!expr</code>, R will evaluate the expression. We commonly specify the allowable ranges for variables in <a href="https://github.com/OuhscBbmc/cdw-skeleton-1/blob/master/config.yml"><code>config.yml</code></a></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="rest.html#cb17-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2010-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span></code></pre></div>
-<p>See the discussion of the <a href="https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html#repo-config"><code>config.yml</code></a> in our prototypical repository, as well</p>
+<p>See the discussion of the <a href="https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html#repo-config"><code>config.yml</code></a> in our prototypical repository, as well.</p>
 </div>
 <div id="data-containers-arrow" class="section level3" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Arrow</h3>
@@ -509,13 +509,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.2.8</span> Containers to avoid</h3>
 <div id="data-containers-avoid-spreadsheets" class="section level4" number="6.2.8.1">
 <h4><span class="header-section-number">6.2.8.1</span> Spreadsheets</h4>
-<p>Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and protyping equations –but is should not be trusted to transport serious information. Other spreadsheet software like <a href="https://en.wikipedia.org/wiki/LibreOffice_Calc">LibreOffice Calc</a> is less problematic in our epxerience, but still less desirable than the formats mentioned above.</p>
+<p>Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and prototyping equations –but is should not be trusted to transport serious information. Other spreadsheet software like <a href="https://en.wikipedia.org/wiki/LibreOffice_Calc">LibreOffice Calc</a> is less problematic in our experience, but still less desirable than the formats mentioned above.</p>
 <p>If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values. After you close the spreadsheet, <a href="git.html#git-stability">review the Git commits</a> to verify no values were corrupted.</p>
 <p>See <a href="snippets.html#snippets-correspondence-excel">the appendix</a> for a list of the ways your analyses can be undermined when receiving Excel files, as well as a template to correspond with your less-experienced colleagues that is sending your team Excel files.</p>
 </div>
 <div id="data-containers-avoid-proprietary" class="section level4" number="6.2.8.2">
 <h4><span class="header-section-number">6.2.8.2</span> Proprietary</h4>
-<p>Proprietary formats like <a href="https://en.wikipedia.org/wiki/SAS_(software)">SAS</a>’s “sas7bdat” are less accesible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project’s impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project’s failure.</p>
+<p>Proprietary formats like <a href="https://en.wikipedia.org/wiki/SAS_(software)">SAS</a>’s “sas7bdat” are less accessible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project’s impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project’s failure.</p>
 <p>We formerly distributed sas7bdat files to supplement (otherwise identical) csvs, in order to cater to the suprisingly large population of SAS users who were unfamiliar with <a href="https://documentation.sas.com/?docsetId=proc&amp;docsetTarget=n18jyszn33umngn14czw2qfw7thc.htm&amp;docsetVersion=9.4&amp;locale=en">proc import</a> or the Google search engine. Recently we have distributed only the csvs, with example code for reading the file from SAS.</p>
 </div>
 </div>
@@ -526,7 +526,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.3.1</span> All Sources</h3>
 <p>Across all file formats, these conventions usually work best.</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>consistency across versions</strong>: use a script to produce the dataset, and inform the recipient if the datasets’s structure changes. Most of our processes are automated, and changes that are trivial to humans (<em>e.g.</em>, <code>yyyy-mm-dd</code> to <code>mm/dd-yy</code>) will break the automation.</p>
+<li><p><strong>consistency across versions</strong>: use a script to produce the dataset, and inform the recipient if the dataset’s structure changes. Most of our processes are automated, and changes that are trivial to humans (<em>e.g.</em>, <code>yyyy-mm-dd</code> to <code>mm/dd-yy</code>) will break the automation.</p>
 <p>The specificity in our automation is intentional. We install guards on our processes so that bad values do not pass. For instance, we may place bounds on the toddlers’ age at 12 and 36 months. We <em>want</em> our automation to break if the next dataset contains age values between 1 and 3 (years). Our downstream analysis (say, a regression model where age is a predictor variable) would produce misleading results if the shift between months and years went undetected.</p></li>
 <li><p><strong>date format</strong>: specify as <code>YYYY-MM-DD</code> (<a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a>)</p></li>
 <li><p><strong>time format</strong>: specify as <code>HH:MM</code> or <code>HH:MM:SS</code>, preferably in 24-hour time. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (<em>i.e.</em>, <strong>0</strong>9:59)</p></li>
@@ -565,7 +565,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>Meditech Idiosyncracies:</p>
 <ol style="list-style-type: decimal">
-<li><strong>blood pressure</strong>: in most systems the <code>bp_diastolic</code> and <code>bp_systolic</code> values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a foward slash.</li>
+<li><strong>blood pressure</strong>: in most systems the <code>bp_diastolic</code> and <code>bp_systolic</code> values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a forward slash.</li>
 </ol>
 </div>
 <div id="data-conventions-database" class="section level3" number="6.3.5">

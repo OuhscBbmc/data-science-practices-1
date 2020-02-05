@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -468,9 +468,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="philosophy" class="section level3" number="7.1.2">
 <h3><span class="header-section-number">7.1.2</span> Philosophy</h3>
 <ul>
-<li>Without data immigration, all warehouses are useless. Embrace the power of fresh information in a way that is:
+<li><p>Without data immigration, all warehouses are useless. Embrace the power of fresh information in a way that is:</p>
 <ul>
-<li>repeatable when the datasource is updated (and you have to refresh your warehouse)</li>
+<li>repeatable when the data source is updated (and you have to refresh your warehouse)</li>
 <li>similar to other Ellis lanes (that are designed for other data sources) so you don’t have to learn/remember an entirely new pattern. (Like Rubiks cube instructions.)</li>
 </ul></li>
 </ul>
@@ -478,13 +478,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="guidelines" class="section level3" number="7.1.3">
 <h3><span class="header-section-number">7.1.3</span> Guidelines</h3>
 <ul>
-<li>Take small bites.
+<li><p>Take small bites.</p>
 <ul>
 <li>Like all software development, don’t tackle all the complexity the first time. Start by processing only the important columns before incorporating move.</li>
 <li>Use only the variables you need in the short-term, especially for new projects. As everyone knows, the variables from the upstream source can change. Don’t spend effort writing code for variables you won’t need for a few months/years; they’ll likely change before you need them.</li>
 <li>After a row passes through the <code>verify-values</code> chunk, you’re accountable for any failures it causes in your warehouse. All analysts know that external data is messy, so don’t be surprised. Sometimes I’ll spend an hour writing an Ellis for 6 columns.</li>
 </ul></li>
-<li>Narrowly define each Ellis lane. One code file should strive to (a) consume only one CSV and (b) produce only one table. Exceptions include:
+<li><p>Narrowly define each Ellis lane. One code file should strive to (a) consume only one CSV and (b) produce only one table. Exceptions include:</p>
 <ol style="list-style-type: decimal">
 <li>if multiple input files are related, and really belong together (<em>e.g.</em>, one CSV per month, or one CSV per clinic). This scenario is pretty common.</li>
 <li>if the CSV should legitimately produce two different tables after munging. This happens infrequently, such as one warehouse table needs to be wide, and another long.</li>
@@ -505,7 +505,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>Clear memory</strong> In scripting languages like R (unlike compiled languages like Java), it’s easy for old variables to hang around. Explicitly clear them before you run the file again.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="patterns.html#cb18-1"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>(<span class="dt">all=</span><span class="ot">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></span></code></pre></div></li>
 <li><p><strong>Load Sources</strong> In R, a <code>source()</code>d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.</p>
-<p>The first approach is better suited for quick &amp; easy development. The second allows you to add documention and unit tests.</p>
+<p>The first approach is better suited for quick &amp; easy development. The second allows you to add documentation and unit tests.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="patterns.html#cb19-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
 <span id="cb19-2"><a href="patterns.html#cb19-2"></a><span class="kw">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</span></code></pre></div></li>
 <li><p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code>library()</code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code>dplyr::intersect()</code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
@@ -520,7 +520,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-9"><a href="patterns.html#cb20-9"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></span>
 <span id="cb20-10"><a href="patterns.html#cb20-10"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</span>
 <span id="cb20-11"><a href="patterns.html#cb20-11"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</span>
-<span id="cb20-12"><a href="patterns.html#cb20-12"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co">#devtools::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div></li>
+<span id="cb20-12"><a href="patterns.html#cb20-12"></a><span class="kw">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co"># remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div></li>
 <li><p><strong>Declare Global Variables and Functions</strong>. This includes defining the expected column names and types of the data sources; use <code>readr::cols_only()</code> (as opposed to <code>readr::cols()</code>) to ignore any new columns that may be been added since the dataset’s last refresh.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="patterns.html#cb21-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Load Data Source(s)</strong> See <a href="file-prototype.html#chunk-load-data">load-data</a> chunk described in the prototypical file.</p>

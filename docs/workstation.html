@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -480,7 +480,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb44-3"><a href="workstation.html#cb44-3"></a></span>
 <span id="cb44-4"><a href="workstation.html#cb44-4"></a><span class="kw">package_janitor_remote</span>(</span>
 <span id="cb44-5"><a href="workstation.html#cb44-5"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv&quot;</span></span>
-<span id="cb44-6"><a href="workstation.html#cb44-6"></a>)        </span></code></pre></div>
+<span id="cb44-6"><a href="workstation.html#cb44-6"></a>)</span></code></pre></div>
 <p>Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper <a href="http://r-pkgs.had.co.nz/description.html">DESCRIPTION</a> file. See <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION">RAnalysisSkeleton</a> for an example.</p>
 <p>When the project is opened in RStudio, <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html"><code>update_packages_addin()</code></a> in <a href="https://ouhscbbmc.github.io/OuhscMunge">OuhscMunge</a> will find the DESCRIPTION file and install the package dependencies.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="workstation.html#cb45-1"></a><span class="cf">if</span>( <span class="op">!</span>base<span class="op">::</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>   ) ) utils<span class="op">::</span><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
@@ -587,8 +587,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">17.4</span> Ubuntu Installation</h2>
 <p>Ubuntu desktop 19.04 follows <a href="https://askubuntu.com/a/862520/153921">these instructions</a> for the R and RStudio and required these debian packages to be installed before the R packages. The <code>--yes</code> option avoids manual confirmation for each line, so you can copy &amp; paste this into the terminal.</p>
 <p>Add the following to the sources with <code>sudo nano /etc/apt/sources.list</code>. The ‘eoan’ version may be updated; The ‘metrocast’ part could be modified too from <a href="https://launchpad.net/ubuntu/+archivemirrors">this list</a>. I found it worked better for a new Ubuntu release than ‘cloud.r-project.org’.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb49-1"><a href="workstation.html#cb49-1"></a><span class="ex">deb</span> https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ </span>
-<span id="cb49-2"><a href="workstation.html#cb49-2"></a><span class="ex">deb-src</span> https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/ </span>
+<div class="sourceCode" id="cb49"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb49-1"><a href="workstation.html#cb49-1"></a><span class="ex">deb</span> https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/</span>
+<span id="cb49-2"><a href="workstation.html#cb49-2"></a><span class="ex">deb-src</span> https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/</span>
 <span id="cb49-3"><a href="workstation.html#cb49-3"></a><span class="ex">deb</span> http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe</span></code></pre></div>
 <p>This next block can be copied and pasted (ctrl-shift-v) into the console <a href="https://stackoverflow.com/a/43164204">entirely</a>. Or lines can be pasted individual (without the <code>( function install-packages {</code> line, or the last three lines).</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb50-1"><a href="workstation.html#cb50-1"></a><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></span>
@@ -596,7 +596,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb50-3"><a href="workstation.html#cb50-3"></a>  <span class="fu">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9</span>
 <span id="cb50-4"><a href="workstation.html#cb50-4"></a>  <span class="fu">sudo</span> apt-get update</span>
 <span id="cb50-5"><a href="workstation.html#cb50-5"></a>  <span class="fu">sudo</span> apt-get install r-base r-base-dev</span>
-<span id="cb50-6"><a href="workstation.html#cb50-6"></a>  </span>
+<span id="cb50-6"><a href="workstation.html#cb50-6"></a></span>
 <span id="cb50-7"><a href="workstation.html#cb50-7"></a>  <span class="al">###</span><span class="co"> Git</span></span>
 <span id="cb50-8"><a href="workstation.html#cb50-8"></a>  <span class="fu">sudo</span> apt-get install git-core</span>
 <span id="cb50-9"><a href="workstation.html#cb50-9"></a>  <span class="fu">git</span> config --global user.email <span class="st">&quot;wibeasley@hotmail.com&quot;</span></span>
@@ -610,13 +610,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb50-17"><a href="workstation.html#cb50-17"></a></span>
 <span id="cb50-18"><a href="workstation.html#cb50-18"></a>  <span class="co"># The genefilter package is needed for &#39;modeest&#39; on CRAN.</span></span>
 <span id="cb50-19"><a href="workstation.html#cb50-19"></a>  <span class="co"># No longer a modeest dependency: Rscript -e &#39;BiocManager::install(&quot;genefilter&quot;)&#39;</span></span>
-<span id="cb50-20"><a href="workstation.html#cb50-20"></a>  </span>
+<span id="cb50-20"><a href="workstation.html#cb50-20"></a></span>
 <span id="cb50-21"><a href="workstation.html#cb50-21"></a>  <span class="al">###</span><span class="co"> CRAN packages that are also on the Ubuntu repositories</span></span>
-<span id="cb50-22"><a href="workstation.html#cb50-22"></a>  </span>
-<span id="cb50-23"><a href="workstation.html#cb50-23"></a>  <span class="co"># The &#39;xml2&#39; package; https://CRAN.R-project.org/package=xml2 </span></span>
+<span id="cb50-22"><a href="workstation.html#cb50-22"></a></span>
+<span id="cb50-23"><a href="workstation.html#cb50-23"></a>  <span class="co"># The &#39;xml2&#39; package; https://CRAN.R-project.org/package=xml2</span></span>
 <span id="cb50-24"><a href="workstation.html#cb50-24"></a>  <span class="fu">sudo</span> apt-get --yes install libxml2-dev r-cran-xml</span>
 <span id="cb50-25"><a href="workstation.html#cb50-25"></a></span>
-<span id="cb50-26"><a href="workstation.html#cb50-26"></a>  <span class="co"># The &#39;curl&#39; package, and others; https://CRAN.R-project.org/package=curl </span></span>
+<span id="cb50-26"><a href="workstation.html#cb50-26"></a>  <span class="co"># The &#39;curl&#39; package, and others; https://CRAN.R-project.org/package=curl</span></span>
 <span id="cb50-27"><a href="workstation.html#cb50-27"></a>  <span class="fu">sudo</span> apt-get --yes install libssl-dev libcurl4-openssl-dev</span>
 <span id="cb50-28"><a href="workstation.html#cb50-28"></a></span>
 <span id="cb50-29"><a href="workstation.html#cb50-29"></a>  <span class="co"># The &#39;udunits2&#39; package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
@@ -642,7 +642,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb50-49"><a href="workstation.html#cb50-49"></a></span>
 <span id="cb50-50"><a href="workstation.html#cb50-50"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
 <span id="cb50-51"><a href="workstation.html#cb50-51"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
-<span id="cb50-52"><a href="workstation.html#cb50-52"></a>  </span>
+<span id="cb50-52"><a href="workstation.html#cb50-52"></a></span>
 <span id="cb50-53"><a href="workstation.html#cb50-53"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
 <span id="cb50-54"><a href="workstation.html#cb50-54"></a>  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</span>
 <span id="cb50-55"><a href="workstation.html#cb50-55"></a></span>
@@ -663,7 +663,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb50-70"><a href="workstation.html#cb50-70"></a></span>
 <span id="cb50-71"><a href="workstation.html#cb50-71"></a>  <span class="co"># pandoc</span></span>
 <span id="cb50-72"><a href="workstation.html#cb50-72"></a>  <span class="fu">sudo</span> apt-get --yes install pandoc</span>
-<span id="cb50-73"><a href="workstation.html#cb50-73"></a>  </span>
+<span id="cb50-73"><a href="workstation.html#cb50-73"></a></span>
 <span id="cb50-74"><a href="workstation.html#cb50-74"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
 <span id="cb50-75"><a href="workstation.html#cb50-75"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
 <span id="cb50-76"><a href="workstation.html#cb50-76"></a><span class="kw">}</span></span>
@@ -699,7 +699,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Text Editor | All Languages | Tabs | Indent size: 2</li>
 <li>Text Editor | All Languages | Tabs | Insert Spaces: true</li>
 </ol>
-<p>These dont affect the saved files, but make life easier. The first makes the <a href="https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/">result font bigger</a>.</p>
+<p>These don’t affect the saved files, but make life easier. The first makes the <a href="https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/">result font bigger</a>.</p>
 <ol style="list-style-type: decimal">
 <li><p>Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10</p></li>
 <li><p>Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`</p></li>

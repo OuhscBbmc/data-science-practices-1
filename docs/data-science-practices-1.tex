@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-01-29}
+\date{2020-02-04}
 
 \begin{document}
 \maketitle
@@ -138,7 +138,7 @@ This collection of documents describe practices used by the OUHSC \href{https://
 
 Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called \texttt{gender} can simultaneously contain the values ``m'', ``f'', ``F'', ``Female'', ``MALE'', ``0'', ``1'', ``2'', ``Latino'', "", and \texttt{NA}. On the other hand, a boolean variable \texttt{gender\_male} can be only \texttt{FALSE}, \texttt{TRUE}, and \texttt{NA}.\footnote{The equivalent of R's \texttt{logical} data type is called a \texttt{bit} in \href{https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql}{SQL Server}, and a \texttt{boolean} in \href{https://www.postgresql.org/docs/current/datatype-boolean.html}{Postgres} and \href{https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html}{MySQL}.}
 
-\href{https://www.sqlite.org/datatype3.html}{SQLite} does not have a dedicated datatype, so you must resort to storing it as \texttt{0}, \texttt{1} and \texttt{NULL} values. Because a caller can't assume that an obstensible boolean SQLite variable contains only those three values, the variable should be checked.{]}
+\href{https://www.sqlite.org/datatype3.html}{SQLite} does not have a dedicated datatype, so you must resort to storing it as \texttt{0}, \texttt{1} and \texttt{NULL} values. Because a caller can't assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.{]}
 
 Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
 
@@ -192,7 +192,7 @@ Almost every project recodes many variables. Choose the simplest function possib
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{Leverage exising booleans:} Suppose you have the logical variable \texttt{gender\_male} (which can be only \texttt{TRUE}, \texttt{FALSE}, or \texttt{NA}). Writing \texttt{gender\_male\ ==\ TRUE} or \texttt{gender\_male\ ==\ FALSE} will evaluate to a boolean --that's unnecessary because \texttt{gender\_male} is already a boolean.
+  \textbf{Leverage existing booleans:} Suppose you have the logical variable \texttt{gender\_male} (which can be only \texttt{TRUE}, \texttt{FALSE}, or \texttt{NA}). Writing \texttt{gender\_male\ ==\ TRUE} or \texttt{gender\_male\ ==\ FALSE} will evaluate to a boolean --that's unnecessary because \texttt{gender\_male} is already a boolean.
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
@@ -254,9 +254,9 @@ Almost every project recodes many variables. Choose the simplest function possib
 \end{Highlighting}
 \end{Shaded}
 \item
-  **\texttt{base::cut()}*: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
+  \textbf{\texttt{base::cut()}}: The function evaluations only a single numeric variable. It's range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer).
 \item
-  *\texttt{dplyr::recode()}**: The function evaluates a single integer or character variable. The output branches to a single discrete value.
+  \textbf{\texttt{dplyr::recode()}}: The function evaluates a single integer or character variable. The output branches to a single discrete value.
 \item
   \textbf{lookup table}: It feasible recode 6 levels of race directly in R. It's less feasible to recode 200 provider names. Specify the mapping in a csv, \texttt{readr} the csv to a data.frame, and left-join it.
 \item
@@ -271,12 +271,20 @@ Almost every project recodes many variables. Choose the simplest function possib
 
 Try to prepend each function with its package. Write \texttt{dplyr::filter()} instead of \texttt{filter()}. When two packages contain public functions with the same name, the package that was most recently called with \texttt{library()} takes precedent. When multiple R files are executed, the packages' precedents may not be predictable. Specifying the package eliminates the ambiguity, while also making the code easier to follow. For this reason, we recommend that almost all R files contain a \protect\hyperlink{chunk-load-packages}{`load-packages'} chunk.
 
-See the \href{https://google.github.io/styleguide/Rguide.html\#qualifying-namespaces}{Google Style Guide} for more about qualifying functions
+See the \href{https://google.github.io/styleguide/Rguide.html\#qualifying-namespaces}{Google Style Guide} for more about qualifying functions.
+
+Some exceptions exist, including:
+
+\begin{itemize}
+\tightlist
+\item
+  The \href{https://r-spatial.github.io/sf/}{sf} package if you're using its objects \href{https://r-spatial.github.io/sf/articles/sf6.html\#why-do-dplyr-verbs-not-work-for-sf-objects}{with dplyr verbs}.
+\end{itemize}
 
 \hypertarget{coding-defensive-date-arithmetic}{%
 \subsection{Date Arithmetic}\label{coding-defensive-date-arithmetic}}
 
-Don't use the minus operator (\emph{i.e.}, \texttt{-}) to subtract dates. Instead use \texttt{as.integer(difftime(stop,\ start,\ units="days"))}. It's longer but protects from the scneario that \texttt{start} or \texttt{stop} are changed upstream to a datetime. In that case, \texttt{stop\ -\ start} equals the number of \emph{seconds} between the two points, not the number of \emph{days}.
+Don't use the minus operator (\emph{i.e.}, \texttt{-}) to subtract dates. Instead use \texttt{as.integer(difftime(stop,\ start,\ units="days"))}. It's longer but protects from the scenario that \texttt{start} or \texttt{stop} are changed upstream to a datetime. In that case, \texttt{stop\ -\ start} equals the number of \emph{seconds} between the two points, not the number of \emph{days}.
 
 \hypertarget{excluding-bad-cases}{%
 \subsection{Excluding Bad Cases}\label{excluding-bad-cases}}
@@ -288,7 +296,7 @@ In this example, we'll presume we can't trust a patient record if it lacks a cle
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Define the permissible range, in either the ellis's \protect\hyperlink{chunk-declare}{declare-gobals} chunk, or in the \protect\hyperlink{repo-config}{config-file}. (We'll use the config file for this example.) We'll exclude anyone born before 2000, or after tomorrow. Even though it's illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.
+  Define the permissible range, in either the ellis's \protect\hyperlink{chunk-declare}{declare-globals} chunk, or in the \protect\hyperlink{repo-config}{config-file}. (We'll use the config file for this example.) We'll exclude anyone born before 2000, or after tomorrow. Even though it's illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -300,7 +308,7 @@ In this example, we'll presume we can't trust a patient record if it lacks a cle
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ds <{-}}\StringTok{ }
+\NormalTok{ds <{-}}
 \StringTok{  }\NormalTok{ds }\OperatorTok{\%>\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
     \DataTypeTok{dob =}\NormalTok{ OuhscMunge}\OperatorTok{::}\KeywordTok{trim\_date}\NormalTok{(dob, config}\OperatorTok{$}\NormalTok{range\_dob)}
@@ -324,8 +332,8 @@ In this example, we'll presume we can't trust a patient record if it lacks a cle
 \hypertarget{encapsulation}{%
 \section{Encapsulation}\label{encapsulation}}
 
-\hypertarget{leverage-team-members-strenghts-avoid-weaknesses}{%
-\section{Leverage team member's strenghts \& avoid weaknesses}\label{leverage-team-members-strenghts-avoid-weaknesses}}
+\hypertarget{leverage-team-members-strengths-avoid-weaknesses}{%
+\section{Leverage team member's strengths \& avoid weaknesses}\label{leverage-team-members-strengths-avoid-weaknesses}}
 
 \hypertarget{focused-code-files}{%
 \subsection{Focused code files}\label{focused-code-files}}
@@ -364,7 +372,7 @@ We use the term ``chunk'' for a section of code because it corresponds with knit
 \hypertarget{chunk-clear}{%
 \section{Clear Memory}\label{chunk-clear}}
 
-Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developig and debugging because it prevents previous runs from contaminating subsequent runs. However it has little effect during production; we'll look at manipulation files separately from analysis files.
+Before the initial chunk many of our files clear the memory of variables from previous run. This is important when developing and debugging because it prevents previous runs from contaminating subsequent runs. However it has little effect during production; we'll look at manipulation files separately from analysis files.
 
 Manipulation R files are \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html}{\texttt{source}}d with the argument \texttt{local=new.env()}. The file is executed in a fresh environment, so there are no variables to clear. Analysis R files are typically called from an Rmd file's \texttt{knitr::read\_chunk()}, and code positioned above the first chunk is not called by knitr \footnote{Read more about knitr's \href{https://yihui.name/knitr/demo/externalization/}{code externalization}}.
 
@@ -383,7 +391,7 @@ In the first true chunk, \href{https://stat.ethz.ch/R-manual/R-devel/library/bas
 
 We prefer not to have \texttt{source}d files perform any real action, such as importing data or manipulating a file. One reason is because it is difficult to be consistent about the environmental variables when the sourced file's functions are run. A second reason is that it more cognitively difficult to understand how the files are connected.
 
-When the sourced file contains only function definitions, these operations can be called at any time in the current file with much tighter control of which variables are modfied. A bonus of the discipline of defining functions (instead of executing functions) is that the operations are typically more robust and generalizable.
+When the sourced file contains only function definitions, these operations can be called at any time in the current file with much tighter control of which variables are modified. A bonus of the discipline of defining functions (instead of executing functions) is that the operations are typically more robust and generalizable.
 
 Keep the chunk even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced. This applies recommendation applies to all the chunks discussed in this chapter. As always, your team should agree on its own set of standards.
 
@@ -409,9 +417,9 @@ As discussed in the previous \protect\hyperlink{qualify-functions}{qualify all f
 \item
   Core packages (\emph{e.g.}, `base' and `stats') are loaded by R in most default installations. We avoid unnecessary calls like \texttt{library(stats)} because they distract from more important features.
 \item
-  Obvious dependencies are not called by \texttt{reqiureNamespace()} or \texttt{library()} for similar reasons, especially if they are not called directly. For example `tidyselect' is not listed when `tidyr' is listed.
+  Obvious dependencies are not called by \texttt{requireNamespace()} or \texttt{library()} for similar reasons, especially if they are not called directly. For example `tidyselect' is not listed when `tidyr' is listed.
 \item
-  The ``pipe'' function (declared in the \texttt{magrittr\textquotesingle{}\ package\ ,\ *i.e.*,}\%\textgreater\%\texttt{)\ is\ attached\ with}import::from(magrittr, ``\%\textgreater\%'')`. This frequently-used function called be called throughout the execution without qualification.
+  The ``pipe'' function (declared in the `magrittr' package , \emph{i.e.}, \texttt{\%\textgreater{}\%}) is attached with \texttt{import::from(magrittr,\ "\%\textgreater{}\%")}. This frequently-used function called be called throughout the execution without qualification.
 \item
   Compared to manipulation files, our analysis files tend to use many functions in a few concentrated packages so conflicting function names are less common. Typical packages used in analysis are `ggplot2' and `lme4'.
 \end{enumerate}
@@ -429,9 +437,9 @@ Here are packages found in most of our manipulation files. Notice the lesser-kno
 
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{     )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{     )}
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{     ) }
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"config"}\NormalTok{    ) }
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{ ) }\CommentTok{\# Asserts expected conditions }
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{     )}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"config"}\NormalTok{    )}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{ ) }\CommentTok{\# Asserts expected conditions}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{\# remotes::install\_github(repo="OuhscBbmc/OuhscMunge")}
 \end{Highlighting}
 \end{Shaded}
@@ -471,11 +479,11 @@ Ideally this chunk consumes data from either a plain-text csv or a database.
 
 Many capable R functions and packages ingest data. We prefer the tidyverse \href{https://readr.tidyverse.org/}{readr} for reading conventional files; its younger cousin, \href{https://vroom.r-lib.org/}{vroom} has some nice advantages when working with larger files and some forms of jagged rectangles\footnote{Say a csv has 20 columns, but a row has missing values for the last five columns. Instead of five successive commas to indicate five empty cells exist, a jagged rectangle simply ends after the last nonmissing value. vroom infers the missing values correctly, while some other packages do not.}. Depending on the file format, good packages to consider are \href{https://cran.r-project.org/package=data.table}{data.table}, \href{https://haven.tidyverse.org/}{haven}, \href{https://readxl.tidyverse.org/}{readxl}, \href{https://ycphs.github.io/openxlsx/}{openxlsx}, \href{https://CRAN.R-project.org/package=arrow}{arrow}, \href{https://CRAN.R-project.org/package=jsonlite}{jsonlite}, \href{http://www.fstpackage.org/}{fst}, \href{https://CRAN.R-project.org/package=yaml}{yaml}, and \href{https://cloud.r-project.org/web/packages/rio/vignettes/rio.html}{rio}.
 
-When used in an \protect\hyperlink{pattern-ellis}{Ellis}, this chunk likely consumees a flat file like a csv with data or metadata. When used in a \protect\hyperlink{pattern-ferry}{Ferry}, \protect\hyperlink{pattern-arch}{Arch}, or \protect\hyperlink{pattern-scribe}{Scribe}, this chunk likely consumes a database table. When used in an \protect\hyperlink{pattern-analysis}{Analysis file}, this chunk likely cosumes a database table or rds (\emph{i.e.}, a compressed R data file).
+When used in an \protect\hyperlink{pattern-ellis}{Ellis}, this chunk likely consumes a flat file like a csv with data or metadata. When used in a \protect\hyperlink{pattern-ferry}{Ferry}, \protect\hyperlink{pattern-arch}{Arch}, or \protect\hyperlink{pattern-scribe}{Scribe}, this chunk likely consumes a database table. When used in an \protect\hyperlink{pattern-analysis}{Analysis file}, this chunk likely consumes a database table or rds (\emph{i.e.}, a compressed R data file).
 
 In some large-scale scenarios, there may be a series of datasets that cannot be held in RAM simultaneously. Our first choice is to split the R file so each new file has only a subset of the datasets --in other words, the R file probably was given too much responsibility. Occassionaly the multiple datasets need to be considered at once, so splitting the R file is not a option. In these scenarios, we prefer to upload all the datasets to a database, which is better manipulating datasets too large for RAM.
 
-An R solution may be to losen the restriction that dataset enter the R file only during the `load-data' chunk. Once a dataset is processed and no longer needed, \texttt{rm()} \emph{r}e\emph{m}oves it from RAM. Now another dataset can be read from a file and manipulated.
+An R solution may be to loosen the restriction that dataset enter the R file only during the `load-data' chunk. Once a dataset is processed and no longer needed, \texttt{rm()} \emph{r}e\emph{m}oves it from RAM. Now another dataset can be read from a file and manipulated.
 
 \emph{loose scrap}:
 the chunk reads all data (\emph{e.g.}, database table, networked CSV, local lookup table). After this chunk, no new data should be introduced. This is for the sake of reducing human cognition load. Everything below this chunk is derived from these first four chunks.
@@ -500,7 +508,7 @@ It's best to rename the dataset (a) in a single place and (b) early in the pipel
 \NormalTok{  ) }\OperatorTok{\%>\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
 
-\NormalTok{  )  }\OperatorTok{\%>\%}
+\NormalTok{  ) }\OperatorTok{\%>\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{arrange}\NormalTok{(subject\_id) }\CommentTok{\# \%>\%}
   \CommentTok{\# tibble::rowid\_to\_column("subject\_id") \# Add a unique index if necessary}
 \end{Highlighting}
@@ -559,7 +567,7 @@ We use the term `slim' because typically this output has fewer variables than th
 
 If you doubt the variable will be needed downstream, leave it in the \texttt{dplyr::select()}, but commented out. If someone needs it in the future, they'll easily determine where it might come from, and then uncomment the line (and possibly modify the database table). Once you import a column into a warehouse that multiple people are using, it can be tough to remove without breaking their code.
 
-This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} because sometimesyou want to check the validity of variables that are not consumed downstream. These variables are not important themselves, but an illegal value may reveal a larger problem with the dataset.
+This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} because sometimes you want to check the validity of variables that are not consumed downstream. These variables are not important themselves, but an illegal value may reveal a larger problem with the dataset.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -617,21 +625,21 @@ Also see the discussion of how we use the config file for \href{https://ouhscbbm
 \CommentTok{  \# To be processed by Ellis lanes}
 \AttributeTok{  }\FunctionTok{path\_subject\_1\_raw}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/raw/subject{-}1.csv"}
 \AttributeTok{  }\FunctionTok{path\_mlm\_1\_raw}\KeywordTok{:}\AttributeTok{      }\StringTok{"data{-}public/raw/mlm{-}1.csv"}
-\AttributeTok{  }
+
 \CommentTok{  \# Central Database (produced by Ellis lanes).}
 \AttributeTok{  }\FunctionTok{path\_database}\KeywordTok{:}\AttributeTok{       }\StringTok{"data{-}public/derived/db.sqlite3"}
-\AttributeTok{  }
+
 \CommentTok{  \# Analysis{-}ready datasets (produced by scribes \& consumed by analyses).}
 \AttributeTok{  }\FunctionTok{path\_mlm\_1\_derived}\KeywordTok{:}\AttributeTok{  }\StringTok{"data{-}public/derived/mlm{-}1.rds"}
-\AttributeTok{  }
+
 \CommentTok{  \# Metadata}
 \AttributeTok{  }\FunctionTok{path\_annotation}\KeywordTok{:}\AttributeTok{     }\StringTok{"data{-}public/metadata/cqi{-}annotation.csv"}
-\AttributeTok{  }
+
 \CommentTok{  \# Logging errors and messages from automated execution.}
 \AttributeTok{  }\FunctionTok{path\_log\_flow}\KeywordTok{:}\AttributeTok{       !expr strftime(Sys.time(), "data{-}unshared/log/flow{-}\%Y{-}\%m{-}\%d{-}{-}\%H{-}\%M{-}\%S.log")}
-\AttributeTok{  }
+
 \CommentTok{  \# time\_zone\_local       :  "America/Chicago" \# Force local time, in case remotely run.}
-\AttributeTok{  }
+
 \CommentTok{  \# {-}{-}{-}{-} Validation Ranges \& Patterns {-}{-}{-}{-}}
 \AttributeTok{  }\FunctionTok{range\_record\_id         }\KeywordTok{:}\AttributeTok{ !expr c(1L, 999999L)}
 \AttributeTok{  }\FunctionTok{range\_dob               }\KeywordTok{:}\AttributeTok{ !expr c(as.Date("2010{-}01{-}01"), Sys.Date() + lubridate::days(1))}
@@ -736,7 +744,7 @@ When exchanging data between two different systems, the preferred format is freq
 \hypertarget{data-containers-yaml}{%
 \subsection{yaml, json, and xml}\label{data-containers-yaml}}
 
-\href{https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/}{yaml}, \href{https://www.w3schools.com/js/js_json_intro.asp}{json}, and \href{https://www.w3schools.com/xml/}{xml} are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds).
+\href{https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/}{yaml}, \href{https://www.w3schools.com/js/js_json_intro.asp}{json}, and \href{https://www.w3schools.com/xml/}{xml} are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds). If you are unsure where to start with a nested dataset, see tidyr's \href{https://tidyr.tidyverse.org/articles/rectangle.html}{Rectangling vignette}.
 
 In the same way we advocate for the \href{https://ouhscbbmc.github.io/data-science-practices-1/coding.html\#coding-simplify-recoding}{simplest recoding} function that is adequate for the task, we prefer yaml over json, and json over xml. Yaml accommodates most, but not all our needs. Initially it may be tricky to correctly use whitespacing to specify the correct nesting structure in yaml, but once you are familar, the file is easy to read and edit, and the Git diffs can be quickly reviewed. The \href{http://biostat.mc.vanderbilt.edu/wiki/Main/YamlR}{yaml} package reads a yaml file, and returns a (nested) \href{https://www.tutorialspoint.com/r/r_lists.htm}{R list}; it can also convert an R list into a yaml file.
 
@@ -748,7 +756,7 @@ The \href{https://github.com/rstudio/config}{config} package wraps the yaml pack
 \end{Highlighting}
 \end{Shaded}
 
-See the discussion of the \href{https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html\#repo-config}{\texttt{config.yml}} in our prototypical repository, as well
+See the discussion of the \href{https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html\#repo-config}{\texttt{config.yml}} in our prototypical repository, as well.
 
 \hypertarget{data-containers-arrow}{%
 \subsection{Arrow}\label{data-containers-arrow}}
@@ -774,7 +782,7 @@ Its downside is the file is not plain-text, but binary. That means the file is n
 \hypertarget{data-containers-avoid-spreadsheets}{%
 \subsubsection{Spreadsheets}\label{data-containers-avoid-spreadsheets}}
 
-Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and protyping equations --but is should not be trusted to transport serious information. Other spreadsheet software like \href{https://en.wikipedia.org/wiki/LibreOffice_Calc}{LibreOffice Calc} is less problematic in our epxerience, but still less desirable than the formats mentioned above.
+Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and prototyping equations --but is should not be trusted to transport serious information. Other spreadsheet software like \href{https://en.wikipedia.org/wiki/LibreOffice_Calc}{LibreOffice Calc} is less problematic in our experience, but still less desirable than the formats mentioned above.
 
 If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values. After you close the spreadsheet, \protect\hyperlink{git-stability}{review the Git commits} to verify no values were corrupted.
 
@@ -783,7 +791,7 @@ See \protect\hyperlink{snippets-correspondence-excel}{the appendix} for a list o
 \hypertarget{data-containers-avoid-proprietary}{%
 \subsubsection{Proprietary}\label{data-containers-avoid-proprietary}}
 
-Proprietary formats like \href{https://en.wikipedia.org/wiki/SAS_(software)}{SAS}'s ``sas7bdat'' are less accesible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project's impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project's failure.
+Proprietary formats like \href{https://en.wikipedia.org/wiki/SAS_(software)}{SAS}'s ``sas7bdat'' are less accessible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project's impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project's failure.
 
 We formerly distributed sas7bdat files to supplement (otherwise identical) csvs, in order to cater to the suprisingly large population of SAS users who were unfamiliar with \href{https://documentation.sas.com/?docsetId=proc\&docsetTarget=n18jyszn33umngn14czw2qfw7thc.htm\&docsetVersion=9.4\&locale=en}{proc import} or the Google search engine. Recently we have distributed only the csvs, with example code for reading the file from SAS.
 
@@ -798,7 +806,7 @@ Across all file formats, these conventions usually work best.
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{consistency across versions}: use a script to produce the dataset, and inform the recipient if the datasets's structure changes. Most of our processes are automated, and changes that are trivial to humans (\emph{e.g.}, \texttt{yyyy-mm-dd} to \texttt{mm/dd-yy}) will break the automation.
+  \textbf{consistency across versions}: use a script to produce the dataset, and inform the recipient if the dataset's structure changes. Most of our processes are automated, and changes that are trivial to humans (\emph{e.g.}, \texttt{yyyy-mm-dd} to \texttt{mm/dd-yy}) will break the automation.
 
   The specificity in our automation is intentional. We install guards on our processes so that bad values do not pass. For instance, we may place bounds on the toddlers' age at 12 and 36 months. We \emph{want} our automation to break if the next dataset contains age values between 1 and 3 (years). Our downstream analysis (say, a regression model where age is a predictor variable) would produce misleading results if the shift between months and years went undetected.
 \item
@@ -868,7 +876,7 @@ Meditech Idiosyncracies:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \textbf{blood pressure}: in most systems the \texttt{bp\_diastolic} and \texttt{bp\_systolic} values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a foward slash.
+  \textbf{blood pressure}: in most systems the \texttt{bp\_diastolic} and \texttt{bp\_systolic} values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a forward slash.
 \end{enumerate}
 
 \hypertarget{data-conventions-database}{%
@@ -891,14 +899,13 @@ To incorporate outside data source into your system safely.
 \subsection{Philosophy}\label{philosophy}}
 
 \begin{itemize}
-\tightlist
 \item
   Without data immigration, all warehouses are useless. Embrace the power of fresh information in a way that is:
 
   \begin{itemize}
   \tightlist
   \item
-    repeatable when the datasource is updated (and you have to refresh your warehouse)
+    repeatable when the data source is updated (and you have to refresh your warehouse)
   \item
     similar to other Ellis lanes (that are designed for other data sources) so you don't have to learn/remember an entirely new pattern. (Like Rubiks cube instructions.)
   \end{itemize}
@@ -908,7 +915,6 @@ To incorporate outside data source into your system safely.
 \subsection{Guidelines}\label{guidelines}}
 
 \begin{itemize}
-\tightlist
 \item
   Take small bites.
 
@@ -963,7 +969,7 @@ To incorporate outside data source into your system safely.
 \item
   \textbf{Load Sources} In R, a \texttt{source()}d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.
 
-  The first approach is better suited for quick \& easy development. The second allows you to add documention and unit tests.
+  The first approach is better suited for quick \& easy development. The second allows you to add documentation and unit tests.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -987,7 +993,7 @@ To incorporate outside data source into your system safely.
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{        ) }\CommentTok{\# Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"testit"}\NormalTok{)}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"checkmate"}\NormalTok{)}
-\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{\#devtools::install\_github(repo="OuhscBbmc/OuhscMunge")}
+\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"OuhscMunge"}\NormalTok{) }\CommentTok{\# remotes::install\_github(repo="OuhscBbmc/OuhscMunge")}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -1355,9 +1361,9 @@ In this scenarios, the first three columns are critical (\emph{i.e.}, \texttt{re
 \hypertarget{scrubbing-github-history}{%
 \subsection{Scrubbing GitHub history}\label{scrubbing-github-history}}
 
-Occassionaly files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (\emph{i.e.}, the branch's \href{https://git-scm.com/docs/gitglossary\#gitglossary-aiddefHEADaHEAD}{head}), but from the entire history of the repo.
+Occasionally files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (\emph{i.e.}, the branch's \href{https://git-scm.com/docs/gitglossary\#gitglossary-aiddefHEADaHEAD}{head}), but from the entire history of the repo.
 
-Scrubbing is require typically when (a) a sensitive file has been accidentally commited and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.
+Scrubbing is require typically when (a) a sensitive file has been accidentally committed and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.
 
 The two suitable scrubbing approaches both require the command line. The first is the \texttt{git-filter-branch} command within git, and the second is the \href{https://rtyley.github.io/bfg-repo-cleaner/}{BFG repo-cleaner}. We use the second approach, which is {[}recommended by GitHub{]}; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.
 
@@ -1419,7 +1425,7 @@ The \href{https://www.gnu.org/software/bash/}{bash}-centric steps below remove a
 \end{Highlighting}
 \end{Shaded}
 \item
-  Ask your collaborators to reclone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo's history.
+  Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo's history.
 \item
   If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file's history isn't accessible through their website, even if the repo is private.
 \end{enumerate}
@@ -1445,7 +1451,7 @@ Automation is an important prerequisite of reproducibility.
 \hypertarget{automation-mediator}{%
 \section{Mediator}\label{automation-mediator}}
 
-A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. The single file makes the project more protable, and also clearly documents the process.
+A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. The single file makes the project more portable, and also clearly documents the process.
 
 This single file is a special cases of the \href{https://en.wikipedia.org/wiki/Mediator_pattern}{mediator pattern}, in the sense that it defines how each piece relates to each other.
 
@@ -1485,9 +1491,11 @@ Many of the GUI options are easy to specify, but three are error-prone, and must
 \item
   \textbf{Program/script:} is the absolute path to \texttt{Rscript.exe}. It needs to be updated every time you upgrade R (unless you're doing something tricky with the \texttt{PATH} environmental OS variable). Notice we are using the ``patched'' version of R. The entry should be enclosed in quotes.
 
-\begin{verbatim}
-"C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe"
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{"C:\textbackslash{}Program Files\textbackslash{}R\textbackslash{}R{-}3.6.2patched\textbackslash{}bin\textbackslash{}Rscript.exe"}
+\end{Highlighting}
+\end{Shaded}
 \item
   \textbf{Add arguments (optional):} specifies the flow file to run. In this case, the repo `butcher-hearing-screen-1' is under in the 'Documents/cdw/` directory; the \protect\hyperlink{automation-flow}{flow file} is located in the repo's root directory, as discussed in the \protect\hyperlink{repo-flow}{prototypical repo}. The entry should be enclosed in quotes.
 
@@ -1779,7 +1787,7 @@ For the most part, our team follows the \href{https://style.tidyverse.org/}{tidy
 \hypertarget{style-number}{%
 \subsection{Number}\label{style-number}}
 
-The word ``number'' is ambiguous, especially in data science. Try for these more specific terms
+The word ``number'' is ambiguous, especially in data science. Try for these more specific terms:
 
 \begin{itemize}
 \tightlist
@@ -1788,7 +1796,7 @@ The word ``number'' is ambiguous, especially in data science. Try for these more
 \item
   \textbf{id}: a value that uniquely identifies an entity that doesn't change over time, such as \texttt{pt\_id}, \texttt{clinic\_id}, \texttt{client\_id},
 \item
-  \textbf{index}: a 1-based sequence that's typically temporary, but unique within the dataset. For instance, \texttt{pt\_index} 195 in Tuesday's dataset is likey a different person than \texttt{pt\_index} 195 on Wednesday. On any given day, there is only one value of 195.
+  \textbf{index}: a 1-based sequence that's typically temporary, but unique within the dataset. For instance, \texttt{pt\_index} 195 in Tuesday's dataset is like;y a different person than \texttt{pt\_index} 195 on Wednesday. On any given day, there is only one value of 195.
 \item
   \textbf{tag}: it is persistent across time like ``id'', but typically created by the analysts and send to the research team. See \protect\hyperlink{snippet-tag}{the snippet} in the appendix for an example.
 \item
@@ -1860,7 +1868,7 @@ is cleaner to read and write than these two styles. In particular, it's easy to 
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(dob))}
 
 \CommentTok{\# Worst}
-\NormalTok{ds[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(ds}\OperatorTok{$}\NormalTok{dob), ]  }
+\NormalTok{ds[}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(ds}\OperatorTok{$}\NormalTok{dob), ]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2092,7 +2100,7 @@ GitLab's data team has a good \href{https://about.gitlab.com/handbook/business-o
 \item
   Favor CTEs
 \item
-  The name of the primary key should typically contain the table. In the \texttt{employee} table, the key should be \texttt{empoyee\_id}, not \texttt{id}.
+  The name of the primary key should typically contain the table. In the \texttt{employee} table, the key should be \texttt{employee\_id}, not \texttt{id}.
 \end{enumerate}
 
 \hypertarget{style-ggplot}{%
@@ -2244,7 +2252,7 @@ To install our frequently-used packages, run the following snippet. The first li
 
 \KeywordTok{package\_janitor\_remote}\NormalTok{(}
   \StringTok{"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package{-}dependency{-}list.csv"}
-\NormalTok{)        }
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2449,8 +2457,8 @@ Add the following to the sources with \texttt{sudo\ nano\ /etc/apt/sources.list}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{deb}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/ }
-\ExtensionTok{deb{-}src}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/ }
+\ExtensionTok{deb}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/}
+\ExtensionTok{deb{-}src}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/}
 \ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan{-}backports main restricted universe}
 \end{Highlighting}
 \end{Shaded}
@@ -2464,7 +2472,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
   \FunctionTok{sudo}\NormalTok{ apt{-}key adv {-}{-}keyserver keyserver.ubuntu.com {-}{-}recv{-}keys E298A3A825C0D65DFD57CBB651716619E084DAB9}
   \FunctionTok{sudo}\NormalTok{ apt{-}get update}
   \FunctionTok{sudo}\NormalTok{ apt{-}get install r{-}base r{-}base{-}dev}
-  
+
   \AlertTok{\#\#\#}\CommentTok{ Git}
   \FunctionTok{sudo}\NormalTok{ apt{-}get install git{-}core}
   \FunctionTok{git}\NormalTok{ config {-}{-}global user.email }\StringTok{"wibeasley@hotmail.com"}
@@ -2478,13 +2486,13 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
 
   \CommentTok{\# The genefilter package is needed for \textquotesingle{}modeest\textquotesingle{} on CRAN.}
   \CommentTok{\# No longer a modeest dependency: Rscript {-}e \textquotesingle{}BiocManager::install("genefilter")\textquotesingle{}}
-  
+
   \AlertTok{\#\#\#}\CommentTok{ CRAN packages that are also on the Ubuntu repositories}
-  
-  \CommentTok{\# The \textquotesingle{}xml2\textquotesingle{} package; https://CRAN.R{-}project.org/package=xml2 }
+
+  \CommentTok{\# The \textquotesingle{}xml2\textquotesingle{} package; https://CRAN.R{-}project.org/package=xml2}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libxml2{-}dev r{-}cran{-}xml}
 
-  \CommentTok{\# The \textquotesingle{}curl\textquotesingle{} package, and others; https://CRAN.R{-}project.org/package=curl }
+  \CommentTok{\# The \textquotesingle{}curl\textquotesingle{} package, and others; https://CRAN.R{-}project.org/package=curl}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libssl{-}dev libcurl4{-}openssl{-}dev}
 
   \CommentTok{\# The \textquotesingle{}udunits2\textquotesingle{} package: https://cran.r{-}project.org/web/packages/udunits2/index.html}
@@ -2510,7 +2518,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
 
   \CommentTok{\# The \textquotesingle{}sf\textquotesingle{} and other spatial packages: https://github.com/r{-}spatial/sf\#ubuntu; https://github.com/r{-}spatial/sf/pull/1208}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libudunits2{-}dev libgdal{-}dev libgeos{-}dev libproj{-}dev libgeos++{-}dev}
-  
+
   \CommentTok{\# For Cairo package, a dependency of Shiny \& plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing{-}cairo{-}for{-}r{-}on{-}ubuntu{-}17{-}04/}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install libcairo2{-}dev}
 
@@ -2531,7 +2539,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console \href{h
 
   \CommentTok{\# pandoc}
   \FunctionTok{sudo}\NormalTok{ apt{-}get {-}{-}yes install pandoc}
-  
+
   \CommentTok{\# For checking packages. Avoid \textasciigrave{}/usr/bin/texi2dvi: not found\textasciigrave{} warning.}
   \FunctionTok{sudo}\NormalTok{ apt{-}get install texinfo}
 \KeywordTok{\}}
@@ -2601,7 +2609,7 @@ The Postman native app for Ubuntu is \href{https://learning.getpostman.com/docs/
     Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Insert Spaces: true
   \end{enumerate}
 
-  These dont affect the saved files, but make life easier. The first makes the \href{https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/}{result font bigger}.
+  These don't affect the saved files, but make life easier. The first makes the \href{https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/}{result font bigger}.
 
   \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
@@ -2787,7 +2795,13 @@ Finally, consider how much traffic passes through the dependency A brittle depen
 \href{https://github.com/jennybc}{Jenny Bryan} and \href{https://github.com/jimhester}{Jim Hester} have published a thorough description of using Git from a data scientist's perspective (\href{https://happygitwithr.com/}{Happy Git and GitHub for the useR}), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is \emph{\href{https://smile.amazon.com/dp/1449302440}{Team Geek}}, which has insightful advice for the human and collaborative aspects of version control.
 
 Other Resources
-1. \href{https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github}{Setting up a CI/CD Process on GitHub with Travis CI}. Travis-CI blob from August 2019.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github}{Setting up a CI/CD Process on GitHub with Travis CI}. Travis-CI blob from August 2019.
+\end{enumerate}
 
 \hypertarget{git-collaboration}{%
 \section{for Collaboration}\label{git-collaboration}}
@@ -2859,7 +2873,7 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \hypertarget{snippets-reading-excel}{%
 \subsection{Reading from Excel}\label{snippets-reading-excel}}
 
-\emph{Background}: Avoid Excel for the \href{\%7B\#data-containers-avoid}{reasons previously discussed}. But if there isn't another good option, be protective. \href{https://readxl.tidyverse.org/reference/read_excel.html}{\texttt{readxl::read\_excel()}} allows you to specify column types, but not column order. The names of \texttt{col\_types} is ignored by \texttt{readxl::read\_excel()}. To defend against roamining columns (\emph{e.g.}, the files changed over time), \texttt{tesit::assert()} that the order is what you expect.
+\emph{Background}: Avoid Excel for the \href{\%7B\#data-containers-avoid}{reasons previously discussed}. But if there isn't another good option, be protective. \href{https://readxl.tidyverse.org/reference/read_excel.html}{\texttt{readxl::read\_excel()}} allows you to specify column types, but not column order. The names of \texttt{col\_types} is ignored by \texttt{readxl::read\_excel()}. To defend against roaming columns (\emph{e.g.}, the files changed over time), \texttt{tesit::assert()} that the order is what you expect.
 
 \emph{Last Modified}: 2019-12-12 by Will
 
@@ -2892,7 +2906,7 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \hypertarget{snippets-reading-trailing-comma}{%
 \subsection{Removing Trailing Comma from Header}\label{snippets-reading-trailing-comma}}
 
-\emph{Background}: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, \href{https://readr.tidyverse.org/reference/read_delim.html}{\texttt{readr:read\_csv()}} appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.
+\emph{Background}: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, \href{https://readr.tidyverse.org/reference/read_delim.html}{\texttt{readr:read\_csv()}} appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.
 
 \emph{Explanation}: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to \texttt{readr::read\_csv()} to convert it into a data.frame.
 
@@ -2959,7 +2973,7 @@ Here are some tips from our experiences with projects involving between 2 and 10
   \KeywordTok{paste}\NormalTok{(}\KeywordTok{sample}\NormalTok{(urn, }\DataTypeTok{size =}\NormalTok{ tag\_length, }\DataTypeTok{replace =}\NormalTok{ T), }\DataTypeTok{collapse =} \StringTok{""}\NormalTok{)}
 \NormalTok{\}}
 
-\NormalTok{ds\_pt\_pool <{-}}\StringTok{ }
+\NormalTok{ds\_pt\_pool <{-}}
 \StringTok{  }\NormalTok{tibble}\OperatorTok{::}\KeywordTok{tibble}\NormalTok{(}
     \DataTypeTok{pt\_index    =} \KeywordTok{seq\_len}\NormalTok{(pt\_count),}
     \DataTypeTok{pt\_tag      =} \KeywordTok{vapply}\NormalTok{(}\KeywordTok{rep}\NormalTok{(tag\_length, pt\_count), draw\_tag, }\KeywordTok{character}\NormalTok{(}\DecValTok{1}\NormalTok{)),}
@@ -2977,12 +2991,12 @@ The resulting dataset will look like this, but with different randomly-generated
 \begin{verbatim}
 # A tibble: 5 x 5
   pt_index pt_tag  assigned name_last name_first
-     <int> <chr>   <lgl>    <chr>     <chr>     
-1        1 seikyfr FALSE    --        --        
-2        2 voiix4l FALSE    --        --        
-3        3 wosn4w2 FALSE    --        --        
-4        4 jl0dg84 FALSE    --        --        
-5        5 r5ei5ph FALSE    --        --        
+     <int> <chr>   <lgl>    <chr>     <chr>
+1        1 seikyfr FALSE    --        --
+2        2 voiix4l FALSE    --        --
+3        3 wosn4w2 FALSE    --        --
+4        4 jl0dg84 FALSE    --        --
+5        5 r5ei5ph FALSE    --        --
 \end{verbatim}
 
 \hypertarget{snippets-correspondence}{%
@@ -3178,7 +3192,7 @@ Here is a collection of presentations by the BBMC and friends that may help demo
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    variable names: within a variable name order from big to small terms (lexigraphical scoping) (\href{https://github.com/thomasnwilson}{thomasnwilson})
+    variable names: within a variable name order from big to small terms (lexicographical scoping) (\href{https://github.com/thomasnwilson}{thomasnwilson})
   \end{enumerate}
 \item
   public reports (and dashboards)
@@ -3187,7 +3201,7 @@ Here is a collection of presentations by the BBMC and friends that may help demo
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    when developing a report for a external audience (ie, people outside your immediate research team), choose one or two pals who are unfamilar with your aims/methods as an impromptu focus group. Ask them what things need to be redesigned/reframed/reformated/further-explained. (\href{https://github.com/genevamarshall}{genevamarshall})
+    when developing a report for a external audience (ie, people outside your immediate research team), choose one or two pals who are unfamiliar with your aims/methods as an impromptu focus group. Ask them what things need to be redesigned/reframed/reformated/further-explained. (\href{https://github.com/genevamarshall}{genevamarshall})
 
     \begin{enumerate}
     \def\labelenumiii{\arabic{enumiii}.}
@@ -3241,6 +3255,48 @@ Here is a collection of presentations by the BBMC and friends that may help demo
 
 \hypertarget{practices}{%
 \section{Practices}\label{practices}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{on.exit()} should have \texttt{add\ =\ TRUE} (\citet{wickham-advanced-r}, \href{https://adv-r.hadley.nz/functions.html\#on-exit}{Exit handlers}).
+\end{itemize}
+
+\hypertarget{good-sites}{%
+\section{Good Sites}\label{good-sites}}
+
+Posts on these sites are almost always worth your time reading. The frequently improve how you develop with the common components used in our data pipelines.
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://yihui.org/en/}{Yihui Xie}, created \href{https://yihui.org/knitr/}{knitr} and other important contributions to reproducible research.
+\item
+  \href{https://blog.rstudio.com/}{RStudio}, in addition to their IDE, many of the packages used here were created by their developers.
+\item
+  \href{www.explainxkcd.com}{Explain xkcd} because it's good.
+\end{itemize}
+
+Occasionally skim the titles on these sites and pick a few relevant to your interests. We think it helps keep you aware of developments in the field, so your skills continually grow and our approaches don't become stagnant.
+
+\begin{itemize}
+\tightlist
+\item
+  \href{}{O'Reilly's Data science ideas and resources}\url{https://www.oreilly.com/topics/data-science}
+\item
+  \href{https://towardsdatascience.com/}{Towards Data Science}
+\end{itemize}
+
+These books haven't been referenced (yet), but have good guidance and could be worth your time skimming to see what is relevant.
+
+\begin{itemize}
+\item
+  \href{http://tidynomicon.tech/}{\emph{The Tidynomicon}} by Dhavide Aruliah \& Greg Wilson
+\item
+  \href{https://bookdown.org/csgillespie/efficientR/}{\emph{Efficient R programming}} by Colin Gillespie \& Robin Lovelace
+\item
+  \href{https://bookdown.org/rdpeng/RProgDA/}{Mastering Software Development in R}
+\end{itemize}
 
 \hypertarget{example-bookdown}{%
 \chapter{Example}\label{example-bookdown}}
@@ -3318,7 +3374,7 @@ You can write citations, too. For example, we are using the \textbf{bookdown} pa
 \hypertarget{acknowledgements}{%
 \chapter{Acknowledgements}\label{acknowledgements}}
 
-The authors thank all our colleauges for the discussions and experiences about data science that lead to this book. At OUHSC, this includes
+The authors thank all our colleagues for the discussions and experiences about data science that lead to this book. At OUHSC, this includes
 \href{https://github.com/adrose}{@adrose},
 \href{https://github.com/aggie-dbc}{@aggie-dbc},
 \href{https://github.com/ARPeters}{@ARPeters},
@@ -3352,6 +3408,11 @@ Outside the OUHSC, this includes
 \href{https://github.com/probinso}{@probinso},
 \href{https://github.com/russelljonas}{@russelljonas}, and
 \href{https://github.com/spopovych}{@spopovych}.
+
+`r if (knitr::is\_html\_output()) '
+
+\hypertarget{references}{%
+\chapter{References}\label{references}}
 
   \bibliography{book.bib,packages.bib}
 

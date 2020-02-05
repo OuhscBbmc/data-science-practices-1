@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -465,11 +465,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.1</span> Readability</h2>
 <div id="style-number" class="section level3" number="13.1.1">
 <h3><span class="header-section-number">13.1.1</span> Number</h3>
-<p>The word “number” is ambiguous, especially in data science. Try for these more specific terms</p>
+<p>The word “number” is ambiguous, especially in data science. Try for these more specific terms:</p>
 <ul>
 <li><strong>count</strong>: the number of discrete objects or events, such as <code>visit_count</code>, <code>pt_count</code>, <code>dx_count</code>.</li>
 <li><strong>id</strong>: a value that uniquely identifies an entity that doesn’t change over time, such as <code>pt_id</code>, <code>clinic_id</code>, <code>client_id</code>,</li>
-<li><strong>index</strong>: a 1-based sequence that’s typically temporary, but unique within the dataset. For instance, <code>pt_index</code> 195 in Tuesday’s dataset is likey a different person than <code>pt_index</code> 195 on Wednesday. On any given day, there is only one value of 195.</li>
+<li><strong>index</strong>: a 1-based sequence that’s typically temporary, but unique within the dataset. For instance, <code>pt_index</code> 195 in Tuesday’s dataset is like;y a different person than <code>pt_index</code> 195 on Wednesday. On any given day, there is only one value of 195.</li>
 <li><strong>tag</strong>: it is persistent across time like “id”, but typically created by the analysts and send to the research team. See <a href="#snippet-tag">the snippet</a> in the appendix for an example.</li>
 <li><strong>tally</strong>: a running count</li>
 <li><strong>duration</strong>: a length of time. Specify the units if it not self-evident.</li>
@@ -518,7 +518,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb38-3"><a href="style.html#cb38-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dob))</span>
 <span id="cb38-4"><a href="style.html#cb38-4"></a></span>
 <span id="cb38-5"><a href="style.html#cb38-5"></a><span class="co"># Worst</span></span>
-<span id="cb38-6"><a href="style.html#cb38-6"></a>ds[<span class="op">!</span><span class="kw">is.na</span>(ds<span class="op">$</span>dob), ]  </span></code></pre></div>
+<span id="cb38-6"><a href="style.html#cb38-6"></a>ds[<span class="op">!</span><span class="kw">is.na</span>(ds<span class="op">$</span>dob), ]</span></code></pre></div>
 </div>
 <div id="style-filter-number-line" class="section level4" number="13.2.1.2">
 <h4><span class="header-section-number">13.2.1.2</span> Mimic number line</h4>
@@ -679,7 +679,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <p>GitLab’s data team has a good <a href="https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/">style guide</a> for databases and sql that’s fairly consistent with our style. Some important similarities and differences are</p>
 <ol style="list-style-type: decimal">
 <li><p>Favor CTEs</p></li>
-<li><p>The name of the primary key should typically contain the table. In the <code>employee</code> table, the key should be <code>empoyee_id</code>, not <code>id</code>.</p></li>
+<li><p>The name of the primary key should typically contain the table. In the <code>employee</code> table, the key should be <code>employee_id</code>, not <code>id</code>.</p></li>
 </ol>
 <!-- 1. When a boolean variable might be ambiguous, -->
 </div>

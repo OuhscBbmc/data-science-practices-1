@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -463,7 +463,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">B.1</span> Reading External Data</h2>
 <div id="snippets-reading-excel" class="section level3" number="21.1.1">
 <h3><span class="header-section-number">B.1.1</span> Reading from Excel</h3>
-<p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roamining columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
+<p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="snippets.html#cb53-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
 <span id="cb53-2"><a href="snippets.html#cb53-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
@@ -489,7 +489,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="snippets-reading-trailing-comma" class="section level3" number="21.1.2">
 <h3><span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header</h3>
-<p><em>Background</em>: Ocassionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr:read_csv()</code></a> appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.</p>
+<p><em>Background</em>: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr:read_csv()</code></a> appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.</p>
 <p><em>Explanation</em>: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to <code>readr::read_csv()</code> to convert it into a data.frame.</p>
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
@@ -531,7 +531,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb56-6"><a href="snippets.html#cb56-6"></a>  <span class="kw">paste</span>(<span class="kw">sample</span>(urn, <span class="dt">size =</span> tag_length, <span class="dt">replace =</span> T), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb56-7"><a href="snippets.html#cb56-7"></a>}</span>
 <span id="cb56-8"><a href="snippets.html#cb56-8"></a></span>
-<span id="cb56-9"><a href="snippets.html#cb56-9"></a>ds_pt_pool &lt;-<span class="st"> </span></span>
+<span id="cb56-9"><a href="snippets.html#cb56-9"></a>ds_pt_pool &lt;-</span>
 <span id="cb56-10"><a href="snippets.html#cb56-10"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">tibble</span>(</span>
 <span id="cb56-11"><a href="snippets.html#cb56-11"></a>    <span class="dt">pt_index    =</span> <span class="kw">seq_len</span>(pt_count),</span>
 <span id="cb56-12"><a href="snippets.html#cb56-12"></a>    <span class="dt">pt_tag      =</span> <span class="kw">vapply</span>(<span class="kw">rep</span>(tag_length, pt_count), draw_tag, <span class="kw">character</span>(<span class="dv">1</span>)),</span>
@@ -544,12 +544,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The resulting dataset will look like this, but with different randomly-generated tags.</p>
 <pre class="csv"><code># A tibble: 5 x 5
   pt_index pt_tag  assigned name_last name_first
-     &lt;int&gt; &lt;chr&gt;   &lt;lgl&gt;    &lt;chr&gt;     &lt;chr&gt;     
-1        1 seikyfr FALSE    --        --        
-2        2 voiix4l FALSE    --        --        
-3        3 wosn4w2 FALSE    --        --        
-4        4 jl0dg84 FALSE    --        --        
-5        5 r5ei5ph FALSE    --        --        </code></pre>
+     &lt;int&gt; &lt;chr&gt;   &lt;lgl&gt;    &lt;chr&gt;     &lt;chr&gt;
+1        1 seikyfr FALSE    --        --
+2        2 voiix4l FALSE    --        --
+3        3 wosn4w2 FALSE    --        --
+4        4 jl0dg84 FALSE    --        --
+5        5 r5ei5ph FALSE    --        --</code></pre>
 </div>
 </div>
 <div id="snippets-correspondence" class="section level2" number="21.4">

@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-02" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strenghts-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strenghts &amp; avoid weaknesses</a>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
@@ -469,8 +469,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.3</span> Public &amp; Private Repositories</h2>
 <div id="scrubbing-github-history" class="section level3" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> Scrubbing GitHub history</h3>
-<p>Occassionaly files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (<em>i.e.</em>, the branch’s <a href="https://git-scm.com/docs/gitglossary#gitglossary-aiddefHEADaHEAD">head</a>), but from the entire history of the repo.</p>
-<p>Scrubbing is require typically when (a) a sensitive file has been accidentally commited and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.</p>
+<p>Occasionally files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (<em>i.e.</em>, the branch’s <a href="https://git-scm.com/docs/gitglossary#gitglossary-aiddefHEADaHEAD">head</a>), but from the entire history of the repo.</p>
+<p>Scrubbing is require typically when (a) a sensitive file has been accidentally committed and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.</p>
 <p>The two suitable scrubbing approaches both require the command line. The first is the <code>git-filter-branch</code> command within git, and the second is the <a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG repo-cleaner</a>. We use the second approach, which is [recommended by GitHub]; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.</p>
 <p>The <a href="https://www.gnu.org/software/bash/">bash</a>-centric steps below remove any file<em>s</em> from the repo history called ‘monster-data.csv’ from the ‘bloated’ repository.</p>
 <ol style="list-style-type: decimal">
@@ -492,7 +492,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Delete the bfg jar from the home directory.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="security.html#cb31-1"></a><span class="bu">cd</span> ~</span>
 <span id="cb31-2"><a href="security.html#cb31-2"></a><span class="fu">rm</span> bfg-*.jar</span></code></pre></div></li>
-<li><p>Ask your collaborators to reclone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
+<li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
 <div id="resources" class="section level5" number="8.3.1.0.1">
