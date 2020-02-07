@@ -32,7 +32,8 @@ rmd_files:
     "ch-snippets.Rmd",
     "ch-presentations.md",
     "ch-scratch-pad.md",
-    "ch-example.Rmd",
+    "ch-example-dashboard.md",
+    "ch-example-chapter.Rmd",
     "ch-acknowledgements.md",
     "ch-references.md"
   ]
