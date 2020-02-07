@@ -472,11 +472,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Communicating quantitative trends to a community with a phobia of math can be difficult. In this appendix, we include a style guide for our dashboards, and a dashboard (with synthetic data) that mimics a recent CQI project where Home Visitors implemented their own intervention ideas. The <a href="https://ouhsc.edu/bbmc/">BBMC</a> helped produce the data pipeline and dashboards during the evaluation.</p>
 <div id="example-dashboard-example" class="section level2" number="24.1">
 <h2><span class="header-section-number">E.1</span> Example</h2>
-<p>Please view the active html at <a href="">qqq</a>. The dashboard source code is available in the <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1"><code>analysis/dashboard-1</code></a> directory of the <a href="https://github.com/wibeasley/RAnalysisSkeleton">R Analysis Skeleton</a> repository, which documents and contains the code for the entire pipeline leading up to this dashboard.</p>
+<p>Please view the active html at <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html">https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html</a>. The dashboard source code is available in the <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1"><code>analysis/dashboard-1</code></a> directory of the <a href="https://github.com/wibeasley/RAnalysisSkeleton">R Analysis Skeleton</a> repository’; this repo documents and contains the code for the entire pipeline leading up to this dashboard.</p>
+<p>In this fictional dashboard, a cognitive measure is tracked across 14 years in three home visiting counties.</p>
 </div>
 <div id="example-dashboard-guide" class="section level2" number="24.2">
 <h2><span class="header-section-number">E.2</span> Style Guide</h2>
-<p>(<em>Last updated from the source on 2020-02-07</em>)</p>
+<p>This section describes a set of practices that the analysts have decided are best for the CQI dashboards used in our MIECHV evaluations. FoPlease see the</p>
+<p><a href="https://ouhscbbmc.github.io/data-science-practices-1/style.html" class="uri">https://ouhscbbmc.github.io/data-science-practices-1/style.html</a></p>
 <p>For the program-specific dashboards we are developing, it’s more important to meet the needs of the individual PDSA than to conform to a guide. However, we should aim to make the dashboard as consistent as possible for several reasons:</p>
 <ol style="list-style-type: decimal">
 <li>It’s less work for the program to learn a new dashboard. Recall they’ll have several PDSA cycles during the MIECHV 3 grant.</li>
@@ -582,7 +584,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Cosmetics connote the type of dashboard. Specify using the <code>theme</code> or <code>css</code> yaml keywords in the Rmd header.</p>
 <ul>
 <li><p><strong>Common measures</strong>: <a href="https://bootswatch.com/flatly/"><code>theme: simplex</code></a> uses a red banner.</p></li>
-<li><p><strong>1st cycle PDSAs</strong>: <a href="https://bootswatch.com/cosmo/"><code>theme: cosmo</code></a> uses a blue banner. This default is used if no theme is specified.</p></li>
+<li><p><strong>1st cycle PDSAs</strong> (<em>i.e.</em>, initial cycle of MIECHV 3): <a href="https://bootswatch.com/cosmo/"><code>theme: cosmo</code></a> uses a blue banner. This default is used if no theme is specified.</p></li>
 <li><p><strong>2nd cycle PDSAs</strong>: <a href="https://bootswatch.com/flatly/"><code>theme: flatly</code></a> uses a turquoise banner.</p></li>
 <li><p><strong>3rd cycle PDSAs</strong>: <a href="https://bootswatch.com/journal/"><code>theme: journal</code></a> uses a light red banner.</p></li>
 <li><p><strong>4th cycle PDSAs</strong> (<em>i.e.</em>, initial cycle of MIECHV 5): <a href="https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css">custom css</a> with a purple banner . Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under <code>output</code> and <code>flexdashboard::flex_dashboard</code>):</p>

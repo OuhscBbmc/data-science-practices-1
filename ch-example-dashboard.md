@@ -6,12 +6,16 @@ Communicating quantitative trends to a community with a phobia of math can be di
 Example {#example-dashboard-example}
 ------------------------------------
 
-Please view the active html at [qqq]().  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton) repository, which documents and contains the code for the entire pipeline leading up to this dashboard.
+Please view the active html at [https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html).  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton) repository'; this repo documents and contains the code for the entire pipeline leading up to this dashboard.
+
+In this fictional dashboard, a cognitive measure is tracked across 14 years in three home visiting counties.
 
 Style Guide {#example-dashboard-guide}
 ------------------------------------
 
-(*Last updated from the source on 2020-02-07*)
+This section describes a set of practices that the analysts have decided are best for the CQI dashboards used in our MIECHV evaluations.  FoPlease see the
+
+https://ouhscbbmc.github.io/data-science-practices-1/style.html
 
 For the program-specific dashboards we are developing, it's more important to meet the needs of the individual PDSA than to conform to a guide.  However, we should aim to make the dashboard as consistent as possible for several reasons:
 
@@ -75,8 +79,10 @@ Just like our CQI grant encourages an HV program to learn from its history and t
         * add hover text to each spaghetti.
 
 1. **Summary Graphs --single column**
+
     * Single column, qualified with `{.tabset}`.
-    *  Contains a marginal/univariate graph of all variables in the analysis.
+    * Contains a marginal/univariate graph of all variables in the analysis.
+
         * **Marginal graph of outcome measure**
         * **Marginal graph of process measure**
         * **Marginal graph of disruptor measure**
@@ -108,8 +114,9 @@ Just like our CQI grant encourages an HV program to learn from its history and t
     * The hierarchy level in this outline indicates the HTML-heading level.  Numbers are H1 (*i.e.*, `======`) that specify pages, roman numerals are H2 (*i.e.*, `------`) that specify columns, and letters are H3 (*i.e.*, `###`) that specify tabs.
 
     * Cosmetics connote the type of dashboard.  Specify using the `theme` or `css` yaml keywords in the Rmd header.
+
         * **Common measures**: [`theme: simplex`](https://bootswatch.com/flatly/) uses a red banner.
-        * **1st cycle PDSAs**: [`theme: cosmo`](https://bootswatch.com/cosmo/) uses a blue banner.  This default is used if no theme is specified.
+        * **1st cycle PDSAs** (*i.e.*, initial cycle of MIECHV 3): [`theme: cosmo`](https://bootswatch.com/cosmo/) uses a blue banner.  This default is used if no theme is specified.
         * **2nd cycle PDSAs**: [`theme: flatly`](https://bootswatch.com/flatly/) uses a turquoise banner.
         * **3rd cycle PDSAs**: [`theme: journal`](https://bootswatch.com/journal/) uses a light red banner.
         * **4th cycle PDSAs** (*i.e.*, initial cycle of MIECHV 5): [custom css](https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css) with a purple banner .  Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under `output` and `flexdashboard::flex_dashboard`):
