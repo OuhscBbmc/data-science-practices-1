@@ -29,7 +29,7 @@ Just like our CQI grant encourages an HV program to learn from its history and t
 
 #### Summary page
 
-The dashboard's greeting should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming.  For the second PDSA cycle, try to have only one important/impact graph on the first page; marginals have their own page later.
+The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary) should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming.  For the second PDSA cycle, try to have only one important/impact graph on the first page; marginals have their own page later.
 
 1. **Left column: Text** qualified with `{.tabset}`
     1. **Notes tab**: text that provides info about the dashboard's dataset, such as
@@ -42,7 +42,7 @@ The dashboard's greeting should be a good blend of (a) orientating the user to t
 
 ### Tables page
 
-The Spaghetti plots should provide the user with a feel of the trends.  The tables supplement with exactness, especially the exactness of (a) the actual *y* value and (b) the frequency of the longitudinal values.  These tables make it easier to see if you're inadvertently plotting multiple values for the same month, or if some month is missing.  In the future, we can add a 'Download as CSV' button if anyone requests it.
+The [tables provide exactness](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables), especially the exactness of (a) the actual *y* value and (b) the frequency of the longitudinal values.  These tables make it easier to see if you're inadvertently plotting multiple values for the same month, or if some month is missing.  In the future, we can add a 'Download as CSV' button if anyone requests it.
 
 Another advantage of the tables is that all measures are visible in the same screen.  A typical program-month table will have at least 6 columns: `program_code`, `month`, `model`, outcome measure, process measure, and disruptor measure.  If this is difficult to do, then the upstream scribe probably isn't doing its job well.  These tables should be almost untouched from the rds files created in the 'load-data' chunk.
 
@@ -59,7 +59,7 @@ Each tab should represent a different unit of analysis (*e.g.*, a single row sum
 
 #### Spaghetti page
 
-One graph per measure, so ideally a max of three spaghetti plots.  Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period.  If a PSDA has multiple Process Measures, give them separate tabs labeled 'Process Measure 1' & 'Process Measure 2'.
+The [spaghetti plots](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti) should provide the user with a feel of the trends.  One graph focuses on one measure, so ideally a max of three spaghetti plots.  Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period.  If a PSDA has multiple Process Measures, give them separate tabs labeled 'Process Measure 1' & 'Process Measure 2'.
 
 1. **Unnamed column** qualified with `{.tabset}`.
 
@@ -79,6 +79,8 @@ If a spaghetti plot depicts a proportion/percentage measure, then include a visu
 
 #### Marginal Graphs page
 
+The [marginal histograms](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#marginals) provide context.
+
 * Single column, qualified with `{.tabset}`.
 * Contains a marginal/univariate graph of all variables in the analysis.
 
@@ -95,6 +97,8 @@ If a spaghetti plot depicts a proportion/percentage measure, then include a visu
 * histograms have a more specific *y*-axis. For example, "Count of Months" instead of "Frequency"
 
 #### Documentation page
+
+The [documentation](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#documentation) should be self-contained in the same html file, so it's easier for the practitioner to quickly get the explanation and return to the trends.
 
 Sometimes it's best to place an explanation/annotation right next to the relevant content, but other times it's distracting.  And it's always more work to maintain the explanations if they're spread-out across the interface.  So let's try keeping almost everything under one or two tabs in the Documentation page.
 
