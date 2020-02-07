@@ -154,13 +154,32 @@ The order does not matter.
   code --install-extension DavidAnson.vscode-markdownlint
   ```
 
-  Note: here are some non-default changes that facilitate our workflow.
+  Note: here are some non-default changes that facilitate our workflow.  Either copy this configuration into [`settings.json`](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings), or manually specify the options with the [settings editor](https://code.visualstudio.com/docs/getstarted/settings).
+
+  ```json
+  {
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.maxComputationTime": 0,
+    "editor.acceptSuggestionOnEnter": "off",
+    "explorer.confirmDragAndDrop": false,
+    "files.associations": {
+        "*.Rmd": "markdown"
+    },
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "window.zoomLevel": 2,
+
+    "markdown.extension.orderedList.autoRenumber": false
+  }
+  ```
 
   1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
 
 * **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
 
-* **Python** is used by some analysts.  The prototypical installation involves two options
+* **[Python](https://www.python.org/)** is used by some analysts.  The prototypical installation involves two options.
 
   * **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
 
@@ -168,7 +187,7 @@ The order does not matter.
      conda install numpy pandas scikit-learn matplotlib
      ```
 
-  * **Standard Python**, while installing packages through pip3 in the terminal
+  * **Standard Python**, while installing packages through pip3 in the terminal.
 
 Ubuntu Installation {#installation-ubuntu}
 -----------------------------------
