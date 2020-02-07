@@ -154,6 +154,10 @@ The order does not matter.
   code --install-extension DavidAnson.vscode-markdownlint
   ```
 
+  Note: here are some non-default changes that facilitate our workflow.
+
+  1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
+
 * **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
 
 * **Python** is used by some analysts.  The prototypical installation involves two options
