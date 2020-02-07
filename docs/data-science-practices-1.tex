@@ -2429,10 +2429,40 @@ The order does not matter.
 \ExtensionTok{code}\NormalTok{ {-}{-}install{-}extension DavidAnson.vscode{-}markdownlint}
 \end{Highlighting}
 \end{Shaded}
+
+  Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into \href{https://code.visualstudio.com/docs/getstarted/tips-and-tricks\#_tune-your-settings}{\texttt{settings.json}}, or manually specify the options with the \href{https://code.visualstudio.com/docs/getstarted/settings}{settings editor}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\{}
+  \DataTypeTok{"diffEditor.ignoreTrimWhitespace"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+  \DataTypeTok{"diffEditor.maxComputationTime"}\FunctionTok{:} \DecValTok{0}\FunctionTok{,}
+  \DataTypeTok{"editor.acceptSuggestionOnEnter"}\FunctionTok{:} \StringTok{"off"}\FunctionTok{,}
+  \DataTypeTok{"explorer.confirmDragAndDrop"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+  \DataTypeTok{"files.associations"}\FunctionTok{:} \FunctionTok{\{}
+      \DataTypeTok{"*.Rmd"}\FunctionTok{:} \StringTok{"markdown"}
+  \FunctionTok{\},}
+  \DataTypeTok{"files.trimFinalNewlines"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+  \DataTypeTok{"files.trimTrailingWhitespace"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+  \DataTypeTok{"git.autofetch"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+  \DataTypeTok{"git.confirmSync"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+  \DataTypeTok{"window.zoomLevel"}\FunctionTok{:} \DecValTok{2}\FunctionTok{,}
+
+  \DataTypeTok{"markdown.extension.orderedList.autoRenumber"}\FunctionTok{:} \KeywordTok{false}
+\FunctionTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Auto Renumber: false} \{\texttt{"markdown.extension.orderedList.autoRenumber":\ false}\}
+  \end{enumerate}
 \item
   \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
 \item
-  \textbf{Python} is used by some analysts. The prototypical installation involves two options
+  \textbf{\href{https://www.python.org/}{Python}} is used by some analysts. The prototypical installation involves two options.
 
   \begin{itemize}
   \item
@@ -2444,7 +2474,7 @@ The order does not matter.
 \end{Highlighting}
 \end{Shaded}
   \item
-    \textbf{Standard Python}, while installing packages through pip3 in the terminal
+    \textbf{Standard Python}, while installing packages through pip3 in the terminal.
   \end{itemize}
 \end{itemize}
 
@@ -3306,12 +3336,14 @@ Communicating quantitative trends to a community with a phobia of math can be di
 \hypertarget{example-dashboard-example}{%
 \section{Example}\label{example-dashboard-example}}
 
-Please view the active html at \href{}{qqq}. The dashboard source code is available in the \href{https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1}{\texttt{analysis/dashboard-1}} directory of the \href{https://github.com/wibeasley/RAnalysisSkeleton}{R Analysis Skeleton} repository, which documents and contains the code for the entire pipeline leading up to this dashboard.
+Please view the active html at \url{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html}. The dashboard source code is available in the \href{https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1}{\texttt{analysis/dashboard-1}} directory of the \href{https://github.com/wibeasley/RAnalysisSkeleton}{R Analysis Skeleton} repository'; this repo documents and contains the code for the entire pipeline leading up to this dashboard.
+
+In this fictional dashboard, a cognitive measure is tracked across 14 years in three home visiting counties.
 
 \hypertarget{example-dashboard-guide}{%
 \section{Style Guide}\label{example-dashboard-guide}}
 
-(\emph{Last updated from the source on 2020-02-07})
+This section describes a set of practices that the analysts have decided are best for the CQI dashboards used in our MIECHV evaluations. In a sense, this CQI dashboard guide supplements our overall \protect\hyperlink{style}{style guide}.
 
 For the program-specific dashboards we are developing, it's more important to meet the needs of the individual PDSA than to conform to a guide. However, we should aim to make the dashboard as consistent as possible for several reasons:
 
@@ -3319,7 +3351,7 @@ For the program-specific dashboards we are developing, it's more important to me
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  It's less work for the program to learn a new dashboard. Recall they'll have several PDSA cycles during the MIECHV 3 grant.
+  It's less work for the practitioners to learn a new dashboard. Recall during the MIECHV 3 project, they'll have three PDSA cycles, plus another ``common measures'' dashboard to learn. The MIECHV 5 project is similar.
 \item
   It's less work for us (the analysts/developers) to help each other when many features of a dashboard are interchangeable with the others.
 \item
@@ -3334,212 +3366,212 @@ Just like our CQI grant encourages an HV program to learn from its history and t
 \hypertarget{layout}{%
 \subsection{Layout}\label{layout}}
 
+\hypertarget{summary-page}{%
+\subsubsection{Summary page}\label{summary-page}}
+
+The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#summary}{dashboard's greeting} should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming. For the second PDSA cycle, try to have only one important/impact graph on the first page; marginals have their own page later.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Left column: Text} qualified with \texttt{\{.tabset\}}
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    \textbf{Notes tab}: text that provides info about the dashboard's dataset, such as
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Count of (a) models, (b) programs, (c) clients, and (d) observations
+    \item
+      Date range
+    \item
+      The specific \texttt{program\_code}s. Even though a PDSA is focused on a specific program, ideally other programs are included so they have a feel for what others are doing.
+    \end{itemize}
+  \end{enumerate}
+\item
+  \textbf{Right column: Headline Graph(s)} optionally qualified with \texttt{\{.tabset\}}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ideally starts with an overall graph, with no longitudinal component.
+  \item
+    Show data only from the program, not the overall model.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{tables-page}{%
+\subsection{Tables page}\label{tables-page}}
+
+The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#tables}{tables provide exactness}, especially the exactness of (a) the actual \emph{y} value and (b) the frequency of the longitudinal values. These tables make it easier to see if you're inadvertently plotting multiple values for the same month, or if some month is missing. In the future, we can add a `Download as CSV' button if anyone requests it.
+
+Another advantage of the tables is that all measures are visible in the same screen. A typical program-month table will have at least 6 columns: \texttt{program\_code}, \texttt{month}, \texttt{model}, outcome measure, process measure, and disruptor measure. If this is difficult to do, then the upstream scribe probably isn't doing its job well. These tables should be almost untouched from the rds files created in the `load-data' chunk.
+
+Each tab should represent a different unit of analysis (\emph{e.g.}, a single row summarizing the completed visits for a program-month). Use all the tabs below that are appropriate for the PDSA. Go from biggest unit (\emph{e.g.}, model) to smallest unit (\emph{e.g.}, Provider-Week).
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{Summary page}
-
-  The dashboard's greeting should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming. For the second PDSA cycle, try to have only one important/impact graph on the first page; marginals have their own page later.
+  \textbf{Unnamed column} qualified with \texttt{\{.tabset\}}.
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    \textbf{Text --left column} qualified with \texttt{\{.tabset\}}
-
-    \begin{enumerate}
-    \def\labelenumiii{\arabic{enumiii}.}
-    \tightlist
-    \item
-      \textbf{Notes tab}: text that provides info about the dashboard's dataset, such as
-
-      \begin{itemize}
-      \tightlist
-      \item
-        Count of (a) models, (b) programs, (c) clients, and (d) observations
-      \item
-        Date range
-      \item
-        The specific \texttt{program\_code}s. Even though a PDSA is focused on a specific program, ideally other programs are included so they have a feel for what others are doing.
-      \end{itemize}
-    \end{enumerate}
+    \textbf{Model tab}
   \item
-    \textbf{Headline Graphs --right column} optionally qualified with \texttt{\{.tabset\}}.
-
-    \begin{itemize}
-    \tightlist
-    \item
-      Ideally starts with an overall graph, with no longitudinal component.
-    \item
-      Show data only from the program, not the overall model.
-    \end{itemize}
+    \textbf{Program tab}
+  \item
+    \textbf{Program-Month tab}
+  \item
+    \textbf{Program-Week tab}
+  \item
+    \textbf{Provider-Week tab}
+  \item
+    \textbf{Spaghetti Annotation tab} If your spaghetti plots use faint vertical lines to mark events (\emph{e.g.}, the start of a PDSA intervention), include the events here too.
   \end{enumerate}
+\end{enumerate}
+
+\hypertarget{spaghetti-page}{%
+\subsubsection{Spaghetti page}\label{spaghetti-page}}
+
+The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#spaghetti}{spaghetti plots} should provide the user with a feel of the trends. One graph focuses on one measure, so ideally a max of three spaghetti plots. Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period. If a PSDA has multiple Process Measures, give them separate tabs labeled `Process Measure 1' \& `Process Measure 2'.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{Tables page}
-
-  The Spaghetti plots should provide the user with a feel of the trends. The tables supplement with exactness, especially the exactness of (a) the actual \emph{y} value and (b) the frequency of the longitudinal values. These tables make it easier to see if you're inadvertently plotting multiple values for the same month, or if some month is missing. In the future, we can add a `Download as CSV' button if anyone requests it.
-
-  Another advantage of the tables is that all measures are visible in the same screen. A typical program-month table will have at least 6 columns: \texttt{program\_code}, \texttt{month}, \texttt{model}, outcome measure, process measure, and disruptor measure. If this is difficult to do, then the upstream scribe probably isn't doing its job well. These tables should be almost untouched from the rds files created in the `load-data' chunk.
-
-  Each tab should represent a different unit of analysis (\emph{e.g.}, a single row summarizing the completed visits for a program-month). Use all the tabs below that are appropriate for the PDSA. Go from biggest unit (\emph{e.g.}, model) to smallest unit (\emph{e.g.}, Provider-Week).
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \item
-    \textbf{Unnamed column} qualified with \texttt{\{.tabset\}}.
-
-    \begin{enumerate}
-    \def\labelenumiii{\arabic{enumiii}.}
-    \tightlist
-    \item
-      \textbf{Model tab}
-    \item
-      \textbf{Program tab}
-    \item
-      \textbf{Program-Month tab}
-    \item
-      \textbf{Program-Week tab}
-    \item
-      \textbf{Provider-Week tab}
-    \item
-      \textbf{Spaghetti Annotation tab} If your spaghetti plots use faint vertical lines to mark events (\emph{e.g.}, the start of a PDSA intervention), include the events here too.
-    \end{enumerate}
-  \end{enumerate}
-\item
-  \textbf{Spaghetti page}
-
-  One graph per measure, so ideally a max of three spaghetti plots. Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period. If a PSDA has multiple Process Measures, give them separate tabs labeled `Process Measure 1' \& `Process Measure 2'.
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \item
-    \textbf{Unnamed column} qualified with \texttt{\{.tabset\}}.
-
-    \begin{enumerate}
-    \def\labelenumiii{\arabic{enumiii}.}
-    \tightlist
-    \item
-      \textbf{Outcome Measure tab}
-    \item
-      \textbf{Process Measure tab}
-    \item
-      \textbf{Disruptor Measure tab}
-    \end{enumerate}
-  \end{enumerate}
-
-  If a spaghetti plot depicts a proportion/percentage measure, then include a visual layer the count/denominator behind each proportion (instead of a separate spaghetti plot dedicated to the denominator). This may include one or more of the following:
+  \textbf{Unnamed column} qualified with \texttt{\{.tabset\}}.
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    geom\_point where presence/absence denotes a nonzero/zero denominator
+    \textbf{Outcome Measure tab}
   \item
-    geom\_point where size denotes denominator's size.
+    \textbf{Process Measure tab}
   \item
-    geom\_text (in place of geom\_point) that explicitly shows denominator's size
-  \item
-    geom\_text along the bottom axis that explicitly shows denominator's size
+    \textbf{Disruptor Measure tab}
   \end{enumerate}
+\end{enumerate}
+
+If a spaghetti plot depicts a proportion/percentage measure, then include a visual layer the count/denominator behind each proportion (instead of a separate spaghetti plot dedicated to the denominator). This may include one or more of the following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  geom\_point where presence/absence denotes a nonzero/zero denominator
+\item
+  geom\_point where size denotes denominator's size.
+\item
+  geom\_text (in place of geom\_point) that explicitly shows denominator's size
+\item
+  geom\_text along the bottom axis that explicitly shows denominator's size
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  use \texttt{spaghetti\_2()} located in \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R}{display-1.R}. \textbf{(not yet developed.)}
 
   \begin{itemize}
   \tightlist
   \item
-    use \texttt{spaghetti\_2()} located in \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R}{display-1.R}. \textbf{(not yet developed.)}
+    add hover text to each spaghetti.
+  \end{itemize}
+\end{itemize}
 
-    \begin{itemize}
-    \tightlist
-    \item
-      add hover text to each spaghetti.
-    \end{itemize}
+\hypertarget{marginal-graphs-page}{%
+\subsubsection{Marginal Graphs page}\label{marginal-graphs-page}}
+
+The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#marginals}{marginal histograms} provide context.
+
+\begin{itemize}
+\item
+  Single column, qualified with \texttt{\{.tabset\}}.
+\item
+  Contains a marginal/univariate graph of all variables in the analysis.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Marginal graph of outcome measure}
+  \item
+    \textbf{Marginal graph of process measure}
+  \item
+    \textbf{Marginal graph of disruptor measure}
   \end{itemize}
 \item
-  \textbf{Summary Graphs --single column}
-
-  \begin{itemize}
-  \item
-    Single column, qualified with \texttt{\{.tabset\}}.
-  \item
-    Contains a marginal/univariate graph of all variables in the analysis.
-
-    \begin{itemize}
-    \tightlist
-    \item
-      \textbf{Marginal graph of outcome measure}
-    \item
-      \textbf{Marginal graph of process measure}
-    \item
-      \textbf{Marginal graph of disruptor measure}
-    \end{itemize}
-  \item
-    Show data only from the program, not the overall model.
-  \item
-    Use \texttt{histogram\_2()} located in \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R}{display-1.R}.
-
-    \begin{itemize}
-    \tightlist
-    \item
-      add hover text to each histogram.
-    \end{itemize}
-  \item
-    If all datasets are the same unit of analysis (\emph{e.g.}, `program-month'), then don't use an H3 tab. Use subtabs if you have marginals more than one level (\emph{e.g.}, visit date at program-month, visit date at program-week, visit date at provider-week). But avoid multiple levels, if possible; especially if program isn't fluent with a single level.
-  \item
-    histograms have a more specific y-axis. For example, ``Count of Months'' instead of ``Frequency''
-  \end{itemize}
+  Show data only from the program, not the overall model.
 \item
-  \textbf{Documentation page}
+  Use \texttt{histogram\_2()} located in \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R}{display-1.R} (this link is accessible only to Oklahoma's MIECHV evaluation team). Add hover text to each histogram.
+\item
+  If all datasets are the same unit of analysis (\emph{e.g.}, `program-month'), then don't use an H3 tab. Use subtabs if you have marginals more than one level (\emph{e.g.}, visit date at program-month, visit date at program-week, visit date at provider-week). But avoid multiple levels, if possible; especially if program isn't fluent with a single level.
+\item
+  histograms have a more specific \emph{y}-axis. For example, ``Count of Months'' instead of ``Frequency''
+\end{itemize}
 
-  Sometimes it's best to place an explanation/annotation right next to the relevant content, but other times it's distracting. And it's always more work to maintain the explanations if they're spread-out across the interface. So let's try keeping almost everything under one or two tabs in the Documentation page.
+\hypertarget{documentation-page}{%
+\subsubsection{Documentation page}\label{documentation-page}}
 
-  To help beyond that, let's try to reuse as many documentation tabs as possible. The first tab will be specific to the methodology and displays of the PDSA. The remaining tabs will reference common Rmd files; the content will automatically update when the dashboard is rendered next.
+The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#documentation}{documentation} should be self-contained in the same html file, so it's easier for the practitioner to quickly get the explanation and return to the trends.
+
+Sometimes it's best to place an explanation/annotation right next to the relevant content, but other times it's distracting. And it's always more work to maintain the explanations if they're spread-out across the interface. So let's try keeping almost everything under one or two tabs in the Documentation page.
+
+To help beyond that, let's try to reuse as many documentation tabs as possible. The first tab will be specific to the methodology and displays of the PDSA. The remaining tabs will reference common Rmd files; the content will automatically update when the dashboard is rendered next.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Unnamed column} qualified with \texttt{\{.tabset\}}.
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
+  \tightlist
   \item
-    \textbf{Unnamed column} qualified with \texttt{\{.tabset\}}.
-
-    \begin{enumerate}
-    \def\labelenumiii{\arabic{enumiii}.}
-    \tightlist
-    \item
-      \textbf{Explanation --Current PDSA}
-    \item
-      \textbf{Explanation --All CQI Dashboards}
-    \item
-      \textbf{Glossary}
-    \item
-      \textbf{Tips}
-    \item
-      \textbf{Config}
-    \end{enumerate}
+    \textbf{Explanation --Current PDSA}
+  \item
+    \textbf{Explanation --All CQI Dashboards}
+  \item
+    \textbf{Glossary}
+  \item
+    \textbf{Tips}
+  \item
+    \textbf{Config}
   \end{enumerate}
+\end{enumerate}
+
+\hypertarget{miscellaneous-notes}{%
+\subsubsection{Miscellaneous Notes}\label{miscellaneous-notes}}
+
+\begin{itemize}
 \item
-  \textbf{Misc Notes}
+  The hierarchy level in this outline indicates the HTML-heading level. Numbers are H1 (\emph{i.e.}, \texttt{======}) that specify pages, roman numerals are H2 (\emph{i.e.}, \texttt{-\/-\/-\/-\/-\/-}) that specify columns, and letters are H3 (\emph{i.e.}, \texttt{\#\#\#}) that specify tabs.
+\item
+  Cosmetics connote the type of dashboard. Specify using the \texttt{theme} or \texttt{css} yaml keywords in the Rmd header.
 
   \begin{itemize}
   \item
-    The hierarchy level in this outline indicates the HTML-heading level. Numbers are H1 (\emph{i.e.}, \texttt{======}) that specify pages, roman numerals are H2 (\emph{i.e.}, \texttt{-\/-\/-\/-\/-\/-}) that specify columns, and letters are H3 (\emph{i.e.}, \texttt{\#\#\#}) that specify tabs.
+    \textbf{Common measures}: \href{https://bootswatch.com/flatly/}{\texttt{theme:\ simplex}} uses a red banner.
   \item
-    Cosmetics connote the type of dashboard. Specify using the \texttt{theme} or \texttt{css} yaml keywords in the Rmd header.
-
-    \begin{itemize}
-    \item
-      \textbf{Common measures}: \href{https://bootswatch.com/flatly/}{\texttt{theme:\ simplex}} uses a red banner.
-    \item
-      \textbf{1st cycle PDSAs}: \href{https://bootswatch.com/cosmo/}{\texttt{theme:\ cosmo}} uses a blue banner. This default is used if no theme is specified.
-    \item
-      \textbf{2nd cycle PDSAs}: \href{https://bootswatch.com/flatly/}{\texttt{theme:\ flatly}} uses a turquoise banner.
-    \item
-      \textbf{3rd cycle PDSAs}: \href{https://bootswatch.com/journal/}{\texttt{theme:\ journal}} uses a light red banner.
-    \item
-      \textbf{4th cycle PDSAs} (\emph{i.e.}, initial cycle of MIECHV 5): \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css}{custom css} with a purple banner . Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under \texttt{output} and \texttt{flexdashboard::flex\_dashboard}):
+    \textbf{1st cycle PDSAs} (\emph{i.e.}, initial cycle of MIECHV 3): \href{https://bootswatch.com/cosmo/}{\texttt{theme:\ cosmo}} uses a blue banner. This default is used if no theme is specified.
+  \item
+    \textbf{2nd cycle PDSAs}: \href{https://bootswatch.com/flatly/}{\texttt{theme:\ flatly}} uses a turquoise banner.
+  \item
+    \textbf{3rd cycle PDSAs}: \href{https://bootswatch.com/journal/}{\texttt{theme:\ journal}} uses a light red banner.
+  \item
+    \textbf{4th cycle PDSAs} (\emph{i.e.}, initial cycle of MIECHV 5): \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css}{custom css} with a purple banner . Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under \texttt{output} and \texttt{flexdashboard::flex\_dashboard}):
 
 \begin{verbatim}
     css: ../../common/style-cqi-cycle-4.css
 \end{verbatim}
-    \end{itemize}
   \end{itemize}
-\end{enumerate}
+\end{itemize}
 
 \hypertarget{incoming-dataset}{%
 \subsection{Incoming Dataset}\label{incoming-dataset}}
