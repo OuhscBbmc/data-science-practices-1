@@ -29,6 +29,10 @@ Just like our CQI grant encourages an HV program to learn from its history and t
 
 #### Summary page
 
+<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">
+    <img src="resources/example-dashboard/summary.png" style="width: 2000px;"/>
+</a>
+
 The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary) should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming.  For the second PDSA cycle, try to have only one important/impact graph on the first page; marginals have their own page later.
 
 1. **Left column: Text** qualified with `{.tabset}`
@@ -40,7 +44,11 @@ The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/
     * Ideally starts with an overall graph, with no longitudinal component.
     * Show data only from the program, not the overall model.
 
-### Tables page
+#### Tables page
+
+<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables">
+    <img src="resources/example-dashboard/tables.png" style="width: 2000px;"/>
+</a>
 
 The [tables provide exactness](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables), especially the exactness of (a) the actual *y* value and (b) the frequency of the longitudinal values.  These tables make it easier to see if you're inadvertently plotting multiple values for the same month, or if some month is missing.  In the future, we can add a 'Download as CSV' button if anyone requests it.
 
@@ -59,6 +67,10 @@ Each tab should represent a different unit of analysis (*e.g.*, a single row sum
 
 #### Spaghetti page
 
+<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti">
+    <img src="resources/example-dashboard/spaghetti.png" style="width: 2000px;"/>
+</a>
+
 The [spaghetti plots](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti) should provide the user with a feel of the trends.  One graph focuses on one measure, so ideally a max of three spaghetti plots.  Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period.  If a PSDA has multiple Process Measures, give them separate tabs labeled 'Process Measure 1' & 'Process Measure 2'.
 
 1. **Unnamed column** qualified with `{.tabset}`.
@@ -74,19 +86,22 @@ If a spaghetti plot depicts a proportion/percentage measure, then include a visu
 1. geom_text (in place of geom_point) that explicitly shows denominator's size
 1. geom_text along the bottom axis that explicitly shows denominator's size
 
-* use `spaghetti_2()` located in [display-1.R](https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R). **(not yet developed.)**
-    * add hover text to each spaghetti.
+* use `spaghetti_2()` located in [display-1.R](https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R). **(not yet developed.)**  Add hover text to each spaghetti.
 
 #### Marginal Graphs page
+
+<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#marginals">
+    <img src="resources/example-dashboard/marginals.png" style="width: 2000px;"/>
+</a>
 
 The [marginal histograms](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#marginals) provide context.
 
 * Single column, qualified with `{.tabset}`.
 * Contains a marginal/univariate graph of all variables in the analysis.
 
-    * **Marginal graph of outcome measure**
-    * **Marginal graph of process measure**
-    * **Marginal graph of disruptor measure**
+  * **Marginal graph of outcome measure**
+  * **Marginal graph of process measure**
+  * **Marginal graph of disruptor measure**
 
 * Show data only from the program, not the overall model.
 
@@ -97,6 +112,10 @@ The [marginal histograms](https://ouhscbbmc.github.io/data-science-practices-1/d
 * histograms have a more specific *y*-axis. For example, "Count of Months" instead of "Frequency"
 
 #### Documentation page
+
+<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#documentation">
+    <img src="resources/example-dashboard/documentation.png" style="width: 2000px;"/>
+</a>
 
 The [documentation](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#documentation) should be self-contained in the same html file, so it's easier for the practitioner to quickly get the explanation and return to the trends.
 

@@ -156,8 +156,8 @@ The order does not matter.
 
   Note: here are some non-default changes that facilitate our workflow.  Either copy this configuration into [`settings.json`](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings), or manually specify the options with the [settings editor](https://code.visualstudio.com/docs/getstarted/settings).
 
-  ```json
-  {
+ ```json
+ {
     "diffEditor.ignoreTrimWhitespace": false,
     "diffEditor.maxComputationTime": 0,
     "editor.acceptSuggestionOnEnter": "off",
@@ -171,9 +171,24 @@ The order does not matter.
     "git.confirmSync": false,
     "window.zoomLevel": 2,
 
-    "markdown.extension.orderedList.autoRenumber": false
-  }
-  ```
+    "markdown.extension.orderedList.autoRenumber": false,
+    "markdownlint.config": {
+        "MD003": { "style": "setext_with_atx" },
+        "MD007": { "indent": 2 },
+        "MD022": { "lines_above": 1,
+                   "lines_below": 1 },
+        "MD024": { "siblings_only": true },
+        "no-bare-urls": false,
+        "no-inline-html": {
+          "allowed_elements": [
+            "mermaid",
+            "a",
+            "img"
+          ]
+        }
+    }
+}
+```
 
   1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
 
@@ -300,7 +315,6 @@ snap install postman
 
 Asset Locations
 -----------------------------------
-
 
 * **GitHub repository** https://github.com/OuhscBbmc/RedcapExamplesAndPatterns {added Sept 2012}
 

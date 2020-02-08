@@ -35,7 +35,7 @@ Loose Notes
 1. Keep chatter to a minimum, especially on projects with 3+ people being notified of every issue post.
 
 1. When encountering a problem,
-    * Take as much ownership as reasonable.  Don't merely report there's an error.  
+    * Take as much ownership as reasonable.  Don't merely report there's an error.
     * If you can't figure it out, ask the question and describe it well.
         * what low-level file & line of code threw the error.
         * how you have tried to solve it.

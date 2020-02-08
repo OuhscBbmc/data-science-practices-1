@@ -22,7 +22,7 @@ Reproducible Research & Visualization
 
 1. **[Building pipelines and dashboards for practitioners](https://github.com/dss-ialh/displaying-health-data/blob/master/documentation/products/beasley/dhd-2018-uvic-3-a-beasley-2018-11-29.pdf)**: Mobilizing knowledge with reproducible reporting.  [Displaying Health Data Colloquium](https://github.com/dss-ialh/displaying-health-data) 2018, University of Victoria.
 1. **[Interactive reports and webpages with R & Shiny](https://rawgit.com/OuhscBbmc/StatisticalComputing/master/2015_Presentations/10_October/beasley-scug-shiny-2015-10.html#/)**. [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2015.
-1. **[Big data, big analysis: a collaborative framework for multistudy replication ](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)**. Conventional of Canadian Psychological Association, Victoria BC, 2016.
+1. **[Big data, big analysis: a collaborative framework for multistudy replication](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)**. Conventional of Canadian Psychological Association, Victoria BC, 2016.
 1. **[WATS: wrap-around time series](https://github.com/OuhscBbmc/Wats)**: Code to accompany WATS Plot article, 2014.
 
 Data Management

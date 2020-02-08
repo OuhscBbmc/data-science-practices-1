@@ -63,7 +63,7 @@ Posts on these sites are almost always worth your time reading.  The frequently 
 
 Occasionally skim the titles on these sites and pick a few relevant to your interests.  We think it helps keep you aware of developments in the field, so your skills continually grow and our approaches don't become stagnant.
 
-* [O'Reilly's Data science ideas and resources]()https://www.oreilly.com/topics/data-science
+* [O'Reilly's Data science ideas and resources](https://www.oreilly.com/topics/data-science)
 * [Towards Data Science](https://towardsdatascience.com/)
 
 These books haven't been referenced (yet), but have good guidance and could be worth your time skimming to see what is relevant.

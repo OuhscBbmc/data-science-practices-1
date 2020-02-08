@@ -107,7 +107,7 @@ If the changes to the pipeline code are too difficult to complete in a day, we c
 
     Another implementation is to convert the repo to a package itself, and [specify the versions](http://r-pkgs.had.co.nz/description.html#dependencies) in the `DESCRIPTION` file.
 
-    ```
+    ```r
     Imports:
        dplyr       (== 0.4.3 )
        ggplot2     (== 2.0.0 )
