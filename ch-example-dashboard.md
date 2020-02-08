@@ -1,25 +1,28 @@
 Example Dashboard {#example-dashboard}
 ====================================
 
-Communicating quantitative trends to a community with a phobia of math can be difficult.  In this appendix, we include a style guide for our dashboards, and a dashboard (with synthetic data) that mimics a recent CQI project where Home Visitors implemented their own intervention ideas.  The [BBMC](https://ouhsc.edu/bbmc/) helped produce the data pipeline and dashboards during the evaluation.
+Communicating quantitative trends to a community with a [quantitative phobia](#publication-phobic) can be difficult.  This appendix showcases a dashboard and then a style guide.  The dashboard mimics a recent CQI project where Home Visitors implemented their own intervention ideas.  Over several years, roughly twelve home visiting programs each have had four CQI cycles tailored to their interests and population.
+
+Over 50 dashboards have been developed: a custom dashboard is developed for each program's cycle, and a three additional dashboards communicate the results of program-agnostic investigations.  A style guide is an important tool when managing this many unique investigations
+
+For a program-specific dashboard, it's more important to meet the needs of the individual PDSA than to conform to a guide.  However, we aim to make the dashboards as consistent as possible for several reasons:
+
+1. It's less work for the practitioners.  A familiar presentation will help the practitioners grow comfortable with their new cycle's dashboard.  Recall most will use at least five dashboards in only a few years.
+1. It's less work for the analysts/developers. Within a cycle, a consistent format (with relatively interchangeable features) means that one analyst can more easily contribute and trouble shoot a colleague's dashboard.
+1. The lessons we've learned (and mistakes we've made) can be applied to later dashboards.  The quality should improve and the development should quicken.
 
 Example {#example-dashboard-example}
 ------------------------------------
 
 Please view the active html at [https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html).  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton) repository'; this repo documents and contains the code for the entire pipeline leading up to this dashboard.
 
-In this fictional dashboard, a cognitive measure is tracked across 14 years in three home visiting counties.
+In this dashboard of synthetic data), a cognitive measure is tracked across 14 years in three home visiting counties.
 
 Style Guide {#example-dashboard-guide}
 ------------------------------------
 
-This section describes a set of practices that the analysts have decided are best for the CQI dashboards used in our MIECHV evaluations.  In a sense, this CQI dashboard guide supplements our overall [style guide](#style).
+This section describes a set of practices that the [BBMC analysts](https://ouhsc.edu/bbmc/) have decided are best for the CQI dashboards used in our MIECHV evaluations.  In a sense, this CQI dashboard guide supplements our overall [style guide](#style).
 
-For the program-specific dashboards we are developing, it's more important to meet the needs of the individual PDSA than to conform to a guide.  However, we should aim to make the dashboard as consistent as possible for several reasons:
-
-1. It's less work for the practitioners to learn a new dashboard.  Recall during the MIECHV 3 project, they'll have three PDSA cycles, plus another "common measures" dashboard to learn.  The MIECHV 5 project is similar.
-1. It's less work for us (the analysts/developers) to help each other when many features of a dashboard are interchangeable with the others.
-1. The lessons we've learned (and mistakes we've made) can be applied to later dashboards to improve both their quality and the development speed.
 
 ### Development Life-cycle
 
