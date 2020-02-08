@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-07" />
+<meta name="date" content="2020-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -584,43 +584,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb47-6"><a href="workstation.html#cb47-6"></a><span class="ex">code</span> --install-extension yzhang.markdown-all-in-one</span>
 <span id="cb47-7"><a href="workstation.html#cb47-7"></a><span class="ex">code</span> --install-extension yzane.markdown-pdf</span>
 <span id="cb47-8"><a href="workstation.html#cb47-8"></a><span class="ex">code</span> --install-extension DavidAnson.vscode-markdownlint</span></code></pre></div>
-<p>Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings"><code>settings.json</code></a>, or manually specify the options with the <a href="https://code.visualstudio.com/docs/getstarted/settings">settings editor</a>.</p></li>
-</ul>
+<p>Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings"><code>settings.json</code></a>, or manually specify the options with the <a href="https://code.visualstudio.com/docs/getstarted/settings">settings editor</a>.</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb48-1"><a href="workstation.html#cb48-1"></a><span class="fu">{</span></span>
-<span id="cb48-2"><a href="workstation.html#cb48-2"></a>   <span class="dt">&quot;diffEditor.ignoreTrimWhitespace&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb48-3"><a href="workstation.html#cb48-3"></a>   <span class="dt">&quot;diffEditor.maxComputationTime&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
-<span id="cb48-4"><a href="workstation.html#cb48-4"></a>   <span class="dt">&quot;editor.acceptSuggestionOnEnter&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span></span>
-<span id="cb48-5"><a href="workstation.html#cb48-5"></a>   <span class="dt">&quot;explorer.confirmDragAndDrop&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb48-6"><a href="workstation.html#cb48-6"></a>   <span class="dt">&quot;files.associations&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb48-7"><a href="workstation.html#cb48-7"></a>       <span class="dt">&quot;*.Rmd&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown&quot;</span></span>
-<span id="cb48-8"><a href="workstation.html#cb48-8"></a>   <span class="fu">},</span></span>
-<span id="cb48-9"><a href="workstation.html#cb48-9"></a>   <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb48-10"><a href="workstation.html#cb48-10"></a>   <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb48-11"><a href="workstation.html#cb48-11"></a>   <span class="dt">&quot;git.autofetch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb48-12"><a href="workstation.html#cb48-12"></a>   <span class="dt">&quot;git.confirmSync&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb48-13"><a href="workstation.html#cb48-13"></a>   <span class="dt">&quot;window.zoomLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb48-2"><a href="workstation.html#cb48-2"></a>    <span class="dt">&quot;diffEditor.ignoreTrimWhitespace&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb48-3"><a href="workstation.html#cb48-3"></a>    <span class="dt">&quot;diffEditor.maxComputationTime&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb48-4"><a href="workstation.html#cb48-4"></a>    <span class="dt">&quot;editor.acceptSuggestionOnEnter&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span></span>
+<span id="cb48-5"><a href="workstation.html#cb48-5"></a>    <span class="dt">&quot;explorer.confirmDragAndDrop&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb48-6"><a href="workstation.html#cb48-6"></a>    <span class="dt">&quot;files.associations&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb48-7"><a href="workstation.html#cb48-7"></a>        <span class="dt">&quot;*.Rmd&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown&quot;</span></span>
+<span id="cb48-8"><a href="workstation.html#cb48-8"></a>    <span class="fu">},</span></span>
+<span id="cb48-9"><a href="workstation.html#cb48-9"></a>    <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb48-10"><a href="workstation.html#cb48-10"></a>    <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb48-11"><a href="workstation.html#cb48-11"></a>    <span class="dt">&quot;git.autofetch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb48-12"><a href="workstation.html#cb48-12"></a>    <span class="dt">&quot;git.confirmSync&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb48-13"><a href="workstation.html#cb48-13"></a>    <span class="dt">&quot;window.zoomLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
 <span id="cb48-14"><a href="workstation.html#cb48-14"></a></span>
-<span id="cb48-15"><a href="workstation.html#cb48-15"></a>   <span class="dt">&quot;markdown.extension.orderedList.autoRenumber&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb48-16"><a href="workstation.html#cb48-16"></a>   <span class="dt">&quot;markdownlint.config&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb48-17"><a href="workstation.html#cb48-17"></a>       <span class="dt">&quot;MD003&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;style&quot;</span><span class="fu">:</span> <span class="st">&quot;setext_with_atx&quot;</span> <span class="fu">},</span></span>
-<span id="cb48-18"><a href="workstation.html#cb48-18"></a>       <span class="dt">&quot;MD007&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;indent&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
-<span id="cb48-19"><a href="workstation.html#cb48-19"></a>       <span class="dt">&quot;MD022&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;lines_above&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
-<span id="cb48-20"><a href="workstation.html#cb48-20"></a>                  <span class="dt">&quot;lines_below&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
-<span id="cb48-21"><a href="workstation.html#cb48-21"></a>       <span class="dt">&quot;MD024&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;siblings_only&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
-<span id="cb48-22"><a href="workstation.html#cb48-22"></a>       <span class="dt">&quot;no-bare-urls&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb48-23"><a href="workstation.html#cb48-23"></a>       <span class="dt">&quot;no-inline-html&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb48-24"><a href="workstation.html#cb48-24"></a>         <span class="dt">&quot;allowed_elements&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb48-25"><a href="workstation.html#cb48-25"></a>           <span class="st">&quot;mermaid&quot;</span><span class="ot">,</span></span>
-<span id="cb48-26"><a href="workstation.html#cb48-26"></a>           <span class="st">&quot;a&quot;</span><span class="ot">,</span></span>
-<span id="cb48-27"><a href="workstation.html#cb48-27"></a>           <span class="st">&quot;img&quot;</span></span>
-<span id="cb48-28"><a href="workstation.html#cb48-28"></a>         <span class="ot">]</span></span>
-<span id="cb48-29"><a href="workstation.html#cb48-29"></a>       <span class="fu">}</span></span>
-<span id="cb48-30"><a href="workstation.html#cb48-30"></a>   <span class="fu">}</span></span>
+<span id="cb48-15"><a href="workstation.html#cb48-15"></a>    <span class="dt">&quot;markdown.extension.orderedList.autoRenumber&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb48-16"><a href="workstation.html#cb48-16"></a>    <span class="dt">&quot;markdownlint.config&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb48-17"><a href="workstation.html#cb48-17"></a>        <span class="dt">&quot;MD003&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;style&quot;</span><span class="fu">:</span> <span class="st">&quot;setext_with_atx&quot;</span> <span class="fu">},</span></span>
+<span id="cb48-18"><a href="workstation.html#cb48-18"></a>        <span class="dt">&quot;MD007&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;indent&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
+<span id="cb48-19"><a href="workstation.html#cb48-19"></a>        <span class="dt">&quot;MD022&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;lines_above&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb48-20"><a href="workstation.html#cb48-20"></a>                   <span class="dt">&quot;lines_below&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
+<span id="cb48-21"><a href="workstation.html#cb48-21"></a>        <span class="dt">&quot;MD024&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;siblings_only&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
+<span id="cb48-22"><a href="workstation.html#cb48-22"></a>        <span class="dt">&quot;no-bare-urls&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb48-23"><a href="workstation.html#cb48-23"></a>        <span class="dt">&quot;no-inline-html&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb48-24"><a href="workstation.html#cb48-24"></a>          <span class="dt">&quot;allowed_elements&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb48-25"><a href="workstation.html#cb48-25"></a>            <span class="st">&quot;mermaid&quot;</span><span class="ot">,</span></span>
+<span id="cb48-26"><a href="workstation.html#cb48-26"></a>            <span class="st">&quot;a&quot;</span><span class="ot">,</span></span>
+<span id="cb48-27"><a href="workstation.html#cb48-27"></a>            <span class="st">&quot;img&quot;</span></span>
+<span id="cb48-28"><a href="workstation.html#cb48-28"></a>          <span class="ot">]</span></span>
+<span id="cb48-29"><a href="workstation.html#cb48-29"></a>        <span class="fu">}</span></span>
+<span id="cb48-30"><a href="workstation.html#cb48-30"></a>    <span class="fu">}</span></span>
 <span id="cb48-31"><a href="workstation.html#cb48-31"></a><span class="fu">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Auto Renumber: false</strong> {<code>"markdown.extension.orderedList.autoRenumber": false</code>}</li>
-</ol>
-<ul>
+</ol></li>
 <li><p><strong><a href="https://pandoc.org/">pandoc</a></strong> converts files from one markup format into another. {added Sept 2012}</p></li>
 <li><p><strong><a href="https://www.python.org/">Python</a></strong> is used by some analysts. The prototypical installation involves two options.</p>
 <ul>

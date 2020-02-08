@@ -156,39 +156,39 @@ The order does not matter.
 
   Note: here are some non-default changes that facilitate our workflow.  Either copy this configuration into [`settings.json`](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings), or manually specify the options with the [settings editor](https://code.visualstudio.com/docs/getstarted/settings).
 
- ```json
- {
-    "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.maxComputationTime": 0,
-    "editor.acceptSuggestionOnEnter": "off",
-    "explorer.confirmDragAndDrop": false,
-    "files.associations": {
-        "*.Rmd": "markdown"
-    },
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "git.autofetch": true,
-    "git.confirmSync": false,
-    "window.zoomLevel": 2,
+  ```json
+  {
+      "diffEditor.ignoreTrimWhitespace": false,
+      "diffEditor.maxComputationTime": 0,
+      "editor.acceptSuggestionOnEnter": "off",
+      "explorer.confirmDragAndDrop": false,
+      "files.associations": {
+          "*.Rmd": "markdown"
+      },
+      "files.trimFinalNewlines": true,
+      "files.trimTrailingWhitespace": true,
+      "git.autofetch": true,
+      "git.confirmSync": false,
+      "window.zoomLevel": 2,
 
-    "markdown.extension.orderedList.autoRenumber": false,
-    "markdownlint.config": {
-        "MD003": { "style": "setext_with_atx" },
-        "MD007": { "indent": 2 },
-        "MD022": { "lines_above": 1,
-                   "lines_below": 1 },
-        "MD024": { "siblings_only": true },
-        "no-bare-urls": false,
-        "no-inline-html": {
-          "allowed_elements": [
-            "mermaid",
-            "a",
-            "img"
-          ]
-        }
-    }
-}
-```
+      "markdown.extension.orderedList.autoRenumber": false,
+      "markdownlint.config": {
+          "MD003": { "style": "setext_with_atx" },
+          "MD007": { "indent": 2 },
+          "MD022": { "lines_above": 1,
+                     "lines_below": 1 },
+          "MD024": { "siblings_only": true },
+          "no-bare-urls": false,
+          "no-inline-html": {
+            "allowed_elements": [
+              "mermaid",
+              "a",
+              "img"
+            ]
+          }
+      }
+  }
+  ```
 
   1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
 
@@ -198,9 +198,9 @@ The order does not matter.
 
   * **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
 
-     ```python
-     conda install numpy pandas scikit-learn matplotlib
-     ```
+    ```python
+    conda install numpy pandas scikit-learn matplotlib
+    ```
 
   * **Standard Python**, while installing packages through pip3 in the terminal.
 
