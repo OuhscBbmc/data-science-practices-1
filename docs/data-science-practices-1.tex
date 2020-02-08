@@ -1589,14 +1589,16 @@ If the changes to the pipeline code are too difficult to complete in a day, we c
 
   Another implementation is to convert the repo to a package itself, and \href{http://r-pkgs.had.co.nz/description.html\#dependencies}{specify the versions} in the \texttt{DESCRIPTION} file.
 
-\begin{verbatim}
-Imports:
-   dplyr       (== 0.4.3 )
-   ggplot2     (== 2.0.0 )
-   data.table  (== 1.10.4)
-   lubridate   (== 1.6.0 )
-   openxlsx    (== 4.0.17)
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Imports}\OperatorTok{:}
+\StringTok{   }\KeywordTok{dplyr}\NormalTok{       (}\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{.}\FloatTok{4.3}\NormalTok{ )}
+   \KeywordTok{ggplot2}\NormalTok{     (}\OperatorTok{==}\StringTok{ }\DecValTok{2}\NormalTok{.}\FloatTok{0.0}\NormalTok{ )}
+   \KeywordTok{data.table}\NormalTok{  (}\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{.}\FloatTok{10.4}\NormalTok{)}
+   \KeywordTok{lubridate}\NormalTok{   (}\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{.}\FloatTok{6.0}\NormalTok{ )}
+   \KeywordTok{openxlsx}\NormalTok{    (}\OperatorTok{==}\StringTok{ }\DecValTok{4}\NormalTok{.}\FloatTok{0.17}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
   A downside is that it can be difficult to set up a identical machine in a few months. Sometimes these packages have depend on packages that are incompatible with other package versions. For example, at one point, the current version of dplyr was 0.4.3. A few months later, the rlang package (which wasn't explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr. The developer on the new machine needs to decide whether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.
 
@@ -1704,7 +1706,7 @@ Imports:
   \begin{itemize}
   \tightlist
   \item
-    Take as much ownership as reasonable. Don't merely report there's an error.\\
+    Take as much ownership as reasonable. Don't merely report there's an error.
   \item
     If you can't figure it out, ask the question and describe it well.
 
@@ -2431,34 +2433,52 @@ The order does not matter.
 \end{Shaded}
 
   Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into \href{https://code.visualstudio.com/docs/getstarted/tips-and-tricks\#_tune-your-settings}{\texttt{settings.json}}, or manually specify the options with the \href{https://code.visualstudio.com/docs/getstarted/settings}{settings editor}.
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{\{}
-  \DataTypeTok{"diffEditor.ignoreTrimWhitespace"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-  \DataTypeTok{"diffEditor.maxComputationTime"}\FunctionTok{:} \DecValTok{0}\FunctionTok{,}
-  \DataTypeTok{"editor.acceptSuggestionOnEnter"}\FunctionTok{:} \StringTok{"off"}\FunctionTok{,}
-  \DataTypeTok{"explorer.confirmDragAndDrop"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-  \DataTypeTok{"files.associations"}\FunctionTok{:} \FunctionTok{\{}
-      \DataTypeTok{"*.Rmd"}\FunctionTok{:} \StringTok{"markdown"}
-  \FunctionTok{\},}
-  \DataTypeTok{"files.trimFinalNewlines"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
-  \DataTypeTok{"files.trimTrailingWhitespace"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
-  \DataTypeTok{"git.autofetch"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
-  \DataTypeTok{"git.confirmSync"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-  \DataTypeTok{"window.zoomLevel"}\FunctionTok{:} \DecValTok{2}\FunctionTok{,}
+   \DataTypeTok{"diffEditor.ignoreTrimWhitespace"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+   \DataTypeTok{"diffEditor.maxComputationTime"}\FunctionTok{:} \DecValTok{0}\FunctionTok{,}
+   \DataTypeTok{"editor.acceptSuggestionOnEnter"}\FunctionTok{:} \StringTok{"off"}\FunctionTok{,}
+   \DataTypeTok{"explorer.confirmDragAndDrop"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+   \DataTypeTok{"files.associations"}\FunctionTok{:} \FunctionTok{\{}
+       \DataTypeTok{"*.Rmd"}\FunctionTok{:} \StringTok{"markdown"}
+   \FunctionTok{\},}
+   \DataTypeTok{"files.trimFinalNewlines"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+   \DataTypeTok{"files.trimTrailingWhitespace"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+   \DataTypeTok{"git.autofetch"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+   \DataTypeTok{"git.confirmSync"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+   \DataTypeTok{"window.zoomLevel"}\FunctionTok{:} \DecValTok{2}\FunctionTok{,}
 
-  \DataTypeTok{"markdown.extension.orderedList.autoRenumber"}\FunctionTok{:} \KeywordTok{false}
+   \DataTypeTok{"markdown.extension.orderedList.autoRenumber"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+   \DataTypeTok{"markdownlint.config"}\FunctionTok{:} \FunctionTok{\{}
+       \DataTypeTok{"MD003"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"style"}\FunctionTok{:} \StringTok{"setext\_with\_atx"} \FunctionTok{\},}
+       \DataTypeTok{"MD007"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"indent"}\FunctionTok{:} \DecValTok{2} \FunctionTok{\},}
+       \DataTypeTok{"MD022"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"lines\_above"}\FunctionTok{:} \DecValTok{1}\FunctionTok{,}
+                  \DataTypeTok{"lines\_below"}\FunctionTok{:} \DecValTok{1} \FunctionTok{\},}
+       \DataTypeTok{"MD024"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"siblings\_only"}\FunctionTok{:} \KeywordTok{true} \FunctionTok{\},}
+       \DataTypeTok{"no{-}bare{-}urls"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+       \DataTypeTok{"no{-}inline{-}html"}\FunctionTok{:} \FunctionTok{\{}
+         \DataTypeTok{"allowed\_elements"}\FunctionTok{:} \OtherTok{[}
+           \StringTok{"mermaid"}\OtherTok{,}
+           \StringTok{"a"}\OtherTok{,}
+           \StringTok{"img"}
+         \OtherTok{]}
+       \FunctionTok{\}}
+   \FunctionTok{\}}
 \FunctionTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Auto Renumber: false} \{\texttt{"markdown.extension.orderedList.autoRenumber":\ false}\}
-  \end{enumerate}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Auto Renumber: false} \{\texttt{"markdown.extension.orderedList.autoRenumber":\ false}\}
+\end{enumerate}
+
+\begin{itemize}
 \item
   \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
 \item
@@ -3312,7 +3332,7 @@ Occasionally skim the titles on these sites and pick a few relevant to your inte
 \begin{itemize}
 \tightlist
 \item
-  \href{}{O'Reilly's Data science ideas and resources}\url{https://www.oreilly.com/topics/data-science}
+  \href{https://www.oreilly.com/topics/data-science}{O'Reilly's Data science ideas and resources}
 \item
   \href{https://towardsdatascience.com/}{Towards Data Science}
 \end{itemize}
@@ -3406,7 +3426,7 @@ The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\
 \end{enumerate}
 
 \hypertarget{tables-page}{%
-\subsection{Tables page}\label{tables-page}}
+\subsubsection{Tables page}\label{tables-page}}
 
 The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#tables}{tables provide exactness}, especially the exactness of (a) the actual \emph{y} value and (b) the frequency of the longitudinal values. These tables make it easier to see if you're inadvertently plotting multiple values for the same month, or if some month is missing. In the future, we can add a `Download as CSV' button if anyone requests it.
 
@@ -3477,13 +3497,7 @@ If a spaghetti plot depicts a proportion/percentage measure, then include a visu
 \begin{itemize}
 \tightlist
 \item
-  use \texttt{spaghetti\_2()} located in \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R}{display-1.R}. \textbf{(not yet developed.)}
-
-  \begin{itemize}
-  \tightlist
-  \item
-    add hover text to each spaghetti.
-  \end{itemize}
+  use \texttt{spaghetti\_2()} located in \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R}{display-1.R}. \textbf{(not yet developed.)} Add hover text to each spaghetti.
 \end{itemize}
 
 \hypertarget{marginal-graphs-page}{%
