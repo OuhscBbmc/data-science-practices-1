@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-07" />
+<meta name="date" content="2020-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -336,9 +336,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="14" data-path="publication.html"><a href="publication.html"><i class="fa fa-check"></i><b>14</b> Publishing Results</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="publication.html"><a href="publication.html#to-other-analysts"><i class="fa fa-check"></i><b>14.1</b> To Other Analysts</a></li>
-<li class="chapter" data-level="14.2" data-path="publication.html"><a href="publication.html#to-researchers-content-experts"><i class="fa fa-check"></i><b>14.2</b> To Researchers &amp; Content Experts</a></li>
-<li class="chapter" data-level="14.3" data-path="publication.html"><a href="publication.html#to-technical-phobic-audiences"><i class="fa fa-check"></i><b>14.3</b> To Technical-Phobic Audiences</a></li>
+<li class="chapter" data-level="14.1" data-path="publication.html"><a href="publication.html#publication-analysts"><i class="fa fa-check"></i><b>14.1</b> To Other Analysts</a></li>
+<li class="chapter" data-level="14.2" data-path="publication.html"><a href="publication.html#publication-experts"><i class="fa fa-check"></i><b>14.2</b> To Researchers &amp; Content Experts</a></li>
+<li class="chapter" data-level="14.3" data-path="publication.html"><a href="publication.html#publication-phobic"><i class="fa fa-check"></i><b>14.3</b> To Technical-Phobic Audiences</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="testing-and-validation.html"><a href="testing-and-validation.html"><i class="fa fa-check"></i><b>15</b> Testing, Validation, &amp; Defensive Programming</a>
 <ul>
@@ -439,9 +439,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="E.1" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-example"><i class="fa fa-check"></i><b>E.1</b> Example</a></li>
 <li class="chapter" data-level="E.2" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-guide"><i class="fa fa-check"></i><b>E.2</b> Style Guide</a>
 <ul>
-<li class="chapter" data-level="E.2.1" data-path="example-dashboard.html"><a href="example-dashboard.html#development-life-cycle"><i class="fa fa-check"></i><b>E.2.1</b> Development Life-cycle</a></li>
-<li class="chapter" data-level="E.2.2" data-path="example-dashboard.html"><a href="example-dashboard.html#layout"><i class="fa fa-check"></i><b>E.2.2</b> Layout</a></li>
-<li class="chapter" data-level="E.2.3" data-path="example-dashboard.html"><a href="example-dashboard.html#incoming-dataset"><i class="fa fa-check"></i><b>E.2.3</b> Incoming Dataset</a></li>
+<li class="chapter" data-level="E.2.1" data-path="example-dashboard.html"><a href="example-dashboard.html#summary-page"><i class="fa fa-check"></i><b>E.2.1</b> Summary page</a></li>
+<li class="chapter" data-level="E.2.2" data-path="example-dashboard.html"><a href="example-dashboard.html#tables-page"><i class="fa fa-check"></i><b>E.2.2</b> Tables page</a></li>
+<li class="chapter" data-level="E.2.3" data-path="example-dashboard.html"><a href="example-dashboard.html#spaghetti-page"><i class="fa fa-check"></i><b>E.2.3</b> Spaghetti page</a></li>
+<li class="chapter" data-level="E.2.4" data-path="example-dashboard.html"><a href="example-dashboard.html#marginal-graphs-page"><i class="fa fa-check"></i><b>E.2.4</b> Marginal Graphs page</a></li>
+<li class="chapter" data-level="E.2.5" data-path="example-dashboard.html"><a href="example-dashboard.html#documentation-page"><i class="fa fa-check"></i><b>E.2.5</b> Documentation page</a></li>
+<li class="chapter" data-level="E.2.6" data-path="example-dashboard.html"><a href="example-dashboard.html#miscellaneous-notes"><i class="fa fa-check"></i><b>E.2.6</b> Miscellaneous Notes</a></li>
+</ul></li>
+<li class="chapter" data-level="E.3" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-architecture"><i class="fa fa-check"></i><b>E.3</b> Architecture</a>
+<ul>
+<li class="chapter" data-level="E.3.1" data-path="example-dashboard.html"><a href="example-dashboard.html#data-from-external-system"><i class="fa fa-check"></i><b>E.3.1</b> Data from External System</a></li>
+<li class="chapter" data-level="E.3.2" data-path="example-dashboard.html"><a href="example-dashboard.html#groomed-data-in-warehouse"><i class="fa fa-check"></i><b>E.3.2</b> Groomed Data in Warehouse</a></li>
+<li class="chapter" data-level="E.3.3" data-path="example-dashboard.html"><a href="example-dashboard.html#analysis-ready-dataset"><i class="fa fa-check"></i><b>E.3.3</b> Analysis-Ready Dataset</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="F" data-path="example-chapter.html"><a href="example-chapter.html"><i class="fa fa-check"></i><b>F</b> Example Chapter</a></li>
@@ -469,33 +478,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="example-dashboard" class="section level1" number="24">
 <h1><span class="header-section-number">E</span> Example Dashboard</h1>
-<p>Communicating quantitative trends to a community with a phobia of math can be difficult. In this appendix, we include a style guide for our dashboards, and a dashboard (with synthetic data) that mimics a recent CQI project where Home Visitors implemented their own intervention ideas. The <a href="https://ouhsc.edu/bbmc/">BBMC</a> helped produce the data pipeline and dashboards during the evaluation.</p>
+<p>Communicating quantitative trends to a community with a <a href="publication.html#publication-phobic">quantitative phobia</a> can be difficult. This appendix showcases a dashboard style that has evolved during the past few years of <a href="https://www.ok.gov/health/Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/About_the_MIECHV_Program_-_Federal_Home_Visiting_Grant/index.html">OSDH Home Visiting</a>, where twelve local programs practitioners implemented their own intervention ideas tailored to their interests and community.</p>
+<p>Over 50 dashboards have been developed: a custom dashboard is developed for each program’s cycle, and a three additional dashboards communicate the results of program-agnostic investigations. A style guide is an important tool when managing this many unique investigations</p>
+<p>For a program-specific dashboard, it’s more important to meet the needs of the individual PDSA than to conform to a guide. However, we aim to make the dashboards as consistent as possible for several reasons:</p>
+<ol style="list-style-type: decimal">
+<li>It’s less work for the practitioners. A familiar presentation will help the practitioners grow comfortable with their new cycle’s dashboard. Recall most will use at least five dashboards in only a few years.</li>
+<li>It’s less work for the analysts/developers. Within a cycle, a consistent format (with relatively interchangeable features) means that one analyst can more easily contribute and trouble shoot a colleague’s dashboard.</li>
+<li>The lessons we’ve learned (and mistakes we’ve made) can be applied to later dashboards. The quality should improve and the development should quicken.</li>
+</ol>
+<p>Just like our CQI grant encourages an HV program to learn from its history and to learn from others, we as analysts should too. As we work with the programs to design a PDSA, each one analyst will learn about the strengths and weaknesses of our current dashboard style, and propose improvements.</p>
 <div id="example-dashboard-example" class="section level2" number="24.1">
 <h2><span class="header-section-number">E.1</span> Example</h2>
-<p>Please view the active html at <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html">https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html</a>. The dashboard source code is available in the <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1"><code>analysis/dashboard-1</code></a> directory of the <a href="https://github.com/wibeasley/RAnalysisSkeleton">R Analysis Skeleton</a> repository’; this repo documents and contains the code for the entire pipeline leading up to this dashboard.</p>
-<p>In this fictional dashboard, a cognitive measure is tracked across 14 years in three home visiting counties.</p>
+<p>A example dashboard that mimic the real CQI is available at <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html">https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html</a>. The dashboard source code is available in the <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1"><code>analysis/dashboard-1</code></a> directory of the <a href="https://github.com/wibeasley/RAnalysisSkeleton#readme">R Analysis Skeleton</a> repository’; this repo contains the code and documents the entire pipeline leading up to this dashboard.</p>
+<p>In this dashboard of synthetic data), a cognitive measure is tracked across 14 years in three home visiting counties.</p>
 </div>
 <div id="example-dashboard-guide" class="section level2" number="24.2">
 <h2><span class="header-section-number">E.2</span> Style Guide</h2>
-<p>This section describes a set of practices that the analysts have decided are best for the CQI dashboards used in our MIECHV evaluations. In a sense, this CQI dashboard guide supplements our overall <a href="style.html#style">style guide</a>.</p>
-<p>For the program-specific dashboards we are developing, it’s more important to meet the needs of the individual PDSA than to conform to a guide. However, we should aim to make the dashboard as consistent as possible for several reasons:</p>
-<ol style="list-style-type: decimal">
-<li>It’s less work for the practitioners to learn a new dashboard. Recall during the MIECHV 3 project, they’ll have three PDSA cycles, plus another “common measures” dashboard to learn. The MIECHV 5 project is similar.</li>
-<li>It’s less work for us (the analysts/developers) to help each other when many features of a dashboard are interchangeable with the others.</li>
-<li>The lessons we’ve learned (and mistakes we’ve made) can be applied to later dashboards to improve both their quality and the development speed.</li>
-</ol>
-<div id="development-life-cycle" class="section level3" number="24.2.1">
-<h3><span class="header-section-number">E.2.1</span> Development Life-cycle</h3>
-<p>Just like our CQI grant encourages an HV program to learn from its history and to learn from others, the analysts should too. As we work with the programs to design a PDSA dashboard, each one of us will learn about the strengths and weaknesses of our current dashboard style.</p>
-</div>
-<div id="layout" class="section level3" number="24.2.2">
-<h3><span class="header-section-number">E.2.2</span> Layout</h3>
-<div id="summary-page" class="section level4" number="24.2.2.1">
-<h4><span class="header-section-number">E.2.2.1</span> Summary page</h4>
+<p>This section describes a set of practices that the <a href="https://ouhsc.edu/bbmc/">BBMC analysts</a> have decided are best for the CQI dashboards used in our MIECHV evaluations. In a sense, this CQI dashboard guide supplements our overall <a href="style.html#style">style guide</a>.</p>
+<p>The MIECHV CQI dashboards are based on RStudio’s <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a> package, which uses <a href="https://CRAN.R-project.org/package=rmarkdown">rmarkdown</a>, JavaScript, and CSS. flexdashboard has a <a href="https://rmarkdown.rstudio.com/flexdashboard/">great website</a> that should be read by anyone adapting this guide for their own CQI projects.</p>
+<div id="summary-page" class="section level3" number="24.2.1">
+<h3><span class="header-section-number">E.2.1</span> Summary page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">
 <img src="resources/example-dashboard/summary.png" style="width: 2000px;"/>
 </a></p>
-<p>The <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">dashboard’s greeting</a> should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming. For the second PDSA cycle, try to have only one important/impact graph on the first page; marginals have their own page later.</p>
+<p>The <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">dashboard’s greeting</a> should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming. For the second PDSA cycle, try to have only one or two important and impactful graphs on the first page; specialized graphs have their own pages later.</p>
 <ol style="list-style-type: decimal">
 <li><strong>Left column: Text</strong> qualified with <code>{.tabset}</code>
 <ol style="list-style-type: decimal">
@@ -513,13 +519,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ol>
 </div>
-<div id="tables-page" class="section level4" number="24.2.2.2">
-<h4><span class="header-section-number">E.2.2.2</span> Tables page</h4>
+<div id="tables-page" class="section level3" number="24.2.2">
+<h3><span class="header-section-number">E.2.2</span> Tables page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables">
 <img src="resources/example-dashboard/tables.png" style="width: 2000px;"/>
 </a></p>
 <p>The <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables">tables provide exactness</a>, especially the exactness of (a) the actual <em>y</em> value and (b) the frequency of the longitudinal values. These tables make it easier to see if you’re inadvertently plotting multiple values for the same month, or if some month is missing. In the future, we can add a ‘Download as CSV’ button if anyone requests it.</p>
-<p>Another advantage of the tables is that all measures are visible in the same screen. A typical program-month table will have at least 6 columns: <code>program_code</code>, <code>month</code>, <code>model</code>, outcome measure, process measure, and disruptor measure. If this is difficult to do, then the upstream scribe probably isn’t doing its job well. These tables should be almost untouched from the rds files created in the ‘load-data’ chunk.</p>
+<p>Another advantage of the tables is that all measures are visible in the same screen. A typical program-month table will have at least 6 columns: <code>program_code</code>, <code>month</code>, <code>model</code>, outcome measure, process measure, and disruptor measure. If this is difficult to do, then the upstream <a href="patterns.html#pattern-scribe">scribe</a> probably isn’t doing its job well. These tables should be almost untouched from the rds files created in the ‘load-data’ chunk.</p>
 <p>Each tab should represent a different unit of analysis (<em>e.g.</em>, a single row summarizing the completed visits for a program-month). Use all the tabs below that are appropriate for the PDSA. Go from biggest unit (<em>e.g.</em>, model) to smallest unit (<em>e.g.</em>, Provider-Week).</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Unnamed column</strong> qualified with <code>{.tabset}</code>.</p>
@@ -533,8 +539,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol></li>
 </ol>
 </div>
-<div id="spaghetti-page" class="section level4" number="24.2.2.3">
-<h4><span class="header-section-number">E.2.2.3</span> Spaghetti page</h4>
+<div id="spaghetti-page" class="section level3" number="24.2.3">
+<h3><span class="header-section-number">E.2.3</span> Spaghetti page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti">
 <img src="resources/example-dashboard/spaghetti.png" style="width: 2000px;"/>
 </a></p>
@@ -558,8 +564,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>use <code>spaghetti_2()</code> located in <a href="https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R">display-1.R</a>. <strong>(not yet developed.)</strong> Add hover text to each spaghetti.</li>
 </ul>
 </div>
-<div id="marginal-graphs-page" class="section level4" number="24.2.2.4">
-<h4><span class="header-section-number">E.2.2.4</span> Marginal Graphs page</h4>
+<div id="marginal-graphs-page" class="section level3" number="24.2.4">
+<h3><span class="header-section-number">E.2.4</span> Marginal Graphs page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#marginals">
 <img src="resources/example-dashboard/marginals.png" style="width: 2000px;"/>
 </a></p>
@@ -578,8 +584,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>histograms have a more specific <em>y</em>-axis. For example, “Count of Months” instead of “Frequency”</p></li>
 </ul>
 </div>
-<div id="documentation-page" class="section level4" number="24.2.2.5">
-<h4><span class="header-section-number">E.2.2.5</span> Documentation page</h4>
+<div id="documentation-page" class="section level3" number="24.2.5">
+<h3><span class="header-section-number">E.2.5</span> Documentation page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#documentation">
 <img src="resources/example-dashboard/documentation.png" style="width: 2000px;"/>
 </a></p>
@@ -597,8 +603,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol></li>
 </ol>
 </div>
-<div id="miscellaneous-notes" class="section level4" number="24.2.2.6">
-<h4><span class="header-section-number">E.2.2.6</span> Miscellaneous Notes</h4>
+<div id="miscellaneous-notes" class="section level3" number="24.2.6">
+<h3><span class="header-section-number">E.2.6</span> Miscellaneous Notes</h3>
 <ul>
 <li><p>The hierarchy level in this outline indicates the HTML-heading level. Numbers are H1 (<em>i.e.</em>, <code>======</code>) that specify pages, roman numerals are H2 (<em>i.e.</em>, <code>------</code>) that specify columns, and letters are H3 (<em>i.e.</em>, <code>###</code>) that specify tabs.</p></li>
 <li><p>Cosmetics connote the type of dashboard. Specify using the <code>theme</code> or <code>css</code> yaml keywords in the Rmd header.</p>
@@ -607,17 +613,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>1st cycle PDSAs</strong> (<em>i.e.</em>, initial cycle of MIECHV 3): <a href="https://bootswatch.com/cosmo/"><code>theme: cosmo</code></a> uses a blue banner. This default is used if no theme is specified.</p></li>
 <li><p><strong>2nd cycle PDSAs</strong>: <a href="https://bootswatch.com/flatly/"><code>theme: flatly</code></a> uses a turquoise banner.</p></li>
 <li><p><strong>3rd cycle PDSAs</strong>: <a href="https://bootswatch.com/journal/"><code>theme: journal</code></a> uses a light red banner.</p></li>
-<li><p><strong>4th cycle PDSAs</strong> (<em>i.e.</em>, initial cycle of MIECHV 5): <a href="https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css">custom css</a> with a purple banner . Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under <code>output</code> and <code>flexdashboard::flex_dashboard</code>):</p>
+<li><p><strong>4th cycle PDSAs</strong> (<em>i.e.</em>, initial cycle of MIECHV 5): <a href="https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css">custom css</a> with a purple banner (a public copy of this css is <a href="resources/example-dashboard/style-cqi-cycle-4.css">available</a>). Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under <code>output</code> and <code>flexdashboard::flex_dashboard</code>)</p>
 <pre class="rmd"><code>    css: ../../common/style-cqi-cycle-4.css</code></pre></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="incoming-dataset" class="section level3" number="24.2.3">
-<h3><span class="header-section-number">E.2.3</span> Incoming Dataset</h3>
+<div id="example-dashboard-architecture" class="section level2" number="24.3">
+<h2><span class="header-section-number">E.3</span> Architecture</h2>
+<p>The dashboard is only one piece of a large workflow. The design and construction of this workflow are discussed in this book, which are highlighted below.</p>
+<p><a href="https://github.com/wibeasley/RAnalysisSkeleton#intra-individual-differences">
+<img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
+</a></p>
+<div id="data-from-external-system" class="section level3" number="24.3.1">
+<h3><span class="header-section-number">E.3.1</span> Data from External System</h3>
+</div>
+<div id="groomed-data-in-warehouse" class="section level3" number="24.3.2">
+<h3><span class="header-section-number">E.3.2</span> Groomed Data in Warehouse</h3>
+</div>
+<div id="analysis-ready-dataset" class="section level3" number="24.3.3">
+<h3><span class="header-section-number">E.3.3</span> Analysis-Ready Dataset</h3>
 <ul>
-<li><p>Very little data manipulation should occur in the dashboard. The upstream scribe should produce an analysis-ready rds file. The scribe should be concerned only with presenting the graphs, tables, and summary text.</p></li>
-<li><p>Include a common measure if the PDSA explicitly mentions it. Try to show measures only if they’re directly related to the PDSA. The PDSA dashboard will have less exposure to change (which makes it easier to maintain). If programs need context for their measures, they can look at the common measure dashboard.</p></li>
+<li><p>Very little data manipulation should occur in the dashboard. The upstream <a href="patterns.html#pattern-scribe">scribe</a> should produce an analysis-ready rds file. The dashboard should be concerned only with presenting the graphs, tables, summary text, and documentation.</p></li>
+<li><p>Include a common measure if the PDSA explicitly mentions it. Try to show measures only if they’re directly related to the PDSA. The PDSA dashboard will have less exposure to change (which makes it easier to maintain). If a program needs context for their measures, they can look at the common measure dashboard.</p></li>
 </ul>
 
 </div>
