@@ -1,11 +1,11 @@
 Publishing Results {#publication}
 ====================================
 
-To Other Analysts
+To Other Analysts {#publication-analysts}
 ------------------------------------
 
-To Researchers & Content Experts
+To Researchers & Content Experts {#publication-experts}
 ------------------------------------
 
-To Technical-Phobic Audiences
+To Technical-Phobic Audiences {#publication-phobic}
 ------------------------------------

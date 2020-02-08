@@ -1,7 +1,7 @@
 Example Dashboard {#example-dashboard}
 ====================================
 
-Communicating quantitative trends to a community with a [quantitative phobia](#publication-phobic) can be difficult.  This appendix showcases a dashboard and then a style guide.  The dashboard mimics a recent CQI project where Home Visitors implemented their own intervention ideas.  Over several years, roughly twelve home visiting programs each have had four CQI cycles tailored to their interests and population.
+Communicating quantitative trends to a community with a [quantitative phobia](#publication-phobic) can be difficult.  This appendix showcases a dashboard style that has evolved during the past few years of [OSDH Home Visiting](https://www.ok.gov/health/Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/About_the_MIECHV_Program_-_Federal_Home_Visiting_Grant/index.html), where twelve local programs practitioners implemented their own intervention ideas tailored to their interests and community.
 
 Over 50 dashboards have been developed: a custom dashboard is developed for each program's cycle, and a three additional dashboards communicate the results of program-agnostic investigations.  A style guide is an important tool when managing this many unique investigations
 
@@ -11,10 +11,12 @@ For a program-specific dashboard, it's more important to meet the needs of the i
 1. It's less work for the analysts/developers. Within a cycle, a consistent format (with relatively interchangeable features) means that one analyst can more easily contribute and trouble shoot a colleague's dashboard.
 1. The lessons we've learned (and mistakes we've made) can be applied to later dashboards.  The quality should improve and the development should quicken.
 
+Just like our CQI grant encourages an HV program to learn from its history and to learn from others, we as analysts should too.  As we work with the programs to design a PDSA, each one analyst will learn about the strengths and weaknesses of our current dashboard style, and propose improvements.
+
 Example {#example-dashboard-example}
 ------------------------------------
 
-Please view the active html at [https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html).  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton) repository'; this repo documents and contains the code for the entire pipeline leading up to this dashboard.
+A example dashboard that mimic the real CQI is available at [https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html).  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton#readme) repository'; this repo contains the code and documents the entire pipeline leading up to this dashboard.
 
 In this dashboard of synthetic data), a cognitive measure is tracked across 14 years in three home visiting counties.
 
@@ -23,20 +25,15 @@ Style Guide {#example-dashboard-guide}
 
 This section describes a set of practices that the [BBMC analysts](https://ouhsc.edu/bbmc/) have decided are best for the CQI dashboards used in our MIECHV evaluations.  In a sense, this CQI dashboard guide supplements our overall [style guide](#style).
 
+The MIECHV CQI dashboards are based on RStudio's [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) package, which uses [rmarkdown](https://CRAN.R-project.org/package=rmarkdown), JavaScript, and CSS.  flexdashboard has a [great website](https://rmarkdown.rstudio.com/flexdashboard/) that should be read by anyone adapting this guide for their own CQI projects.
 
-### Development Life-cycle
-
-Just like our CQI grant encourages an HV program to learn from its history and to learn from others, the analysts should too.  As we work with the programs to design a PDSA dashboard, each one of us will learn about the strengths and weaknesses of our current dashboard style.
-
-### Layout
-
-#### Summary page
+### Summary page
 
 <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">
     <img src="resources/example-dashboard/summary.png" style="width: 2000px;"/>
 </a>
 
-The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary) should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming.  For the second PDSA cycle, try to have only one important/impact graph on the first page; marginals have their own page later.
+The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary) should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming.  For the second PDSA cycle, try to have only one or two important and impactful graphs on the first page; specialized graphs have their own pages later.
 
 1. **Left column: Text** qualified with `{.tabset}`
     1. **Notes tab**: text that provides info about the dashboard's dataset, such as
@@ -47,7 +44,7 @@ The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/
     * Ideally starts with an overall graph, with no longitudinal component.
     * Show data only from the program, not the overall model.
 
-#### Tables page
+### Tables page
 
 <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables">
     <img src="resources/example-dashboard/tables.png" style="width: 2000px;"/>
@@ -55,7 +52,7 @@ The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/
 
 The [tables provide exactness](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables), especially the exactness of (a) the actual *y* value and (b) the frequency of the longitudinal values.  These tables make it easier to see if you're inadvertently plotting multiple values for the same month, or if some month is missing.  In the future, we can add a 'Download as CSV' button if anyone requests it.
 
-Another advantage of the tables is that all measures are visible in the same screen.  A typical program-month table will have at least 6 columns: `program_code`, `month`, `model`, outcome measure, process measure, and disruptor measure.  If this is difficult to do, then the upstream scribe probably isn't doing its job well.  These tables should be almost untouched from the rds files created in the 'load-data' chunk.
+Another advantage of the tables is that all measures are visible in the same screen.  A typical program-month table will have at least 6 columns: `program_code`, `month`, `model`, outcome measure, process measure, and disruptor measure.  If this is difficult to do, then the upstream [scribe](#pattern-scribe) probably isn't doing its job well.  These tables should be almost untouched from the rds files created in the 'load-data' chunk.
 
 Each tab should represent a different unit of analysis (*e.g.*, a single row summarizing the completed visits for a program-month).  Use all the tabs below that are appropriate for the PDSA.  Go from biggest unit (*e.g.*, model) to smallest unit (*e.g.*, Provider-Week).
 
@@ -68,7 +65,7 @@ Each tab should represent a different unit of analysis (*e.g.*, a single row sum
     1. **Provider-Week tab**
     1. **Spaghetti Annotation tab**  If your spaghetti plots use faint vertical lines to mark events (*e.g.*, the start of a PDSA intervention), include the events here too.
 
-#### Spaghetti page
+### Spaghetti page
 
 <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti">
     <img src="resources/example-dashboard/spaghetti.png" style="width: 2000px;"/>
@@ -91,7 +88,7 @@ If a spaghetti plot depicts a proportion/percentage measure, then include a visu
 
 * use `spaghetti_2()` located in [display-1.R](https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R). **(not yet developed.)**  Add hover text to each spaghetti.
 
-#### Marginal Graphs page
+### Marginal Graphs page
 
 <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#marginals">
     <img src="resources/example-dashboard/marginals.png" style="width: 2000px;"/>
@@ -114,7 +111,7 @@ The [marginal histograms](https://ouhscbbmc.github.io/data-science-practices-1/d
 
 * histograms have a more specific *y*-axis. For example, "Count of Months" instead of "Frequency"
 
-#### Documentation page
+### Documentation page
 
 <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#documentation">
     <img src="resources/example-dashboard/documentation.png" style="width: 2000px;"/>
@@ -134,7 +131,7 @@ To help beyond that, let's try to reuse as many documentation tabs as possible. 
     1. **Tips**
     1. **Config**
 
-#### Miscellaneous Notes
+### Miscellaneous Notes
 
 * The hierarchy level in this outline indicates the HTML-heading level.  Numbers are H1 (*i.e.*, `======`) that specify pages, roman numerals are H2 (*i.e.*, `------`) that specify columns, and letters are H3 (*i.e.*, `###`) that specify tabs.
 
@@ -144,14 +141,27 @@ To help beyond that, let's try to reuse as many documentation tabs as possible. 
   * **1st cycle PDSAs** (*i.e.*, initial cycle of MIECHV 3): [`theme: cosmo`](https://bootswatch.com/cosmo/) uses a blue banner.  This default is used if no theme is specified.
   * **2nd cycle PDSAs**: [`theme: flatly`](https://bootswatch.com/flatly/) uses a turquoise banner.
   * **3rd cycle PDSAs**: [`theme: journal`](https://bootswatch.com/journal/) uses a light red banner.
-  * **4th cycle PDSAs** (*i.e.*, initial cycle of MIECHV 5): [custom css](https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css) with a purple banner .  Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under `output` and `flexdashboard::flex_dashboard`):
+  * **4th cycle PDSAs** (*i.e.*, initial cycle of MIECHV 5): [custom css](https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/style-cqi-cycle-4.css) with a purple banner (a public copy of this css is [available](resources/example-dashboard/style-cqi-cycle-4.css)).  Instead of a theme, the below line (with four leading spaces, because the yaml entry is nested under `output` and `flexdashboard::flex_dashboard`)
 
       ```Rmd
           css: ../../common/style-cqi-cycle-4.css
       ```
 
-### Incoming Dataset
+Architecture {#example-dashboard-architecture}
+------------------------------------
 
-* Very little data manipulation should occur in the dashboard.  The upstream scribe should produce an analysis-ready rds file.  The scribe should be concerned only with presenting the graphs, tables, and summary text.
+The dashboard is only one piece of a large workflow. The design and construction of this workflow are discussed in this book, which are highlighted below.
 
-* Include a common measure if the PDSA explicitly mentions it.  Try to show measures only if they're directly related to the PDSA.  The PDSA dashboard will have less exposure to change (which makes it easier to maintain).  If programs need context for their measures, they can look at the common measure dashboard.
+<a href="https://github.com/wibeasley/RAnalysisSkeleton#intra-individual-differences">
+    <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
+</a>
+
+### Data from External System
+
+### Groomed Data in Warehouse
+
+### Analysis-Ready Dataset
+
+* Very little data manipulation should occur in the dashboard.  The upstream [scribe](#pattern-scribe)  should produce an analysis-ready rds file.  The dashboard should be concerned only with presenting the graphs, tables, summary text, and documentation.
+
+* Include a common measure if the PDSA explicitly mentions it.  Try to show measures only if they're directly related to the PDSA.  The PDSA dashboard will have less exposure to change (which makes it easier to maintain).  If a program needs context for their measures, they can look at the common measure dashboard.
