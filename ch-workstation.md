@@ -161,6 +161,7 @@ The order does not matter.
       "diffEditor.ignoreTrimWhitespace": false,
       "diffEditor.maxComputationTime": 0,
       "editor.acceptSuggestionOnEnter": "off",
+      "editor.renderWhitespace": "all",
       "explorer.confirmDragAndDrop": false,
       "files.associations": {
           "*.Rmd": "markdown"
@@ -172,6 +173,7 @@ The order does not matter.
       "window.zoomLevel": 2,
 
       "markdown.extension.orderedList.autoRenumber": false,
+      "markdown.extension.orderedList.marker": "one",
       "markdownlint.config": {
           "MD003": { "style": "setext_with_atx" },
           "MD007": { "indent": 2 },
