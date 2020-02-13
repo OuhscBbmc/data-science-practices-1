@@ -27,10 +27,10 @@ This section describes a set of practices that the [BBMC analysts](https://ouhsc
 
 The MIECHV CQI dashboards are based on RStudio's [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) package, which uses [rmarkdown](https://CRAN.R-project.org/package=rmarkdown), JavaScript, and CSS.  flexdashboard has a [great website](https://rmarkdown.rstudio.com/flexdashboard/) that should be read by anyone adapting this guide for their own CQI projects.
 
-### Summary page
+### Headline page
 
-<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">
-    <img src="resources/example-dashboard/summary.png" style="width: 2000px;"/>
+<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#headline">
+    <img src="resources/example-dashboard/headline.png" style="width: 2000px;"/>
 </a>
 
 The [dashboard's greeting](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary) should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming.  For the second PDSA cycle, try to have only one or two important and impactful graphs on the first page; specialized graphs have their own pages later.
@@ -65,13 +65,13 @@ Each tab should represent a different unit of analysis (*e.g.*, a single row sum
     1. **Provider-Week tab**
     1. **Spaghetti Annotation tab**  If your spaghetti plots use faint vertical lines to mark events (*e.g.*, the start of a PDSA intervention), include the events here too.
 
-### Spaghetti page
+### Graphs page
 
-<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti">
-    <img src="resources/example-dashboard/spaghetti.png" style="width: 2000px;"/>
+<a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#graphs">
+    <img src="resources/example-dashboard/graphs.png" style="width: 2000px;"/>
 </a>
 
-The [spaghetti plots](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti) should provide the user with a feel of the trends.  One graph focuses on one measure, so ideally a max of three spaghetti plots.  Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period.  If a PSDA has multiple Process Measures, give them separate tabs labeled 'Process Measure 1' & 'Process Measure 2'.
+The [graphs plots](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#graphs) should provide the user with a feel of the trends.  One graph focuses on one measure, so ideally a max of three spaghetti plots.  Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period.  If a PSDA has multiple Process Measures, give them separate tabs labeled 'Process Measure 1' & 'Process Measure 2'.
 
 1. **Unnamed column** qualified with `{.tabset}`.
 
@@ -107,7 +107,7 @@ The [marginal histograms](https://ouhscbbmc.github.io/data-science-practices-1/d
 
 * Use `histogram_2()` located in [display-1.R](https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R) (this link is accessible only to Oklahoma's MIECHV evaluation team).  Add hover text to each histogram.
 
-* If all datasets are the same unit of analysis (*e.g.*, 'program-month'), then don't use an H3 tab.  Use subtabs if you have marginals more than one level (*e.g.*, visit date at program-month, visit date at program-week, visit date at provider-week).  But avoid multiple levels, if possible;  especially if program isn't fluent with a single level.
+* If all datasets are the same unit of analysis (*e.g.*, 'program-month'), then don't use an H3 tab.  Use (H3) tabs if you have marginals more than one level (*e.g.*, visit date at program-month, visit date at program-week, visit date at provider-week).  But avoid multiple levels, if possible;  especially if program isn't fluent with a single level.
 
 * histograms have a more specific *y*-axis. For example, "Count of Months" instead of "Frequency"
 
