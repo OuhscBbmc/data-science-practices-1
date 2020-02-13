@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-08" />
+<meta name="date" content="2020-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -439,9 +439,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="E.1" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-example"><i class="fa fa-check"></i><b>E.1</b> Example</a></li>
 <li class="chapter" data-level="E.2" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-guide"><i class="fa fa-check"></i><b>E.2</b> Style Guide</a>
 <ul>
-<li class="chapter" data-level="E.2.1" data-path="example-dashboard.html"><a href="example-dashboard.html#summary-page"><i class="fa fa-check"></i><b>E.2.1</b> Summary page</a></li>
+<li class="chapter" data-level="E.2.1" data-path="example-dashboard.html"><a href="example-dashboard.html#headline-page"><i class="fa fa-check"></i><b>E.2.1</b> Headline page</a></li>
 <li class="chapter" data-level="E.2.2" data-path="example-dashboard.html"><a href="example-dashboard.html#tables-page"><i class="fa fa-check"></i><b>E.2.2</b> Tables page</a></li>
-<li class="chapter" data-level="E.2.3" data-path="example-dashboard.html"><a href="example-dashboard.html#spaghetti-page"><i class="fa fa-check"></i><b>E.2.3</b> Spaghetti page</a></li>
+<li class="chapter" data-level="E.2.3" data-path="example-dashboard.html"><a href="example-dashboard.html#graphs-page"><i class="fa fa-check"></i><b>E.2.3</b> Graphs page</a></li>
 <li class="chapter" data-level="E.2.4" data-path="example-dashboard.html"><a href="example-dashboard.html#marginal-graphs-page"><i class="fa fa-check"></i><b>E.2.4</b> Marginal Graphs page</a></li>
 <li class="chapter" data-level="E.2.5" data-path="example-dashboard.html"><a href="example-dashboard.html#documentation-page"><i class="fa fa-check"></i><b>E.2.5</b> Documentation page</a></li>
 <li class="chapter" data-level="E.2.6" data-path="example-dashboard.html"><a href="example-dashboard.html#miscellaneous-notes"><i class="fa fa-check"></i><b>E.2.6</b> Miscellaneous Notes</a></li>
@@ -496,10 +496,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">E.2</span> Style Guide</h2>
 <p>This section describes a set of practices that the <a href="https://ouhsc.edu/bbmc/">BBMC analysts</a> have decided are best for the CQI dashboards used in our MIECHV evaluations. In a sense, this CQI dashboard guide supplements our overall <a href="style.html#style">style guide</a>.</p>
 <p>The MIECHV CQI dashboards are based on RStudio’s <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a> package, which uses <a href="https://CRAN.R-project.org/package=rmarkdown">rmarkdown</a>, JavaScript, and CSS. flexdashboard has a <a href="https://rmarkdown.rstudio.com/flexdashboard/">great website</a> that should be read by anyone adapting this guide for their own CQI projects.</p>
-<div id="summary-page" class="section level3" number="24.2.1">
-<h3><span class="header-section-number">E.2.1</span> Summary page</h3>
-<p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">
-<img src="resources/example-dashboard/summary.png" style="width: 2000px;"/>
+<div id="headline-page" class="section level3" number="24.2.1">
+<h3><span class="header-section-number">E.2.1</span> Headline page</h3>
+<p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#headline">
+<img src="resources/example-dashboard/headline.png" style="width: 2000px;"/>
 </a></p>
 <p>The <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#summary">dashboard’s greeting</a> should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming. For the second PDSA cycle, try to have only one or two important and impactful graphs on the first page; specialized graphs have their own pages later.</p>
 <ol style="list-style-type: decimal">
@@ -539,12 +539,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol></li>
 </ol>
 </div>
-<div id="spaghetti-page" class="section level3" number="24.2.3">
-<h3><span class="header-section-number">E.2.3</span> Spaghetti page</h3>
-<p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti">
-<img src="resources/example-dashboard/spaghetti.png" style="width: 2000px;"/>
+<div id="graphs-page" class="section level3" number="24.2.3">
+<h3><span class="header-section-number">E.2.3</span> Graphs page</h3>
+<p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#graphs">
+<img src="resources/example-dashboard/graphs.png" style="width: 2000px;"/>
 </a></p>
-<p>The <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#spaghetti">spaghetti plots</a> should provide the user with a feel of the trends. One graph focuses on one measure, so ideally a max of three spaghetti plots. Ideally the change over time (for the PDSA’s program) is compared to the other programs during the same period. If a PSDA has multiple Process Measures, give them separate tabs labeled ‘Process Measure 1’ &amp; ‘Process Measure 2’.</p>
+<p>The <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#graphs">graphs plots</a> should provide the user with a feel of the trends. One graph focuses on one measure, so ideally a max of three spaghetti plots. Ideally the change over time (for the PDSA’s program) is compared to the other programs during the same period. If a PSDA has multiple Process Measures, give them separate tabs labeled ‘Process Measure 1’ &amp; ‘Process Measure 2’.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Unnamed column</strong> qualified with <code>{.tabset}</code>.</p>
 <ol style="list-style-type: decimal">
@@ -580,7 +580,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><p>Show data only from the program, not the overall model.</p></li>
 <li><p>Use <code>histogram_2()</code> located in <a href="https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R">display-1.R</a> (this link is accessible only to Oklahoma’s MIECHV evaluation team). Add hover text to each histogram.</p></li>
-<li><p>If all datasets are the same unit of analysis (<em>e.g.</em>, ‘program-month’), then don’t use an H3 tab. Use subtabs if you have marginals more than one level (<em>e.g.</em>, visit date at program-month, visit date at program-week, visit date at provider-week). But avoid multiple levels, if possible; especially if program isn’t fluent with a single level.</p></li>
+<li><p>If all datasets are the same unit of analysis (<em>e.g.</em>, ‘program-month’), then don’t use an H3 tab. Use (H3) tabs if you have marginals more than one level (<em>e.g.</em>, visit date at program-month, visit date at program-week, visit date at provider-week). But avoid multiple levels, if possible; especially if program isn’t fluent with a single level.</p></li>
 <li><p>histograms have a more specific <em>y</em>-axis. For example, “Count of Months” instead of “Frequency”</p></li>
 </ul>
 </div>

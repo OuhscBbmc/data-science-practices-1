@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-02-08}
+\date{2020-02-13}
 
 \begin{document}
 \maketitle
@@ -2437,35 +2437,37 @@ The order does not matter.
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{\{}
-    \DataTypeTok{"diffEditor.ignoreTrimWhitespace"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-    \DataTypeTok{"diffEditor.maxComputationTime"}\FunctionTok{:} \DecValTok{0}\FunctionTok{,}
-    \DataTypeTok{"editor.acceptSuggestionOnEnter"}\FunctionTok{:} \StringTok{"off"}\FunctionTok{,}
-    \DataTypeTok{"explorer.confirmDragAndDrop"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-    \DataTypeTok{"files.associations"}\FunctionTok{:} \FunctionTok{\{}
-        \DataTypeTok{"*.Rmd"}\FunctionTok{:} \StringTok{"markdown"}
-    \FunctionTok{\},}
-    \DataTypeTok{"files.trimFinalNewlines"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
-    \DataTypeTok{"files.trimTrailingWhitespace"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
-    \DataTypeTok{"git.autofetch"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
-    \DataTypeTok{"git.confirmSync"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-    \DataTypeTok{"window.zoomLevel"}\FunctionTok{:} \DecValTok{2}\FunctionTok{,}
+  \DataTypeTok{"diffEditor.ignoreTrimWhitespace"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+  \DataTypeTok{"diffEditor.maxComputationTime"}\FunctionTok{:} \DecValTok{0}\FunctionTok{,}
+  \DataTypeTok{"editor.acceptSuggestionOnEnter"}\FunctionTok{:} \StringTok{"off"}\FunctionTok{,}
+  \DataTypeTok{"editor.renderWhitespace"}\FunctionTok{:} \StringTok{"all"}\FunctionTok{,}
+  \DataTypeTok{"explorer.confirmDragAndDrop"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+  \DataTypeTok{"files.associations"}\FunctionTok{:} \FunctionTok{\{}
+      \DataTypeTok{"*.Rmd"}\FunctionTok{:} \StringTok{"markdown"}
+  \FunctionTok{\},}
+  \DataTypeTok{"files.trimFinalNewlines"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+  \DataTypeTok{"files.trimTrailingWhitespace"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+  \DataTypeTok{"git.autofetch"}\FunctionTok{:} \KeywordTok{true}\FunctionTok{,}
+  \DataTypeTok{"git.confirmSync"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+  \DataTypeTok{"window.zoomLevel"}\FunctionTok{:} \DecValTok{2}\FunctionTok{,}
 
-    \DataTypeTok{"markdown.extension.orderedList.autoRenumber"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-    \DataTypeTok{"markdownlint.config"}\FunctionTok{:} \FunctionTok{\{}
-        \DataTypeTok{"MD003"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"style"}\FunctionTok{:} \StringTok{"setext\_with\_atx"} \FunctionTok{\},}
-        \DataTypeTok{"MD007"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"indent"}\FunctionTok{:} \DecValTok{2} \FunctionTok{\},}
-        \DataTypeTok{"MD022"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"lines\_above"}\FunctionTok{:} \DecValTok{1}\FunctionTok{,}
-                   \DataTypeTok{"lines\_below"}\FunctionTok{:} \DecValTok{1} \FunctionTok{\},}
-        \DataTypeTok{"MD024"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"siblings\_only"}\FunctionTok{:} \KeywordTok{true} \FunctionTok{\},}
-        \DataTypeTok{"no{-}bare{-}urls"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
-        \DataTypeTok{"no{-}inline{-}html"}\FunctionTok{:} \FunctionTok{\{}
-          \DataTypeTok{"allowed\_elements"}\FunctionTok{:} \OtherTok{[}
-            \StringTok{"mermaid"}\OtherTok{,}
-            \StringTok{"a"}\OtherTok{,}
-            \StringTok{"img"}
-          \OtherTok{]}
-        \FunctionTok{\}}
-    \FunctionTok{\}}
+  \DataTypeTok{"markdown.extension.orderedList.autoRenumber"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+  \DataTypeTok{"markdown.extension.orderedList.marker"}\FunctionTok{:} \StringTok{"one"}\FunctionTok{,}
+  \DataTypeTok{"markdownlint.config"}\FunctionTok{:} \FunctionTok{\{}
+      \DataTypeTok{"MD003"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"style"}\FunctionTok{:} \StringTok{"setext\_with\_atx"} \FunctionTok{\},}
+      \DataTypeTok{"MD007"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"indent"}\FunctionTok{:} \DecValTok{2} \FunctionTok{\},}
+      \DataTypeTok{"MD022"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"lines\_above"}\FunctionTok{:} \DecValTok{1}\FunctionTok{,}
+                 \DataTypeTok{"lines\_below"}\FunctionTok{:} \DecValTok{1} \FunctionTok{\},}
+      \DataTypeTok{"MD024"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"siblings\_only"}\FunctionTok{:} \KeywordTok{true} \FunctionTok{\},}
+      \DataTypeTok{"no{-}bare{-}urls"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
+      \DataTypeTok{"no{-}inline{-}html"}\FunctionTok{:} \FunctionTok{\{}
+        \DataTypeTok{"allowed\_elements"}\FunctionTok{:} \OtherTok{[}
+          \StringTok{"mermaid"}\OtherTok{,}
+          \StringTok{"a"}\OtherTok{,}
+          \StringTok{"img"}
+        \OtherTok{]}
+      \FunctionTok{\}}
+  \FunctionTok{\}}
 \FunctionTok{\}}
 \end{Highlighting}
 \end{Shaded}
@@ -2475,6 +2477,8 @@ The order does not matter.
   \tightlist
   \item
     Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Auto Renumber: false} \{\texttt{"markdown.extension.orderedList.autoRenumber":\ false}\}
+  \item
+    Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Markder: one} \{\texttt{"markdown.extension.orderedList.marker":\ "one"}\}
   \end{enumerate}
 \item
   \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
@@ -3242,6 +3246,10 @@ Here is a collection of presentations by the BBMC and friends that may help demo
     variable names: within a variable name order from big to small terms (lexicographical scoping) (\href{https://github.com/thomasnwilson}{thomasnwilson})
   \end{enumerate}
 \item
+  automation on a remote server or VDI
+
+  There's always a chance that my machine is configured a little differently than yours, which may affect results. Will you glance at those results too? I forgot what this project is about, and I wouldn't be able to spot problems like you can. The S drive file and the tables don't seem to have any obvious problems
+\item
   public reports (and dashboards)
 
   \begin{enumerate}
@@ -3381,8 +3389,8 @@ This section describes a set of practices that the \href{https://ouhsc.edu/bbmc/
 
 The MIECHV CQI dashboards are based on RStudio's \href{https://rmarkdown.rstudio.com/flexdashboard/}{flexdashboard} package, which uses \href{https://CRAN.R-project.org/package=rmarkdown}{rmarkdown}, JavaScript, and CSS. flexdashboard has a \href{https://rmarkdown.rstudio.com/flexdashboard/}{great website} that should be read by anyone adapting this guide for their own CQI projects.
 
-\hypertarget{summary-page}{%
-\subsection{Summary page}\label{summary-page}}
+\hypertarget{headline-page}{%
+\subsection{Headline page}\label{headline-page}}
 
 The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#summary}{dashboard's greeting} should be a good blend of (a) orientating the user to the context and (b) being welcoming but not overwhelming. For the second PDSA cycle, try to have only one or two important and impactful graphs on the first page; specialized graphs have their own pages later.
 
@@ -3452,10 +3460,10 @@ Each tab should represent a different unit of analysis (\emph{e.g.}, a single ro
   \end{enumerate}
 \end{enumerate}
 
-\hypertarget{spaghetti-page}{%
-\subsection{Spaghetti page}\label{spaghetti-page}}
+\hypertarget{graphs-page}{%
+\subsection{Graphs page}\label{graphs-page}}
 
-The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#spaghetti}{spaghetti plots} should provide the user with a feel of the trends. One graph focuses on one measure, so ideally a max of three spaghetti plots. Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period. If a PSDA has multiple Process Measures, give them separate tabs labeled `Process Measure 1' \& `Process Measure 2'.
+The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\#graphs}{graphs plots} should provide the user with a feel of the trends. One graph focuses on one measure, so ideally a max of three spaghetti plots. Ideally the change over time (for the PDSA's program) is compared to the other programs during the same period. If a PSDA has multiple Process Measures, give them separate tabs labeled `Process Measure 1' \& `Process Measure 2'.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3520,7 +3528,7 @@ The \href{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html\
 \item
   Use \texttt{histogram\_2()} located in \href{https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R}{display-1.R} (this link is accessible only to Oklahoma's MIECHV evaluation team). Add hover text to each histogram.
 \item
-  If all datasets are the same unit of analysis (\emph{e.g.}, `program-month'), then don't use an H3 tab. Use subtabs if you have marginals more than one level (\emph{e.g.}, visit date at program-month, visit date at program-week, visit date at provider-week). But avoid multiple levels, if possible; especially if program isn't fluent with a single level.
+  If all datasets are the same unit of analysis (\emph{e.g.}, `program-month'), then don't use an H3 tab. Use (H3) tabs if you have marginals more than one level (\emph{e.g.}, visit date at program-month, visit date at program-week, visit date at provider-week). But avoid multiple levels, if possible; especially if program isn't fluent with a single level.
 \item
   histograms have a more specific \emph{y}-axis. For example, ``Count of Months'' instead of ``Frequency''
 \end{itemize}
