@@ -14,6 +14,10 @@ Chapters & Sections to Form
 1. styles
     1. variable names: within a variable name order from big to small terms (lexicographical scoping) ([thomasnwilson](https://github.com/thomasnwilson))
 
+1. automation on a remote server or VDI
+
+    There's always a chance that my machine is configured a little differently than yours, which may affect results.  Will you glance at those results too?  I forgot what this project is about, and I wouldn't be able to spot problems like you can. The S drive file and the tables don't seem to have any obvious problems
+    
 1. public reports (and dashboards)
     1. when developing a report for a external audience (ie, people outside your immediate research team), choose one or two pals who are unfamiliar with your aims/methods as an impromptu focus group.  Ask them what things need to be redesigned/reframed/reformated/further-explained. ([genevamarshall](https://github.com/genevamarshall))
         1. plots

@@ -158,39 +158,42 @@ The order does not matter.
 
   ```json
   {
-      "diffEditor.ignoreTrimWhitespace": false,
-      "diffEditor.maxComputationTime": 0,
-      "editor.acceptSuggestionOnEnter": "off",
-      "explorer.confirmDragAndDrop": false,
-      "files.associations": {
-          "*.Rmd": "markdown"
-      },
-      "files.trimFinalNewlines": true,
-      "files.trimTrailingWhitespace": true,
-      "git.autofetch": true,
-      "git.confirmSync": false,
-      "window.zoomLevel": 2,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.maxComputationTime": 0,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.renderWhitespace": "all",
+    "explorer.confirmDragAndDrop": false,
+    "files.associations": {
+        "*.Rmd": "markdown"
+    },
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "window.zoomLevel": 2,
 
-      "markdown.extension.orderedList.autoRenumber": false,
-      "markdownlint.config": {
-          "MD003": { "style": "setext_with_atx" },
-          "MD007": { "indent": 2 },
-          "MD022": { "lines_above": 1,
-                     "lines_below": 1 },
-          "MD024": { "siblings_only": true },
-          "no-bare-urls": false,
-          "no-inline-html": {
-            "allowed_elements": [
-              "mermaid",
-              "a",
-              "img"
-            ]
-          }
-      }
+    "markdown.extension.orderedList.autoRenumber": false,
+    "markdown.extension.orderedList.marker": "one",
+    "markdownlint.config": {
+        "MD003": { "style": "setext_with_atx" },
+        "MD007": { "indent": 2 },
+        "MD022": { "lines_above": 1,
+                   "lines_below": 1 },
+        "MD024": { "siblings_only": true },
+        "no-bare-urls": false,
+        "no-inline-html": {
+          "allowed_elements": [
+            "mermaid",
+            "a",
+            "img"
+          ]
+        }
+    }
   }
   ```
 
   1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
+  1. Settings | Extensions |Markdown All in One | Ordered List | **Markder: one** {`"markdown.extension.orderedList.marker": "one"`}
 
 * **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
 
