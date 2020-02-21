@@ -18,7 +18,9 @@ Example {#example-dashboard-example}
 
 A example dashboard that mimic the real CQI is available at [https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html).  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton#readme) repository'; this repo contains the code and documents the entire pipeline leading up to this dashboard.
 
-In this dashboard of synthetic data), a cognitive measure is tracked across 14 years in three home visiting counties.
+We've had success developing and distributing dashboards as self-contained html files.  They are portable and don't have dependencies on local data files or remote databases, yet the JavaScript and CSS provide a modest amount of interactivity.  The dashboard's principal components are [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/), [plotly](https://plot.ly/r/), [ggplot2](https://ggplot2.tidyverse.org/), and [R Markdown](https://rmarkdown.rstudio.com/).
+
+In this dashboard of synthetic data, a cognitive measure is tracked across 14 years in three home visiting counties.
 
 Style Guide {#example-dashboard-guide}
 ------------------------------------
