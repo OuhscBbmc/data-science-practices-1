@@ -11,9 +11,6 @@ Chapters & Sections to Form
 1. ggplot2
     1. use factors for explanatory variables when you want to keep the order consistent across graphs. ([genevamarshall](https://github.com/genevamarshall))
 
-1. styles
-    1. variable names: within a variable name order from big to small terms (lexicographical scoping) ([thomasnwilson](https://github.com/thomasnwilson))
-
 1. automation on a remote server or VDI
 
     There's always a chance that my machine is configured a little differently than yours, which may affect results.  Will you glance at those results too?  I forgot what this project is about, and I wouldn't be able to spot problems like you can. The S drive file and the tables don't seem to have any obvious problems

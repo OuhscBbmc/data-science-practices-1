@@ -155,9 +155,77 @@ Dates {#style-dates}
 Naming
 ------------------------------------
 
+### Variables {#style-naming-variables}
+
+This builds upon the [tidyverse style guide](https://style.tidyverse.org/syntax.html#object-names) for objects.
+
+#### Characters {#style-naming-variables-characters}
+
+Use lowercase letters, using underscores to separate words.  Avoid uppercase letters and periods.
+
+#### Lexigraphical Sorting {#style-naming-variables-lexigraphical}
+
+For variables including multiple nouns or adjectives, use [lexigraphical sorting](https://en.wikipedia.org/wiki/Lexicographical_order).  The "bigger" term goes first.
+
+```r
+# Good:
+parent_name_last
+parent_name_first
+parent_dob
+kid_name_last
+kid_name_first
+kid_dob
+
+# Bad:
+last_name_parent
+first_name_parent
+dob_parent
+last_name_kid
+first_name_kid
+dob_kid
+```
+
+Large datasets with multiple questionaries (each with multiple subsections) are much more managable when the variables follow a lexigraphical order.
+
+```sql
+SELECT
+  asq3_medical_problems_01
+  ,asq3_medical_problems_02
+  ,asq3_medical_problems_03
+  ,asq3_behavior_concerns_01
+  ,asq3_behavior_concerns_02
+  ,asq3_behavior_concerns_03
+  ,asq3_worry_01
+  ,asq3_worry_02
+  ,asq3_worry_03
+  ,wai_01_steps_beneficial
+  ,wai_02_hv_useful
+  ,wai_03_parent_likes_me
+  ,wai_04_hv_doubts
+  ,hri_01_client_input
+  ,hri_02_problems_discussed
+  ,hri_03_addressing_problems_clarity
+  ,hri_04_goals_discussed
+FROM miechv.gpav_3
+```
+
+### Files and Folders {#style-naming-files}
+
+Naming filers and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  
+
+Infrequently, we'll use a dash if it helps identify a noun (that already contains an underscore).  For instance, if there's a table called `patient_demographics`, we might call the files `patient_demographics-truncate.sql` and `patient_demographics-insert.sql`.
+
+Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive.  To promote portability, keep everything lowercase.
+
+Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash.  Do not include spaces, uppercase letters, and especially punctuation, such as `:` or `(`.
+
+
+
 ### Datasets {#style-naming-datasets}
 
-[`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html)s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent of a conventional table.  Note that "dataset" means a collections of tables in the the [.NET](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/) world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).^[To complete the survey of "dataset" definitions: TThe Java world is like R, in that "dataset" typically describes rectangular tables (*e.g.*, [Java](https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html), [Spark](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html), [scala]).  In Julia and Python, qqq]
+[`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html)s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  Naming datasets follows the style of [naming variables](#style-naming-variables), with a few additional features.
+
+In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent of a conventional table.  Note that "dataset" means a collections of tables in the the [.NET](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/) world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).^[To complete the survey of "dataset" definitions: TThe Java world is like R, in that "dataset" typically describes rectangular tables (*e.g.*, [Java](https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html), [Spark](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html), [scala]).  In Julia and Python, qqq]
 
 #### Prefix with `ds_` and `d_` {#style-naming-datasets-prefix}
 
