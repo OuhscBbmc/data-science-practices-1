@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-02-13" />
+<meta name="date" content="2020-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -323,8 +323,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.4" data-path="style.html"><a href="style.html#style-dates"><i class="fa fa-check"></i><b>13.4</b> Dates</a></li>
 <li class="chapter" data-level="13.5" data-path="style.html"><a href="style.html#naming"><i class="fa fa-check"></i><b>13.5</b> Naming</a>
 <ul>
-<li class="chapter" data-level="13.5.1" data-path="style.html"><a href="style.html#style-naming-datasets"><i class="fa fa-check"></i><b>13.5.1</b> Datasets</a></li>
-<li class="chapter" data-level="13.5.2" data-path="style.html"><a href="style.html#style-naming-semantic"><i class="fa fa-check"></i><b>13.5.2</b> Semantic sorting</a></li>
+<li class="chapter" data-level="13.5.1" data-path="style.html"><a href="style.html#style-naming-variables"><i class="fa fa-check"></i><b>13.5.1</b> Variables</a></li>
+<li class="chapter" data-level="13.5.2" data-path="style.html"><a href="style.html#style-naming-files"><i class="fa fa-check"></i><b>13.5.2</b> Files and Folders</a></li>
+<li class="chapter" data-level="13.5.3" data-path="style.html"><a href="style.html#style-naming-datasets"><i class="fa fa-check"></i><b>13.5.3</b> Datasets</a></li>
+<li class="chapter" data-level="13.5.4" data-path="style.html"><a href="style.html#style-naming-semantic"><i class="fa fa-check"></i><b>13.5.4</b> Semantic sorting</a></li>
 </ul></li>
 <li class="chapter" data-level="13.6" data-path="style.html"><a href="style.html#style-whitespace"><i class="fa fa-check"></i><b>13.6</b> Whitespace</a></li>
 <li class="chapter" data-level="13.7" data-path="style.html"><a href="style.html#style-database"><i class="fa fa-check"></i><b>13.7</b> Database</a></li>
@@ -484,27 +486,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">B.1.1</span> Reading from Excel</h3>
 <p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="snippets.html#cb54-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb54-2"><a href="snippets.html#cb54-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
-<span id="cb54-3"><a href="snippets.html#cb54-3"></a></span>
-<span id="cb54-4"><a href="snippets.html#cb54-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
-<span id="cb54-5"><a href="snippets.html#cb54-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb54-6"><a href="snippets.html#cb54-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>     =<span class="st"> &quot;text&quot;</span>,</span>
-<span id="cb54-7"><a href="snippets.html#cb54-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>      =<span class="st"> &quot;date&quot;</span>,</span>
-<span id="cb54-8"><a href="snippets.html#cb54-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>   =<span class="st"> &quot;numeric&quot;</span></span>
-<span id="cb54-9"><a href="snippets.html#cb54-9"></a>)</span>
-<span id="cb54-10"><a href="snippets.html#cb54-10"></a></span>
-<span id="cb54-11"><a href="snippets.html#cb54-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb54-12"><a href="snippets.html#cb54-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
-<span id="cb54-13"><a href="snippets.html#cb54-13"></a>  <span class="dt">path      =</span> config<span class="op">$</span>path_admission_charge,</span>
-<span id="cb54-14"><a href="snippets.html#cb54-14"></a>  <span class="dt">col_types =</span> col_types</span>
-<span id="cb54-15"><a href="snippets.html#cb54-15"></a>  <span class="co"># sheet   = &quot;dont-use-sheets-if-possible&quot;</span></span>
-<span id="cb54-16"><a href="snippets.html#cb54-16"></a>)</span>
-<span id="cb54-17"><a href="snippets.html#cb54-17"></a></span>
-<span id="cb54-18"><a href="snippets.html#cb54-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
-<span id="cb54-19"><a href="snippets.html#cb54-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
-<span id="cb54-20"><a href="snippets.html#cb54-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
-<span id="cb54-21"><a href="snippets.html#cb54-21"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="snippets.html#cb56-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb56-2"><a href="snippets.html#cb56-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
+<span id="cb56-3"><a href="snippets.html#cb56-3"></a></span>
+<span id="cb56-4"><a href="snippets.html#cb56-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
+<span id="cb56-5"><a href="snippets.html#cb56-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb56-6"><a href="snippets.html#cb56-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>     =<span class="st"> &quot;text&quot;</span>,</span>
+<span id="cb56-7"><a href="snippets.html#cb56-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>      =<span class="st"> &quot;date&quot;</span>,</span>
+<span id="cb56-8"><a href="snippets.html#cb56-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>   =<span class="st"> &quot;numeric&quot;</span></span>
+<span id="cb56-9"><a href="snippets.html#cb56-9"></a>)</span>
+<span id="cb56-10"><a href="snippets.html#cb56-10"></a></span>
+<span id="cb56-11"><a href="snippets.html#cb56-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb56-12"><a href="snippets.html#cb56-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
+<span id="cb56-13"><a href="snippets.html#cb56-13"></a>  <span class="dt">path      =</span> config<span class="op">$</span>path_admission_charge,</span>
+<span id="cb56-14"><a href="snippets.html#cb56-14"></a>  <span class="dt">col_types =</span> col_types</span>
+<span id="cb56-15"><a href="snippets.html#cb56-15"></a>  <span class="co"># sheet   = &quot;dont-use-sheets-if-possible&quot;</span></span>
+<span id="cb56-16"><a href="snippets.html#cb56-16"></a>)</span>
+<span id="cb56-17"><a href="snippets.html#cb56-17"></a></span>
+<span id="cb56-18"><a href="snippets.html#cb56-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
+<span id="cb56-19"><a href="snippets.html#cb56-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
+<span id="cb56-20"><a href="snippets.html#cb56-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
+<span id="cb56-21"><a href="snippets.html#cb56-21"></a>)</span></code></pre></div>
 </div>
 <div id="snippets-reading-trailing-comma" class="section level3" number="21.1.2">
 <h3><span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header</h3>
@@ -513,11 +515,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="snippets.html#cb55-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
-<span id="cb55-2"><a href="snippets.html#cb55-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
-<span id="cb55-3"><a href="snippets.html#cb55-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
-<span id="cb55-4"><a href="snippets.html#cb55-4"></a></span>
-<span id="cb55-5"><a href="snippets.html#cb55-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="snippets.html#cb57-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
+<span id="cb57-2"><a href="snippets.html#cb57-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
+<span id="cb57-3"><a href="snippets.html#cb57-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
+<span id="cb57-4"><a href="snippets.html#cb57-4"></a></span>
+<span id="cb57-5"><a href="snippets.html#cb57-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
 </div>
 </div>
 <div id="snippets-grooming" class="section level2" number="21.2">
@@ -528,10 +530,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="snippets.html#cb56-1"></a> ds <span class="op">%&gt;%</span></span>
-<span id="cb56-2"><a href="snippets.html#cb56-2"></a><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
-<span id="cb56-3"><a href="snippets.html#cb56-3"></a>    <span class="dt">dob =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(dob <span class="op">&lt;=</span><span class="st"> </span><span class="kw">Sys.Date</span>(), dob, dob <span class="op">-</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">years</span>(<span class="dv">100</span>))</span>
-<span id="cb56-4"><a href="snippets.html#cb56-4"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="snippets.html#cb58-1"></a> ds <span class="op">%&gt;%</span></span>
+<span id="cb58-2"><a href="snippets.html#cb58-2"></a><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(</span>
+<span id="cb58-3"><a href="snippets.html#cb58-3"></a>    <span class="dt">dob =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(dob <span class="op">&lt;=</span><span class="st"> </span><span class="kw">Sys.Date</span>(), dob, dob <span class="op">-</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">years</span>(<span class="dv">100</span>))</span>
+<span id="cb58-4"><a href="snippets.html#cb58-4"></a>  )</span></code></pre></div>
 </div>
 </div>
 <div id="snippets-identification" class="section level2" number="21.3">
@@ -542,24 +544,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Explanation</em>: This snippet will create a 5-row csv with random 7-character “tags” to send to the research team collecting patients. The</p>
 <p><em>Instruction</em>: Set <code>pt_count</code>, <code>tag_length</code>, <code>path_out</code>, and execute. Add and rename the columns to be more appropriate for your domain (<em>e.g.</em>, change “patient tag” to “store tag”).</p>
 <p><em>Last Modified</em>: 2019-12-30 by Will</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="snippets.html#cb57-1"></a>pt_count    &lt;-<span class="st"> </span>5L   <span class="co"># The number of rows in the dataset.</span></span>
-<span id="cb57-2"><a href="snippets.html#cb57-2"></a>tag_length  &lt;-<span class="st"> </span>7L   <span class="co"># The number of characters in each tag.</span></span>
-<span id="cb57-3"><a href="snippets.html#cb57-3"></a>path_out    &lt;-<span class="st"> &quot;data-private/derived/pt-pool.csv&quot;</span></span>
-<span id="cb57-4"><a href="snippets.html#cb57-4"></a></span>
-<span id="cb57-5"><a href="snippets.html#cb57-5"></a>draw_tag &lt;-<span class="st"> </span><span class="cf">function</span> (<span class="dt">tag_length =</span> 4L, <span class="dt">urn =</span> <span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, letters)) {</span>
-<span id="cb57-6"><a href="snippets.html#cb57-6"></a>  <span class="kw">paste</span>(<span class="kw">sample</span>(urn, <span class="dt">size =</span> tag_length, <span class="dt">replace =</span> T), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb57-7"><a href="snippets.html#cb57-7"></a>}</span>
-<span id="cb57-8"><a href="snippets.html#cb57-8"></a></span>
-<span id="cb57-9"><a href="snippets.html#cb57-9"></a>ds_pt_pool &lt;-</span>
-<span id="cb57-10"><a href="snippets.html#cb57-10"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">tibble</span>(</span>
-<span id="cb57-11"><a href="snippets.html#cb57-11"></a>    <span class="dt">pt_index    =</span> <span class="kw">seq_len</span>(pt_count),</span>
-<span id="cb57-12"><a href="snippets.html#cb57-12"></a>    <span class="dt">pt_tag      =</span> <span class="kw">vapply</span>(<span class="kw">rep</span>(tag_length, pt_count), draw_tag, <span class="kw">character</span>(<span class="dv">1</span>)),</span>
-<span id="cb57-13"><a href="snippets.html#cb57-13"></a>    <span class="dt">assigned    =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb57-14"><a href="snippets.html#cb57-14"></a>    <span class="dt">name_last   =</span> <span class="st">&quot;--&quot;</span>,</span>
-<span id="cb57-15"><a href="snippets.html#cb57-15"></a>    <span class="dt">name_first  =</span> <span class="st">&quot;--&quot;</span></span>
-<span id="cb57-16"><a href="snippets.html#cb57-16"></a>  )</span>
-<span id="cb57-17"><a href="snippets.html#cb57-17"></a></span>
-<span id="cb57-18"><a href="snippets.html#cb57-18"></a>readr<span class="op">::</span><span class="kw">write_csv</span>(ds_pt_pool, path_out)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="snippets.html#cb59-1"></a>pt_count    &lt;-<span class="st"> </span>5L   <span class="co"># The number of rows in the dataset.</span></span>
+<span id="cb59-2"><a href="snippets.html#cb59-2"></a>tag_length  &lt;-<span class="st"> </span>7L   <span class="co"># The number of characters in each tag.</span></span>
+<span id="cb59-3"><a href="snippets.html#cb59-3"></a>path_out    &lt;-<span class="st"> &quot;data-private/derived/pt-pool.csv&quot;</span></span>
+<span id="cb59-4"><a href="snippets.html#cb59-4"></a></span>
+<span id="cb59-5"><a href="snippets.html#cb59-5"></a>draw_tag &lt;-<span class="st"> </span><span class="cf">function</span> (<span class="dt">tag_length =</span> 4L, <span class="dt">urn =</span> <span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">9</span>, letters)) {</span>
+<span id="cb59-6"><a href="snippets.html#cb59-6"></a>  <span class="kw">paste</span>(<span class="kw">sample</span>(urn, <span class="dt">size =</span> tag_length, <span class="dt">replace =</span> T), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb59-7"><a href="snippets.html#cb59-7"></a>}</span>
+<span id="cb59-8"><a href="snippets.html#cb59-8"></a></span>
+<span id="cb59-9"><a href="snippets.html#cb59-9"></a>ds_pt_pool &lt;-</span>
+<span id="cb59-10"><a href="snippets.html#cb59-10"></a><span class="st">  </span>tibble<span class="op">::</span><span class="kw">tibble</span>(</span>
+<span id="cb59-11"><a href="snippets.html#cb59-11"></a>    <span class="dt">pt_index    =</span> <span class="kw">seq_len</span>(pt_count),</span>
+<span id="cb59-12"><a href="snippets.html#cb59-12"></a>    <span class="dt">pt_tag      =</span> <span class="kw">vapply</span>(<span class="kw">rep</span>(tag_length, pt_count), draw_tag, <span class="kw">character</span>(<span class="dv">1</span>)),</span>
+<span id="cb59-13"><a href="snippets.html#cb59-13"></a>    <span class="dt">assigned    =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb59-14"><a href="snippets.html#cb59-14"></a>    <span class="dt">name_last   =</span> <span class="st">&quot;--&quot;</span>,</span>
+<span id="cb59-15"><a href="snippets.html#cb59-15"></a>    <span class="dt">name_first  =</span> <span class="st">&quot;--&quot;</span></span>
+<span id="cb59-16"><a href="snippets.html#cb59-16"></a>  )</span>
+<span id="cb59-17"><a href="snippets.html#cb59-17"></a></span>
+<span id="cb59-18"><a href="snippets.html#cb59-18"></a>readr<span class="op">::</span><span class="kw">write_csv</span>(ds_pt_pool, path_out)</span></code></pre></div>
 <p>The resulting dataset will look like this, but with different randomly-generated tags.</p>
 <pre class="csv"><code># A tibble: 5 x 5
   pt_index pt_tag  assigned name_last name_first

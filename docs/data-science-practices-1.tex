@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-02-13}
+\date{2020-03-06}
 
 \begin{document}
 \maketitle
@@ -1965,10 +1965,84 @@ Sometimes it helps to represent the values differently, say a granular and a coa
 \hypertarget{naming}{%
 \section{Naming}\label{naming}}
 
+\hypertarget{style-naming-variables}{%
+\subsection{Variables}\label{style-naming-variables}}
+
+This builds upon the \href{https://style.tidyverse.org/syntax.html\#object-names}{tidyverse style guide} for objects.
+
+\hypertarget{style-naming-variables-characters}{%
+\subsubsection{Characters}\label{style-naming-variables-characters}}
+
+Use lowercase letters, using underscores to separate words. Avoid uppercase letters and periods.
+
+\hypertarget{style-naming-variables-lexigraphical}{%
+\subsubsection{Lexigraphical Sorting}\label{style-naming-variables-lexigraphical}}
+
+For variables including multiple nouns or adjectives, use \href{https://en.wikipedia.org/wiki/Lexicographical_order}{lexigraphical sorting}. The ``bigger'' term goes first.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Good:}
+\NormalTok{parent\_name\_last}
+\NormalTok{parent\_name\_first}
+\NormalTok{parent\_dob}
+\NormalTok{kid\_name\_last}
+\NormalTok{kid\_name\_first}
+\NormalTok{kid\_dob}
+
+\CommentTok{\# Bad:}
+\NormalTok{last\_name\_parent}
+\NormalTok{first\_name\_parent}
+\NormalTok{dob\_parent}
+\NormalTok{last\_name\_kid}
+\NormalTok{first\_name\_kid}
+\NormalTok{dob\_kid}
+\end{Highlighting}
+\end{Shaded}
+
+Large datasets with multiple questionaries (each with multiple subsections) are much more managable when the variables follow a lexigraphical order.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT}
+\NormalTok{  asq3\_medical\_problems\_01}
+\NormalTok{  ,asq3\_medical\_problems\_02}
+\NormalTok{  ,asq3\_medical\_problems\_03}
+\NormalTok{  ,asq3\_behavior\_concerns\_01}
+\NormalTok{  ,asq3\_behavior\_concerns\_02}
+\NormalTok{  ,asq3\_behavior\_concerns\_03}
+\NormalTok{  ,asq3\_worry\_01}
+\NormalTok{  ,asq3\_worry\_02}
+\NormalTok{  ,asq3\_worry\_03}
+\NormalTok{  ,wai\_01\_steps\_beneficial}
+\NormalTok{  ,wai\_02\_hv\_useful}
+\NormalTok{  ,wai\_03\_parent\_likes\_me}
+\NormalTok{  ,wai\_04\_hv\_doubts}
+\NormalTok{  ,hri\_01\_client\_input}
+\NormalTok{  ,hri\_02\_problems\_discussed}
+\NormalTok{  ,hri\_03\_addressing\_problems\_clarity}
+\NormalTok{  ,hri\_04\_goals\_discussed}
+\KeywordTok{FROM}\NormalTok{ miechv.gpav\_3}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-naming-files}{%
+\subsection{Files and Folders}\label{style-naming-files}}
+
+Naming filers and their folders/directories follows the style of \protect\hyperlink{style-naming-variables}{naming variables}, with one small difference: separate words with dashes (\emph{i.e.}, \texttt{-}), not underscores (\emph{i.e.}, \texttt{\_}).
+
+Infrequently, we'll use a dash if it helps identify a noun (that already contains an underscore). For instance, if there's a table called \texttt{patient\_demographics}, we might call the files \texttt{patient\_demographics-truncate.sql} and \texttt{patient\_demographics-insert.sql}.
+
+Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive. To promote portability, keep everything lowercase.
+
+Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash. Do not include spaces, uppercase letters, and especially punctuation, such as \texttt{:} or \texttt{(}.
+
 \hypertarget{style-naming-datasets}{%
 \subsection{Datasets}\label{style-naming-datasets}}
 
-\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html}{\texttt{data.frame}}s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. In the R world, ``dataset'' is typically a synonym of \texttt{data.frame} --a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that ``dataset'' means a collections of tables in the the \href{https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/}{.NET} world, and a collection of (not-necessarily-rectangular) files in \href{https://dataverse.harvard.edu}{Dataverse}.\footnote{To complete the survey of ``dataset'' definitions: TThe Java world is like R, in that ``dataset'' typically describes rectangular tables (\emph{e.g.}, \href{https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html}{Java}, \href{https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html}{Spark}, {[}scala{]}). In Julia and Python, qqq}
+\href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html}{\texttt{data.frame}}s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. Naming datasets follows the style of \protect\hyperlink{style-naming-variables}{naming variables}, with a few additional features.
+
+In the R world, ``dataset'' is typically a synonym of \texttt{data.frame} --a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that ``dataset'' means a collections of tables in the the \href{https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/}{.NET} world, and a collection of (not-necessarily-rectangular) files in \href{https://dataverse.harvard.edu}{Dataverse}.\footnote{To complete the survey of ``dataset'' definitions: TThe Java world is like R, in that ``dataset'' typically describes rectangular tables (\emph{e.g.}, \href{https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html}{Java}, \href{https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html}{Spark}, {[}scala{]}). In Julia and Python, qqq}
 
 \hypertarget{style-naming-datasets-prefix}{%
 \subsubsection{\texorpdfstring{Prefix with \texttt{ds\_} and \texttt{d\_}}{Prefix with ds\_ and d\_}}\label{style-naming-datasets-prefix}}
@@ -3237,15 +3311,6 @@ Here is a collection of presentations by the BBMC and friends that may help demo
     use factors for explanatory variables when you want to keep the order consistent across graphs. (\href{https://github.com/genevamarshall}{genevamarshall})
   \end{enumerate}
 \item
-  styles
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    variable names: within a variable name order from big to small terms (lexicographical scoping) (\href{https://github.com/thomasnwilson}{thomasnwilson})
-  \end{enumerate}
-\item
   automation on a remote server or VDI
 
   There's always a chance that my machine is configured a little differently than yours, which may affect results. Will you glance at those results too? I forgot what this project is about, and I wouldn't be able to spot problems like you can. The S drive file and the tables don't seem to have any obvious problems
@@ -3380,7 +3445,9 @@ Just like our CQI grant encourages an HV program to learn from its history and t
 
 A example dashboard that mimic the real CQI is available at \url{https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html}. The dashboard source code is available in the \href{https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1}{\texttt{analysis/dashboard-1}} directory of the \href{https://github.com/wibeasley/RAnalysisSkeleton\#readme}{R Analysis Skeleton} repository'; this repo contains the code and documents the entire pipeline leading up to this dashboard.
 
-In this dashboard of synthetic data), a cognitive measure is tracked across 14 years in three home visiting counties.
+We've had success developing and distributing dashboards as self-contained html files. They are portable and don't have dependencies on local data files or remote databases, yet the JavaScript and CSS provide a modest amount of interactivity. The dashboard's principal components are \href{https://rmarkdown.rstudio.com/flexdashboard/}{flexdashboard}, \href{https://plot.ly/r/}{plotly}, \href{https://ggplot2.tidyverse.org/}{ggplot2}, and \href{https://rmarkdown.rstudio.com/}{R Markdown}.
+
+In this dashboard of synthetic data, a cognitive measure is tracked across 14 years in three home visiting counties.
 
 \hypertarget{example-dashboard-guide}{%
 \section{Style Guide}\label{example-dashboard-guide}}
