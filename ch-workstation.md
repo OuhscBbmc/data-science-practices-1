@@ -100,6 +100,7 @@ The order does not matter.
     Note: here are some non-default changes that facilitate our workflow.
 
     1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
+    1. Settings | Text Editor | **Detect Indentation: uncheck** {`"editor.detectIndentation": false`}
     1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
     1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
     1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
