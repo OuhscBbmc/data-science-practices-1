@@ -53,3 +53,8 @@ for Stability {#git-stability}
     1. No unintended functional difference (*e.g.*, `!match` accidentally changed to `match`).
     1. No PHI snuck in (*e.g.*, a patient ID used while isolating and debugging).
     1. The metadata format didn't change (*e.g.*, Excel sometimes changes the string '010' to the number '10').  See [the appendix](#snippets-correspondence-excel) for a longer discussion about the problems that Excel typically introduces.
+
+for New Collaborators {#git-collaborators}
+------------------------------------
+
+{Transfer & update the material from https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/github.md}
