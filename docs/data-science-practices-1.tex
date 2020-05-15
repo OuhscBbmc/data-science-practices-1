@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-03-06}
+\date{2020-05-15}
 
 \begin{document}
 \maketitle
@@ -2372,49 +2372,6 @@ The order does not matter.
 \item
   \textbf{\href{http://notepad-plus-plus.org/}{Notepad++}} is a text editor that allows you look at the raw text files, such as code and CSVs. For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks \& causes some issues). \{added Sept 2012\}
 \item
-  \textbf{\href{https://atom.io/}{Atom}} is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
-
-  Productivity is enhanced with the following \href{https://atom.io/packages}{Atom packages}:
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item
-    \href{https://atom.io/packages/Sublime-Style-Column-Selection}{Sublime Style Column Selection}: Enable Sublime style `Column Selection'. Just hold `alt' while you select, or select using your middle mouse button.
-  \item
-    \href{https://atom.io/packages/atom-language-r}{atom-language-r} allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well. An older alternative is \href{https://atom.io/packages/language-r}{language-r}.
-  \item
-    \href{https://atom.io/packages/language-csv}{language-csv}: Adds syntax highlighting to \href{https://en.wikipedia.org/wiki/Comma-separated_values}{CSV} files. The highlighting is nice, and it automatically disables spell checking lines.
-  \item
-    \href{https://atom.io/packages/atom-beautify}{atom-beautify}: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C\#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
-  \item
-    \href{https://atom.io/packages/atom-wrap-in-tag}{atom-wrap-in-tag}: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
-  \item
-    \href{https://atom.io/packages/minimap}{minimap}: A preview of the full source code (in the right margin).
-  \item
-    \href{https://atom.io/packages/script}{script}: Run scripts based on file name, a selection of code, or by line number.
-  \item
-    \href{https://atom.io/packages/git-plus}{git-plus}: Do git things without the terminal (I don't think this is necessary anymore).
-  \end{enumerate}
-
-  The packages can be installed through Atom, or through the \texttt{apm} utility in the command line:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{apm}\NormalTok{ install sublime{-}style{-}column{-}selection atom{-}language{-}r language{-}csv atom{-}beautify atom{-}wrap{-}in{-}tag minimap script}
-\end{Highlighting}
-\end{Shaded}
-
-  And the following settings keep files consistent among developers.
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
-  \item
-    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Type: soft (This inserts 2 spaces instead of a tab when `Tab' is pressed)
-  \end{enumerate}
-\item
   \textbf{\href{https://docs.microsoft.com/en-us/sql/azure-data-studio/download}{Azure Data Studio (ADS)}} is now recommended by \href{https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/}{Microsoft} and \href{https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/}{others} for analysts (and some other roles) --ahead of SQL Server Managment Studio.
 
   Note: here are some non-default changes that facilitate our workflow.
@@ -2424,6 +2381,8 @@ The order does not matter.
   \tightlist
   \item
     Settings \textbar{} Text Editor \textbar{} \textbf{Tab Size: 2} \{\texttt{"editor.tabSize":\ 2}\}
+  \item
+    Settings \textbar{} Text Editor \textbar{} \textbf{Detect Indentation: uncheck} \{\texttt{"editor.detectIndentation":\ false}\}
   \item
     Settings \textbar{} Text Editor \textbar{} \textbf{Insert Final Newlines: check} \{\texttt{"files.insertFinalNewline":\ true}\}
   \item
@@ -2437,40 +2396,6 @@ The order does not matter.
   \end{enumerate}
 \item
   \textbf{\href{https://connect.ouhsc.edu}{Pulse Secure}} is VPN client for OUHSC researchers. It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
-\end{itemize}
-
-\hypertarget{installation-optional}{%
-\section{Optional Installation}\label{installation-optional}}
-
-The order does not matter.
-
-\begin{itemize}
-\item
-  \textbf{\href{https://git-scm.com/downloads}{Git}} command-line utility enables some advanced operations that the GitHub client doesn't support. Use the default installation options, except these preferences of ours:
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Nano is the default text editor.
-  \end{enumerate}
-\item
-  \textbf{GitLab SSL Certificate} isn't software, but still needs to be configured.
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Talk to Will for the server URL and the \texttt{*.cer} file.
-  \item
-    Save the file in something like \texttt{\textasciitilde{}/keys/ca-bundle-gitlab.cer}
-  \item
-    Associate the file with \texttt{git\ config\ -\/-global\ http.sslCAInfo\ ...path.../ca-bundle-gitlab.cer} (but replace \texttt{...path...}).
-  \end{enumerate}
-\item
-  \textbf{\href{http://miktex.org/}{MiKTeX}} is necessary only if you're using knitr or Sweave to produce \emph{LaTeX} files (and not just \emph{markdown} files). It's a huge, slow installation that can take an hour or two. \{added Sept 2012\}
-\item
-  \textbf{\href{https://www.libreoffice.org/discover/calc/}{LibreOffice Calc}} is an alternative to Excel. Unlike it Excel, it doesn't guess much with formatting (which usually mess up things, especially dates).
 \item
   \textbf{\href{https://code.visualstudio.com/}{Visual Studio Code}} is an extensible text editor that runs on Windows and Linux, similar to \href{https://atom.io/}{Atom} (described above). It's much \href{https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio}{lighter} than the full \href{https://visualstudio.microsoft.com/}{Visual Studio}. Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. Currently, it supports searching CSVs better than Atom. Productivity is enhanced with the following extensions: \{added Dec 2018\}
 
@@ -2552,8 +2477,42 @@ The order does not matter.
   \item
     Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Auto Renumber: false} \{\texttt{"markdown.extension.orderedList.autoRenumber":\ false}\}
   \item
-    Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Markder: one} \{\texttt{"markdown.extension.orderedList.marker":\ "one"}\}
+    Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Marker: one} \{\texttt{"markdown.extension.orderedList.marker":\ "one"}\}
   \end{enumerate}
+\end{itemize}
+
+\hypertarget{installation-optional}{%
+\section{Optional Installation}\label{installation-optional}}
+
+The order does not matter.
+
+\begin{itemize}
+\item
+  \textbf{\href{https://git-scm.com/downloads}{Git}} command-line utility enables some advanced operations that the GitHub client doesn't support. Use the default installation options, except these preferences of ours:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Nano is the default text editor.
+  \end{enumerate}
+\item
+  \textbf{GitLab SSL Certificate} isn't software, but still needs to be configured.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Talk to Will for the server URL and the \texttt{*.cer} file.
+  \item
+    Save the file in something like \texttt{\textasciitilde{}/keys/ca-bundle-gitlab.cer}
+  \item
+    Associate the file with \texttt{git\ config\ -\/-global\ http.sslCAInfo\ ...path.../ca-bundle-gitlab.cer} (but replace \texttt{...path...}).
+  \end{enumerate}
+\item
+  \textbf{\href{http://miktex.org/}{MiKTeX}} is necessary only if you're using knitr or Sweave to produce \emph{LaTeX} files (and not just \emph{markdown} files). It's a huge, slow installation that can take an hour or two. \{added Sept 2012\}
+\item
+  \textbf{\href{https://www.libreoffice.org/discover/calc/}{LibreOffice Calc}} is an alternative to Excel. Unlike it Excel, it doesn't guess much with formatting (which usually mess up things, especially dates).
 \item
   \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
 \item
@@ -2571,6 +2530,49 @@ The order does not matter.
   \item
     \textbf{Standard Python}, while installing packages through pip3 in the terminal.
   \end{itemize}
+\item
+  \textbf{\href{https://atom.io/}{Atom}} is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
+
+  Productivity is enhanced with the following \href{https://atom.io/packages}{Atom packages}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    \href{https://atom.io/packages/Sublime-Style-Column-Selection}{Sublime Style Column Selection}: Enable Sublime style `Column Selection'. Just hold `alt' while you select, or select using your middle mouse button.
+  \item
+    \href{https://atom.io/packages/atom-language-r}{atom-language-r} allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well. An older alternative is \href{https://atom.io/packages/language-r}{language-r}.
+  \item
+    \href{https://atom.io/packages/language-csv}{language-csv}: Adds syntax highlighting to \href{https://en.wikipedia.org/wiki/Comma-separated_values}{CSV} files. The highlighting is nice, and it automatically disables spell checking lines.
+  \item
+    \href{https://atom.io/packages/atom-beautify}{atom-beautify}: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C\#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
+  \item
+    \href{https://atom.io/packages/atom-wrap-in-tag}{atom-wrap-in-tag}: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
+  \item
+    \href{https://atom.io/packages/minimap}{minimap}: A preview of the full source code (in the right margin).
+  \item
+    \href{https://atom.io/packages/script}{script}: Run scripts based on file name, a selection of code, or by line number.
+  \item
+    \href{https://atom.io/packages/git-plus}{git-plus}: Do git things without the terminal (I don't think this is necessary anymore).
+  \end{enumerate}
+
+  The packages can be installed through Atom, or through the \texttt{apm} utility in the command line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apm}\NormalTok{ install sublime{-}style{-}column{-}selection atom{-}language{-}r language{-}csv atom{-}beautify atom{-}wrap{-}in{-}tag minimap script}
+\end{Highlighting}
+\end{Shaded}
+
+  And the following settings keep files consistent among developers.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
+  \item
+    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Type: soft (This inserts 2 spaces instead of a tab when `Tab' is pressed)
+  \end{enumerate}
 \end{itemize}
 
 \hypertarget{installation-ubuntu}{%
@@ -2988,6 +2990,11 @@ Here are some tips from our experiences with projects involving between 2 and 10
     The metadata format didn't change (\emph{e.g.}, Excel sometimes changes the string `010' to the number `10'). See \protect\hyperlink{snippets-correspondence-excel}{the appendix} for a longer discussion about the problems that Excel typically introduces.
   \end{enumerate}
 \end{enumerate}
+
+\hypertarget{git-collaborators}{%
+\section{for New Collaborators}\label{git-collaborators}}
+
+\{Transfer \& update the material from \url{https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/github.md}\}
 
 \hypertarget{snippets}{%
 \chapter{Snippets}\label{snippets}}

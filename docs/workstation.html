@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 Workstation | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 17 Workstation | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-03-06" />
+<meta name="date" content="2020-05-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -398,6 +398,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
 <li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
 <li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
+<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.4</b> for New Collaborators</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
 <ul>
@@ -528,29 +529,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong><a href="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server">ODBC Driver for SQL Server</a></strong> is for connecting to the <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd">token server</a>, if your institution is using one. As of this writing, version 17 is the most recent driver version. See if a new one exists. {updated Apr 2018}</p></li>
 <li><p><strong><a href="https://cran.r-project.org/bin/windows/Rtools/">R Tools for Windows</a></strong> is necessary to build some packages in development hosted on GitHub. {added Feb 2017}</p></li>
 <li><p><strong><a href="http://notepad-plus-plus.org/">Notepad++</a></strong> is a text editor that allows you look at the raw text files, such as code and CSVs. For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks &amp; causes some issues). {added Sept 2012}</p></li>
-<li><p><strong><a href="https://atom.io/">Atom</a></strong> is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.</p>
-<p>Productivity is enhanced with the following <a href="https://atom.io/packages">Atom packages</a>:</p>
-<ol style="list-style-type: decimal">
-<li><p><a href="https://atom.io/packages/Sublime-Style-Column-Selection">Sublime Style Column Selection</a>: Enable Sublime style ‘Column Selection’. Just hold ‘alt’ while you select, or select using your middle mouse button.</p></li>
-<li><p><a href="https://atom.io/packages/atom-language-r">atom-language-r</a> allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom’s tree panel (on the left) works well. An older alternative is <a href="https://atom.io/packages/language-r">language-r</a>.</p></li>
-<li><p><a href="https://atom.io/packages/language-csv">language-csv</a>: Adds syntax highlighting to <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files. The highlighting is nice, and it automatically disables spell checking lines.</p></li>
-<li><p><a href="https://atom.io/packages/atom-beautify">atom-beautify</a>: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.</p></li>
-<li><p><a href="https://atom.io/packages/atom-wrap-in-tag">atom-wrap-in-tag</a>: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.</p></li>
-<li><p><a href="https://atom.io/packages/minimap">minimap</a>: A preview of the full source code (in the right margin).</p></li>
-<li><p><a href="https://atom.io/packages/script">script</a>: Run scripts based on file name, a selection of code, or by line number.</p></li>
-<li><p><a href="https://atom.io/packages/git-plus">git-plus</a>: Do git things without the terminal (I don’t think this is necessary anymore).</p></li>
-</ol>
-<p>The packages can be installed through Atom, or through the <code>apm</code> utility in the command line:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="workstation.html#cb48-1"></a><span class="fu">apm</span> install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script</span></code></pre></div>
-<p>And the following settings keep files consistent among developers.</p>
-<ol style="list-style-type: decimal">
-<li>File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)</li>
-<li>File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when ‘Tab’ is pressed)</li>
-</ol></li>
 <li><p><strong><a href="https://docs.microsoft.com/en-us/sql/azure-data-studio/download">Azure Data Studio (ADS)</a></strong> is now recommended by <a href="https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/">Microsoft</a> and <a href="https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/">others</a> for analysts (and some other roles) –ahead of SQL Server Managment Studio.</p>
 <p>Note: here are some non-default changes that facilitate our workflow.</p>
 <ol style="list-style-type: decimal">
 <li>Settings | Text Editor | <strong>Tab Size: 2</strong> {<code>"editor.tabSize": 2</code>}</li>
+<li>Settings | Text Editor | <strong>Detect Indentation: uncheck</strong> {<code>"editor.detectIndentation": false</code>}</li>
 <li>Settings | Text Editor | <strong>Insert Final Newlines: check</strong> {<code>"files.insertFinalNewline": true</code>}</li>
 <li>Settings | Text Editor | <strong>Trim Final Newlines: check</strong> {<code>"files.trimFinalNewlines": true</code>}</li>
 <li>Settings | Text Editor | <strong>Trim Trailing Whitespace: check</strong> {<code>"files.trimTrailingWhitespace": true</code>}</li>
@@ -558,6 +541,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Data | Sql | <strong>Copy Includes Headers: check</strong> {<code>"sql.copyIncludeHeaders": true</code>}</li>
 </ol></li>
 <li><p><strong><a href="https://connect.ouhsc.edu">Pulse Secure</a></strong> is VPN client for OUHSC researchers. It’s not required for the REDCap API, but it’s usually necessary to communicate with other campus data sources.</p></li>
+<li><p><strong><a href="https://code.visualstudio.com/">Visual Studio Code</a></strong> is an extensible text editor that runs on Windows and Linux, similar to <a href="https://atom.io/">Atom</a> (described above). It’s much <a href="https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio">lighter</a> than the full <a href="https://visualstudio.microsoft.com/">Visual Studio</a>. Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. Currently, it supports searching CSVs better than Atom. Productivity is enhanced with the following extensions: {added Dec 2018}</p>
+<ul>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer">Excel Viewer</a> isn’t a good name, but I’ve liked the capability. It displays CSVs and other files in a grid. {added Dec 2018}</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv">Rainbow CSV</a> color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql">SQL Server</a> allows you to execute against a database, and view/copy/save the grid results. It doesn’t replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a> produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> has some useful markdown capbilities, such as converting the file to html.</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf">Markdown PDF</a> has some useful markdown capbilities, such as converting the file to pdf.</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">markdownlint</a> has linting and style checking.</p></li>
+</ul>
+<p>These extensions <a href="https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions">can be installed by command line</a>.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb48-1"><a href="workstation.html#cb48-1"></a><span class="ex">code</span> --list-extensions</span>
+<span id="cb48-2"><a href="workstation.html#cb48-2"></a><span class="ex">code</span> --install-extension GrapeCity.gc-excelviewer</span>
+<span id="cb48-3"><a href="workstation.html#cb48-3"></a><span class="ex">code</span> --install-extension mechatroner.rainbow-csv</span>
+<span id="cb48-4"><a href="workstation.html#cb48-4"></a><span class="ex">code</span> --install-extension ms-mssql.mssql</span>
+<span id="cb48-5"><a href="workstation.html#cb48-5"></a><span class="ex">code</span> --install-extension streetsidesoftware.code-spell-checker</span>
+<span id="cb48-6"><a href="workstation.html#cb48-6"></a><span class="ex">code</span> --install-extension yzhang.markdown-all-in-one</span>
+<span id="cb48-7"><a href="workstation.html#cb48-7"></a><span class="ex">code</span> --install-extension yzane.markdown-pdf</span>
+<span id="cb48-8"><a href="workstation.html#cb48-8"></a><span class="ex">code</span> --install-extension DavidAnson.vscode-markdownlint</span></code></pre></div>
+<p>Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings"><code>settings.json</code></a>, or manually specify the options with the <a href="https://code.visualstudio.com/docs/getstarted/settings">settings editor</a>.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb49-1"><a href="workstation.html#cb49-1"></a><span class="fu">{</span></span>
+<span id="cb49-2"><a href="workstation.html#cb49-2"></a>  <span class="dt">&quot;diffEditor.ignoreTrimWhitespace&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb49-3"><a href="workstation.html#cb49-3"></a>  <span class="dt">&quot;diffEditor.maxComputationTime&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb49-4"><a href="workstation.html#cb49-4"></a>  <span class="dt">&quot;editor.acceptSuggestionOnEnter&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span></span>
+<span id="cb49-5"><a href="workstation.html#cb49-5"></a>  <span class="dt">&quot;editor.renderWhitespace&quot;</span><span class="fu">:</span> <span class="st">&quot;all&quot;</span><span class="fu">,</span></span>
+<span id="cb49-6"><a href="workstation.html#cb49-6"></a>  <span class="dt">&quot;explorer.confirmDragAndDrop&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb49-7"><a href="workstation.html#cb49-7"></a>  <span class="dt">&quot;files.associations&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb49-8"><a href="workstation.html#cb49-8"></a>      <span class="dt">&quot;*.Rmd&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown&quot;</span></span>
+<span id="cb49-9"><a href="workstation.html#cb49-9"></a>  <span class="fu">},</span></span>
+<span id="cb49-10"><a href="workstation.html#cb49-10"></a>  <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb49-11"><a href="workstation.html#cb49-11"></a>  <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb49-12"><a href="workstation.html#cb49-12"></a>  <span class="dt">&quot;git.autofetch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb49-13"><a href="workstation.html#cb49-13"></a>  <span class="dt">&quot;git.confirmSync&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb49-14"><a href="workstation.html#cb49-14"></a>  <span class="dt">&quot;window.zoomLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb49-15"><a href="workstation.html#cb49-15"></a></span>
+<span id="cb49-16"><a href="workstation.html#cb49-16"></a>  <span class="dt">&quot;markdown.extension.orderedList.autoRenumber&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb49-17"><a href="workstation.html#cb49-17"></a>  <span class="dt">&quot;markdown.extension.orderedList.marker&quot;</span><span class="fu">:</span> <span class="st">&quot;one&quot;</span><span class="fu">,</span></span>
+<span id="cb49-18"><a href="workstation.html#cb49-18"></a>  <span class="dt">&quot;markdownlint.config&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb49-19"><a href="workstation.html#cb49-19"></a>      <span class="dt">&quot;MD003&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;style&quot;</span><span class="fu">:</span> <span class="st">&quot;setext_with_atx&quot;</span> <span class="fu">},</span></span>
+<span id="cb49-20"><a href="workstation.html#cb49-20"></a>      <span class="dt">&quot;MD007&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;indent&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
+<span id="cb49-21"><a href="workstation.html#cb49-21"></a>      <span class="dt">&quot;MD022&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;lines_above&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb49-22"><a href="workstation.html#cb49-22"></a>                 <span class="dt">&quot;lines_below&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
+<span id="cb49-23"><a href="workstation.html#cb49-23"></a>      <span class="dt">&quot;MD024&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;siblings_only&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
+<span id="cb49-24"><a href="workstation.html#cb49-24"></a>      <span class="dt">&quot;no-bare-urls&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb49-25"><a href="workstation.html#cb49-25"></a>      <span class="dt">&quot;no-inline-html&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb49-26"><a href="workstation.html#cb49-26"></a>        <span class="dt">&quot;allowed_elements&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb49-27"><a href="workstation.html#cb49-27"></a>          <span class="st">&quot;mermaid&quot;</span><span class="ot">,</span></span>
+<span id="cb49-28"><a href="workstation.html#cb49-28"></a>          <span class="st">&quot;a&quot;</span><span class="ot">,</span></span>
+<span id="cb49-29"><a href="workstation.html#cb49-29"></a>          <span class="st">&quot;img&quot;</span></span>
+<span id="cb49-30"><a href="workstation.html#cb49-30"></a>        <span class="ot">]</span></span>
+<span id="cb49-31"><a href="workstation.html#cb49-31"></a>      <span class="fu">}</span></span>
+<span id="cb49-32"><a href="workstation.html#cb49-32"></a>  <span class="fu">}</span></span>
+<span id="cb49-33"><a href="workstation.html#cb49-33"></a><span class="fu">}</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Auto Renumber: false</strong> {<code>"markdown.extension.orderedList.autoRenumber": false</code>}</li>
+<li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Marker: one</strong> {<code>"markdown.extension.orderedList.marker": "one"</code>}</li>
+</ol></li>
 </ul>
 </div>
 <div id="installation-optional" class="section level2" number="17.3">
@@ -576,70 +616,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol></li>
 <li><p><strong><a href="http://miktex.org/">MiKTeX</a></strong> is necessary only if you’re using knitr or Sweave to produce <em>LaTeX</em> files (and not just <em>markdown</em> files). It’s a huge, slow installation that can take an hour or two. {added Sept 2012}</p></li>
 <li><p><strong><a href="https://www.libreoffice.org/discover/calc/">LibreOffice Calc</a></strong> is an alternative to Excel. Unlike it Excel, it doesn’t guess much with formatting (which usually mess up things, especially dates).</p></li>
-<li><p><strong><a href="https://code.visualstudio.com/">Visual Studio Code</a></strong> is an extensible text editor that runs on Windows and Linux, similar to <a href="https://atom.io/">Atom</a> (described above). It’s much <a href="https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio">lighter</a> than the full <a href="https://visualstudio.microsoft.com/">Visual Studio</a>. Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. Currently, it supports searching CSVs better than Atom. Productivity is enhanced with the following extensions: {added Dec 2018}</p>
-<ul>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer">Excel Viewer</a> isn’t a good name, but I’ve liked the capability. It displays CSVs and other files in a grid. {added Dec 2018}</p></li>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv">Rainbow CSV</a> color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}</p></li>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql">SQL Server</a> allows you to execute against a database, and view/copy/save the grid results. It doesn’t replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}</p></li>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a> produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.</p></li>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> has some useful markdown capbilities, such as converting the file to html.</p></li>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf">Markdown PDF</a> has some useful markdown capbilities, such as converting the file to pdf.</p></li>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">markdownlint</a> has linting and style checking.</p></li>
-</ul>
-<p>These extensions <a href="https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions">can be installed by command line</a>.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb49-1"><a href="workstation.html#cb49-1"></a><span class="ex">code</span> --list-extensions</span>
-<span id="cb49-2"><a href="workstation.html#cb49-2"></a><span class="ex">code</span> --install-extension GrapeCity.gc-excelviewer</span>
-<span id="cb49-3"><a href="workstation.html#cb49-3"></a><span class="ex">code</span> --install-extension mechatroner.rainbow-csv</span>
-<span id="cb49-4"><a href="workstation.html#cb49-4"></a><span class="ex">code</span> --install-extension ms-mssql.mssql</span>
-<span id="cb49-5"><a href="workstation.html#cb49-5"></a><span class="ex">code</span> --install-extension streetsidesoftware.code-spell-checker</span>
-<span id="cb49-6"><a href="workstation.html#cb49-6"></a><span class="ex">code</span> --install-extension yzhang.markdown-all-in-one</span>
-<span id="cb49-7"><a href="workstation.html#cb49-7"></a><span class="ex">code</span> --install-extension yzane.markdown-pdf</span>
-<span id="cb49-8"><a href="workstation.html#cb49-8"></a><span class="ex">code</span> --install-extension DavidAnson.vscode-markdownlint</span></code></pre></div>
-<p>Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings"><code>settings.json</code></a>, or manually specify the options with the <a href="https://code.visualstudio.com/docs/getstarted/settings">settings editor</a>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb50-1"><a href="workstation.html#cb50-1"></a><span class="fu">{</span></span>
-<span id="cb50-2"><a href="workstation.html#cb50-2"></a>  <span class="dt">&quot;diffEditor.ignoreTrimWhitespace&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb50-3"><a href="workstation.html#cb50-3"></a>  <span class="dt">&quot;diffEditor.maxComputationTime&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
-<span id="cb50-4"><a href="workstation.html#cb50-4"></a>  <span class="dt">&quot;editor.acceptSuggestionOnEnter&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span></span>
-<span id="cb50-5"><a href="workstation.html#cb50-5"></a>  <span class="dt">&quot;editor.renderWhitespace&quot;</span><span class="fu">:</span> <span class="st">&quot;all&quot;</span><span class="fu">,</span></span>
-<span id="cb50-6"><a href="workstation.html#cb50-6"></a>  <span class="dt">&quot;explorer.confirmDragAndDrop&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb50-7"><a href="workstation.html#cb50-7"></a>  <span class="dt">&quot;files.associations&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb50-8"><a href="workstation.html#cb50-8"></a>      <span class="dt">&quot;*.Rmd&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown&quot;</span></span>
-<span id="cb50-9"><a href="workstation.html#cb50-9"></a>  <span class="fu">},</span></span>
-<span id="cb50-10"><a href="workstation.html#cb50-10"></a>  <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb50-11"><a href="workstation.html#cb50-11"></a>  <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb50-12"><a href="workstation.html#cb50-12"></a>  <span class="dt">&quot;git.autofetch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb50-13"><a href="workstation.html#cb50-13"></a>  <span class="dt">&quot;git.confirmSync&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb50-14"><a href="workstation.html#cb50-14"></a>  <span class="dt">&quot;window.zoomLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
-<span id="cb50-15"><a href="workstation.html#cb50-15"></a></span>
-<span id="cb50-16"><a href="workstation.html#cb50-16"></a>  <span class="dt">&quot;markdown.extension.orderedList.autoRenumber&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb50-17"><a href="workstation.html#cb50-17"></a>  <span class="dt">&quot;markdown.extension.orderedList.marker&quot;</span><span class="fu">:</span> <span class="st">&quot;one&quot;</span><span class="fu">,</span></span>
-<span id="cb50-18"><a href="workstation.html#cb50-18"></a>  <span class="dt">&quot;markdownlint.config&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb50-19"><a href="workstation.html#cb50-19"></a>      <span class="dt">&quot;MD003&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;style&quot;</span><span class="fu">:</span> <span class="st">&quot;setext_with_atx&quot;</span> <span class="fu">},</span></span>
-<span id="cb50-20"><a href="workstation.html#cb50-20"></a>      <span class="dt">&quot;MD007&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;indent&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
-<span id="cb50-21"><a href="workstation.html#cb50-21"></a>      <span class="dt">&quot;MD022&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;lines_above&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
-<span id="cb50-22"><a href="workstation.html#cb50-22"></a>                 <span class="dt">&quot;lines_below&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
-<span id="cb50-23"><a href="workstation.html#cb50-23"></a>      <span class="dt">&quot;MD024&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;siblings_only&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
-<span id="cb50-24"><a href="workstation.html#cb50-24"></a>      <span class="dt">&quot;no-bare-urls&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb50-25"><a href="workstation.html#cb50-25"></a>      <span class="dt">&quot;no-inline-html&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb50-26"><a href="workstation.html#cb50-26"></a>        <span class="dt">&quot;allowed_elements&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb50-27"><a href="workstation.html#cb50-27"></a>          <span class="st">&quot;mermaid&quot;</span><span class="ot">,</span></span>
-<span id="cb50-28"><a href="workstation.html#cb50-28"></a>          <span class="st">&quot;a&quot;</span><span class="ot">,</span></span>
-<span id="cb50-29"><a href="workstation.html#cb50-29"></a>          <span class="st">&quot;img&quot;</span></span>
-<span id="cb50-30"><a href="workstation.html#cb50-30"></a>        <span class="ot">]</span></span>
-<span id="cb50-31"><a href="workstation.html#cb50-31"></a>      <span class="fu">}</span></span>
-<span id="cb50-32"><a href="workstation.html#cb50-32"></a>  <span class="fu">}</span></span>
-<span id="cb50-33"><a href="workstation.html#cb50-33"></a><span class="fu">}</span></span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Auto Renumber: false</strong> {<code>"markdown.extension.orderedList.autoRenumber": false</code>}</li>
-<li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Markder: one</strong> {<code>"markdown.extension.orderedList.marker": "one"</code>}</li>
-</ol></li>
 <li><p><strong><a href="https://pandoc.org/">pandoc</a></strong> converts files from one markup format into another. {added Sept 2012}</p></li>
 <li><p><strong><a href="https://www.python.org/">Python</a></strong> is used by some analysts. The prototypical installation involves two options.</p>
 <ul>
 <li><p><strong><a href="https://www.anaconda.com/distribution/#download-section">Anaconda</a></strong>, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open “Anaconda Prompt” with administrative privileges</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="workstation.html#cb51-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div></li>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="workstation.html#cb50-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div></li>
 <li><p><strong>Standard Python</strong>, while installing packages through pip3 in the terminal.</p></li>
 </ul></li>
+<li><p><strong><a href="https://atom.io/">Atom</a></strong> is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.</p>
+<p>Productivity is enhanced with the following <a href="https://atom.io/packages">Atom packages</a>:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://atom.io/packages/Sublime-Style-Column-Selection">Sublime Style Column Selection</a>: Enable Sublime style ‘Column Selection’. Just hold ‘alt’ while you select, or select using your middle mouse button.</p></li>
+<li><p><a href="https://atom.io/packages/atom-language-r">atom-language-r</a> allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom’s tree panel (on the left) works well. An older alternative is <a href="https://atom.io/packages/language-r">language-r</a>.</p></li>
+<li><p><a href="https://atom.io/packages/language-csv">language-csv</a>: Adds syntax highlighting to <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files. The highlighting is nice, and it automatically disables spell checking lines.</p></li>
+<li><p><a href="https://atom.io/packages/atom-beautify">atom-beautify</a>: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.</p></li>
+<li><p><a href="https://atom.io/packages/atom-wrap-in-tag">atom-wrap-in-tag</a>: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.</p></li>
+<li><p><a href="https://atom.io/packages/minimap">minimap</a>: A preview of the full source code (in the right margin).</p></li>
+<li><p><a href="https://atom.io/packages/script">script</a>: Run scripts based on file name, a selection of code, or by line number.</p></li>
+<li><p><a href="https://atom.io/packages/git-plus">git-plus</a>: Do git things without the terminal (I don’t think this is necessary anymore).</p></li>
+</ol>
+<p>The packages can be installed through Atom, or through the <code>apm</code> utility in the command line:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="workstation.html#cb51-1"></a><span class="fu">apm</span> install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script</span></code></pre></div>
+<p>And the following settings keep files consistent among developers.</p>
+<ol style="list-style-type: decimal">
+<li>File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)</li>
+<li>File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when ‘Tab’ is pressed)</li>
+</ol></li>
 </ul>
 </div>
 <div id="installation-ubuntu" class="section level2" number="17.4">
