@@ -216,6 +216,11 @@ Ubuntu desktop 19.04 follows [these instructions](https://askubuntu.com/a/862520
 Add the following to the sources with `sudo nano /etc/apt/sources.list`.  The 'eoan' version may be updated; The 'metrocast' part could be modified too from [this list](https://launchpad.net/ubuntu/+archivemirrors).  I found it worked better for a new Ubuntu release than 'cloud.r-project.org'.
 
 ```sh
+# For R 4.0
+deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/
+deb http://mirror.genesisadaptive.com/ubuntu/ focal-backports main restricted universe
+
+# For R 3.5 & #.6
 deb https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/
 deb-src https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/
 deb http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe
