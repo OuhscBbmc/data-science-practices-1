@@ -14,7 +14,7 @@ Chapters & Sections to Form
 1. automation on a remote server or VDI
 
     There's always a chance that my machine is configured a little differently than yours, which may affect results.  Will you glance at those results too?  I forgot what this project is about, and I wouldn't be able to spot problems like you can. The S drive file and the tables don't seem to have any obvious problems
-    
+
 1. public reports (and dashboards)
     1. when developing a report for a external audience (ie, people outside your immediate research team), choose one or two pals who are unfamiliar with your aims/methods as an impromptu focus group.  Ask them what things need to be redesigned/reframed/reformated/further-explained. ([genevamarshall](https://github.com/genevamarshall))
         1. plots
@@ -46,7 +46,7 @@ Chapters & Sections to Form
 
 1. Cargo cult programming "is a style of computer programming characterized by the ritual inclusion of code or program structures that serve no real purpose." ([Wikipedia](https://en.wikipedia.org/wiki/Cargo_cult_programming))
 
-    Your team should decide which elements of [a file prototype](https://ouhscbbmc.github.io/data-science-practices-1/file-prototype.html) and [repo prototype](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html) are best for you.
+    Your team should decide which elements of [a file prototype](https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html) and [repo prototype](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html) are best for you.
 
 Practices
 ------------------------------------
