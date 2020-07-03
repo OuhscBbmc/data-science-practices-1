@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-05-15}
+\date{2020-07-03}
 
 \begin{document}
 \maketitle
@@ -244,13 +244,13 @@ Almost every project recodes many variables. Choose the simplest function possib
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{date\_start <{-}}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2017{-}01{-}01"}\NormalTok{)}
+\NormalTok{date\_start \textless{}{-}}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2017{-}01{-}01"}\NormalTok{)}
 
 \CommentTok{\# If a missing month element needs to be handled explicitly.}
-\NormalTok{stage       =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(date\_start }\OperatorTok{<=}\StringTok{ }\NormalTok{month, }\StringTok{"pre"}\NormalTok{, }\StringTok{"post"}\NormalTok{, }\DataTypeTok{missing =} \StringTok{"missing{-}month"}\NormalTok{)}
+\NormalTok{stage       =}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(date\_start }\OperatorTok{\textless{}=}\StringTok{ }\NormalTok{month, }\StringTok{"pre"}\NormalTok{, }\StringTok{"post"}\NormalTok{, }\DataTypeTok{missing =} \StringTok{"missing{-}month"}\NormalTok{)}
 
 \CommentTok{\# Otherwise a simple boolean output is sufficient.}
-\NormalTok{stage\_post  =}\StringTok{ }\NormalTok{(date\_start }\OperatorTok{<=}\StringTok{ }\NormalTok{month)}
+\NormalTok{stage\_post  =}\StringTok{ }\NormalTok{(date\_start }\OperatorTok{\textless{}=}\StringTok{ }\NormalTok{month)}
 \end{Highlighting}
 \end{Shaded}
 \item
@@ -308,11 +308,11 @@ In this example, we'll presume we can't trust a patient record if it lacks a cle
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ds <{-}}
-\StringTok{  }\NormalTok{ds }\OperatorTok{\%>\%}
+\NormalTok{ds \textless{}{-}}
+\StringTok{  }\NormalTok{ds }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
     \DataTypeTok{dob =}\NormalTok{ OuhscMunge}\OperatorTok{::}\KeywordTok{trim\_date}\NormalTok{(dob, config}\OperatorTok{$}\NormalTok{range\_dob)}
-\NormalTok{  ) }\OperatorTok{\%>\%}
+\NormalTok{  ) }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{drop\_na}\NormalTok{(dob)}
 \end{Highlighting}
 \end{Shaded}
@@ -433,7 +433,7 @@ Here are packages found in most of our manipulation files. Notice the lesser-kno
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# {-}{-}{-}{-} load{-}packages {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{import}\OperatorTok{::}\KeywordTok{from}\NormalTok{(magrittr, }\StringTok{"\%>\%"}\NormalTok{ )}
+\NormalTok{import}\OperatorTok{::}\KeywordTok{from}\NormalTok{(magrittr, }\StringTok{"\%\textgreater{}\%"}\NormalTok{ )}
 
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"readr"}\NormalTok{     )}
 \KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{     )}
@@ -455,12 +455,12 @@ The \protect\hyperlink{repo-root}{config file} can coordinate a static variable 
 \begin{Highlighting}[]
 \CommentTok{\# {-}{-}{-}{-} declare{-}globals {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
 \CommentTok{\# Constant values that won\textquotesingle{}t change.}
-\NormalTok{config                         <{-}}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
-\NormalTok{path\_db                        <{-}}\StringTok{ }\NormalTok{config}\OperatorTok{$}\NormalTok{path\_database}
+\NormalTok{config                         \textless{}{-}}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
+\NormalTok{path\_db                        \textless{}{-}}\StringTok{ }\NormalTok{config}\OperatorTok{$}\NormalTok{path\_database}
 
 \CommentTok{\# Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).}
 \CommentTok{\#   OuhscMunge::readr\_spec\_aligned(config$path\_subject\_1\_raw)}
-\NormalTok{col\_types <{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{cols\_only}\NormalTok{(}
+\NormalTok{col\_types \textless{}{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{cols\_only}\NormalTok{(}
   \DataTypeTok{subject\_id          =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
   \DataTypeTok{county\_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
   \DataTypeTok{gender\_id           =}\NormalTok{ readr}\OperatorTok{::}\KeywordTok{col\_double}\NormalTok{(),}
@@ -497,19 +497,19 @@ It's best to rename the dataset (a) in a single place and (b) early in the pipel
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# OuhscMunge::column\_rename\_headstart(ds) \# Help write \textasciigrave{}dplyr::select()\textasciigrave{} call.}
-\NormalTok{ds <{-}}
-\StringTok{  }\NormalTok{ds }\OperatorTok{\%>\%}
+\NormalTok{ds \textless{}{-}}
+\StringTok{  }\NormalTok{ds }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(    }\CommentTok{\# \textasciigrave{}dplyr::select()\textasciigrave{} drops columns not included.}
 \NormalTok{    subject\_id,}
 \NormalTok{    county\_id,}
 \NormalTok{    gender\_id,}
 \NormalTok{    race,}
 \NormalTok{    ethnicity}
-\NormalTok{  ) }\OperatorTok{\%>\%}
+\NormalTok{  ) }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
 
-\NormalTok{  ) }\OperatorTok{\%>\%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{arrange}\NormalTok{(subject\_id) }\CommentTok{\# \%>\%}
+\NormalTok{  ) }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{arrange}\NormalTok{(subject\_id) }\CommentTok{\# \%\textgreater{}\%}
   \CommentTok{\# tibble::rowid\_to\_column("subject\_id") \# Add a unique index if necessary}
 \end{Highlighting}
 \end{Shaded}
@@ -540,7 +540,7 @@ Running \texttt{OuhscMunge::verify\_value\_headstart(ds)} will
 \NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_logical}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{fte\_approximated   , }\DataTypeTok{any.missing=}\NormalTok{F                                                )}
 \NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_numeric}\NormalTok{(  ds}\OperatorTok{$}\NormalTok{fte\_rolling\_median , }\DataTypeTok{any.missing=}\NormalTok{T , }\DataTypeTok{lower=}\DecValTok{0}\NormalTok{, }\DataTypeTok{upper=}\DecValTok{40}\NormalTok{                            )}
 
-\NormalTok{county\_month\_combo   <{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(ds}\OperatorTok{$}\NormalTok{county\_id, ds}\OperatorTok{$}\NormalTok{month)}
+\NormalTok{county\_month\_combo   \textless{}{-}}\StringTok{ }\KeywordTok{paste}\NormalTok{(ds}\OperatorTok{$}\NormalTok{county\_id, ds}\OperatorTok{$}\NormalTok{month)}
 \NormalTok{checkmate}\OperatorTok{::}\KeywordTok{assert\_character}\NormalTok{(county\_month\_combo, }\DataTypeTok{pattern  =}\StringTok{"\^{}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{1,2\} }\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{4\}{-}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}{-}}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{d\{2\}$"}\NormalTok{, }\DataTypeTok{any.missing=}\NormalTok{F, }\DataTypeTok{unique=}\NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
@@ -577,9 +577,9 @@ This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} becaus
 \CommentTok{\# Define the subset of columns that will be needed in the analyses.}
 \CommentTok{\#   The fewer columns that are exported, the fewer things that can break downstream.}
 
-\NormalTok{ds\_slim <{-}}
-\StringTok{  }\NormalTok{ds }\OperatorTok{\%>\%}
-\StringTok{  }\CommentTok{\# dplyr::slice(1:100) \%>\%}
+\NormalTok{ds\_slim \textless{}{-}}
+\StringTok{  }\NormalTok{ds }\OperatorTok{\%\textgreater{}\%}
+\StringTok{  }\CommentTok{\# dplyr::slice(1:100) \%\textgreater{}\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(}
 \NormalTok{    subject\_id,}
 \NormalTok{    county\_id,}
@@ -1677,8 +1677,8 @@ If the changes to the pipeline code are too difficult to complete in a day, we c
   Headset \& sharing screens
 \end{enumerate}
 
-\hypertarget{additional-resources-1}{%
-\section{Additional Resources}\label{additional-resources-1}}
+\hypertarget{additional-resources}{%
+\section{Additional Resources}\label{additional-resources}}
 
 \begin{itemize}
 \tightlist
@@ -1856,7 +1856,7 @@ Removing datasets rows is an important operation that is a frequent source of sn
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Good}
-\NormalTok{ds }\OperatorTok{\%>\%}
+\NormalTok{ds }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{drop\_na}\NormalTok{(dob)}
 \end{Highlighting}
 \end{Shaded}
@@ -1866,7 +1866,7 @@ is cleaner to read and write than these two styles. In particular, it's easy to 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Worse}
-\NormalTok{ds }\OperatorTok{\%>\%}
+\NormalTok{ds }\OperatorTok{\%\textgreater{}\%}
 \StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(dob))}
 
 \CommentTok{\# Worst}
@@ -2051,11 +2051,11 @@ Datasets are handled so differently than other variables that we find it's easie
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{count\_elements <{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (d) \{}
+\NormalTok{count\_elements \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (d) \{}
   \KeywordTok{nrow}\NormalTok{(d) }\OperatorTok{*}\StringTok{ }\KeywordTok{ncol}\NormalTok{(d)}
 \NormalTok{\}}
 
-\NormalTok{ds <{-}}\StringTok{ }\NormalTok{mtcars}
+\NormalTok{ds \textless{}{-}}\StringTok{ }\NormalTok{mtcars}
 \KeywordTok{count\_elements}\NormalTok{(}\DataTypeTok{d =}\NormalTok{ ds)}
 \end{Highlighting}
 \end{Shaded}
@@ -2126,7 +2126,7 @@ If it's potentially unclear to a new reader, use a comment immediately before th
 \CommentTok{\#    grain: one row per client}
 \CommentTok{\#    subset: only clients who have successfully enrolled are included}
 \CommentTok{\#    source: the \textasciigrave{}client\textasciigrave{} database table, where \textasciigrave{}enroll\_count\textasciigrave{} is 1+.}
-\NormalTok{ds\_client\_enroll <{-}}\StringTok{ }\NormalTok{...}
+\NormalTok{ds\_client\_enroll \textless{}{-}}\StringTok{ }\NormalTok{...}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2349,8 +2349,8 @@ When the project is opened in RStudio, \href{http://ouhscbbmc.github.io/OuhscMun
 
 Several R packages will need to be updated every weeks. Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code \texttt{update.packages(checkBuilt=TRUE)}.
 
-\hypertarget{github-1}{%
-\subsection{GitHub}\label{github-1}}
+\hypertarget{github}{%
+\subsection{GitHub}\label{github}}
 
 \href{https://github.com/}{GitHub} registration is necessary to push modified files to the repository. First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator (\emph{e.g.}, to \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns}).
 
@@ -2584,6 +2584,11 @@ Add the following to the sources with \texttt{sudo\ nano\ /etc/apt/sources.list}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# For R 4.0}
+\ExtensionTok{deb}\NormalTok{ https://cloud.r{-}project.org/bin/linux/ubuntu focal{-}cran40/}
+\ExtensionTok{deb}\NormalTok{ http://mirror.genesisadaptive.com/ubuntu/ focal{-}backports main restricted universe}
+
+\CommentTok{\# For R 3.5 \& \#.6}
 \ExtensionTok{deb}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/}
 \ExtensionTok{deb{-}src}\NormalTok{ https://cloud.r{-}project/bin/linux/ubuntu/ eoan{-}cran35/}
 \ExtensionTok{deb}\NormalTok{ http://mirror.metrocast.net/ubuntu/ eoan{-}backports main restricted universe}
@@ -2864,8 +2869,8 @@ Finally, consider how much traffic passes through the dependency A brittle depen
   Warehouse vs transactional performance
 \end{enumerate}
 
-\hypertarget{additional-resources-2}{%
-\section{Additional Resources}\label{additional-resources-2}}
+\hypertarget{additional-resources}{%
+\section{Additional Resources}\label{additional-resources}}
 
 \begin{itemize}
 \tightlist
@@ -3012,17 +3017,17 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# {-}{-}{-}{-} declare{-}globals {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{config                         <{-}}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
+\NormalTok{config                         \textless{}{-}}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
 
 \CommentTok{\# cat(sprintf(\textquotesingle{}  \textasciigrave{}\%s\textasciigrave{}             = "text",\textbackslash{}n\textquotesingle{}, colnames(ds)), sep="") \# \textquotesingle{}text\textquotesingle{} by default {-}{-}then change where appropriate.}
-\NormalTok{col\_types <{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+\NormalTok{col\_types \textless{}{-}}\StringTok{ }\KeywordTok{c}\NormalTok{(}
   \StringTok{\textasciigrave{}}\DataTypeTok{Med Rec Num}\StringTok{\textasciigrave{}}\NormalTok{     =}\StringTok{ "text"}\NormalTok{,}
   \StringTok{\textasciigrave{}}\DataTypeTok{Admit Date}\StringTok{\textasciigrave{}}\NormalTok{      =}\StringTok{ "date"}\NormalTok{,}
   \StringTok{\textasciigrave{}}\DataTypeTok{Tot Cash Pymt}\StringTok{\textasciigrave{}}\NormalTok{   =}\StringTok{ "numeric"}
 \NormalTok{)}
 
 \CommentTok{\# {-}{-}{-}{-} load{-}data {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
-\NormalTok{ds <{-}}\StringTok{ }\NormalTok{readxl}\OperatorTok{::}\KeywordTok{read\_excel}\NormalTok{(}
+\NormalTok{ds \textless{}{-}}\StringTok{ }\NormalTok{readxl}\OperatorTok{::}\KeywordTok{read\_excel}\NormalTok{(}
   \DataTypeTok{path      =}\NormalTok{ config}\OperatorTok{$}\NormalTok{path\_admission\_charge,}
   \DataTypeTok{col\_types =}\NormalTok{ col\_types}
   \CommentTok{\# sheet   = "dont{-}use{-}sheets{-}if{-}possible"}
@@ -3051,10 +3056,10 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# The next two lines remove the trailing comma at the end of the 1st line.}
-\NormalTok{raw\_text  <{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_file}\NormalTok{(path\_in)}
-\NormalTok{raw\_text  <{-}}\StringTok{ }\KeywordTok{sub}\NormalTok{(}\StringTok{"\^{}(.+Dx50 Name),"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{, raw\_text)}
+\NormalTok{raw\_text  \textless{}{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_file}\NormalTok{(path\_in)}
+\NormalTok{raw\_text  \textless{}{-}}\StringTok{ }\KeywordTok{sub}\NormalTok{(}\StringTok{"\^{}(.+Dx50 Name),"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{, raw\_text)}
 
-\NormalTok{ds        <{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_csv}\NormalTok{(raw\_text, }\DataTypeTok{col\_types=}\NormalTok{col\_types)}
+\NormalTok{ds        \textless{}{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_csv}\NormalTok{(raw\_text, }\DataTypeTok{col\_types=}\NormalTok{col\_types)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3074,9 +3079,9 @@ Here are some tips from our experiences with projects involving between 2 and 10
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ ds }\OperatorTok{\%>\%}
+\NormalTok{ ds }\OperatorTok{\%\textgreater{}\%}
 \StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{dob =}\NormalTok{ dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(dob }\OperatorTok{<=}\StringTok{ }\KeywordTok{Sys.Date}\NormalTok{(), dob, dob }\OperatorTok{{-}}\StringTok{ }\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{years}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+    \DataTypeTok{dob =}\NormalTok{ dplyr}\OperatorTok{::}\KeywordTok{if\_else}\NormalTok{(dob }\OperatorTok{\textless{}=}\StringTok{ }\KeywordTok{Sys.Date}\NormalTok{(), dob, dob }\OperatorTok{{-}}\StringTok{ }\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{years}\NormalTok{(}\DecValTok{100}\NormalTok{))}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
@@ -3097,15 +3102,15 @@ Here are some tips from our experiences with projects involving between 2 and 10
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pt\_count    <{-}}\StringTok{ }\NormalTok{5L   }\CommentTok{\# The number of rows in the dataset.}
-\NormalTok{tag\_length  <{-}}\StringTok{ }\NormalTok{7L   }\CommentTok{\# The number of characters in each tag.}
-\NormalTok{path\_out    <{-}}\StringTok{ "data{-}private/derived/pt{-}pool.csv"}
+\NormalTok{pt\_count    \textless{}{-}}\StringTok{ }\NormalTok{5L   }\CommentTok{\# The number of rows in the dataset.}
+\NormalTok{tag\_length  \textless{}{-}}\StringTok{ }\NormalTok{7L   }\CommentTok{\# The number of characters in each tag.}
+\NormalTok{path\_out    \textless{}{-}}\StringTok{ "data{-}private/derived/pt{-}pool.csv"}
 
-\NormalTok{draw\_tag <{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (}\DataTypeTok{tag\_length =}\NormalTok{ 4L, }\DataTypeTok{urn =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{9}\NormalTok{, letters)) \{}
+\NormalTok{draw\_tag \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (}\DataTypeTok{tag\_length =}\NormalTok{ 4L, }\DataTypeTok{urn =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{9}\NormalTok{, letters)) \{}
   \KeywordTok{paste}\NormalTok{(}\KeywordTok{sample}\NormalTok{(urn, }\DataTypeTok{size =}\NormalTok{ tag\_length, }\DataTypeTok{replace =}\NormalTok{ T), }\DataTypeTok{collapse =} \StringTok{""}\NormalTok{)}
 \NormalTok{\}}
 
-\NormalTok{ds\_pt\_pool <{-}}
+\NormalTok{ds\_pt\_pool \textless{}{-}}
 \StringTok{  }\NormalTok{tibble}\OperatorTok{::}\KeywordTok{tibble}\NormalTok{(}
     \DataTypeTok{pt\_index    =} \KeywordTok{seq\_len}\NormalTok{(pt\_count),}
     \DataTypeTok{pt\_tag      =} \KeywordTok{vapply}\NormalTok{(}\KeywordTok{rep}\NormalTok{(tag\_length, pt\_count), draw\_tag, }\KeywordTok{character}\NormalTok{(}\DecValTok{1}\NormalTok{)),}
@@ -3224,8 +3229,8 @@ Here is a collection of presentations by the BBMC and friends that may help demo
   \textbf{\href{https://rawgit.com/wibeasley/RAnalysisSkeleton/master/documentation/time-and-effort-synthesis.html\#/}{Time and Effort Data Synthesis}}. \href{https://github.com/OuhscBbmc/StatisticalComputing}{SCUG} 2015.
 \end{enumerate}
 
-\hypertarget{github-2}{%
-\section{GitHub}\label{github-2}}
+\hypertarget{github}{%
+\section{GitHub}\label{github}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
