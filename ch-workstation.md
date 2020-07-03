@@ -3,27 +3,27 @@ Workstation {#workstation}
 
 We believe it is important to keep software updated and consistent across workstations in your project.  This material was originally posted at https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md.  It should help establish our tools on a new development computer.
 
-Required Installation {#installation-required}
+Required Installation {#workstation-required}
 ------------------------------------
 
-The order matters.
+The installation order matters.
 
-### R
+### R {#workstation-r}
 
 [R](http://cran.r-project.org/) is the centerpiece of the analysis. Every few months, you'll need to download the most recent version.  {added Sept 2012}
 
-### RStudio
+### RStudio {#workstation-rstudio}
 
 [RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.
 
-### Installing R Packages
+### Installing R Packages {#workstation-r-package-installation}
 
 Dozens of R Packages will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least fifteen minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated.
 
 To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3), which defines the `package_janitor_remote()` function.  The final line calls the function (and passes a specific CSV of packages)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R) (located in the `utility/` directory) that lives in this repository.  The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R).].
 
 ```r
-if( !base::requireNamespace("devtools") ) utils::install.packages("devtools")
+if (!base::requireNamespace("devtools")) utils::install.packages("devtools")
 devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
 
 package_janitor_remote(
@@ -41,30 +41,38 @@ if( !base::requireNamespace("OuhscMunge") ) remotes::install_github("OuhscMunge"
 OuhscMunge::update_packages_addin()
 ```
 
-### Updating R Packages
+### Updating R Packages {#workstation-r-package-update}
 
 Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(checkBuilt=TRUE)`.
 
-### GitHub
+### GitHub {#workstation-github}
 
 [GitHub](https://github.com/) registration is necessary to push modified files to the repository.    First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator  (*e.g.*, to https://github.com/OuhscBbmc/RedcapExamplesAndPatterns).
 
-### GitHub for Windows Client
+### GitHub for Windows Client {#workstation-github-client}
 
 [GitHub for Windows Client](http://windows.github.com/) does the basic tasks a little easier than the git features built into RStudio.  Occasionally, someone might need to use git form the command line to fix problems.
 
-Recommended Installation {#installation-recommended}
+Recommended Installation {#workstation-recommended}
 ------------------------------------
 
-The order does not matter.
+The installation order does not matter.
 
-* **[ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)** is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 17 is the most recent driver version.  See if a new one exists. {updated Apr 2018}
+### ODBC Driver {#workstation-odbc}
 
-* **[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/)** is necessary to build some packages in development hosted on GitHub. {added Feb 2017}
+[ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 17 is the most recent driver version.  See if a new one exists. {updated Apr 2018}
 
-* **[Notepad++](http://notepad-plus-plus.org/)** is a text editor that allows you look at the raw text files, such as code and CSVs.  For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks & causes some issues).  {added Sept 2012}
+### R Tools {#workstation-rtools}
 
-* **[Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download)** is now recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Managment Studio.
+[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub. {added Feb 2017}
+
+### Notepad++ {#workstation-notepadpp}
+
+[Notepad++](http://notepad-plus-plus.org/) is a text editor that allows you look at the raw text files, such as code and CSVs.  For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks & causes some issues).  {added Sept 2012}
+
+### Azure Data Studio {#workstation-ads}
+
+[Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download) is now recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Management Studio.
 
     Note: here are some non-default changes that facilitate our workflow.
 
@@ -76,139 +84,109 @@ The order does not matter.
     1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
     1. Data | Sql | **Copy Includes Headers: check** {`"sql.copyIncludeHeaders": true`}
 
-* **[Pulse Secure](https://connect.ouhsc.edu)** is VPN client for OUHSC researchers.  It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
-* **[Visual Studio Code](https://code.visualstudio.com/)** is an extensible text editor that runs on Windows and Linux, similar to [Atom](https://atom.io/) (described above).  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown.  Currently, it supports searching CSVs better than Atom.  Productivity is enhanced with the following extensions:  {added Dec 2018}
+### Visual Studio Code {#workstation-vscode}
 
-  * [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) isn't a good name, but I've liked the capability.  It displays CSVs and other files in a grid. {added Dec 2018}
+[Visual Studio Code](https://code.visualstudio.com/) is an extensible text editor that runs on Windows and Linux, similar to [Atom](https://atom.io/) (described above).  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown.  Currently, it supports searching CSVs better than Atom.  Productivity is enhanced with the following extensions:  {added Dec 2018}
 
-  * [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv) color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}
+* [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) isn't a good name, but I've liked the capability.  It displays CSVs and other files in a grid. {added Dec 2018}
 
-  * [SQL Server](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) allows you to execute against a database, and view/copy/save the grid results.  It doesn't replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}
+* [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv) color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}
 
-  * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) produces  green squiggly lines under words not in its dictionary.  You can add words to your user dictionary, or a project dictionary.
+* [SQL Server](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) allows you to execute against a database, and view/copy/save the grid results.  It doesn't replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}
 
-  * [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) has some useful markdown capbilities, such as converting the file to html.
+* [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) produces  green squiggly lines under words not in its dictionary.  You can add words to your user dictionary, or a project dictionary.
 
-  * [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) has some useful markdown capbilities, such as converting the file to pdf.
+* [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) has some useful markdown capabilities, such as converting the file to html.
 
-  * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) has linting and style checking.
+* [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) has some useful markdown capbilities, such as converting the file to pdf.
 
-  These extensions [can be installed by command line](https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions).
+* [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) has linting and style checking.
 
-  ```sh
-  code --list-extensions
-  code --install-extension GrapeCity.gc-excelviewer
-  code --install-extension mechatroner.rainbow-csv
-  code --install-extension ms-mssql.mssql
-  code --install-extension streetsidesoftware.code-spell-checker
-  code --install-extension yzhang.markdown-all-in-one
-  code --install-extension yzane.markdown-pdf
-  code --install-extension DavidAnson.vscode-markdownlint
-  ```
+These extensions [can be installed by command line](https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions).
 
-  Note: here are some non-default changes that facilitate our workflow.  Either copy this configuration into [`settings.json`](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings), or manually specify the options with the [settings editor](https://code.visualstudio.com/docs/getstarted/settings).
+```sh
+code --list-extensions
+code --install-extension GrapeCity.gc-excelviewer
+code --install-extension mechatroner.rainbow-csv
+code --install-extension ms-mssql.mssql
+code --install-extension streetsidesoftware.code-spell-checker
+code --install-extension yzhang.markdown-all-in-one
+code --install-extension yzane.markdown-pdf
+code --install-extension DavidAnson.vscode-markdownlint
+```
 
-  ```json
-  {
-    "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.maxComputationTime": 0,
-    "editor.acceptSuggestionOnEnter": "off",
-    "editor.renderWhitespace": "all",
-    "explorer.confirmDragAndDrop": false,
-    "files.associations": {
-        "*.Rmd": "markdown"
-    },
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "git.autofetch": true,
-    "git.confirmSync": false,
-    "window.zoomLevel": 2,
+Note: here are some non-default changes that facilitate our workflow.  Either copy this configuration into [`settings.json`](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings), or manually specify the options with the [settings editor](https://code.visualstudio.com/docs/getstarted/settings).
 
-    "markdown.extension.orderedList.autoRenumber": false,
-    "markdown.extension.orderedList.marker": "one",
-    "markdownlint.config": {
-        "MD003": { "style": "setext_with_atx" },
-        "MD007": { "indent": 2 },
-        "MD022": { "lines_above": 1,
-                   "lines_below": 1 },
-        "MD024": { "siblings_only": true },
-        "no-bare-urls": false,
-        "no-inline-html": {
-          "allowed_elements": [
-            "mermaid",
-            "a",
-            "img"
-          ]
-        }
-    }
+```json
+{
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.maxComputationTime": 0,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.renderWhitespace": "all",
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+      "*.Rmd": "markdown"
+  },
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "window.zoomLevel": 2,
+
+  "markdown.extension.orderedList.autoRenumber": false,
+  "markdown.extension.orderedList.marker": "one",
+  "markdownlint.config": {
+      "MD003": { "style": "setext_with_atx" },
+      "MD007": { "indent": 2 },
+      "MD022": { "lines_above": 1,
+                  "lines_below": 1 },
+      "MD024": { "siblings_only": true },
+      "no-bare-urls": false,
+      "no-inline-html": {
+        "allowed_elements": [
+          "mermaid",
+          "a",
+          "img"
+        ]
+      }
   }
-  ```
+}
+```
 
-  1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
-  1. Settings | Extensions |Markdown All in One | Ordered List | **Marker: one** {`"markdown.extension.orderedList.marker": "one"`}
+1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
+1. Settings | Extensions |Markdown All in One | Ordered List | **Marker: one** {`"markdown.extension.orderedList.marker": "one"`}
 
-
-Optional Installation {#installation-optional}
+Optional Installation {#workstation-optional}
 -----------------------------------
 
-The order does not matter.
+The installation order does not matter.
 
-* **[Git](https://git-scm.com/downloads)** command-line utility enables some advanced operations that the GitHub client doesn't support.  Use the default installation options, except these preferences of ours:
+### Git {#workstation-git}
+
+[Git](https://git-scm.com/downloads) command-line utility enables some advanced operations that the GitHub client doesn't support.  Use the default installation options, except these preferences of ours:
     1. Nano is the default text editor.
 
-* **GitLab SSL Certificate** isn't software, but still needs to be configured.
-    1. Talk to Will for the server URL and the `*.cer` file.
-    1. Save the file in something like `~/keys/ca-bundle-gitlab.cer`
-    1. Associate the file with `git config --global http.sslCAInfo ...path.../ca-bundle-gitlab.cer` (but replace `...path...`).
+### LibreOffice Calc {#workstation-calc}
 
-* **[MiKTeX](http://miktex.org/)** is necessary only if you're using knitr or Sweave to produce *LaTeX* files (and not just *markdown* files).  It's a huge, slow installation that can take an hour or two.  {added Sept 2012}
+[LibreOffice Calc](https://www.libreoffice.org/discover/calc/) is an alternative to Excel.  Unlike it Excel, it doesn't guess much with formatting (which usually mess up things, especially dates).
 
-* **[LibreOffice Calc](https://www.libreoffice.org/discover/calc/)** is an alternative to Excel.  Unlike it Excel, it doesn't guess much with formatting (which usually mess up things, especially dates).
+### pandoc {#workstation-pandoc}
 
-* **[pandoc](https://pandoc.org/)** converts files from one markup format into another. {added Sept 2012}
+[pandoc](https://pandoc.org/) converts files from one markup format into another. {added Sept 2012}
 
-* **[Python](https://www.python.org/)** is used by some analysts.  The prototypical installation involves two options.
+### Python {#workstation-python}
 
-  * **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
+[Python](https://www.python.org/) is used by some analysts.  The prototypical installation involves two options.
 
-    ```python
-    conda install numpy pandas scikit-learn matplotlib
-    ```
+* **[Anaconda](https://www.anaconda.com/distribution/#download-section)**, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code.  In Windows, open "Anaconda Prompt" with administrative privileges
 
-  * **Standard Python**, while installing packages through pip3 in the terminal.
+  ```python
+  conda install numpy pandas scikit-learn matplotlib
+  ```
 
-* **[Atom](https://atom.io/)** is a text editor, similar to Notepad++.  Notepad++ appears more efficient opening large CSVs.  Atom is better suited when editing a lot of files in a repository.  For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
+* **Standard Python**, while installing packages through pip3 in the terminal.
 
-    Productivity is enhanced with the following [Atom packages](https://atom.io/packages):
-
-    1. [Sublime Style Column Selection](https://atom.io/packages/Sublime-Style-Column-Selection): Enable Sublime style 'Column Selection'. Just hold 'alt' while you select, or select using your middle mouse button.
-
-    1. [atom-language-r](https://atom.io/packages/atom-language-r) allows Atom to recognize files as R.  This prevents spell checking indicators and enable syntax highlighting.  When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well.  An older alternative is [language-r](https://atom.io/packages/language-r).
-
-    1. [language-csv](https://atom.io/packages/language-csv): Adds syntax highlighting to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files.  The highlighting is nice, and it automatically disables spell checking lines.
-
-    1. [atom-beautify](https://atom.io/packages/atom-beautify): Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
-
-    1. [atom-wrap-in-tag](https://atom.io/packages/atom-wrap-in-tag): wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
-
-    1. [minimap](https://atom.io/packages/minimap): A preview of the full source code (in the right margin).
-
-    1. [script](https://atom.io/packages/script): Run scripts based on file name, a selection of code, or by line number.
-
-    1. [git-plus](https://atom.io/packages/git-plus): Do git things without the terminal (I don't think this is necessary anymore).
-
-    The packages can be installed through Atom, or through the `apm` utility in the command line:
-
-    ```bash
-    apm install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script
-    ```
-
-    And the following settings keep files consistent among developers.
-
-    1. File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
-    1. File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when 'Tab' is pressed)
-
-Ubuntu Installation {#installation-ubuntu}
+Ubuntu Installation {#workstation-ubuntu}
 -----------------------------------
 
 Ubuntu desktop 19.04 follows [these instructions](https://askubuntu.com/a/862520/153921) for the R and RStudio and required these debian packages to be installed before the R packages.  The `--yes` option avoids manual confirmation for each line, so you can copy & paste this into the terminal.
@@ -322,7 +300,7 @@ The Postman native app for Ubuntu is [installed](https://learning.getpostman.com
 snap install postman
 ```
 
-Asset Locations
+Asset Locations {#workstation-assets}
 -----------------------------------
 
 * **GitHub repository** https://github.com/OuhscBbmc/RedcapExamplesAndPatterns {added Sept 2012}
@@ -335,37 +313,45 @@ Asset Locations
 
 * **ODBC UserDsn** The name depends on your specific repository, and SQL Server database.  Ask Thomas, Will or David for how to set it up.
 
-Administrator Installation {#installation-administrator}
+Administrator Installation {#workstation-administrator}
 -----------------------------------
 
-* **[MySQL Workbench](https://dev.mysql.com/downloads/workbench/)** is useful occassionly for REDCap admins.
+These programs are useful to people administrating servers, but not to the typical data scientist.
 
-* **[Postman Native App](https://www.getpostman.com/downloads/)** is useful for developing with the API and has [replaced the Chrome app](https://blog.getpostman.com/2017/03/14/going-native/).  If that's not possible, a [web client](https://web.postman.co/) is available as well.  With either program, do not access any PHI.
+### MySQL Workbench {#workstation-mysql}
 
-* **[SQL Server Management Studio (SSMS)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)** has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators.  It is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+[MySQL Workbench](https://dev.mysql.com/downloads/workbench/) is useful occasionally for REDCap admins.
 
-    Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
+### Postman {#workstation-postman}
 
-    1. SQL Server Object Explorer | Scripting | Include descriptive headers: False
-    1. SQL Server Object Explorer | Scripting | Script extended properties: False
-    1. Text Editor | All Languages | Tabs | Tab size: 2
-    1. Text Editor | All Languages | Tabs | Indent size: 2
-    1. Text Editor | All Languages | Tabs | Insert Spaces: true
+[Postman Native App](https://www.getpostman.com/downloads/) is useful for developing with the API and has [replaced the Chrome app](https://blog.getpostman.com/2017/03/14/going-native/).  If that's not possible, a [web client](https://web.postman.co/) is available as well.  With either program, do not access any PHI.
 
-    These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
+### SQL Server Management Studio (SSMS) {#workstation-ssms}
 
-    1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
-    1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
-    1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
+[SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators.  It is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
 
-    1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false
-    1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false
-    1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false
-    1. Text Editor | All Languages | General | Line Numbers: true
+Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
 
-    For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
+1. SQL Server Object Explorer | Scripting | Include descriptive headers: False
+1. SQL Server Object Explorer | Scripting | Script extended properties: False
+1. Text Editor | All Languages | Tabs | Tab size: 2
+1. Text Editor | All Languages | Tabs | Indent size: 2
+1. Text Editor | All Languages | Tabs | Insert Spaces: true
 
-Installation Troubleshooting
+These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
+
+1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
+1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
+1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
+
+1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false
+1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false
+1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false
+1. Text Editor | All Languages | General | Line Numbers: true
+
+For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
+
+Installation Troubleshooting {#workstation-troubleshooting}
 -----------------------------------
 
 * **Git**: Will Beasley resorted to this workaround Sept 2012: http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing.  And then he copied the following four files from `D:/Program Files/msysgit/mingw/bin/` to `D:/Program Files/msysgit/bin/`: (1) `libiconv2.dll`, (2) `libcurl-4.dll`, (3) `libcrypto.dll`, and (4) `libssl.dll`. (If you install to the default location, you'll  move instead from `C:/msysgit/mingw/bin/` to `C:/msysgit/bin/`) {added Sept 2012}
@@ -374,10 +360,19 @@ Installation Troubleshooting
 
 * **RStudio** If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings`. {added Sept 2012}
 
-Retired Tools
+Retired Tools {#workstation-retired}
 -----------------------------------
 
-We previously installed this software in this list.  Most have been replaced by software above that's either newer or more natural to use.
+We previously installed the software below.  Most have been replaced by software above that's either newer or more natural to use.
+
+* **GitLab SSL Certificate** isn't software, but still needs to be configured.
+    1. Talk to Will for the server URL and the `*.cer` file.
+    1. Save the file in something like `~/keys/ca-bundle-gitlab.cer`
+    1. Associate the file with `git config --global http.sslCAInfo ...path.../ca-bundle-gitlab.cer` (but replace `...path...`).
+
+* **[MiKTeX](http://miktex.org/)** is necessary only if you're using knitr or Sweave to produce *LaTeX* files (and not just *markdown* files).  It's a huge, slow installation that can take an hour or two.  {added Sept 2012}
+
+* **[Pulse Secure](https://connect.ouhsc.edu)** is VPN client for OUHSC researchers.  It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
 
 * **[msysGit](http://msysgit.github.com/)** allows RStudio to track changes and commit & sync them to the GitHub server. Connect RStudio to GitHub repository.  I moved this to optional (Oct 14, 2012) because the GitHub client (see above) does almost everything that the RStudio plugin does; and it does it a little better and a little more robust; and its installation hasn't given me problems.  {added Oct 2012}
   * Starting in the top right of RStudio, click: Project -> New Project -> Create Project from Version Control -> Git  {added Sept 2012}
@@ -392,3 +387,33 @@ We previously installed this software in this list.  Most have been replaced by 
 * **[GitHub for Eclipse](http://eclipse.github.com/)** is something I discourage for a beginner, and I strongly recommend you start with RStudio (and [GitHub Client](http://windows.github.com/) or the git capabilities within RStudio) for a few months before you even consider Eclipse.  It's included in this list for the sake of completeness. When installing EGit plug-in, ignore eclipse site and check out this youtube video:http://www.youtube.com/watch?v=I7fbCE5nWPU.
 
 * **[Color Oracle](http://colororacle.org/)** simulates the three most common types of color blindness.  If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too).  If it's already installed, it takes less than 10 second to check it against all three types of color blindness. If it's not installed, extra work may be necessary if Java isn't already installed.  When you download the zip, extract the `ColorOracle.exe` program where you like. {added Sept 2012}
+* **[Atom](https://atom.io/)** is a text editor, similar to Notepad++.  Notepad++ appears more efficient opening large CSVs.  Atom is better suited when editing a lot of files in a repository.  For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
+
+    Productivity is enhanced with the following [Atom packages](https://atom.io/packages):
+
+    1. [Sublime Style Column Selection](https://atom.io/packages/Sublime-Style-Column-Selection): Enable Sublime style 'Column Selection'. Just hold 'alt' while you select, or select using your middle mouse button.
+
+    1. [atom-language-r](https://atom.io/packages/atom-language-r) allows Atom to recognize files as R.  This prevents spell checking indicators and enable syntax highlighting.  When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well.  An older alternative is [language-r](https://atom.io/packages/language-r).
+
+    1. [language-csv](https://atom.io/packages/language-csv): Adds syntax highlighting to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files.  The highlighting is nice, and it automatically disables spell checking lines.
+
+    1. [atom-beautify](https://atom.io/packages/atom-beautify): Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
+
+    1. [atom-wrap-in-tag](https://atom.io/packages/atom-wrap-in-tag): wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
+
+    1. [minimap](https://atom.io/packages/minimap): A preview of the full source code (in the right margin).
+
+    1. [script](https://atom.io/packages/script): Run scripts based on file name, a selection of code, or by line number.
+
+    1. [git-plus](https://atom.io/packages/git-plus): Do git things without the terminal (I don't think this is necessary anymore).
+
+    The packages can be installed through Atom, or through the `apm` utility in the command line:
+
+    ```bash
+    apm install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script
+    ```
+
+    And the following settings keep files consistent among developers.
+
+    1. File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
+    1. File | Settings | Editor | Tab Type: soft (This inserts 2 spaces instead of a tab when 'Tab' is pressed)
