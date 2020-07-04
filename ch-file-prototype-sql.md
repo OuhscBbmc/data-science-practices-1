@@ -13,6 +13,14 @@ In some scenarios, it is desirable to use the `INSERT` SQL command to transfer d
 
 In both cases, we try to write the SQL files to conform to similar standards and conventions.  As stated in [Consistency across Files](#consistency-files) (and in the [previous chapter](#file-prototype-r)), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
+Choice of Database Engine {#sql-choice}
+------------------------------------
+
+The major relational database engines use roughly the same syntax, but they all have slight deviations and enhancements beyond the SQL standards.  Most of our databases are hosted by SQL Server, since that is what OUHSC's campus seems most comfortable supporting.  Consequently, this chapter uses SQL Server 2017+ syntax.
+
+But like most data science teams, we still need to consume other databases, such as  Oracle and MySQL.  Outside OUHSC projects, we tend to use PostgreSQL and Redshift.
+
+
 Ferry {#sql-ferry}
 ------------------------------------
 
@@ -46,7 +54,7 @@ WHERE
   pr.problem_date_start between @start_date and @stop_date
   and
   pr.patient_id is not null
-ORDER BY pr.problem_date_start
+ORDER BY pr.patient_id, pr.problem_date_start desc
 
 CREATE INDEX ley_covid_1_dx_patient_id on ley_covid_1.dx (patient_id);
 CREATE INDEX ley_covid_1_dx_icd10_code on ley_covid_1.dx (icd10_code);
@@ -108,22 +116,46 @@ In scenarios where the table definition is stable and the data is refreshed freq
 -- TRUNCATE TABLE ley_covid_1.dx;
 ```
 
+INSERT INTO {#sql-insert}
+------------------------------------
+
+The [`INSERT INTO`](https://www.w3schools.com/sql/sql_insert_into_select.asp) (when followed by a `SELECT` clause), simply moves data from the query into the specified table.
+
+The `INSERT INTO` clause transfers the columns in the exact order of the query.  It *does not* try to match to the names of the destination table.  An error will be thrown if the column types are mismatched (*e.g.*, attempting to insert a character string into an integer value).
+
+Even worse, no error will be thrown if the mismatched columns have compatible types.  This will occur if the table's columns are `patient_id`, `weight_kg`, and `height_cm`, but the query's columns are `patient_id`, `height_cm`, and `weight_in`.  Not only will the weight and height be written to the incorrect columns, but the execution will not catch that the source is `weight_kg`, but the destination is `weight_in`.
+
 ```sql
 INSERT INTO ley_covid_1.dx
 ```
+
+SELECT {#sql-select}
+------------------------------------
+
+The [`SELECT`](https://www.w3schools.com/sql/sql_select.asp) clause specifies the desired columns.  It can also rename columns and perform manipulations.
+
+We prefer to specify the aliased table of each column.  If two source tables have the same column name, an error will be thrown regarding the ambiguity.  Even if that's not a concern, we believe that explicitly specifying the source improves readability and reduces errors.
 
 ```sql
 SELECT
   pr.patient_id
   ,ss.covid_confirmed
-  ,pr.invoice_date     as problem_date
-  ,pr.code             as icd10_code
+  ,cast(pr.invoice_datetime as date) as problem_date
+  ,pr.code                           as icd10_code
 ```
+
+FROM {#sql-from}
+------------------------------------
 
 ```sql
 FROM cdw.star_1.fact_problem       as pr
   inner join beasley_covid_1.ss_dx as ss on pr.code = ss.icd10_code
 ```
+
+WHERE {#sql-where}
+------------------------------------
+
+The [`WHERE`](https://www.w3schools.com/sql/sql_where.asp) clause reduces the number of returned rows (as opposed to reducing the number of columns in the `SELECT` clause).  Use the indention level to communicate to reader how the subclauses are combined.  This is especially important if it both `AND` and `OR` operators are used, since their order of operations can be confused easily.
 
 ```sql
 WHERE
@@ -132,9 +164,19 @@ WHERE
   pr.patient_id is not null
 ```
 
+ORDER BY {#sql-order-by}
+------------------------------------
+
+The [`ORDER BY`](https://www.w3schools.com/sql/sql_orderby.asp) clause simply specifies the order of the rows.  Be default, a column's values will be in *asc*ending order, but can be *desc*ending if desired.
+
 ```sql
-ORDER BY pr.problem_date_start
+ORDER BY pr.patient_id, pr.problem_date_start desc
 ```
+
+Indexing {#sql-indexing}
+------------------------------------
+
+If the table is large or queried in a variety of ways, [index]()ing the table can speed up performance dramatically.
 
 ```sql
 CREATE INDEX ley_covid_1_dx_patient_id on ley_covid_1.dx (patient_id);
