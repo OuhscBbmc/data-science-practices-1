@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-07-03}
+\date{2020-08-05}
 
 \begin{document}
 \maketitle
@@ -362,10 +362,10 @@ In this example, we'll presume we can't trust a patient record if it lacks a cle
 \hypertarget{across-projects}{%
 \subsection{Across Projects}\label{across-projects}}
 
-\hypertarget{file-prototype}{%
-\chapter{Prototypical File}\label{file-prototype}}
+\hypertarget{file-prototype-r}{%
+\chapter{Prototypical R File}\label{file-prototype-r}}
 
-As stated before, in \protect\hyperlink{consistency-files}{Consistency across Files}, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
+As stated in \protect\hyperlink{consistency-files}{Consistency across Files}, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
 We use the term ``chunk'' for a section of code because it corresponds with knitr terminology \citep{xie2015}, and in many analysis files (as opposed to manipulation files), the chunk of our R file connects to a knitr Rmd file.
 
@@ -603,6 +603,228 @@ This chunk follows \protect\hyperlink{chunk-verify-values}{verify-values} becaus
 \item
   \citep{gillespie}, particularly the ``Efficient input/output'' chapter.
 \end{itemize}
+
+\hypertarget{file-prototype-sql}{%
+\chapter{Prototypical SQL File}\label{file-prototype-sql}}
+
+New data scientists typically import entire tables from a database into R, and then merge, filter, and groom the data.frames. A more efficient approach is to submit \href{https://en.wikipedia.org/wiki/SQL}{sql} that executes on the database and returns a more specialized dataset.
+
+This provides several advantages:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A database will be much more efficient when filtering and \href{https://www.w3schools.com/sql/sql_join.asp}{joining} tables than any programing language, such as R or Python. A well-designed database will have \href{https://en.wikipedia.org/wiki/Database_index\#:~:text=A\%20database\%20index\%20is\%20a,maintain\%20the\%20index\%20data\%20structure.}{indexed columns} and other optimizations that surpass R and Python capabilities.
+\item
+  A database handles datasets that are thousands of times larger than what R and Python can accommodate in RAM. For large datasets, database engines persist the data on a hard drive (instead of just RAM) and are optimized to read the necessary information into RAM the moment before it is needed, and then return the processed back to disk before progressing to the next block of data.
+\item
+  Frequently, only a portion of the table's rows and columns are ultimately needed by the analysis. Reducing the size of the dataset leaving the database has two benefits: less information travels across the network and R's and Python's limited memory space is conserved.
+\end{enumerate}
+
+In some scenarios, it is desirable to use the \texttt{INSERT} SQL command to transfer data within the database; and never travel across the network and never touch R or your local machine. For our large and complicated projects, the majority of data movement uses \texttt{INSERT} commands within SQL files. Among these scenarios, the analysis-focused projects use R to call the sequence of SQL files (see \protect\hyperlink{repo-flow}{\texttt{flow.R}}), while the database-focused project uss \href{https://en.wikipedia.org/wiki/SQL_Server_Integration_Services}{SSIS}.
+
+In both cases, we try to write the SQL files to conform to similar standards and conventions. As stated in \protect\hyperlink{consistency-files}{Consistency across Files} (and in the \protect\hyperlink{file-prototype-r}{previous chapter}), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
+
+\hypertarget{sql-choice}{%
+\section{Choice of Database Engine}\label{sql-choice}}
+
+The major relational database engines use roughly the same syntax, but they all have slight deviations and enhancements beyond the SQL standards. Most of our databases are hosted by SQL Server, since that is what OUHSC's campus seems most comfortable supporting. Consequently, this chapter uses SQL Server 2017+ syntax.
+
+But like most data science teams, we still need to consume other databases, such as Oracle and MySQL. Outside OUHSC projects, we tend to use PostgreSQL and Redshift.
+
+\hypertarget{sql-ferry}{%
+\section{Ferry}\label{sql-ferry}}
+
+This basic sql file moves data within a database to create a table named \texttt{dx}, which is contained in the \texttt{ley\_covid\_1} schema of the \texttt{cdw\_staging} database.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{{-}{-}use cdw\_staging}
+\KeywordTok{declare}\NormalTok{ @start\_date }\DataTypeTok{date} \OperatorTok{=} \StringTok{\textquotesingle{}2020{-}02{-}01\textquotesingle{}}\NormalTok{;                               }\CommentTok{{-}{-} sync with config.yml}
+\KeywordTok{declare}\NormalTok{ @stop\_date  }\DataTypeTok{date} \OperatorTok{=}\NormalTok{ dateadd(}\DataTypeTok{day}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\FunctionTok{cast}\NormalTok{(getdate() }\KeywordTok{as} \DataTypeTok{date}\NormalTok{));  }\CommentTok{{-}{-} sync with config.yml}
+
+\KeywordTok{DROP} \KeywordTok{TABLE} \ControlFlowTok{if} \KeywordTok{exists}\NormalTok{ ley\_covid\_1.dx;}
+\KeywordTok{CREATE} \KeywordTok{TABLE}\NormalTok{ ley\_covid\_1.dx(}
+\NormalTok{  dx\_id           }\DataTypeTok{int}\NormalTok{ identity(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{) }\KeywordTok{primary} \KeywordTok{key}\NormalTok{,}
+\NormalTok{  patient\_id      }\DataTypeTok{int}         \KeywordTok{not} \KeywordTok{null}\NormalTok{,}
+\NormalTok{  covid\_confirmed bit         }\KeywordTok{not} \KeywordTok{null}\NormalTok{,}
+\NormalTok{  problem\_date    }\DataTypeTok{date}            \KeywordTok{null}\NormalTok{,}
+\NormalTok{  icd10\_code      }\DataTypeTok{varchar}\NormalTok{(}\DecValTok{20}\NormalTok{) }\KeywordTok{not} \KeywordTok{null}
+\NormalTok{);}
+\CommentTok{{-}{-} TRUNCATE TABLE ley\_covid\_1.dx;}
+
+\KeywordTok{INSERT} \KeywordTok{INTO}\NormalTok{ ley\_covid\_1.dx}
+\KeywordTok{SELECT}
+\NormalTok{  pr.patient\_id}
+\NormalTok{  ,ss.covid\_confirmed}
+\NormalTok{  ,pr.invoice\_date     }\KeywordTok{as}\NormalTok{ problem\_date}
+\NormalTok{  ,pr.code             }\KeywordTok{as}\NormalTok{ icd10\_code}
+  \CommentTok{{-}{-} into ley\_covid\_1.dx}
+\KeywordTok{FROM}\NormalTok{ cdw.star\_1.fact\_problem       }\KeywordTok{as}\NormalTok{ pr}
+  \KeywordTok{inner} \KeywordTok{join}\NormalTok{ beasley\_covid\_1.ss\_dx }\KeywordTok{as}\NormalTok{ ss }\KeywordTok{on}\NormalTok{ pr.code }\OperatorTok{=}\NormalTok{ ss.icd10\_code}
+\KeywordTok{WHERE}
+\NormalTok{  pr.problem\_date\_start }\KeywordTok{between}\NormalTok{ @start\_date }\KeywordTok{and}\NormalTok{ @stop\_date}
+  \KeywordTok{and}
+\NormalTok{  pr.patient\_id }\KeywordTok{is} \KeywordTok{not} \KeywordTok{null}
+\KeywordTok{ORDER} \KeywordTok{BY}\NormalTok{ pr.patient\_id, pr.problem\_date\_start }\KeywordTok{desc}
+
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ ley\_covid\_1\_dx\_patient\_id }\KeywordTok{on}\NormalTok{ ley\_covid\_1.dx (patient\_id);}
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ ley\_covid\_1\_dx\_icd10\_code }\KeywordTok{on}\NormalTok{ ley\_covid\_1.dx (icd10\_code);}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-default-database}{%
+\section{Default Databases}\label{sql-default-database}}
+
+We prefer not to specify the database of each table, and instead control it through the connection (such as the DSN's ``default database'' value). Nevertheless, it's helpful to include the default database behind a comment for two reasons. First, it communicates to the default database to the human reader. Second, during debugging, the code can be highlighted in \protect\hyperlink{workstation-ads}{ADS}/\protect\hyperlink{workstation-ssms}{SSMS} and executed with ``F5''; this will mimic what happens when the file is run via automation with a DSN.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{{-}{-}use cdw\_staging}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-declare}{%
+\section{Declare Values Databases}\label{sql-declare}}
+
+Similar to the \protect\hyperlink{chunk-declare}{Declare Globals} chunk in a \href{file-prototype-r}{prototypical R file}, values set at the top of the file are easy to read and modify.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{declare}\NormalTok{ @start\_date }\DataTypeTok{date} \OperatorTok{=} \StringTok{\textquotesingle{}2020{-}02{-}01\textquotesingle{}}\NormalTok{;                               }\CommentTok{{-}{-} sync with config.yml}
+\KeywordTok{declare}\NormalTok{ @stop\_date  }\DataTypeTok{date} \OperatorTok{=}\NormalTok{ dateadd(}\DataTypeTok{day}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\FunctionTok{cast}\NormalTok{(getdate() }\KeywordTok{as} \DataTypeTok{date}\NormalTok{));  }\CommentTok{{-}{-} sync with config.yml}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-recreate}{%
+\section{Recreate Table}\label{sql-recreate}}
+
+When batch-loading data, it is typically easiest drop and recreate a database table. In the snippet below, any table with the specific name is dropped/deleted from the database and replaced with a (possibly new) definition. We like to dedicate a line to each table column, with at least three elements per line: the name, the \href{https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql}{data type}, and if nulls are allowed.
+
+Many other features and keywords are available when designing tables. The ones we occasionally use are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://www.w3schools.com/sql/sql_primarykey.ASP}{\texttt{primary\ key}} helps database optimization when later querying the table, and enforces uniqueness, such as a patient table should not have any two rows with the same \texttt{patient\_id} value. Primary keys must be nonmissing, so the \texttt{not\ null} keyword is redundant.
+\item
+  \href{https://www.w3schools.com/sql/sql_unique.asp}{\texttt{unique}} is helpful when a table has additional columns that need to be unique (such as \texttt{patient\_ssn} and \texttt{patient\_id}). A more advanced scenario using a \href{https://docs.microsoft.com/en-us/sql/relational-databases/indexes/columnstore-indexes-overview\#when-should-i-use-a-columnstore-index}{clustered columnar table}, which is incompatible with the \texttt{primary\ key} designation.
+\item
+  \texttt{identity(1,\ 1)} creates a 1, 2, 3, \ldots{} sequence, which relieves the client of creating the sequence with something like \href{https://docs.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql}{\texttt{row\_number()}}. Note that when identity column exists, the number columns in the \texttt{SELECT} clause will be one fewer than the columns defined in \texttt{CREATE\ TABLE}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{DROP} \KeywordTok{TABLE} \ControlFlowTok{if} \KeywordTok{exists}\NormalTok{ ley\_covid\_1.dx;}
+\KeywordTok{CREATE} \KeywordTok{TABLE}\NormalTok{ ley\_covid\_1.dx(}
+\NormalTok{  dx\_id           }\DataTypeTok{int}\NormalTok{ identity(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{) }\KeywordTok{primary} \KeywordTok{key}\NormalTok{,}
+\NormalTok{  patient\_id      }\DataTypeTok{int}         \KeywordTok{not} \KeywordTok{null}\NormalTok{,}
+\NormalTok{  covid\_confirmed bit         }\KeywordTok{not} \KeywordTok{null}\NormalTok{,}
+\NormalTok{  problem\_date    }\DataTypeTok{date}            \KeywordTok{null}\NormalTok{,}
+\NormalTok{  icd10\_code      }\DataTypeTok{varchar}\NormalTok{(}\DecValTok{20}\NormalTok{) }\KeywordTok{not} \KeywordTok{null}
+\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+To jump-start the creation of the table definition, we frequently use the \href{https://docs.microsoft.com/en-us/sql/t-sql/queries/select-into-clause-transact-sql}{\texttt{INTO}} clause. This operation creates a new table, informed the column properties of the source tables. Within \protect\hyperlink{workstation-ads}{ADS} and \protect\hyperlink{workstation-ssms}{SSMS}, refresh the list of tables and select the new table; there will be an option to copy the \texttt{CREATE\ TABLE} statement (similar to the snippet above) and paste it into the sql file. The definition can then be modified, such as tightening from \texttt{null} to \texttt{not\ null}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \CommentTok{{-}{-} into ley\_covid\_1.dx}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-truncate}{%
+\section{Truncate Table}\label{sql-truncate}}
+
+In scenarios where the table definition is stable and the data is refreshed frequently (say, daily), consider \href{https://docs.microsoft.com/en-us/sql/t-sql/statements/truncate-table-transact-sql}{TRUNCATE}-ing the table. When taking this approach, we prefer to keep the \texttt{DROP} and \texttt{CREATE} code in the file, but commented out. This saves development time in the future if the table definition needs to be modified.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{{-}{-} TRUNCATE TABLE ley\_covid\_1.dx;}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-insert}{%
+\section{INSERT INTO}\label{sql-insert}}
+
+The \href{https://www.w3schools.com/sql/sql_insert_into_select.asp}{\texttt{INSERT\ INTO}} (when followed by a \texttt{SELECT} clause), simply moves data from the query into the specified table.
+
+The \texttt{INSERT\ INTO} clause transfers the columns in the exact order of the query. It \emph{does not} try to match to the names of the destination table. An error will be thrown if the column types are mismatched (\emph{e.g.}, attempting to insert a character string into an integer value).
+
+Even worse, no error will be thrown if the mismatched columns have compatible types. This will occur if the table's columns are \texttt{patient\_id}, \texttt{weight\_kg}, and \texttt{height\_cm}, but the query's columns are \texttt{patient\_id}, \texttt{height\_cm}, and \texttt{weight\_in}. Not only will the weight and height be written to the incorrect columns, but the execution will not catch that the source is \texttt{weight\_kg}, but the destination is \texttt{weight\_in}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{INSERT} \KeywordTok{INTO}\NormalTok{ ley\_covid\_1.dx}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-select}{%
+\section{SELECT}\label{sql-select}}
+
+The \href{https://www.w3schools.com/sql/sql_select.asp}{\texttt{SELECT}} clause specifies the desired columns. It can also rename columns and perform manipulations.
+
+We prefer to specify the aliased table of each column. If two source tables have the same column name, an error will be thrown regarding the ambiguity. Even if that's not a concern, we believe that explicitly specifying the source improves readability and reduces errors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT}
+\NormalTok{  pr.patient\_id}
+\NormalTok{  ,ss.covid\_confirmed}
+\NormalTok{  ,}\FunctionTok{cast}\NormalTok{(pr.invoice\_datetime }\KeywordTok{as} \DataTypeTok{date}\NormalTok{) }\KeywordTok{as}\NormalTok{ problem\_date}
+\NormalTok{  ,pr.code                           }\KeywordTok{as}\NormalTok{ icd10\_code}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-from}{%
+\section{FROM}\label{sql-from}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{FROM}\NormalTok{ cdw.star\_1.fact\_problem       }\KeywordTok{as}\NormalTok{ pr}
+  \KeywordTok{inner} \KeywordTok{join}\NormalTok{ beasley\_covid\_1.ss\_dx }\KeywordTok{as}\NormalTok{ ss }\KeywordTok{on}\NormalTok{ pr.code }\OperatorTok{=}\NormalTok{ ss.icd10\_code}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-where}{%
+\section{WHERE}\label{sql-where}}
+
+The \href{https://www.w3schools.com/sql/sql_where.asp}{\texttt{WHERE}} clause reduces the number of returned rows (as opposed to reducing the number of columns in the \texttt{SELECT} clause). Use the indention level to communicate to reader how the subclauses are combined. This is especially important if it both \texttt{AND} and \texttt{OR} operators are used, since their order of operations can be confused easily.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{WHERE}
+\NormalTok{  pr.problem\_date\_start }\KeywordTok{between}\NormalTok{ @start\_date }\KeywordTok{and}\NormalTok{ @stop\_date}
+  \KeywordTok{and}
+\NormalTok{  pr.patient\_id }\KeywordTok{is} \KeywordTok{not} \KeywordTok{null}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-order-by}{%
+\section{ORDER BY}\label{sql-order-by}}
+
+The \href{https://www.w3schools.com/sql/sql_orderby.asp}{\texttt{ORDER\ BY}} clause simply specifies the order of the rows. Be default, a column's values will be in \emph{asc}ending order, but can be \emph{desc}ending if desired.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ORDER} \KeywordTok{BY}\NormalTok{ pr.patient\_id, pr.problem\_date\_start }\KeywordTok{desc}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sql-indexing}{%
+\section{Indexing}\label{sql-indexing}}
+
+If the table is large or queried in a variety of ways, \href{}{index}ing the table can speed up performance dramatically.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ ley\_covid\_1\_dx\_patient\_id }\KeywordTok{on}\NormalTok{ ley\_covid\_1.dx (patient\_id);}
+\KeywordTok{CREATE} \KeywordTok{INDEX}\NormalTok{ ley\_covid\_1\_dx\_icd10\_code }\KeywordTok{on}\NormalTok{ ley\_covid\_1.dx (icd10\_code);}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{repo-prototype}{%
 \chapter{Prototypical Repository}\label{repo-prototype}}
@@ -2299,23 +2521,23 @@ When jittering, set the seed in the `declare-globals' chunk so that rerunning th
 
 We believe it is important to keep software updated and consistent across workstations in your project. This material was originally posted at \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md}. It should help establish our tools on a new development computer.
 
-\hypertarget{installation-required}{%
-\section{Required Installation}\label{installation-required}}
+\hypertarget{workstation-required}{%
+\section{Required Installation}\label{workstation-required}}
 
-The order matters.
+The installation order matters.
 
-\hypertarget{r}{%
-\subsection{R}\label{r}}
+\hypertarget{workstation-r}{%
+\subsection{R}\label{workstation-r}}
 
 \href{http://cran.r-project.org/}{R} is the centerpiece of the analysis. Every few months, you'll need to download the most recent version. \{added Sept 2012\}
 
-\hypertarget{rstudio}{%
-\subsection{RStudio}\label{rstudio}}
+\hypertarget{workstation-rstudio}{%
+\subsection{RStudio}\label{workstation-rstudio}}
 
 \href{http://www.rstudio.com/ide/download/desktop}{RStudio Desktop} is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus \texttt{Help} -\textgreater{} \texttt{Check\ for\ updates}.
 
-\hypertarget{installing-r-packages}{%
-\subsection{Installing R Packages}\label{installing-r-packages}}
+\hypertarget{workstation-r-package-installation}{%
+\subsection{Installing R Packages}\label{workstation-r-package-installation}}
 
 Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install \href{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv}{from our list of packages that our data analysts typically need}. The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available. Create a new `personal library' if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.
 
@@ -2323,7 +2545,7 @@ To install our frequently-used packages, run the following snippet. The first li
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{if}\NormalTok{( }\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"devtools"}\NormalTok{) ) utils}\OperatorTok{::}\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\NormalTok{base}\OperatorTok{::}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)) utils}\OperatorTok{::}\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
 \NormalTok{devtools}\OperatorTok{::}\KeywordTok{source\_gist}\NormalTok{(}\StringTok{"2c5e7459b88ec28b9e8fa0c695b15ee3"}\NormalTok{, }\DataTypeTok{filename=}\StringTok{"package{-}janitor{-}bbmc.R"}\NormalTok{)}
 
 \KeywordTok{package\_janitor\_remote}\NormalTok{(}
@@ -2344,79 +2566,81 @@ When the project is opened in RStudio, \href{http://ouhscbbmc.github.io/OuhscMun
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{updating-r-packages}{%
-\subsection{Updating R Packages}\label{updating-r-packages}}
+\hypertarget{workstation-r-package-update}{%
+\subsection{Updating R Packages}\label{workstation-r-package-update}}
 
 Several R packages will need to be updated every weeks. Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code \texttt{update.packages(checkBuilt=TRUE)}.
 
-\hypertarget{github}{%
-\subsection{GitHub}\label{github}}
+\hypertarget{workstation-github}{%
+\subsection{GitHub}\label{workstation-github}}
 
 \href{https://github.com/}{GitHub} registration is necessary to push modified files to the repository. First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator (\emph{e.g.}, to \url{https://github.com/OuhscBbmc/RedcapExamplesAndPatterns}).
 
-\hypertarget{github-for-windows-client}{%
-\subsection{GitHub for Windows Client}\label{github-for-windows-client}}
+\hypertarget{workstation-github-client}{%
+\subsection{GitHub for Windows Client}\label{workstation-github-client}}
 
 \href{http://windows.github.com/}{GitHub for Windows Client} does the basic tasks a little easier than the git features built into RStudio. Occasionally, someone might need to use git form the command line to fix problems.
 
-\hypertarget{installation-recommended}{%
-\section{Recommended Installation}\label{installation-recommended}}
+\hypertarget{workstation-recommended}{%
+\section{Recommended Installation}\label{workstation-recommended}}
 
-The order does not matter.
+The installation order does not matter.
+
+\hypertarget{workstation-odbc}{%
+\subsection{ODBC Driver}\label{workstation-odbc}}
+
+\href{https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server}{ODBC Driver for SQL Server} is for connecting to the \href{https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd}{token server}, if your institution is using one. As of this writing, version 17 is the most recent driver version. See if a new one exists. \{updated Apr 2018\}
+
+\hypertarget{workstation-rtools}{%
+\subsection{R Tools}\label{workstation-rtools}}
+
+\href{https://cran.r-project.org/bin/windows/Rtools/}{R Tools for Windows} is necessary to build some packages in development hosted on GitHub. \{added Feb 2017\}
+
+\hypertarget{workstation-notepadpp}{%
+\subsection{Notepad++}\label{workstation-notepadpp}}
+
+\href{http://notepad-plus-plus.org/}{Notepad++} is a text editor that allows you look at the raw text files, such as code and CSVs. For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks \& causes some issues). \{added Sept 2012\}
+
+\hypertarget{workstation-ads}{%
+\subsection{Azure Data Studio}\label{workstation-ads}}
+
+\href{https://docs.microsoft.com/en-us/sql/azure-data-studio/download}{Azure Data Studio (ADS)} is now recommended by \href{https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/}{Microsoft} and \href{https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/}{others} for analysts (and some other roles) --ahead of SQL Server Management Studio.
+
+\begin{verbatim}
+Note: here are some non-default changes that facilitate our workflow.
+
+1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
+1. Settings | Text Editor | **Detect Indentation: uncheck** {`"editor.detectIndentation": false`}
+1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
+1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
+1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
+1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
+1. Data | Sql | **Copy Includes Headers: check** {`"sql.copyIncludeHeaders": true`}
+\end{verbatim}
+
+\hypertarget{workstation-vscode}{%
+\subsection{Visual Studio Code}\label{workstation-vscode}}
+
+\href{https://code.visualstudio.com/}{Visual Studio Code} is an extensible text editor that runs on Windows and Linux, similar to \href{https://atom.io/}{Atom} (described above). It's much \href{https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio}{lighter} than the full \href{https://visualstudio.microsoft.com/}{Visual Studio}. Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. Currently, it supports searching CSVs better than Atom. Productivity is enhanced with the following extensions: \{added Dec 2018\}
 
 \begin{itemize}
 \item
-  \textbf{\href{https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server}{ODBC Driver for SQL Server}} is for connecting to the \href{https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd}{token server}, if your institution is using one. As of this writing, version 17 is the most recent driver version. See if a new one exists. \{updated Apr 2018\}
+  \href{https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer}{Excel Viewer} isn't a good name, but I've liked the capability. It displays CSVs and other files in a grid. \{added Dec 2018\}
 \item
-  \textbf{\href{https://cran.r-project.org/bin/windows/Rtools/}{R Tools for Windows}} is necessary to build some packages in development hosted on GitHub. \{added Feb 2017\}
+  \href{https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv}{Rainbow CSV} color codes the columns, but still allows you to see and edit the raw plain-text file. \{added Dec 2018\}
 \item
-  \textbf{\href{http://notepad-plus-plus.org/}{Notepad++}} is a text editor that allows you look at the raw text files, such as code and CSVs. For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks \& causes some issues). \{added Sept 2012\}
+  \href{https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql}{SQL Server} allows you to execute against a database, and view/copy/save the grid results. It doesn't replicate all SSMS features, but is nice as your scanning through files. \{added Dec 2018\}
 \item
-  \textbf{\href{https://docs.microsoft.com/en-us/sql/azure-data-studio/download}{Azure Data Studio (ADS)}} is now recommended by \href{https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/}{Microsoft} and \href{https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/}{others} for analysts (and some other roles) --ahead of SQL Server Managment Studio.
+  \href{https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker}{Code Spell Checker} produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.
+\item
+  \href{https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one}{Markdown All in One} has some useful markdown capabilities, such as converting the file to html.
+\item
+  \href{https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf}{Markdown PDF} has some useful markdown capbilities, such as converting the file to pdf.
+\item
+  \href{https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint}{markdownlint} has linting and style checking.
+\end{itemize}
 
-  Note: here are some non-default changes that facilitate our workflow.
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Settings \textbar{} Text Editor \textbar{} \textbf{Tab Size: 2} \{\texttt{"editor.tabSize":\ 2}\}
-  \item
-    Settings \textbar{} Text Editor \textbar{} \textbf{Detect Indentation: uncheck} \{\texttt{"editor.detectIndentation":\ false}\}
-  \item
-    Settings \textbar{} Text Editor \textbar{} \textbf{Insert Final Newlines: check} \{\texttt{"files.insertFinalNewline":\ true}\}
-  \item
-    Settings \textbar{} Text Editor \textbar{} \textbf{Trim Final Newlines: check} \{\texttt{"files.trimFinalNewlines":\ true}\}
-  \item
-    Settings \textbar{} Text Editor \textbar{} \textbf{Trim Trailing Whitespace: check} \{\texttt{"files.trimTrailingWhitespace":\ true}\}
-  \item
-    Data \textbar{} Sql \textbar{} \textbf{Show Connection Info In Title: uncheck} \{\texttt{"sql.showConnectionInfoInTitle":\ false}\}
-  \item
-    Data \textbar{} Sql \textbar{} \textbf{Copy Includes Headers: check} \{\texttt{"sql.copyIncludeHeaders":\ true}\}
-  \end{enumerate}
-\item
-  \textbf{\href{https://connect.ouhsc.edu}{Pulse Secure}} is VPN client for OUHSC researchers. It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
-\item
-  \textbf{\href{https://code.visualstudio.com/}{Visual Studio Code}} is an extensible text editor that runs on Windows and Linux, similar to \href{https://atom.io/}{Atom} (described above). It's much \href{https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio}{lighter} than the full \href{https://visualstudio.microsoft.com/}{Visual Studio}. Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. Currently, it supports searching CSVs better than Atom. Productivity is enhanced with the following extensions: \{added Dec 2018\}
-
-  \begin{itemize}
-  \item
-    \href{https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer}{Excel Viewer} isn't a good name, but I've liked the capability. It displays CSVs and other files in a grid. \{added Dec 2018\}
-  \item
-    \href{https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv}{Rainbow CSV} color codes the columns, but still allows you to see and edit the raw plain-text file. \{added Dec 2018\}
-  \item
-    \href{https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql}{SQL Server} allows you to execute against a database, and view/copy/save the grid results. It doesn't replicate all SSMS features, but is nice as your scanning through files. \{added Dec 2018\}
-  \item
-    \href{https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker}{Code Spell Checker} produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.
-  \item
-    \href{https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one}{Markdown All in One} has some useful markdown capbilities, such as converting the file to html.
-  \item
-    \href{https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf}{Markdown PDF} has some useful markdown capbilities, such as converting the file to pdf.
-  \item
-    \href{https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint}{markdownlint} has linting and style checking.
-  \end{itemize}
-
-  These extensions \href{https://code.visualstudio.com/docs/editor/command-line\#_working-with-extensions}{can be installed by command line}.
+These extensions \href{https://code.visualstudio.com/docs/editor/command-line\#_working-with-extensions}{can be installed by command line}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2431,7 +2655,7 @@ The order does not matter.
 \end{Highlighting}
 \end{Shaded}
 
-  Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into \href{https://code.visualstudio.com/docs/getstarted/tips-and-tricks\#_tune-your-settings}{\texttt{settings.json}}, or manually specify the options with the \href{https://code.visualstudio.com/docs/getstarted/settings}{settings editor}.
+Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into \href{https://code.visualstudio.com/docs/getstarted/tips-and-tricks\#_tune-your-settings}{\texttt{settings.json}}, or manually specify the options with the \href{https://code.visualstudio.com/docs/getstarted/settings}{settings editor}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2456,7 +2680,7 @@ The order does not matter.
       \DataTypeTok{"MD003"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"style"}\FunctionTok{:} \StringTok{"setext\_with\_atx"} \FunctionTok{\},}
       \DataTypeTok{"MD007"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"indent"}\FunctionTok{:} \DecValTok{2} \FunctionTok{\},}
       \DataTypeTok{"MD022"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"lines\_above"}\FunctionTok{:} \DecValTok{1}\FunctionTok{,}
-                 \DataTypeTok{"lines\_below"}\FunctionTok{:} \DecValTok{1} \FunctionTok{\},}
+                  \DataTypeTok{"lines\_below"}\FunctionTok{:} \DecValTok{1} \FunctionTok{\},}
       \DataTypeTok{"MD024"}\FunctionTok{:} \FunctionTok{\{} \DataTypeTok{"siblings\_only"}\FunctionTok{:} \KeywordTok{true} \FunctionTok{\},}
       \DataTypeTok{"no{-}bare{-}urls"}\FunctionTok{:} \KeywordTok{false}\FunctionTok{,}
       \DataTypeTok{"no{-}inline{-}html"}\FunctionTok{:} \FunctionTok{\{}
@@ -2471,112 +2695,56 @@ The order does not matter.
 \end{Highlighting}
 \end{Shaded}
 
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Auto Renumber: false} \{\texttt{"markdown.extension.orderedList.autoRenumber":\ false}\}
-  \item
-    Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Marker: one} \{\texttt{"markdown.extension.orderedList.marker":\ "one"}\}
-  \end{enumerate}
-\end{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Auto Renumber: false} \{\texttt{"markdown.extension.orderedList.autoRenumber":\ false}\}
+\item
+  Settings \textbar{} Extensions \textbar Markdown All in One \textbar{} Ordered List \textbar{} \textbf{Marker: one} \{\texttt{"markdown.extension.orderedList.marker":\ "one"}\}
+\end{enumerate}
 
-\hypertarget{installation-optional}{%
-\section{Optional Installation}\label{installation-optional}}
+\hypertarget{workstation-optional}{%
+\section{Optional Installation}\label{workstation-optional}}
 
-The order does not matter.
+The installation order does not matter.
+
+\hypertarget{workstation-git}{%
+\subsection{Git}\label{workstation-git}}
+
+\href{https://git-scm.com/downloads}{Git} command-line utility enables some advanced operations that the GitHub client doesn't support. Use the default installation options, except these preferences of ours:
+1. Nano is the default text editor.
+
+\hypertarget{workstation-calc}{%
+\subsection{LibreOffice Calc}\label{workstation-calc}}
+
+\href{https://www.libreoffice.org/discover/calc/}{LibreOffice Calc} is an alternative to Excel. Unlike it Excel, it doesn't guess much with formatting (which usually mess up things, especially dates).
+
+\hypertarget{workstation-pandoc}{%
+\subsection{pandoc}\label{workstation-pandoc}}
+
+\href{https://pandoc.org/}{pandoc} converts files from one markup format into another. \{added Sept 2012\}
+
+\hypertarget{workstation-python}{%
+\subsection{Python}\label{workstation-python}}
+
+\href{https://www.python.org/}{Python} is used by some analysts. The prototypical installation involves two options.
 
 \begin{itemize}
 \item
-  \textbf{\href{https://git-scm.com/downloads}{Git}} command-line utility enables some advanced operations that the GitHub client doesn't support. Use the default installation options, except these preferences of ours:
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Nano is the default text editor.
-  \end{enumerate}
-\item
-  \textbf{GitLab SSL Certificate} isn't software, but still needs to be configured.
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    Talk to Will for the server URL and the \texttt{*.cer} file.
-  \item
-    Save the file in something like \texttt{\textasciitilde{}/keys/ca-bundle-gitlab.cer}
-  \item
-    Associate the file with \texttt{git\ config\ -\/-global\ http.sslCAInfo\ ...path.../ca-bundle-gitlab.cer} (but replace \texttt{...path...}).
-  \end{enumerate}
-\item
-  \textbf{\href{http://miktex.org/}{MiKTeX}} is necessary only if you're using knitr or Sweave to produce \emph{LaTeX} files (and not just \emph{markdown} files). It's a huge, slow installation that can take an hour or two. \{added Sept 2012\}
-\item
-  \textbf{\href{https://www.libreoffice.org/discover/calc/}{LibreOffice Calc}} is an alternative to Excel. Unlike it Excel, it doesn't guess much with formatting (which usually mess up things, especially dates).
-\item
-  \textbf{\href{https://pandoc.org/}{pandoc}} converts files from one markup format into another. \{added Sept 2012\}
-\item
-  \textbf{\href{https://www.python.org/}{Python}} is used by some analysts. The prototypical installation involves two options.
-
-  \begin{itemize}
-  \item
-    \textbf{\href{https://www.anaconda.com/distribution/\#download-section}{Anaconda}}, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open ``Anaconda Prompt'' with administrative privileges
+  \textbf{\href{https://www.anaconda.com/distribution/\#download-section}{Anaconda}}, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open ``Anaconda Prompt'' with administrative privileges
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{conda install numpy pandas scikit}\OperatorTok{{-}}\NormalTok{learn matplotlib}
 \end{Highlighting}
 \end{Shaded}
-  \item
-    \textbf{Standard Python}, while installing packages through pip3 in the terminal.
-  \end{itemize}
 \item
-  \textbf{\href{https://atom.io/}{Atom}} is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
-
-  Productivity is enhanced with the following \href{https://atom.io/packages}{Atom packages}:
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item
-    \href{https://atom.io/packages/Sublime-Style-Column-Selection}{Sublime Style Column Selection}: Enable Sublime style `Column Selection'. Just hold `alt' while you select, or select using your middle mouse button.
-  \item
-    \href{https://atom.io/packages/atom-language-r}{atom-language-r} allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well. An older alternative is \href{https://atom.io/packages/language-r}{language-r}.
-  \item
-    \href{https://atom.io/packages/language-csv}{language-csv}: Adds syntax highlighting to \href{https://en.wikipedia.org/wiki/Comma-separated_values}{CSV} files. The highlighting is nice, and it automatically disables spell checking lines.
-  \item
-    \href{https://atom.io/packages/atom-beautify}{atom-beautify}: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C\#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
-  \item
-    \href{https://atom.io/packages/atom-wrap-in-tag}{atom-wrap-in-tag}: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
-  \item
-    \href{https://atom.io/packages/minimap}{minimap}: A preview of the full source code (in the right margin).
-  \item
-    \href{https://atom.io/packages/script}{script}: Run scripts based on file name, a selection of code, or by line number.
-  \item
-    \href{https://atom.io/packages/git-plus}{git-plus}: Do git things without the terminal (I don't think this is necessary anymore).
-  \end{enumerate}
-
-  The packages can be installed through Atom, or through the \texttt{apm} utility in the command line:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{apm}\NormalTok{ install sublime{-}style{-}column{-}selection atom{-}language{-}r language{-}csv atom{-}beautify atom{-}wrap{-}in{-}tag minimap script}
-\end{Highlighting}
-\end{Shaded}
-
-  And the following settings keep files consistent among developers.
-
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
-  \item
-    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Type: soft (This inserts 2 spaces instead of a tab when `Tab' is pressed)
-  \end{enumerate}
+  \textbf{Standard Python}, while installing packages through pip3 in the terminal.
 \end{itemize}
 
-\hypertarget{installation-ubuntu}{%
-\section{Ubuntu Installation}\label{installation-ubuntu}}
+\hypertarget{workstation-ubuntu}{%
+\section{Ubuntu Installation}\label{workstation-ubuntu}}
 
 Ubuntu desktop 19.04 follows \href{https://askubuntu.com/a/862520/153921}{these instructions} for the R and RStudio and required these debian packages to be installed before the R packages. The \texttt{-\/-yes} option avoids manual confirmation for each line, so you can copy \& paste this into the terminal.
 
@@ -2697,8 +2865,8 @@ The Postman native app for Ubuntu is \href{https://learning.getpostman.com/docs/
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{asset-locations}{%
-\section{Asset Locations}\label{asset-locations}}
+\hypertarget{workstation-assets}{%
+\section{Asset Locations}\label{workstation-assets}}
 
 \begin{itemize}
 \item
@@ -2713,59 +2881,67 @@ The Postman native app for Ubuntu is \href{https://learning.getpostman.com/docs/
   \textbf{ODBC UserDsn} The name depends on your specific repository, and SQL Server database. Ask Thomas, Will or David for how to set it up.
 \end{itemize}
 
-\hypertarget{installation-administrator}{%
-\section{Administrator Installation}\label{installation-administrator}}
+\hypertarget{workstation-administrator}{%
+\section{Administrator Installation}\label{workstation-administrator}}
 
-\begin{itemize}
+These programs are useful to people administrating servers, but not to the typical data scientist.
+
+\hypertarget{workstation-mysql}{%
+\subsection{MySQL Workbench}\label{workstation-mysql}}
+
+\href{https://dev.mysql.com/downloads/workbench/}{MySQL Workbench} is useful occasionally for REDCap admins.
+
+\hypertarget{workstation-postman}{%
+\subsection{Postman}\label{workstation-postman}}
+
+\href{https://www.getpostman.com/downloads/}{Postman Native App} is useful for developing with the API and has \href{https://blog.getpostman.com/2017/03/14/going-native/}{replaced the Chrome app}. If that's not possible, a \href{https://web.postman.co/}{web client} is available as well. With either program, do not access any PHI.
+
+\hypertarget{workstation-ssms}{%
+\subsection{SQL Server Management Studio (SSMS)}\label{workstation-ssms}}
+
+\href{https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms}{SQL Server Management Studio} has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators. It is an easy way to access the database and write queries (and transfer the SQL to an R file). It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+
+Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database \emph{structure} (not data) on GitHub, so we can easily track/monitor the structural changes over time. The \emph{tabs} options keeps things consistent between editors. In the SSMS `Tools \textbar{} Options' dialog box:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
-  \textbf{\href{https://dev.mysql.com/downloads/workbench/}{MySQL Workbench}} is useful occassionly for REDCap admins.
+  SQL Server Object Explorer \textbar{} Scripting \textbar{} Include descriptive headers: False
 \item
-  \textbf{\href{https://www.getpostman.com/downloads/}{Postman Native App}} is useful for developing with the API and has \href{https://blog.getpostman.com/2017/03/14/going-native/}{replaced the Chrome app}. If that's not possible, a \href{https://web.postman.co/}{web client} is available as well. With either program, do not access any PHI.
+  SQL Server Object Explorer \textbar{} Scripting \textbar{} Script extended properties: False
 \item
-  \textbf{\href{https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms}{SQL Server Management Studio (SSMS)}} has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators. It is an easy way to access the database and write queries (and transfer the SQL to an R file). It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+  Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Tab size: 2
+\item
+  Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Indent size: 2
+\item
+  Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Insert Spaces: true
+\end{enumerate}
 
-  Note: here are some non-default changes that facilitate our workflow. The first two help when we save the database \emph{structure} (not data) on GitHub, so we can easily track/monitor the structural changes over time. The \emph{tabs} options keeps things consistent between editors. In the SSMS `Tools \textbar{} Options' dialog box:
+These don't affect the saved files, but make life easier. The first makes the \href{https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/}{result font bigger}.
 
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \tightlist
-  \item
-    SQL Server Object Explorer \textbar{} Scripting \textbar{} Include descriptive headers: False
-  \item
-    SQL Server Object Explorer \textbar{} Scripting \textbar{} Script extended properties: False
-  \item
-    Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Tab size: 2
-  \item
-    Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Indent size: 2
-  \item
-    Text Editor \textbar{} All Languages \textbar{} Tabs \textbar{} Insert Spaces: true
-  \end{enumerate}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Environment \textbar{} Fonts and Colors \textbar{} Show settings for: Grid Results \textbar{} Size: 10
+\item
+  Query Results \textbar{} SQL Server \textbar{} Results to Grid \textbar{} Include column headers when copying or saving the results: false`
+\item
+  Designers \textbar{} Table and Database Designers \textbar{} Prevent saving changes that require table-recreation: false
+\item
+  Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Server Name: false
+\item
+  Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Database Name: false
+\item
+  Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Login Name: false
+\item
+  Text Editor \textbar{} All Languages \textbar{} General \textbar{} Line Numbers: true
+\end{enumerate}
 
-  These don't affect the saved files, but make life easier. The first makes the \href{https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/}{result font bigger}.
+For more details, see \href{https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md}{setting-up-dev-machine.md} (in a private repo that's restricted to BBMC members).
 
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item
-    Environment \textbar{} Fonts and Colors \textbar{} Show settings for: Grid Results \textbar{} Size: 10
-  \item
-    Query Results \textbar{} SQL Server \textbar{} Results to Grid \textbar{} Include column headers when copying or saving the results: false`
-  \item
-    Designers \textbar{} Table and Database Designers \textbar{} Prevent saving changes that require table-recreation: false
-  \item
-    Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Server Name: false
-  \item
-    Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Database Name: false
-  \item
-    Text Editor \textbar{} Editor Tab and Status Bar \textbar{} Tab Text \textbar{} Include Login Name: false
-  \item
-    Text Editor \textbar{} All Languages \textbar{} General \textbar{} Line Numbers: true
-  \end{enumerate}
-
-  For more details, see \href{https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md}{setting-up-dev-machine.md} (in a private repo that's restricted to BBMC members).
-\end{itemize}
-
-\hypertarget{installation-troubleshooting}{%
-\section{Installation Troubleshooting}\label{installation-troubleshooting}}
+\hypertarget{workstation-troubleshooting}{%
+\section{Installation Troubleshooting}\label{workstation-troubleshooting}}
 
 \begin{itemize}
 \item
@@ -2776,12 +2952,29 @@ The Postman native app for Ubuntu is \href{https://learning.getpostman.com/docs/
   \textbf{RStudio} If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased. To be safe, you can be thorough and delete the equivalent of \texttt{C:\textbackslash{}Users\textbackslash{}wibeasley\textbackslash{}AppData\textbackslash{}Local\textbackslash{}RStudio-Desktop\textbackslash{}}. The options settings are stored (and can be manipulated) in this extentionless text file: \texttt{C:\textbackslash{}Users\textbackslash{}wibeasley\textbackslash{}AppData\textbackslash{}Local\textbackslash{}RStudio-Desktop\textbackslash{}monitored\textbackslash{}user-settings\textbackslash{}user-settings}. \{added Sept 2012\}
 \end{itemize}
 
-\hypertarget{retired-tools}{%
-\section{Retired Tools}\label{retired-tools}}
+\hypertarget{workstation-retired}{%
+\section{Retired Tools}\label{workstation-retired}}
 
-We previously installed this software in this list. Most have been replaced by software above that's either newer or more natural to use.
+We previously installed the software below. Most have been replaced by software above that's either newer or more natural to use.
 
 \begin{itemize}
+\item
+  \textbf{GitLab SSL Certificate} isn't software, but still needs to be configured.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Talk to Will for the server URL and the \texttt{*.cer} file.
+  \item
+    Save the file in something like \texttt{\textasciitilde{}/keys/ca-bundle-gitlab.cer}
+  \item
+    Associate the file with \texttt{git\ config\ -\/-global\ http.sslCAInfo\ ...path.../ca-bundle-gitlab.cer} (but replace \texttt{...path...}).
+  \end{enumerate}
+\item
+  \textbf{\href{http://miktex.org/}{MiKTeX}} is necessary only if you're using knitr or Sweave to produce \emph{LaTeX} files (and not just \emph{markdown} files). It's a huge, slow installation that can take an hour or two. \{added Sept 2012\}
+\item
+  \textbf{\href{https://connect.ouhsc.edu}{Pulse Secure}} is VPN client for OUHSC researchers. It's not required for the REDCap API, but it's usually necessary to communicate with other campus data sources.
 \item
   \textbf{\href{http://msysgit.github.com/}{msysGit}} allows RStudio to track changes and commit \& sync them to the GitHub server. Connect RStudio to GitHub repository. I moved this to optional (Oct 14, 2012) because the GitHub client (see above) does almost everything that the RStudio plugin does; and it does it a little better and a little more robust; and its installation hasn't given me problems. \{added Oct 2012\}
 
@@ -2802,6 +2995,49 @@ We previously installed this software in this list. Most have been replaced by s
   \textbf{\href{http://eclipse.github.com/}{GitHub for Eclipse}} is something I discourage for a beginner, and I strongly recommend you start with RStudio (and \href{http://windows.github.com/}{GitHub Client} or the git capabilities within RStudio) for a few months before you even consider Eclipse. It's included in this list for the sake of completeness. When installing EGit plug-in, ignore eclipse site and check out this youtube video:\url{http://www.youtube.com/watch?v=I7fbCE5nWPU}.
 \item
   \textbf{\href{http://colororacle.org/}{Color Oracle}} simulates the three most common types of color blindness. If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too). If it's already installed, it takes less than 10 second to check it against all three types of color blindness. If it's not installed, extra work may be necessary if Java isn't already installed. When you download the zip, extract the \texttt{ColorOracle.exe} program where you like. \{added Sept 2012\}
+\item
+  \textbf{\href{https://atom.io/}{Atom}} is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.
+
+  Productivity is enhanced with the following \href{https://atom.io/packages}{Atom packages}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \item
+    \href{https://atom.io/packages/Sublime-Style-Column-Selection}{Sublime Style Column Selection}: Enable Sublime style `Column Selection'. Just hold `alt' while you select, or select using your middle mouse button.
+  \item
+    \href{https://atom.io/packages/atom-language-r}{atom-language-r} allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well. An older alternative is \href{https://atom.io/packages/language-r}{language-r}.
+  \item
+    \href{https://atom.io/packages/language-csv}{language-csv}: Adds syntax highlighting to \href{https://en.wikipedia.org/wiki/Comma-separated_values}{CSV} files. The highlighting is nice, and it automatically disables spell checking lines.
+  \item
+    \href{https://atom.io/packages/atom-beautify}{atom-beautify}: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C\#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
+  \item
+    \href{https://atom.io/packages/atom-wrap-in-tag}{atom-wrap-in-tag}: wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
+  \item
+    \href{https://atom.io/packages/minimap}{minimap}: A preview of the full source code (in the right margin).
+  \item
+    \href{https://atom.io/packages/script}{script}: Run scripts based on file name, a selection of code, or by line number.
+  \item
+    \href{https://atom.io/packages/git-plus}{git-plus}: Do git things without the terminal (I don't think this is necessary anymore).
+  \end{enumerate}
+
+  The packages can be installed through Atom, or through the \texttt{apm} utility in the command line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apm}\NormalTok{ install sublime{-}style{-}column{-}selection atom{-}language{-}r language{-}csv atom{-}beautify atom{-}wrap{-}in{-}tag minimap script}
+\end{Highlighting}
+\end{Shaded}
+
+  And the following settings keep files consistent among developers.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Length: 2 (As opposed to 3 or 4, used in other conventions)
+  \item
+    File \textbar{} Settings \textbar{} Editor \textbar{} Tab Type: soft (This inserts 2 spaces instead of a tab when `Tab' is pressed)
+  \end{enumerate}
 \end{itemize}
 
 \hypertarget{tools}{%
@@ -3382,7 +3618,7 @@ Here is a collection of presentations by the BBMC and friends that may help demo
 \item
   Cargo cult programming ``is a style of computer programming characterized by the ritual inclusion of code or program structures that serve no real purpose.'' (\href{https://en.wikipedia.org/wiki/Cargo_cult_programming}{Wikipedia})
 
-  Your team should decide which elements of \href{https://ouhscbbmc.github.io/data-science-practices-1/file-prototype.html}{a file prototype} and \href{https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html}{repo prototype} are best for you.
+  Your team should decide which elements of \href{https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html}{a file prototype} and \href{https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html}{repo prototype} are best for you.
 \end{enumerate}
 
 \hypertarget{practices}{%

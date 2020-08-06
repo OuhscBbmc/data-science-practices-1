@@ -69,7 +69,7 @@ We prefer not to specify the database of each table, and instead control it thro
 --use cdw_staging
 ```
 
-Declare Values Databases {#sql-default-database}
+Declare Values Databases {#sql-declare}
 ------------------------------------
 
 Similar to the [Declare Globals](#chunk-declare) chunk in a [prototypical R file](file-prototype-r), values set at the top of the file are easy to read and modify.
