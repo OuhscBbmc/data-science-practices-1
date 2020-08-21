@@ -54,6 +54,52 @@ raw_text  <- sub("^(.+Dx50 Name),", "\\1", raw_text)
 ds        <- readr::read_csv(raw_text, col_types=col_types)
 ```
 
+### Removing Trailing Comma from Header {#snippets-reading-vroom}
+
+*Background*: Occasionally incoming data files are on the large side to comfortably accept with [readr](https://readr.tidyverse.org/), so we use [vroom](https://vroom.r-lib.org/).  The two packages are develoepd by the same group and [might be combined](https://github.com/tidyverse/tidyverse.org/pull/375#issuecomment-564781603) in the future.
+
+*Explanation*: This snippet defines the `col_types` list with names so it mimics [our approach](https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html#chunk-declare) of using readr.  There are two small differences: 
+  * it is a [list](https://stat.ethz.ch/R-manual/R-devel/library/base/html/list.html) instead of a [`readr::cols_only`](https://readr.tidyverse.org/reference/cols.html) object, and
+  * in the call to [`vroom::vroom()`](https://vroom.r-lib.org/reference/vroom.html), we have to pass `col_names = names(col_types)` explicitly.
+
+
+*Real Example*: [akande-medically-complex-1](https://github.com/OuhscBbmc/akande-medically-complex-1/tree/master/manipulation/ohca) (Accessible to only CDW members.)
+
+*Last Modified*: 2020-08-21 by Will
+
+```r
+# ---- declare-globals ---------------------------------------------------------
+config            <- config::get()
+
+col_types <- list(
+  sak                      = vroom::col_integer(),  # "system-assigned key"
+  aid_category_id          = vroom::col_character(),
+  age                      = vroom::col_integer(),
+  service_date_first       = vroom::col_date("%m/%d/%Y"),
+  service_date_lasst       = vroom::col_date("%m/%d/%Y"),
+  claim_type               = vroom::col_character(),
+  provider_id              = vroom::col_character(),
+  provider_lat             = vroom::col_double(),
+  provider_long            = vroom::col_double(),
+  provider_zip             = vroom::col_character(),
+  cpt                      = vroom::col_integer(),
+  revenue_code             = vroom::col_integer(),
+  icd_code                 = vroom::col_character(),
+  icd_sequence             = vroom::col_integer(),
+  vocabulary_coarse_id     = vroom::col_integer()
+)
+
+# ---- load-data ---------------------------------------------------------------
+ds <- vroom::vroom(
+  file      = config$path_ohca_patient,
+  delim     = "\t",
+  col_names = names(col_types),
+  col_types = col_types
+)
+
+rm(col_types)
+```
+
 Grooming {#snippets-grooming}
 ------------------------------------
 
