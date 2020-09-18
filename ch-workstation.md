@@ -74,15 +74,15 @@ The installation order does not matter.
 
 [Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download) is now recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Management Studio.
 
-    Note: here are some non-default changes that facilitate our workflow.
+  Note: here are some non-default changes that facilitate our workflow.
 
-    1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
-    1. Settings | Text Editor | **Detect Indentation: uncheck** {`"editor.detectIndentation": false`}
-    1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
-    1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
-    1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
-    1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
-    1. Data | Sql | **Copy Includes Headers: check** {`"sql.copyIncludeHeaders": true`}
+  1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
+  1. Settings | Text Editor | **Detect Indentation: uncheck** {`"editor.detectIndentation": false`}
+  1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
+  1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
+  1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
+  1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
+  1. Data | Sql | **Copy Include Headers: check** {`"sql.copyIncludeHeaders": true`}
 
 ### Visual Studio Code {#workstation-vscode}
 
