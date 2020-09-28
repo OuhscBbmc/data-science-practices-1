@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-08-05" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -440,6 +440,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#snippets-reading-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
 <li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#snippets-reading-trailing-comma"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
+<li class="chapter" data-level="B.1.3" data-path="snippets.html"><a href="snippets.html#snippets-reading-vroom"><i class="fa fa-check"></i><b>B.1.3</b> Removing Trailing Comma from Header</a></li>
 </ul></li>
 <li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#snippets-grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
 <ul>
@@ -521,27 +522,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">B.1.1</span> Reading from Excel</h3>
 <p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="snippets.html#cb69-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb69-2"><a href="snippets.html#cb69-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
-<span id="cb69-3"><a href="snippets.html#cb69-3"></a></span>
-<span id="cb69-4"><a href="snippets.html#cb69-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
-<span id="cb69-5"><a href="snippets.html#cb69-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb69-6"><a href="snippets.html#cb69-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>     =<span class="st"> &quot;text&quot;</span>,</span>
-<span id="cb69-7"><a href="snippets.html#cb69-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>      =<span class="st"> &quot;date&quot;</span>,</span>
-<span id="cb69-8"><a href="snippets.html#cb69-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>   =<span class="st"> &quot;numeric&quot;</span></span>
-<span id="cb69-9"><a href="snippets.html#cb69-9"></a>)</span>
-<span id="cb69-10"><a href="snippets.html#cb69-10"></a></span>
-<span id="cb69-11"><a href="snippets.html#cb69-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb69-12"><a href="snippets.html#cb69-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
-<span id="cb69-13"><a href="snippets.html#cb69-13"></a>  <span class="dt">path      =</span> config<span class="op">$</span>path_admission_charge,</span>
-<span id="cb69-14"><a href="snippets.html#cb69-14"></a>  <span class="dt">col_types =</span> col_types</span>
-<span id="cb69-15"><a href="snippets.html#cb69-15"></a>  <span class="co"># sheet   = &quot;dont-use-sheets-if-possible&quot;</span></span>
-<span id="cb69-16"><a href="snippets.html#cb69-16"></a>)</span>
-<span id="cb69-17"><a href="snippets.html#cb69-17"></a></span>
-<span id="cb69-18"><a href="snippets.html#cb69-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
-<span id="cb69-19"><a href="snippets.html#cb69-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
-<span id="cb69-20"><a href="snippets.html#cb69-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
-<span id="cb69-21"><a href="snippets.html#cb69-21"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="snippets.html#cb68-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb68-2"><a href="snippets.html#cb68-2"></a>config                         &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
+<span id="cb68-3"><a href="snippets.html#cb68-3"></a></span>
+<span id="cb68-4"><a href="snippets.html#cb68-4"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
+<span id="cb68-5"><a href="snippets.html#cb68-5"></a>col_types &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb68-6"><a href="snippets.html#cb68-6"></a>  <span class="st">`</span><span class="dt">Med Rec Num</span><span class="st">`</span>     =<span class="st"> &quot;text&quot;</span>,</span>
+<span id="cb68-7"><a href="snippets.html#cb68-7"></a>  <span class="st">`</span><span class="dt">Admit Date</span><span class="st">`</span>      =<span class="st"> &quot;date&quot;</span>,</span>
+<span id="cb68-8"><a href="snippets.html#cb68-8"></a>  <span class="st">`</span><span class="dt">Tot Cash Pymt</span><span class="st">`</span>   =<span class="st"> &quot;numeric&quot;</span></span>
+<span id="cb68-9"><a href="snippets.html#cb68-9"></a>)</span>
+<span id="cb68-10"><a href="snippets.html#cb68-10"></a></span>
+<span id="cb68-11"><a href="snippets.html#cb68-11"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb68-12"><a href="snippets.html#cb68-12"></a>ds &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_excel</span>(</span>
+<span id="cb68-13"><a href="snippets.html#cb68-13"></a>  <span class="dt">path      =</span> config<span class="op">$</span>path_admission_charge,</span>
+<span id="cb68-14"><a href="snippets.html#cb68-14"></a>  <span class="dt">col_types =</span> col_types</span>
+<span id="cb68-15"><a href="snippets.html#cb68-15"></a>  <span class="co"># sheet   = &quot;dont-use-sheets-if-possible&quot;</span></span>
+<span id="cb68-16"><a href="snippets.html#cb68-16"></a>)</span>
+<span id="cb68-17"><a href="snippets.html#cb68-17"></a></span>
+<span id="cb68-18"><a href="snippets.html#cb68-18"></a>testit<span class="op">::</span><span class="kw">assert</span>(</span>
+<span id="cb68-19"><a href="snippets.html#cb68-19"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
+<span id="cb68-20"><a href="snippets.html#cb68-20"></a>  <span class="kw">names</span>(col_types) <span class="op">==</span><span class="st"> </span><span class="kw">colnames</span>(ds)</span>
+<span id="cb68-21"><a href="snippets.html#cb68-21"></a>)</span></code></pre></div>
 </div>
 <div id="snippets-reading-trailing-comma" class="section level3" number="22.1.2">
 <h3><span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header</h3>
@@ -550,11 +551,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="snippets.html#cb70-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
-<span id="cb70-2"><a href="snippets.html#cb70-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
-<span id="cb70-3"><a href="snippets.html#cb70-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
-<span id="cb70-4"><a href="snippets.html#cb70-4"></a></span>
-<span id="cb70-5"><a href="snippets.html#cb70-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="snippets.html#cb69-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
+<span id="cb69-2"><a href="snippets.html#cb69-2"></a>raw_text  &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_file</span>(path_in)</span>
+<span id="cb69-3"><a href="snippets.html#cb69-3"></a>raw_text  &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>, raw_text)</span>
+<span id="cb69-4"><a href="snippets.html#cb69-4"></a></span>
+<span id="cb69-5"><a href="snippets.html#cb69-5"></a>ds        &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(raw_text, <span class="dt">col_types=</span>col_types)</span></code></pre></div>
+</div>
+<div id="snippets-reading-vroom" class="section level3" number="22.1.3">
+<h3><span class="header-section-number">B.1.3</span> Removing Trailing Comma from Header</h3>
+<p><em>Background</em>: When incoming data files are on the large side to comfortably accept with <a href="https://readr.tidyverse.org/">readr</a>, we use <a href="https://vroom.r-lib.org/">vroom</a>. The two packages are develoepd by the same group and <a href="https://github.com/tidyverse/tidyverse.org/pull/375#issuecomment-564781603">might be combined</a> in the future.</p>
+<p><em>Explanation</em>: This snippet defines the <code>col_types</code> list with names to mimic <a href="https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html#chunk-declare">our approach</a> of using readr. There are some small differences with our readr approach:
+1. <code>col_types</code> is a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/list.html">list</a> instead of a <a href="https://readr.tidyverse.org/reference/cols.html"><code>readr::cols_only</code></a> object.
+1. The call to <a href="https://vroom.r-lib.org/reference/vroom.html"><code>vroom::vroom()</code></a> passes <code>col_names = names(col_types)</code> explicitly.
+1. If the data file contains columns we don’t need, we define them in <code>col_types</code> anyway; vroom needs to know the file structure if it’s missing a header row.</p>
+<p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/akande-medically-complex-1/tree/master/manipulation/ohca">akande-medically-complex-1</a> (Accessible to only CDW members.) Thesee files did not have a header of variable names; the first line of the file is the first data row.</p>
+<p><em>Last Modified</em>: 2020-08-21 by Will</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="snippets.html#cb70-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb70-2"><a href="snippets.html#cb70-2"></a>config            &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>()</span>
+<span id="cb70-3"><a href="snippets.html#cb70-3"></a></span>
+<span id="cb70-4"><a href="snippets.html#cb70-4"></a>col_types &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb70-5"><a href="snippets.html#cb70-5"></a>  <span class="dt">sak                      =</span> vroom<span class="op">::</span><span class="kw">col_integer</span>(),  <span class="co"># &quot;system-assigned key&quot;</span></span>
+<span id="cb70-6"><a href="snippets.html#cb70-6"></a>  <span class="dt">aid_category_id          =</span> vroom<span class="op">::</span><span class="kw">col_character</span>(),</span>
+<span id="cb70-7"><a href="snippets.html#cb70-7"></a>  <span class="dt">age                      =</span> vroom<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb70-8"><a href="snippets.html#cb70-8"></a>  <span class="dt">service_date_first       =</span> vroom<span class="op">::</span><span class="kw">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
+<span id="cb70-9"><a href="snippets.html#cb70-9"></a>  <span class="dt">service_date_lasst       =</span> vroom<span class="op">::</span><span class="kw">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
+<span id="cb70-10"><a href="snippets.html#cb70-10"></a>  <span class="dt">claim_type               =</span> vroom<span class="op">::</span><span class="kw">col_character</span>(),</span>
+<span id="cb70-11"><a href="snippets.html#cb70-11"></a>  <span class="dt">provider_id              =</span> vroom<span class="op">::</span><span class="kw">col_character</span>(),</span>
+<span id="cb70-12"><a href="snippets.html#cb70-12"></a>  <span class="dt">provider_lat             =</span> vroom<span class="op">::</span><span class="kw">col_double</span>(),</span>
+<span id="cb70-13"><a href="snippets.html#cb70-13"></a>  <span class="dt">provider_long            =</span> vroom<span class="op">::</span><span class="kw">col_double</span>(),</span>
+<span id="cb70-14"><a href="snippets.html#cb70-14"></a>  <span class="dt">provider_zip             =</span> vroom<span class="op">::</span><span class="kw">col_character</span>(),</span>
+<span id="cb70-15"><a href="snippets.html#cb70-15"></a>  <span class="dt">cpt                      =</span> vroom<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb70-16"><a href="snippets.html#cb70-16"></a>  <span class="dt">revenue_code             =</span> vroom<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb70-17"><a href="snippets.html#cb70-17"></a>  <span class="dt">icd_code                 =</span> vroom<span class="op">::</span><span class="kw">col_character</span>(),</span>
+<span id="cb70-18"><a href="snippets.html#cb70-18"></a>  <span class="dt">icd_sequence             =</span> vroom<span class="op">::</span><span class="kw">col_integer</span>(),</span>
+<span id="cb70-19"><a href="snippets.html#cb70-19"></a>  <span class="dt">vocabulary_coarse_id     =</span> vroom<span class="op">::</span><span class="kw">col_integer</span>()</span>
+<span id="cb70-20"><a href="snippets.html#cb70-20"></a>)</span>
+<span id="cb70-21"><a href="snippets.html#cb70-21"></a></span>
+<span id="cb70-22"><a href="snippets.html#cb70-22"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb70-23"><a href="snippets.html#cb70-23"></a>ds &lt;-<span class="st"> </span>vroom<span class="op">::</span><span class="kw">vroom</span>(</span>
+<span id="cb70-24"><a href="snippets.html#cb70-24"></a>  <span class="dt">file      =</span> config<span class="op">$</span>path_ohca_patient,</span>
+<span id="cb70-25"><a href="snippets.html#cb70-25"></a>  <span class="dt">delim     =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb70-26"><a href="snippets.html#cb70-26"></a>  <span class="dt">col_names =</span> <span class="kw">names</span>(col_types),</span>
+<span id="cb70-27"><a href="snippets.html#cb70-27"></a>  <span class="dt">col_types =</span> col_types</span>
+<span id="cb70-28"><a href="snippets.html#cb70-28"></a>)</span>
+<span id="cb70-29"><a href="snippets.html#cb70-29"></a></span>
+<span id="cb70-30"><a href="snippets.html#cb70-30"></a><span class="kw">rm</span>(col_types)</span></code></pre></div>
 </div>
 </div>
 <div id="snippets-grooming" class="section level2" number="22.2">

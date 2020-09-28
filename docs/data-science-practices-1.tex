@@ -113,7 +113,7 @@
 
 \title{Collaborative Data Science Practices}
 \author{Will Beasley}
-\date{2020-08-05}
+\date{2020-09-27}
 
 \begin{document}
 \maketitle
@@ -2606,17 +2606,26 @@ The installation order does not matter.
 
 \href{https://docs.microsoft.com/en-us/sql/azure-data-studio/download}{Azure Data Studio (ADS)} is now recommended by \href{https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/}{Microsoft} and \href{https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/}{others} for analysts (and some other roles) --ahead of SQL Server Management Studio.
 
-\begin{verbatim}
 Note: here are some non-default changes that facilitate our workflow.
 
-1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
-1. Settings | Text Editor | **Detect Indentation: uncheck** {`"editor.detectIndentation": false`}
-1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
-1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
-1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
-1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
-1. Data | Sql | **Copy Includes Headers: check** {`"sql.copyIncludeHeaders": true`}
-\end{verbatim}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Settings \textbar{} Text Editor \textbar{} \textbf{Tab Size: 2} \{\texttt{"editor.tabSize":\ 2}\}
+\item
+  Settings \textbar{} Text Editor \textbar{} \textbf{Detect Indentation: uncheck} \{\texttt{"editor.detectIndentation":\ false}\}
+\item
+  Settings \textbar{} Text Editor \textbar{} \textbf{Insert Final Newlines: check} \{\texttt{"files.insertFinalNewline":\ true}\}
+\item
+  Settings \textbar{} Text Editor \textbar{} \textbf{Trim Final Newlines: check} \{\texttt{"files.trimFinalNewlines":\ true}\}
+\item
+  Settings \textbar{} Text Editor \textbar{} \textbf{Trim Trailing Whitespace: check} \{\texttt{"files.trimTrailingWhitespace":\ true}\}
+\item
+  Data \textbar{} Sql \textbar{} \textbf{Show Connection Info In Title: uncheck} \{\texttt{"sql.showConnectionInfoInTitle":\ false}\}
+\item
+  Data \textbar{} Sql \textbar{} \textbf{Copy Include Headers: check} \{\texttt{"sql.copyIncludeHeaders":\ true}\}
+\end{enumerate}
 
 \hypertarget{workstation-vscode}{%
 \subsection{Visual Studio Code}\label{workstation-vscode}}
@@ -3296,6 +3305,55 @@ Here are some tips from our experiences with projects involving between 2 and 10
 \NormalTok{raw\_text  \textless{}{-}}\StringTok{ }\KeywordTok{sub}\NormalTok{(}\StringTok{"\^{}(.+Dx50 Name),"}\NormalTok{, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{1"}\NormalTok{, raw\_text)}
 
 \NormalTok{ds        \textless{}{-}}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read\_csv}\NormalTok{(raw\_text, }\DataTypeTok{col\_types=}\NormalTok{col\_types)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{snippets-reading-vroom}{%
+\subsection{Removing Trailing Comma from Header}\label{snippets-reading-vroom}}
+
+\emph{Background}: When incoming data files are on the large side to comfortably accept with \href{https://readr.tidyverse.org/}{readr}, we use \href{https://vroom.r-lib.org/}{vroom}. The two packages are develoepd by the same group and \href{https://github.com/tidyverse/tidyverse.org/pull/375\#issuecomment-564781603}{might be combined} in the future.
+
+\emph{Explanation}: This snippet defines the \texttt{col\_types} list with names to mimic \href{https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html\#chunk-declare}{our approach} of using readr. There are some small differences with our readr approach:
+1. \texttt{col\_types} is a \href{https://stat.ethz.ch/R-manual/R-devel/library/base/html/list.html}{list} instead of a \href{https://readr.tidyverse.org/reference/cols.html}{\texttt{readr::cols\_only}} object.
+1. The call to \href{https://vroom.r-lib.org/reference/vroom.html}{\texttt{vroom::vroom()}} passes \texttt{col\_names\ =\ names(col\_types)} explicitly.
+1. If the data file contains columns we don't need, we define them in \texttt{col\_types} anyway; vroom needs to know the file structure if it's missing a header row.
+
+\emph{Real Example}: \href{https://github.com/OuhscBbmc/akande-medically-complex-1/tree/master/manipulation/ohca}{akande-medically-complex-1} (Accessible to only CDW members.) Thesee files did not have a header of variable names; the first line of the file is the first data row.
+
+\emph{Last Modified}: 2020-08-21 by Will
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# {-}{-}{-}{-} declare{-}globals {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{config            \textless{}{-}}\StringTok{ }\NormalTok{config}\OperatorTok{::}\KeywordTok{get}\NormalTok{()}
+
+\NormalTok{col\_types \textless{}{-}}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{sak                      =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),  }\CommentTok{\# "system{-}assigned key"}
+  \DataTypeTok{aid\_category\_id          =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_character}\NormalTok{(),}
+  \DataTypeTok{age                      =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
+  \DataTypeTok{service\_date\_first       =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_date}\NormalTok{(}\StringTok{"\%m/\%d/\%Y"}\NormalTok{),}
+  \DataTypeTok{service\_date\_lasst       =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_date}\NormalTok{(}\StringTok{"\%m/\%d/\%Y"}\NormalTok{),}
+  \DataTypeTok{claim\_type               =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_character}\NormalTok{(),}
+  \DataTypeTok{provider\_id              =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_character}\NormalTok{(),}
+  \DataTypeTok{provider\_lat             =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_double}\NormalTok{(),}
+  \DataTypeTok{provider\_long            =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_double}\NormalTok{(),}
+  \DataTypeTok{provider\_zip             =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_character}\NormalTok{(),}
+  \DataTypeTok{cpt                      =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
+  \DataTypeTok{revenue\_code             =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
+  \DataTypeTok{icd\_code                 =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_character}\NormalTok{(),}
+  \DataTypeTok{icd\_sequence             =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{(),}
+  \DataTypeTok{vocabulary\_coarse\_id     =}\NormalTok{ vroom}\OperatorTok{::}\KeywordTok{col\_integer}\NormalTok{()}
+\NormalTok{)}
+
+\CommentTok{\# {-}{-}{-}{-} load{-}data {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\NormalTok{ds \textless{}{-}}\StringTok{ }\NormalTok{vroom}\OperatorTok{::}\KeywordTok{vroom}\NormalTok{(}
+  \DataTypeTok{file      =}\NormalTok{ config}\OperatorTok{$}\NormalTok{path\_ohca\_patient,}
+  \DataTypeTok{delim     =} \StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{,}
+  \DataTypeTok{col\_names =} \KeywordTok{names}\NormalTok{(col\_types),}
+  \DataTypeTok{col\_types =}\NormalTok{ col\_types}
+\NormalTok{)}
+
+\KeywordTok{rm}\NormalTok{(col\_types)}
 \end{Highlighting}
 \end{Shaded}
 
