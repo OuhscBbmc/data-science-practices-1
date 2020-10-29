@@ -37,7 +37,7 @@ When the project is opened in RStudio, [`update_packages_addin()`](http://ouhscb
 
 ```r
 if( !base::requireNamespace("remotes"   ) ) utils::install.packages("remotes")
-if( !base::requireNamespace("OuhscMunge") ) remotes::install_github("OuhscMunge")
+if( !base::requireNamespace("OuhscMunge") ) remotes::install_github("OuhscBbmc/OuhscMunge")
 OuhscMunge::update_packages_addin()
 ```
 
