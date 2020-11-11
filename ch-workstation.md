@@ -351,6 +351,11 @@ These don't affect the saved files, but make life easier.  The first makes the [
 
 For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
 
+### WinSCP (SSMS) {#workstation-winscp}
+
+[WinSCP](https://winscp.net/eng/download.php) is a GUI for SCP and SFTP file transfer using SSH keys.  The tool is occassionally useful for admins when collaborating with other institutions or [other OU computing resources](https://www.ou.edu/oscer).  Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators.  The typical data scientist on our teams does not need this tool.
+
+
 Installation Troubleshooting {#workstation-troubleshooting}
 -----------------------------------
 
