@@ -49,9 +49,13 @@ Several R packages will need to be updated every weeks.  Unless you have been to
 
 [GitHub](https://github.com/) registration is necessary to push modified files to the repository.    First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator  (*e.g.*, to https://github.com/OuhscBbmc/RedcapExamplesAndPatterns).
 
-### GitHub for Windows Client {#workstation-github-client}
+### GitHub Desktop {#workstation-github-client}
 
-[GitHub for Windows Client](http://windows.github.com/) does the basic tasks a little easier than the git features built into RStudio.  Occasionally, someone might need to use git form the command line to fix problems.
+[GitHub Desktop](http://desktop.github.com/) does the basic tasks a little easier than the git features built into RStudio.  This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to fix problems, but this is not required to start.)
+
+### R Tools {#workstation-rtools}
+
+[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
 
 Recommended Installation {#workstation-recommended}
 ------------------------------------
@@ -61,10 +65,6 @@ The installation order does not matter.
 ### ODBC Driver {#workstation-odbc}
 
 [ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 17 is the most recent driver version.  See if a new one exists. {updated Apr 2018}
-
-### R Tools {#workstation-rtools}
-
-[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub. {added Feb 2017}
 
 ### Notepad++ {#workstation-notepadpp}
 
