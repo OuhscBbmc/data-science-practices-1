@@ -57,4 +57,32 @@ for Stability {#git-stability}
 for New Collaborators {#git-collaborators}
 ------------------------------------
 
+Steps for Contributing to Repo {#git-contribution}
+------------------------------------
+
+### Regular Contributions {#git-contribution-regular}
+
+#### Keep your dev branch fresh {#git-contribution-regular-pull}
+
+We recommend doing this at least every day you write code in a repo.  Perhaps more frequently if a lot of developers are pushing code (*e.g.*, right before a reporting deadline).
+
+1. Update master on your local machine (from the GitHub server)
+1. Merge master *into* your local dev branch
+1. Push your local dev branch to the GitHub server
+
+#### Make your code contributions available to other analysts {#git-contribution-regular-push}
+
+At least every few days, push your changes to the master branch so teammates can benefit from your work.  Especially if you are improving the pipeline code (*e.g.* Ellises or REDCap Arches)
+
+1. Make sure you dev branch is updated immediately before you create a [Pull Request]().  Follow the [steps above](#git-contribution-regular-pull).
+1. Verify the merged code still works as expected.  In other words, make sure that when your new code is blended with the newest master code, nothing breaks.  Depending on the repo, these steps might include
+    1. [Build and Check](https://support.rstudio.com/hc/en-us/articles/200486508-Building-Testing-and-Distributing-Packages) the repo (assuming the rep is also a package).
+    1. Run any code that verify's the basic functionality of the repo.  (For example, our MIECHV team should run "high-school-funnel.R" and verify the assertions passed).
+1. Commit changes in your dev branch and push to the GitHub server.
+1. Create a [Pull Request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) (otherwise known as a PR) and [assign a reviewer](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-request-reviews).  (For example, developers in the MIECHV team are paired together to review each other's code.)
+1. The reviewer will pull your dev branch on to their local machine and run the same checks and verification (that you did on the 2nd step above).  This duplicate effort helps verify that your code likely works for everyone on their own machines.
+1. The reviewer then accepts the PR and the master branch now contains your changes and are available to teammates.
+
+-------
+
 {Transfer & update the material from https://github.com/OuhscBbmc/BbmcResources/blob/master/instructions/github.md}
