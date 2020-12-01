@@ -185,9 +185,9 @@ workstation-r-package-installation
 workstation-r-package-update
 workstation-github
 workstation-github-client
+workstation-rtools
 workstation-recommended
 workstation-odbc
-workstation-rtools
 workstation-notepadpp
 workstation-ads
 workstation-vscode
@@ -202,6 +202,7 @@ workstation-administrator
 workstation-mysql
 workstation-postman
 workstation-ssms
+workstation-winscp
 workstation-troubleshooting
 workstation-retired
 tools
@@ -223,6 +224,10 @@ git-code
 git-collaboration
 git-stability
 git-collaborators
+git-contribution
+git-contribution-regular
+git-contribution-regular-pull
+git-contribution-regular-push
 snippets
 snippets-reading
 snippets-reading-excel
