@@ -186,6 +186,71 @@ The installation order does not matter.
 
 * **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install pysftp`; this calls pip through the `py` command which is usually in the path variable after installation.
 
+Asset Locations {#workstation-assets}
+-----------------------------------
+
+* **GitHub repository** https://github.com/OuhscBbmc/RedcapExamplesAndPatterns {added Sept 2012}
+
+* **File server directory** Ask your PI.  For Peds, it's typically on the "S" drive.
+
+* **SQL Server Database** Ask Thomas, Will or David
+
+* **REDCap database** Ask Thomas, Will or David.  It is a http url, and we're trying not to publicize its value.
+
+* **ODBC UserDsn** The name depends on your specific repository, and SQL Server database.  Ask Thomas, Will or David for how to set it up.
+
+Administrator Installation {#workstation-administrator}
+-----------------------------------
+
+These programs are useful to people administrating servers, but not to the typical data scientist.
+
+### MySQL Workbench {#workstation-mysql}
+
+[MySQL Workbench](https://dev.mysql.com/downloads/workbench/) is useful occasionally for REDCap admins.
+
+### Postman {#workstation-postman}
+
+[Postman Native App](https://www.getpostman.com/downloads/) is useful for developing with the API and has [replaced the Chrome app](https://blog.getpostman.com/2017/03/14/going-native/).  If that's not possible, a [web client](https://web.postman.co/) is available as well.  With either program, do not access any PHI.
+
+### SQL Server Management Studio (SSMS) {#workstation-ssms}
+
+[SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators.  It is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
+
+Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
+
+1. SQL Server Object Explorer | Scripting | Include descriptive headers: False
+1. SQL Server Object Explorer | Scripting | Script extended properties: False
+1. Text Editor | All Languages | Tabs | Tab size: 2
+1. Text Editor | All Languages | Tabs | Indent size: 2
+1. Text Editor | All Languages | Tabs | Insert Spaces: true
+
+These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
+
+1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
+1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
+1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
+1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false
+1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false
+1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false
+1. Text Editor | All Languages | General | Line Numbers: true
+
+A dark theme is unofficially supported in SSMS 18.  If you have write privileges in the "Program Files" directory, [a quick modification](https://blog.sqlauthority.com/2019/09/12/sql-server-management-studio-18-enable-dark-theme/) to a config file will reduce eye strain.  This change also prevents your screen from flashing dark-to-light-to-dark, which broadcasts your wandering attention during a Zoom meeting.
+
+For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
+
+### WinSCP {#workstation-winscp}
+
+[WinSCP](https://winscp.net/eng/download.php) is a GUI for SCP and SFTP file transfer using SSH keys.  The tool is occassionally useful for admins when collaborating with other institutions or [other OU computing resources](https://www.ou.edu/oscer).  Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators.  The typical data scientist on our teams does not need this tool.
+
+Installation Troubleshooting {#workstation-troubleshooting}
+-----------------------------------
+
+* **Git**: Will Beasley resorted to this workaround Sept 2012: http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing.  And then he copied the following four files from `D:/Program Files/msysgit/mingw/bin/` to `D:/Program Files/msysgit/bin/`: (1) `libiconv2.dll`, (2) `libcurl-4.dll`, (3) `libcrypto.dll`, and (4) `libssl.dll`. (If you install to the default location, you'll  move instead from `C:/msysgit/mingw/bin/` to `C:/msysgit/bin/`) {added Sept 2012}
+
+* **Git**: On a different computer, Will Beasley couldn't get RStudio to recognize msysGit, so installed the `Full installer for official Git for Windows 1.7.11` from (http://code.google.com/p/msysgit/downloads/list) and switched the Git Path in the RStudio Options. {added Sept 2012}
+
+* **RStudio** If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings`. {added Sept 2012}
+
 Ubuntu Installation {#workstation-ubuntu}
 -----------------------------------
 
@@ -300,72 +365,6 @@ The Postman native app for Ubuntu is [installed](https://learning.getpostman.com
 snap install postman
 ```
 
-Asset Locations {#workstation-assets}
------------------------------------
-
-* **GitHub repository** https://github.com/OuhscBbmc/RedcapExamplesAndPatterns {added Sept 2012}
-
-* **File server directory** Ask your PI.  For Peds, it's typically on the "S" drive.
-
-* **SQL Server Database** Ask Thomas, Will or David
-
-* **REDCap database** Ask Thomas, Will or David.  It is a http url, and we're trying not to publicize its value.
-
-* **ODBC UserDsn** The name depends on your specific repository, and SQL Server database.  Ask Thomas, Will or David for how to set it up.
-
-Administrator Installation {#workstation-administrator}
------------------------------------
-
-These programs are useful to people administrating servers, but not to the typical data scientist.
-
-### MySQL Workbench {#workstation-mysql}
-
-[MySQL Workbench](https://dev.mysql.com/downloads/workbench/) is useful occasionally for REDCap admins.
-
-### Postman {#workstation-postman}
-
-[Postman Native App](https://www.getpostman.com/downloads/) is useful for developing with the API and has [replaced the Chrome app](https://blog.getpostman.com/2017/03/14/going-native/).  If that's not possible, a [web client](https://web.postman.co/) is available as well.  With either program, do not access any PHI.
-
-### SQL Server Management Studio (SSMS) {#workstation-ssms}
-
-[SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) has been replaced by Azure Data Studio for some roles, but is still recommended for database administrators.  It is an easy way to access the database and write queries (and transfer the SQL to an R file).   It's not required for the REDCap API, but it's usually necessary when integrating REDCap with other databases.
-
-Note: here are some non-default changes that facilitate our workflow.  The first two help when we save the database *structure* (not data) on GitHub, so we can easily track/monitor the structural changes over time.    The *tabs* options keeps things consistent between editors.  In the SSMS 'Tools | Options' dialog box:
-
-1. SQL Server Object Explorer | Scripting | Include descriptive headers: False
-1. SQL Server Object Explorer | Scripting | Script extended properties: False
-1. Text Editor | All Languages | Tabs | Tab size: 2
-1. Text Editor | All Languages | Tabs | Indent size: 2
-1. Text Editor | All Languages | Tabs | Insert Spaces: true
-
-These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
-
-1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
-1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
-1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
-1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false
-1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false
-1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false
-1. Text Editor | All Languages | General | Line Numbers: true
-
-A dark theme is unofficially supported in SSMS 18.  If you have write privileges in the "Program Files" directory, [a quick modification](https://blog.sqlauthority.com/2019/09/12/sql-server-management-studio-18-enable-dark-theme/) to a config file will reduce eye strain.  This change also prevents your screen from flashing dark-to-light-to-dark, which broadcasts your wandering attention during a Zoom meeting.
-
-For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
-
-### WinSCP {#workstation-winscp}
-
-[WinSCP](https://winscp.net/eng/download.php) is a GUI for SCP and SFTP file transfer using SSH keys.  The tool is occassionally useful for admins when collaborating with other institutions or [other OU computing resources](https://www.ou.edu/oscer).  Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators.  The typical data scientist on our teams does not need this tool.
-
-
-Installation Troubleshooting {#workstation-troubleshooting}
------------------------------------
-
-* **Git**: Will Beasley resorted to this workaround Sept 2012: http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing.  And then he copied the following four files from `D:/Program Files/msysgit/mingw/bin/` to `D:/Program Files/msysgit/bin/`: (1) `libiconv2.dll`, (2) `libcurl-4.dll`, (3) `libcrypto.dll`, and (4) `libssl.dll`. (If you install to the default location, you'll  move instead from `C:/msysgit/mingw/bin/` to `C:/msysgit/bin/`) {added Sept 2012}
-
-* **Git**: On a different computer, Will Beasley couldn't get RStudio to recognize msysGit, so installed the `Full installer for official Git for Windows 1.7.11` from (http://code.google.com/p/msysgit/downloads/list) and switched the Git Path in the RStudio Options. {added Sept 2012}
-
-* **RStudio** If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings`. {added Sept 2012}
-
 Retired Tools {#workstation-retired}
 -----------------------------------
 
@@ -398,21 +397,14 @@ We previously installed the software below.  Most have been replaced by software
     Productivity is enhanced with the following [Atom packages](https://atom.io/packages):
 
     1. [Sublime Style Column Selection](https://atom.io/packages/Sublime-Style-Column-Selection): Enable Sublime style 'Column Selection'. Just hold 'alt' while you select, or select using your middle mouse button.
-
     1. [atom-language-r](https://atom.io/packages/atom-language-r) allows Atom to recognize files as R.  This prevents spell checking indicators and enable syntax highlighting.  When you need to browse through a lot of scattered R files quickly, Atom's tree panel (on the left) works well.  An older alternative is [language-r](https://atom.io/packages/language-r).
-
     1. [language-csv](https://atom.io/packages/language-csv): Adds syntax highlighting to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) files.  The highlighting is nice, and it automatically disables spell checking lines.
-
     1. [atom-beautify](https://atom.io/packages/atom-beautify): Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.
-
     1. [atom-wrap-in-tag](https://atom.io/packages/atom-wrap-in-tag): wraps tag around selection; just select a word or phrase and hit Alt + Shift + w.
-
     1. [minimap](https://atom.io/packages/minimap): A preview of the full source code (in the right margin).
-
     1. [script](https://atom.io/packages/script): Run scripts based on file name, a selection of code, or by line number.
-
     1. [git-plus](https://atom.io/packages/git-plus): Do git things without the terminal (I don't think this is necessary anymore).
-
+    
     The packages can be installed through Atom, or through the `apm` utility in the command line:
 
     ```bash
