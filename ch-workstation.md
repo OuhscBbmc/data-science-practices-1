@@ -343,15 +343,16 @@ These don't affect the saved files, but make life easier.  The first makes the [
 1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
 1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
 1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
-
 1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Server Name: false
 1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Database Name: false
 1. Text Editor | Editor Tab and Status Bar | Tab Text | Include Login Name: false
 1. Text Editor | All Languages | General | Line Numbers: true
 
+A dark theme is unofficially supported in SSMS 18.  If you have write privileges in the "Program Files" directory, [a quick modification](https://blog.sqlauthority.com/2019/09/12/sql-server-management-studio-18-enable-dark-theme/) to a config file will reduce eye strain.  This change also prevents your screen from flashing dark-to-light-to-dark, which broadcasts your wandering attention during a Zoom meeting.
+
 For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
 
-### WinSCP (SSMS) {#workstation-winscp}
+### WinSCP {#workstation-winscp}
 
 [WinSCP](https://winscp.net/eng/download.php) is a GUI for SCP and SFTP file transfer using SSH keys.  The tool is occassionally useful for admins when collaborating with other institutions or [other OU computing resources](https://www.ou.edu/oscer).  Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators.  The typical data scientist on our teams does not need this tool.
 
