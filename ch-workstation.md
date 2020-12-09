@@ -184,7 +184,7 @@ The installation order does not matter.
   conda install numpy pandas scikit-learn matplotlib
   ```
 
-* **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install pysftp`; this calls pip through the `py` command which is usually in the path variable after installation.
+* **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install pysftp`; this calls pip through the `py` command which is sometimes in the path variable after installation.
 
 Asset Locations {#workstation-assets}
 -----------------------------------
