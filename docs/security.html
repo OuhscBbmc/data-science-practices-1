@@ -288,11 +288,15 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="9" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>9</b> Security &amp; Private Data</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="security.html"><a href="security.html#file-level-permissions"><i class="fa fa-check"></i><b>9.1</b> File-level permissions</a></li>
-<li class="chapter" data-level="9.2" data-path="security.html"><a href="security.html#database-permissions"><i class="fa fa-check"></i><b>9.2</b> Database permissions</a></li>
-<li class="chapter" data-level="9.3" data-path="security.html"><a href="security.html#public-private-repositories"><i class="fa fa-check"></i><b>9.3</b> Public &amp; Private Repositories</a>
+<li class="chapter" data-level="9.1" data-path="security.html"><a href="security.html#security-guidelines"><i class="fa fa-check"></i><b>9.1</b> Security Guidelines</a></li>
+<li class="chapter" data-level="9.2" data-path="security.html"><a href="security.html#dataset-level-redaction"><i class="fa fa-check"></i><b>9.2</b> Dataset-level Redaction</a></li>
+<li class="chapter" data-level="9.3" data-path="security.html"><a href="security.html#security-for-data-at-rest"><i class="fa fa-check"></i><b>9.3</b> Security for Data at Rest</a></li>
+<li class="chapter" data-level="9.4" data-path="security.html"><a href="security.html#file-level-permissions"><i class="fa fa-check"></i><b>9.4</b> File-level permissions</a></li>
+<li class="chapter" data-level="9.5" data-path="security.html"><a href="security.html#database-permissions"><i class="fa fa-check"></i><b>9.5</b> Database permissions</a></li>
+<li class="chapter" data-level="9.6" data-path="security.html"><a href="security.html#public-private-repositories"><i class="fa fa-check"></i><b>9.6</b> Public &amp; Private Repositories</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>9.3.1</b> Scrubbing GitHub history</a></li>
+<li class="chapter" data-level="9.6.1" data-path="security.html"><a href="security.html#repo-rules"><i class="fa fa-check"></i><b>9.6.1</b> Repo Rules</a></li>
+<li class="chapter" data-level="9.6.2" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>9.6.2</b> Scrubbing GitHub history</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>10</b> Automation &amp; Reproducibility</a>
@@ -546,16 +550,106 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="security" class="section level1" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Security &amp; Private Data</h1>
-<div id="file-level-permissions" class="section level2" number="9.1">
-<h2><span class="header-section-number">9.1</span> File-level permissions</h2>
+<p>Overview</p>
+<p><em>{Include a few paragraphs that describe principles and mentality, and how the following sections contribute.}</em></p>
+<p>The report’s dataset(s) are preferably stored in REDCap or SQL Server.
+They’re absolutely not stored not on GitHub or the local machine.
+Avoid Microsoft Access, Excel, CSVs, or anything without user accounts.
+If the PHI must be stored as a loose file (eg, CSV), keep it on the encrypted file server.
+Any PHI on a fileserver should be stored in a directory controlled by a fairly restrictive Windows AD group. Only ~4 people on a project probably need access to those files, not all ~20 people on a project.
+There are many benefits of SQL Server over CSVs or Excel files .
+It’s protected by Odyssey (not just the VPN).
+It provides auditing logs.
+It provides schemas to further partition authorization.
+Real databases aren’t accidentally emailed or copied to an unsecured location.
+Transfer PHI into REDCap &amp; SQL Server as early as possible (particularly the CSVs &amp; XLSXs we regularly receive from partners).
+Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.</p>
+<div id="security-guidelines" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Security Guidelines</h2>
+<p>If you encounter a decision that’s not described by this chapter’s the security practices, follow these underlying concepts. And of course, consult other people.</p>
+<ul>
+<li>Principle of least privilege: expose as little as possible.
+<ul>
+<li>Limit the number of team members.</li>
+<li>Limit the amount of data (consider rows &amp; columns).</li>
+<li>Obfuscate values and remove unnecessary PHI in derivative datasets.</li>
+</ul></li>
+<li>Redundant layers of protection.
+<ul>
+<li>A single point of failure shouldn’t be enough to breach PHI security.</li>
+</ul></li>
+<li>Simplicity when possible.
+<ul>
+<li>Store data in only two houses (eg, REDCap &amp; SQL Server).</li>
+<li>Easier to identify &amp; manage than a bunch of PHI CSVs scattered across a dozen folders, with versions.
+<ul>
+<li>Manipulate your data programmatically, not manually.</li>
+</ul></li>
+<li>Your Windows AD account controls everything, indirectly or directly:
+<ul>
+<li>VPN, Odyssey, file server, SQL, REDCap, &amp; REDCap API.</li>
+</ul></li>
+</ul></li>
+<li>Lock out team members when possible.
+<ul>
+<li>It’s not that you don’t trust them with a lot of unnecessary data, it’s that you don’t trust their ex-boyfriends and their coffee shop hackers.</li>
+</ul></li>
+</ul>
 </div>
-<div id="database-permissions" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Database permissions</h2>
+<div id="dataset-level-redaction" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Dataset-level Redaction</h2>
+<p>Several multi-layered strategies exist to prevent exposing PHI. One approach is simply to reduce the information contained in each variable. Much of the information in a medical record is not useful for modeling or descriptive statistics, and therefore can be omitted from downstream datasets. The techniques include:</p>
+<ol style="list-style-type: decimal">
+<li><em>Remove the variable</em>: An empty bucket has nothing to leak.</li>
+<li><em>Decrease the resolution</em>: Many times, a patient’s year of birth is adequate for analysis, and include the month and day are unnecessary risks.</li>
+<li><em>Hash and salt identifiers</em>: use cryptographic-quality algorithms transform an ID to a derived value. For example, “234” becomes “1432c1a399.” The original value of 234 is not recoverable from 1432c1a399. But two rows with 1432c1a399 are still attributed to the same patient by the statistical model.</li>
+</ol>
 </div>
-<div id="public-private-repositories" class="section level2" number="9.3">
-<h2><span class="header-section-number">9.3</span> Public &amp; Private Repositories</h2>
-<div id="scrubbing-github-history" class="section level3" number="9.3.1">
-<h3><span class="header-section-number">9.3.1</span> Scrubbing GitHub history</h3>
+<div id="security-for-data-at-rest" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Security for Data at Rest</h2>
+<ul>
+<li>The report’s dataset(s) are preferably stored in REDCap or SQL Server.
+<ul>
+<li>They’re absolutely not stored not on GitHub or the local machine.</li>
+<li>Avoid Microsoft Access, Excel, CSVs, or anything without user accounts.</li>
+<li>If the PHI must be stored as a loose file (eg, CSV), keep it on the encrypted file server.</li>
+</ul></li>
+<li>Any PHI on a fileserver should be stored in a directory controlled by a fairly restrictive Windows AD group. Only ~4 people on a project probably need access to those files, not all ~20 people on a project.</li>
+<li>There are many benefits of SQL Server over CSVs or Excel files .
+<ul>
+<li>It’s protected by Odyssey (not just the VPN).</li>
+<li>It provides auditing logs.</li>
+<li>It provides schemas to further partition authorization.</li>
+<li>Real databases aren’t accidentally emailed or copied to an unsecured location.</li>
+</ul></li>
+<li>Transfer PHI into REDCap &amp; SQL Server as early as possible (particularly the CSVs &amp; XLSXs we regularly receive from partners).</li>
+<li>Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.</li>
+<li>Hash values when possible. For instance, when we determine families/networks of people, we use things like SSNs. But the algorithm that identifies the clusters doesn’t need to know the <em>actual</em> SSN, just that two records have the <em>same</em> SSN. Something like a <a href="http://en.wikipedia.org/wiki/SHA-2">SHA-256 hash</a> is good for this. The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can’t be determined from its hashed value. If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing &amp; salting process: <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/CodeUtilities/HashUtility.R">HashUtility.R</a> and <a href="https://github.com/OuhscBbmc/RedcapExample/blob/master/CodeUtilities/CreateSalt.R">CreateSalt.R</a>.</li>
+</ul>
+</div>
+<div id="file-level-permissions" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> File-level permissions</h2>
+</div>
+<div id="database-permissions" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> Database permissions</h2>
+</div>
+<div id="public-private-repositories" class="section level2" number="9.6">
+<h2><span class="header-section-number">9.6</span> Public &amp; Private Repositories</h2>
+<div id="repo-rules" class="section level3" number="9.6.1">
+<h3><span class="header-section-number">9.6.1</span> Repo Rules</h3>
+<ul>
+<li>A code repository should be private, and restricted to only the necessary project members.</li>
+<li>The repo should be controled by an OUHSC organization, and not by an individual’s private account.</li>
+<li>The <code>.gitignore</code> file prohibits common data file formats from being pushed/uploaded to the central repository.
+<ul>
+<li>Examples: accdb, mdb, xlsx, csv, sas7bdat, rdata, RHistory.</li>
+<li>If you have a text file without PHI that must be on GitHub, create a new extension for it like ’*.PhiFree’.</li>
+<li>Or you can include a specific exception to the .gitignore file, but adding an exclamation point in front of the file, such as <code>!RecruitmentProductivity/RecruitingZones/ZipcodesToZone.csv</code>. An example is included in the current repository’s [.gitignore file(<a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/.gitignore" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/.gitignore</a>).</li>
+</ul></li>
+</ul>
+</div>
+<div id="scrubbing-github-history" class="section level3" number="9.6.2">
+<h3><span class="header-section-number">9.6.2</span> Scrubbing GitHub history</h3>
 <p>Occasionally files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (<em>i.e.</em>, the branch’s <a href="https://git-scm.com/docs/gitglossary#gitglossary-aiddefHEADaHEAD">head</a>), but from the entire history of the repo.</p>
 <p>Scrubbing is require typically when (a) a sensitive file has been accidentally committed and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.</p>
 <p>The two suitable scrubbing approaches both require the command line. The first is the <code>git-filter-branch</code> command within git, and the second is the <a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG repo-cleaner</a>. We use the second approach, which is [recommended by GitHub]; it requires 15 minutes to install and configure from scratch, but then is much easier to develop against, and executes much faster.</p>
@@ -582,8 +676,8 @@ div.csl-indent {
 <li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
-<div id="resources" class="section level5" number="9.3.1.0.1">
-<h5><span class="header-section-number">9.3.1.0.1</span> Resources</h5>
+<div id="resources" class="section level5" number="9.6.2.0.1">
+<h5><span class="header-section-number">9.6.2.0.1</span> Resources</h5>
 <ul>
 <li><a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG Repo-Cleaner site</a></li>
 <li><a href="https://github.com/IBM/BluePic/wiki/Using-BFG-Repo-Cleaner-tool-to-remove-sensitive-files-from-your-git-repo">Additional BFG instructions</a></li>

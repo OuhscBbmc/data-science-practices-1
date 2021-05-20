@@ -96,9 +96,13 @@ pattern-metadata
 primary-rules-for-mapping
 secondary-rules-for-mapping
 security
+security-guidelines
+dataset-level-redaction
+security-for-data-at-rest
 file-level-permissions
 database-permissions
 public-private-repositories
+repo-rules
 scrubbing-github-history
 resources
 automation
