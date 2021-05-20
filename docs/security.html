@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2020-11-30" />
+<meta name="date" content="2021-05-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="patterns.html"/>
 <link rel="next" href="automation.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,15 +51,15 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -118,6 +118,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -397,16 +420,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.3.3" data-path="workstation.html"><a href="workstation.html#workstation-pandoc"><i class="fa fa-check"></i><b>18.3.3</b> pandoc</a></li>
 <li class="chapter" data-level="18.3.4" data-path="workstation.html"><a href="workstation.html#workstation-python"><i class="fa fa-check"></i><b>18.3.4</b> Python</a></li>
 </ul></li>
-<li class="chapter" data-level="18.4" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu"><i class="fa fa-check"></i><b>18.4</b> Ubuntu Installation</a></li>
-<li class="chapter" data-level="18.5" data-path="workstation.html"><a href="workstation.html#workstation-assets"><i class="fa fa-check"></i><b>18.5</b> Asset Locations</a></li>
-<li class="chapter" data-level="18.6" data-path="workstation.html"><a href="workstation.html#workstation-administrator"><i class="fa fa-check"></i><b>18.6</b> Administrator Installation</a>
+<li class="chapter" data-level="18.4" data-path="workstation.html"><a href="workstation.html#workstation-assets"><i class="fa fa-check"></i><b>18.4</b> Asset Locations</a></li>
+<li class="chapter" data-level="18.5" data-path="workstation.html"><a href="workstation.html#workstation-administrator"><i class="fa fa-check"></i><b>18.5</b> Administrator Installation</a>
 <ul>
-<li class="chapter" data-level="18.6.1" data-path="workstation.html"><a href="workstation.html#workstation-mysql"><i class="fa fa-check"></i><b>18.6.1</b> MySQL Workbench</a></li>
-<li class="chapter" data-level="18.6.2" data-path="workstation.html"><a href="workstation.html#workstation-postman"><i class="fa fa-check"></i><b>18.6.2</b> Postman</a></li>
-<li class="chapter" data-level="18.6.3" data-path="workstation.html"><a href="workstation.html#workstation-ssms"><i class="fa fa-check"></i><b>18.6.3</b> SQL Server Management Studio (SSMS)</a></li>
-<li class="chapter" data-level="18.6.4" data-path="workstation.html"><a href="workstation.html#workstation-winscp"><i class="fa fa-check"></i><b>18.6.4</b> WinSCP (SSMS)</a></li>
+<li class="chapter" data-level="18.5.1" data-path="workstation.html"><a href="workstation.html#workstation-mysql"><i class="fa fa-check"></i><b>18.5.1</b> MySQL Workbench</a></li>
+<li class="chapter" data-level="18.5.2" data-path="workstation.html"><a href="workstation.html#workstation-postman"><i class="fa fa-check"></i><b>18.5.2</b> Postman</a></li>
+<li class="chapter" data-level="18.5.3" data-path="workstation.html"><a href="workstation.html#workstation-ssms"><i class="fa fa-check"></i><b>18.5.3</b> SQL Server Management Studio (SSMS)</a></li>
+<li class="chapter" data-level="18.5.4" data-path="workstation.html"><a href="workstation.html#workstation-winscp"><i class="fa fa-check"></i><b>18.5.4</b> WinSCP</a></li>
 </ul></li>
-<li class="chapter" data-level="18.7" data-path="workstation.html"><a href="workstation.html#workstation-troubleshooting"><i class="fa fa-check"></i><b>18.7</b> Installation Troubleshooting</a></li>
+<li class="chapter" data-level="18.6" data-path="workstation.html"><a href="workstation.html#workstation-troubleshooting"><i class="fa fa-check"></i><b>18.6</b> Installation Troubleshooting</a></li>
+<li class="chapter" data-level="18.7" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu"><i class="fa fa-check"></i><b>18.7</b> Ubuntu Installation</a></li>
 <li class="chapter" data-level="18.8" data-path="workstation.html"><a href="workstation.html#workstation-retired"><i class="fa fa-check"></i><b>18.8</b> Retired Tools</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>19</b> Considerations when Selecting Tools</a>
@@ -544,18 +567,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Download and install the most recent Java JRE from the Oracle site.</p></li>
 <li><p>Download the most recent jar file from the BFG site to the home directory.</p></li>
 <li><p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="security.html#cb39-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb39-2"><a href="security.html#cb39-2"></a><span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</span></code></pre></div></li>
-<li><p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="security.html#cb40-1"></a><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</span></code></pre></div></li>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="security.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb39-2"><a href="security.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--mirror</span> https://github.com/your-org/bloated.git</span></code></pre></div></li>
+<li><p>Remove all files (in any directory) called ‘monster-data.csv.’</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="security.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> bfg-<span class="pp">*</span>.jar <span class="at">--delete-files</span> monster-data.csv bloated.git</span></code></pre></div></li>
 <li><p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="security.html#cb41-1"></a><span class="bu">cd</span> bloated.git</span>
-<span id="cb41-2"><a href="security.html#cb41-2"></a><span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</span></code></pre></div></li>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="security.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bloated.git</span>
+<span id="cb41-2"><a href="security.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog expire <span class="at">--expire</span><span class="op">=</span>now <span class="at">--all</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc <span class="at">--prune</span><span class="op">=</span>now <span class="at">--aggressive</span></span></code></pre></div></li>
 <li><p>Push your local changes to the GitHub server.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="security.html#cb42-1"></a><span class="fu">git</span> push</span></code></pre></div></li>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="security.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div></li>
 <li><p>Delete the bfg jar from the home directory.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="security.html#cb43-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb43-2"><a href="security.html#cb43-2"></a><span class="fu">rm</span> bfg-*.jar</span></code></pre></div></li>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="security.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb43-2"><a href="security.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> bfg-<span class="pp">*</span>.jar</span></code></pre></div></li>
 <li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
@@ -600,6 +623,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

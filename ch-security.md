@@ -1,6 +1,14 @@
 Security & Private Data {#security}
 ====================================
 
+*{Include a few paragraphs that describe principles and mentality, and how the following sections contribute.}*
+
+Dataset-level Redaction
+------------------------------------
+
+Several multi-layered strategies exist to prevent exposing PHI.  One approach is simply to reduce the information contained in each variable.  The techniques include:
+
+
 File-level permissions
 ------------------------------------
 
