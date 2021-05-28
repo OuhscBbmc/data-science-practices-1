@@ -84,6 +84,20 @@ The installation order does not matter.
   1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
   1. Data | Sql | **Copy Include Headers: check** {`"sql.copyIncludeHeaders": true`}
 
+```json
+{
+  "workbench.enablePreviewFeatures": true,
+  "workbench.colorTheme": "Default Dark Azure Data Studio",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "queryEditor.showConnectionInfoInTitle": false,
+  "queryEditor.results.copyIncludeHeaders": true
+}
+```
+
 ### Visual Studio Code {#workstation-vscode}
 
 [Visual Studio Code](https://code.visualstudio.com/) is an extensible text editor that runs on Windows and Linux, similar to [Atom](https://atom.io/) (described above).  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown.  Currently, it supports searching CSVs better than Atom.  Productivity is enhanced with the following extensions:  {added Dec 2018}
