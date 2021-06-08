@@ -27,6 +27,9 @@ rmd_files:
     "ch-workstation.md",
     "ch-tools.md",
     "ch-team.md",
+    "ch-redcap-user.md",
+    "ch-redcap-developer.md",
+    "ch-redcap-admin.md",
 
     # Appendices
     "ch-git.md",

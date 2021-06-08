@@ -24,14 +24,14 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-05-20" />
+<meta name="date" content="2021-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="team.html"/>
+<link rel="prev" href="redcap-admin.html"/>
 <link rel="next" href="snippets.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -456,6 +456,13 @@ div.csl-indent {
 <li class="chapter" data-level="20.2" data-path="team.html"><a href="team.html#training-to-data-science"><i class="fa fa-check"></i><b>20.2</b> Training to Data Science</a></li>
 <li class="chapter" data-level="20.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>20.3</b> Bridges Outside the Team</a></li>
 </ul></li>
+<li class="chapter" data-level="21" data-path="redcap-user.html"><a href="redcap-user.html"><i class="fa fa-check"></i><b>21</b> Material for REDCap Users</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-login"><i class="fa fa-check"></i><b>21.1</b> Login</a></li>
+<li class="chapter" data-level="21.2" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-report-develop"><i class="fa fa-check"></i><b>21.2</b> Developing Reports</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="redcap-developer.html"><a href="redcap-developer.html"><i class="fa fa-check"></i><b>22</b> Material for REDCap Developers</a></li>
+<li class="chapter" data-level="23" data-path="redcap-admin.html"><a href="redcap-admin.html"><i class="fa fa-check"></i><b>23</b> Material for REDCap Admins</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
@@ -548,9 +555,9 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="git" class="section level1" number="21">
+<div id="git" class="section level1" number="24">
 <h1><span class="header-section-number">A</span> Git &amp; GitHub</h1>
-<div id="git-code" class="section level2" number="21.1">
+<div id="git-code" class="section level2" number="24.1">
 <h2><span class="header-section-number">A.1</span> for Code Development</h2>
 <p><a href="https://github.com/jennybc">Jenny Bryan</a> and <a href="https://github.com/jimhester">Jim Hester</a> have published a thorough description of using Git from a data scientist’s perspective (<a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a>), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is <em><a href="https://smile.amazon.com/dp/1449302440">Team Geek</a></em>, which has insightful advice for the human and collaborative aspects of version control.</p>
 <p>Other Resources</p>
@@ -558,7 +565,7 @@ div.csl-indent {
 <li><a href="https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github">Setting up a CI/CD Process on GitHub with Travis CI</a>. Travis-CI blob from August 2019.</li>
 </ol>
 </div>
-<div id="git-collaboration" class="section level2" number="21.2">
+<div id="git-collaboration" class="section level2" number="24.2">
 <h2><span class="header-section-number">A.2</span> for Collaboration</h2>
 <ol style="list-style-type: decimal">
 <li><p>Somewhat separate from it’s version control capabilities, GitHub provides built-in tools for coordinating projects across people and time. This tools revolves around <a href="https://guides.github.com/features/issues/">GitHub Issues</a>, which allow teammates to</p></li>
@@ -581,7 +588,7 @@ div.csl-indent {
 </ol>
 <!-- Consider including good examples, like https://github.com/OuhscBbmc/miechv-3/issues/2073.  Probably shorten some for clarity. -->
 </div>
-<div id="git-stability" class="section level2" number="21.3">
+<div id="git-stability" class="section level2" number="24.3">
 <h2><span class="header-section-number">A.3</span> for Stability</h2>
 <ol style="list-style-type: decimal">
 <li><p>Review Git commits closely</p>
@@ -592,14 +599,14 @@ div.csl-indent {
 </ol></li>
 </ol>
 </div>
-<div id="git-collaborators" class="section level2" number="21.4">
+<div id="git-collaborators" class="section level2" number="24.4">
 <h2><span class="header-section-number">A.4</span> for New Collaborators</h2>
 </div>
-<div id="git-contribution" class="section level2" number="21.5">
+<div id="git-contribution" class="section level2" number="24.5">
 <h2><span class="header-section-number">A.5</span> Steps for Contributing to Repo</h2>
-<div id="git-contribution-regular" class="section level3" number="21.5.1">
+<div id="git-contribution-regular" class="section level3" number="24.5.1">
 <h3><span class="header-section-number">A.5.1</span> Regular Contributions</h3>
-<div id="git-contribution-regular-pull" class="section level4" number="21.5.1.1">
+<div id="git-contribution-regular-pull" class="section level4" number="24.5.1.1">
 <h4><span class="header-section-number">A.5.1.1</span> Keep your dev branch fresh</h4>
 <p>We recommend doing this at least every day you write code in a repo. Perhaps more frequently if a lot of developers are pushing code (<em>e.g.</em>, right before a reporting deadline).</p>
 <ol style="list-style-type: decimal">
@@ -608,7 +615,7 @@ div.csl-indent {
 <li>Push your local dev branch to the GitHub server</li>
 </ol>
 </div>
-<div id="git-contribution-regular-push" class="section level4" number="21.5.1.2">
+<div id="git-contribution-regular-push" class="section level4" number="24.5.1.2">
 <h4><span class="header-section-number">A.5.1.2</span> Make your code contributions available to other analysts</h4>
 <p>At least every few days, push your changes to the master branch so teammates can benefit from your work. Especially if you are improving the pipeline code (<em>e.g.</em> Ellises or REDCap Arches)</p>
 <ol style="list-style-type: decimal">
@@ -635,7 +642,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="team.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="redcap-admin.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="snippets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

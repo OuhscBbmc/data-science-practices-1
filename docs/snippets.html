@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-05-20" />
+<meta name="date" content="2021-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -456,6 +456,13 @@ div.csl-indent {
 <li class="chapter" data-level="20.2" data-path="team.html"><a href="team.html#training-to-data-science"><i class="fa fa-check"></i><b>20.2</b> Training to Data Science</a></li>
 <li class="chapter" data-level="20.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>20.3</b> Bridges Outside the Team</a></li>
 </ul></li>
+<li class="chapter" data-level="21" data-path="redcap-user.html"><a href="redcap-user.html"><i class="fa fa-check"></i><b>21</b> Material for REDCap Users</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-login"><i class="fa fa-check"></i><b>21.1</b> Login</a></li>
+<li class="chapter" data-level="21.2" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-report-develop"><i class="fa fa-check"></i><b>21.2</b> Developing Reports</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="redcap-developer.html"><a href="redcap-developer.html"><i class="fa fa-check"></i><b>22</b> Material for REDCap Developers</a></li>
+<li class="chapter" data-level="23" data-path="redcap-admin.html"><a href="redcap-admin.html"><i class="fa fa-check"></i><b>23</b> Material for REDCap Admins</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
@@ -548,50 +555,50 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="snippets" class="section level1" number="22">
+<div id="snippets" class="section level1" number="25">
 <h1><span class="header-section-number">B</span> Snippets</h1>
-<div id="snippets-reading" class="section level2" number="22.1">
+<div id="snippets-reading" class="section level2" number="25.1">
 <h2><span class="header-section-number">B.1</span> Reading External Data</h2>
-<div id="snippets-reading-excel" class="section level3" number="22.1.1">
+<div id="snippets-reading-excel" class="section level3" number="25.1.1">
 <h3><span class="header-section-number">B.1.1</span> Reading from Excel</h3>
 <p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="snippets.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb68-2"><a href="snippets.html#cb68-2" aria-hidden="true" tabindex="-1"></a>config                         <span class="ot">&lt;-</span> config<span class="sc">::</span><span class="fu">get</span>()</span>
-<span id="cb68-3"><a href="snippets.html#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-4"><a href="snippets.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
-<span id="cb68-5"><a href="snippets.html#cb68-5" aria-hidden="true" tabindex="-1"></a>col_types <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb68-6"><a href="snippets.html#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Med Rec Num</span><span class="st">`</span>     <span class="ot">=</span> <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb68-7"><a href="snippets.html#cb68-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Admit Date</span><span class="st">`</span>      <span class="ot">=</span> <span class="st">&quot;date&quot;</span>,</span>
-<span id="cb68-8"><a href="snippets.html#cb68-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Tot Cash Pymt</span><span class="st">`</span>   <span class="ot">=</span> <span class="st">&quot;numeric&quot;</span></span>
-<span id="cb68-9"><a href="snippets.html#cb68-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb68-10"><a href="snippets.html#cb68-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-11"><a href="snippets.html#cb68-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb68-12"><a href="snippets.html#cb68-12" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
-<span id="cb68-13"><a href="snippets.html#cb68-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">path      =</span> config<span class="sc">$</span>path_admission_charge,</span>
-<span id="cb68-14"><a href="snippets.html#cb68-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> col_types</span>
-<span id="cb68-15"><a href="snippets.html#cb68-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sheet   = &quot;dont-use-sheets-if-possible&quot;</span></span>
-<span id="cb68-16"><a href="snippets.html#cb68-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb68-17"><a href="snippets.html#cb68-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-18"><a href="snippets.html#cb68-18" aria-hidden="true" tabindex="-1"></a>testit<span class="sc">::</span><span class="fu">assert</span>(</span>
-<span id="cb68-19"><a href="snippets.html#cb68-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
-<span id="cb68-20"><a href="snippets.html#cb68-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(col_types) <span class="sc">==</span> <span class="fu">colnames</span>(ds)</span>
-<span id="cb68-21"><a href="snippets.html#cb68-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="snippets.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb69-2"><a href="snippets.html#cb69-2" aria-hidden="true" tabindex="-1"></a>config                         <span class="ot">&lt;-</span> config<span class="sc">::</span><span class="fu">get</span>()</span>
+<span id="cb69-3"><a href="snippets.html#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="snippets.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
+<span id="cb69-5"><a href="snippets.html#cb69-5" aria-hidden="true" tabindex="-1"></a>col_types <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb69-6"><a href="snippets.html#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Med Rec Num</span><span class="st">`</span>     <span class="ot">=</span> <span class="st">&quot;text&quot;</span>,</span>
+<span id="cb69-7"><a href="snippets.html#cb69-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Admit Date</span><span class="st">`</span>      <span class="ot">=</span> <span class="st">&quot;date&quot;</span>,</span>
+<span id="cb69-8"><a href="snippets.html#cb69-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Tot Cash Pymt</span><span class="st">`</span>   <span class="ot">=</span> <span class="st">&quot;numeric&quot;</span></span>
+<span id="cb69-9"><a href="snippets.html#cb69-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb69-10"><a href="snippets.html#cb69-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-11"><a href="snippets.html#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb69-12"><a href="snippets.html#cb69-12" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
+<span id="cb69-13"><a href="snippets.html#cb69-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">path      =</span> config<span class="sc">$</span>path_admission_charge,</span>
+<span id="cb69-14"><a href="snippets.html#cb69-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> col_types</span>
+<span id="cb69-15"><a href="snippets.html#cb69-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sheet   = &quot;dont-use-sheets-if-possible&quot;</span></span>
+<span id="cb69-16"><a href="snippets.html#cb69-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb69-17"><a href="snippets.html#cb69-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-18"><a href="snippets.html#cb69-18" aria-hidden="true" tabindex="-1"></a>testit<span class="sc">::</span><span class="fu">assert</span>(</span>
+<span id="cb69-19"><a href="snippets.html#cb69-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
+<span id="cb69-20"><a href="snippets.html#cb69-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(col_types) <span class="sc">==</span> <span class="fu">colnames</span>(ds)</span>
+<span id="cb69-21"><a href="snippets.html#cb69-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="snippets-reading-trailing-comma" class="section level3" number="22.1.2">
+<div id="snippets-reading-trailing-comma" class="section level3" number="25.1.2">
 <h3><span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header</h3>
 <p><em>Background</em>: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr:read_csv()</code></a> appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.</p>
 <p><em>Explanation</em>: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to <code>readr::read_csv()</code> to convert it into a data.frame.</p>
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="snippets.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
-<span id="cb69-2"><a href="snippets.html#cb69-2" aria-hidden="true" tabindex="-1"></a>raw_text  <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_file</span>(path_in)</span>
-<span id="cb69-3"><a href="snippets.html#cb69-3" aria-hidden="true" tabindex="-1"></a>raw_text  <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>, raw_text)</span>
-<span id="cb69-4"><a href="snippets.html#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-5"><a href="snippets.html#cb69-5" aria-hidden="true" tabindex="-1"></a>ds        <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(raw_text, <span class="at">col_types=</span>col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="snippets.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
+<span id="cb70-2"><a href="snippets.html#cb70-2" aria-hidden="true" tabindex="-1"></a>raw_text  <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_file</span>(path_in)</span>
+<span id="cb70-3"><a href="snippets.html#cb70-3" aria-hidden="true" tabindex="-1"></a>raw_text  <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>, raw_text)</span>
+<span id="cb70-4"><a href="snippets.html#cb70-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-5"><a href="snippets.html#cb70-5" aria-hidden="true" tabindex="-1"></a>ds        <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(raw_text, <span class="at">col_types=</span>col_types)</span></code></pre></div>
 </div>
-<div id="snippets-reading-vroom" class="section level3" number="22.1.3">
+<div id="snippets-reading-vroom" class="section level3" number="25.1.3">
 <h3><span class="header-section-number">B.1.3</span> Removing Trailing Comma from Header</h3>
 <p><em>Background</em>: When incoming data files are on the large side to comfortably accept with <a href="https://readr.tidyverse.org/">readr</a>, we use <a href="https://vroom.r-lib.org/">vroom</a>. The two packages are develoepd by the same group and <a href="https://github.com/tidyverse/tidyverse.org/pull/375#issuecomment-564781603">might be combined</a> in the future.</p>
 <p><em>Explanation</em>: This snippet defines the <code>col_types</code> list with names to mimic <a href="https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html#chunk-declare">our approach</a> of using readr. There are some small differences with our readr approach:
@@ -600,78 +607,78 @@ div.csl-indent {
 1. If the data file contains columns we don’t need, we define them in <code>col_types</code> anyway; vroom needs to know the file structure if it’s missing a header row.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/akande-medically-complex-1/tree/master/manipulation/ohca">akande-medically-complex-1</a> (Accessible to only CDW members.) Thesee files did not have a header of variable names; the first line of the file is the first data row.</p>
 <p><em>Last Modified</em>: 2020-08-21 by Will</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="snippets.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb70-2"><a href="snippets.html#cb70-2" aria-hidden="true" tabindex="-1"></a>config            <span class="ot">&lt;-</span> config<span class="sc">::</span><span class="fu">get</span>()</span>
-<span id="cb70-3"><a href="snippets.html#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-4"><a href="snippets.html#cb70-4" aria-hidden="true" tabindex="-1"></a>col_types <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb70-5"><a href="snippets.html#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sak                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),  <span class="co"># &quot;system-assigned key&quot;</span></span>
-<span id="cb70-6"><a href="snippets.html#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">aid_category_id          =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb70-7"><a href="snippets.html#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">age                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb70-8"><a href="snippets.html#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">service_date_first       =</span> vroom<span class="sc">::</span><span class="fu">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
-<span id="cb70-9"><a href="snippets.html#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">service_date_lasst       =</span> vroom<span class="sc">::</span><span class="fu">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
-<span id="cb70-10"><a href="snippets.html#cb70-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">claim_type               =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb70-11"><a href="snippets.html#cb70-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_id              =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb70-12"><a href="snippets.html#cb70-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_lat             =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
-<span id="cb70-13"><a href="snippets.html#cb70-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_long            =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
-<span id="cb70-14"><a href="snippets.html#cb70-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_zip             =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb70-15"><a href="snippets.html#cb70-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">cpt                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb70-16"><a href="snippets.html#cb70-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">revenue_code             =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb70-17"><a href="snippets.html#cb70-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">icd_code                 =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb70-18"><a href="snippets.html#cb70-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">icd_sequence             =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb70-19"><a href="snippets.html#cb70-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">vocabulary_coarse_id     =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>()</span>
-<span id="cb70-20"><a href="snippets.html#cb70-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb70-21"><a href="snippets.html#cb70-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-22"><a href="snippets.html#cb70-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb70-23"><a href="snippets.html#cb70-23" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> vroom<span class="sc">::</span><span class="fu">vroom</span>(</span>
-<span id="cb70-24"><a href="snippets.html#cb70-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">file      =</span> config<span class="sc">$</span>path_ohca_patient,</span>
-<span id="cb70-25"><a href="snippets.html#cb70-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim     =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb70-26"><a href="snippets.html#cb70-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">names</span>(col_types),</span>
-<span id="cb70-27"><a href="snippets.html#cb70-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> col_types</span>
-<span id="cb70-28"><a href="snippets.html#cb70-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb70-29"><a href="snippets.html#cb70-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-30"><a href="snippets.html#cb70-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="snippets.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span id="cb71-2"><a href="snippets.html#cb71-2" aria-hidden="true" tabindex="-1"></a>config            <span class="ot">&lt;-</span> config<span class="sc">::</span><span class="fu">get</span>()</span>
+<span id="cb71-3"><a href="snippets.html#cb71-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="snippets.html#cb71-4" aria-hidden="true" tabindex="-1"></a>col_types <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb71-5"><a href="snippets.html#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sak                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),  <span class="co"># &quot;system-assigned key&quot;</span></span>
+<span id="cb71-6"><a href="snippets.html#cb71-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">aid_category_id          =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb71-7"><a href="snippets.html#cb71-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">age                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
+<span id="cb71-8"><a href="snippets.html#cb71-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">service_date_first       =</span> vroom<span class="sc">::</span><span class="fu">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
+<span id="cb71-9"><a href="snippets.html#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">service_date_lasst       =</span> vroom<span class="sc">::</span><span class="fu">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
+<span id="cb71-10"><a href="snippets.html#cb71-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">claim_type               =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb71-11"><a href="snippets.html#cb71-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_id              =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb71-12"><a href="snippets.html#cb71-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_lat             =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
+<span id="cb71-13"><a href="snippets.html#cb71-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_long            =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
+<span id="cb71-14"><a href="snippets.html#cb71-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_zip             =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb71-15"><a href="snippets.html#cb71-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">cpt                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
+<span id="cb71-16"><a href="snippets.html#cb71-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">revenue_code             =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
+<span id="cb71-17"><a href="snippets.html#cb71-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">icd_code                 =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb71-18"><a href="snippets.html#cb71-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">icd_sequence             =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
+<span id="cb71-19"><a href="snippets.html#cb71-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">vocabulary_coarse_id     =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>()</span>
+<span id="cb71-20"><a href="snippets.html#cb71-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb71-21"><a href="snippets.html#cb71-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-22"><a href="snippets.html#cb71-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
+<span id="cb71-23"><a href="snippets.html#cb71-23" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> vroom<span class="sc">::</span><span class="fu">vroom</span>(</span>
+<span id="cb71-24"><a href="snippets.html#cb71-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">file      =</span> config<span class="sc">$</span>path_ohca_patient,</span>
+<span id="cb71-25"><a href="snippets.html#cb71-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim     =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
+<span id="cb71-26"><a href="snippets.html#cb71-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">names</span>(col_types),</span>
+<span id="cb71-27"><a href="snippets.html#cb71-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> col_types</span>
+<span id="cb71-28"><a href="snippets.html#cb71-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb71-29"><a href="snippets.html#cb71-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-30"><a href="snippets.html#cb71-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(col_types)</span></code></pre></div>
 </div>
 </div>
-<div id="snippets-grooming" class="section level2" number="22.2">
+<div id="snippets-grooming" class="section level2" number="25.2">
 <h2><span class="header-section-number">B.2</span> Grooming</h2>
-<div id="snippets-grooming-two-year" class="section level3" number="22.2.1">
+<div id="snippets-grooming-two-year" class="section level3" number="25.2.1">
 <h3><span class="header-section-number">B.2.1</span> Correct for misinterpreted two-digit year</h3>
 <p><em>Background</em>: Sometimes the Meditech dates are specified like <code>1/6/54</code> instead of <code>1/6/1954</code>. <code>readr::read_csv()</code> has to choose if the year is supposed to be ‘1954’ or ‘2054.’ A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can’t (so it guesses 2054). For avoid this and other problems, request dates in an <a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a> format.</p>
 <p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="snippets.html#cb71-1" aria-hidden="true" tabindex="-1"></a> ds <span class="sc">%&gt;%</span></span>
-<span id="cb71-2"><a href="snippets.html#cb71-2" aria-hidden="true" tabindex="-1"></a> dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb71-3"><a href="snippets.html#cb71-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">dob =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(dob <span class="sc">&lt;=</span> <span class="fu">Sys.Date</span>(), dob, dob <span class="sc">-</span> lubridate<span class="sc">::</span><span class="fu">years</span>(<span class="dv">100</span>))</span>
-<span id="cb71-4"><a href="snippets.html#cb71-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="snippets.html#cb72-1" aria-hidden="true" tabindex="-1"></a> ds <span class="sc">%&gt;%</span></span>
+<span id="cb72-2"><a href="snippets.html#cb72-2" aria-hidden="true" tabindex="-1"></a> dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb72-3"><a href="snippets.html#cb72-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">dob =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(dob <span class="sc">&lt;=</span> <span class="fu">Sys.Date</span>(), dob, dob <span class="sc">-</span> lubridate<span class="sc">::</span><span class="fu">years</span>(<span class="dv">100</span>))</span>
+<span id="cb72-4"><a href="snippets.html#cb72-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 </div>
-<div id="snippets-identification" class="section level2" number="22.3">
+<div id="snippets-identification" class="section level2" number="25.3">
 <h2><span class="header-section-number">B.3</span> Identification</h2>
-<div id="snippets-identification-tags" class="section level3" number="22.3.1">
+<div id="snippets-identification-tags" class="section level3" number="25.3.1">
 <h3><span class="header-section-number">B.3.1</span> Generating “tags”</h3>
 <p><em>Background</em>: When you need to generate unique identification values for future people/clients/patients, as described in the <a href="style.html#style-number">style guide</a>.</p>
 <p><em>Explanation</em>: This snippet will create a 5-row csv with random 7-character “tags” to send to the research team collecting patients. The</p>
 <p><em>Instruction</em>: Set <code>pt_count</code>, <code>tag_length</code>, <code>path_out</code>, and execute. Add and rename the columns to be more appropriate for your domain (<em>e.g.</em>, change “patient tag” to “store tag”).</p>
 <p><em>Last Modified</em>: 2019-12-30 by Will</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="snippets.html#cb72-1" aria-hidden="true" tabindex="-1"></a>pt_count    <span class="ot">&lt;-</span> 5L   <span class="co"># The number of rows in the dataset.</span></span>
-<span id="cb72-2"><a href="snippets.html#cb72-2" aria-hidden="true" tabindex="-1"></a>tag_length  <span class="ot">&lt;-</span> 7L   <span class="co"># The number of characters in each tag.</span></span>
-<span id="cb72-3"><a href="snippets.html#cb72-3" aria-hidden="true" tabindex="-1"></a>path_out    <span class="ot">&lt;-</span> <span class="st">&quot;data-private/derived/pt-pool.csv&quot;</span></span>
-<span id="cb72-4"><a href="snippets.html#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-5"><a href="snippets.html#cb72-5" aria-hidden="true" tabindex="-1"></a>draw_tag <span class="ot">&lt;-</span> <span class="cf">function</span> (<span class="at">tag_length =</span> 4L, <span class="at">urn =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>, letters)) {</span>
-<span id="cb72-6"><a href="snippets.html#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">sample</span>(urn, <span class="at">size =</span> tag_length, <span class="at">replace =</span> T), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb72-7"><a href="snippets.html#cb72-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb72-8"><a href="snippets.html#cb72-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-9"><a href="snippets.html#cb72-9" aria-hidden="true" tabindex="-1"></a>ds_pt_pool <span class="ot">&lt;-</span></span>
-<span id="cb72-10"><a href="snippets.html#cb72-10" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb72-11"><a href="snippets.html#cb72-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">pt_index    =</span> <span class="fu">seq_len</span>(pt_count),</span>
-<span id="cb72-12"><a href="snippets.html#cb72-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">pt_tag      =</span> <span class="fu">vapply</span>(<span class="fu">rep</span>(tag_length, pt_count), draw_tag, <span class="fu">character</span>(<span class="dv">1</span>)),</span>
-<span id="cb72-13"><a href="snippets.html#cb72-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">assigned    =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb72-14"><a href="snippets.html#cb72-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">name_last   =</span> <span class="st">&quot;--&quot;</span>,</span>
-<span id="cb72-15"><a href="snippets.html#cb72-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">name_first  =</span> <span class="st">&quot;--&quot;</span></span>
-<span id="cb72-16"><a href="snippets.html#cb72-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb72-17"><a href="snippets.html#cb72-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-18"><a href="snippets.html#cb72-18" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(ds_pt_pool, path_out)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="snippets.html#cb73-1" aria-hidden="true" tabindex="-1"></a>pt_count    <span class="ot">&lt;-</span> 5L   <span class="co"># The number of rows in the dataset.</span></span>
+<span id="cb73-2"><a href="snippets.html#cb73-2" aria-hidden="true" tabindex="-1"></a>tag_length  <span class="ot">&lt;-</span> 7L   <span class="co"># The number of characters in each tag.</span></span>
+<span id="cb73-3"><a href="snippets.html#cb73-3" aria-hidden="true" tabindex="-1"></a>path_out    <span class="ot">&lt;-</span> <span class="st">&quot;data-private/derived/pt-pool.csv&quot;</span></span>
+<span id="cb73-4"><a href="snippets.html#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="snippets.html#cb73-5" aria-hidden="true" tabindex="-1"></a>draw_tag <span class="ot">&lt;-</span> <span class="cf">function</span> (<span class="at">tag_length =</span> 4L, <span class="at">urn =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>, letters)) {</span>
+<span id="cb73-6"><a href="snippets.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">sample</span>(urn, <span class="at">size =</span> tag_length, <span class="at">replace =</span> T), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb73-7"><a href="snippets.html#cb73-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-8"><a href="snippets.html#cb73-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-9"><a href="snippets.html#cb73-9" aria-hidden="true" tabindex="-1"></a>ds_pt_pool <span class="ot">&lt;-</span></span>
+<span id="cb73-10"><a href="snippets.html#cb73-10" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb73-11"><a href="snippets.html#cb73-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">pt_index    =</span> <span class="fu">seq_len</span>(pt_count),</span>
+<span id="cb73-12"><a href="snippets.html#cb73-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">pt_tag      =</span> <span class="fu">vapply</span>(<span class="fu">rep</span>(tag_length, pt_count), draw_tag, <span class="fu">character</span>(<span class="dv">1</span>)),</span>
+<span id="cb73-13"><a href="snippets.html#cb73-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">assigned    =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb73-14"><a href="snippets.html#cb73-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">name_last   =</span> <span class="st">&quot;--&quot;</span>,</span>
+<span id="cb73-15"><a href="snippets.html#cb73-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">name_first  =</span> <span class="st">&quot;--&quot;</span></span>
+<span id="cb73-16"><a href="snippets.html#cb73-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb73-17"><a href="snippets.html#cb73-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-18"><a href="snippets.html#cb73-18" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(ds_pt_pool, path_out)</span></code></pre></div>
 <p>The resulting dataset will look like this, but with different randomly-generated tags.</p>
 <pre class="csv"><code># A tibble: 5 x 5
   pt_index pt_tag  assigned name_last name_first
@@ -683,9 +690,9 @@ div.csl-indent {
 5        5 r5ei5ph FALSE    --        --</code></pre>
 </div>
 </div>
-<div id="snippets-correspondence" class="section level2" number="22.4">
+<div id="snippets-correspondence" class="section level2" number="25.4">
 <h2><span class="header-section-number">B.4</span> Correspondence with Collaborators</h2>
-<div id="snippets-correspondence-excel" class="section level3" number="22.4.1">
+<div id="snippets-correspondence-excel" class="section level3" number="25.4.1">
 <h3><span class="header-section-number">B.4.1</span> Excel files</h3>
 <p>Receiving and storing <a href="rest.html#data-containers-avoid">Excel files should almost always be avoided</a> for the reasons explained in this letter.</p>
 <p>We receive extracts as Excel files frequently, and have the following request ready to email the person sending us Excel files. Adapt the bold values like “109.19” to your situation. If you are familiar with their tools, suggest an alternative for saving the file as a csv. Once presented with these Excel gotchas, almost everyone has an ‘aha’ moment and recognizes the problem. Unfortunately, not everyone has flexible software and can adapt easily.</p>

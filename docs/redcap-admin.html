@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Parallel Collaboration | Collaborative Data Science Practices</title>
+  <title>Chapter 23 Material for REDCap Admins | Collaborative Data Science Practices</title>
   <meta name="description" content="Collection of publicly available practices of data science and analysis." />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Parallel Collaboration | Collaborative Data Science Practices" />
+  <meta property="og:title" content="Chapter 23 Material for REDCap Admins | Collaborative Data Science Practices" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Parallel Collaboration | Collaborative Data Science Practices" />
+  <meta name="twitter:title" content="Chapter 23 Material for REDCap Admins | Collaborative Data Science Practices" />
   
   <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="scaling-up.html"/>
-<link rel="next" href="document.html"/>
+<link rel="prev" href="redcap-developer.html"/>
+<link rel="next" href="git.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -555,82 +555,20 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="collaboration" class="section level1" number="12">
-<h1><span class="header-section-number">Chapter 12</span> Parallel Collaboration</h1>
-<div id="social-contract" class="section level2" number="12.1">
-<h2><span class="header-section-number">12.1</span> Social Contract</h2>
-<ol style="list-style-type: decimal">
-<li>Issues</li>
-<li>Organized Commits &amp; Coherent Diffs</li>
-<li>Branch &amp; Merge Strategy</li>
-</ol>
-</div>
-<div id="code-reviews" class="section level2" number="12.2">
-<h2><span class="header-section-number">12.2</span> Code Reviews</h2>
-<ol style="list-style-type: decimal">
-<li>Daily Reviews of PRs</li>
-<li>Periodic Reviews of Files</li>
-</ol>
-</div>
-<div id="remote" class="section level2" number="12.3">
-<h2><span class="header-section-number">12.3</span> Remote</h2>
-<ol style="list-style-type: decimal">
-<li>Headset &amp; sharing screens</li>
-</ol>
-</div>
-<div id="additional-resources-1" class="section level2" number="12.4">
-<h2><span class="header-section-number">12.4</span> Additional Resources</h2>
-<ul>
-<li><span class="citation">(<a href="#ref-gillespie" role="doc-biblioref">Colin Gillespie 2017</a>)</span>, particularly the “Efficient collaboration” chapter.</li>
-<li><span class="citation">(<a href="#ref-fitzpatrick" role="doc-biblioref">Brian Fitzpatrick 2012</a>)</span></li>
-</ul>
-</div>
-<div id="loose-notes" class="section level2" number="12.5">
-<h2><span class="header-section-number">12.5</span> Loose Notes</h2>
-<div id="github" class="section level3" number="12.5.1">
-<h3><span class="header-section-number">12.5.1</span> GitHub</h3>
-<ol style="list-style-type: decimal">
-<li><p>Review your diffs before committing. Check for things like accidental deletions and debugging code that should be deleted (or at least commented out).</p></li>
-<li><p>Keep chatter to a minimum, especially on projects with 3+ people being notified of every issue post.</p></li>
-<li><p>When encountering a problem,</p>
-<ul>
-<li>Take as much ownership as reasonable. Don’t merely report there’s an error.</li>
-<li>If you can’t figure it out, ask the question and describe it well.
-<ul>
-<li>what low-level file &amp; line of code threw the error.</li>
-<li>how you have tried to solve it.</li>
-</ul></li>
-<li>If there’s a questionable line/chunk of code, <a href="https://help.github.com/articles/tracing-changes-in-a-file/">trace</a> its origin. Not for the sake of pointing the finger at someone, but for the sake of understanding its origin and history.</li>
-</ul></li>
-</ol>
-</div>
-<div id="common-code" class="section level3" number="12.5.2">
-<h3><span class="header-section-number">12.5.2</span> Common Code</h3>
-<p>This involves code/files that multiple people use, like the REDCap arches.</p>
-<ol style="list-style-type: decimal">
-<li>Run the file before committing it. Run common downstream files too (<em>e.g.</em>, if you make a change to the arch, also run the funnel).</li>
-<li>If an upstream variable name must change, alert people. Post a GitHub issue to announce it. Tell everyone, and search the repo (ctrl+shift+f in RStudio) to alert specific people who might be affected.</li>
-</ol>
+<div id="redcap-admin" class="section level1" number="23">
+<h1><span class="header-section-number">Chapter 23</span> Material for REDCap Admins</h1>
 
 </div>
-</div>
-</div>
-<h3><span class="header-section-number">H</span> References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-fitzpatrick" class="csl-entry">
-Brian Fitzpatrick, Ben Collins-Sussman. 2012. <em>Team Geek: A Software Developer’s Guide to Working Well with Others</em>. 1st ed. Cambridge MA: O’Reilly. <a href="http://shop.oreilly.com/product/0636920018025.do">http://shop.oreilly.com/product/0636920018025.do</a>.
-</div>
-<div id="ref-gillespie" class="csl-entry">
-Colin Gillespie, Robin Lovelace. 2017. <em>Efficient r Programming</em>. 1st ed. Cambridge MA: O’Reilly. <a href="https://csgillespie.github.io/efficientR/">https://csgillespie.github.io/efficientR/</a>.
-</div>
-</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="scaling-up.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="document.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="redcap-developer.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="git.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -662,7 +600,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-collaboration.md",
+"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/master/ch-redcap-admin.md",
 "text": "Edit"
 },
 "history": {

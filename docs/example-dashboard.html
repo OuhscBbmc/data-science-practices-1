@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-05-20" />
+<meta name="date" content="2021-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -456,6 +456,13 @@ div.csl-indent {
 <li class="chapter" data-level="20.2" data-path="team.html"><a href="team.html#training-to-data-science"><i class="fa fa-check"></i><b>20.2</b> Training to Data Science</a></li>
 <li class="chapter" data-level="20.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>20.3</b> Bridges Outside the Team</a></li>
 </ul></li>
+<li class="chapter" data-level="21" data-path="redcap-user.html"><a href="redcap-user.html"><i class="fa fa-check"></i><b>21</b> Material for REDCap Users</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-login"><i class="fa fa-check"></i><b>21.1</b> Login</a></li>
+<li class="chapter" data-level="21.2" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-report-develop"><i class="fa fa-check"></i><b>21.2</b> Developing Reports</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="redcap-developer.html"><a href="redcap-developer.html"><i class="fa fa-check"></i><b>22</b> Material for REDCap Developers</a></li>
+<li class="chapter" data-level="23" data-path="redcap-admin.html"><a href="redcap-admin.html"><i class="fa fa-check"></i><b>23</b> Material for REDCap Admins</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
@@ -548,7 +555,7 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="example-dashboard" class="section level1" number="25">
+<div id="example-dashboard" class="section level1" number="28">
 <h1><span class="header-section-number">E</span> Example Dashboard</h1>
 <p>Communicating quantitative trends to a community with a <a href="publication.html#publication-phobic">quantitative phobia</a> can be difficult. This appendix showcases a dashboard style that has evolved during the past few years of <a href="https://www.ok.gov/health/Family_Health/Family_Support_and_Prevention_Service/MIECHV_Program_-_Federal_Home_Visiting_Grant/About_the_MIECHV_Program_-_Federal_Home_Visiting_Grant/index.html">OSDH Home Visiting</a>, where twelve local programs practitioners implemented their own intervention ideas tailored to their interests and community.</p>
 <p>Over 50 dashboards have been developed: a custom dashboard is developed for each program’s cycle, and a three additional dashboards communicate the results of program-agnostic investigations. A style guide is an important tool when managing this many unique investigations</p>
@@ -559,17 +566,17 @@ div.csl-indent {
 <li>The lessons we’ve learned (and mistakes we’ve made) can be applied to later dashboards. The quality should improve and the development should quicken.</li>
 </ol>
 <p>Just like our CQI grant encourages an HV program to learn from its history and to learn from others, we as analysts should too. As we work with the programs to design a PDSA, each one analyst will learn about the strengths and weaknesses of our current dashboard style, and propose improvements.</p>
-<div id="example-dashboard-example" class="section level2" number="25.1">
+<div id="example-dashboard-example" class="section level2" number="28.1">
 <h2><span class="header-section-number">E.1</span> Example</h2>
 <p>A example dashboard that mimic the real CQI is available at <a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html">https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html</a>. The dashboard source code is available in the <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1"><code>analysis/dashboard-1</code></a> directory of the <a href="https://github.com/wibeasley/RAnalysisSkeleton#readme">R Analysis Skeleton</a> repository’; this repo contains the code and documents the entire pipeline leading up to this dashboard.</p>
 <p>We’ve had success developing and distributing dashboards as self-contained html files. They are portable and don’t have dependencies on local data files or remote databases, yet the JavaScript and CSS provide a modest amount of interactivity. The dashboard’s principal components are <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a>, <a href="https://plot.ly/r/">plotly</a>, <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, and <a href="https://rmarkdown.rstudio.com/">R Markdown</a>.</p>
 <p>In this dashboard of synthetic data, a cognitive measure is tracked across 14 years in three home visiting counties.</p>
 </div>
-<div id="example-dashboard-guide" class="section level2" number="25.2">
+<div id="example-dashboard-guide" class="section level2" number="28.2">
 <h2><span class="header-section-number">E.2</span> Style Guide</h2>
 <p>This section describes a set of practices that the <a href="https://ouhsc.edu/bbmc/">BBMC analysts</a> have decided are best for the CQI dashboards used in our MIECHV evaluations. In a sense, this CQI dashboard guide supplements our overall <a href="style.html#style">style guide</a>.</p>
 <p>The MIECHV CQI dashboards are based on RStudio’s <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a> package, which uses <a href="https://CRAN.R-project.org/package=rmarkdown">rmarkdown</a>, JavaScript, and CSS. flexdashboard has a <a href="https://rmarkdown.rstudio.com/flexdashboard/">great website</a> that should be read by anyone adapting this guide for their own CQI projects.</p>
-<div id="headline-page" class="section level3" number="25.2.1">
+<div id="headline-page" class="section level3" number="28.2.1">
 <h3><span class="header-section-number">E.2.1</span> Headline page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#headline">
 <img src="resources/example-dashboard/headline.png" style="width: 2000px;"/>
@@ -592,7 +599,7 @@ div.csl-indent {
 </ul></li>
 </ol>
 </div>
-<div id="tables-page" class="section level3" number="25.2.2">
+<div id="tables-page" class="section level3" number="28.2.2">
 <h3><span class="header-section-number">E.2.2</span> Tables page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#tables">
 <img src="resources/example-dashboard/tables.png" style="width: 2000px;"/>
@@ -612,7 +619,7 @@ div.csl-indent {
 </ol></li>
 </ol>
 </div>
-<div id="graphs-page" class="section level3" number="25.2.3">
+<div id="graphs-page" class="section level3" number="28.2.3">
 <h3><span class="header-section-number">E.2.3</span> Graphs page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#graphs">
 <img src="resources/example-dashboard/graphs.png" style="width: 2000px;"/>
@@ -637,7 +644,7 @@ div.csl-indent {
 <li>use <code>spaghetti_2()</code> located in <a href="https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R">display-1.R</a>. <strong>(not yet developed.)</strong> Add hover text to each spaghetti.</li>
 </ul>
 </div>
-<div id="marginal-graphs-page" class="section level3" number="25.2.4">
+<div id="marginal-graphs-page" class="section level3" number="28.2.4">
 <h3><span class="header-section-number">E.2.4</span> Marginal Graphs page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#marginals">
 <img src="resources/example-dashboard/marginals.png" style="width: 2000px;"/>
@@ -657,7 +664,7 @@ div.csl-indent {
 <li><p>histograms have a more specific <em>y</em>-axis. For example, “Count of Months” instead of “Frequency”</p></li>
 </ul>
 </div>
-<div id="documentation-page" class="section level3" number="25.2.5">
+<div id="documentation-page" class="section level3" number="28.2.5">
 <h3><span class="header-section-number">E.2.5</span> Documentation page</h3>
 <p><a href="https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html#documentation">
 <img src="resources/example-dashboard/documentation.png" style="width: 2000px;"/>
@@ -676,7 +683,7 @@ div.csl-indent {
 </ol></li>
 </ol>
 </div>
-<div id="miscellaneous-notes" class="section level3" number="25.2.6">
+<div id="miscellaneous-notes" class="section level3" number="28.2.6">
 <h3><span class="header-section-number">E.2.6</span> Miscellaneous Notes</h3>
 <ul>
 <li><p>The hierarchy level in this outline indicates the HTML-heading level. Numbers are H1 (<em>i.e.</em>, <code>======</code>) that specify pages, roman numerals are H2 (<em>i.e.</em>, <code>------</code>) that specify columns, and letters are H3 (<em>i.e.</em>, <code>###</code>) that specify tabs.</p></li>
@@ -692,19 +699,19 @@ div.csl-indent {
 </ul>
 </div>
 </div>
-<div id="example-dashboard-architecture" class="section level2" number="25.3">
+<div id="example-dashboard-architecture" class="section level2" number="28.3">
 <h2><span class="header-section-number">E.3</span> Architecture</h2>
 <p>The dashboard is only one piece of a large workflow. The design and construction of this workflow are discussed in this book, which are highlighted below.</p>
 <p><a href="https://github.com/wibeasley/RAnalysisSkeleton#intra-individual-differences">
 <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
 </a></p>
-<div id="data-from-external-system" class="section level3" number="25.3.1">
+<div id="data-from-external-system" class="section level3" number="28.3.1">
 <h3><span class="header-section-number">E.3.1</span> Data from External System</h3>
 </div>
-<div id="groomed-data-in-warehouse" class="section level3" number="25.3.2">
+<div id="groomed-data-in-warehouse" class="section level3" number="28.3.2">
 <h3><span class="header-section-number">E.3.2</span> Groomed Data in Warehouse</h3>
 </div>
-<div id="analysis-ready-dataset" class="section level3" number="25.3.3">
+<div id="analysis-ready-dataset" class="section level3" number="28.3.3">
 <h3><span class="header-section-number">E.3.3</span> Analysis-Ready Dataset</h3>
 <ul>
 <li><p>Very little data manipulation should occur in the dashboard. The upstream <a href="patterns.html#pattern-scribe">scribe</a> should produce an analysis-ready rds file. The dashboard should be concerned only with presenting the graphs, tables, summary text, and documentation.</p></li>
