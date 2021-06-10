@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-06-08" />
+<meta name="date" content="2021-06-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -572,13 +572,19 @@ div.csl-indent {
 <div id="workstation-r-package-installation" class="section level3" number="18.1.3">
 <h3><span class="header-section-number">18.1.3</span> Installing R Packages</h3>
 <p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
-<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a>, which defines the <code>package_janitor_remote()</code> function. The final line calls the function (and passes a specific CSV of packages)<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.</p>
+<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, “package-dependency-list.csv” and “package-dependency-list-more.csv.”</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="workstation.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) utils<span class="sc">::</span><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
 <span id="cb58-2"><a href="workstation.html#cb58-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_gist</span>(<span class="st">&quot;2c5e7459b88ec28b9e8fa0c695b15ee3&quot;</span>, <span class="at">filename=</span><span class="st">&quot;package-janitor-bbmc.R&quot;</span>)</span>
 <span id="cb58-3"><a href="workstation.html#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-4"><a href="workstation.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">package_janitor_remote</span>(</span>
-<span id="cb58-5"><a href="workstation.html#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv&quot;</span></span>
-<span id="cb58-6"><a href="workstation.html#cb58-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb58-4"><a href="workstation.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Important packages required by most BBMC projects</span></span>
+<span id="cb58-5"><a href="workstation.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">package_janitor_remote</span>(</span>
+<span id="cb58-6"><a href="workstation.html#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv&quot;</span></span>
+<span id="cb58-7"><a href="workstation.html#cb58-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb58-8"><a href="workstation.html#cb58-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-9"><a href="workstation.html#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Nonessential packages used in a few BBMC projects</span></span>
+<span id="cb58-10"><a href="workstation.html#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="fu">package_janitor_remote</span>(</span>
+<span id="cb58-11"><a href="workstation.html#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list-more.csv&quot;</span></span>
+<span id="cb58-12"><a href="workstation.html#cb58-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper <a href="http://r-pkgs.had.co.nz/description.html">DESCRIPTION</a> file. See <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION">RAnalysisSkeleton</a> for an example.</p>
 <p>When the project is opened in RStudio, <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html"><code>update_packages_addin()</code></a> in <a href="https://ouhscbbmc.github.io/OuhscMunge">OuhscMunge</a> will find the DESCRIPTION file and install the package dependencies.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="workstation.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( <span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>   ) ) utils<span class="sc">::</span><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
@@ -928,7 +934,7 @@ div.csl-indent {
 <div class="footnotes">
 <hr />
 <ol start="7">
-<li id="fn7"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in the <code>utility/</code> directory) that lives in this repository. The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in that repository’s <code>utility/</code> directory). The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
