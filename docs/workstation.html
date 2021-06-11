@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-06-10" />
+<meta name="date" content="2021-06-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -572,7 +572,7 @@ div.csl-indent {
 <div id="workstation-r-package-installation" class="section level3" number="18.1.3">
 <h3><span class="header-section-number">18.1.3</span> Installing R Packages</h3>
 <p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
-<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, “package-dependency-list.csv” and “package-dependency-list-more.csv.”</p>
+<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">package-dependency-list.csv</a> and <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list-more.csv">package-dependency-list-more.csv</a>.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="workstation.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) utils<span class="sc">::</span><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
 <span id="cb58-2"><a href="workstation.html#cb58-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_gist</span>(<span class="st">&quot;2c5e7459b88ec28b9e8fa0c695b15ee3&quot;</span>, <span class="at">filename=</span><span class="st">&quot;package-janitor-bbmc.R&quot;</span>)</span>
 <span id="cb58-3"><a href="workstation.html#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
