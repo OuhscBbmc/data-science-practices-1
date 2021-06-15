@@ -61,7 +61,9 @@ Other options we typically specify are:
 1. "Run as the highest available version of Windows."
 1. "Wake the computer to run this task" is probably necessary if this is located on a normal desktop.  It is not something we specify, because our tasks are located on a [VM](https://en.wikipedia.org/wiki/System_virtual_machine)-based workstation that is never turned off.
 
-Following these instructions, you are required to enter your password every time you modify the task, and every time you update your password.  If you are using network credentials, you probably should specify your account like "domain/username".  Be careful: when you modify a task and are prompted for a password, the GUI subtly alters the account entry to just "username" (instead of "domain/username").  Make sure you prepend the username with the domain, as you enter the password.
+Following these instructions, you are required to enter your password every time you modify the task, and every time you update your password.  If you are using network credentials, you probably should specify your account like "domain/username".  Be careful: when you modify a task and are prompted for a password, the GUI may subtly alter the account entry to just "username" (instead of "domain\username").  Make sure you prepend the username with the domain, as you enter the password.
+
+If you have 10+ tasks, consider creating a [System Environment Variable](https://www.computerhope.com/issues/ch000549.htm) called `%rscript_path%` whose value is something like `"C:\Program Files\R\R-4.1.0patched\bin\Rscript.exe"`.  When R is updated every few months, you need to change the path in only one place (*i.e.*, in the Environment Variables GUI) instead of in each task, which requires repeatedly re-entering your username and password.  If you defined the tasks differently than describe here, you may need to restart your machine to load the fresh variable value into the Task Scheduler environment.
 
 ### SQL Server Agent  {#automation-sql-server-agent}
 
