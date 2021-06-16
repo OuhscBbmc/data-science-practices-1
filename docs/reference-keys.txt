@@ -200,6 +200,7 @@ workstation-git
 workstation-calc
 workstation-pandoc
 workstation-python
+workstation-pilot-edit
 workstation-assets
 workstation-administrator
 workstation-mysql

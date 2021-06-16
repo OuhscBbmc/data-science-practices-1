@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-06-15" />
+<meta name="date" content="2021-06-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -423,6 +423,7 @@ div.csl-indent {
 <li class="chapter" data-level="18.3.2" data-path="workstation.html"><a href="workstation.html#workstation-calc"><i class="fa fa-check"></i><b>18.3.2</b> LibreOffice Calc</a></li>
 <li class="chapter" data-level="18.3.3" data-path="workstation.html"><a href="workstation.html#workstation-pandoc"><i class="fa fa-check"></i><b>18.3.3</b> pandoc</a></li>
 <li class="chapter" data-level="18.3.4" data-path="workstation.html"><a href="workstation.html#workstation-python"><i class="fa fa-check"></i><b>18.3.4</b> Python</a></li>
+<li class="chapter" data-level="18.3.5" data-path="workstation.html"><a href="workstation.html#workstation-pilot-edit"><i class="fa fa-check"></i><b>18.3.5</b> PilotEdit</a></li>
 </ul></li>
 <li class="chapter" data-level="18.4" data-path="workstation.html"><a href="workstation.html#workstation-assets"><i class="fa fa-check"></i><b>18.4</b> Asset Locations</a></li>
 <li class="chapter" data-level="18.5" data-path="workstation.html"><a href="workstation.html#workstation-administrator"><i class="fa fa-check"></i><b>18.5</b> Administrator Installation</a>
@@ -729,6 +730,12 @@ div.csl-indent {
 <div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="workstation.html#cb63-1" aria-hidden="true" tabindex="-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div></li>
 <li><p><strong><a href="https://www.python.org/downloads/">Standard Python</a></strong>, while installing packages through pip3 in the terminal. If the <code>pip3</code> command is unrecognized because it’s missing from the OS <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> variable, an alternative is <code>py -3 -mpip install pysftp</code>; this calls pip through the <code>py</code> command which is sometimes in the path variable after installation.</p></li>
 </ul>
+</div>
+<div id="workstation-pilot-edit" class="section level3" number="18.3.5">
+<h3><span class="header-section-number">18.3.5</span> PilotEdit</h3>
+<p><a href="https://www.pilotedit.com/">PilotEdit</a> can load huge text files that cannot fit into RAM, such as files that are over 100MB that choke Excel, <a href="workstation.html#workstation-calc">Calc</a>, <a href="workstation.html#workstation-notepadpp">Notepad++</a>, and <a href="workstation.html#workstation-vscode">Visual Studio Code</a>.</p>
+<p>Like Notepad++ and VS Code, PilotEdit has good Find features that can (a) present all search hits within a file, (b) scan multiple files, and (c) use regular expressions. This helps trace the origin of problems in a pipeline. For example, if our data warehouse has a suspicious character in patient 10009’s BMI value, the <a href="https://www.regular-expressions.info/">regex</a> <code>\b10009\tbmi\b</code> locates the origin among the multiple 1+GB files we received.</p>
+<p>PilotEdit is also a good tool for the occasional data extract with an encoding problem. You can side-by-side inspect the hex code and (visible or non-visible) character produced (<a href="https://www.binaryhexconverter.com/ascii-text-to-hex-converter">for example with ascii</a>, “76” produces “v” and “0A” produces a line feed). {Added Sept 2020}</p>
 </div>
 </div>
 <div id="workstation-assets" class="section level2" number="18.4">
