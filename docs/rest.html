@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-06-15" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="repo-prototype.html"/>
 <link rel="next" href="patterns.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -423,6 +423,7 @@ div.csl-indent {
 <li class="chapter" data-level="18.3.2" data-path="workstation.html"><a href="workstation.html#workstation-calc"><i class="fa fa-check"></i><b>18.3.2</b> LibreOffice Calc</a></li>
 <li class="chapter" data-level="18.3.3" data-path="workstation.html"><a href="workstation.html#workstation-pandoc"><i class="fa fa-check"></i><b>18.3.3</b> pandoc</a></li>
 <li class="chapter" data-level="18.3.4" data-path="workstation.html"><a href="workstation.html#workstation-python"><i class="fa fa-check"></i><b>18.3.4</b> Python</a></li>
+<li class="chapter" data-level="18.3.5" data-path="workstation.html"><a href="workstation.html#workstation-pilot-edit"><i class="fa fa-check"></i><b>18.3.5</b> PilotEdit</a></li>
 </ul></li>
 <li class="chapter" data-level="18.4" data-path="workstation.html"><a href="workstation.html#workstation-assets"><i class="fa fa-check"></i><b>18.4</b> Asset Locations</a></li>
 <li class="chapter" data-level="18.5" data-path="workstation.html"><a href="workstation.html#workstation-administrator"><i class="fa fa-check"></i><b>18.5</b> Administrator Installation</a>
@@ -466,13 +467,15 @@ div.csl-indent {
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
-<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.4</b> for New Collaborators</a></li>
-<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.5</b> Steps for Contributing to Repo</a>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-justification"><i class="fa fa-check"></i><b>A.1</b> Justification</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.2</b> for Code Development</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.3</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.4</b> for Stability</a></li>
+<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#organization-wide-defaults-and-practices"><i class="fa fa-check"></i><b>A.5</b> Organization-wide defaults and practices</a></li>
+<li class="chapter" data-level="A.6" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.6</b> for New Collaborators</a></li>
+<li class="chapter" data-level="A.7" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.7</b> Steps for Contributing to Repo</a>
 <ul>
-<li class="chapter" data-level="A.5.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.5.1</b> Regular Contributions</a></li>
+<li class="chapter" data-level="A.7.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.7.1</b> Regular Contributions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
@@ -629,7 +632,7 @@ div.csl-indent {
 <li><p><strong>date format</strong>: specify as <code>YYYY-MM-DD</code> (<a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a>)</p></li>
 <li><p><strong>time format</strong>: specify as <code>HH:MM</code> or <code>HH:MM:SS</code>, preferably in 24-hour time. Use a leading zero from midnight to 9:59am, with a colon separating hours, minutes, and seconds (<em>i.e.</em>, <strong>0</strong>9:59)</p></li>
 <li><p><strong>patient names</strong>: separate the <code>name_last</code>, <code>name_first</code>, and <code>name_middle</code> as three distinct variables when possible.</p></li>
-<li><p><strong>currency</strong>: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like <code>max()</code> or <code>mean()</code>) to be performed directly. Avoid commas and symbols like “$.” If there is a possibility of ambiguity, indicate the denomination in the variable name (<em>e.g.</em>, <code>payment_dollars</code> or <code>payment_euros</code>).</p></li>
+<li><p><strong>currency</strong>: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like <code>max()</code> or <code>mean()</code>) to be performed directly. Avoid commas and symbols like “$”. If there is a possibility of ambiguity, indicate the denomination in the variable name (<em>e.g.</em>, <code>payment_dollars</code> or <code>payment_euros</code>).</p></li>
 </ol>
 </div>
 <div id="data-conventions-text" class="section level3" number="7.3.2">

@@ -206,6 +206,14 @@ The installation order does not matter.
 
 * **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install pysftp`; this calls pip through the `py` command which is sometimes in the path variable after installation.
 
+### PilotEdit {#workstation-pilot-edit}
+
+[PilotEdit](https://www.pilotedit.com/) can load huge text files that cannot fit into RAM, such as files that are over 100MB that choke Excel, [Calc](#workstation-calc),  [Notepad++](#workstation-notepadpp), and [Visual Studio Code](#workstation-vscode).  
+
+Like Notepad++ and VS Code, PilotEdit has good Find features that can (a) present all search hits within a file, (b) scan multiple files, and (c) use regular expressions.  This helps trace the origin of problems in a pipeline.  For example, if our data warehouse has a suspicious character in patient 10009's BMI value, the [regex](https://www.regular-expressions.info/) `\b10009\tbmi\b` locates the origin among the multiple 1+GB files we received.
+
+PilotEdit is also a good tool for the occasional data extract with an encoding problem.  You can side-by-side inspect the hex code and (visible or non-visible) character produced ([for example with ascii](https://www.binaryhexconverter.com/ascii-text-to-hex-converter), "76" produces "v" and "0A" produces a line feed).  {Added Sept 2020}
+
 Asset Locations {#workstation-assets}
 -----------------------------------
 

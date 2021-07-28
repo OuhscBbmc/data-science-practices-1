@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-06-15" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="troubleshooting.html"/>
 <link rel="next" href="tools.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -423,6 +423,7 @@ div.csl-indent {
 <li class="chapter" data-level="18.3.2" data-path="workstation.html"><a href="workstation.html#workstation-calc"><i class="fa fa-check"></i><b>18.3.2</b> LibreOffice Calc</a></li>
 <li class="chapter" data-level="18.3.3" data-path="workstation.html"><a href="workstation.html#workstation-pandoc"><i class="fa fa-check"></i><b>18.3.3</b> pandoc</a></li>
 <li class="chapter" data-level="18.3.4" data-path="workstation.html"><a href="workstation.html#workstation-python"><i class="fa fa-check"></i><b>18.3.4</b> Python</a></li>
+<li class="chapter" data-level="18.3.5" data-path="workstation.html"><a href="workstation.html#workstation-pilot-edit"><i class="fa fa-check"></i><b>18.3.5</b> PilotEdit</a></li>
 </ul></li>
 <li class="chapter" data-level="18.4" data-path="workstation.html"><a href="workstation.html#workstation-assets"><i class="fa fa-check"></i><b>18.4</b> Asset Locations</a></li>
 <li class="chapter" data-level="18.5" data-path="workstation.html"><a href="workstation.html#workstation-administrator"><i class="fa fa-check"></i><b>18.5</b> Administrator Installation</a>
@@ -466,13 +467,15 @@ div.csl-indent {
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
-<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.4</b> for New Collaborators</a></li>
-<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.5</b> Steps for Contributing to Repo</a>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-justification"><i class="fa fa-check"></i><b>A.1</b> Justification</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.2</b> for Code Development</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.3</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.4</b> for Stability</a></li>
+<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#organization-wide-defaults-and-practices"><i class="fa fa-check"></i><b>A.5</b> Organization-wide defaults and practices</a></li>
+<li class="chapter" data-level="A.6" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.6</b> for New Collaborators</a></li>
+<li class="chapter" data-level="A.7" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.7</b> Steps for Contributing to Repo</a>
 <ul>
-<li class="chapter" data-level="A.5.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.5.1</b> Regular Contributions</a></li>
+<li class="chapter" data-level="A.7.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.7.1</b> Regular Contributions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
@@ -730,6 +733,12 @@ div.csl-indent {
 <li><p><strong><a href="https://www.python.org/downloads/">Standard Python</a></strong>, while installing packages through pip3 in the terminal. If the <code>pip3</code> command is unrecognized because it’s missing from the OS <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> variable, an alternative is <code>py -3 -mpip install pysftp</code>; this calls pip through the <code>py</code> command which is sometimes in the path variable after installation.</p></li>
 </ul>
 </div>
+<div id="workstation-pilot-edit" class="section level3" number="18.3.5">
+<h3><span class="header-section-number">18.3.5</span> PilotEdit</h3>
+<p><a href="https://www.pilotedit.com/">PilotEdit</a> can load huge text files that cannot fit into RAM, such as files that are over 100MB that choke Excel, <a href="workstation.html#workstation-calc">Calc</a>, <a href="workstation.html#workstation-notepadpp">Notepad++</a>, and <a href="workstation.html#workstation-vscode">Visual Studio Code</a>.</p>
+<p>Like Notepad++ and VS Code, PilotEdit has good Find features that can (a) present all search hits within a file, (b) scan multiple files, and (c) use regular expressions. This helps trace the origin of problems in a pipeline. For example, if our data warehouse has a suspicious character in patient 10009’s BMI value, the <a href="https://www.regular-expressions.info/">regex</a> <code>\b10009\tbmi\b</code> locates the origin among the multiple 1+GB files we received.</p>
+<p>PilotEdit is also a good tool for the occasional data extract with an encoding problem. You can side-by-side inspect the hex code and (visible or non-visible) character produced (<a href="https://www.binaryhexconverter.com/ascii-text-to-hex-converter">for example with ascii</a>, “76” produces “v” and “0A” produces a line feed). {Added Sept 2020}</p>
+</div>
 </div>
 <div id="workstation-assets" class="section level2" number="18.4">
 <h2><span class="header-section-number">18.4</span> Asset Locations</h2>
@@ -792,7 +801,7 @@ div.csl-indent {
 <div id="workstation-ubuntu" class="section level2" number="18.7">
 <h2><span class="header-section-number">18.7</span> Ubuntu Installation</h2>
 <p>Ubuntu desktop 19.04 follows <a href="https://askubuntu.com/a/862520/153921">these instructions</a> for the R and RStudio and required these debian packages to be installed before the R packages. The <code>--yes</code> option avoids manual confirmation for each line, so you can copy &amp; paste this into the terminal.</p>
-<p>Add the following to the sources with <code>sudo nano /etc/apt/sources.list</code>. The ‘eoan’ version may be updated; The ‘metrocast’ part could be modified too from <a href="https://launchpad.net/ubuntu/+archivemirrors">this list</a>. I found it worked better for a new Ubuntu release than ‘cloud.r-project.org.’</p>
+<p>Add the following to the sources with <code>sudo nano /etc/apt/sources.list</code>. The ‘eoan’ version may be updated; The ‘metrocast’ part could be modified too from <a href="https://launchpad.net/ubuntu/+archivemirrors">this list</a>. I found it worked better for a new Ubuntu release than ‘cloud.r-project.org’.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb64-1"><a href="workstation.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For R 4.0</span></span>
 <span id="cb64-2"><a href="workstation.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="ex">deb</span> https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/</span>
 <span id="cb64-3"><a href="workstation.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="ex">deb</span> http://mirror.genesisadaptive.com/ubuntu/ focal-backports main restricted universe</span>
@@ -879,7 +888,7 @@ div.csl-indent {
 <span id="cb65-75"><a href="workstation.html#cb65-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
 <span id="cb65-76"><a href="workstation.html#cb65-76" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
 <span id="cb65-77"><a href="workstation.html#cb65-77" aria-hidden="true" tabindex="-1"></a><span class="ex">install-packages</span></span>
-<span id="cb65-78"><a href="workstation.html#cb65-78" aria-hidden="true" tabindex="-1"></a><span class="er">)</span></span></code></pre></div>
+<span id="cb65-78"><a href="workstation.html#cb65-78" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
 <p>The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, <a href="https://github.com/jgm/pandoc/releases">download the .deb file</a> then install from the same directory. Finally, verify the version.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb66-1"><a href="workstation.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> pandoc-<span class="pp">*</span></span>
 <span id="cb66-2"><a href="workstation.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-v</span></span></code></pre></div>
@@ -905,13 +914,13 @@ div.csl-indent {
 </ul></li>
 <li><p><strong><a href="http://csved.sjfrancke.nl/">CSVed</a></strong> is a lightweight program for viewing data files. It fits somewhere between a text editor and Excel.</p></li>
 <li><p><strong><a href="http://www.sourcetreeapp.com/">SourceTree</a></strong> is a rich client that has many more features than the GitHub client. I don’t recommend it for beginners, since it has more ways to mess up things. But for developers, it nicely fills a spot in between the GitHub client and command-line operations. The branching visualization is really nice too. Unfortunately and ironically, it doesn’t currently support Linux. {added Sept 2014}.</p></li>
-<li><p><strong><a href="http://git-cola.github.io/">git-cola</a></strong> is probably the best GUI for Git supported on Linux. It’s available through the official <a href="http://packages.ubuntu.com/search?keywords=git-cola">Ubuntu repositories</a> with <code>apt-get</code> (also see <a href="https://apps.ubuntu.com/cat/applications/git-cola/">this</a>). The branch visualization features are in a different, but related program, ‘git dag.’ {added Sept 2014}</p></li>
+<li><p><strong><a href="http://git-cola.github.io/">git-cola</a></strong> is probably the best GUI for Git supported on Linux. It’s available through the official <a href="http://packages.ubuntu.com/search?keywords=git-cola">Ubuntu repositories</a> with <code>apt-get</code> (also see <a href="https://apps.ubuntu.com/cat/applications/git-cola/">this</a>). The branch visualization features are in a different, but related program, ‘git dag’. {added Sept 2014}</p></li>
 <li><p><strong><a href="http://eclipse.github.com/">GitHub for Eclipse</a></strong> is something I discourage for a beginner, and I strongly recommend you start with RStudio (and <a href="http://windows.github.com/">GitHub Client</a> or the git capabilities within RStudio) for a few months before you even consider Eclipse. It’s included in this list for the sake of completeness. When installing EGit plug-in, ignore eclipse site and check out this youtube video:<a href="http://www.youtube.com/watch?v=I7fbCE5nWPU" class="uri">http://www.youtube.com/watch?v=I7fbCE5nWPU</a>.</p></li>
 <li><p><strong><a href="http://colororacle.org/">Color Oracle</a></strong> simulates the three most common types of color blindness. If you have produce a color graph in a report you develop, check it with Color Oracle (or ask someone else too). If it’s already installed, it takes less than 10 second to check it against all three types of color blindness. If it’s not installed, extra work may be necessary if Java isn’t already installed. When you download the zip, extract the <code>ColorOracle.exe</code> program where you like. {added Sept 2012}</p></li>
 <li><p><strong><a href="https://atom.io/">Atom</a></strong> is a text editor, similar to Notepad++. Notepad++ appears more efficient opening large CSVs. Atom is better suited when editing a lot of files in a repository. For finding and replacing across a lot of files, it is superior to Notepad++ and RStudio; it permits regexes and has a great GUI preview of the potential replacements.</p>
 <p>Productivity is enhanced with the following <a href="https://atom.io/packages">Atom packages</a>:</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://atom.io/packages/Sublime-Style-Column-Selection">Sublime Style Column Selection</a>: Enable Sublime style ‘Column Selection.’ Just hold ‘alt’ while you select, or select using your middle mouse button.</li>
+<li><a href="https://atom.io/packages/Sublime-Style-Column-Selection">Sublime Style Column Selection</a>: Enable Sublime style ‘Column Selection’. Just hold ‘alt’ while you select, or select using your middle mouse button.</li>
 <li><a href="https://atom.io/packages/atom-language-r">atom-language-r</a> allows Atom to recognize files as R. This prevents spell checking indicators and enable syntax highlighting. When you need to browse through a lot of scattered R files quickly, Atom’s tree panel (on the left) works well. An older alternative is <a href="https://atom.io/packages/language-r">language-r</a>.</li>
 <li><a href="https://atom.io/packages/language-csv">language-csv</a>: Adds syntax highlighting to <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files. The highlighting is nice, and it automatically disables spell checking lines.</li>
 <li><a href="https://atom.io/packages/atom-beautify">atom-beautify</a>: Beautify HTML, CSS, JavaScript, PHP, Python, Ruby, Java, C, C++, C#, Objective-C, CoffeeScript, TypeScript, Coldfusion, SQL, and more in Atom.</li>

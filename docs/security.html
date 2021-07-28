@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-06-15" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="patterns.html"/>
 <link rel="next" href="automation.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -423,6 +423,7 @@ div.csl-indent {
 <li class="chapter" data-level="18.3.2" data-path="workstation.html"><a href="workstation.html#workstation-calc"><i class="fa fa-check"></i><b>18.3.2</b> LibreOffice Calc</a></li>
 <li class="chapter" data-level="18.3.3" data-path="workstation.html"><a href="workstation.html#workstation-pandoc"><i class="fa fa-check"></i><b>18.3.3</b> pandoc</a></li>
 <li class="chapter" data-level="18.3.4" data-path="workstation.html"><a href="workstation.html#workstation-python"><i class="fa fa-check"></i><b>18.3.4</b> Python</a></li>
+<li class="chapter" data-level="18.3.5" data-path="workstation.html"><a href="workstation.html#workstation-pilot-edit"><i class="fa fa-check"></i><b>18.3.5</b> PilotEdit</a></li>
 </ul></li>
 <li class="chapter" data-level="18.4" data-path="workstation.html"><a href="workstation.html#workstation-assets"><i class="fa fa-check"></i><b>18.4</b> Asset Locations</a></li>
 <li class="chapter" data-level="18.5" data-path="workstation.html"><a href="workstation.html#workstation-administrator"><i class="fa fa-check"></i><b>18.5</b> Administrator Installation</a>
@@ -466,13 +467,15 @@ div.csl-indent {
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
-<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.4</b> for New Collaborators</a></li>
-<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.5</b> Steps for Contributing to Repo</a>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-justification"><i class="fa fa-check"></i><b>A.1</b> Justification</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.2</b> for Code Development</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.3</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.4</b> for Stability</a></li>
+<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#organization-wide-defaults-and-practices"><i class="fa fa-check"></i><b>A.5</b> Organization-wide defaults and practices</a></li>
+<li class="chapter" data-level="A.6" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.6</b> for New Collaborators</a></li>
+<li class="chapter" data-level="A.7" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.7</b> Steps for Contributing to Repo</a>
 <ul>
-<li class="chapter" data-level="A.5.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.5.1</b> Regular Contributions</a></li>
+<li class="chapter" data-level="A.7.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.7.1</b> Regular Contributions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
@@ -609,7 +612,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <ol style="list-style-type: decimal">
 <li><em>Remove the variable</em>: An empty bucket has nothing to leak.</li>
 <li><em>Decrease the resolution</em>: Many times, a patient’s year of birth is adequate for analysis, and include the month and day are unnecessary risks.</li>
-<li><em>Hash and salt identifiers</em>: use cryptographic-quality algorithms transform an ID to a derived value. For example, “234” becomes “1432c1a399.” The original value of 234 is not recoverable from 1432c1a399. But two rows with 1432c1a399 are still attributed to the same patient by the statistical model.</li>
+<li><em>Hash and salt identifiers</em>: use cryptographic-quality algorithms transform an ID to a derived value. For example, “234” becomes “1432c1a399”. The original value of 234 is not recoverable from 1432c1a399. But two rows with 1432c1a399 are still attributed to the same patient by the statistical model.</li>
 </ol>
 </div>
 <div id="security-for-data-at-rest" class="section level2" number="9.3">
@@ -670,7 +673,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li><p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="security.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
 <span id="cb39-2"><a href="security.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--mirror</span> https://github.com/your-org/bloated.git</span></code></pre></div></li>
-<li><p>Remove all files (in any directory) called ‘monster-data.csv.’</p>
+<li><p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="security.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> bfg-<span class="pp">*</span>.jar <span class="at">--delete-files</span> monster-data.csv bloated.git</span></code></pre></div></li>
 <li><p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="security.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bloated.git</span>
