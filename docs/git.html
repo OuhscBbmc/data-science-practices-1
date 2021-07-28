@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-06-16" />
+<meta name="date" content="2021-07-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="redcap-admin.html"/>
 <link rel="next" href="snippets.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -467,13 +467,15 @@ div.csl-indent {
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.1</b> for Code Development</a></li>
-<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.2</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.3</b> for Stability</a></li>
-<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.4</b> for New Collaborators</a></li>
-<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.5</b> Steps for Contributing to Repo</a>
+<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-justification"><i class="fa fa-check"></i><b>A.1</b> Justification</a></li>
+<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.2</b> for Code Development</a></li>
+<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.3</b> for Collaboration</a></li>
+<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.4</b> for Stability</a></li>
+<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#organization-wide-defaults-and-practices"><i class="fa fa-check"></i><b>A.5</b> Organization-wide defaults and practices</a></li>
+<li class="chapter" data-level="A.6" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.6</b> for New Collaborators</a></li>
+<li class="chapter" data-level="A.7" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.7</b> Steps for Contributing to Repo</a>
 <ul>
-<li class="chapter" data-level="A.5.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.5.1</b> Regular Contributions</a></li>
+<li class="chapter" data-level="A.7.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.7.1</b> Regular Contributions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
@@ -558,16 +560,37 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="git" class="section level1" number="24">
 <h1><span class="header-section-number">A</span> Git &amp; GitHub</h1>
-<div id="git-code" class="section level2" number="24.1">
-<h2><span class="header-section-number">A.1</span> for Code Development</h2>
+<div id="git-justification" class="section level2" number="24.1">
+<h2><span class="header-section-number">A.1</span> Justification</h2>
+<p>(<em>Written in 2017 to justify the service to a corporation’s IT department.</em>)
+Git and GitHub are the de facto version control software and hosting solution for software development in modern data science. Using GitHub will help our group with three critical tasks: (a) developing our own software, (b) leveraging innovations of others, and (c) attracting top talent.</p>
+<p><strong>Developing Software</strong>: Version control is critical for developing quality software, especially when multiple data scientists are contributing to the same code bank. Among modern version control software, Git and GitHub are the most popular for new projects, especially among the talent pool that we recruit from. Compared to outdated approaches using conventional file-servers, version control substantially increases productivity. Analysts can develop code &amp; report in parallel, and then combine when their branch is mature. Additionally, all commits are saved indefinitely, allowing us to ‘turn back the clock’ are resurrect older code when necessary. It also allows us to organize and manage our proprietary code in a single (distributed) location.</p>
+<p>Given the needs of our small data science team, we believe that private GitHub repositories (secured with two-factor authentication) strike a nice balance between (a) security, (b) ease of use for developers, (c) ease of maintenance for administrators, and (d) cost.</p>
+<p><strong>Leveraging Innovation</strong>: Most cutting-edge data science algorithms are released on GitHub. These algorithms are not stand-alone software; instead they augment the statistical software, R, which has been approved by IT. Furthermore, GitHub.com hosts the documentation and user forums for most data science algorithms. Without access to this information, we are at greater risk of misunderstanding and misusing the routines, which could weaken the accuracy of the financial reports we produce.</p>
+<p><strong>Attracting Talent</strong>: As we compete for the top talent in the highly competitive field of data science, we want to provide access its standard tools. We do not want to send the message that our organization doesn’t value the advancements appreciated and employed by our competitors.</p>
+<p><strong>Alternatives</strong>:</p>
+<ul>
+<li>GitHub Enterprise: hosting solution developed by GitHub, but hosted on a university-controlled VM.</li>
+<li>GitLab: A competitor to GitHub. GitLab uses Git, but has a different hosting options</li>
+<li>Mercurial: modern version control that is similar to Git. It has many of Git’s strengths and avoids many of the undesirable features of Subversion/SVN.</li>
+<li>Atlassian: A competitor to GitHub that focuses on businesses. Altassian/Bitbucket repositories can use Git or Mercurial. Like GitHub and GitLab, offers different hosting options.</li>
+</ul>
+<p><strong>Resources</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>GitHub for Business</li>
+<li>Git for Teams</li>
+</ol>
+</div>
+<div id="git-code" class="section level2" number="24.2">
+<h2><span class="header-section-number">A.2</span> for Code Development</h2>
 <p><a href="https://github.com/jennybc">Jenny Bryan</a> and <a href="https://github.com/jimhester">Jim Hester</a> have published a thorough description of using Git from a data scientist’s perspective (<a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a>), and we recommend following their guidance. It is consistent with our approach, with a few exceptions noted below. A complementary resource is <em><a href="https://smile.amazon.com/dp/1449302440">Team Geek</a></em>, which has insightful advice for the human and collaborative aspects of version control.</p>
 <p>Other Resources</p>
 <ol style="list-style-type: decimal">
 <li><a href="https://blog.travis-ci.com/2019-05-30-setting-up-a-ci-cd-process-on-github">Setting up a CI/CD Process on GitHub with Travis CI</a>. Travis-CI blob from August 2019.</li>
 </ol>
 </div>
-<div id="git-collaboration" class="section level2" number="24.2">
-<h2><span class="header-section-number">A.2</span> for Collaboration</h2>
+<div id="git-collaboration" class="section level2" number="24.3">
+<h2><span class="header-section-number">A.3</span> for Collaboration</h2>
 <ol style="list-style-type: decimal">
 <li><p>Somewhat separate from it’s version control capabilities, GitHub provides built-in tools for coordinating projects across people and time. This tools revolves around <a href="https://guides.github.com/features/issues/">GitHub Issues</a>, which allow teammates to</p></li>
 <li><p>track issues assigned to them and others</p></li>
@@ -589,8 +612,8 @@ div.csl-indent {
 </ol>
 <!-- Consider including good examples, like https://github.com/OuhscBbmc/miechv-3/issues/2073.  Probably shorten some for clarity. -->
 </div>
-<div id="git-stability" class="section level2" number="24.3">
-<h2><span class="header-section-number">A.3</span> for Stability</h2>
+<div id="git-stability" class="section level2" number="24.4">
+<h2><span class="header-section-number">A.4</span> for Stability</h2>
 <ol style="list-style-type: decimal">
 <li><p>Review Git commits closely</p>
 <ol style="list-style-type: decimal">
@@ -600,15 +623,40 @@ div.csl-indent {
 </ol></li>
 </ol>
 </div>
-<div id="git-collaborators" class="section level2" number="24.4">
-<h2><span class="header-section-number">A.4</span> for New Collaborators</h2>
+<div id="organization-wide-defaults-and-practices" class="section level2" number="24.5">
+<h2><span class="header-section-number">A.5</span> Organization-wide defaults and practices</h2>
+<p>Our core-wide goal of being <a href="https://en.wikipedia.org/wiki/Secure_by_default">secure by default</a> applies to GitHub too. Some security measures have to be added explicitly (<em>e.g.</em>, <code>.gitignore</code> blocking common data files like <code>*.csv</code> &amp; <code>*.xlsx</code>), but these organization-wide settings make new repo more secure as soon as their initialized, even at the cost of accessibility.</p>
+<p><em>Defaults</em></p>
+<ol style="list-style-type: decimal">
+<li><p>Two-factor authentication <a href="https://help.github.com/articles/requiring-two-factor-authentication-in-your-organization/">is required</a> for all organization memebers and outside collaborators. See setting “Security” =&gt; “Two-factor authentication”</p></li>
+<li><p>Organization members are <a href="https://help.github.com/articles/repository-permission-levels-for-an-organization/#restricting-people-from-creating-repositories">restricted from creating repositories</a>. See setting “Member privileges” =&gt; “Repository creation”.</p></li>
+<li><p>Organization members have <a href="https://help.github.com/articles/repository-permission-levels-for-an-organization/#restricting-people-from-creating-repositories">zero permissions on new repositories</a>. See setting “Member privileges” =&gt; “Default repository permission”
+.</p></li>
+</ol>
+<p><em>Practices</em></p>
+<ol style="list-style-type: decimal">
+<li><p>Authorized teammates outside OUHSC are designated as <a href="https://help.github.com/articles/adding-outside-collaborators-to-repositories-in-your-organization/">outside collaborators</a>, instead of “members”.</p></li>
+<li><p>Only three people are <a href="https://help.github.com/articles/permission-levels-for-an-organization/">owners</a> of the GitHub organization. Everyone else must be explicitly added to each appropriate repository. Other important restrictions to members include (a) cannot add/delete/transfer (private or public) repositories and (b) cannot add/delete other members to organization.</p></li>
+<li><p>Every week, an owner (probably <span class="citation">(<a href="#ref-wibeasley" role="doc-biblioref"><strong>wibeasley?</strong></a>)</span>) will review the <a href="https://github.com/organizations/OuhscBbmc/settings/audit-log">organization’s audit log</a> (which only owners can view).</p></li>
+<li><p>Two or more owners must discuss and agree upon adding/modifying/deleting any extra entity added to our GitHub Organization, including</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://developer.github.com/webhooks/">webhooks</a>,</li>
+<li><a href="https://help.github.com/articles/about-third-party-application-restrictions/">third-party applications</a>,</li>
+<li><a href="https://developer.github.com/early-access/integrations/">installed integration</a>, and</li>
+<li><a href="https://developer.github.com/v3/oauth/">OAuth applications</a>.</li>
+</ol>
+<p>Currently, the only approved entity is the <a href="https://codecov.io/">Codecov</a> integration, which helps us test our package code and quantify its coverage (“Improve code quality. Expose bugs and security vulnerabilities.”). Codecov must be explicitly turned on for each desired repository.</p></li>
+</ol>
 </div>
-<div id="git-contribution" class="section level2" number="24.5">
-<h2><span class="header-section-number">A.5</span> Steps for Contributing to Repo</h2>
-<div id="git-contribution-regular" class="section level3" number="24.5.1">
-<h3><span class="header-section-number">A.5.1</span> Regular Contributions</h3>
-<div id="git-contribution-regular-pull" class="section level4" number="24.5.1.1">
-<h4><span class="header-section-number">A.5.1.1</span> Keep your dev branch fresh</h4>
+<div id="git-collaborators" class="section level2" number="24.6">
+<h2><span class="header-section-number">A.6</span> for New Collaborators</h2>
+</div>
+<div id="git-contribution" class="section level2" number="24.7">
+<h2><span class="header-section-number">A.7</span> Steps for Contributing to Repo</h2>
+<div id="git-contribution-regular" class="section level3" number="24.7.1">
+<h3><span class="header-section-number">A.7.1</span> Regular Contributions</h3>
+<div id="git-contribution-regular-pull" class="section level4" number="24.7.1.1">
+<h4><span class="header-section-number">A.7.1.1</span> Keep your dev branch fresh</h4>
 <p>We recommend doing this at least every day you write code in a repo. Perhaps more frequently if a lot of developers are pushing code (<em>e.g.</em>, right before a reporting deadline).</p>
 <ol style="list-style-type: decimal">
 <li>Update master on your local machine (from the GitHub server)</li>
@@ -616,8 +664,8 @@ div.csl-indent {
 <li>Push your local dev branch to the GitHub server</li>
 </ol>
 </div>
-<div id="git-contribution-regular-push" class="section level4" number="24.5.1.2">
-<h4><span class="header-section-number">A.5.1.2</span> Make your code contributions available to other analysts</h4>
+<div id="git-contribution-regular-push" class="section level4" number="24.7.1.2">
+<h4><span class="header-section-number">A.7.1.2</span> Make your code contributions available to other analysts</h4>
 <p>At least every few days, push your changes to the master branch so teammates can benefit from your work. Especially if you are improving the pipeline code (<em>e.g.</em> Ellises or REDCap Arches)</p>
 <ol style="list-style-type: decimal">
 <li>Make sure you dev branch is updated immediately before you create a <a href="">Pull Request</a>. Follow the <a href="git.html#git-contribution-regular-pull">steps above</a>.</li>
