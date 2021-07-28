@@ -36,6 +36,10 @@ jobs:
           key: bookdown-${{ hashFiles('**/*Rmd') }}
           restore-keys: bookdown-
 
+      - name: Install bookdown
+        run: |
+          R -e 'install.packages("bookdown")'
+
       - name: Install packages
         run: |
           R -e 'install.packages("renv")'
