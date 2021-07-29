@@ -10,6 +10,7 @@ Justification {#git-justification}
 ------------------------------------
 
 (*Written in 2017 to justify the service to a corporation's IT department.*)
+
 Git and GitHub are the de facto version control software and hosting solution for software development in modern data science.  Using GitHub will help our group with three critical tasks: (a) developing our own software, (b) leveraging innovations of others, and (c) attracting top talent.
 
 **Developing Software**: Version control is critical for developing quality software, especially when multiple data scientists are contributing to the same code bank.  Among modern version control software, Git and GitHub are the most popular for new projects, especially among the talent pool that we recruit from.  Compared to outdated approaches using conventional file-servers, version control substantially increases productivity.  Analysts can develop code & report in parallel, and then combine when their branch is mature.  Additionally, all commits are saved indefinitely, allowing us to 'turn back the clock' are resurrect older code when necessary.  It also allows us to organize and manage our proprietary code in a single (distributed) location.
@@ -20,12 +21,12 @@ Given the needs of our small data science team, we believe that private GitHub r
 
 **Attracting Talent**: As we compete for the top talent in the highly competitive field of data science, we want to provide access its standard tools.  We do not want to send the message that our organization doesn't value the advancements appreciated and employed by our competitors.
 
-**Alternatives**:
+**Alternatives**: The GitHub approach described above is the most common, but is not the only approached endorsed by contemporary developers.  Others include:
 
 * GitHub Enterprise: hosting solution developed by GitHub, but hosted on a university-controlled VM.
-* GitLab:  A competitor to GitHub.  GitLab uses Git, but has a different hosting options
-* Mercurial: modern version control that is similar to Git.  It has many of Git’s strengths and avoids many of the undesirable features of Subversion/SVN.
-* Atlassian: A competitor to GitHub that focuses on businesses.  Altassian/Bitbucket repositories can use Git or Mercurial.  Like GitHub and GitLab, offers different hosting options.
+* GitLab:  A competitor to GitHub.  GitLab uses Git, but has a different hosting options, both cloud and on-premisis.
+* Mercurial: modern version control that is similar to Git.  It has many of Git's strengths and avoids many of the undesirable features of Subversion/SVN.
+* Atlassian: A competitor to GitHub that focuses on businesses.  Altassian/Bitbucket repositories can use Git or Mercurial.  Like GitHub and GitLab, they offers different hosting options.
 
 **Resources**:
 
