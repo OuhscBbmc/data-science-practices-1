@@ -84,7 +84,7 @@ Almost every project recodes many variables.  Choose the simplest function possi
     stage_post  = (date_start <= month)
     ```
 
-1. **`base::cut()`**: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).
+1. **`base::cut()`**: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
 
 1. **`dplyr::recode()`**: The function evaluates a single integer or character variable.  The output branches to a single discrete value.
 
