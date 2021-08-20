@@ -40,7 +40,7 @@ Many of the GUI options are easy to specify, but three are error-prone, and must
 * **Program/script:** is the absolute path to `Rscript.exe`.  It needs to be updated every time you upgrade R (unless you're doing something tricky with the `PATH` environmental OS variable).  Notice we are using the "patched" version of R.  The entry should be enclosed in quotes.
 
     ```sh
-    "C:\Program Files\R\R-3.6.2patched\bin\Rscript.exe"
+    "C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"
     ```
 
 * **Add arguments (optional):** specifies the flow file to run.  In this case, the repo 'butcher-hearing-screen-1' is under in the 'Documents/cdw/` directory; the [flow file](#automation-flow) is located in the repo's root directory, as discussed in the [prototypical repo](#repo-flow).  The entry should be enclosed in quotes.
