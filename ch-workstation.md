@@ -282,30 +282,37 @@ Installation Troubleshooting {#workstation-troubleshooting}
 Ubuntu Installation {#workstation-ubuntu}
 -----------------------------------
 
-Ubuntu desktop 19.04 follows [these instructions](https://askubuntu.com/a/862520/153921) for the R and RStudio and required these debian packages to be installed before the R packages.  The `--yes` option avoids manual confirmation for each line, so you can copy & paste this into the terminal.
+### R {#workstation-ubuntu-r}
 
-Add the following to the sources with `sudo nano /etc/apt/sources.list`.  The 'eoan' version may be updated; The 'metrocast' part could be modified too from [this list](https://launchpad.net/ubuntu/+archivemirrors).  I found it worked better for a new Ubuntu release than 'cloud.r-project.org'.
+Check <https://cran.r-project.org/bin/linux/ubuntu/> for the most recent instructions.
 
 ```sh
-# For R 4.0
-deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/
-deb http://mirror.genesisadaptive.com/ubuntu/ focal-backports main restricted universe
-
-# For R 3.5 & #.6
-deb https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/
-deb-src https://cloud.r-project/bin/linux/ubuntu/ eoan-cran35/
-deb http://mirror.metrocast.net/ubuntu/ eoan-backports main restricted universe
+  ### Add the key, update the list, then install base R.
+  sudo apt update -qq
+  sudo apt install --no-install-recommends software-properties-common dirmngr
+  wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+  sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+  sudo apt-get install r-base r-base-dev
 ```
+
+### RStudio {#workstation-ubuntu-rstudio}
+
+Download the most recent version from  <https://www.rstudio.com/products/rstudio/download/#download>. Then run the two `gdebi()` lines.
+Alternatively, update the `wget` line with the most recent version.
+
+```sh
+  # wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.4.1717-amd64.deb
+  sudo apt-get install gdebi-core
+  sudo gdebi rstudio-*-amd64.deb
+```
+
+### apt-get Packages {#workstation-ubuntu-packages}
 
 This next block can be copied and pasted (ctrl-shift-v) into the console [entirely](https://stackoverflow.com/a/43164204).  Or lines can be pasted individual (without the `( function install-packages {` line, or the last three lines).
 
 ```sh
 ( function install-packages {
-  ### Add the key, update the list, then install base R.
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-  sudo apt-get update
-  sudo apt-get install r-base r-base-dev
-
+  
   ### Git
   sudo apt-get install git-core
   git config --global user.email "wibeasley@hotmail.com"
@@ -380,6 +387,8 @@ install-packages
 )
 ```
 
+### Pandoc {#workstation-ubuntu-pandoc}
+
 The version of pandoc from the Ubuntu repository may be delayed.  To install the latest version, [download the .deb file](https://github.com/jgm/pandoc/releases) then install from the same directory.  Finally, verify the version.
 
 ```sh
@@ -387,7 +396,9 @@ sudo dpkg -i pandoc-*
 pandoc -v
 ```
 
-The Postman native app for Ubuntu is [installed](https://learning.getpostman.com/docs/postman/launching-postman/installation-and-updates/#installing-postman-on-linux) through [snap](https://tutorials.ubuntu.com/tutorial/basic-snap-usage), which is [updated daily automatically](https://tutorials.ubuntu.com/tutorial/basic-snap-usage#2).
+### Postman {#workstation-ubuntu-postman}
+
+The Postman native app for Ubuntu is [installed](https://learning.postman.com/docs/getting-started/installation-and-updates/#installing-postman-on-linux) through [snap](https://tutorials.ubuntu.com/tutorial/basic-snap-usage), which is [updated daily automatically](https://tutorials.ubuntu.com/tutorial/basic-snap-usage#2).
 
 ```sh
 snap install postman
