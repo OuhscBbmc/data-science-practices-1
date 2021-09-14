@@ -35,21 +35,21 @@ Scheduling {#automation-scheduling}
 
 [Windows Task Scheduler](https://en.wikipedia.org/wiki/Windows_Task_Scheduler) is the common choice when scheduling tasks on Windows.
 
-Many of the GUI options are easy to specify, but three are error-prone, and must be specified carefully.  The exist under "Actions" | "Start a program".
+Many of the GUI options are easy to specify, but three are error-prone, and must be specified carefully.  They exist under "Actions" | "Start a program".
 
-* **Program/script:** is the absolute path to `Rscript.exe`.  It needs to be updated every time you upgrade R (unless you're doing something tricky with the `PATH` environmental OS variable).  Notice we are using the "patched" version of R.  The entry should be enclosed in quotes.
+1. **Program/script:** is the absolute path to `Rscript.exe`.  It needs to be updated every time you upgrade R (unless you're doing something tricky with the `PATH` environmental OS variable).  Notice we are using the "patched" version of R.  The entry should be enclosed in quotes.
 
     ```sh
     "C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"
     ```
 
-* **Add arguments (optional):** specifies the flow file to run.  In this case, the repo 'butcher-hearing-screen-1' is under in the 'Documents/cdw/` directory; the [flow file](#automation-flow) is located in the repo's root directory, as discussed in the [prototypical repo](#repo-flow).  The entry should be enclosed in quotes.
+1. **Add arguments (optional):** specifies the flow file to run.  In this case, the repo 'butcher-hearing-screen-1' is under in the 'Documents/cdw/` directory; the [flow file](#automation-flow) is located in the repo's root directory, as discussed in the [prototypical repo](#repo-flow).  The entry should be enclosed in quotes.
 
     ```shell
     "C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R"
     ```
 
-* **Start in (optional):** sets the working directory.  If not properly set, the relative paths of the files will not point to the correct locations.  It should be identical to the entry above, but (a) does not include '/flow.R' and (b) does NOT contains quotes.
+1. **Start in (optional):** sets the working directory.  If not properly set, the relative paths of the files will not point to the correct locations.  It should be identical to the entry above, but (a) does not include '/flow.R' and (b) does NOT contains quotes.
 
     ```shell
     C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1
@@ -57,13 +57,15 @@ Many of the GUI options are easy to specify, but three are error-prone, and must
 
 Other options we typically specify are:
 
-1. "Run whether the user is logged in or not."
-1. "Run as the highest available version of Windows."
-1. "Wake the computer to run this task" is probably necessary if this is located on a normal desktop.  It is not something we specify, because our tasks are located on a [VM](https://en.wikipedia.org/wiki/System_virtual_machine)-based workstation that is never turned off.
+<ol start="4">
+  <li>"Run whether the user is logged in or not."</li>
+  <li>"Run as the highest available version of Windows."</li>
+  <li>"Wake the computer to run this task" is probably necessary if this is located on a normal desktop.  It is not something we specify, because our tasks are located on a [VM](https://en.wikipedia.org/wiki/System_virtual_machine)-based workstation that is never turned off.</li>
+</ol>
 
 Following these instructions, you are required to enter your password every time you modify the task, and every time you update your password.  If you are using network credentials, you probably should specify your account like "domain/username".  Be careful: when you modify a task and are prompted for a password, the GUI may subtly alter the account entry to just "username" (instead of "domain\username").  Make sure you prepend the username with the domain, as you enter the password.
 
-If you have 10+ tasks, consider creating a [System Environment Variable](https://www.computerhope.com/issues/ch000549.htm) called `%rscript_path%` whose value is something like `"C:\Program Files\R\R-4.1.0patched\bin\Rscript.exe"`.  When R is updated every few months, you need to change the path in only one place (*i.e.*, in the Environment Variables GUI) instead of in each task, which requires repeatedly re-entering your username and password.  If you defined the tasks differently than describe here, you may need to restart your machine to load the fresh variable value into the Task Scheduler environment.
+If you have 10+ tasks, consider creating a [System Environment Variable](https://www.computerhope.com/issues/ch000549.htm) called `%rscript_path%` whose value is something like `"C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"`.  The text `%rscript_path%` goes into step one ("Program/script" above).  When R is updated every few months, you need to change the path in only one place (*i.e.*, in the Environment Variables GUI) instead of in each task, which requires repeatedly re-entering your username and password.  If you defined the tasks differently than describe here, you may need to restart your machine to load the fresh variable value into the Task Scheduler environment.
 
 ### SQL Server Agent  {#automation-sql-server-agent}
 
