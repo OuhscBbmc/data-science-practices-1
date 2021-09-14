@@ -67,6 +67,8 @@ Following these instructions, you are required to enter your password every time
 
 If you have 10+ tasks, consider creating a [System Environment Variable](https://www.computerhope.com/issues/ch000549.htm) called `%rscript_path%` whose value is something like `"C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"`.  The text `%rscript_path%` goes into step one ("Program/script" above).  When R is updated every few months, you need to change the path in only one place (*i.e.*, in the Environment Variables GUI) instead of in each task, which requires repeatedly re-entering your username and password.  If you defined the tasks differently than describe here, you may need to restart your machine to load the fresh variable value into the Task Scheduler environment.
 
+If code executed by the task scheduler accesses a network drive or file share, the path cannot naturally reference the mapped letter.  The easiest solution is to spell out the full path.  For instance in the Python/R code, replace "<b>Q:/</b>subdirectory/hospital-location.csv" with "<b>//server-name/data-files/</b>subdirectory/hospital-location.csv".
+
 ### SQL Server Agent  {#automation-sql-server-agent}
 
 [SQL Server Agent](https://docs.microsoft.com/en-us/sql/ssms/agent/sql-server-agent) executes jobs on a specified schedule.  It also naturally interfaces with [SSIS packages](#automation-ssis) deployed to the server, but can also execute other formats, like a plain sql file.
