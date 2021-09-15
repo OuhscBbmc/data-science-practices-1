@@ -48,6 +48,12 @@ jobs:
       - name: Build site
         run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
 
+      - name: Deploy to GitHub pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: _docs
+          
       # - name: Install npm
       #   uses: actions/setup-node@v1
 
