@@ -90,9 +90,9 @@ The following subsections do not execute or schedule any code, but should be con
 
 ### Package Versions
 
-When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems.  And when they are, the error messages may not be as clear as when you are running the procedure in RStudio.  For these and other reasons, plan your strategy for maintaining the version of R and its packages.  Here are some approaches, with different tradeoffs.
+When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems.  And when they are, the error messages may not be as clear as when you are running the procedure in RStudio.  For these and other reasons, plan your strategy for maintaining the version of R and its packages.  Here are three approaches, with different tradeoffs.
 
-1. For most conventional projects, we keep all packages up to date, and live with the occasional breaks.  We stick to a practice of (a) run our daily workflow, (b) update the packages (and R & RStudio if necessary), (c) rereun that same week's workflow, and finally (d) verify that the results from a & c are the same.  If something is different, we have a day to adapt the pipeline code to the breaking changes in the packages.
+1. For most conventional projects, we keep all packages up to date, and live with the occasional breaks and down time.  When it's time to update packages for the week, we (a) run our daily reports in the morning, (b) update the packages (and R & RStudio if necessary), (c) rereun that same reports, and finally (d) verify that the results from a & c are the same.  If something is different, we have a day to adapt the pipeline code to the breaking changes in the packages.
 
 Before updating a package, read the NEWS file for changes that are not  backwards-compatible (commonly called "breaking changes" in the [news file](https://style.tidyverse.org/news.html#breaking-changes)).
 
@@ -122,7 +122,7 @@ If the changes to the pipeline code are too difficult to complete in a day, we c
        openxlsx    (== 4.0.17)
     ```
 
-    A downside is that it can be difficult to set up a identical machine in a few months.  Sometimes these packages have depend on packages that are incompatible with other package versions.  For example, at one point, the current version of dplyr was 0.4.3.  A few months later, the rlang package (which wasn't explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr.  The developer on the new machine needs to decide whether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.
+    A downside is that it can be difficult to set up a identical machine in a few months.  Sometimes these packages depend on a package version that is incompatible with other package versions.  For example, at one point, the current version of dplyr was 0.4.3.  A few months later, the rlang package (which wasn't explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr.  The developer on the new machine needs to decide whether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.
 
     A second important downside is that this approach can lock all the user's projects to specific outdated package version.
 
@@ -130,4 +130,4 @@ If the changes to the pipeline code are too difficult to complete in a day, we c
 
     When uptime is important and your team is experienced with other languages like Java, Python, or C#, consider if those would be better suited.
 
-1. A compromise between these two previous approaches in the [renv](https://rstudio.github.io/renv) package - R Environmentals.  It is a successor to [packrat](https://rstudio.github.io/packrat/).  It requires some learning and cognitive overhead.  But this investment becomes very appealing if (a) you were running hourly predictions and downtime is a big deal, or (b) your machine contains multiple projects that require different versions of the same package (such as dplyr 0.4.3 and dplyr 0.8.0).
+1. A compromise between these two previous approaches in the [renv](https://rstudio.github.io/renv) package - R Environmentals.  It is a successor to [packrat](https://rstudio.github.io/packrat/).  It requires some learning and cognitive overhead.  But this investment becomes very appealing if (a) you are running hourly predictions and downtime is a big deal, or (b) your machine contains multiple projects that require different versions of the same package (such as dplyr 0.4.3 and dplyr 0.8.0).
