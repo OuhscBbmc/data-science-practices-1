@@ -90,13 +90,13 @@ The following subsections do not execute or schedule any code, but should be con
 
 ### Package Versions
 
-When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems.  And when they are, the error messages may not be as clear as when you are running the procedure in RStudio.  For these and other reasons, plan your strategy for maintaining the version of R and its packages.  Here are three approaches, with different tradeoffs.
+When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems.  And when they are, the error messages may not be as clear as when you are running the procedure in RStudio.  For these and other reasons, plan your strategy for maintaining the version of R and its packages.  Here are three approaches and their tradeoffs.
 
 1. For most conventional projects, we keep all packages up to date, and live with the occasional breaks and down time.  When it's time to update packages for the week, we (a) run our daily reports in the morning, (b) update the packages (and R & RStudio if necessary), (c) rereun that same reports, and finally (d) verify that the results from a & c are the same.  If something is different, we have a day to adapt the pipeline code to the breaking changes in the packages.
 
-Before updating a package, read the NEWS file for changes that are not  backwards-compatible (commonly called "breaking changes" in the [news file](https://style.tidyverse.org/news.html#breaking-changes)).
+    Before updating a package, read the NEWS file for changes that are not  backwards-compatible (commonly called "breaking changes" in the [news file](https://style.tidyverse.org/news.html#breaking-changes)).
 
-If the changes to the pipeline code are too difficult to complete in a day, we can roll back to a previous version with [`remotes::install_version()`](https://remotes.r-lib.org/reference/install_version.html).
+    If the changes to the pipeline code are too difficult to complete in a day, we can roll back to a previous version with [`remotes::install_version()`](https://remotes.r-lib.org/reference/install_version.html).
 
 1. On the other side of the spectrum, you can meticulously specify the desired version of each R package.  This approach reduces the chance of a new version of a package breaking existing pipeline code.   We recommend this approach when uptime is very important.
 
