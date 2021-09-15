@@ -1,0 +1,43 @@
+book_filename: "data-science-practices-1"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
+output_dir: "docs"
+edit: https://github.com/ouhscbbmc/data-science-practices-1/edit/master/%s
+rmd_files:
+  [
+    "index.Rmd",
+    "ch-coding.md",
+    "ch-architecture.md",
+    "ch-file-prototype-r.md",
+    "ch-file-prototype-sql.md",
+    "ch-repo-prototype.md",
+    "ch-rest.md",
+    "ch-patterns.md",
+    "ch-security.md",
+    "ch-automation.md",
+    "ch-scaling-up.md",
+    "ch-collaboration.md",
+    "ch-documentation.md",
+    "ch-style.md",
+    "ch-publication.md",
+    "ch-testing-and-validation.md",
+    "ch-troubleshooting.md",
+    "ch-workstation.md",
+    "ch-tools.md",
+    "ch-team.md",
+    "ch-redcap-user.md",
+    "ch-redcap-developer.md",
+    "ch-redcap-admin.md",
+
+    # Appendices
+    "ch-git.md",
+    "ch-snippets.Rmd",
+    "ch-presentations.md",
+    "ch-scratch-pad.md",
+    "ch-example-dashboard.md",
+    "ch-example-chapter.Rmd",
+    "ch-acknowledgements.md",
+    "ch-references.md"
+  ]
