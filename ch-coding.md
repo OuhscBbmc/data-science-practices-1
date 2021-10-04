@@ -78,7 +78,7 @@ Almost every project recodes many variables.  Choose the simplest function possi
     date_start <- as.Date("2017-01-01")
 
     # If a missing month element needs to be handled explicitly.
-    stage       = dplyr::if_else(date_start <= month, "pre", "post", missing = "missing-month")
+    stage       = dplyr::if_else(date_start <= month, "post", "pre", missing = "missing-month")
 
     # Otherwise a simple boolean output is sufficient.
     stage_post  = (date_start <= month)

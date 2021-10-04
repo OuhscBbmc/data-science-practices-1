@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-10-01" />
+<meta name="date" content="2021-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -620,7 +620,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coding.html#cb5-1" aria-hidden="true" tabindex="-1"></a>date_start <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2017-01-01&quot;</span>)</span>
 <span id="cb5-2"><a href="coding.html#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="coding.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If a missing month element needs to be handled explicitly.</span></span>
-<span id="cb5-4"><a href="coding.html#cb5-4" aria-hidden="true" tabindex="-1"></a>stage       <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(date_start <span class="sc">&lt;=</span> month, <span class="st">&quot;pre&quot;</span>, <span class="st">&quot;post&quot;</span>, <span class="at">missing =</span> <span class="st">&quot;missing-month&quot;</span>)</span>
+<span id="cb5-4"><a href="coding.html#cb5-4" aria-hidden="true" tabindex="-1"></a>stage       <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(date_start <span class="sc">&lt;=</span> month, <span class="st">&quot;post&quot;</span>, <span class="st">&quot;pre&quot;</span>, <span class="at">missing =</span> <span class="st">&quot;missing-month&quot;</span>)</span>
 <span id="cb5-5"><a href="coding.html#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="coding.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Otherwise a simple boolean output is sufficient.</span></span>
 <span id="cb5-7"><a href="coding.html#cb5-7" aria-hidden="true" tabindex="-1"></a>stage_post  <span class="ot">=</span> (date_start <span class="sc">&lt;=</span> month)</span></code></pre></div></li>
