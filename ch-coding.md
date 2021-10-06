@@ -86,6 +86,37 @@ Almost every project recodes many variables.  Choose the simplest function possi
 
 1. **`base::cut()`**: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
 
+    ```r
+    mtcars |> 
+      tibble::as_tibble() |> 
+      dplyr::select(
+        disp,
+      ) |> 
+      dplyr::mutate(
+        # Example of a simple inequality operator (see two bullets above)
+        muscle_car            = (300 <= disp),
+        
+        # Divide `disp` into three levels.
+        size_default_labels   = cut(disp, breaks = c(-Inf, 200, 300, Inf), right = F),
+        
+        # Divide `disp` into three levels with custom labels.
+        size_cut3             = cut(
+          disp, 
+          breaks = c(-Inf,   200,      300,   Inf),
+          labels = c(  "small", "medium", "big"),
+          right = FALSE  # Is the right boundary INclusive ('FALSE' is an EXclusive boundary)
+        ),  
+        
+        # Divide `disp` into five levels with custom labels.
+        size_cut5             = cut(
+          disp, 
+          breaks = c(-Inf,         100,            150,            200,      300,   Inf),
+          labels = c(  "small small", "medium small", "biggie small", "medium", "big"),
+          right = FALSE
+        ),
+      )
+    ````
+
 1. **`dplyr::recode()`**: The function evaluates a single integer or character variable.  The output branches to a single discrete value.
 
 1. **lookup table**:  It feasible recode 6 levels of race directly in R.  It's less feasible to recode 200 provider names.  Specify the mapping in a csv, `readr` the csv to a data.frame, and left-join it.

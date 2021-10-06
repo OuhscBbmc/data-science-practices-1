@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-10-04" />
+<meta name="date" content="2021-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -678,18 +678,18 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li><p>Download and install the most recent Java JRE from the Oracle site.</p></li>
 <li><p>Download the most recent jar file from the BFG site to the home directory.</p></li>
 <li><p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="security.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb39-2"><a href="security.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--mirror</span> https://github.com/your-org/bloated.git</span></code></pre></div></li>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="security.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb40-2"><a href="security.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--mirror</span> https://github.com/your-org/bloated.git</span></code></pre></div></li>
 <li><p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="security.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> bfg-<span class="pp">*</span>.jar <span class="at">--delete-files</span> monster-data.csv bloated.git</span></code></pre></div></li>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="security.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> bfg-<span class="pp">*</span>.jar <span class="at">--delete-files</span> monster-data.csv bloated.git</span></code></pre></div></li>
 <li><p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="security.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bloated.git</span>
-<span id="cb41-2"><a href="security.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog expire <span class="at">--expire</span><span class="op">=</span>now <span class="at">--all</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc <span class="at">--prune</span><span class="op">=</span>now <span class="at">--aggressive</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="security.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bloated.git</span>
+<span id="cb42-2"><a href="security.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog expire <span class="at">--expire</span><span class="op">=</span>now <span class="at">--all</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc <span class="at">--prune</span><span class="op">=</span>now <span class="at">--aggressive</span></span></code></pre></div></li>
 <li><p>Push your local changes to the GitHub server.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="security.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div></li>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="security.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div></li>
 <li><p>Delete the bfg jar from the home directory.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="security.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb43-2"><a href="security.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> bfg-<span class="pp">*</span>.jar</span></code></pre></div></li>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="security.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb44-2"><a href="security.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> bfg-<span class="pp">*</span>.jar</span></code></pre></div></li>
 <li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
