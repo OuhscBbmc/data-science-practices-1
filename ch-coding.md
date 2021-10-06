@@ -42,7 +42,7 @@ Almost every project recodes many variables.  Choose the simplest function possi
 
     1. *Testing for `FALSE`*:  use `!`.  Write `!gender_male` instead of `gender_male == FALSE` or `gender_male != TRUE`.
 
-1. **`dplyr::coalesce()`**: The function evaluates a single variable and replaces `NA` with values from another variable.
+1. **[`dplyr::coalesce()`](https://dplyr.tidyverse.org/reference/coalesce.html)**: The function evaluates a single variable and replaces `NA` with values from another variable.
 
     A coalesce like
 
@@ -56,7 +56,7 @@ Almost every project recodes many variables.  Choose the simplest function possi
     visit_completed = dplyr::if_else(!is.na(visit_completed), visit_completed, FALSE)
     ```
 
-1. **`dplyr::na_if()`** transforms a nonmissing value into an NA.
+1. **[`dplyr::na_if()`](https://dplyr.tidyverse.org/reference/na_if.html)** transforms a nonmissing value into an NA.
 
     Recoding missing values like
 
@@ -72,7 +72,7 @@ Almost every project recodes many variables.  Choose the simplest function possi
 
 1. **`<=`** (or a similar comparison operator): Compare two quantities to output a boolean variable.
 
-1. **`dplyr::if_else()`**:  The function evaluates a single boolean variable.  The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) `NA`.  An advantage over `<=` is that `NA` values can be specified directly.
+1. **[`dplyr::if_else()`](https://dplyr.tidyverse.org/reference/if_else.html)**:  The function evaluates a single boolean variable.  The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) `NA`.  An advantage over `<=` is that `NA` values can be specified directly.
 
     ```r
     date_start <- as.Date("2017-01-01")
@@ -84,7 +84,7 @@ Almost every project recodes many variables.  Choose the simplest function possi
     stage_post  = (date_start <= month)
     ```
 
-1. **`base::cut()`**: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
+1. **[`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html)**: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
 
     ```r
     mtcars |> 
@@ -117,11 +117,11 @@ Almost every project recodes many variables.  Choose the simplest function possi
       )
     ````
 
-1. **`dplyr::recode()`**: The function evaluates a single integer or character variable.  The output branches to a single discrete value.
+1. **[`dplyr::recode()`](https://dplyr.tidyverse.org/reference/recode.html)**: The function evaluates a single integer or character variable.  The output branches to a single discrete value.
 
 1. **lookup table**:  It feasible recode 6 levels of race directly in R.  It's less feasible to recode 200 provider names.  Specify the mapping in a csv, `readr` the csv to a data.frame, and left-join it.
 
-1. **`dplyr::case_when()`**: The function is the most complicated because it can evaluate multiple variables.  Also, multiple cases can be true, but only the first output is returned. This 'water fall' execution helps in complicated scenarios, but is overkill for most.
+1. **[`dplyr::case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)**: The function is the most complicated because it can evaluate multiple variables.  Also, multiple cases can be true, but only the first output is returned. This 'water fall' execution helps in complicated scenarios, but is overkill for most.
 
 Defensive Style {#coding-defensive}
 ------------------------------------
