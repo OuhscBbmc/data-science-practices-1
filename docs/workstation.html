@@ -582,24 +582,24 @@ div.csl-indent {
 <div id="workstation-r-package-installation" class="section level3" number="18.1.3">
 <h3><span class="header-section-number">18.1.3</span> Installing R Packages</h3>
 <p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
-<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">package-dependency-list.csv</a> and <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list-more.csv">package-dependency-list-more.csv</a>.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="workstation.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) utils<span class="sc">::</span><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb59-2"><a href="workstation.html#cb59-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_gist</span>(<span class="st">&quot;2c5e7459b88ec28b9e8fa0c695b15ee3&quot;</span>, <span class="at">filename=</span><span class="st">&quot;package-janitor-bbmc.R&quot;</span>)</span>
-<span id="cb59-3"><a href="workstation.html#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="workstation.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Important packages required by most BBMC projects</span></span>
-<span id="cb59-5"><a href="workstation.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">package_janitor_remote</span>(</span>
-<span id="cb59-6"><a href="workstation.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv&quot;</span></span>
-<span id="cb59-7"><a href="workstation.html#cb59-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb59-8"><a href="workstation.html#cb59-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-9"><a href="workstation.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Nonessential packages used in a few BBMC projects</span></span>
-<span id="cb59-10"><a href="workstation.html#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="fu">package_janitor_remote</span>(</span>
-<span id="cb59-11"><a href="workstation.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list-more.csv&quot;</span></span>
-<span id="cb59-12"><a href="workstation.html#cb59-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">package-dependency-list.csv</a> and <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list-more.csv">package-dependency-list-more.csv</a>.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="workstation.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) utils<span class="sc">::</span><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb61-2"><a href="workstation.html#cb61-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_gist</span>(<span class="st">&quot;2c5e7459b88ec28b9e8fa0c695b15ee3&quot;</span>, <span class="at">filename=</span><span class="st">&quot;package-janitor-bbmc.R&quot;</span>)</span>
+<span id="cb61-3"><a href="workstation.html#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="workstation.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Important packages required by most BBMC projects</span></span>
+<span id="cb61-5"><a href="workstation.html#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="fu">package_janitor_remote</span>(</span>
+<span id="cb61-6"><a href="workstation.html#cb61-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv&quot;</span></span>
+<span id="cb61-7"><a href="workstation.html#cb61-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb61-8"><a href="workstation.html#cb61-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-9"><a href="workstation.html#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Nonessential packages used in a few BBMC projects</span></span>
+<span id="cb61-10"><a href="workstation.html#cb61-10" aria-hidden="true" tabindex="-1"></a><span class="fu">package_janitor_remote</span>(</span>
+<span id="cb61-11"><a href="workstation.html#cb61-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list-more.csv&quot;</span></span>
+<span id="cb61-12"><a href="workstation.html#cb61-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper <a href="http://r-pkgs.had.co.nz/description.html">DESCRIPTION</a> file. See <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION">RAnalysisSkeleton</a> for an example.</p>
 <p>When the project is opened in RStudio, <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html"><code>update_packages_addin()</code></a> in <a href="https://ouhscbbmc.github.io/OuhscMunge">OuhscMunge</a> will find the DESCRIPTION file and install the package dependencies.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="workstation.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( <span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>   ) ) utils<span class="sc">::</span><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb60-2"><a href="workstation.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( <span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) ) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;OuhscBbmc/OuhscMunge&quot;</span>)</span>
-<span id="cb60-3"><a href="workstation.html#cb60-3" aria-hidden="true" tabindex="-1"></a>OuhscMunge<span class="sc">::</span><span class="fu">update_packages_addin</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="workstation.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( <span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>   ) ) utils<span class="sc">::</span><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb62-2"><a href="workstation.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>( <span class="sc">!</span>base<span class="sc">::</span><span class="fu">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) ) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;OuhscBbmc/OuhscMunge&quot;</span>)</span>
+<span id="cb62-3"><a href="workstation.html#cb62-3" aria-hidden="true" tabindex="-1"></a>OuhscMunge<span class="sc">::</span><span class="fu">update_packages_addin</span>()</span></code></pre></div>
 </div>
 <div id="workstation-r-package-update" class="section level3" number="18.1.4">
 <h3><span class="header-section-number">18.1.4</span> Updating R Packages</h3>
@@ -642,17 +642,17 @@ div.csl-indent {
 <li>Data | Sql | <strong>Show Connection Info In Title: uncheck</strong> {<code>"sql.showConnectionInfoInTitle": false</code>}</li>
 <li>Data | Sql | <strong>Copy Include Headers: check</strong> {<code>"sql.copyIncludeHeaders": true</code>}</li>
 </ol>
-<div class="sourceCode" id="cb61"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb61-1"><a href="workstation.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb61-2"><a href="workstation.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;workbench.enablePreviewFeatures&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb61-3"><a href="workstation.html#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;workbench.colorTheme&quot;</span><span class="fu">:</span> <span class="st">&quot;Default Dark Azure Data Studio&quot;</span><span class="fu">,</span></span>
-<span id="cb61-4"><a href="workstation.html#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.tabSize&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
-<span id="cb61-5"><a href="workstation.html#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.detectIndentation&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb61-6"><a href="workstation.html#cb61-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.insertFinalNewline&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb61-7"><a href="workstation.html#cb61-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb61-8"><a href="workstation.html#cb61-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb61-9"><a href="workstation.html#cb61-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;queryEditor.showConnectionInfoInTitle&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb61-10"><a href="workstation.html#cb61-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;queryEditor.results.copyIncludeHeaders&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
-<span id="cb61-11"><a href="workstation.html#cb61-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb63-1"><a href="workstation.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb63-2"><a href="workstation.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;workbench.enablePreviewFeatures&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb63-3"><a href="workstation.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;workbench.colorTheme&quot;</span><span class="fu">:</span> <span class="st">&quot;Default Dark Azure Data Studio&quot;</span><span class="fu">,</span></span>
+<span id="cb63-4"><a href="workstation.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.tabSize&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb63-5"><a href="workstation.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.detectIndentation&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb63-6"><a href="workstation.html#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.insertFinalNewline&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb63-7"><a href="workstation.html#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb63-8"><a href="workstation.html#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb63-9"><a href="workstation.html#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;queryEditor.showConnectionInfoInTitle&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb63-10"><a href="workstation.html#cb63-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;queryEditor.results.copyIncludeHeaders&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb63-11"><a href="workstation.html#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 <div id="workstation-vscode" class="section level3" number="18.2.4">
 <h3><span class="header-section-number">18.2.4</span> Visual Studio Code</h3>
@@ -667,48 +667,48 @@ div.csl-indent {
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">markdownlint</a> has linting and style checking.</p></li>
 </ul>
 <p>These extensions <a href="https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions">can be installed by command line</a>.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb62-1"><a href="workstation.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--list-extensions</span></span>
-<span id="cb62-2"><a href="workstation.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> GrapeCity.gc-excelviewer</span>
-<span id="cb62-3"><a href="workstation.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> mechatroner.rainbow-csv</span>
-<span id="cb62-4"><a href="workstation.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-mssql.mssql</span>
-<span id="cb62-5"><a href="workstation.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> streetsidesoftware.code-spell-checker</span>
-<span id="cb62-6"><a href="workstation.html#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzhang.markdown-all-in-one</span>
-<span id="cb62-7"><a href="workstation.html#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzane.markdown-pdf</span>
-<span id="cb62-8"><a href="workstation.html#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> DavidAnson.vscode-markdownlint</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb64-1"><a href="workstation.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--list-extensions</span></span>
+<span id="cb64-2"><a href="workstation.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> GrapeCity.gc-excelviewer</span>
+<span id="cb64-3"><a href="workstation.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> mechatroner.rainbow-csv</span>
+<span id="cb64-4"><a href="workstation.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-mssql.mssql</span>
+<span id="cb64-5"><a href="workstation.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> streetsidesoftware.code-spell-checker</span>
+<span id="cb64-6"><a href="workstation.html#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzhang.markdown-all-in-one</span>
+<span id="cb64-7"><a href="workstation.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzane.markdown-pdf</span>
+<span id="cb64-8"><a href="workstation.html#cb64-8" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> DavidAnson.vscode-markdownlint</span></code></pre></div>
 <p>Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings"><code>settings.json</code></a>, or manually specify the options with the <a href="https://code.visualstudio.com/docs/getstarted/settings">settings editor</a>.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb63-1"><a href="workstation.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb63-2"><a href="workstation.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;diffEditor.ignoreTrimWhitespace&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb63-3"><a href="workstation.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;diffEditor.maxComputationTime&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
-<span id="cb63-4"><a href="workstation.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.acceptSuggestionOnEnter&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span></span>
-<span id="cb63-5"><a href="workstation.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.renderWhitespace&quot;</span><span class="fu">:</span> <span class="st">&quot;all&quot;</span><span class="fu">,</span></span>
-<span id="cb63-6"><a href="workstation.html#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;explorer.confirmDragAndDrop&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb63-7"><a href="workstation.html#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.associations&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb63-8"><a href="workstation.html#cb63-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;*.Rmd&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown&quot;</span></span>
-<span id="cb63-9"><a href="workstation.html#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb63-10"><a href="workstation.html#cb63-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb63-11"><a href="workstation.html#cb63-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb63-12"><a href="workstation.html#cb63-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;git.autofetch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb63-13"><a href="workstation.html#cb63-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;git.confirmSync&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb63-14"><a href="workstation.html#cb63-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;window.zoomLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
-<span id="cb63-15"><a href="workstation.html#cb63-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-16"><a href="workstation.html#cb63-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;markdown.extension.orderedList.autoRenumber&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb63-17"><a href="workstation.html#cb63-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;markdown.extension.orderedList.marker&quot;</span><span class="fu">:</span> <span class="st">&quot;one&quot;</span><span class="fu">,</span></span>
-<span id="cb63-18"><a href="workstation.html#cb63-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;markdownlint.config&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb63-19"><a href="workstation.html#cb63-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD003&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;style&quot;</span><span class="fu">:</span> <span class="st">&quot;setext_with_atx&quot;</span> <span class="fu">},</span></span>
-<span id="cb63-20"><a href="workstation.html#cb63-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD007&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;indent&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
-<span id="cb63-21"><a href="workstation.html#cb63-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD022&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;lines_above&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
-<span id="cb63-22"><a href="workstation.html#cb63-22" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">&quot;lines_below&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
-<span id="cb63-23"><a href="workstation.html#cb63-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD024&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;siblings_only&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
-<span id="cb63-24"><a href="workstation.html#cb63-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;no-bare-urls&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb63-25"><a href="workstation.html#cb63-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;no-inline-html&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb63-26"><a href="workstation.html#cb63-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;allowed_elements&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb63-27"><a href="workstation.html#cb63-27" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;mermaid&quot;</span><span class="ot">,</span></span>
-<span id="cb63-28"><a href="workstation.html#cb63-28" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;a&quot;</span><span class="ot">,</span></span>
-<span id="cb63-29"><a href="workstation.html#cb63-29" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;img&quot;</span></span>
-<span id="cb63-30"><a href="workstation.html#cb63-30" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
-<span id="cb63-31"><a href="workstation.html#cb63-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
-<span id="cb63-32"><a href="workstation.html#cb63-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb63-33"><a href="workstation.html#cb63-33" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb65-1"><a href="workstation.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb65-2"><a href="workstation.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;diffEditor.ignoreTrimWhitespace&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb65-3"><a href="workstation.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;diffEditor.maxComputationTime&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb65-4"><a href="workstation.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.acceptSuggestionOnEnter&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span><span class="fu">,</span></span>
+<span id="cb65-5"><a href="workstation.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;editor.renderWhitespace&quot;</span><span class="fu">:</span> <span class="st">&quot;all&quot;</span><span class="fu">,</span></span>
+<span id="cb65-6"><a href="workstation.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;explorer.confirmDragAndDrop&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb65-7"><a href="workstation.html#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.associations&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb65-8"><a href="workstation.html#cb65-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;*.Rmd&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown&quot;</span></span>
+<span id="cb65-9"><a href="workstation.html#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb65-10"><a href="workstation.html#cb65-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimFinalNewlines&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb65-11"><a href="workstation.html#cb65-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb65-12"><a href="workstation.html#cb65-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;git.autofetch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb65-13"><a href="workstation.html#cb65-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;git.confirmSync&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb65-14"><a href="workstation.html#cb65-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;window.zoomLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb65-15"><a href="workstation.html#cb65-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-16"><a href="workstation.html#cb65-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;markdown.extension.orderedList.autoRenumber&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb65-17"><a href="workstation.html#cb65-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;markdown.extension.orderedList.marker&quot;</span><span class="fu">:</span> <span class="st">&quot;one&quot;</span><span class="fu">,</span></span>
+<span id="cb65-18"><a href="workstation.html#cb65-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;markdownlint.config&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb65-19"><a href="workstation.html#cb65-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD003&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;style&quot;</span><span class="fu">:</span> <span class="st">&quot;setext_with_atx&quot;</span> <span class="fu">},</span></span>
+<span id="cb65-20"><a href="workstation.html#cb65-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD007&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;indent&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
+<span id="cb65-21"><a href="workstation.html#cb65-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD022&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;lines_above&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb65-22"><a href="workstation.html#cb65-22" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">&quot;lines_below&quot;</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
+<span id="cb65-23"><a href="workstation.html#cb65-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;MD024&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;siblings_only&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
+<span id="cb65-24"><a href="workstation.html#cb65-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;no-bare-urls&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb65-25"><a href="workstation.html#cb65-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;no-inline-html&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb65-26"><a href="workstation.html#cb65-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;allowed_elements&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb65-27"><a href="workstation.html#cb65-27" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;mermaid&quot;</span><span class="ot">,</span></span>
+<span id="cb65-28"><a href="workstation.html#cb65-28" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;a&quot;</span><span class="ot">,</span></span>
+<span id="cb65-29"><a href="workstation.html#cb65-29" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;img&quot;</span></span>
+<span id="cb65-30"><a href="workstation.html#cb65-30" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
+<span id="cb65-31"><a href="workstation.html#cb65-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb65-32"><a href="workstation.html#cb65-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb65-33"><a href="workstation.html#cb65-33" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Auto Renumber: false</strong> {<code>"markdown.extension.orderedList.autoRenumber": false</code>}</li>
 <li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Marker: one</strong> {<code>"markdown.extension.orderedList.marker": "one"</code>}</li>
@@ -736,7 +736,7 @@ div.csl-indent {
 <p><a href="https://www.python.org/">Python</a> is used by some analysts. The prototypical installation involves two options.</p>
 <ul>
 <li><p><strong><a href="https://www.anaconda.com/distribution/#download-section">Anaconda</a></strong>, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open “Anaconda Prompt” with administrative privileges</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="workstation.html#cb64-1" aria-hidden="true" tabindex="-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div></li>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="workstation.html#cb66-1" aria-hidden="true" tabindex="-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div></li>
 <li><p><strong><a href="https://www.python.org/downloads/">Standard Python</a></strong>, while installing packages through pip3 in the terminal. If the <code>pip3</code> command is unrecognized because it’s missing from the OS <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> variable, an alternative is <code>py -3 -mpip install pysftp</code>; this calls pip through the <code>py</code> command which is sometimes in the path variable after installation.</p></li>
 </ul>
 </div>
@@ -810,109 +810,109 @@ div.csl-indent {
 <div id="workstation-ubuntu-r" class="section level3" number="18.7.1">
 <h3><span class="header-section-number">18.7.1</span> R</h3>
 <p>Check <a href="https://cran.r-project.org/bin/linux/ubuntu/" class="uri">https://cran.r-project.org/bin/linux/ubuntu/</a> for the most recent instructions.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb65-1"><a href="workstation.html#cb65-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Add the key, update the list, then install base R.</span></span>
-<span id="cb65-2"><a href="workstation.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt update <span class="at">-qq</span></span>
-<span id="cb65-3"><a href="workstation.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt install <span class="at">--no-install-recommends</span> software-properties-common dirmngr</span>
-<span id="cb65-4"><a href="workstation.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span>
-<span id="cb65-5"><a href="workstation.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> add-apt-repository <span class="st">&quot;deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/&quot;</span></span>
-<span id="cb65-6"><a href="workstation.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install r-base r-base-dev</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb67-1"><a href="workstation.html#cb67-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Add the key, update the list, then install base R.</span></span>
+<span id="cb67-2"><a href="workstation.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt update <span class="at">-qq</span></span>
+<span id="cb67-3"><a href="workstation.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt install <span class="at">--no-install-recommends</span> software-properties-common dirmngr</span>
+<span id="cb67-4"><a href="workstation.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span>
+<span id="cb67-5"><a href="workstation.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> add-apt-repository <span class="st">&quot;deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/&quot;</span></span>
+<span id="cb67-6"><a href="workstation.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install r-base r-base-dev</span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-rstudio" class="section level3" number="18.7.2">
 <h3><span class="header-section-number">18.7.2</span> RStudio</h3>
 <p>Download the most recent version from <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>. Then run the two <code>gdebi()</code> lines.
 Alternatively, update the <code>wget</code> line with the most recent version.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb66-1"><a href="workstation.html#cb66-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.4.1717-amd64.deb</span></span>
-<span id="cb66-2"><a href="workstation.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install gdebi-core</span>
-<span id="cb66-3"><a href="workstation.html#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> gdebi rstudio-<span class="pp">*</span>-amd64.deb</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb68-1"><a href="workstation.html#cb68-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.4.1717-amd64.deb</span></span>
+<span id="cb68-2"><a href="workstation.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install gdebi-core</span>
+<span id="cb68-3"><a href="workstation.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> gdebi rstudio-<span class="pp">*</span>-amd64.deb</span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-packages" class="section level3" number="18.7.3">
 <h3><span class="header-section-number">18.7.3</span> apt-get Packages</h3>
 <p>This next block can be copied and pasted (ctrl-shift-v) into the console <a href="https://stackoverflow.com/a/43164204">entirely</a>. Or lines can be pasted individual (without the <code>( function install-packages {</code> line, or the last three lines).</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb67-1"><a href="workstation.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></span>
-<span id="cb67-2"><a href="workstation.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb67-3"><a href="workstation.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Git</span></span>
-<span id="cb67-4"><a href="workstation.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install git-core</span>
-<span id="cb67-5"><a href="workstation.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;wibeasley@hotmail.com&quot;</span></span>
-<span id="cb67-6"><a href="workstation.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;Will Beasley&quot;</span></span>
-<span id="cb67-7"><a href="workstation.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">&#39;cache --timeout=3600000&#39;</span></span>
-<span id="cb67-8"><a href="workstation.html#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-9"><a href="workstation.html#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Ubuntu &amp; Bioconductor packages that are indirectly needed for packages and BBMC scripts</span></span>
-<span id="cb67-10"><a href="workstation.html#cb67-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-11"><a href="workstation.html#cb67-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Supports the `locate` command in bash</span></span>
-<span id="cb67-12"><a href="workstation.html#cb67-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install mlocate</span>
-<span id="cb67-13"><a href="workstation.html#cb67-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-14"><a href="workstation.html#cb67-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The genefilter package is needed for &#39;modeest&#39; on CRAN.</span></span>
-<span id="cb67-15"><a href="workstation.html#cb67-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># No longer a modeest dependency: Rscript -e &#39;BiocManager::install(&quot;genefilter&quot;)&#39;</span></span>
-<span id="cb67-16"><a href="workstation.html#cb67-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-17"><a href="workstation.html#cb67-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">### CRAN packages that are also on the Ubuntu repositories</span></span>
-<span id="cb67-18"><a href="workstation.html#cb67-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-19"><a href="workstation.html#cb67-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;xml2&#39; package; https://CRAN.R-project.org/package=xml2</span></span>
-<span id="cb67-20"><a href="workstation.html#cb67-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libxml2-dev r-cran-xml</span>
-<span id="cb67-21"><a href="workstation.html#cb67-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-22"><a href="workstation.html#cb67-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;curl&#39; package, and others; https://CRAN.R-project.org/package=curl</span></span>
-<span id="cb67-23"><a href="workstation.html#cb67-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libssl-dev libcurl4-openssl-dev</span>
-<span id="cb67-24"><a href="workstation.html#cb67-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-25"><a href="workstation.html#cb67-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;udunits2&#39; package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
-<span id="cb67-26"><a href="workstation.html#cb67-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev</span>
-<span id="cb67-27"><a href="workstation.html#cb67-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-28"><a href="workstation.html#cb67-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;odbc&#39; package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
-<span id="cb67-29"><a href="workstation.html#cb67-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
-<span id="cb67-30"><a href="workstation.html#cb67-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-31"><a href="workstation.html#cb67-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;rgl&#39; package; https://stackoverflow.com/a/39952771/1082435</span></span>
-<span id="cb67-32"><a href="workstation.html#cb67-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcgal-dev libglu1-mesa-dev</span>
-<span id="cb67-33"><a href="workstation.html#cb67-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-34"><a href="workstation.html#cb67-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;magick&#39; package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
-<span id="cb67-35"><a href="workstation.html#cb67-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install <span class="st">&#39;libmagick++-dev&#39;</span></span>
-<span id="cb67-36"><a href="workstation.html#cb67-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-37"><a href="workstation.html#cb67-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
-<span id="cb67-38"><a href="workstation.html#cb67-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install qpdf</span>
-<span id="cb67-39"><a href="workstation.html#cb67-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-40"><a href="workstation.html#cb67-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></span>
-<span id="cb67-41"><a href="workstation.html#cb67-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libpoppler-cpp-dev libpoppler-glib-dev</span>
-<span id="cb67-42"><a href="workstation.html#cb67-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-43"><a href="workstation.html#cb67-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;sys&#39; package</span></span>
-<span id="cb67-44"><a href="workstation.html#cb67-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libapparmor-dev</span>
-<span id="cb67-45"><a href="workstation.html#cb67-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-46"><a href="workstation.html#cb67-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
-<span id="cb67-47"><a href="workstation.html#cb67-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
-<span id="cb67-48"><a href="workstation.html#cb67-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-49"><a href="workstation.html#cb67-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
-<span id="cb67-50"><a href="workstation.html#cb67-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
-<span id="cb67-51"><a href="workstation.html#cb67-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-52"><a href="workstation.html#cb67-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># &#39;rJava&#39; and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
-<span id="cb67-53"><a href="workstation.html#cb67-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
-<span id="cb67-54"><a href="workstation.html#cb67-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
-<span id="cb67-55"><a href="workstation.html#cb67-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
-<span id="cb67-56"><a href="workstation.html#cb67-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-57"><a href="workstation.html#cb67-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
-<span id="cb67-58"><a href="workstation.html#cb67-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
-<span id="cb67-59"><a href="workstation.html#cb67-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-60"><a href="workstation.html#cb67-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
-<span id="cb67-61"><a href="workstation.html#cb67-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
-<span id="cb67-62"><a href="workstation.html#cb67-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-63"><a href="workstation.html#cb67-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For databases</span></span>
-<span id="cb67-64"><a href="workstation.html#cb67-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
-<span id="cb67-65"><a href="workstation.html#cb67-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
-<span id="cb67-66"><a href="workstation.html#cb67-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-67"><a href="workstation.html#cb67-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
-<span id="cb67-68"><a href="workstation.html#cb67-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
-<span id="cb67-69"><a href="workstation.html#cb67-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-70"><a href="workstation.html#cb67-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
-<span id="cb67-71"><a href="workstation.html#cb67-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
-<span id="cb67-72"><a href="workstation.html#cb67-72" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb67-73"><a href="workstation.html#cb67-73" aria-hidden="true" tabindex="-1"></a><span class="ex">install-packages</span></span>
-<span id="cb67-74"><a href="workstation.html#cb67-74" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb69-1"><a href="workstation.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></span>
+<span id="cb69-2"><a href="workstation.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb69-3"><a href="workstation.html#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Git</span></span>
+<span id="cb69-4"><a href="workstation.html#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install git-core</span>
+<span id="cb69-5"><a href="workstation.html#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;wibeasley@hotmail.com&quot;</span></span>
+<span id="cb69-6"><a href="workstation.html#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;Will Beasley&quot;</span></span>
+<span id="cb69-7"><a href="workstation.html#cb69-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">&#39;cache --timeout=3600000&#39;</span></span>
+<span id="cb69-8"><a href="workstation.html#cb69-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-9"><a href="workstation.html#cb69-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Ubuntu &amp; Bioconductor packages that are indirectly needed for packages and BBMC scripts</span></span>
+<span id="cb69-10"><a href="workstation.html#cb69-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-11"><a href="workstation.html#cb69-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Supports the `locate` command in bash</span></span>
+<span id="cb69-12"><a href="workstation.html#cb69-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install mlocate</span>
+<span id="cb69-13"><a href="workstation.html#cb69-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-14"><a href="workstation.html#cb69-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The genefilter package is needed for &#39;modeest&#39; on CRAN.</span></span>
+<span id="cb69-15"><a href="workstation.html#cb69-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># No longer a modeest dependency: Rscript -e &#39;BiocManager::install(&quot;genefilter&quot;)&#39;</span></span>
+<span id="cb69-16"><a href="workstation.html#cb69-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-17"><a href="workstation.html#cb69-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">### CRAN packages that are also on the Ubuntu repositories</span></span>
+<span id="cb69-18"><a href="workstation.html#cb69-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-19"><a href="workstation.html#cb69-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;xml2&#39; package; https://CRAN.R-project.org/package=xml2</span></span>
+<span id="cb69-20"><a href="workstation.html#cb69-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libxml2-dev r-cran-xml</span>
+<span id="cb69-21"><a href="workstation.html#cb69-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-22"><a href="workstation.html#cb69-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;curl&#39; package, and others; https://CRAN.R-project.org/package=curl</span></span>
+<span id="cb69-23"><a href="workstation.html#cb69-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libssl-dev libcurl4-openssl-dev</span>
+<span id="cb69-24"><a href="workstation.html#cb69-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-25"><a href="workstation.html#cb69-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;udunits2&#39; package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
+<span id="cb69-26"><a href="workstation.html#cb69-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev</span>
+<span id="cb69-27"><a href="workstation.html#cb69-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-28"><a href="workstation.html#cb69-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;odbc&#39; package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
+<span id="cb69-29"><a href="workstation.html#cb69-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
+<span id="cb69-30"><a href="workstation.html#cb69-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-31"><a href="workstation.html#cb69-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;rgl&#39; package; https://stackoverflow.com/a/39952771/1082435</span></span>
+<span id="cb69-32"><a href="workstation.html#cb69-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcgal-dev libglu1-mesa-dev</span>
+<span id="cb69-33"><a href="workstation.html#cb69-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-34"><a href="workstation.html#cb69-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;magick&#39; package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
+<span id="cb69-35"><a href="workstation.html#cb69-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install <span class="st">&#39;libmagick++-dev&#39;</span></span>
+<span id="cb69-36"><a href="workstation.html#cb69-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-37"><a href="workstation.html#cb69-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
+<span id="cb69-38"><a href="workstation.html#cb69-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install qpdf</span>
+<span id="cb69-39"><a href="workstation.html#cb69-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-40"><a href="workstation.html#cb69-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;pdftools&#39; and &#39;Rpoppler&#39; packages, which involve PDFs</span></span>
+<span id="cb69-41"><a href="workstation.html#cb69-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libpoppler-cpp-dev libpoppler-glib-dev</span>
+<span id="cb69-42"><a href="workstation.html#cb69-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-43"><a href="workstation.html#cb69-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;sys&#39; package</span></span>
+<span id="cb69-44"><a href="workstation.html#cb69-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libapparmor-dev</span>
+<span id="cb69-45"><a href="workstation.html#cb69-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-46"><a href="workstation.html#cb69-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The &#39;sf&#39; and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
+<span id="cb69-47"><a href="workstation.html#cb69-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
+<span id="cb69-48"><a href="workstation.html#cb69-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-49"><a href="workstation.html#cb69-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
+<span id="cb69-50"><a href="workstation.html#cb69-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
+<span id="cb69-51"><a href="workstation.html#cb69-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-52"><a href="workstation.html#cb69-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># &#39;rJava&#39; and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
+<span id="cb69-53"><a href="workstation.html#cb69-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
+<span id="cb69-54"><a href="workstation.html#cb69-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
+<span id="cb69-55"><a href="workstation.html#cb69-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
+<span id="cb69-56"><a href="workstation.html#cb69-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-57"><a href="workstation.html#cb69-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
+<span id="cb69-58"><a href="workstation.html#cb69-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
+<span id="cb69-59"><a href="workstation.html#cb69-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-60"><a href="workstation.html#cb69-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
+<span id="cb69-61"><a href="workstation.html#cb69-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
+<span id="cb69-62"><a href="workstation.html#cb69-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-63"><a href="workstation.html#cb69-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For databases</span></span>
+<span id="cb69-64"><a href="workstation.html#cb69-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
+<span id="cb69-65"><a href="workstation.html#cb69-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
+<span id="cb69-66"><a href="workstation.html#cb69-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-67"><a href="workstation.html#cb69-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
+<span id="cb69-68"><a href="workstation.html#cb69-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
+<span id="cb69-69"><a href="workstation.html#cb69-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-70"><a href="workstation.html#cb69-70" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
+<span id="cb69-71"><a href="workstation.html#cb69-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
+<span id="cb69-72"><a href="workstation.html#cb69-72" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb69-73"><a href="workstation.html#cb69-73" aria-hidden="true" tabindex="-1"></a><span class="ex">install-packages</span></span>
+<span id="cb69-74"><a href="workstation.html#cb69-74" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-pandoc" class="section level3" number="18.7.4">
 <h3><span class="header-section-number">18.7.4</span> Pandoc</h3>
 <p>The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, <a href="https://github.com/jgm/pandoc/releases">download the .deb file</a> then install from the same directory. Finally, verify the version.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb68-1"><a href="workstation.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> pandoc-<span class="pp">*</span></span>
-<span id="cb68-2"><a href="workstation.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-v</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb70-1"><a href="workstation.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> pandoc-<span class="pp">*</span></span>
+<span id="cb70-2"><a href="workstation.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-v</span></span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-postman" class="section level3" number="18.7.5">
 <h3><span class="header-section-number">18.7.5</span> Postman</h3>
 <p>The Postman native app for Ubuntu is <a href="https://learning.postman.com/docs/getting-started/installation-and-updates/#installing-postman-on-linux">installed</a> through <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage">snap</a>, which is <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage#2">updated daily automatically</a>.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb69-1"><a href="workstation.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snap</span> install postman</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb71-1"><a href="workstation.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snap</span> install postman</span></code></pre></div>
 </div>
 </div>
 <div id="workstation-retired" class="section level2" number="18.8">
@@ -950,7 +950,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <li><a href="https://atom.io/packages/git-plus">git-plus</a>: Do git things without the terminal (I don’t think this is necessary anymore).</li>
 </ol>
 <p>The packages can be installed through Atom, or through the <code>apm</code> utility in the command line:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb70-1"><a href="workstation.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apm</span> install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb72-1"><a href="workstation.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apm</span> install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script</span></code></pre></div>
 <p>And the following settings keep files consistent among developers.</p>
 <ol style="list-style-type: decimal">
 <li>File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)</li>
@@ -962,8 +962,8 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
-<li id="fn7"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in that repository’s <code>utility/</code> directory). The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<ol start="8">
+<li id="fn8"><p>As an alternative to the Gist, run the local R script <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"><code>install-packages.R</code></a> (located in that repository’s <code>utility/</code> directory). The workhorse of this function is <a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"><code>OuhscMunge::package_janitor()</code></a>.<a href="workstation.html#fnref8" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
