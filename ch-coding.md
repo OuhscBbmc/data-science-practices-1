@@ -84,7 +84,7 @@ Almost every project recodes many variables.  Choose the simplest function possi
     stage_post  = (date_start <= month)
     ```
 
-1. **[`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html)**: The function evaluations only a single numeric variable.  It's range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
+1. **[`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html)**: The function transforms a single numeric variable into a factor.  Its range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
 
     ```r
     mtcars |> 
@@ -117,7 +117,53 @@ Almost every project recodes many variables.  Choose the simplest function possi
       )
     ````
 
-1. **[`dplyr::recode()`](https://dplyr.tidyverse.org/reference/recode.html)**: The function accepts an integer or character variable and transforms it.  The output branches to a single discrete value.
+1. **[`dplyr::recode()`](https://dplyr.tidyverse.org/reference/recode.html)**: The function accepts an integer or character variable.  The output branches to a single discrete value.  This example maps integers to strings.
+
+    ```r
+    # https://www.census.gov/quickfacts/fact/note/US/RHI625219
+    race_id        <- c(1L, 2L, 1L, 4L, 3L, 4L, 2L, NA_integer_)
+    race_id_spouse <- c(1L, 1L, 2L, 3L, 3L, 4L, 5L, NA_integer_)
+    race <-
+      dplyr::recode(
+        race_id,
+        "1"      = "White",
+        "2"      = "Black or African American",
+        "3"      = "American Indian and Alaska Native",
+        "4"      = "Asian",
+        "5"      = "Native Hawaiian or Other Pacific Islander",
+        .missing = "Unknown"
+      )
+    ```
+    
+    If multiple variables have the same mapping, define the mapping once in a named vector, and pass it for multiple calls to `dplyr::recode()`.  Notice that the two variables `race` and `race_spouse` use the same mapping.^[For now, employ the `!!!` operator without understanding it.  When you're more comfortable with R, read about [quosures and lazy evaluation](https://adv-r.hadley.nz/quasiquotation.html#unquoting-many-arguments) so you can use it in more general scenarios.]
+    
+    ```r
+    mapping_race <- c(
+      "1" = "White",
+      "2" = "Black or African American",
+      "3" = "American Indian and Alaska Native",
+      "4" = "Asian",
+      "5" = "Native Hawaiian or Other Pacific Islander"
+    )
+    race <-
+      dplyr::recode(
+        race_id,
+        !!!mapping_race,
+        .missing = "Unknown"
+      )
+    race_spouse <-
+      dplyr::recode(
+        race_id_spouse,
+        !!!mapping_race,
+        .missing = "Unknown"
+      )
+    ```
+    
+    Tips for `dplyr::recode()`:
+      * A resuable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like "disagree", "neutral", "agree".
+      * Use [`dplyr::recode_factor()`](https://dplyr.tidyverse.org/reference/recode.html) to map integers to factor levels.  
+      * [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html) is similar.  We prefer the `.missing` parameter of `dplyr::recode()` that recodes NA values into an explicit value.
+      * When using the [REDCap API](https://ouhscbbmc.github.io/REDCapR/), these functions help convert radio buttons to a character or factor variable.
 
 1. **lookup table**:  It is feasible to recode 6 levels of race directly in R, but it's less feasible to recode 200 provider names.  Specify the mapping in a csv, then use [readr](https://readr.tidyverse.org/reference/read_delim.html) to convert the csv to a data.frame, and finally [left join](https://dplyr.tidyverse.org/reference/mutate-joins.html) it.
 
