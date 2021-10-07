@@ -8,9 +8,9 @@ Simplify {#coding-simplify}
 
 Use the simplest data type reasonable.  A simpler data type is less likely contain unintended values.  As we have seen, a string variable called `gender` can simultaneously contain the values "m", "f", "F", "Female", "MALE", "0", "1", "2", "Latino", "", and `NA`.  On the other hand, a boolean variable `gender_male` can be only `FALSE`, `TRUE`, and `NA`.^[The equivalent of R's `logical` data type is called a `bit` in [SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql), and a `boolean` in [Postgres](https://www.postgresql.org/docs/current/datatype-boolean.html) and [MySQL](https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html).]
 
-[SQLite](https://www.sqlite.org/datatype3.html) does not have a dedicated datatype, so you must resort to storing it as `0`, `1` and `NULL` values.  Because a caller can't assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.]
+[SQLite](https://www.sqlite.org/datatype3.html) does not have a dedicated datatype, so you must resort to storing it as `0`, `1` and `NULL` values.  Because a caller can't assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.
 
-Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced.  As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
+Once you have cleaned a variable in your initial ETL files (like an [Ellis](https://ouhscbbmc.github.io/data-science-practices-1/patterns.html#pattern-ellis)), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced.  As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
 
 Within R, the preference for numeric-ish variables is
 
@@ -117,9 +117,9 @@ Almost every project recodes many variables.  Choose the simplest function possi
       )
     ````
 
-1. **[`dplyr::recode()`](https://dplyr.tidyverse.org/reference/recode.html)**: The function evaluates a single integer or character variable.  The output branches to a single discrete value.
+1. **[`dplyr::recode()`](https://dplyr.tidyverse.org/reference/recode.html)**: The function accepts an integer or character variable and transforms it.  The output branches to a single discrete value.
 
-1. **lookup table**:  It feasible recode 6 levels of race directly in R.  It's less feasible to recode 200 provider names.  Specify the mapping in a csv, `readr` the csv to a data.frame, and left-join it.
+1. **lookup table**:  It is feasible to recode 6 levels of race directly in R, but it's less feasible to recode 200 provider names.  Specify the mapping in a csv, then use [readr](https://readr.tidyverse.org/reference/read_delim.html) to convert the csv to a data.frame, and finally [left join](https://dplyr.tidyverse.org/reference/mutate-joins.html) it.
 
 1. **[`dplyr::case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)**: The function is the most complicated because it can evaluate multiple variables.  Also, multiple cases can be true, but only the first output is returned. This 'water fall' execution helps in complicated scenarios, but is overkill for most.
 

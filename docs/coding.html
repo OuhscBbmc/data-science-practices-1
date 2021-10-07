@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-10-06" />
+<meta name="date" content="2021-10-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -572,8 +572,8 @@ div.csl-indent {
 <div id="coding-simplify-types" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Data Types</h3>
 <p>Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called <code>gender</code> can simultaneously contain the values “m”, “f”, “F”, “Female”, “MALE”, “0”, “1”, “2”, “Latino”, ““, and <code>NA</code>. On the other hand, a boolean variable <code>gender_male</code> can be only <code>FALSE</code>, <code>TRUE</code>, and <code>NA</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p><a href="https://www.sqlite.org/datatype3.html">SQLite</a> does not have a dedicated datatype, so you must resort to storing it as <code>0</code>, <code>1</code> and <code>NULL</code> values. Because a caller can’t assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.]</p>
-<p>Once you have cleaned a variable in your initial ETL files (like an Ellis), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
+<p><a href="https://www.sqlite.org/datatype3.html">SQLite</a> does not have a dedicated datatype, so you must resort to storing it as <code>0</code>, <code>1</code> and <code>NULL</code> values. Because a caller can’t assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.</p>
+<p>Once you have cleaned a variable in your initial ETL files (like an <a href="https://ouhscbbmc.github.io/data-science-practices-1/patterns.html#pattern-ellis">Ellis</a>), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
 <p>Within R, the preference for numeric-ish variables is</p>
 <ol style="list-style-type: decimal">
 <li><code>logical</code>/boolean/bit,</li>
@@ -653,8 +653,8 @@ div.csl-indent {
 <span id="cb6-26"><a href="coding.html#cb6-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span></span>
 <span id="cb6-27"><a href="coding.html#cb6-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb6-28"><a href="coding.html#cb6-28" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div></li>
-<li><p><strong><a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode()</code></a></strong>: The function evaluates a single integer or character variable. The output branches to a single discrete value.</p></li>
-<li><p><strong>lookup table</strong>: It feasible recode 6 levels of race directly in R. It’s less feasible to recode 200 provider names. Specify the mapping in a csv, <code>readr</code> the csv to a data.frame, and left-join it.</p></li>
+<li><p><strong><a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode()</code></a></strong>: The function accepts an integer or character variable and transforms it. The output branches to a single discrete value.</p></li>
+<li><p><strong>lookup table</strong>: It is feasible to recode 6 levels of race directly in R, but it’s less feasible to recode 200 provider names. Specify the mapping in a csv, then use <a href="https://readr.tidyverse.org/reference/read_delim.html">readr</a> to convert the csv to a data.frame, and finally <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left join</a> it.</p></li>
 <li><p><strong><a href="https://dplyr.tidyverse.org/reference/case_when.html"><code>dplyr::case_when()</code></a></strong>: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This ‘water fall’ execution helps in complicated scenarios, but is overkill for most.</p></li>
 </ol>
 </div>
