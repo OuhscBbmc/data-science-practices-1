@@ -4,7 +4,7 @@ language:
   ui:
     chapter_name: "Chapter "
 output_dir: "docs"
-edit: https://github.com/ouhscbbmc/data-science-practices-1/edit/master/%s
+edit: https://github.com/ouhscbbmc/data-science-practices-1/edit/main/%s
 rmd_files:
   [
     "index.Rmd",
