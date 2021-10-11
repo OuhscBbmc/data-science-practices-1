@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-10-09" />
+<meta name="date" content="2021-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -841,8 +841,15 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h2><span class="header-section-number">14.7</span> Database</h2>
 <p>GitLab’s data team has a good <a href="https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/">style guide</a> for databases and sql that’s fairly consistent with our style. Some important similarities and differences are</p>
 <ol style="list-style-type: decimal">
-<li><p>Favor CTEs</p></li>
-<li><p>The name of the primary key should typically contain the table. In the <code>employee</code> table, the key should be <code>employee_id</code>, not <code>id</code>.</p></li>
+<li>Favor CTEs over subqueries because they’re easier to follow and can be reused in the same file. If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.</li>
+</ol>
+<p>Resources</p>
+<ul>
+<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/">SQL Server Common Table Expressions</a></li>
+<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/">What’s Better, CTEs or Temp Tables?</a></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>The name of the primary key should typically contain the table. In the <code>employee</code> table, the key should be <code>employee_id</code>, not <code>id</code>.</li>
 </ol>
 <!-- 1. When a boolean variable might be ambiguous, -->
 </div>

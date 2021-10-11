@@ -321,7 +321,12 @@ Database {#style-database}
 
 GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/) for databases and sql that's fairly consistent with our style.  Some important similarities and differences are
 
-1. Favor CTEs
+1. Favor CTEs over subqueries because they're easier to follow and can be reused in the same file.   If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.
+
+  Resources
+  
+  * Brent Ozar's [SQL Server Common Table Expressions](https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/)
+  * Brent Ozar's [What’s Better, CTEs or Temp Tables?](https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/)
 
 1. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `employee_id`, not `id`.
 
