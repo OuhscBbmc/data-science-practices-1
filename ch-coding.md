@@ -34,7 +34,7 @@ When a boolean variable would be too restrictive and a factor or character is re
 
 ### Recoding {#coding-simplify-recoding}
 
-Almost every project recodes many variables.  Choose the simplest function possible.  The functions at the top are easier to read and harder to mess up than the functions below it
+Almost every project recodes variables.  Choose the simplest function possible.  The functions at the top are easier to read and harder to mess up than the functions below it
 
 1. **Leverage existing booleans:** Suppose you have the logical variable `gender_male` (which can be only `TRUE`, `FALSE`, or `NA`).  Writing `gender_male == TRUE` or `gender_male == FALSE` will evaluate to a boolean --that's unnecessary because `gender_male` is already a boolean.
 
@@ -93,12 +93,35 @@ Almost every project recodes many variables.  Choose the simplest function possi
     stage_post  <- (date_start <= month)
     ```
 
-    If it is important that the reader understand that an input expression of `NA` will produce an NA, consider using `dplyr::if_else()`, even though these two lines are equivalent.  A casual reader may not consider that `stage_post` could be `NA`.
+    If it is important that the reader understand that an input expression of `NA` will produce an NA, consider using `dplyr::if_else()`.  Even though these two lines are equivalent, a casual reader may not consider that `stage_post` could be `NA`.
 
     ```r
     stage_post  <- (date_start <= month)
     stage_post  <- dplyr::if_else(date_start <= month, TRUE, FALSE, missing = NA)
     ```
+
+1. **[`dplyr::between()`](https://dplyr.tidyverse.org/reference/between.html)**: The function evaluates a numeric `x` against a `left` and a `right` boundary to return a boolean value.  The output is `TRUE` if `x` is inside the boundaries or equal to either boundary (*i.e.*, the boundaries are *in*clusive).  The output is `FALSE` if `x` is outside either boundary.
+
+    ```r
+    too_cold      <- 60
+    too_hot       <- 88
+    goldilocks_1  <- dplyr::between(temperature, too_cold, too_hot)
+
+    # This is equivalent to the previous line.
+    goldilocks_2  <- (too_cold <= temperature & temperature <= too_hot)
+    ```
+    
+    If you need an *ex*clusive boundary, abandon `dplyr::between()` and specify it exactly.
+
+    ```r
+    # Left boundary is exclusive
+    goldilocks_3  <- (too_cold < temperature & temperature <= too_hot)
+
+    # Both boundaries are exclusive
+    goldilocks_4  <- (too_cold < temperature & temperature <  too_hot)
+    ```
+
+    If your code starts to nest `dplyr::between()` calls inside `dplyr::if_else()`, consider `base::cut()`.
 
 1. **[`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html)**: The function transforms a single numeric variable into a factor.  Its range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
 
