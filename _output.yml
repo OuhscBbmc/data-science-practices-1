@@ -1,16 +1,18 @@
-bookdown::gitbook:
-  css: style.css
+bookdown::bs4_book:
+  css: bs4_style.css
+  theme:
+    primary: "#096B72"
+  repo:
+    base: https://github.com/OuhscBbmc/data-science-practices-1
+    branch: main
   config:
-    toc:
-      before: |
-        <li><a href="./">Collaborative Data Science</a></li>
-      after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    download: ["pdf", "epub"]
-bookdown::pdf_book:
-  includes:
-    in_header: preamble.tex
-  latex_engine: xelatex
-  citation_package: natbib
-  keep_tex: yes
+    search:
+      engine: fuse # lunr is the default
+      options: null # can override, see: https://fusejs.io/api/options.html
+# bookdown::pdf_book:
+#   includes:
+#     in_header: preamble.tex
+#   latex_engine: xelatex
+#   citation_package: natbib
+#   keep_tex: yes
 bookdown::epub_book: default
