@@ -116,7 +116,7 @@ Grooming {#snippets-grooming}
 *Last Modified*: 2019-12-12 by Will
 
 ```r
- ds %>%
+ ds |>
  dplyr::mutate(
     dob = dplyr::if_else(dob <= Sys.Date(), dob, dob - lubridate::years(100))
   )

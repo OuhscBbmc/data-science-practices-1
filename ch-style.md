@@ -59,7 +59,7 @@ Removing datasets rows is an important operation that is a frequent source of sn
 
 ```r
 # Good
-ds %>%
+ds |>
   tidyr::drop_na(dob)
 ```
 
@@ -67,7 +67,7 @@ is cleaner to read and write than these two styles.  In particular, it's easy to
 
 ```r
 # Worse
-ds %>%
+ds |>
   dplyr::filter(!is.na(dob))
 
 # Worst

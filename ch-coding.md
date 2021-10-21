@@ -241,10 +241,10 @@ In this example, we'll presume we cannot trust a patient record if it lacks a cl
 
     ```r
     ds <-
-      ds %>%
+      ds |>
       dplyr::mutate(
         dob = OuhscMunge::trim_date(dob, config$range_dob)
-      ) %>%
+      ) |>
       tidyr::drop_na(dob)
     ```
 
