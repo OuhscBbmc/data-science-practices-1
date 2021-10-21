@@ -47,13 +47,13 @@ Almost every project recodes variables.  Choose the simplest function possible. 
     A coalesce like
 
     ```r
-    visit_completed = dplyr::coalesce(visit_completed, FALSE)
+    visit_completed <- dplyr::coalesce(visit_completed, FALSE)
     ```
 
     is much easier to read and not mess up than
 
     ```r
-    visit_completed = dplyr::if_else(!is.na(visit_completed), visit_completed, FALSE)
+    visit_completed <- dplyr::if_else(!is.na(visit_completed), visit_completed, FALSE)
     ```
 
 1. **[`dplyr::na_if()`](https://dplyr.tidyverse.org/reference/na_if.html)** transforms a nonmissing value into an NA.
@@ -61,13 +61,13 @@ Almost every project recodes variables.  Choose the simplest function possible. 
     Recoding missing values like
 
     ```r
-    birth_apgar = dplyr::na_if(birth_apgar, 99)
+    birth_apgar <- dplyr::na_if(birth_apgar, 99)
     ```
 
     is easier to read and not mess up than
 
     ```r
-    birth_apgar = dplyr::if_else(birth_apgar == 99, NA_real_, birth_apgar)
+    birth_apgar <- dplyr::if_else(birth_apgar == 99, NA_real_, birth_apgar)
     ```
 
 1. **`<=`** (or a similar comparison operator): Compare two quantities to output a boolean variable.  The parentheses are unnecessary, but can help readability.  If either value is `NA`, then the result is `NA`.
@@ -199,14 +199,14 @@ Almost every project recodes variables.  Choose the simplest function possible. 
     ```
     
     Tips for `dplyr::recode()`:
-      * A resuable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like "disagree", "neutral", "agree".
+      * A reusable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like "disagree", "neutral", "agree".
       * Use [`dplyr::recode_factor()`](https://dplyr.tidyverse.org/reference/recode.html) to map integers to factor levels.  
-      * [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html) is similar.  We prefer the `.missing` parameter of `dplyr::recode()` that recodes NA values into an explicit value.
+      * [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html) is similar.  We prefer the `.missing` parameter of `dplyr::recode()` that translates an `NA` into an explicit value.
       * When using the [REDCap API](https://ouhscbbmc.github.io/REDCapR/), these functions help convert radio buttons to a character or factor variable.
 
 1. **lookup table**:  It is feasible to recode 6 levels of race directly in R, but it's less feasible to recode 200 provider names.  Specify the mapping in a csv, then use [readr](https://readr.tidyverse.org/reference/read_delim.html) to convert the csv to a data.frame, and finally [left join](https://dplyr.tidyverse.org/reference/mutate-joins.html) it.
 
-1. **[`dplyr::case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)**: The function is the most complicated because it can evaluate multiple variables.  Also, multiple cases can be true, but only the first output is returned. This 'water fall' execution helps in complicated scenarios, but is overkill for most.
+1. **[`dplyr::case_when()`](https://dplyr.tidyverse.org/reference/case_when.html)**: The function is the most complicated because it can evaluate multiple input variables.  Also, multiple cases can be true, but only the first output is returned. This 'water fall' execution helps in complicated scenarios, but is overkill for most.
 
 Defensive Style {#coding-defensive}
 ------------------------------------
@@ -223,13 +223,13 @@ Some exceptions exist, including:
 
 ### Date Arithmetic {#coding-defensive-date-arithmetic}
 
-Don't use the minus operator (*i.e.*, `-`) to subtract dates.  Instead use `as.integer(difftime(stop, start, units="days"))`.  It's longer but protects from the scenario that `start` or `stop` are changed upstream to a datetime.  In that case, `stop - start` equals the number of *seconds* between the two points, not the number of *days*.
+Don't use the minus operator (*i.e.*, `-`) to subtract dates.  Instead use `as.integer(difftime(stop, start, units="days"))`.  It's longer but protects from the scenario that `start` or `stop` are changed upstream from a date to a datetime.  In that case, `stop - start` returns the number of *seconds* between the two points, not the number of *days*.
 
 ### Excluding Bad Cases
 
 Some variables are critical to the record, and if it's missing, you don't want or trust any of its other values.  For instance, a hospital visit record rarely useful if missing the patient ID.  In these cases, prevent the record from passing through the [ellis](#pattern-ellis).
 
-In this example, we'll presume we can't trust a patient record if it lacks a clean date of birth (`dob`).
+In this example, we'll presume we cannot trust a patient record if it lacks a clean date of birth (`dob`).
 
 1. Define the permissible range, in either the ellis's [declare-globals](#chunk-declare) chunk, or in the [config-file](#repo-config).  (We'll use the config file for this example.)  We'll exclude anyone born before 2000, or after tomorrow.  Even though it's illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.
 
