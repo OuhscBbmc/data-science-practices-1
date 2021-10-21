@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-10-11" />
+<meta name="date" content="2021-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -573,15 +573,15 @@ div.csl-indent {
 <h3><span class="header-section-number">2.1.1</span> Data Types</h3>
 <p>Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called <code>gender</code> can simultaneously contain the values “m”, “f”, “F”, “Female”, “MALE”, “0”, “1”, “2”, “Latino”, ““, and <code>NA</code>. On the other hand, a boolean variable <code>gender_male</code> can be only <code>FALSE</code>, <code>TRUE</code>, and <code>NA</code>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p><a href="https://www.sqlite.org/datatype3.html">SQLite</a> does not have a dedicated datatype, so you must resort to storing it as <code>0</code>, <code>1</code> and <code>NULL</code> values. Because a caller can’t assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.</p>
-<p>Once you have cleaned a variable in your initial ETL files (like an <a href="https://ouhscbbmc.github.io/data-science-practices-1/patterns.html#pattern-ellis">Ellis</a>), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
-<p>Within R, the preference for numeric-ish variables is</p>
+<p>Once you have cleaned a variable in your initial ETL files (like an <a href="https://ouhscbbmc.github.io/data-science-practices-1/patterns.html#pattern-ellis">Ellis</a>), establish boundaries so you do not have to spend time in the downstream files verifying that no bad values have been introduced. As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.</p>
+<p>Within R, numeric-ish variables can be represented by the following four data types. Use the simplest type that adequately captures the information. <code>logical</code> is the simplest and <code>numeric</code> is the most flexible.</p>
 <ol style="list-style-type: decimal">
 <li><code>logical</code>/boolean/bit,</li>
 <li><code>integer</code>,</li>
 <li><code>bit64::integer64</code>, and</li>
 <li><code>numeric</code>/double-precision floats.</li>
 </ol>
-<p>The preference for categorical variables is</p>
+<p>Categorical variables have a similar spectrum. After <code>logical</code> types, <code>factor</code>s are more restrictive and less flexible than <code>character</code>s.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <ol style="list-style-type: decimal">
 <li><code>logical</code>/boolean/bit,</li>
 <li><code>factor</code>, and</li>
@@ -598,7 +598,7 @@ div.csl-indent {
 </div>
 <div id="coding-simplify-recoding" class="section level3" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Recoding</h3>
-<p>Almost every project recodes many variables. Choose the simplest function possible. The functions at the top are much easier to read and harder to mess up.</p>
+<p>Almost every project recodes variables. Choose the simplest function possible. The functions at the top are easier to read and harder to mess up than the functions below it</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Leverage existing booleans:</strong> Suppose you have the logical variable <code>gender_male</code> (which can be only <code>TRUE</code>, <code>FALSE</code>, or <code>NA</code>). Writing <code>gender_male == TRUE</code> or <code>gender_male == FALSE</code> will evaluate to a boolean –that’s unnecessary because <code>gender_male</code> is already a boolean.</p>
 <ol style="list-style-type: decimal">
@@ -607,96 +607,118 @@ div.csl-indent {
 </ol></li>
 <li><p><strong><a href="https://dplyr.tidyverse.org/reference/coalesce.html"><code>dplyr::coalesce()</code></a></strong>: The function evaluates a single variable and replaces <code>NA</code> with values from another variable.</p>
 <p>A coalesce like</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="coding.html#cb1-1" aria-hidden="true" tabindex="-1"></a>visit_completed <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">coalesce</span>(visit_completed, <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="coding.html#cb1-1" aria-hidden="true" tabindex="-1"></a>visit_completed <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">coalesce</span>(visit_completed, <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>is much easier to read and not mess up than</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="coding.html#cb2-1" aria-hidden="true" tabindex="-1"></a>visit_completed <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(<span class="sc">!</span><span class="fu">is.na</span>(visit_completed), visit_completed, <span class="cn">FALSE</span>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="coding.html#cb2-1" aria-hidden="true" tabindex="-1"></a>visit_completed <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(<span class="sc">!</span><span class="fu">is.na</span>(visit_completed), visit_completed, <span class="cn">FALSE</span>)</span></code></pre></div></li>
 <li><p><strong><a href="https://dplyr.tidyverse.org/reference/na_if.html"><code>dplyr::na_if()</code></a></strong> transforms a nonmissing value into an NA.</p>
 <p>Recoding missing values like</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="coding.html#cb3-1" aria-hidden="true" tabindex="-1"></a>birth_apgar <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">na_if</span>(birth_apgar, <span class="dv">99</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="coding.html#cb3-1" aria-hidden="true" tabindex="-1"></a>birth_apgar <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">na_if</span>(birth_apgar, <span class="dv">99</span>)</span></code></pre></div>
 <p>is easier to read and not mess up than</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="coding.html#cb4-1" aria-hidden="true" tabindex="-1"></a>birth_apgar <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(birth_apgar <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA_real_</span>, birth_apgar)</span></code></pre></div></li>
-<li><p><strong><code>&lt;=</code></strong> (or a similar comparison operator): Compare two quantities to output a boolean variable.</p></li>
-<li><p><strong><a href="https://dplyr.tidyverse.org/reference/if_else.html"><code>dplyr::if_else()</code></a></strong>: The function evaluates a single boolean variable. The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) <code>NA</code>. An advantage over <code>&lt;=</code> is that <code>NA</code> values can be specified directly.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coding.html#cb5-1" aria-hidden="true" tabindex="-1"></a>date_start <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2017-01-01&quot;</span>)</span>
-<span id="cb5-2"><a href="coding.html#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="coding.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If a missing month element needs to be handled explicitly.</span></span>
-<span id="cb5-4"><a href="coding.html#cb5-4" aria-hidden="true" tabindex="-1"></a>stage       <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(date_start <span class="sc">&lt;=</span> month, <span class="st">&quot;post&quot;</span>, <span class="st">&quot;pre&quot;</span>, <span class="at">missing =</span> <span class="st">&quot;missing-month&quot;</span>)</span>
-<span id="cb5-5"><a href="coding.html#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="coding.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Otherwise a simple boolean output is sufficient.</span></span>
-<span id="cb5-7"><a href="coding.html#cb5-7" aria-hidden="true" tabindex="-1"></a>stage_post  <span class="ot">=</span> (date_start <span class="sc">&lt;=</span> month)</span></code></pre></div></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="coding.html#cb4-1" aria-hidden="true" tabindex="-1"></a>birth_apgar <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(birth_apgar <span class="sc">==</span> <span class="dv">99</span>, <span class="cn">NA_real_</span>, birth_apgar)</span></code></pre></div></li>
+<li><p><strong><code>&lt;=</code></strong> (or a similar comparison operator): Compare two quantities to output a boolean variable. The parentheses are unnecessary, but can help readability. If either value is <code>NA</code>, then the result is <code>NA</code>.</p>
+<p>Notice that we prefer to order the variables like a number line. When the result is <code>TRUE</code>, the smaller value is to the left of the larger value.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="coding.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dob_in_the_future   <span class="ot">&lt;-</span> (<span class="fu">Sys.Date</span>() <span class="sc">&lt;</span> dob)</span>
+<span id="cb5-2"><a href="coding.html#cb5-2" aria-hidden="true" tabindex="-1"></a>dod_follows_dob     <span class="ot">&lt;-</span> (dob <span class="sc">&lt;=</span> dod)</span>
+<span id="cb5-3"><a href="coding.html#cb5-3" aria-hidden="true" tabindex="-1"></a>premature           <span class="ot">&lt;-</span> (gestation_weeks <span class="sc">&lt;</span> <span class="dv">37</span>)</span>
+<span id="cb5-4"><a href="coding.html#cb5-4" aria-hidden="true" tabindex="-1"></a>big_boy             <span class="ot">&lt;-</span> (threshold_in_kg <span class="sc">&lt;=</span> birth_weight_in_kg)</span></code></pre></div></li>
+<li><p><strong><a href="https://dplyr.tidyverse.org/reference/if_else.html"><code>dplyr::if_else()</code></a></strong>: The function evaluates a single boolean variable or expression. The output branches to only three possibilities: the input is (a) true, (b) false, or (c) (optionally) <code>NA</code>. Notice that unlike the <code>&lt;=</code> operator, <code>dplyr::if_else()</code> lets you specify a value if the input expression evaluates to <code>NA</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="coding.html#cb6-1" aria-hidden="true" tabindex="-1"></a>date_start  <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2017-01-01&quot;</span>)</span>
+<span id="cb6-2"><a href="coding.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="coding.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If a missing month element needs to be handled explicitly.</span></span>
+<span id="cb6-4"><a href="coding.html#cb6-4" aria-hidden="true" tabindex="-1"></a>stage       <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(date_start <span class="sc">&lt;=</span> month, <span class="st">&quot;post&quot;</span>, <span class="st">&quot;pre&quot;</span>, <span class="at">missing =</span> <span class="st">&quot;missing-month&quot;</span>)</span>
+<span id="cb6-5"><a href="coding.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="coding.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Otherwise a simple boolean output is sufficient.</span></span>
+<span id="cb6-7"><a href="coding.html#cb6-7" aria-hidden="true" tabindex="-1"></a>stage_post  <span class="ot">&lt;-</span> (date_start <span class="sc">&lt;=</span> month)</span></code></pre></div>
+<p>If it is important that the reader understand that an input expression of <code>NA</code> will produce an NA, consider using <code>dplyr::if_else()</code>. Even though these two lines are equivalent, a casual reader may not consider that <code>stage_post</code> could be <code>NA</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coding.html#cb7-1" aria-hidden="true" tabindex="-1"></a>stage_post  <span class="ot">&lt;-</span> (date_start <span class="sc">&lt;=</span> month)</span>
+<span id="cb7-2"><a href="coding.html#cb7-2" aria-hidden="true" tabindex="-1"></a>stage_post  <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(date_start <span class="sc">&lt;=</span> month, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="at">missing =</span> <span class="cn">NA</span>)</span></code></pre></div></li>
+<li><p><strong><a href="https://dplyr.tidyverse.org/reference/between.html"><code>dplyr::between()</code></a></strong>: The function evaluates a numeric <code>x</code> against a <code>left</code> and a <code>right</code> boundary to return a boolean value. The output is <code>TRUE</code> if <code>x</code> is inside the boundaries or equal to either boundary (<em>i.e.</em>, the boundaries are <em>in</em>clusive). The output is <code>FALSE</code> if <code>x</code> is outside either boundary.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="coding.html#cb8-1" aria-hidden="true" tabindex="-1"></a>too_cold      <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb8-2"><a href="coding.html#cb8-2" aria-hidden="true" tabindex="-1"></a>too_hot       <span class="ot">&lt;-</span> <span class="dv">88</span></span>
+<span id="cb8-3"><a href="coding.html#cb8-3" aria-hidden="true" tabindex="-1"></a>goldilocks_1  <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">between</span>(temperature, too_cold, too_hot)</span>
+<span id="cb8-4"><a href="coding.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="coding.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This is equivalent to the previous line.</span></span>
+<span id="cb8-6"><a href="coding.html#cb8-6" aria-hidden="true" tabindex="-1"></a>goldilocks_2  <span class="ot">&lt;-</span> (too_cold <span class="sc">&lt;=</span> temperature <span class="sc">&amp;</span> temperature <span class="sc">&lt;=</span> too_hot)</span></code></pre></div>
+<p>If you need an <em>ex</em>clusive boundary, abandon <code>dplyr::between()</code> and specify it exactly.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="coding.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Left boundary is exclusive</span></span>
+<span id="cb9-2"><a href="coding.html#cb9-2" aria-hidden="true" tabindex="-1"></a>goldilocks_3  <span class="ot">&lt;-</span> (too_cold <span class="sc">&lt;</span> temperature <span class="sc">&amp;</span> temperature <span class="sc">&lt;=</span> too_hot)</span>
+<span id="cb9-3"><a href="coding.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="coding.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Both boundaries are exclusive</span></span>
+<span id="cb9-5"><a href="coding.html#cb9-5" aria-hidden="true" tabindex="-1"></a>goldilocks_4  <span class="ot">&lt;-</span> (too_cold <span class="sc">&lt;</span> temperature <span class="sc">&amp;</span> temperature <span class="sc">&lt;</span>  too_hot)</span></code></pre></div>
+<p>If your code starts to nest <code>dplyr::between()</code> calls inside <code>dplyr::if_else()</code>, consider <code>base::cut()</code>.</p></li>
 <li><p><strong><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a></strong>: The function transforms a single numeric variable into a factor. Its range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer). Modify the <code>right</code> parameter to <code>FALSE</code> if you’d like the left/lower bound to be inclusive (which tends to be more natural for me).</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="coding.html#cb6-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="coding.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="coding.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
-<span id="cb6-4"><a href="coding.html#cb6-4" aria-hidden="true" tabindex="-1"></a>    disp,</span>
-<span id="cb6-5"><a href="coding.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb6-6"><a href="coding.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb6-7"><a href="coding.html#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Example of a simple inequality operator (see two bullets above)</span></span>
-<span id="cb6-8"><a href="coding.html#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">muscle_car            =</span> (<span class="dv">300</span> <span class="sc">&lt;=</span> disp),</span>
-<span id="cb6-9"><a href="coding.html#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="coding.html#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Divide `disp` into three levels.</span></span>
-<span id="cb6-11"><a href="coding.html#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">size_default_labels   =</span> <span class="fu">cut</span>(disp, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="cn">Inf</span>), <span class="at">right =</span> F),</span>
-<span id="cb6-12"><a href="coding.html#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="coding.html#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Divide `disp` into three levels with custom labels.</span></span>
-<span id="cb6-14"><a href="coding.html#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">size_cut3             =</span> <span class="fu">cut</span>(</span>
-<span id="cb6-15"><a href="coding.html#cb6-15" aria-hidden="true" tabindex="-1"></a>      disp, </span>
-<span id="cb6-16"><a href="coding.html#cb6-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,   <span class="dv">200</span>,      <span class="dv">300</span>,   <span class="cn">Inf</span>),</span>
-<span id="cb6-17"><a href="coding.html#cb6-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(  <span class="st">&quot;small&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;big&quot;</span>),</span>
-<span id="cb6-18"><a href="coding.html#cb6-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span>  <span class="co"># Is the right boundary INclusive (&#39;FALSE&#39; is an EXclusive boundary)</span></span>
-<span id="cb6-19"><a href="coding.html#cb6-19" aria-hidden="true" tabindex="-1"></a>    ),  </span>
-<span id="cb6-20"><a href="coding.html#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="coding.html#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Divide `disp` into five levels with custom labels.</span></span>
-<span id="cb6-22"><a href="coding.html#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">size_cut5             =</span> <span class="fu">cut</span>(</span>
-<span id="cb6-23"><a href="coding.html#cb6-23" aria-hidden="true" tabindex="-1"></a>      disp, </span>
-<span id="cb6-24"><a href="coding.html#cb6-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,         <span class="dv">100</span>,            <span class="dv">150</span>,            <span class="dv">200</span>,      <span class="dv">300</span>,   <span class="cn">Inf</span>),</span>
-<span id="cb6-25"><a href="coding.html#cb6-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(  <span class="st">&quot;small small&quot;</span>, <span class="st">&quot;medium small&quot;</span>, <span class="st">&quot;biggie small&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;big&quot;</span>),</span>
-<span id="cb6-26"><a href="coding.html#cb6-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span></span>
-<span id="cb6-27"><a href="coding.html#cb6-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb6-28"><a href="coding.html#cb6-28" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="coding.html#cb10-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="coding.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="coding.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb10-4"><a href="coding.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    disp,</span>
+<span id="cb10-5"><a href="coding.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb10-6"><a href="coding.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb10-7"><a href="coding.html#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Example of a simple inequality operator (see two bullets above)</span></span>
+<span id="cb10-8"><a href="coding.html#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">muscle_car            =</span> (<span class="dv">300</span> <span class="sc">&lt;=</span> disp),</span>
+<span id="cb10-9"><a href="coding.html#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="coding.html#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Divide `disp` into three levels.</span></span>
+<span id="cb10-11"><a href="coding.html#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">size_default_labels   =</span> <span class="fu">cut</span>(disp, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="cn">Inf</span>), <span class="at">right =</span> F),</span>
+<span id="cb10-12"><a href="coding.html#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="coding.html#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Divide `disp` into three levels with custom labels.</span></span>
+<span id="cb10-14"><a href="coding.html#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">size_cut3             =</span> <span class="fu">cut</span>(</span>
+<span id="cb10-15"><a href="coding.html#cb10-15" aria-hidden="true" tabindex="-1"></a>      disp, </span>
+<span id="cb10-16"><a href="coding.html#cb10-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,   <span class="dv">200</span>,      <span class="dv">300</span>,   <span class="cn">Inf</span>),</span>
+<span id="cb10-17"><a href="coding.html#cb10-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(  <span class="st">&quot;small&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;big&quot;</span>),</span>
+<span id="cb10-18"><a href="coding.html#cb10-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span>  <span class="co"># Is the right boundary INclusive (&#39;FALSE&#39; is an EXclusive boundary)</span></span>
+<span id="cb10-19"><a href="coding.html#cb10-19" aria-hidden="true" tabindex="-1"></a>    ),  </span>
+<span id="cb10-20"><a href="coding.html#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="coding.html#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Divide `disp` into five levels with custom labels.</span></span>
+<span id="cb10-22"><a href="coding.html#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">size_cut5             =</span> <span class="fu">cut</span>(</span>
+<span id="cb10-23"><a href="coding.html#cb10-23" aria-hidden="true" tabindex="-1"></a>      disp, </span>
+<span id="cb10-24"><a href="coding.html#cb10-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,         <span class="dv">100</span>,            <span class="dv">150</span>,            <span class="dv">200</span>,      <span class="dv">300</span>,   <span class="cn">Inf</span>),</span>
+<span id="cb10-25"><a href="coding.html#cb10-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(  <span class="st">&quot;small small&quot;</span>, <span class="st">&quot;medium small&quot;</span>, <span class="st">&quot;biggie small&quot;</span>, <span class="st">&quot;medium&quot;</span>, <span class="st">&quot;big&quot;</span>),</span>
+<span id="cb10-26"><a href="coding.html#cb10-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">right =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-27"><a href="coding.html#cb10-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-28"><a href="coding.html#cb10-28" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div></li>
 <li><p><strong><a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode()</code></a></strong>: The function accepts an integer or character variable. The output branches to a single discrete value. This example maps integers to strings.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="coding.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.census.gov/quickfacts/fact/note/US/RHI625219</span></span>
-<span id="cb7-2"><a href="coding.html#cb7-2" aria-hidden="true" tabindex="-1"></a>race_id        <span class="ot">&lt;-</span> <span class="fu">c</span>(1L, 2L, 1L, 4L, 3L, 4L, 2L, <span class="cn">NA_integer_</span>)</span>
-<span id="cb7-3"><a href="coding.html#cb7-3" aria-hidden="true" tabindex="-1"></a>race_id_spouse <span class="ot">&lt;-</span> <span class="fu">c</span>(1L, 1L, 2L, 3L, 3L, 4L, 5L, <span class="cn">NA_integer_</span>)</span>
-<span id="cb7-4"><a href="coding.html#cb7-4" aria-hidden="true" tabindex="-1"></a>race <span class="ot">&lt;-</span></span>
-<span id="cb7-5"><a href="coding.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
-<span id="cb7-6"><a href="coding.html#cb7-6" aria-hidden="true" tabindex="-1"></a>    race_id,</span>
-<span id="cb7-7"><a href="coding.html#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;1&quot;</span>      <span class="ot">=</span> <span class="st">&quot;White&quot;</span>,</span>
-<span id="cb7-8"><a href="coding.html#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;2&quot;</span>      <span class="ot">=</span> <span class="st">&quot;Black or African American&quot;</span>,</span>
-<span id="cb7-9"><a href="coding.html#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;3&quot;</span>      <span class="ot">=</span> <span class="st">&quot;American Indian and Alaska Native&quot;</span>,</span>
-<span id="cb7-10"><a href="coding.html#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;4&quot;</span>      <span class="ot">=</span> <span class="st">&quot;Asian&quot;</span>,</span>
-<span id="cb7-11"><a href="coding.html#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;5&quot;</span>      <span class="ot">=</span> <span class="st">&quot;Native Hawaiian or Other Pacific Islander&quot;</span>,</span>
-<span id="cb7-12"><a href="coding.html#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.missing =</span> <span class="st">&quot;Unknown&quot;</span></span>
-<span id="cb7-13"><a href="coding.html#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p>If multiple variables have the same mapping, define the mapping once in a named vector, and pass it for multiple calls to <code>dplyr::recode()</code>. Notice that the two variables <code>race</code> and <code>race_spouse</code> use the same mapping.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="coding.html#cb8-1" aria-hidden="true" tabindex="-1"></a>mapping_race <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb8-2"><a href="coding.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="st">&quot;White&quot;</span>,</span>
-<span id="cb8-3"><a href="coding.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;2&quot;</span> <span class="ot">=</span> <span class="st">&quot;Black or African American&quot;</span>,</span>
-<span id="cb8-4"><a href="coding.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;3&quot;</span> <span class="ot">=</span> <span class="st">&quot;American Indian and Alaska Native&quot;</span>,</span>
-<span id="cb8-5"><a href="coding.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;4&quot;</span> <span class="ot">=</span> <span class="st">&quot;Asian&quot;</span>,</span>
-<span id="cb8-6"><a href="coding.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;5&quot;</span> <span class="ot">=</span> <span class="st">&quot;Native Hawaiian or Other Pacific Islander&quot;</span></span>
-<span id="cb8-7"><a href="coding.html#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-8"><a href="coding.html#cb8-8" aria-hidden="true" tabindex="-1"></a>race <span class="ot">&lt;-</span></span>
-<span id="cb8-9"><a href="coding.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
-<span id="cb8-10"><a href="coding.html#cb8-10" aria-hidden="true" tabindex="-1"></a>    race_id,</span>
-<span id="cb8-11"><a href="coding.html#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!!</span>mapping_race,</span>
-<span id="cb8-12"><a href="coding.html#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.missing =</span> <span class="st">&quot;Unknown&quot;</span></span>
-<span id="cb8-13"><a href="coding.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-14"><a href="coding.html#cb8-14" aria-hidden="true" tabindex="-1"></a>race_spouse <span class="ot">&lt;-</span></span>
-<span id="cb8-15"><a href="coding.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
-<span id="cb8-16"><a href="coding.html#cb8-16" aria-hidden="true" tabindex="-1"></a>    race_id_spouse,</span>
-<span id="cb8-17"><a href="coding.html#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!!</span>mapping_race,</span>
-<span id="cb8-18"><a href="coding.html#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">.missing =</span> <span class="st">&quot;Unknown&quot;</span></span>
-<span id="cb8-19"><a href="coding.html#cb8-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="coding.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.census.gov/quickfacts/fact/note/US/RHI625219</span></span>
+<span id="cb11-2"><a href="coding.html#cb11-2" aria-hidden="true" tabindex="-1"></a>race_id        <span class="ot">&lt;-</span> <span class="fu">c</span>(1L, 2L, 1L, 4L, 3L, 4L, 2L, <span class="cn">NA_integer_</span>)</span>
+<span id="cb11-3"><a href="coding.html#cb11-3" aria-hidden="true" tabindex="-1"></a>race_id_spouse <span class="ot">&lt;-</span> <span class="fu">c</span>(1L, 1L, 2L, 3L, 3L, 4L, 5L, <span class="cn">NA_integer_</span>)</span>
+<span id="cb11-4"><a href="coding.html#cb11-4" aria-hidden="true" tabindex="-1"></a>race <span class="ot">&lt;-</span></span>
+<span id="cb11-5"><a href="coding.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
+<span id="cb11-6"><a href="coding.html#cb11-6" aria-hidden="true" tabindex="-1"></a>    race_id,</span>
+<span id="cb11-7"><a href="coding.html#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;1&quot;</span>      <span class="ot">=</span> <span class="st">&quot;White&quot;</span>,</span>
+<span id="cb11-8"><a href="coding.html#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;2&quot;</span>      <span class="ot">=</span> <span class="st">&quot;Black or African American&quot;</span>,</span>
+<span id="cb11-9"><a href="coding.html#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;3&quot;</span>      <span class="ot">=</span> <span class="st">&quot;American Indian and Alaska Native&quot;</span>,</span>
+<span id="cb11-10"><a href="coding.html#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;4&quot;</span>      <span class="ot">=</span> <span class="st">&quot;Asian&quot;</span>,</span>
+<span id="cb11-11"><a href="coding.html#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;5&quot;</span>      <span class="ot">=</span> <span class="st">&quot;Native Hawaiian or Other Pacific Islander&quot;</span>,</span>
+<span id="cb11-12"><a href="coding.html#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.missing =</span> <span class="st">&quot;Unknown&quot;</span></span>
+<span id="cb11-13"><a href="coding.html#cb11-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>If multiple variables have the same mapping, define the mapping once in a named vector, and pass it for multiple calls to <code>dplyr::recode()</code>. Notice that the two variables <code>race</code> and <code>race_spouse</code> use the same mapping.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="coding.html#cb12-1" aria-hidden="true" tabindex="-1"></a>mapping_race <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-2"><a href="coding.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="st">&quot;White&quot;</span>,</span>
+<span id="cb12-3"><a href="coding.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;2&quot;</span> <span class="ot">=</span> <span class="st">&quot;Black or African American&quot;</span>,</span>
+<span id="cb12-4"><a href="coding.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;3&quot;</span> <span class="ot">=</span> <span class="st">&quot;American Indian and Alaska Native&quot;</span>,</span>
+<span id="cb12-5"><a href="coding.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;4&quot;</span> <span class="ot">=</span> <span class="st">&quot;Asian&quot;</span>,</span>
+<span id="cb12-6"><a href="coding.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;5&quot;</span> <span class="ot">=</span> <span class="st">&quot;Native Hawaiian or Other Pacific Islander&quot;</span></span>
+<span id="cb12-7"><a href="coding.html#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="coding.html#cb12-8" aria-hidden="true" tabindex="-1"></a>race <span class="ot">&lt;-</span></span>
+<span id="cb12-9"><a href="coding.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
+<span id="cb12-10"><a href="coding.html#cb12-10" aria-hidden="true" tabindex="-1"></a>    race_id,</span>
+<span id="cb12-11"><a href="coding.html#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!!</span>mapping_race,</span>
+<span id="cb12-12"><a href="coding.html#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">.missing =</span> <span class="st">&quot;Unknown&quot;</span></span>
+<span id="cb12-13"><a href="coding.html#cb12-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-14"><a href="coding.html#cb12-14" aria-hidden="true" tabindex="-1"></a>race_spouse <span class="ot">&lt;-</span></span>
+<span id="cb12-15"><a href="coding.html#cb12-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
+<span id="cb12-16"><a href="coding.html#cb12-16" aria-hidden="true" tabindex="-1"></a>    race_id_spouse,</span>
+<span id="cb12-17"><a href="coding.html#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!!!</span>mapping_race,</span>
+<span id="cb12-18"><a href="coding.html#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">.missing =</span> <span class="st">&quot;Unknown&quot;</span></span>
+<span id="cb12-19"><a href="coding.html#cb12-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Tips for <code>dplyr::recode()</code>:</p>
 <ul>
-<li>A resuable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like “disagree”, “neutral”, “agree”.</li>
+<li>A reusable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like “disagree”, “neutral”, “agree”.</li>
 <li>Use <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode_factor()</code></a> to map integers to factor levels.<br />
 </li>
-<li><a href="https://forcats.tidyverse.org/reference/fct_recode.html"><code>forcats::fct_recode()</code></a> is similar. We prefer the <code>.missing</code> parameter of <code>dplyr::recode()</code> that recodes NA values into an explicit value.</li>
+<li><a href="https://forcats.tidyverse.org/reference/fct_recode.html"><code>forcats::fct_recode()</code></a> is similar. We prefer the <code>.missing</code> parameter of <code>dplyr::recode()</code> that translates an <code>NA</code> into an explicit value.</li>
 <li>When using the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCap API</a>, these functions help convert radio buttons to a character or factor variable.</li>
 </ul></li>
 <li><p><strong>lookup table</strong>: It is feasible to recode 6 levels of race directly in R, but it’s less feasible to recode 200 provider names. Specify the mapping in a csv, then use <a href="https://readr.tidyverse.org/reference/read_delim.html">readr</a> to convert the csv to a data.frame, and finally <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left join</a> it.</p></li>
-<li><p><strong><a href="https://dplyr.tidyverse.org/reference/case_when.html"><code>dplyr::case_when()</code></a></strong>: The function is the most complicated because it can evaluate multiple variables. Also, multiple cases can be true, but only the first output is returned. This ‘water fall’ execution helps in complicated scenarios, but is overkill for most.</p></li>
+<li><p><strong><a href="https://dplyr.tidyverse.org/reference/case_when.html"><code>dplyr::case_when()</code></a></strong>: The function is the most complicated because it can evaluate multiple input variables. Also, multiple cases can be true, but only the first output is returned. This ‘water fall’ execution helps in complicated scenarios, but is overkill for most.</p></li>
 </ol>
 </div>
 </div>
@@ -713,24 +735,24 @@ div.csl-indent {
 </div>
 <div id="coding-defensive-date-arithmetic" class="section level3" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Date Arithmetic</h3>
-<p>Don’t use the minus operator (<em>i.e.</em>, <code>-</code>) to subtract dates. Instead use <code>as.integer(difftime(stop, start, units="days"))</code>. It’s longer but protects from the scenario that <code>start</code> or <code>stop</code> are changed upstream to a datetime. In that case, <code>stop - start</code> equals the number of <em>seconds</em> between the two points, not the number of <em>days</em>.</p>
+<p>Don’t use the minus operator (<em>i.e.</em>, <code>-</code>) to subtract dates. Instead use <code>as.integer(difftime(stop, start, units="days"))</code>. It’s longer but protects from the scenario that <code>start</code> or <code>stop</code> are changed upstream from a date to a datetime. In that case, <code>stop - start</code> returns the number of <em>seconds</em> between the two points, not the number of <em>days</em>.</p>
 </div>
 <div id="excluding-bad-cases" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Excluding Bad Cases</h3>
 <p>Some variables are critical to the record, and if it’s missing, you don’t want or trust any of its other values. For instance, a hospital visit record rarely useful if missing the patient ID. In these cases, prevent the record from passing through the <a href="patterns.html#pattern-ellis">ellis</a>.</p>
-<p>In this example, we’ll presume we can’t trust a patient record if it lacks a clean date of birth (<code>dob</code>).</p>
+<p>In this example, we’ll presume we cannot trust a patient record if it lacks a clean date of birth (<code>dob</code>).</p>
 <ol style="list-style-type: decimal">
 <li><p>Define the permissible range, in either the ellis’s <a href="file-prototype-r.html#chunk-declare">declare-globals</a> chunk, or in the <a href="repo-prototype.html#repo-config">config-file</a>. (We’ll use the config file for this example.) We’ll exclude anyone born before 2000, or after tomorrow. Even though it’s illogical for someone in a retrospective record to be born tomorrow, consider bending a little for small errors.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="coding.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2000-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb13-1"><a href="coding.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date(&quot;2000-01-01&quot;), Sys.Date() + lubridate::days(1))</span></span></code></pre></div></li>
 <li><p>In the <a href="file-prototype-r.html#chunk-tweak-data">tweak-data</a> chunk, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/trim.html"><code>OuhscMunge::trim_date()</code></a> to set the cell to <code>NA</code> if it falls outside an acceptable range. After <a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>dplyr::mutate()</code></a>, call <a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> to exclude the entire record, regardless if (a) it was already <code>NA</code>, or (b) was “trimmed” to <code>NA</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="coding.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span></span>
-<span id="cb10-2"><a href="coding.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  ds <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="coding.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb10-4"><a href="coding.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dob =</span> OuhscMunge<span class="sc">::</span><span class="fu">trim_date</span>(dob, config<span class="sc">$</span>range_dob)</span>
-<span id="cb10-5"><a href="coding.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb10-6"><a href="coding.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">drop_na</span>(dob)</span></code></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="coding.html#cb14-1" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span></span>
+<span id="cb14-2"><a href="coding.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  ds <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="coding.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb14-4"><a href="coding.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dob =</span> OuhscMunge<span class="sc">::</span><span class="fu">trim_date</span>(dob, config<span class="sc">$</span>range_dob)</span>
+<span id="cb14-5"><a href="coding.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="coding.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">drop_na</span>(dob)</span></code></pre></div></li>
 <li><p>Near the end of the file, verify the variable for three reasons: (a) there’s a chance that the code above isn’t working as expected, (b) some later code later might have introduced bad values, and (c) it clearly documents to a reader that <code>dob</code> was included in this range at this stage of the pipeline.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="coding.html#cb11-1" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_date</span>(ds<span class="sc">$</span>dob, <span class="at">any.missing=</span>F, <span class="at">lower=</span>config<span class="sc">$</span>range_dob[<span class="dv">1</span>], <span class="at">upper=</span>config<span class="sc">$</span>range_dob[<span class="dv">2</span>])</span></code></pre></div></li>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="coding.html#cb15-1" aria-hidden="true" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_date</span>(ds<span class="sc">$</span>dob, <span class="at">any.missing=</span>F, <span class="at">lower=</span>config<span class="sc">$</span>range_dob[<span class="dv">1</span>], <span class="at">upper=</span>config<span class="sc">$</span>range_dob[<span class="dv">2</span>])</span></code></pre></div></li>
 </ol>
 
 </div>
@@ -739,8 +761,9 @@ div.csl-indent {
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>The equivalent of R’s <code>logical</code> data type is called a <code>bit</code> in <a href="https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql">SQL Server</a>, and a <code>boolean</code> in <a href="https://www.postgresql.org/docs/current/datatype-boolean.html">Postgres</a> and <a href="https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html">MySQL</a>.<a href="coding.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>For now, employ the <code>!!!</code> operator without understanding it. When you’re more comfortable with R, read about <a href="https://adv-r.hadley.nz/quasiquotation.html#unquoting-many-arguments">quosures and lazy evaluation</a> so you can use it in more general scenarios.<a href="coding.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>The equivalent of R’s <code>logical</code> data type is called a <code>bit</code> in <a href="https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql">SQL Server</a>, and a <code>boolean</code> in <a href="https://www.postgresql.org/docs/current/datatype-boolean.html">Postgres</a> and <a href="https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html">MySQL</a>. SQLite’s <code>integer</code> is best alternative for boolean variables.<a href="coding.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>In the database world, <code>character</code> variables are typically represented by the <code>varchar</code>; when setting the maximum length, consider padding with some extra character. If most of the entries are eight to ten characters, consider using <code>varchar(15)</code>. Mimicking a <code>factor</code> variable is more complicated. Factor levels are typically defined in a dedicated table (commonly called a lookup table), and then referenced with a foreign key relationship. In many circumstances saving an R factor to a database, we will use a simple <code>varchar</code>.<a href="coding.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>For now, employ the <code>!!!</code> operator without understanding it. When you’re more comfortable with R, read about <a href="https://adv-r.hadley.nz/quasiquotation.html#unquoting-many-arguments">quosures and lazy evaluation</a> so you can use it in more general scenarios.<a href="coding.html#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

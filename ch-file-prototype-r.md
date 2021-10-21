@@ -45,7 +45,7 @@ As discussed in the previous [qualify all functions](#qualify-functions) section
 
 1. Core packages (*e.g.*, 'base' and 'stats') are loaded by R in most default installations.  We avoid unnecessary calls like `library(stats)` because they distract from more important features.
 1. Obvious dependencies are not called by `requireNamespace()` or `library()` for similar reasons, especially if they are not called directly.  For example 'tidyselect' is not listed when 'tidyr' is listed.
-1. The "pipe" function (declared in the 'magrittr' package , *i.e.*, `%>%`) is attached with `import::from(magrittr, "%>%")`.  This frequently-used function called be called throughout the execution without qualification.
+1. *If using a version older than R 4.1*^[The "native pipe" (*i.e.*, `|>`) was introduced in R 4.1, and we strongly recommend you upgrade.  If this is not possible, most examples in this book should run by simply replacing `|>` with `%>%` and calling `import::from(magrittr, "%>%")` at the top of each file.]: The "pipe" function (declared in the 'magrittr' package , *i.e.*, `%>%`) is attached with `import::from(magrittr, "%>%")`.  This frequently-used function can be called throughout the execution without qualification.
 1. Compared to manipulation files, our analysis files tend to use many functions in a few concentrated packages so conflicting function names are less common.  Typical packages used in analysis are 'ggplot2' and 'lme4'.
 
 The `source`d files above may load their own packages (by calling `library()`).  It is important that the `library()` calls in this file follow the 'load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent.  Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.
@@ -56,7 +56,7 @@ Here are packages found in most of our manipulation files.  Notice the lesser-kn
 
 ```r
 # ---- load-packages -----------------------------------------------------------
-import::from(magrittr, "%>%" )
+# import::from(magrittr, "%>%" )
 
 requireNamespace("readr"     )
 requireNamespace("tidyr"     )
@@ -117,18 +117,18 @@ It's best to rename the dataset (a) in a single place and (b) early in the pipel
 ```r
 # OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.
 ds <-
-  ds %>%
+  ds |>
   dplyr::select(    # `dplyr::select()` drops columns not included.
     subject_id,
     county_id,
     gender_id,
     race,
     ethnicity
-  ) %>%
+  ) |>
   dplyr::mutate(
 
-  ) %>%
-  dplyr::arrange(subject_id) # %>%
+  ) |>
+  dplyr::arrange(subject_id) # |>
   # tibble::rowid_to_column("subject_id") # Add a unique index if necessary
 ```
 
@@ -186,8 +186,8 @@ This chunk follows [verify-values](#chunk-verify-values) because sometimes you w
 #   The fewer columns that are exported, the fewer things that can break downstream.
 
 ds_slim <-
-  ds %>%
-  # dplyr::slice(1:100) %>%
+  ds |>
+  # dplyr::slice(1:100) |>
   dplyr::select(
     subject_id,
     county_id,

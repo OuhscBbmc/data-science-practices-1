@@ -24,7 +24,7 @@
 <meta name="author" content="Will Beasley" />
 
 
-<meta name="date" content="2021-10-11" />
+<meta name="date" content="2021-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -611,39 +611,39 @@ div.csl-indent {
 <h3><span class="header-section-number">8.1.5</span> Elements</h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>Clear memory</strong> In scripting languages like R (unlike compiled languages like Java), it’s easy for old variables to hang around. Explicitly clear them before you run the file again.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="patterns.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="patterns.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>(<span class="at">all=</span><span class="cn">TRUE</span>)) <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it&#39;s above the first chunk.</span></span></code></pre></div></li>
 <li><p><strong>Load Sources</strong> In R, a <code>source()</code>d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.</p>
 <p>The first approach is better suited for quick &amp; easy development. The second allows you to add documentation and unit tests.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="patterns.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
-<span id="cb34-2"><a href="patterns.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</span></code></pre></div></li>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="patterns.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
+<span id="cb38-2"><a href="patterns.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./manipulation/osdh/ellis/common-ellis.R&quot;</span>)</span></code></pre></div></li>
 <li><p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code>library()</code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code>dplyr::intersect()</code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="patterns.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
-<span id="cb35-2"><a href="patterns.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
-<span id="cb35-3"><a href="patterns.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr            , <span class="at">quietly=</span><span class="cn">TRUE</span>)</span>
-<span id="cb35-4"><a href="patterns.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI                 , <span class="at">quietly=</span><span class="cn">TRUE</span>)</span>
-<span id="cb35-5"><a href="patterns.html#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="patterns.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
-<span id="cb35-7"><a href="patterns.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</span>
-<span id="cb35-8"><a href="patterns.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</span>
-<span id="cb35-9"><a href="patterns.html#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></span>
-<span id="cb35-10"><a href="patterns.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</span>
-<span id="cb35-11"><a href="patterns.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</span>
-<span id="cb35-12"><a href="patterns.html#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co"># remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="patterns.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
+<span id="cb39-2"><a href="patterns.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
+<span id="cb39-3"><a href="patterns.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr            , <span class="at">quietly=</span><span class="cn">TRUE</span>)</span>
+<span id="cb39-4"><a href="patterns.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI                 , <span class="at">quietly=</span><span class="cn">TRUE</span>)</span>
+<span id="cb39-5"><a href="patterns.html#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="patterns.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
+<span id="cb39-7"><a href="patterns.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;readr&quot;</span>        )</span>
+<span id="cb39-8"><a href="patterns.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;tidyr&quot;</span>        )</span>
+<span id="cb39-9"><a href="patterns.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>        ) <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></span>
+<span id="cb39-10"><a href="patterns.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;testit&quot;</span>)</span>
+<span id="cb39-11"><a href="patterns.html#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;checkmate&quot;</span>)</span>
+<span id="cb39-12"><a href="patterns.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="fu">requireNamespace</span>(<span class="st">&quot;OuhscMunge&quot;</span>) <span class="co"># remotes::install_github(repo=&quot;OuhscBbmc/OuhscMunge&quot;)</span></span></code></pre></div></li>
 <li><p><strong>Declare Global Variables and Functions</strong>. This includes defining the expected column names and types of the data sources; use <code>readr::cols_only()</code> (as opposed to <code>readr::cols()</code>) to ignore any new columns that may be been added since the dataset’s last refresh.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="patterns.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="patterns.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Load Data Source(s)</strong> See <a href="file-prototype-r.html#chunk-load-data">load-data</a> chunk described in the prototypical file.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="patterns.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="patterns.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Tweak Data</strong></p>
 <p>See <a href="file-prototype-r.html#chunk-tweak-data">tweak-data</a> chunk described in the prototypical file.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="patterns.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="patterns.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Body of the Ellis</strong></p></li>
 <li><p><strong>Verify</strong></p></li>
 <li><p><strong>Specify Columns</strong></p>
 <p>See <a href="file-prototype-r.html#chunk-specify-columns">specify-columns-to-upload</a> chunk described in the prototypical file.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="patterns.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="patterns.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span></code></pre></div></li>
 <li><p><strong>Welcome</strong> into your warehouse. Until this chunk, nothing should be persisted.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="patterns.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- save-to-db --------------------------------------------------------------</span></span>
-<span id="cb40-2"><a href="patterns.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></span></code></pre></div></li>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="patterns.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- save-to-db --------------------------------------------------------------</span></span>
+<span id="cb44-2"><a href="patterns.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></span></code></pre></div></li>
 </ol>
 </div>
 </div>
