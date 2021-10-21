@@ -6,20 +6,20 @@ Simplify {#coding-simplify}
 
 ### Data Types {#coding-simplify-types}
 
-Use the simplest data type reasonable.  A simpler data type is less likely contain unintended values.  As we have seen, a string variable called `gender` can simultaneously contain the values "m", "f", "F", "Female", "MALE", "0", "1", "2", "Latino", "", and `NA`.  On the other hand, a boolean variable `gender_male` can be only `FALSE`, `TRUE`, and `NA`.^[The equivalent of R's `logical` data type is called a `bit` in [SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql), and a `boolean` in [Postgres](https://www.postgresql.org/docs/current/datatype-boolean.html) and [MySQL](https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html).]
+Use the simplest data type reasonable.  A simpler data type is less likely contain unintended values.  As we have seen, a string variable called `gender` can simultaneously contain the values "m", "f", "F", "Female", "MALE", "0", "1", "2", "Latino", "", and `NA`.  On the other hand, a boolean variable `gender_male` can be only `FALSE`, `TRUE`, and `NA`.^[The equivalent of R's `logical` data type is called a `bit` in [SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/data-types/bit-transact-sql), and a `boolean` in [Postgres](https://www.postgresql.org/docs/current/datatype-boolean.html) and [MySQL](https://dev.mysql.com/doc/refman/8.0/en/boolean-literals.html). SQLite's `integer` is best alternative for boolean variables.]
 
 [SQLite](https://www.sqlite.org/datatype3.html) does not have a dedicated datatype, so you must resort to storing it as `0`, `1` and `NULL` values.  Because a caller can't assume that an ostensible boolean SQLite variable contains only those three values, the variable should be checked.
 
-Once you have cleaned a variable in your initial ETL files (like an [Ellis](https://ouhscbbmc.github.io/data-science-practices-1/patterns.html#pattern-ellis)), lock it down so you do not have to spend time in the downstream files verifying that no bad values have been introduced.  As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
+Once you have cleaned a variable in your initial ETL files (like an [Ellis](https://ouhscbbmc.github.io/data-science-practices-1/patterns.html#pattern-ellis)), establish boundaries so you do not have to spend time in the downstream files verifying that no bad values have been introduced.  As a small bonus, simpler data types are typically faster, consume less memory, and translate more cleanly across platforms.
 
-Within R, the preference for numeric-ish variables is
+Within R, numeric-ish variables can be represented by the following four data types.  Use the simplest type that adequately captures the information.  `logical` is the simplest and `numeric` is the most flexible.
 
 1. `logical`/boolean/bit,
 1. `integer`,
 1. `bit64::integer64`, and
 1. `numeric`/double-precision floats.
 
-The preference for categorical variables is
+Categorical variables have a similar spectrum.  After `logical` types, `factor`s are more restrictive and less flexible than `character`s.^[In the database world, `character` variables are typically represented by the `varchar`; when setting the maximum length, consider padding with some extra character.  If most of the entries are eight to ten characters, consider using `varchar(15)`.  Mimicking a `factor` variable is more complicated.  Factor levels are typically defined in a dedicated table (commonly called a lookup table), and then referenced with a foreign key relationship.  In many circumstances saving an R factor to a database, we will use a simple `varchar`.]
 
 1. `logical`/boolean/bit,
 1. `factor`, and
@@ -34,7 +34,7 @@ When a boolean variable would be too restrictive and a factor or character is re
 
 ### Recoding {#coding-simplify-recoding}
 
-Almost every project recodes many variables.  Choose the simplest function possible.  The functions at the top are much easier to read and harder to mess up.
+Almost every project recodes many variables.  Choose the simplest function possible.  The functions at the top are easier to read and harder to mess up than the functions below it
 
 1. **Leverage existing booleans:** Suppose you have the logical variable `gender_male` (which can be only `TRUE`, `FALSE`, or `NA`).  Writing `gender_male == TRUE` or `gender_male == FALSE` will evaluate to a boolean --that's unnecessary because `gender_male` is already a boolean.
 
@@ -70,18 +70,34 @@ Almost every project recodes many variables.  Choose the simplest function possi
     birth_apgar = dplyr::if_else(birth_apgar == 99, NA_real_, birth_apgar)
     ```
 
-1. **`<=`** (or a similar comparison operator): Compare two quantities to output a boolean variable.
+1. **`<=`** (or a similar comparison operator): Compare two quantities to output a boolean variable.  The parentheses are unnecessary, but can help readability.  If either value is `NA`, then the result is `NA`.
 
-1. **[`dplyr::if_else()`](https://dplyr.tidyverse.org/reference/if_else.html)**:  The function evaluates a single boolean variable.  The output branches to only three possibilities: condition is (a) true, (b) false, or (c) (optionally) `NA`.  An advantage over `<=` is that `NA` values can be specified directly.
+    Notice that we prefer to order the variables like a number line.  When the result is `TRUE`, the smaller value is to the left of the larger value.
 
     ```r
-    date_start <- as.Date("2017-01-01")
+    dob_in_the_future   <- (Sys.Date() < dob)
+    dod_follows_dob     <- (dob <= dod)
+    premature           <- (gestation_weeks < 37)
+    big_boy             <- (threshold_in_kg <= birth_weight_in_kg)
+    ```
+
+1. **[`dplyr::if_else()`](https://dplyr.tidyverse.org/reference/if_else.html)**:  The function evaluates a single boolean variable or expression.  The output branches to only three possibilities: the input is (a) true, (b) false, or (c) (optionally) `NA`.  Notice that unlike the `<=` operator, `dplyr::if_else()` lets you specify a value if the input expression evaluates to `NA`. 
+
+    ```r
+    date_start  <- as.Date("2017-01-01")
 
     # If a missing month element needs to be handled explicitly.
-    stage       = dplyr::if_else(date_start <= month, "post", "pre", missing = "missing-month")
+    stage       <- dplyr::if_else(date_start <= month, "post", "pre", missing = "missing-month")
 
     # Otherwise a simple boolean output is sufficient.
-    stage_post  = (date_start <= month)
+    stage_post  <- (date_start <= month)
+    ```
+
+    If it is important that the reader understand that an input expression of `NA` will produce an NA, consider using `dplyr::if_else()`, even though these two lines are equivalent.  A casual reader may not consider that `stage_post` could be `NA`.
+
+    ```r
+    stage_post  <- (date_start <= month)
+    stage_post  <- dplyr::if_else(date_start <= month, TRUE, FALSE, missing = NA)
     ```
 
 1. **[`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html)**: The function transforms a single numeric variable into a factor.  Its range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
