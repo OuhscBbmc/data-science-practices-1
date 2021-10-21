@@ -1,10 +1,11 @@
 book_filename: "data-science-practices-1"
+new_session: true
+before_chapter_script: _common.R
 delete_merged_file: true
+output_dir: "_book" # This blocks local contributions but allows GitHub Actions (which write to docs/ instead of _book/) to be deliver html files where GitHub Pages can serve it.
 language:
   ui:
     chapter_name: "Chapter "
-output_dir: "docs"
-edit: https://github.com/ouhscbbmc/data-science-practices-1/edit/main/%s
 rmd_files:
   [
     "index.Rmd",

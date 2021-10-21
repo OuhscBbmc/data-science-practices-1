@@ -1,0 +1,60 @@
+Type: Book
+Package: collaborativedatascience
+Title: Collaborative Data Science Practices
+Version: 1.0.1
+Authors@R: c(
+    person("Will", "Beasley", role = c("aut", "cre"), email =
+    "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006"))
+    )
+Imports: 
+    bookdown,
+    remotes,    
+    kableExtra,
+    knitcitations,
+    knitr,
+    learnr,
+    magick,
+    nomnoml,
+    officedown,
+    officer,
+    pagedown,
+    pander,
+    pdftools,
+    pixiedust,
+    pkgdown,
+    printr,
+    r2d3,
+    reactable,
+    reticulate,
+    revealjs,
+    rgl,
+    rhandsontable,
+    rmarkdown,
+    rmdformats,
+    roxygen2,
+    rsconnect,
+    rticles,
+    sass,
+    spelling,
+    stargazer,
+    styler,
+    svglite,
+    tables,
+    tangram,
+    tikzDevice,
+    tinytex,
+    trackdown,
+    tufte,
+    usethis,
+    webshot,
+    workflowr,
+    xaringan,
+    xfun,
+    xtable,
+    yaml,
+    ztable
+Suggests:
+    rsconnect
+Encoding: UTF-8
+Language: en-US
+

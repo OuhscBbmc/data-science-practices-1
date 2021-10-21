@@ -1,616 +1,141 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>B Snippets | Collaborative Data Science Practices</title>
-  <meta name="description" content="Collection of publicly available practices of data science and analysis." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="B Snippets | Collaborative Data Science Practices" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Collection of publicly available practices of data science and analysis." />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="B Snippets | Collaborative Data Science Practices" />
-  
-  <meta name="twitter:description" content="Collection of publicly available practices of data science and analysis." />
-  
-
-<meta name="author" content="Will Beasley" />
-
-
-<meta name="date" content="2021-10-21" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="git.html"/>
-<link rel="next" href="presentations.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>B Snippets | Collaborative Data Science Practices</title>
+<meta name="author" content="Will Beasley">
+<meta name="description" content="B.1 Reading External Data  B.1.1 Reading from Excel Background: Avoid Excel for the reasons previously discussed. But if there isn’t another good option, be protective. readxl::read_excel() allows...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="B Snippets | Collaborative Data Science Practices">
+<meta property="og:type" content="book">
+<meta property="og:description" content="B.1 Reading External Data  B.1.1 Reading from Excel Background: Avoid Excel for the reasons previously discussed. But if there isn’t another good option, be protective. readxl::read_excel() allows...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="B Snippets | Collaborative Data Science Practices">
+<meta name="twitter:description" content="B.1 Reading External Data  B.1.1 Reading from Excel Background: Avoid Excel for the reasons previously discussed. But if there isn’t another good option, be protective. readxl::read_excel() allows...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">Collaborative Data Science</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>2</b> Coding Principles</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="coding.html"><a href="coding.html#coding-simplify"><i class="fa fa-check"></i><b>2.1</b> Simplify</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="coding.html"><a href="coding.html#coding-simplify-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
-<li class="chapter" data-level="2.1.2" data-path="coding.html"><a href="coding.html#coding-simplify-categorical"><i class="fa fa-check"></i><b>2.1.2</b> Categorical Levels</a></li>
-<li class="chapter" data-level="2.1.3" data-path="coding.html"><a href="coding.html#coding-simplify-recoding"><i class="fa fa-check"></i><b>2.1.3</b> Recoding</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="coding.html"><a href="coding.html#coding-defensive"><i class="fa fa-check"></i><b>2.2</b> Defensive Style</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="coding.html"><a href="coding.html#coding-defensive-qualify-functions"><i class="fa fa-check"></i><b>2.2.1</b> Qualify functions</a></li>
-<li class="chapter" data-level="2.2.2" data-path="coding.html"><a href="coding.html#coding-defensive-date-arithmetic"><i class="fa fa-check"></i><b>2.2.2</b> Date Arithmetic</a></li>
-<li class="chapter" data-level="2.2.3" data-path="coding.html"><a href="coding.html#excluding-bad-cases"><i class="fa fa-check"></i><b>2.2.3</b> Excluding Bad Cases</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture Principles</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#encapsulation"><i class="fa fa-check"></i><b>3.1</b> Encapsulation</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#leverage-team-members-strengths-avoid-weaknesses"><i class="fa fa-check"></i><b>3.2</b> Leverage team member’s strengths &amp; avoid weaknesses</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#focused-code-files"><i class="fa fa-check"></i><b>3.2.1</b> Focused code files</a></li>
-<li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#metadata-for-content-experts"><i class="fa fa-check"></i><b>3.2.2</b> Metadata for content experts</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#scales"><i class="fa fa-check"></i><b>3.3</b> Scales</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#single-source-single-analysis"><i class="fa fa-check"></i><b>3.3.1</b> Single source &amp; single analysis</a></li>
-<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#multiple-sources-multiple-analyses"><i class="fa fa-check"></i><b>3.3.2</b> Multiple sources &amp; multiple analyses</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#architecture-consistency"><i class="fa fa-check"></i><b>3.4</b> Consistency</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#consistency-files"><i class="fa fa-check"></i><b>3.4.1</b> Across Files</a></li>
-<li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#across-languages"><i class="fa fa-check"></i><b>3.4.2</b> Across Languages</a></li>
-<li class="chapter" data-level="3.4.3" data-path="architecture.html"><a href="architecture.html#across-projects"><i class="fa fa-check"></i><b>3.4.3</b> Across Projects</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="file-prototype-r.html"><a href="file-prototype-r.html"><i class="fa fa-check"></i><b>4</b> Prototypical R File</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-clear"><i class="fa fa-check"></i><b>4.1</b> Clear Memory</a></li>
-<li class="chapter" data-level="4.2" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-load-sources"><i class="fa fa-check"></i><b>4.2</b> Load Sources</a></li>
-<li class="chapter" data-level="4.3" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-load-packages"><i class="fa fa-check"></i><b>4.3</b> Load Packages</a></li>
-<li class="chapter" data-level="4.4" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-declare"><i class="fa fa-check"></i><b>4.4</b> Declare Globals</a></li>
-<li class="chapter" data-level="4.5" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-load-data"><i class="fa fa-check"></i><b>4.5</b> Load Data</a></li>
-<li class="chapter" data-level="4.6" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-tweak-data"><i class="fa fa-check"></i><b>4.6</b> Tweak Data</a></li>
-<li class="chapter" data-level="4.7" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-unique"><i class="fa fa-check"></i><b>4.7</b> (Unique Content)</a></li>
-<li class="chapter" data-level="4.8" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-verify-values"><i class="fa fa-check"></i><b>4.8</b> Verify Values</a></li>
-<li class="chapter" data-level="4.9" data-path="file-prototype-r.html"><a href="file-prototype-r.html#chunk-specify-columns"><i class="fa fa-check"></i><b>4.9</b> Specify Output Columns</a></li>
-<li class="chapter" data-level="4.10" data-path="file-prototype-r.html"><a href="file-prototype-r.html#save-to-disk-or-database"><i class="fa fa-check"></i><b>4.10</b> Save to Disk or Database</a></li>
-<li class="chapter" data-level="4.11" data-path="file-prototype-r.html"><a href="file-prototype-r.html#additional-resources"><i class="fa fa-check"></i><b>4.11</b> Additional Resources</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html"><i class="fa fa-check"></i><b>5</b> Prototypical SQL File</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-choice"><i class="fa fa-check"></i><b>5.1</b> Choice of Database Engine</a></li>
-<li class="chapter" data-level="5.2" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-ferry"><i class="fa fa-check"></i><b>5.2</b> Ferry</a></li>
-<li class="chapter" data-level="5.3" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-default-database"><i class="fa fa-check"></i><b>5.3</b> Default Databases</a></li>
-<li class="chapter" data-level="5.4" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-declare"><i class="fa fa-check"></i><b>5.4</b> Declare Values Databases</a></li>
-<li class="chapter" data-level="5.5" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-recreate"><i class="fa fa-check"></i><b>5.5</b> Recreate Table</a></li>
-<li class="chapter" data-level="5.6" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-truncate"><i class="fa fa-check"></i><b>5.6</b> Truncate Table</a></li>
-<li class="chapter" data-level="5.7" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-insert"><i class="fa fa-check"></i><b>5.7</b> INSERT INTO</a></li>
-<li class="chapter" data-level="5.8" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-select"><i class="fa fa-check"></i><b>5.8</b> SELECT</a></li>
-<li class="chapter" data-level="5.9" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-from"><i class="fa fa-check"></i><b>5.9</b> FROM</a></li>
-<li class="chapter" data-level="5.10" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-where"><i class="fa fa-check"></i><b>5.10</b> WHERE</a></li>
-<li class="chapter" data-level="5.11" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-order-by"><i class="fa fa-check"></i><b>5.11</b> ORDER BY</a></li>
-<li class="chapter" data-level="5.12" data-path="file-prototype-sql.html"><a href="file-prototype-sql.html#sql-indexing"><i class="fa fa-check"></i><b>5.12</b> Indexing</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="repo-prototype.html"><a href="repo-prototype.html"><i class="fa fa-check"></i><b>6</b> Prototypical Repository</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-root"><i class="fa fa-check"></i><b>6.1</b> Root</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-config"><i class="fa fa-check"></i><b>6.1.1</b> <code>config.R</code></a></li>
-<li class="chapter" data-level="6.1.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-flow"><i class="fa fa-check"></i><b>6.1.2</b> <code>flow.R</code></a></li>
-<li class="chapter" data-level="6.1.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-readme"><i class="fa fa-check"></i><b>6.1.3</b> <code>README.md</code></a></li>
-<li class="chapter" data-level="6.1.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-rproj"><i class="fa fa-check"></i><b>6.1.4</b> <code>*.Rproj</code></a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-analysis"><i class="fa fa-check"></i><b>6.2</b> Analysis</a></li>
-<li class="chapter" data-level="6.3" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-public"><i class="fa fa-check"></i><b>6.3</b> Data Public</a></li>
-<li class="chapter" data-level="6.4" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-data-unshared"><i class="fa fa-check"></i><b>6.4</b> Data Unshared</a></li>
-<li class="chapter" data-level="6.5" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-documentation"><i class="fa fa-check"></i><b>6.5</b> Documentation</a></li>
-<li class="chapter" data-level="6.6" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-manipulation"><i class="fa fa-check"></i><b>6.6</b> Manipulation</a></li>
-<li class="chapter" data-level="6.7" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-stitched"><i class="fa fa-check"></i><b>6.7</b> Stitched Output</a></li>
-<li class="chapter" data-level="6.8" data-path="repo-prototype.html"><a href="repo-prototype.html#repo-utility"><i class="fa fa-check"></i><b>6.8</b> Utility</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="rest.html"><a href="rest.html"><i class="fa fa-check"></i><b>7</b> Data at Rest</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="rest.html"><a href="rest.html#data-states"><i class="fa fa-check"></i><b>7.1</b> Data States</a></li>
-<li class="chapter" data-level="7.2" data-path="rest.html"><a href="rest.html#data-containers"><i class="fa fa-check"></i><b>7.2</b> Data Containers</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="rest.html"><a href="rest.html#data-containers-csv"><i class="fa fa-check"></i><b>7.2.1</b> csv</a></li>
-<li class="chapter" data-level="7.2.2" data-path="rest.html"><a href="rest.html#data-containers-rds"><i class="fa fa-check"></i><b>7.2.2</b> rds</a></li>
-<li class="chapter" data-level="7.2.3" data-path="rest.html"><a href="rest.html#data-containers-yaml"><i class="fa fa-check"></i><b>7.2.3</b> yaml, json, and xml</a></li>
-<li class="chapter" data-level="7.2.4" data-path="rest.html"><a href="rest.html#data-containers-arrow"><i class="fa fa-check"></i><b>7.2.4</b> Arrow</a></li>
-<li class="chapter" data-level="7.2.5" data-path="rest.html"><a href="rest.html#data-containers-sqlite"><i class="fa fa-check"></i><b>7.2.5</b> SQLite</a></li>
-<li class="chapter" data-level="7.2.6" data-path="rest.html"><a href="rest.html#data-containers-database"><i class="fa fa-check"></i><b>7.2.6</b> Central Enterprise database</a></li>
-<li class="chapter" data-level="7.2.7" data-path="rest.html"><a href="rest.html#data-containers-redcap"><i class="fa fa-check"></i><b>7.2.7</b> Central REDCap database</a></li>
-<li class="chapter" data-level="7.2.8" data-path="rest.html"><a href="rest.html#data-containers-avoid"><i class="fa fa-check"></i><b>7.2.8</b> Containers to avoid</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="rest.html"><a href="rest.html#data-conventions"><i class="fa fa-check"></i><b>7.3</b> Storage Conventions</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="rest.html"><a href="rest.html#data-conventions-all"><i class="fa fa-check"></i><b>7.3.1</b> All Sources</a></li>
-<li class="chapter" data-level="7.3.2" data-path="rest.html"><a href="rest.html#data-conventions-text"><i class="fa fa-check"></i><b>7.3.2</b> Text</a></li>
-<li class="chapter" data-level="7.3.3" data-path="rest.html"><a href="rest.html#data-conventions-excel"><i class="fa fa-check"></i><b>7.3.3</b> Excel</a></li>
-<li class="chapter" data-level="7.3.4" data-path="rest.html"><a href="rest.html#data-conventions-meditech"><i class="fa fa-check"></i><b>7.3.4</b> Meditech</a></li>
-<li class="chapter" data-level="7.3.5" data-path="rest.html"><a href="rest.html#data-conventions-database"><i class="fa fa-check"></i><b>7.3.5</b> Databases</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="patterns.html"><a href="patterns.html"><i class="fa fa-check"></i><b>8</b> Patterns</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="patterns.html"><a href="patterns.html#pattern-ellis"><i class="fa fa-check"></i><b>8.1</b> Ellis</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="patterns.html"><a href="patterns.html#purpose"><i class="fa fa-check"></i><b>8.1.1</b> Purpose</a></li>
-<li class="chapter" data-level="8.1.2" data-path="patterns.html"><a href="patterns.html#philosophy"><i class="fa fa-check"></i><b>8.1.2</b> Philosophy</a></li>
-<li class="chapter" data-level="8.1.3" data-path="patterns.html"><a href="patterns.html#guidelines"><i class="fa fa-check"></i><b>8.1.3</b> Guidelines</a></li>
-<li class="chapter" data-level="8.1.4" data-path="patterns.html"><a href="patterns.html#examples"><i class="fa fa-check"></i><b>8.1.4</b> Examples</a></li>
-<li class="chapter" data-level="8.1.5" data-path="patterns.html"><a href="patterns.html#elements"><i class="fa fa-check"></i><b>8.1.5</b> Elements</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="patterns.html"><a href="patterns.html#pattern-arch"><i class="fa fa-check"></i><b>8.2</b> Arch</a></li>
-<li class="chapter" data-level="8.3" data-path="patterns.html"><a href="patterns.html#pattern-ferry"><i class="fa fa-check"></i><b>8.3</b> Ferry</a></li>
-<li class="chapter" data-level="8.4" data-path="patterns.html"><a href="patterns.html#pattern-scribe"><i class="fa fa-check"></i><b>8.4</b> Scribe</a></li>
-<li class="chapter" data-level="8.5" data-path="patterns.html"><a href="patterns.html#pattern-analysis"><i class="fa fa-check"></i><b>8.5</b> Analysis</a></li>
-<li class="chapter" data-level="8.6" data-path="patterns.html"><a href="patterns.html#pattern-presentation-static"><i class="fa fa-check"></i><b>8.6</b> Presentation -Static</a></li>
-<li class="chapter" data-level="8.7" data-path="patterns.html"><a href="patterns.html#pattern-presentation-interactive"><i class="fa fa-check"></i><b>8.7</b> Presentation -Interactive</a></li>
-<li class="chapter" data-level="8.8" data-path="patterns.html"><a href="patterns.html#pattern-metadata"><i class="fa fa-check"></i><b>8.8</b> Metadata</a>
-<ul>
-<li class="chapter" data-level="8.8.1" data-path="patterns.html"><a href="patterns.html#primary-rules-for-mapping"><i class="fa fa-check"></i><b>8.8.1</b> Primary Rules for Mapping</a></li>
-<li class="chapter" data-level="8.8.2" data-path="patterns.html"><a href="patterns.html#secondary-rules-for-mapping"><i class="fa fa-check"></i><b>8.8.2</b> Secondary Rules for Mapping</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="security.html"><a href="security.html"><i class="fa fa-check"></i><b>9</b> Security &amp; Private Data</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="security.html"><a href="security.html#security-guidelines"><i class="fa fa-check"></i><b>9.1</b> Security Guidelines</a></li>
-<li class="chapter" data-level="9.2" data-path="security.html"><a href="security.html#dataset-level-redaction"><i class="fa fa-check"></i><b>9.2</b> Dataset-level Redaction</a></li>
-<li class="chapter" data-level="9.3" data-path="security.html"><a href="security.html#security-for-data-at-rest"><i class="fa fa-check"></i><b>9.3</b> Security for Data at Rest</a></li>
-<li class="chapter" data-level="9.4" data-path="security.html"><a href="security.html#file-level-permissions"><i class="fa fa-check"></i><b>9.4</b> File-level permissions</a></li>
-<li class="chapter" data-level="9.5" data-path="security.html"><a href="security.html#database-permissions"><i class="fa fa-check"></i><b>9.5</b> Database permissions</a></li>
-<li class="chapter" data-level="9.6" data-path="security.html"><a href="security.html#public-private-repositories"><i class="fa fa-check"></i><b>9.6</b> Public &amp; Private Repositories</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="security.html"><a href="security.html#repo-rules"><i class="fa fa-check"></i><b>9.6.1</b> Repo Rules</a></li>
-<li class="chapter" data-level="9.6.2" data-path="security.html"><a href="security.html#scrubbing-github-history"><i class="fa fa-check"></i><b>9.6.2</b> Scrubbing GitHub history</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="automation.html"><a href="automation.html"><i class="fa fa-check"></i><b>10</b> Automation &amp; Reproducibility</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="automation.html"><a href="automation.html#automation-mediator"><i class="fa fa-check"></i><b>10.1</b> Mediator</a>
-<ul>
-<li class="chapter" data-level="10.1.1" data-path="automation.html"><a href="automation.html#automation-flow"><i class="fa fa-check"></i><b>10.1.1</b> Flow File in R</a></li>
-<li class="chapter" data-level="10.1.2" data-path="automation.html"><a href="automation.html#automation-makefile"><i class="fa fa-check"></i><b>10.1.2</b> Makefile</a></li>
-<li class="chapter" data-level="10.1.3" data-path="automation.html"><a href="automation.html#automation-ssis"><i class="fa fa-check"></i><b>10.1.3</b> SSIS</a></li>
-</ul></li>
-<li class="chapter" data-level="10.2" data-path="automation.html"><a href="automation.html#automation-scheduling"><i class="fa fa-check"></i><b>10.2</b> Scheduling</a>
-<ul>
-<li class="chapter" data-level="10.2.1" data-path="automation.html"><a href="automation.html#automation-cron"><i class="fa fa-check"></i><b>10.2.1</b> cron</a></li>
-<li class="chapter" data-level="10.2.2" data-path="automation.html"><a href="automation.html#automation-task-scheduler"><i class="fa fa-check"></i><b>10.2.2</b> Task Scheduler</a></li>
-<li class="chapter" data-level="10.2.3" data-path="automation.html"><a href="automation.html#automation-sql-server-agent"><i class="fa fa-check"></i><b>10.2.3</b> SQL Server Agent</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="automation.html"><a href="automation.html#auxiliary-issues"><i class="fa fa-check"></i><b>10.3</b> Auxiliary Issues</a>
-<ul>
-<li class="chapter" data-level="10.3.1" data-path="automation.html"><a href="automation.html#sink-log-files"><i class="fa fa-check"></i><b>10.3.1</b> Sink Log Files</a></li>
-<li class="chapter" data-level="10.3.2" data-path="automation.html"><a href="automation.html#package-versions"><i class="fa fa-check"></i><b>10.3.2</b> Package Versions</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="scaling-up.html"><a href="scaling-up.html"><i class="fa fa-check"></i><b>11</b> Scaling Up</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="scaling-up.html"><a href="scaling-up.html#data-storage"><i class="fa fa-check"></i><b>11.1</b> Data Storage</a></li>
-<li class="chapter" data-level="11.2" data-path="scaling-up.html"><a href="scaling-up.html#data-processing"><i class="fa fa-check"></i><b>11.2</b> Data Processing</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="collaboration.html"><a href="collaboration.html"><i class="fa fa-check"></i><b>12</b> Parallel Collaboration</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="collaboration.html"><a href="collaboration.html#social-contract"><i class="fa fa-check"></i><b>12.1</b> Social Contract</a></li>
-<li class="chapter" data-level="12.2" data-path="collaboration.html"><a href="collaboration.html#code-reviews"><i class="fa fa-check"></i><b>12.2</b> Code Reviews</a></li>
-<li class="chapter" data-level="12.3" data-path="collaboration.html"><a href="collaboration.html#remote"><i class="fa fa-check"></i><b>12.3</b> Remote</a></li>
-<li class="chapter" data-level="12.4" data-path="collaboration.html"><a href="collaboration.html#additional-resources-1"><i class="fa fa-check"></i><b>12.4</b> Additional Resources</a></li>
-<li class="chapter" data-level="12.5" data-path="collaboration.html"><a href="collaboration.html#loose-notes"><i class="fa fa-check"></i><b>12.5</b> Loose Notes</a>
-<ul>
-<li class="chapter" data-level="12.5.1" data-path="collaboration.html"><a href="collaboration.html#github"><i class="fa fa-check"></i><b>12.5.1</b> GitHub</a></li>
-<li class="chapter" data-level="12.5.2" data-path="collaboration.html"><a href="collaboration.html#common-code"><i class="fa fa-check"></i><b>12.5.2</b> Common Code</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="document.html"><a href="document.html"><i class="fa fa-check"></i><b>13</b> Documentation</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="document.html"><a href="document.html#team-wide"><i class="fa fa-check"></i><b>13.1</b> Team-wide</a></li>
-<li class="chapter" data-level="13.2" data-path="document.html"><a href="document.html#project-specific"><i class="fa fa-check"></i><b>13.2</b> Project-specific</a></li>
-<li class="chapter" data-level="13.3" data-path="document.html"><a href="document.html#dataset-origin-structure"><i class="fa fa-check"></i><b>13.3</b> Dataset Origin &amp; Structure</a></li>
-<li class="chapter" data-level="13.4" data-path="document.html"><a href="document.html#issues-tasks"><i class="fa fa-check"></i><b>13.4</b> Issues &amp; Tasks</a>
-<ul>
-<li class="chapter" data-level="13.4.1" data-path="document.html"><a href="document.html#documentation-issue-template"><i class="fa fa-check"></i><b>13.4.1</b> GitHub Issue Template</a></li>
-</ul></li>
-<li class="chapter" data-level="13.5" data-path="document.html"><a href="document.html#flow-diagrams"><i class="fa fa-check"></i><b>13.5</b> Flow Diagrams</a></li>
-<li class="chapter" data-level="13.6" data-path="document.html"><a href="document.html#setting-up-new-machine"><i class="fa fa-check"></i><b>13.6</b> Setting up new machine</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="style.html"><a href="style.html"><i class="fa fa-check"></i><b>14</b> Style Guide</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="style.html"><a href="style.html#readability"><i class="fa fa-check"></i><b>14.1</b> Readability</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="style.html"><a href="style.html#style-number"><i class="fa fa-check"></i><b>14.1.1</b> Number</a></li>
-<li class="chapter" data-level="14.1.2" data-path="style.html"><a href="style.html#style-abbreviation"><i class="fa fa-check"></i><b>14.1.2</b> Abbreviations</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="style.html"><a href="style.html#datasets"><i class="fa fa-check"></i><b>14.2</b> Datasets</a>
-<ul>
-<li class="chapter" data-level="14.2.1" data-path="style.html"><a href="style.html#style-filter"><i class="fa fa-check"></i><b>14.2.1</b> Filtering Rows</a></li>
-<li class="chapter" data-level="14.2.2" data-path="style.html"><a href="style.html#style-attach"><i class="fa fa-check"></i><b>14.2.2</b> Don’t attach</a></li>
-</ul></li>
-<li class="chapter" data-level="14.3" data-path="style.html"><a href="style.html#style-factor"><i class="fa fa-check"></i><b>14.3</b> Categorical Variables</a>
-<ul>
-<li class="chapter" data-level="14.3.1" data-path="style.html"><a href="style.html#style-factor-unknown"><i class="fa fa-check"></i><b>14.3.1</b> Explicit Missing Values</a></li>
-<li class="chapter" data-level="14.3.2" data-path="style.html"><a href="style.html#style-factor-granularity"><i class="fa fa-check"></i><b>14.3.2</b> Granularity</a></li>
-</ul></li>
-<li class="chapter" data-level="14.4" data-path="style.html"><a href="style.html#style-dates"><i class="fa fa-check"></i><b>14.4</b> Dates</a></li>
-<li class="chapter" data-level="14.5" data-path="style.html"><a href="style.html#naming"><i class="fa fa-check"></i><b>14.5</b> Naming</a>
-<ul>
-<li class="chapter" data-level="14.5.1" data-path="style.html"><a href="style.html#style-naming-variables"><i class="fa fa-check"></i><b>14.5.1</b> Variables</a></li>
-<li class="chapter" data-level="14.5.2" data-path="style.html"><a href="style.html#style-naming-files"><i class="fa fa-check"></i><b>14.5.2</b> Files and Folders</a></li>
-<li class="chapter" data-level="14.5.3" data-path="style.html"><a href="style.html#style-naming-datasets"><i class="fa fa-check"></i><b>14.5.3</b> Datasets</a></li>
-<li class="chapter" data-level="14.5.4" data-path="style.html"><a href="style.html#style-naming-semantic"><i class="fa fa-check"></i><b>14.5.4</b> Semantic sorting</a></li>
-</ul></li>
-<li class="chapter" data-level="14.6" data-path="style.html"><a href="style.html#style-whitespace"><i class="fa fa-check"></i><b>14.6</b> Whitespace</a></li>
-<li class="chapter" data-level="14.7" data-path="style.html"><a href="style.html#style-database"><i class="fa fa-check"></i><b>14.7</b> Database</a></li>
-<li class="chapter" data-level="14.8" data-path="style.html"><a href="style.html#style-ggplot"><i class="fa fa-check"></i><b>14.8</b> ggplot2</a>
-<ul>
-<li class="chapter" data-level="14.8.1" data-path="style.html"><a href="style.html#style-ggplot-order"><i class="fa fa-check"></i><b>14.8.1</b> Order of commands</a></li>
-<li class="chapter" data-level="14.8.2" data-path="style.html"><a href="style.html#style-ggplot-gotchas"><i class="fa fa-check"></i><b>14.8.2</b> Gotchas</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="publication.html"><a href="publication.html"><i class="fa fa-check"></i><b>15</b> Publishing Results</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="publication.html"><a href="publication.html#publication-analysts"><i class="fa fa-check"></i><b>15.1</b> To Other Analysts</a></li>
-<li class="chapter" data-level="15.2" data-path="publication.html"><a href="publication.html#publication-experts"><i class="fa fa-check"></i><b>15.2</b> To Researchers &amp; Content Experts</a></li>
-<li class="chapter" data-level="15.3" data-path="publication.html"><a href="publication.html#publication-phobic"><i class="fa fa-check"></i><b>15.3</b> To Technical-Phobic Audiences</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="testing-and-validation.html"><a href="testing-and-validation.html"><i class="fa fa-check"></i><b>16</b> Testing, Validation, &amp; Defensive Programming</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="testing-and-validation.html"><a href="testing-and-validation.html#testing-functions"><i class="fa fa-check"></i><b>16.1</b> Testing Functions</a></li>
-<li class="chapter" data-level="16.2" data-path="testing-and-validation.html"><a href="testing-and-validation.html#defensive-programming"><i class="fa fa-check"></i><b>16.2</b> Defensive Programming</a></li>
-<li class="chapter" data-level="16.3" data-path="testing-and-validation.html"><a href="testing-and-validation.html#validator"><i class="fa fa-check"></i><b>16.3</b> Validator</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="troubleshooting.html"><a href="troubleshooting.html"><i class="fa fa-check"></i><b>17</b> Troubleshooting and Debugging</a>
-<ul>
-<li class="chapter" data-level="17.1" data-path="troubleshooting.html"><a href="troubleshooting.html#finding-help"><i class="fa fa-check"></i><b>17.1</b> Finding Help</a></li>
-<li class="chapter" data-level="17.2" data-path="troubleshooting.html"><a href="troubleshooting.html#debugging"><i class="fa fa-check"></i><b>17.2</b> Debugging</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="workstation.html"><a href="workstation.html"><i class="fa fa-check"></i><b>18</b> Workstation</a>
-<ul>
-<li class="chapter" data-level="18.1" data-path="workstation.html"><a href="workstation.html#workstation-required"><i class="fa fa-check"></i><b>18.1</b> Required Installation</a>
-<ul>
-<li class="chapter" data-level="18.1.1" data-path="workstation.html"><a href="workstation.html#workstation-r"><i class="fa fa-check"></i><b>18.1.1</b> R</a></li>
-<li class="chapter" data-level="18.1.2" data-path="workstation.html"><a href="workstation.html#workstation-rstudio"><i class="fa fa-check"></i><b>18.1.2</b> RStudio</a></li>
-<li class="chapter" data-level="18.1.3" data-path="workstation.html"><a href="workstation.html#workstation-r-package-installation"><i class="fa fa-check"></i><b>18.1.3</b> Installing R Packages</a></li>
-<li class="chapter" data-level="18.1.4" data-path="workstation.html"><a href="workstation.html#workstation-r-package-update"><i class="fa fa-check"></i><b>18.1.4</b> Updating R Packages</a></li>
-<li class="chapter" data-level="18.1.5" data-path="workstation.html"><a href="workstation.html#workstation-github"><i class="fa fa-check"></i><b>18.1.5</b> GitHub</a></li>
-<li class="chapter" data-level="18.1.6" data-path="workstation.html"><a href="workstation.html#workstation-github-client"><i class="fa fa-check"></i><b>18.1.6</b> GitHub Desktop</a></li>
-<li class="chapter" data-level="18.1.7" data-path="workstation.html"><a href="workstation.html#workstation-rtools"><i class="fa fa-check"></i><b>18.1.7</b> R Tools</a></li>
-</ul></li>
-<li class="chapter" data-level="18.2" data-path="workstation.html"><a href="workstation.html#workstation-recommended"><i class="fa fa-check"></i><b>18.2</b> Recommended Installation</a>
-<ul>
-<li class="chapter" data-level="18.2.1" data-path="workstation.html"><a href="workstation.html#workstation-odbc"><i class="fa fa-check"></i><b>18.2.1</b> ODBC Driver</a></li>
-<li class="chapter" data-level="18.2.2" data-path="workstation.html"><a href="workstation.html#workstation-notepadpp"><i class="fa fa-check"></i><b>18.2.2</b> Notepad++</a></li>
-<li class="chapter" data-level="18.2.3" data-path="workstation.html"><a href="workstation.html#workstation-ads"><i class="fa fa-check"></i><b>18.2.3</b> Azure Data Studio</a></li>
-<li class="chapter" data-level="18.2.4" data-path="workstation.html"><a href="workstation.html#workstation-vscode"><i class="fa fa-check"></i><b>18.2.4</b> Visual Studio Code</a></li>
-</ul></li>
-<li class="chapter" data-level="18.3" data-path="workstation.html"><a href="workstation.html#workstation-optional"><i class="fa fa-check"></i><b>18.3</b> Optional Installation</a>
-<ul>
-<li class="chapter" data-level="18.3.1" data-path="workstation.html"><a href="workstation.html#workstation-git"><i class="fa fa-check"></i><b>18.3.1</b> Git</a></li>
-<li class="chapter" data-level="18.3.2" data-path="workstation.html"><a href="workstation.html#workstation-calc"><i class="fa fa-check"></i><b>18.3.2</b> LibreOffice Calc</a></li>
-<li class="chapter" data-level="18.3.3" data-path="workstation.html"><a href="workstation.html#workstation-pandoc"><i class="fa fa-check"></i><b>18.3.3</b> pandoc</a></li>
-<li class="chapter" data-level="18.3.4" data-path="workstation.html"><a href="workstation.html#workstation-python"><i class="fa fa-check"></i><b>18.3.4</b> Python</a></li>
-<li class="chapter" data-level="18.3.5" data-path="workstation.html"><a href="workstation.html#workstation-pilot-edit"><i class="fa fa-check"></i><b>18.3.5</b> PilotEdit</a></li>
-</ul></li>
-<li class="chapter" data-level="18.4" data-path="workstation.html"><a href="workstation.html#workstation-assets"><i class="fa fa-check"></i><b>18.4</b> Asset Locations</a></li>
-<li class="chapter" data-level="18.5" data-path="workstation.html"><a href="workstation.html#workstation-administrator"><i class="fa fa-check"></i><b>18.5</b> Administrator Installation</a>
-<ul>
-<li class="chapter" data-level="18.5.1" data-path="workstation.html"><a href="workstation.html#workstation-mysql"><i class="fa fa-check"></i><b>18.5.1</b> MySQL Workbench</a></li>
-<li class="chapter" data-level="18.5.2" data-path="workstation.html"><a href="workstation.html#workstation-postman"><i class="fa fa-check"></i><b>18.5.2</b> Postman</a></li>
-<li class="chapter" data-level="18.5.3" data-path="workstation.html"><a href="workstation.html#workstation-ssms"><i class="fa fa-check"></i><b>18.5.3</b> SQL Server Management Studio (SSMS)</a></li>
-<li class="chapter" data-level="18.5.4" data-path="workstation.html"><a href="workstation.html#workstation-winscp"><i class="fa fa-check"></i><b>18.5.4</b> WinSCP</a></li>
-</ul></li>
-<li class="chapter" data-level="18.6" data-path="workstation.html"><a href="workstation.html#workstation-troubleshooting"><i class="fa fa-check"></i><b>18.6</b> Installation Troubleshooting</a></li>
-<li class="chapter" data-level="18.7" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu"><i class="fa fa-check"></i><b>18.7</b> Ubuntu Installation</a>
-<ul>
-<li class="chapter" data-level="18.7.1" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu-r"><i class="fa fa-check"></i><b>18.7.1</b> R</a></li>
-<li class="chapter" data-level="18.7.2" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu-rstudio"><i class="fa fa-check"></i><b>18.7.2</b> RStudio</a></li>
-<li class="chapter" data-level="18.7.3" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu-packages"><i class="fa fa-check"></i><b>18.7.3</b> apt-get Packages</a></li>
-<li class="chapter" data-level="18.7.4" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu-pandoc"><i class="fa fa-check"></i><b>18.7.4</b> Pandoc</a></li>
-<li class="chapter" data-level="18.7.5" data-path="workstation.html"><a href="workstation.html#workstation-ubuntu-postman"><i class="fa fa-check"></i><b>18.7.5</b> Postman</a></li>
-</ul></li>
-<li class="chapter" data-level="18.8" data-path="workstation.html"><a href="workstation.html#workstation-retired"><i class="fa fa-check"></i><b>18.8</b> Retired Tools</a></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>19</b> Considerations when Selecting Tools</a>
-<ul>
-<li class="chapter" data-level="19.1" data-path="tools.html"><a href="tools.html#general"><i class="fa fa-check"></i><b>19.1</b> General</a>
-<ul>
-<li class="chapter" data-level="19.1.1" data-path="tools.html"><a href="tools.html#the-components-goal"><i class="fa fa-check"></i><b>19.1.1</b> The Component’s Goal</a></li>
-<li class="chapter" data-level="19.1.2" data-path="tools.html"><a href="tools.html#current-skillset-of-team"><i class="fa fa-check"></i><b>19.1.2</b> Current Skillset of Team</a></li>
-<li class="chapter" data-level="19.1.3" data-path="tools.html"><a href="tools.html#desired-future-skillset-of-team"><i class="fa fa-check"></i><b>19.1.3</b> Desired Future Skillset of Team</a></li>
-<li class="chapter" data-level="19.1.4" data-path="tools.html"><a href="tools.html#skillset-of-audience"><i class="fa fa-check"></i><b>19.1.4</b> Skillset of Audience</a></li>
-</ul></li>
-<li class="chapter" data-level="19.2" data-path="tools.html"><a href="tools.html#languages"><i class="fa fa-check"></i><b>19.2</b> Languages</a></li>
-<li class="chapter" data-level="19.3" data-path="tools.html"><a href="tools.html#r-packages"><i class="fa fa-check"></i><b>19.3</b> R Packages</a></li>
-<li class="chapter" data-level="19.4" data-path="tools.html"><a href="tools.html#database"><i class="fa fa-check"></i><b>19.4</b> Database</a></li>
-<li class="chapter" data-level="19.5" data-path="tools.html"><a href="tools.html#additional-resources-2"><i class="fa fa-check"></i><b>19.5</b> Additional Resources</a></li>
-</ul></li>
-<li class="chapter" data-level="20" data-path="team.html"><a href="team.html"><i class="fa fa-check"></i><b>20</b> Growing a Team</a>
-<ul>
-<li class="chapter" data-level="20.1" data-path="team.html"><a href="team.html#recruiting"><i class="fa fa-check"></i><b>20.1</b> Recruiting</a></li>
-<li class="chapter" data-level="20.2" data-path="team.html"><a href="team.html#training-to-data-science"><i class="fa fa-check"></i><b>20.2</b> Training to Data Science</a></li>
-<li class="chapter" data-level="20.3" data-path="team.html"><a href="team.html#bridges-outside-the-team"><i class="fa fa-check"></i><b>20.3</b> Bridges Outside the Team</a></li>
-</ul></li>
-<li class="chapter" data-level="21" data-path="redcap-user.html"><a href="redcap-user.html"><i class="fa fa-check"></i><b>21</b> Material for REDCap Users</a>
-<ul>
-<li class="chapter" data-level="21.1" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-login"><i class="fa fa-check"></i><b>21.1</b> Login</a></li>
-<li class="chapter" data-level="21.2" data-path="redcap-user.html"><a href="redcap-user.html#redcap-user-report-develop"><i class="fa fa-check"></i><b>21.2</b> Developing Reports</a></li>
-</ul></li>
-<li class="chapter" data-level="22" data-path="redcap-developer.html"><a href="redcap-developer.html"><i class="fa fa-check"></i><b>22</b> Material for REDCap Developers</a></li>
-<li class="chapter" data-level="23" data-path="redcap-admin.html"><a href="redcap-admin.html"><i class="fa fa-check"></i><b>23</b> Material for REDCap Admins</a></li>
-<li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>A</b> Git &amp; GitHub</a>
-<ul>
-<li class="chapter" data-level="A.1" data-path="git.html"><a href="git.html#git-justification"><i class="fa fa-check"></i><b>A.1</b> Justification</a></li>
-<li class="chapter" data-level="A.2" data-path="git.html"><a href="git.html#git-code"><i class="fa fa-check"></i><b>A.2</b> for Code Development</a></li>
-<li class="chapter" data-level="A.3" data-path="git.html"><a href="git.html#git-collaboration"><i class="fa fa-check"></i><b>A.3</b> for Collaboration</a></li>
-<li class="chapter" data-level="A.4" data-path="git.html"><a href="git.html#git-stability"><i class="fa fa-check"></i><b>A.4</b> for Stability</a></li>
-<li class="chapter" data-level="A.5" data-path="git.html"><a href="git.html#organization-wide-defaults-and-practices"><i class="fa fa-check"></i><b>A.5</b> Organization-wide defaults and practices</a></li>
-<li class="chapter" data-level="A.6" data-path="git.html"><a href="git.html#git-collaborators"><i class="fa fa-check"></i><b>A.6</b> for New Collaborators</a></li>
-<li class="chapter" data-level="A.7" data-path="git.html"><a href="git.html#git-contribution"><i class="fa fa-check"></i><b>A.7</b> Steps for Contributing to Repo</a>
-<ul>
-<li class="chapter" data-level="A.7.1" data-path="git.html"><a href="git.html#git-contribution-regular"><i class="fa fa-check"></i><b>A.7.1</b> Regular Contributions</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="snippets.html"><a href="snippets.html"><i class="fa fa-check"></i><b>B</b> Snippets</a>
-<ul>
-<li class="chapter" data-level="B.1" data-path="snippets.html"><a href="snippets.html#snippets-reading"><i class="fa fa-check"></i><b>B.1</b> Reading External Data</a>
-<ul>
-<li class="chapter" data-level="B.1.1" data-path="snippets.html"><a href="snippets.html#snippets-reading-excel"><i class="fa fa-check"></i><b>B.1.1</b> Reading from Excel</a></li>
-<li class="chapter" data-level="B.1.2" data-path="snippets.html"><a href="snippets.html#snippets-reading-trailing-comma"><i class="fa fa-check"></i><b>B.1.2</b> Removing Trailing Comma from Header</a></li>
-<li class="chapter" data-level="B.1.3" data-path="snippets.html"><a href="snippets.html#snippets-reading-vroom"><i class="fa fa-check"></i><b>B.1.3</b> Removing Trailing Comma from Header</a></li>
-</ul></li>
-<li class="chapter" data-level="B.2" data-path="snippets.html"><a href="snippets.html#snippets-grooming"><i class="fa fa-check"></i><b>B.2</b> Grooming</a>
-<ul>
-<li class="chapter" data-level="B.2.1" data-path="snippets.html"><a href="snippets.html#snippets-grooming-two-year"><i class="fa fa-check"></i><b>B.2.1</b> Correct for misinterpreted two-digit year</a></li>
-</ul></li>
-<li class="chapter" data-level="B.3" data-path="snippets.html"><a href="snippets.html#snippets-identification"><i class="fa fa-check"></i><b>B.3</b> Identification</a>
-<ul>
-<li class="chapter" data-level="B.3.1" data-path="snippets.html"><a href="snippets.html#snippets-identification-tags"><i class="fa fa-check"></i><b>B.3.1</b> Generating “tags”</a></li>
-</ul></li>
-<li class="chapter" data-level="B.4" data-path="snippets.html"><a href="snippets.html#snippets-correspondence"><i class="fa fa-check"></i><b>B.4</b> Correspondence with Collaborators</a>
-<ul>
-<li class="chapter" data-level="B.4.1" data-path="snippets.html"><a href="snippets.html#snippets-correspondence-excel"><i class="fa fa-check"></i><b>B.4.1</b> Excel files</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="C" data-path="presentations.html"><a href="presentations.html"><i class="fa fa-check"></i><b>C</b> Presentations</a>
-<ul>
-<li class="chapter" data-level="C.1" data-path="presentations.html"><a href="presentations.html#cdw"><i class="fa fa-check"></i><b>C.1</b> CDW</a></li>
-<li class="chapter" data-level="C.2" data-path="presentations.html"><a href="presentations.html#redcap"><i class="fa fa-check"></i><b>C.2</b> REDCap</a></li>
-<li class="chapter" data-level="C.3" data-path="presentations.html"><a href="presentations.html#reproducible-research-visualization"><i class="fa fa-check"></i><b>C.3</b> Reproducible Research &amp; Visualization</a></li>
-<li class="chapter" data-level="C.4" data-path="presentations.html"><a href="presentations.html#data-management"><i class="fa fa-check"></i><b>C.4</b> Data Management</a></li>
-<li class="chapter" data-level="C.5" data-path="presentations.html"><a href="presentations.html#github-1"><i class="fa fa-check"></i><b>C.5</b> GitHub</a></li>
-<li class="chapter" data-level="C.6" data-path="presentations.html"><a href="presentations.html#software"><i class="fa fa-check"></i><b>C.6</b> Software</a></li>
-<li class="chapter" data-level="C.7" data-path="presentations.html"><a href="presentations.html#architectures"><i class="fa fa-check"></i><b>C.7</b> Architectures</a></li>
-<li class="chapter" data-level="C.8" data-path="presentations.html"><a href="presentations.html#components"><i class="fa fa-check"></i><b>C.8</b> Components</a></li>
-</ul></li>
-<li class="chapter" data-level="D" data-path="scratch-pad.html"><a href="scratch-pad.html"><i class="fa fa-check"></i><b>D</b> Scratch Pad of Loose Ideas</a>
-<ul>
-<li class="chapter" data-level="D.1" data-path="scratch-pad.html"><a href="scratch-pad.html#chapters-sections-to-form"><i class="fa fa-check"></i><b>D.1</b> Chapters &amp; Sections to Form</a></li>
-<li class="chapter" data-level="D.2" data-path="scratch-pad.html"><a href="scratch-pad.html#practices"><i class="fa fa-check"></i><b>D.2</b> Practices</a></li>
-<li class="chapter" data-level="D.3" data-path="scratch-pad.html"><a href="scratch-pad.html#good-sites"><i class="fa fa-check"></i><b>D.3</b> Good Sites</a></li>
-</ul></li>
-<li class="chapter" data-level="E" data-path="example-dashboard.html"><a href="example-dashboard.html"><i class="fa fa-check"></i><b>E</b> Example Dashboard</a>
-<ul>
-<li class="chapter" data-level="E.1" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-example"><i class="fa fa-check"></i><b>E.1</b> Example</a></li>
-<li class="chapter" data-level="E.2" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-guide"><i class="fa fa-check"></i><b>E.2</b> Style Guide</a>
-<ul>
-<li class="chapter" data-level="E.2.1" data-path="example-dashboard.html"><a href="example-dashboard.html#headline-page"><i class="fa fa-check"></i><b>E.2.1</b> Headline page</a></li>
-<li class="chapter" data-level="E.2.2" data-path="example-dashboard.html"><a href="example-dashboard.html#tables-page"><i class="fa fa-check"></i><b>E.2.2</b> Tables page</a></li>
-<li class="chapter" data-level="E.2.3" data-path="example-dashboard.html"><a href="example-dashboard.html#graphs-page"><i class="fa fa-check"></i><b>E.2.3</b> Graphs page</a></li>
-<li class="chapter" data-level="E.2.4" data-path="example-dashboard.html"><a href="example-dashboard.html#marginal-graphs-page"><i class="fa fa-check"></i><b>E.2.4</b> Marginal Graphs page</a></li>
-<li class="chapter" data-level="E.2.5" data-path="example-dashboard.html"><a href="example-dashboard.html#documentation-page"><i class="fa fa-check"></i><b>E.2.5</b> Documentation page</a></li>
-<li class="chapter" data-level="E.2.6" data-path="example-dashboard.html"><a href="example-dashboard.html#miscellaneous-notes"><i class="fa fa-check"></i><b>E.2.6</b> Miscellaneous Notes</a></li>
-</ul></li>
-<li class="chapter" data-level="E.3" data-path="example-dashboard.html"><a href="example-dashboard.html#example-dashboard-architecture"><i class="fa fa-check"></i><b>E.3</b> Architecture</a>
-<ul>
-<li class="chapter" data-level="E.3.1" data-path="example-dashboard.html"><a href="example-dashboard.html#data-from-external-system"><i class="fa fa-check"></i><b>E.3.1</b> Data from External System</a></li>
-<li class="chapter" data-level="E.3.2" data-path="example-dashboard.html"><a href="example-dashboard.html#groomed-data-in-warehouse"><i class="fa fa-check"></i><b>E.3.2</b> Groomed Data in Warehouse</a></li>
-<li class="chapter" data-level="E.3.3" data-path="example-dashboard.html"><a href="example-dashboard.html#analysis-ready-dataset"><i class="fa fa-check"></i><b>E.3.3</b> Analysis-Ready Dataset</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="F" data-path="example-chapter.html"><a href="example-chapter.html"><i class="fa fa-check"></i><b>F</b> Example Chapter</a></li>
-<li class="chapter" data-level="G" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>G</b> Acknowledgements</a></li>
-<li class="chapter" data-level="H" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>H</b> References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Collaborative Data Science Practices</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Collaborative Data Science Practices</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="coding.html"><span class="header-section-number">2</span> Coding Principles</a></li>
+<li><a class="" href="architecture.html"><span class="header-section-number">3</span> Architecture Principles</a></li>
+<li><a class="" href="file-prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
+<li><a class="" href="file-prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
+<li><a class="" href="repo-prototype.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
+<li><a class="" href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></li>
+<li><a class="" href="patterns.html"><span class="header-section-number">8</span> Patterns</a></li>
+<li><a class="" href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
+<li><a class="" href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
+<li><a class="" href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></li>
+<li><a class="" href="collaboration.html"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
+<li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
+<li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
+<li><a class="" href="testing-and-validation.html"><span class="header-section-number">16</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">17</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">18</span> Workstation</a></li>
+<li><a class="" href="tools.html"><span class="header-section-number">19</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">20</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">21</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">22</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">23</span> Material for REDCap Admins</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
+<li><a class="active" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
+<li><a class="" href="presentations.html"><span class="header-section-number">C</span> Presentations</a></li>
+<li><a class="" href="scratch-pad.html"><span class="header-section-number">D</span> Scratch Pad of Loose Ideas</a></li>
+<li><a class="" href="example-dashboard.html"><span class="header-section-number">E</span> Example Dashboard</a></li>
+<li><a class="" href="example-chapter.html"><span class="header-section-number">F</span> Example Chapter</a></li>
+<li><a class="" href="acknowledgements.html"><span class="header-section-number">G</span> Acknowledgements</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">H</span> References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/OuhscBbmc/data-science-practices-1">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="snippets" class="section level1" number="25">
-<h1><span class="header-section-number">B</span> Snippets</h1>
-<div id="snippets-reading" class="section level2" number="25.1">
-<h2><span class="header-section-number">B.1</span> Reading External Data</h2>
-<div id="snippets-reading-excel" class="section level3" number="25.1.1">
-<h3><span class="header-section-number">B.1.1</span> Reading from Excel</h3>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="snippets" class="section level1">
+<h1>
+<span class="header-section-number">B</span> Snippets<a class="anchor" aria-label="anchor" href="#snippets"><i class="fas fa-link"></i></a>
+</h1>
+<div id="snippets-reading" class="section level2">
+<h2>
+<span class="header-section-number">B.1</span> Reading External Data<a class="anchor" aria-label="anchor" href="#snippets-reading"><i class="fas fa-link"></i></a>
+</h2>
+<div id="snippets-reading-excel" class="section level3">
+<h3>
+<span class="header-section-number">B.1.1</span> Reading from Excel<a class="anchor" aria-label="anchor" href="#snippets-reading-excel"><i class="fas fa-link"></i></a>
+</h3>
 <p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p>See the readxl vignette, <a href="https://readxl.tidyverse.org/articles/cell-and-column-types.html">Cell and Column Types</a>, for more info.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="snippets.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb77-2"><a href="snippets.html#cb77-2" aria-hidden="true" tabindex="-1"></a>config                         <span class="ot">&lt;-</span> config<span class="sc">::</span><span class="fu">get</span>()</span>
-<span id="cb77-3"><a href="snippets.html#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-4"><a href="snippets.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cat(sprintf(&#39;  `%s`             = &quot;text&quot;,\n&#39;, colnames(ds)), sep=&quot;&quot;) # &#39;text&#39; by default --then change where appropriate.</span></span>
-<span id="cb77-5"><a href="snippets.html#cb77-5" aria-hidden="true" tabindex="-1"></a>col_types <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb77-6"><a href="snippets.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Med Rec Num</span><span class="st">`</span>     <span class="ot">=</span> <span class="st">&quot;text&quot;</span>,</span>
-<span id="cb77-7"><a href="snippets.html#cb77-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Admit Date</span><span class="st">`</span>      <span class="ot">=</span> <span class="st">&quot;date&quot;</span>,</span>
-<span id="cb77-8"><a href="snippets.html#cb77-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Tot Cash Pymt</span><span class="st">`</span>   <span class="ot">=</span> <span class="st">&quot;numeric&quot;</span></span>
-<span id="cb77-9"><a href="snippets.html#cb77-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb77-10"><a href="snippets.html#cb77-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-11"><a href="snippets.html#cb77-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb77-12"><a href="snippets.html#cb77-12" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
-<span id="cb77-13"><a href="snippets.html#cb77-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">path      =</span> config<span class="sc">$</span>path_admission_charge,</span>
-<span id="cb77-14"><a href="snippets.html#cb77-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> col_types</span>
-<span id="cb77-15"><a href="snippets.html#cb77-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sheet   = &quot;dont-use-sheets-if-possible&quot;</span></span>
-<span id="cb77-16"><a href="snippets.html#cb77-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb77-17"><a href="snippets.html#cb77-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-18"><a href="snippets.html#cb77-18" aria-hidden="true" tabindex="-1"></a>testit<span class="sc">::</span><span class="fu">assert</span>(</span>
-<span id="cb77-19"><a href="snippets.html#cb77-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;The order of column names must match the expected list.&quot;</span>,</span>
-<span id="cb77-20"><a href="snippets.html#cb77-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(col_types) <span class="sc">==</span> <span class="fu">colnames</span>(ds)</span>
-<span id="cb77-21"><a href="snippets.html#cb77-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ---- declare-globals ---------------------------------------------------------</span>
+<span class="va">config</span>                         <span class="op">&lt;-</span> <span class="fu">config</span><span class="fu">::</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># cat(sprintf('  `%s`             = "text",\n', colnames(ds)), sep="") # 'text' by default --then change where appropriate.</span>
+<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  `Med Rec Num`     <span class="op">=</span> <span class="st">"text"</span>,
+  `Admit Date`      <span class="op">=</span> <span class="st">"date"</span>,
+  `Tot Cash Pymt`   <span class="op">=</span> <span class="st">"numeric"</span>
+<span class="op">)</span>
+
+<span class="co"># ---- load-data ---------------------------------------------------------------</span>
+<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu">read_excel</span><span class="op">(</span>
+  path      <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="va">path_admission_charge</span>,
+  col_types <span class="op">=</span> <span class="va">col_types</span>
+  <span class="co"># sheet   = "dont-use-sheets-if-possible"</span>
+<span class="op">)</span>
+
+<span class="fu">testit</span><span class="fu">::</span><span class="fu">assert</span><span class="op">(</span>
+  <span class="st">"The order of column names must match the expected list."</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">col_types</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
-<div id="snippets-reading-trailing-comma" class="section level3" number="25.1.2">
-<h3><span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header</h3>
+<div id="snippets-reading-trailing-comma" class="section level3">
+<h3>
+<span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header<a class="anchor" aria-label="anchor" href="#snippets-reading-trailing-comma"><i class="fas fa-link"></i></a>
+</h3>
 <p><em>Background</em>: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr:read_csv()</code></a> appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.</p>
 <p><em>Explanation</em>: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to <code>readr::read_csv()</code> to convert it into a data.frame.</p>
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="snippets.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
-<span id="cb78-2"><a href="snippets.html#cb78-2" aria-hidden="true" tabindex="-1"></a>raw_text  <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_file</span>(path_in)</span>
-<span id="cb78-3"><a href="snippets.html#cb78-3" aria-hidden="true" tabindex="-1"></a>raw_text  <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;^(.+Dx50 Name),&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>, raw_text)</span>
-<span id="cb78-4"><a href="snippets.html#cb78-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-5"><a href="snippets.html#cb78-5" aria-hidden="true" tabindex="-1"></a>ds        <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(raw_text, <span class="at">col_types=</span>col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span>
+<span class="va">raw_text</span>  <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">read_file</span><span class="op">(</span><span class="va">path_in</span><span class="op">)</span>
+<span class="va">raw_text</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"^(.+Dx50 Name),"</span>, <span class="st">"\\1"</span>, <span class="va">raw_text</span><span class="op">)</span>
+
+<span class="va">ds</span>        <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">read_csv</span><span class="op">(</span><span class="va">raw_text</span>, col_types<span class="op">=</span><span class="va">col_types</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="snippets-reading-vroom" class="section level3" number="25.1.3">
-<h3><span class="header-section-number">B.1.3</span> Removing Trailing Comma from Header</h3>
+<div id="snippets-reading-vroom" class="section level3">
+<h3>
+<span class="header-section-number">B.1.3</span> Removing Trailing Comma from Header<a class="anchor" aria-label="anchor" href="#snippets-reading-vroom"><i class="fas fa-link"></i></a>
+</h3>
 <p><em>Background</em>: When incoming data files are on the large side to comfortably accept with <a href="https://readr.tidyverse.org/">readr</a>, we use <a href="https://vroom.r-lib.org/">vroom</a>. The two packages are develoepd by the same group and <a href="https://github.com/tidyverse/tidyverse.org/pull/375#issuecomment-564781603">might be combined</a> in the future.</p>
 <p><em>Explanation</em>: This snippet defines the <code>col_types</code> list with names to mimic <a href="https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html#chunk-declare">our approach</a> of using readr. There are some small differences with our readr approach:
 1. <code>col_types</code> is a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/list.html">list</a> instead of a <a href="https://readr.tidyverse.org/reference/cols.html"><code>readr::cols_only</code></a> object.
@@ -618,78 +143,89 @@ div.csl-indent {
 1. If the data file contains columns we don’t need, we define them in <code>col_types</code> anyway; vroom needs to know the file structure if it’s missing a header row.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/akande-medically-complex-1/tree/master/manipulation/ohca">akande-medically-complex-1</a> (Accessible to only CDW members.) Thesee files did not have a header of variable names; the first line of the file is the first data row.</p>
 <p><em>Last Modified</em>: 2020-08-21 by Will</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="snippets.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
-<span id="cb79-2"><a href="snippets.html#cb79-2" aria-hidden="true" tabindex="-1"></a>config            <span class="ot">&lt;-</span> config<span class="sc">::</span><span class="fu">get</span>()</span>
-<span id="cb79-3"><a href="snippets.html#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-4"><a href="snippets.html#cb79-4" aria-hidden="true" tabindex="-1"></a>col_types <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb79-5"><a href="snippets.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sak                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),  <span class="co"># &quot;system-assigned key&quot;</span></span>
-<span id="cb79-6"><a href="snippets.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">aid_category_id          =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb79-7"><a href="snippets.html#cb79-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">age                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb79-8"><a href="snippets.html#cb79-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">service_date_first       =</span> vroom<span class="sc">::</span><span class="fu">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
-<span id="cb79-9"><a href="snippets.html#cb79-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">service_date_lasst       =</span> vroom<span class="sc">::</span><span class="fu">col_date</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>),</span>
-<span id="cb79-10"><a href="snippets.html#cb79-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">claim_type               =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb79-11"><a href="snippets.html#cb79-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_id              =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb79-12"><a href="snippets.html#cb79-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_lat             =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
-<span id="cb79-13"><a href="snippets.html#cb79-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_long            =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
-<span id="cb79-14"><a href="snippets.html#cb79-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">provider_zip             =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb79-15"><a href="snippets.html#cb79-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">cpt                      =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb79-16"><a href="snippets.html#cb79-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">revenue_code             =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb79-17"><a href="snippets.html#cb79-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">icd_code                 =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
-<span id="cb79-18"><a href="snippets.html#cb79-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">icd_sequence             =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
-<span id="cb79-19"><a href="snippets.html#cb79-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">vocabulary_coarse_id     =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>()</span>
-<span id="cb79-20"><a href="snippets.html#cb79-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb79-21"><a href="snippets.html#cb79-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-22"><a href="snippets.html#cb79-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- load-data ---------------------------------------------------------------</span></span>
-<span id="cb79-23"><a href="snippets.html#cb79-23" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> vroom<span class="sc">::</span><span class="fu">vroom</span>(</span>
-<span id="cb79-24"><a href="snippets.html#cb79-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">file      =</span> config<span class="sc">$</span>path_ohca_patient,</span>
-<span id="cb79-25"><a href="snippets.html#cb79-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim     =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>,</span>
-<span id="cb79-26"><a href="snippets.html#cb79-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_names =</span> <span class="fu">names</span>(col_types),</span>
-<span id="cb79-27"><a href="snippets.html#cb79-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> col_types</span>
-<span id="cb79-28"><a href="snippets.html#cb79-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb79-29"><a href="snippets.html#cb79-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-30"><a href="snippets.html#cb79-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(col_types)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ---- declare-globals ---------------------------------------------------------</span>
+<span class="va">config</span>            <span class="op">&lt;-</span> <span class="fu">config</span><span class="fu">::</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span>
+
+<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  sak                      <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,  <span class="co"># "system-assigned key"</span>
+  aid_category_id          <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,
+  age                      <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,
+  service_date_first       <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_date</span><span class="op">(</span><span class="st">"%m/%d/%Y"</span><span class="op">)</span>,
+  service_date_lasst       <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_date</span><span class="op">(</span><span class="st">"%m/%d/%Y"</span><span class="op">)</span>,
+  claim_type               <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,
+  provider_id              <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,
+  provider_lat             <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_double</span><span class="op">(</span><span class="op">)</span>,
+  provider_long            <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_double</span><span class="op">(</span><span class="op">)</span>,
+  provider_zip             <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,
+  cpt                      <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,
+  revenue_code             <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,
+  icd_code                 <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,
+  icd_sequence             <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,
+  vocabulary_coarse_id     <span class="op">=</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="co"># ---- load-data ---------------------------------------------------------------</span>
+<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu">vroom</span><span class="fu">::</span><span class="fu">vroom</span><span class="op">(</span>
+  file      <span class="op">=</span> <span class="va">config</span><span class="op">$</span><span class="va">path_ohca_patient</span>,
+  delim     <span class="op">=</span> <span class="st">"\t"</span>,
+  col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">col_types</span><span class="op">)</span>,
+  col_types <span class="op">=</span> <span class="va">col_types</span>
+<span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">col_types</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="snippets-grooming" class="section level2" number="25.2">
-<h2><span class="header-section-number">B.2</span> Grooming</h2>
-<div id="snippets-grooming-two-year" class="section level3" number="25.2.1">
-<h3><span class="header-section-number">B.2.1</span> Correct for misinterpreted two-digit year</h3>
+<div id="snippets-grooming" class="section level2">
+<h2>
+<span class="header-section-number">B.2</span> Grooming<a class="anchor" aria-label="anchor" href="#snippets-grooming"><i class="fas fa-link"></i></a>
+</h2>
+<div id="snippets-grooming-two-year" class="section level3">
+<h3>
+<span class="header-section-number">B.2.1</span> Correct for misinterpreted two-digit year<a class="anchor" aria-label="anchor" href="#snippets-grooming-two-year"><i class="fas fa-link"></i></a>
+</h3>
 <p><em>Background</em>: Sometimes the Meditech dates are specified like <code>1/6/54</code> instead of <code>1/6/1954</code>. <code>readr::read_csv()</code> has to choose if the year is supposed to be ‘1954’ or ‘2054’. A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can’t (so it guesses 2054). For avoid this and other problems, request dates in an <a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a> format.</p>
-<p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
+<p><em>Explanation</em>: Correct for this in a <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="snippets.html#cb80-1" aria-hidden="true" tabindex="-1"></a> ds <span class="sc">|&gt;</span></span>
-<span id="cb80-2"><a href="snippets.html#cb80-2" aria-hidden="true" tabindex="-1"></a> dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb80-3"><a href="snippets.html#cb80-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">dob =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(dob <span class="sc">&lt;=</span> <span class="fu">Sys.Date</span>(), dob, dob <span class="sc">-</span> lubridate<span class="sc">::</span><span class="fu">years</span>(<span class="dv">100</span>))</span>
-<span id="cb80-4"><a href="snippets.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"> <span class="va">ds</span> |&gt;
+ <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+    dob <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">dob</span>, <span class="va">dob</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html">years</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="snippets-identification" class="section level2" number="25.3">
-<h2><span class="header-section-number">B.3</span> Identification</h2>
-<div id="snippets-identification-tags" class="section level3" number="25.3.1">
-<h3><span class="header-section-number">B.3.1</span> Generating “tags”</h3>
+<div id="snippets-identification" class="section level2">
+<h2>
+<span class="header-section-number">B.3</span> Identification<a class="anchor" aria-label="anchor" href="#snippets-identification"><i class="fas fa-link"></i></a>
+</h2>
+<div id="snippets-identification-tags" class="section level3">
+<h3>
+<span class="header-section-number">B.3.1</span> Generating “tags”<a class="anchor" aria-label="anchor" href="#snippets-identification-tags"><i class="fas fa-link"></i></a>
+</h3>
 <p><em>Background</em>: When you need to generate unique identification values for future people/clients/patients, as described in the <a href="style.html#style-number">style guide</a>.</p>
 <p><em>Explanation</em>: This snippet will create a 5-row csv with random 7-character “tags” to send to the research team collecting patients. The</p>
 <p><em>Instruction</em>: Set <code>pt_count</code>, <code>tag_length</code>, <code>path_out</code>, and execute. Add and rename the columns to be more appropriate for your domain (<em>e.g.</em>, change “patient tag” to “store tag”).</p>
 <p><em>Last Modified</em>: 2019-12-30 by Will</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="snippets.html#cb81-1" aria-hidden="true" tabindex="-1"></a>pt_count    <span class="ot">&lt;-</span> 5L   <span class="co"># The number of rows in the dataset.</span></span>
-<span id="cb81-2"><a href="snippets.html#cb81-2" aria-hidden="true" tabindex="-1"></a>tag_length  <span class="ot">&lt;-</span> 7L   <span class="co"># The number of characters in each tag.</span></span>
-<span id="cb81-3"><a href="snippets.html#cb81-3" aria-hidden="true" tabindex="-1"></a>path_out    <span class="ot">&lt;-</span> <span class="st">&quot;data-private/derived/pt-pool.csv&quot;</span></span>
-<span id="cb81-4"><a href="snippets.html#cb81-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-5"><a href="snippets.html#cb81-5" aria-hidden="true" tabindex="-1"></a>draw_tag <span class="ot">&lt;-</span> <span class="cf">function</span> (<span class="at">tag_length =</span> 4L, <span class="at">urn =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>, letters)) {</span>
-<span id="cb81-6"><a href="snippets.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="fu">sample</span>(urn, <span class="at">size =</span> tag_length, <span class="at">replace =</span> T), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb81-7"><a href="snippets.html#cb81-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb81-8"><a href="snippets.html#cb81-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-9"><a href="snippets.html#cb81-9" aria-hidden="true" tabindex="-1"></a>ds_pt_pool <span class="ot">&lt;-</span></span>
-<span id="cb81-10"><a href="snippets.html#cb81-10" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
-<span id="cb81-11"><a href="snippets.html#cb81-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">pt_index    =</span> <span class="fu">seq_len</span>(pt_count),</span>
-<span id="cb81-12"><a href="snippets.html#cb81-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">pt_tag      =</span> <span class="fu">vapply</span>(<span class="fu">rep</span>(tag_length, pt_count), draw_tag, <span class="fu">character</span>(<span class="dv">1</span>)),</span>
-<span id="cb81-13"><a href="snippets.html#cb81-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">assigned    =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb81-14"><a href="snippets.html#cb81-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">name_last   =</span> <span class="st">&quot;--&quot;</span>,</span>
-<span id="cb81-15"><a href="snippets.html#cb81-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">name_first  =</span> <span class="st">&quot;--&quot;</span></span>
-<span id="cb81-16"><a href="snippets.html#cb81-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb81-17"><a href="snippets.html#cb81-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-18"><a href="snippets.html#cb81-18" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(ds_pt_pool, path_out)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pt_count</span>    <span class="op">&lt;-</span> <span class="fl">5L</span>   <span class="co"># The number of rows in the dataset.</span>
+<span class="va">tag_length</span>  <span class="op">&lt;-</span> <span class="fl">7L</span>   <span class="co"># The number of characters in each tag.</span>
+<span class="va">path_out</span>    <span class="op">&lt;-</span> <span class="st">"data-private/derived/pt-pool.csv"</span>
+
+<span class="va">draw_tag</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">tag_length</span> <span class="op">=</span> <span class="fl">4L</span>, <span class="va">urn</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">9</span>, <span class="va">letters</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">urn</span>, size <span class="op">=</span> <span class="va">tag_length</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">""</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="va">ds_pt_pool</span> <span class="op">&lt;-</span>
+  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+    pt_index    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">pt_count</span><span class="op">)</span>,
+    pt_tag      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">vapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">tag_length</span>, <span class="va">pt_count</span><span class="op">)</span>, <span class="va">draw_tag</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>,
+    assigned    <span class="op">=</span> <span class="cn">FALSE</span>,
+    name_last   <span class="op">=</span> <span class="st">"--"</span>,
+    name_first  <span class="op">=</span> <span class="st">"--"</span>
+  <span class="op">)</span>
+
+<span class="fu">readr</span><span class="fu">::</span><span class="fu">write_csv</span><span class="op">(</span><span class="va">ds_pt_pool</span>, <span class="va">path_out</span><span class="op">)</span></code></pre></div>
 <p>The resulting dataset will look like this, but with different randomly-generated tags.</p>
 <pre class="csv"><code># A tibble: 5 x 5
   pt_index pt_tag  assigned name_last name_first
@@ -701,13 +237,17 @@ div.csl-indent {
 5        5 r5ei5ph FALSE    --        --</code></pre>
 </div>
 </div>
-<div id="snippets-correspondence" class="section level2" number="25.4">
-<h2><span class="header-section-number">B.4</span> Correspondence with Collaborators</h2>
-<div id="snippets-correspondence-excel" class="section level3" number="25.4.1">
-<h3><span class="header-section-number">B.4.1</span> Excel files</h3>
+<div id="snippets-correspondence" class="section level2">
+<h2>
+<span class="header-section-number">B.4</span> Correspondence with Collaborators<a class="anchor" aria-label="anchor" href="#snippets-correspondence"><i class="fas fa-link"></i></a>
+</h2>
+<div id="snippets-correspondence-excel" class="section level3">
+<h3>
+<span class="header-section-number">B.4.1</span> Excel files<a class="anchor" aria-label="anchor" href="#snippets-correspondence-excel"><i class="fas fa-link"></i></a>
+</h3>
 <p>Receiving and storing <a href="rest.html#data-containers-avoid">Excel files should almost always be avoided</a> for the reasons explained in this letter.</p>
 <p>We receive extracts as Excel files frequently, and have the following request ready to email the person sending us Excel files. Adapt the bold values like “109.19” to your situation. If you are familiar with their tools, suggest an alternative for saving the file as a csv. Once presented with these Excel gotchas, almost everyone has an ‘aha’ moment and recognizes the problem. Unfortunately, not everyone has flexible software and can adapt easily.</p>
-<hr />
+<hr>
 <p>[Start of the letter]</p>
 <p>Sorry to be tedious, but could you please resend the extract as a <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> file? Please call me if you have questions.</p>
 <p>Excel is being too helpful with some of the values, and essentially corrupting them. For example, values like <strong>109.19</strong> is interpreted as a number, not a character code (<em>e.g.</em>, see cell <strong>L14</strong>). Because of <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">limitations of finite precision</a>, this becomes <strong>109.18999999999999773</strong>. We can’t round it, because there are other values in this column that cannot be cast to numbers, such as <strong>V55.0</strong>. Furthermore, the “E”s in some codes are incorrectly interpreted as the exponent operator (<em>e.g.</em>, “4E5” is converted to 400,000). Finally, values like <strong>41.0</strong> are being converted to a number and the trailing zero is dropped (so cells like “41” are not distinguishable from “41.0”).</p>
@@ -722,66 +262,54 @@ div.csl-indent {
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></div>
+<div class="next"><a href="presentations.html"><span class="header-section-number">C</span> Presentations</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#snippets"><span class="header-section-number">B</span> Snippets</a></li>
+<li>
+<a class="nav-link" href="#snippets-reading"><span class="header-section-number">B.1</span> Reading External Data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#snippets-reading-excel"><span class="header-section-number">B.1.1</span> Reading from Excel</a></li>
+<li><a class="nav-link" href="#snippets-reading-trailing-comma"><span class="header-section-number">B.1.2</span> Removing Trailing Comma from Header</a></li>
+<li><a class="nav-link" href="#snippets-reading-vroom"><span class="header-section-number">B.1.3</span> Removing Trailing Comma from Header</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#snippets-grooming"><span class="header-section-number">B.2</span> Grooming</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-grooming-two-year"><span class="header-section-number">B.2.1</span> Correct for misinterpreted two-digit year</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#snippets-identification"><span class="header-section-number">B.3</span> Identification</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-identification-tags"><span class="header-section-number">B.3.1</span> Generating “tags”</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#snippets-correspondence"><span class="header-section-number">B.4</span> Correspondence with Collaborators</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-correspondence-excel"><span class="header-section-number">B.4.1</span> Excel files</a></li></ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="git.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="presentations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-snippets.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-snippets.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-21.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/ouhscbbmc/data-science-practices-1/edit/main/ch-snippets.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["data-science-practices-1.pdf", "data-science-practices-1.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
 </body>
-
 </html>
