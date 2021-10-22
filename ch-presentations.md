@@ -30,7 +30,7 @@ Data Management
 
 1. **[BBMC Validator](https://rawgit.com/OuhscBbmc/StatisticalComputing/master/2016-presentations/11-november/beasley-scug-validator-2016-11.html#/)**: catch and communicate data errors.  [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2016.
 1. **[Text manipulation with Regular Expressions, Part 1](https://rawgit.com/OuhscBbmc/StatisticalComputing/master/2016-presentations/02-february/beasley-scug-regex-part-1-2016-02.html) and [Part 2](https://rawgit.com/OuhscBbmc/StatisticalComputing/master/2016-presentations/05-may/beasley-scug-regex-part-2-2016-05.html#/)**.  [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2016.
-1. **[Time and Effort Data Synthesis](https://rawgit.com/wibeasley/RAnalysisSkeleton/master/documentation/time-and-effort-synthesis.html#/)**.  [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2015.
+1. **[Time and Effort Data Synthesis](https://rawgit.com/wibeasley/RAnalysisSkeleton/main/documentation/time-and-effort-synthesis.html#/)**.  [SCUG](https://github.com/OuhscBbmc/StatisticalComputing) 2015.
 
 GitHub
 ------------------------------------
@@ -50,32 +50,32 @@ Architectures
 
 1. Linear Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
-    <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png">
-      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton-car.png?raw=true" style="width: 500px;"/>.
+    <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton-car.png">
+      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton-car.png?raw=true" style="width: 100%;"/>.
     </a>
 
 1. Many-to-many Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
-    <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png">
-      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
+    <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton.png">
+      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton.png?raw=true" style="width: 100%;"/>.
     </a>
 
 1. Immunization transfer
 
     <a href="resources/immunization-flow.pdf">
-      <img src="resources/immunization-flow.png" style="width: 2000px;"/>.
+      <img src="resources/immunization-flow.png" style="width: 100%;"/>.
     </a>
 
 1. [IALSA](http://www.ialsa.org/): [A Collaborative Modeling Framework for Multi-study Replication](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)
 
     <a href = "https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png">
-      <img src="https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png?raw=true" style="width: 2000px;"/>.
+      <img src="https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png?raw=true" style="width: 100%;"/>.
     </a>
 
 1. [POPS](https://github.com/OuhscBbmc/darden-pharmaco-1): Automated daily screening eligibility for rare and understudied prescriptions.
 
     <a href = "resources/pops-flow.png">
-      <img src="resources/pops-flow.png?raw=true" style="width: 2000px;"/>.
+      <img src="resources/pops-flow.png" style="width: 100%;"/>.
     </a>
 
 Components
