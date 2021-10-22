@@ -12,6 +12,8 @@ CDW
 REDCap
 ------------------------------------
 
+1. **[Secure Medical Data Collection - Best Practices with Excel, and Leveling Up to REDCap & CollaboratoR](https://youtu.be/sM9GEAm6Uew?t=5354)**. [R/Medicine 2021](https://r-medicine.org/schedule/), Virtual.  Accompanying vignette: [Typical REDCap Workflow for a Data Analyst](https://ouhscbbmc.github.io/REDCapR/articles/workflow-read.html).
+
 1. **[REDCap Systems Integration](https://github.com/OuhscBbmc/BbmcResources/blob/master/Publications/Presentation2015-09-REDCapCon/REDCapIntegration.pdf)**.  [REDCap Con](https://projectredcap.org/about/redcapcon/) 2015, Portland, Oregon.
 1. **[Literate Programming Patterns and Practices with REDCap](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/LiterateProgrammingPatternsAndPracticesWithREDCap.pptx)** [REDCap Con](https://projectredcap.org/about/redcapcon/) 2014, Park City, Utah.
 1. **[Interacting with the REDCap API using the REDCapR Package](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/Publications/Presentation-2014-09-REDCapCon/REDCapR.pptx)** [REDCap Con](https://projectredcap.org/about/redcapcon/) 2014, Park City, Utah.
