@@ -8,19 +8,15 @@ Authors@R: c(
     )
 Imports: 
     bookdown,
-    remotes,    
+    remotes,
     kableExtra,
     knitcitations,
     knitr,
     learnr,
     magick,
-    nomnoml,
-    officedown,
-    officer,
     pagedown,
     pander,
     pdftools,
-    pixiedust,
     pkgdown,
     printr,
     r2d3,
@@ -28,15 +24,12 @@ Imports:
     reticulate,
     revealjs,
     rgl,
-    rhandsontable,
     rmarkdown,
     rmdformats,
     roxygen2,
     rsconnect,
     rticles,
-    sass,
     spelling,
-    stargazer,
     styler,
     svglite,
     tables,
@@ -44,15 +37,12 @@ Imports:
     tikzDevice,
     tinytex,
     trackdown,
-    tufte,
     usethis,
     webshot,
     workflowr,
-    xaringan,
     xfun,
     xtable,
-    yaml,
-    ztable
+    yaml
 Suggests:
     rsconnect
 Encoding: UTF-8
