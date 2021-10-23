@@ -6,20 +6,18 @@ Authors@R: c(
     person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006"))
     )
-Imports: 
+Imports:
     bookdown,
     remotes,
     kableExtra,
     knitcitations,
     knitr,
-    learnr,
     magick,
     pagedown,
     pander,
     pdftools,
     pkgdown,
     printr,
-    r2d3,
     reactable,
     reticulate,
     revealjs,
@@ -27,13 +25,10 @@ Imports:
     rmarkdown,
     rmdformats,
     roxygen2,
-    rsconnect,
     rticles,
     spelling,
     styler,
     svglite,
-    tables,
-    tangram,
     tikzDevice,
     tinytex,
     trackdown,
