@@ -53,31 +53,31 @@ Architectures
 1. Linear Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
     <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton-car.png">
-      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton-car.png?raw=true" style="width: 100%;"/>.
+      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton-car.png?raw=true" style="width: 100%;" target="_blank" rel="noopener noreferrer"/>.
     </a>
 
 1. Many-to-many Pipeline of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton)
 
     <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton.png">
-      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton.png?raw=true" style="width: 100%;"/>.
+      <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton.png?raw=true" style="width: 100%;" target="_blank" rel="noopener noreferrer"/>.
     </a>
 
 1. Immunization transfer
 
     <a href="resources/immunization-flow.pdf">
-      <img src="resources/immunization-flow.png" style="width: 100%;"/>.
+      <img src="resources/immunization-flow.png" style="width: 100%;" target="_blank" rel="noopener noreferrer"/>.
     </a>
 
 1. [IALSA](http://www.ialsa.org/): [A Collaborative Modeling Framework for Multi-study Replication](https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/ppt/koval-etal-2016-06-10-cpa.pdf)
 
     <a href = "https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png">
-      <img src="https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png?raw=true" style="width: 100%;"/>.
+      <img src="https://github.com/IALSA/IALSA-2015-Portland/blob/master/pubs/2016-talks/2016-06-09-cpa/cc-production/ai/CPA-2016-poster-flow-map-01-01.png?raw=true" style="width: 100%;" target="_blank" rel="noopener noreferrer"/>.
     </a>
 
 1. [POPS](https://github.com/OuhscBbmc/darden-pharmaco-1): Automated daily screening eligibility for rare and understudied prescriptions.
 
     <a href = "resources/pops-flow.png">
-      <img src="resources/pops-flow.png" style="width: 100%;"/>.
+      <img src="resources/pops-flow.png" style="width: 100%;" target="_blank" rel="noopener noreferrer"/>.
     </a>
 
 Components
