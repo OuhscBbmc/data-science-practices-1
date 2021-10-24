@@ -9,21 +9,11 @@ Authors@R: c(
 Imports:
     bookdown,
     kableExtra,
-    knitcitations,
     pagedown,
-    pander,
     pdftools,
     printr,
-    reactable,
     rmarkdown,
-    styler,
-    svglite,
     tikzDevice,
-    tinytex,
-    trackdown,
-    usethis,
-    webshot,
-    workflowr,
-    yaml
+    tinytex
 Encoding: UTF-8
 Language: en-US
