@@ -15,6 +15,11 @@ The installation order matters.
 ### RStudio {#workstation-rstudio}
 
 [RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.
+ix problems, but this is not required to start.)
+
+### R Tools {#workstation-rtools}
+
+[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
 
 ### Installing R Packages {#workstation-r-package-installation}
 
@@ -49,7 +54,7 @@ OuhscMunge::update_packages_addin()
 
 ### Updating R Packages {#workstation-r-package-update}
 
-Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(checkBuilt=TRUE)`.
+Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(checkBuilt = TRUE, ask = FALSE)`.
 
 ### GitHub {#workstation-github}
 
@@ -57,11 +62,7 @@ Several R packages will need to be updated every weeks.  Unless you have been to
 
 ### GitHub Desktop {#workstation-github-client}
 
-[GitHub Desktop](http://desktop.github.com/) does the basic tasks a little easier than the git features built into RStudio.  This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to fix problems, but this is not required to start.)
-
-### R Tools {#workstation-rtools}
-
-[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
+[GitHub Desktop](http://desktop.github.com/) does the basic tasks a little easier than the git features built into RStudio.  This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to f
 
 Recommended Installation {#workstation-recommended}
 ------------------------------------
