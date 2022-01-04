@@ -16,6 +16,7 @@ Imports:
     printr,
     rmarkdown,
     tikzDevice,
-    tinytex
+    tinytex,
+    withr
 Encoding: UTF-8
 Language: en-US
