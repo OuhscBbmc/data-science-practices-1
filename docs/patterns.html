@@ -156,12 +156,12 @@
 <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"./manipulation/osdh/ellis/common-ellis.R"</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
-<p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code><a href="https://generics.r-lib.org/reference/setops.html">dplyr::intersect()</a></code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
+<p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code>dplyr::intersect()</code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># ---- load-packages -----------------------------------------------------------</span>
 <span class="co"># Attach these package(s) so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span>            , quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">DBI</span>                 , quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span>                 , quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span>
 <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"readr"</span>        <span class="op">)</span>
@@ -465,7 +465,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -153,12 +153,12 @@
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Good</span>
 <span class="va">ds</span> |&gt;
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
-<p>is cleaner to read and write than these two styles. In particular, it’s easy to forget/overlook a <code><a href="https://rdrr.io/r/base/Logic.html">!</a></code>.</p>
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
+<p>is cleaner to read and write than these two styles. In particular, it’s easy to forget/overlook a <code>!</code>.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Worse</span>
 <span class="va">ds</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Worst</span>
 <span class="va">ds</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
@@ -196,7 +196,7 @@
 <h3>
 <span class="header-section-number">14.3.1</span> Explicit Missing Values<a class="anchor" aria-label="anchor" href="#style-factor-unknown"><i class="fas fa-link"></i></a>
 </h3>
-<p>Define a level like <code>"unknown"</code> so the data manipulation doesn’t have to test for both <code><a href="https://rdrr.io/r/base/NA.html">is.na(x)</a></code> and <code>x=="unknown"</code>. The explicit labels also helps when included in a statistical procedure and coefficient table.</p>
+<p>Define a level like <code>"unknown"</code> so the data manipulation doesn’t have to test for both <code>is.na(x)</code> and <code>x=="unknown"</code>. The explicit labels also helps when included in a statistical procedure and coefficient table.</p>
 </div>
 <div id="style-factor-granularity" class="section level3">
 <h3>
@@ -248,7 +248,7 @@
 <ul>
 <li><p>yob is an integer, but mob and wob are dates. Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html"><code>OuhscMunge::clump_month_date()</code></a> and <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html"><code>OuhscMunge::clump_week_date()</code></a>. These help obfuscate the real value, if PHI is involved. Months are centered because the midpoint is usually a better representation of the month’s performance than the month’s initial day.</p></li>
 <li><p><code>birth_month_index</code> can be values 1 through 12, while <code>birth_month</code> (or commonly <code>mob</code>) contains the year (<em>e.g.</em>, 2014-07-15).</p></li>
-<li><p>Don’t use the minus operator (<em>i.e.</em>, <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code>). See <a href="coding.html#coding-defensive-date-arithmetic">Defensive Date Arithmetic</a>.</p></li>
+<li><p>Don’t use the minus operator (<em>i.e.</em>, <code>-</code>). See <a href="coding.html#coding-defensive-date-arithmetic">Defensive Date Arithmetic</a>.</p></li>
 </ul>
 </div>
 <div id="naming" class="section level2">
@@ -313,10 +313,10 @@
 <h3>
 <span class="header-section-number">14.5.2</span> Files and Folders<a class="anchor" aria-label="anchor" href="#style-naming-files"><i class="fas fa-link"></i></a>
 </h3>
-<p>Naming filers and their folders/directories follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with one small difference: separate words with dashes (<em>i.e.</em>, <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code>), not underscores (<em>i.e.</em>, <code>_</code>).</p>
+<p>Naming filers and their folders/directories follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with one small difference: separate words with dashes (<em>i.e.</em>, <code>-</code>), not underscores (<em>i.e.</em>, <code>_</code>).</p>
 <p>Infrequently, we’ll use a dash if it helps identify a noun (that already contains an underscore). For instance, if there’s a table called <code>patient_demographics</code>, we might call the files <code>patient_demographics-truncate.sql</code> and <code>patient_demographics-insert.sql</code>.</p>
 <p>Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive. To promote portability, keep everything lowercase.</p>
-<p>Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash. Do not include spaces, uppercase letters, and especially punctuation, such as <code><a href="https://rdrr.io/r/base/Colon.html">:</a></code> or <code>(</code>.</p>
+<p>Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash. Do not include spaces, uppercase letters, and especially punctuation, such as <code>:</code> or <code>(</code>.</p>
 </div>
 <div id="style-naming-datasets" class="section level3">
 <h3>
@@ -450,7 +450,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h3>
 <span class="header-section-number">14.8.1</span> Order of commands<a class="anchor" aria-label="anchor" href="#style-ggplot-order"><i class="fas fa-link"></i></a>
 </h3>
-<p>ggplot2 is essentially a collection of functions combined with the <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code> operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functions should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:</p>
+<p>ggplot2 is essentially a collection of functions combined with the <code>+</code> operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functions should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:</p>
 <ol style="list-style-type: decimal">
 <li>
 <code>ggplot()</code> is the primary function to specify the default dataset and aesthetic mappings. Many arguments can be passed to <code>aes()</code>, and we prefer to follow an order consistent with the <code>scale_*()</code> order below.</li>
@@ -549,7 +549,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

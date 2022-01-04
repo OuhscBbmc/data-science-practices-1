@@ -185,11 +185,11 @@ workstation
 workstation-required
 workstation-r
 workstation-rstudio
+workstation-rtools
 workstation-r-package-installation
 workstation-r-package-update
 workstation-github
 workstation-github-client
-workstation-rtools
 workstation-recommended
 workstation-odbc
 workstation-notepadpp

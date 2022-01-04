@@ -179,17 +179,17 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <code class="sourceCode R"><span class="co"># OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.</span>
 <span class="va">ds</span> <span class="op">&lt;-</span>
   <span class="va">ds</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>    <span class="co"># `dplyr::select()` drops columns not included.</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>    <span class="co"># `dplyr::select()` drops columns not included.</span>
     <span class="va">subject_id</span>,
     <span class="va">county_id</span>,
     <span class="va">gender_id</span>,
     <span class="va">race</span>,
     <span class="va">ethnicity</span>
   <span class="op">)</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
 
   <span class="op">)</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">subject_id</span><span class="op">)</span> <span class="co"># |&gt;</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="va">subject_id</span><span class="op">)</span> <span class="co"># |&gt;</span>
   <span class="co"># tibble::rowid_to_column("subject_id") # Add a unique index if necessary</span></code></pre></div>
 </div>
 <div id="chunk-unique" class="section level2">
@@ -208,17 +208,17 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <code class="sourceCode R"><span class="co"># ---- verify-values -----------------------------------------------------------</span>
 <span class="co"># Sniff out problems</span>
 <span class="co"># OuhscMunge::verify_value_headstart(ds)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkInteger.html">assert_integer</a></span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_month_id</span>    , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">3080</span>                , unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkInteger.html">assert_integer</a></span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">77</span>                            <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkDate.html">assert_date</a></span><span class="op">(</span>     <span class="va">ds</span><span class="op">$</span><span class="va">month</span>              , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2012-06-15"</span><span class="op">)</span>, upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">county_name</span>        , any.missing<span class="op">=</span><span class="cn">F</span> , pattern<span class="op">=</span><span class="st">"^.{3,12}$"</span>                          <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkInteger.html">assert_integer</a></span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">region_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">20</span>                            <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkNumeric.html">assert_numeric</a></span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte</span>                , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkLogical.html">assert_logical</a></span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_approximated</span>   , any.missing<span class="op">=</span><span class="cn">F</span>                                                <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkNumeric.html">assert_numeric</a></span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_rolling_median</span> , any.missing<span class="op">=</span><span class="cn">T</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_month_id</span>    , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">3080</span>                , unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">77</span>                            <span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_date</span><span class="op">(</span>     <span class="va">ds</span><span class="op">$</span><span class="va">month</span>              , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2012-06-15"</span><span class="op">)</span>, upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">county_name</span>        , any.missing<span class="op">=</span><span class="cn">F</span> , pattern<span class="op">=</span><span class="st">"^.{3,12}$"</span>                          <span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">region_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">20</span>                            <span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_numeric</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte</span>                , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_logical</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_approximated</span>   , any.missing<span class="op">=</span><span class="cn">F</span>                                                <span class="op">)</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_numeric</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_rolling_median</span> , any.missing<span class="op">=</span><span class="cn">T</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span>
 
 <span class="va">county_month_combo</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">county_id</span>, <span class="va">ds</span><span class="op">$</span><span class="va">month</span><span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkCharacter.html">assert_character</a></span><span class="op">(</span><span class="va">county_month_combo</span>, pattern  <span class="op">=</span><span class="st">"^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$"</span>, any.missing<span class="op">=</span><span class="cn">F</span>, unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">county_month_combo</span>, pattern  <span class="op">=</span><span class="st">"^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$"</span>, any.missing<span class="op">=</span><span class="cn">F</span>, unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="chunk-specify-columns" class="section level2">
 <h2>
@@ -232,7 +232,7 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 </ol>
 <p>Variable order is especially important for the database engines/drivers that ignore the variable name, and use only the variable position.</p>
 <p>We use the term ‘slim’ because typically this output has fewer variables than the full dataset processed by the file.</p>
-<p>If you doubt the variable will be needed downstream, leave it in the <code><a href="https://dplyr.tidyverse.org/reference/select.html">dplyr::select()</a></code>, but commented out. If someone needs it in the future, they’ll easily determine where it might come from, and then uncomment the line (and possibly modify the database table). Once you import a column into a warehouse that multiple people are using, it can be tough to remove without breaking their code.</p>
+<p>If you doubt the variable will be needed downstream, leave it in the <code>dplyr::select()</code>, but commented out. If someone needs it in the future, they’ll easily determine where it might come from, and then uncomment the line (and possibly modify the database table). Once you import a column into a warehouse that multiple people are using, it can be tough to remove without breaking their code.</p>
 <p>This chunk follows <a href="file-prototype-r.html#chunk-verify-values">verify-values</a> because sometimes you want to check the validity of variables that are not consumed downstream. These variables are not important themselves, but an illegal value may reveal a larger problem with the dataset.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Print colnames that `dplyr::select()`  should contain below:</span>
@@ -244,7 +244,7 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <span class="va">ds_slim</span> <span class="op">&lt;-</span>
   <span class="va">ds</span> |&gt;
   <span class="co"># dplyr::slice(1:100) |&gt;</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>
     <span class="va">subject_id</span>,
     <span class="va">county_id</span>,
     <span class="va">gender_id</span>,
@@ -305,7 +305,7 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

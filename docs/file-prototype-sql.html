@@ -162,7 +162,7 @@
 <li>
 <a href="https://www.w3schools.com/sql/sql_unique.asp"><code>unique</code></a> is helpful when a table has additional columns that need to be unique (such as <code>patient_ssn</code> and <code>patient_id</code>). A more advanced scenario using a <a href="https://docs.microsoft.com/en-us/sql/relational-databases/indexes/columnstore-indexes-overview#when-should-i-use-a-columnstore-index">clustered columnar table</a>, which is incompatible with the <code>primary key</code> designation.</li>
 <li>
-<code><a href="https://rdrr.io/r/base/identity.html">identity(1, 1)</a></code> creates a 1, 2, 3, … sequence, which relieves the client of creating the sequence with something like <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql"><code>row_number()</code></a>. Note that when identity column exists, the number columns in the <code>SELECT</code> clause will be one fewer than the columns defined in <code>CREATE TABLE</code>.</li>
+<code>identity(1, 1)</code> creates a 1, 2, 3, … sequence, which relieves the client of creating the sequence with something like <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/row-number-transact-sql"><code>row_number()</code></a>. Note that when identity column exists, the number columns in the <code>SELECT</code> clause will be one fewer than the columns defined in <code>CREATE TABLE</code>.</li>
 </ol>
 <div class="sourceCode" id="cb26"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb26-1"><a href="file-prototype-sql.html#cb26-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">if</span> <span class="kw">exists</span> ley_covid_1.dx;</span>
 <span id="cb26-2"><a href="file-prototype-sql.html#cb26-2"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> ley_covid_1.dx(</span>
@@ -273,7 +273,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

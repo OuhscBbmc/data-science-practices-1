@@ -98,11 +98,18 @@
 <h3>
 <span class="header-section-number">18.1.2</span> RStudio<a class="anchor" aria-label="anchor" href="#workstation-rstudio"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="http://www.rstudio.com/ide/download/desktop">RStudio Desktop</a> is the IDE (integrated design interface) that you’ll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus <code>Help</code> -&gt; <code>Check for updates</code>.</p>
+<p><a href="http://www.rstudio.com/ide/download/desktop">RStudio Desktop</a> is the IDE (integrated design interface) that you’ll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus <code>Help</code> -&gt; <code>Check for updates</code>.
+ix problems, but this is not required to start.)</p>
+</div>
+<div id="workstation-rtools" class="section level3">
+<h3>
+<span class="header-section-number">18.1.3</span> R Tools<a class="anchor" aria-label="anchor" href="#workstation-rtools"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://cran.r-project.org/bin/windows/Rtools/">R Tools for Windows</a> is necessary to build some packages in development hosted on GitHub. If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}</p>
 </div>
 <div id="workstation-r-package-installation" class="section level3">
 <h3>
-<span class="header-section-number">18.1.3</span> Installing R Packages<a class="anchor" aria-label="anchor" href="#workstation-r-package-installation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1.4</span> Installing R Packages<a class="anchor" aria-label="anchor" href="#workstation-r-package-installation"><i class="fas fa-link"></i></a>
 </h3>
 <p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
 <p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;As an alternative to the Gist, run the local R script &lt;a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"&gt;&lt;code&gt;install-packages.R&lt;/code&gt;&lt;/a&gt; (located in that repository’s &lt;code&gt;utility/&lt;/code&gt; directory). The workhorse of this function is &lt;a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"&gt;&lt;code&gt;OuhscMunge::package_janitor()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>10</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">package-dependency-list.csv</a> and <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list-more.csv">package-dependency-list-more.csv</a>.</p>
@@ -128,27 +135,21 @@
 </div>
 <div id="workstation-r-package-update" class="section level3">
 <h3>
-<span class="header-section-number">18.1.4</span> Updating R Packages<a class="anchor" aria-label="anchor" href="#workstation-r-package-update"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1.5</span> Updating R Packages<a class="anchor" aria-label="anchor" href="#workstation-r-package-update"><i class="fas fa-link"></i></a>
 </h3>
-<p>Several R packages will need to be updated every weeks. Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code <code><a href="https://rdrr.io/r/utils/update.packages.html">update.packages(checkBuilt=TRUE)</a></code>.</p>
+<p>Several R packages will need to be updated every weeks. Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code <code>update.packages(checkBuilt = TRUE, ask = FALSE)</code>.</p>
 </div>
 <div id="workstation-github" class="section level3">
 <h3>
-<span class="header-section-number">18.1.5</span> GitHub<a class="anchor" aria-label="anchor" href="#workstation-github"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1.6</span> GitHub<a class="anchor" aria-label="anchor" href="#workstation-github"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://github.com/">GitHub</a> registration is necessary to push modified files to the repository. First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator (<em>e.g.</em>, to <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns</a>).</p>
 </div>
 <div id="workstation-github-client" class="section level3">
 <h3>
-<span class="header-section-number">18.1.6</span> GitHub Desktop<a class="anchor" aria-label="anchor" href="#workstation-github-client"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1.7</span> GitHub Desktop<a class="anchor" aria-label="anchor" href="#workstation-github-client"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="http://desktop.github.com/">GitHub Desktop</a> does the basic tasks a little easier than the git features built into RStudio. This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to fix problems, but this is not required to start.)</p>
-</div>
-<div id="workstation-rtools" class="section level3">
-<h3>
-<span class="header-section-number">18.1.7</span> R Tools<a class="anchor" aria-label="anchor" href="#workstation-rtools"><i class="fas fa-link"></i></a>
-</h3>
-<p><a href="https://cran.r-project.org/bin/windows/Rtools/">R Tools for Windows</a> is necessary to build some packages in development hosted on GitHub. If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}</p>
+<p><a href="http://desktop.github.com/">GitHub Desktop</a> does the basic tasks a little easier than the git features built into RStudio. This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to f</p>
 </div>
 </div>
 <div id="workstation-recommended" class="section level2">
@@ -373,7 +374,14 @@
 <ul>
 <li><p><strong>Git</strong>: Will Beasley resorted to this workaround Sept 2012: <a href="http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing" class="uri">http://stackoverflow.com/questions/3431361/git-for-windows-the-program-cant-start-because-libiconv2-dll-is-missing</a>. And then he copied the following four files from <code>D:/Program Files/msysgit/mingw/bin/</code> to <code>D:/Program Files/msysgit/bin/</code>: (1) <code>libiconv2.dll</code>, (2) <code>libcurl-4.dll</code>, (3) <code>libcrypto.dll</code>, and (4) <code>libssl.dll</code>. (If you install to the default location, you’ll move instead from <code>C:/msysgit/mingw/bin/</code> to <code>C:/msysgit/bin/</code>) {added Sept 2012}</p></li>
 <li><p><strong>Git</strong>: On a different computer, Will Beasley couldn’t get RStudio to recognize msysGit, so installed the <code>Full installer for official Git for Windows 1.7.11</code> from (<a href="http://code.google.com/p/msysgit/downloads/list" class="uri">http://code.google.com/p/msysgit/downloads/list</a>) and switched the Git Path in the RStudio Options. {added Sept 2012}</p></li>
-<li><p><strong>RStudio</strong> If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren’t erased. To be safe, you can be thorough and delete the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio-Desktop\</code>. The options settings are stored (and can be manipulated) in this extentionless text file: <code>C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings</code>. {added Sept 2012}</p></li>
+<li>
+<p><strong>RStudio</strong></p>
+<ul>
+<li>If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren’t erased. To be safe, you can be thorough and delete the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\</code>. The options settings are stored (and can be manipulated) in this extentionless text file: <code>C:\Users\wibeasley\AppData\Local\RStudio\monitored\user-settings\user-settings</code>. See RStudio’s support page, <a href="https://support.rstudio.com/hc/en-us/articles/200534577-Resetting-RStudio-s-State">Resetting RStudio Desktop’s State</a>. {added Sept 2012}</li>
+<li>Hold down the ctrl button when clicking on RStudio in the Windows Start Menu. Try switching up the 64/32-bit option. For a VDI, forcing it to a software-rendering option fixed a problem where the RStudio window opened, but nothing was visible inside. {added Jan 2022}</li>
+<li>It might help to look in the logs, which are stored inthe equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\logs</code> {added Jan 2022}</li>
+</ul>
+</li>
 </ul>
 </div>
 <div id="workstation-ubuntu" class="section level2">
@@ -571,11 +579,11 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <a class="nav-link" href="#workstation-required"><span class="header-section-number">18.1</span> Required Installation</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#workstation-r"><span class="header-section-number">18.1.1</span> R</a></li>
 <li><a class="nav-link" href="#workstation-rstudio"><span class="header-section-number">18.1.2</span> RStudio</a></li>
-<li><a class="nav-link" href="#workstation-r-package-installation"><span class="header-section-number">18.1.3</span> Installing R Packages</a></li>
-<li><a class="nav-link" href="#workstation-r-package-update"><span class="header-section-number">18.1.4</span> Updating R Packages</a></li>
-<li><a class="nav-link" href="#workstation-github"><span class="header-section-number">18.1.5</span> GitHub</a></li>
-<li><a class="nav-link" href="#workstation-github-client"><span class="header-section-number">18.1.6</span> GitHub Desktop</a></li>
-<li><a class="nav-link" href="#workstation-rtools"><span class="header-section-number">18.1.7</span> R Tools</a></li>
+<li><a class="nav-link" href="#workstation-rtools"><span class="header-section-number">18.1.3</span> R Tools</a></li>
+<li><a class="nav-link" href="#workstation-r-package-installation"><span class="header-section-number">18.1.4</span> Installing R Packages</a></li>
+<li><a class="nav-link" href="#workstation-r-package-update"><span class="header-section-number">18.1.5</span> Updating R Packages</a></li>
+<li><a class="nav-link" href="#workstation-github"><span class="header-section-number">18.1.6</span> GitHub</a></li>
+<li><a class="nav-link" href="#workstation-github-client"><span class="header-section-number">18.1.7</span> GitHub Desktop</a></li>
 </ul>
 </li>
 <li>
@@ -632,7 +640,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

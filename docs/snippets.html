@@ -185,13 +185,13 @@
 <span class="header-section-number">B.2.1</span> Correct for misinterpreted two-digit year<a class="anchor" aria-label="anchor" href="#snippets-grooming-two-year"><i class="fas fa-link"></i></a>
 </h3>
 <p><em>Background</em>: Sometimes the Meditech dates are specified like <code>1/6/54</code> instead of <code>1/6/1954</code>. <code>readr::read_csv()</code> has to choose if the year is supposed to be ‘1954’ or ‘2054’. A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can’t (so it guesses 2054). For avoid this and other problems, request dates in an <a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a> format.</p>
-<p><em>Explanation</em>: Correct for this in a <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
+<p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="va">ds</span> |&gt;
- <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-    dob <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">dob</span>, <span class="va">dob</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/period.html">years</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+ <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
+    dob <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">dob</span>, <span class="va">dob</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu">years</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -302,7 +302,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

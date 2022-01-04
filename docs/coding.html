@@ -134,29 +134,29 @@
 <p><strong>Leverage existing booleans:</strong> Suppose you have the logical variable <code>gender_male</code> (which can be only <code>TRUE</code>, <code>FALSE</code>, or <code>NA</code>). Writing <code>gender_male == TRUE</code> or <code>gender_male == FALSE</code> will evaluate to a boolean –that’s unnecessary because <code>gender_male</code> is already a boolean.</p>
 <ol style="list-style-type: decimal">
 <li><p><em>Testing for <code>TRUE</code></em>: use the variable by itself (<em>i.e.</em>, <code>gender_male</code> instead of <code>gender_male == TRUE</code>).</p></li>
-<li><p><em>Testing for <code>FALSE</code></em>: use <code><a href="https://rdrr.io/r/base/Logic.html">!</a></code>. Write <code>!gender_male</code> instead of <code>gender_male == FALSE</code> or <code>gender_male != TRUE</code>.</p></li>
+<li><p><em>Testing for <code>FALSE</code></em>: use <code>!</code>. Write <code>!gender_male</code> instead of <code>gender_male == FALSE</code> or <code>gender_male != TRUE</code>.</p></li>
 </ol>
 </li>
 <li>
 <p><strong><a href="https://dplyr.tidyverse.org/reference/coalesce.html"><code>dplyr::coalesce()</code></a></strong>: The function evaluates a single variable and replaces <code>NA</code> with values from another variable.</p>
 <p>A coalesce like</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/coalesce.html">coalesce</a></span><span class="op">(</span><span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">coalesce</span><span class="op">(</span><span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>is much easier to read and not mess up than</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">visit_completed</span><span class="op">)</span>, <span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">visit_completed</span><span class="op">)</span>, <span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
 <p><strong><a href="https://dplyr.tidyverse.org/reference/na_if.html"><code>dplyr::na_if()</code></a></strong> transforms a nonmissing value into an NA.</p>
 <p>Recoding missing values like</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html">na_if</a></span><span class="op">(</span><span class="va">birth_apgar</span>, <span class="fl">99</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">na_if</span><span class="op">(</span><span class="va">birth_apgar</span>, <span class="fl">99</span><span class="op">)</span></code></pre></div>
 <p>is easier to read and not mess up than</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">birth_apgar</span> <span class="op">==</span> <span class="fl">99</span>, <span class="cn">NA_real_</span>, <span class="va">birth_apgar</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">birth_apgar</span> <span class="op">==</span> <span class="fl">99</span>, <span class="cn">NA_real_</span>, <span class="va">birth_apgar</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
-<p><strong><code><a href="https://rdrr.io/r/base/Comparison.html">&lt;=</a></code></strong> (or a similar comparison operator): Compare two quantities to output a boolean variable. The parentheses are unnecessary, but can help readability. If either value is <code>NA</code>, then the result is <code>NA</code>.</p>
+<p><strong><code>&lt;=</code></strong> (or a similar comparison operator): Compare two quantities to output a boolean variable. The parentheses are unnecessary, but can help readability. If either value is <code>NA</code>, then the result is <code>NA</code>.</p>
 <p>Notice that we prefer to order the variables like a number line. When the result is <code>TRUE</code>, the smaller value is to the left of the larger value.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dob_in_the_future</span>   <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">dob</span><span class="op">)</span>
@@ -165,47 +165,47 @@
 <span class="va">big_boy</span>             <span class="op">&lt;-</span> <span class="op">(</span><span class="va">threshold_in_kg</span> <span class="op">&lt;=</span> <span class="va">birth_weight_in_kg</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
-<p><strong><a href="https://dplyr.tidyverse.org/reference/if_else.html"><code>dplyr::if_else()</code></a></strong>: The function evaluates a single boolean variable or expression. The output branches to only three possibilities: the input is (a) true, (b) false, or (c) (optionally) <code>NA</code>. Notice that unlike the <code><a href="https://rdrr.io/r/base/Comparison.html">&lt;=</a></code> operator, <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">dplyr::if_else()</a></code> lets you specify a value if the input expression evaluates to <code>NA</code>.</p>
+<p><strong><a href="https://dplyr.tidyverse.org/reference/if_else.html"><code>dplyr::if_else()</code></a></strong>: The function evaluates a single boolean variable or expression. The output branches to only three possibilities: the input is (a) true, (b) false, or (c) (optionally) <code>NA</code>. Notice that unlike the <code>&lt;=</code> operator, <code>dplyr::if_else()</code> lets you specify a value if the input expression evaluates to <code>NA</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">date_start</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2017-01-01"</span><span class="op">)</span>
 
 <span class="co"># If a missing month element needs to be handled explicitly.</span>
-<span class="va">stage</span>       <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="st">"post"</span>, <span class="st">"pre"</span>, missing <span class="op">=</span> <span class="st">"missing-month"</span><span class="op">)</span>
+<span class="va">stage</span>       <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="st">"post"</span>, <span class="st">"pre"</span>, missing <span class="op">=</span> <span class="st">"missing-month"</span><span class="op">)</span>
 
 <span class="co"># Otherwise a simple boolean output is sufficient.</span>
 <span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span><span class="op">)</span></code></pre></div>
-<p>If it is important that the reader understand that an input expression of <code>NA</code> will produce an NA, consider using <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">dplyr::if_else()</a></code>. Even though these two lines are equivalent, a casual reader may not consider that <code>stage_post</code> could be <code>NA</code>.</p>
+<p>If it is important that the reader understand that an input expression of <code>NA</code> will produce an NA, consider using <code>dplyr::if_else()</code>. Even though these two lines are equivalent, a casual reader may not consider that <code>stage_post</code> could be <code>NA</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span><span class="op">)</span>
-<span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, missing <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, missing <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
 <p><strong><a href="https://dplyr.tidyverse.org/reference/between.html"><code>dplyr::between()</code></a></strong>: The function evaluates a numeric <code>x</code> against a <code>left</code> and a <code>right</code> boundary to return a boolean value. The output is <code>TRUE</code> if <code>x</code> is inside the boundaries or equal to either boundary (<em>i.e.</em>, the boundaries are <em>in</em>clusive). The output is <code>FALSE</code> if <code>x</code> is outside either boundary.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">too_cold</span>      <span class="op">&lt;-</span> <span class="fl">60</span>
 <span class="va">too_hot</span>       <span class="op">&lt;-</span> <span class="fl">88</span>
-<span class="va">goldilocks_1</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">temperature</span>, <span class="va">too_cold</span>, <span class="va">too_hot</span><span class="op">)</span>
+<span class="va">goldilocks_1</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">between</span><span class="op">(</span><span class="va">temperature</span>, <span class="va">too_cold</span>, <span class="va">too_hot</span><span class="op">)</span>
 
 <span class="co"># This is equivalent to the previous line.</span>
 <span class="va">goldilocks_2</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;=</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;=</span> <span class="va">too_hot</span><span class="op">)</span></code></pre></div>
-<p>If you need an <em>ex</em>clusive boundary, abandon <code><a href="https://dplyr.tidyverse.org/reference/between.html">dplyr::between()</a></code> and specify it exactly.</p>
+<p>If you need an <em>ex</em>clusive boundary, abandon <code>dplyr::between()</code> and specify it exactly.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Left boundary is exclusive</span>
 <span class="va">goldilocks_3</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;=</span> <span class="va">too_hot</span><span class="op">)</span>
 
 <span class="co"># Both boundaries are exclusive</span>
 <span class="va">goldilocks_4</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;</span>  <span class="va">too_hot</span><span class="op">)</span></code></pre></div>
-<p>If your code starts to nest <code><a href="https://dplyr.tidyverse.org/reference/between.html">dplyr::between()</a></code> calls inside <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">dplyr::if_else()</a></code>, consider <code><a href="https://rdrr.io/r/base/cut.html">base::cut()</a></code>.</p>
+<p>If your code starts to nest <code>dplyr::between()</code> calls inside <code>dplyr::if_else()</code>, consider <code><a href="https://rdrr.io/r/base/cut.html">base::cut()</a></code>.</p>
 </li>
 <li>
 <p><strong><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a></strong>: The function transforms a single numeric variable into a factor. Its range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer). Modify the <code>right</code> parameter to <code>FALSE</code> if you’d like the left/lower bound to be inclusive (which tends to be more natural for me).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mtcars</span> |&gt; 
   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>
     <span class="va">disp</span>,
   <span class="op">)</span> |&gt; 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
     <span class="co"># Example of a simple inequality operator (see two bullets above)</span>
     muscle_car            <span class="op">=</span> <span class="op">(</span><span class="fl">300</span> <span class="op">&lt;=</span> <span class="va">disp</span><span class="op">)</span>,
 
@@ -236,7 +236,7 @@
 <span class="va">race_id</span>        <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">3L</span>, <span class="fl">4L</span>, <span class="fl">2L</span>, <span class="cn">NA_integer_</span><span class="op">)</span>
 <span class="va">race_id_spouse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="cn">NA_integer_</span><span class="op">)</span>
 <span class="va">race</span> <span class="op">&lt;-</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span>
     <span class="va">race_id</span>,
     <span class="st">"1"</span>      <span class="op">=</span> <span class="st">"White"</span>,
     <span class="st">"2"</span>      <span class="op">=</span> <span class="st">"Black or African American"</span>,
@@ -245,7 +245,7 @@
     <span class="st">"5"</span>      <span class="op">=</span> <span class="st">"Native Hawaiian or Other Pacific Islander"</span>,
     .missing <span class="op">=</span> <span class="st">"Unknown"</span>
   <span class="op">)</span></code></pre></div>
-<p>If multiple variables have the same mapping, define the mapping once in a named vector, and pass it for multiple calls to <code><a href="https://dplyr.tidyverse.org/reference/recode.html">dplyr::recode()</a></code>. Notice that the two variables <code>race</code> and <code>race_spouse</code> use the same mapping.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For now, employ the &lt;code&gt;!!!&lt;/code&gt; operator without understanding it. When you’re more comfortable with R, read about &lt;a href="https://adv-r.hadley.nz/quasiquotation.html#unquoting-many-arguments"&gt;quosures and lazy evaluation&lt;/a&gt; so you can use it in more general scenarios.&lt;/p&gt;'><sup>3</sup></a></p>
+<p>If multiple variables have the same mapping, define the mapping once in a named vector, and pass it for multiple calls to <code>dplyr::recode()</code>. Notice that the two variables <code>race</code> and <code>race_spouse</code> use the same mapping.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For now, employ the &lt;code&gt;!!!&lt;/code&gt; operator without understanding it. When you’re more comfortable with R, read about &lt;a href="https://adv-r.hadley.nz/quasiquotation.html#unquoting-many-arguments"&gt;quosures and lazy evaluation&lt;/a&gt; so you can use it in more general scenarios.&lt;/p&gt;'><sup>3</sup></a></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mapping_race</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"1"</span> <span class="op">=</span> <span class="st">"White"</span>,
@@ -255,24 +255,24 @@
   <span class="st">"5"</span> <span class="op">=</span> <span class="st">"Native Hawaiian or Other Pacific Islander"</span>
 <span class="op">)</span>
 <span class="va">race</span> <span class="op">&lt;-</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span>
     <span class="va">race_id</span>,
     <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">mapping_race</span>,
     .missing <span class="op">=</span> <span class="st">"Unknown"</span>
   <span class="op">)</span>
 <span class="va">race_spouse</span> <span class="op">&lt;-</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span>
     <span class="va">race_id_spouse</span>,
     <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">mapping_race</span>,
     .missing <span class="op">=</span> <span class="st">"Unknown"</span>
   <span class="op">)</span></code></pre></div>
-<p>Tips for <code><a href="https://dplyr.tidyverse.org/reference/recode.html">dplyr::recode()</a></code>:</p>
+<p>Tips for <code>dplyr::recode()</code>:</p>
 <ul>
 <li>A reusable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like “disagree”, “neutral”, “agree”.</li>
 <li>Use <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode_factor()</code></a> to map integers to factor levels.<br>
 </li>
 <li>
-<a href="https://forcats.tidyverse.org/reference/fct_recode.html"><code>forcats::fct_recode()</code></a> is similar. We prefer the <code>.missing</code> parameter of <code><a href="https://dplyr.tidyverse.org/reference/recode.html">dplyr::recode()</a></code> that translates an <code>NA</code> into an explicit value.</li>
+<a href="https://forcats.tidyverse.org/reference/fct_recode.html"><code>forcats::fct_recode()</code></a> is similar. We prefer the <code>.missing</code> parameter of <code>dplyr::recode()</code> that translates an <code>NA</code> into an explicit value.</li>
 <li>When using the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCap API</a>, these functions help convert radio buttons to a character or factor variable.</li>
 </ul>
 </li>
@@ -289,7 +289,7 @@
 <h3>
 <span class="header-section-number">2.2.1</span> Qualify functions<a class="anchor" aria-label="anchor" href="#coding-defensive-qualify-functions"><i class="fas fa-link"></i></a>
 </h3>
-<p>Try to prepend each function with its package. Write <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code> instead of <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>. When two packages contain public functions with the same name, the package that was most recently called with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> takes precedent. When multiple R files are executed, the packages’ precedents may not be predictable. Specifying the package eliminates the ambiguity, while also making the code easier to follow. For this reason, we recommend that almost all R files contain a <a href="file-prototype-r.html#chunk-load-packages">‘load-packages’</a> chunk.</p>
+<p>Try to prepend each function with its package. Write <code>dplyr::filter()</code> instead of <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>. When two packages contain public functions with the same name, the package that was most recently called with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> takes precedent. When multiple R files are executed, the packages’ precedents may not be predictable. Specifying the package eliminates the ambiguity, while also making the code easier to follow. For this reason, we recommend that almost all R files contain a <a href="file-prototype-r.html#chunk-load-packages">‘load-packages’</a> chunk.</p>
 <p>See the <a href="https://google.github.io/styleguide/Rguide.html#qualifying-namespaces">Google Style Guide</a> for more about qualifying functions.</p>
 <p>Some exceptions exist, including:</p>
 <ul>
@@ -300,7 +300,7 @@
 <h3>
 <span class="header-section-number">2.2.2</span> Date Arithmetic<a class="anchor" aria-label="anchor" href="#coding-defensive-date-arithmetic"><i class="fas fa-link"></i></a>
 </h3>
-<p>Don’t use the minus operator (<em>i.e.</em>, <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code>) to subtract dates. Instead use <code><a href="https://rdrr.io/r/base/integer.html">as.integer(difftime(stop, start, units="days"))</a></code>. It’s longer but protects from the scenario that <code>start</code> or <code>stop</code> are changed upstream from a date to a datetime. In that case, <code>stop - start</code> returns the number of <em>seconds</em> between the two points, not the number of <em>days</em>.</p>
+<p>Don’t use the minus operator (<em>i.e.</em>, <code>-</code>) to subtract dates. Instead use <code>as.integer(difftime(stop, start, units="days"))</code>. It’s longer but protects from the scenario that <code>start</code> or <code>stop</code> are changed upstream from a date to a datetime. In that case, <code>stop - start</code> returns the number of <em>seconds</em> between the two points, not the number of <em>days</em>.</p>
 </div>
 <div id="excluding-bad-cases" class="section level3">
 <h3>
@@ -318,15 +318,15 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span>
   <span class="va">ds</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
     dob <span class="op">=</span> <span class="fu">OuhscMunge</span><span class="fu">::</span><span class="fu">trim_date</span><span class="op">(</span><span class="va">dob</span>, <span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">)</span>
   <span class="op">)</span> |&gt;
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
 <p>Near the end of the file, verify the variable for three reasons: (a) there’s a chance that the code above isn’t working as expected, (b) some later code later might have introduced bad values, and (c) it clearly documents to a reader that <code>dob</code> was included in this range at this stage of the pipeline.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/checkmate/man/checkDate.html">assert_date</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span>, any.missing<span class="op">=</span><span class="cn">F</span>, lower<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, upper<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_date</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span>, any.missing<span class="op">=</span><span class="cn">F</span>, lower<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, upper<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 </li>
 </ol>
 </div>
@@ -371,7 +371,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2021-10-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
