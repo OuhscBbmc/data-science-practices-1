@@ -19,7 +19,7 @@ ix problems, but this is not required to start.)
 
 ### R Tools {#workstation-rtools}
 
-[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
+[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If runing Windows, follow the page's instructions, especially the "Putting Rtools on the PATH" section.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
 
 ### Installing R Packages {#workstation-r-package-installation}
 
