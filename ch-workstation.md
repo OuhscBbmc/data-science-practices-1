@@ -283,6 +283,16 @@ Installation Troubleshooting {#workstation-troubleshooting}
     * Hold down the ctrl button when clicking on RStudio in the Windows Start Menu.  Try switching up the 64/32-bit option.  For a VDI, forcing it to a software-rendering option fixed a problem where the RStudio window opened, but nothing was visible inside.  {added Jan 2022}
     * It might help to look in the logs, which are stored inthe equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\logs`  {added Jan 2022}
 
+Windows Installation {#workstation-windows}
+-----------------------------------
+
+### File Explorer {#workstation-windows-explorer}
+
+When reviewing repo files, it's frequently important to see file extensions and hidden files in [File Explorer](https://en.wikipedia.org/wiki/File_Explorer).
+* View Menu: check the box for "File name extensions"
+* View Menu: check the box for "Hidden items"
+
+
 Ubuntu Installation {#workstation-ubuntu}
 -----------------------------------
 

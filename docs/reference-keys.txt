@@ -208,6 +208,8 @@ workstation-postman
 workstation-ssms
 workstation-winscp
 workstation-troubleshooting
+workstation-windows
+workstation-windows-explorer
 workstation-ubuntu
 workstation-ubuntu-r
 workstation-ubuntu-rstudio

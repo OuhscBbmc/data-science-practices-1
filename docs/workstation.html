@@ -384,13 +384,26 @@ ix problems, but this is not required to start.)</p>
 </li>
 </ul>
 </div>
+<div id="workstation-windows" class="section level2">
+<h2>
+<span class="header-section-number">18.7</span> Windows Installation<a class="anchor" aria-label="anchor" href="#workstation-windows"><i class="fas fa-link"></i></a>
+</h2>
+<div id="workstation-windows-explorer" class="section level3">
+<h3>
+<span class="header-section-number">18.7.1</span> File Explorer<a class="anchor" aria-label="anchor" href="#workstation-windows-explorer"><i class="fas fa-link"></i></a>
+</h3>
+<p>When reviewing repo files, it’s frequently important to see file extensions and hidden files in <a href="https://en.wikipedia.org/wiki/File_Explorer">File Explorer</a>.
+* View Menu: check the box for “File name extensions”
+* View Menu: check the box for “Hidden items”</p>
+</div>
+</div>
 <div id="workstation-ubuntu" class="section level2">
 <h2>
-<span class="header-section-number">18.7</span> Ubuntu Installation<a class="anchor" aria-label="anchor" href="#workstation-ubuntu"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8</span> Ubuntu Installation<a class="anchor" aria-label="anchor" href="#workstation-ubuntu"><i class="fas fa-link"></i></a>
 </h2>
 <div id="workstation-ubuntu-r" class="section level3">
 <h3>
-<span class="header-section-number">18.7.1</span> R<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.1</span> R<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>Check <a href="https://cran.r-project.org/bin/linux/ubuntu/" class="uri">https://cran.r-project.org/bin/linux/ubuntu/</a> for the most recent instructions.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb71-1"><a href="workstation.html#cb71-1"></a>  <span class="al">###</span><span class="co"> Add the key, update the list, then install base R.</span></span>
@@ -402,7 +415,7 @@ ix problems, but this is not required to start.)</p>
 </div>
 <div id="workstation-ubuntu-rstudio" class="section level3">
 <h3>
-<span class="header-section-number">18.7.2</span> RStudio<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-rstudio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.2</span> RStudio<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-rstudio"><i class="fas fa-link"></i></a>
 </h3>
 <p>Download the most recent version from <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>. Then run the two <code>gdebi()</code> lines.
 Alternatively, update the <code>wget</code> line with the most recent version.</p>
@@ -412,7 +425,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 </div>
 <div id="workstation-ubuntu-packages" class="section level3">
 <h3>
-<span class="header-section-number">18.7.3</span> apt-get Packages<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.3</span> apt-get Packages<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-packages"><i class="fas fa-link"></i></a>
 </h3>
 <p>This next block can be copied and pasted (ctrl-shift-v) into the console <a href="https://stackoverflow.com/a/43164204">entirely</a>. Or lines can be pasted individual (without the <code>( function install-packages {</code> line, or the last three lines).</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb73-1"><a href="workstation.html#cb73-1"></a><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></span>
@@ -492,7 +505,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 </div>
 <div id="workstation-ubuntu-pandoc" class="section level3">
 <h3>
-<span class="header-section-number">18.7.4</span> Pandoc<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-pandoc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.4</span> Pandoc<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-pandoc"><i class="fas fa-link"></i></a>
 </h3>
 <p>The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, <a href="https://github.com/jgm/pandoc/releases">download the .deb file</a> then install from the same directory. Finally, verify the version.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb74-1"><a href="workstation.html#cb74-1"></a><span class="fu">sudo</span> dpkg -i pandoc-*</span>
@@ -500,7 +513,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 </div>
 <div id="workstation-ubuntu-postman" class="section level3">
 <h3>
-<span class="header-section-number">18.7.5</span> Postman<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-postman"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8.5</span> Postman<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-postman"><i class="fas fa-link"></i></a>
 </h3>
 <p>The Postman native app for Ubuntu is <a href="https://learning.postman.com/docs/getting-started/installation-and-updates/#installing-postman-on-linux">installed</a> through <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage">snap</a>, which is <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage#2">updated daily automatically</a>.</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb75-1"><a href="workstation.html#cb75-1"></a><span class="ex">snap</span> install postman</span></code></pre></div>
@@ -508,7 +521,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 </div>
 <div id="workstation-retired" class="section level2">
 <h2>
-<span class="header-section-number">18.8</span> Retired Tools<a class="anchor" aria-label="anchor" href="#workstation-retired"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.9</span> Retired Tools<a class="anchor" aria-label="anchor" href="#workstation-retired"><i class="fas fa-link"></i></a>
 </h2>
 <p>We previously installed the software below. Most have been replaced by software above that’s either newer or more natural to use.</p>
 <ul>
@@ -614,15 +627,18 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 </li>
 <li><a class="nav-link" href="#workstation-troubleshooting"><span class="header-section-number">18.6</span> Installation Troubleshooting</a></li>
 <li>
-<a class="nav-link" href="#workstation-ubuntu"><span class="header-section-number">18.7</span> Ubuntu Installation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#workstation-ubuntu-r"><span class="header-section-number">18.7.1</span> R</a></li>
-<li><a class="nav-link" href="#workstation-ubuntu-rstudio"><span class="header-section-number">18.7.2</span> RStudio</a></li>
-<li><a class="nav-link" href="#workstation-ubuntu-packages"><span class="header-section-number">18.7.3</span> apt-get Packages</a></li>
-<li><a class="nav-link" href="#workstation-ubuntu-pandoc"><span class="header-section-number">18.7.4</span> Pandoc</a></li>
-<li><a class="nav-link" href="#workstation-ubuntu-postman"><span class="header-section-number">18.7.5</span> Postman</a></li>
+<a class="nav-link" href="#workstation-windows"><span class="header-section-number">18.7</span> Windows Installation</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#workstation-windows-explorer"><span class="header-section-number">18.7.1</span> File Explorer</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#workstation-ubuntu"><span class="header-section-number">18.8</span> Ubuntu Installation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#workstation-ubuntu-r"><span class="header-section-number">18.8.1</span> R</a></li>
+<li><a class="nav-link" href="#workstation-ubuntu-rstudio"><span class="header-section-number">18.8.2</span> RStudio</a></li>
+<li><a class="nav-link" href="#workstation-ubuntu-packages"><span class="header-section-number">18.8.3</span> apt-get Packages</a></li>
+<li><a class="nav-link" href="#workstation-ubuntu-pandoc"><span class="header-section-number">18.8.4</span> Pandoc</a></li>
+<li><a class="nav-link" href="#workstation-ubuntu-postman"><span class="header-section-number">18.8.5</span> Postman</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#workstation-retired"><span class="header-section-number">18.8</span> Retired Tools</a></li>
+<li><a class="nav-link" href="#workstation-retired"><span class="header-section-number">18.9</span> Retired Tools</a></li>
 </ul>
 
       <div class="book-extra">
@@ -640,7 +656,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-24.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-01-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
