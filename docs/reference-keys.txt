@@ -247,6 +247,7 @@ git-contribution
 git-contribution-regular
 git-contribution-regular-pull
 git-contribution-regular-push
+main-vs-master-branch
 snippets
 snippets-reading
 snippets-reading-excel
