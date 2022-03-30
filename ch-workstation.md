@@ -89,7 +89,7 @@ The installation order does not matter.
   1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
   1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
   1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
-  1. Data | Sql | **Copy Include Headers: check** {`"sql.copyIncludeHeaders": true`}
+  1. Data | Sql | **Copy Include Headers: check** {`"sql.copyIncludeHeaders": false`}
 
 ```json
 {
