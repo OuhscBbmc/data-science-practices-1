@@ -89,7 +89,7 @@ The installation order does not matter.
   1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
   1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
   1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
-  1. Data | Sql | ** Include Headers: check** {`"sql.copyIncludeHeaders": false`}
+  1. Data | Sql | **Include Headers: check** {`"sql.copyIncludeHeaders": false`}
 
 ```json
 {
@@ -107,7 +107,9 @@ The installation order does not matter.
 
 ### Visual Studio Code {#workstation-vscode}
 
-[Visual Studio Code](https://code.visualstudio.com/) is an extensible text editor that runs on Windows and Linux, similar to [Atom](https://atom.io/) (described above).  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown.  Currently, it supports searching CSVs better than Atom.  Productivity is enhanced with the following extensions:  {added Dec 2018}
+[Visual Studio Code](https://code.visualstudio.com/) is an extensible text editor that runs on Windows and Linux.  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like [Atom](#workstation-retired), it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. VS Code has good documentation for [Basic Editing](https://code.visualstudio.com/docs/editor/codebasics).
+
+Productivity in VS Code is enhanced with the following extensions:  {added Dec 2018}
 
 * [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) isn't a good name, but I've liked the capability.  It displays CSVs and other files in a grid. {added Dec 2018}
 
