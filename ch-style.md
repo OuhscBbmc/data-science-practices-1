@@ -319,10 +319,12 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 
 1. Favor CTEs over subqueries because they're easier to follow and can be reused in the same file.   If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.
 
-  Resources
-  
-  * Brent Ozar's [SQL Server Common Table Expressions](https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/)
-  * Brent Ozar's [What’s Better, CTEs or Temp Tables?](https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/)
+    *Resources*:
+
+    * Brent Ozar's [SQL Server Common Table Expressions](https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/) defines the basics:
+        > A CTE effectively creates a temporary view that a developer can reference multiple times in the underlying query.
+    * Brent Ozar's [What’s Better, CTEs or Temp Tables?](https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/)  The article's bottom line is:
+        > I’d suggest starting with CTEs because they’re easy to write and to read. If you hit a performance wall, try ripping out a CTE and writing it to a temp table, then joining to the temp table.
 
 1. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `employee_id`, not `id`.
 
