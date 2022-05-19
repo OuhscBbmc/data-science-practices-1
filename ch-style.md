@@ -163,9 +163,9 @@ This builds upon the [tidyverse style guide](https://style.tidyverse.org/syntax.
 
 Use lowercase letters, using underscores to separate words.  Avoid uppercase letters and periods.
 
-#### Lexigraphical Sorting {#style-naming-variables-lexigraphical}
+### Semantic Order {#style-naming-semantic}
 
-For variables including multiple nouns or adjectives, use [lexigraphical sorting](https://en.wikipedia.org/wiki/Lexicographical_order).  The "bigger" term goes first.
+For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms.  The "bigger" term goes first; the "smaller" terms are nested in the bigger terms.
 
 ```r
 # Good:
@@ -185,7 +185,7 @@ first_name_kid
 dob_kid
 ```
 
-Large datasets with multiple questionaries (each with multiple subsections) are much more managable when the variables follow a lexigraphical order.
+Large datasets with multiple questionnaries (each with multiple subsections) are much more managable when the variables follow a semantic order.
 
 ```sql
 SELECT
@@ -209,6 +209,8 @@ SELECT
 FROM miechv.gpav_3
 ```
 
+I don't know where we picked up the term "semantic order".  It may have come from [Semantic Versioning](https://www.geeksforgeeks.org/introduction-semantic-versioning/) of software releases.
+
 ### Files and Folders {#style-naming-files}
 
 Naming filers and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  
@@ -218,8 +220,6 @@ Infrequently, we'll use a dash if it helps identify a noun (that already contain
 Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive.  To promote portability, keep everything lowercase.
 
 Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash.  Do not include spaces, uppercase letters, and especially punctuation, such as `:` or `(`.
-
-
 
 ### Datasets {#style-naming-datasets}
 
@@ -296,10 +296,6 @@ If it's potentially unclear to a new reader, use a comment immediately before th
 #    source: the `client` database table, where `enroll_count` is 1+.
 ds_client_enroll <- ...
 ```
-
-### Semantic sorting {#style-naming-semantic}
-
-Put the "biggest" term on the left side of the variable.
 
 Whitespace {#style-whitespace}
 ------------------------------------
