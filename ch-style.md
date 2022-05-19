@@ -213,7 +213,7 @@ I don't know where we picked up the term "semantic order".  It may have come fro
 
 ### Files and Folders {#style-naming-files}
 
-Naming filers and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  
+Naming filers and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  In other words, ["kebab case"](https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841).
 
 Infrequently, we'll use a dash if it helps identify a noun (that already contains an underscore).  For instance, if there's a table called `patient_demographics`, we might call the files `patient_demographics-truncate.sql` and `patient_demographics-insert.sql`.
 
@@ -330,9 +330,10 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 
 <!-- 1. When a boolean variable might be ambiguous, -->
 
-## Code Repositories {#style-repo}
+Code Repositories {#style-repo}
+------------------------------------
 
-Our analytical team dedicates a private repo to each research project.  It is a repository in GitHub accessible only to the team members given explicit privileges.
+Our analytical team dedicates a private repo to each research project.  It is a repository in GitHub accessible only to the team members given explicit privileges.  Repos are also discussed in the [Git & GitHub](#git) appendix. 
 
 ### Repo Naming {#style-repo-naming}
 
