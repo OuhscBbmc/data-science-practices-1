@@ -380,6 +380,11 @@ The boundaries of a research project may be fuzzy, so you may not have a clear a
 
 * The development windows don't overlap.  If the initial project wrapped up last year and a follow-up study is starting, consider a separate repo that starts with a subset of the code.  Start fresh and copy over only what's necessary
 
+### Repo Pricing {#style-repo-pricing}
+
+We enrolled in some GitHub program in 2012 that allows academic research group to have unlimited private repos in the [GitHub Organization](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations).  Otherwise, it would not be feasible to have 300+ tightly-focused repos.
+
+GitHub seems to introduce new programs or modify existing branding every few years.  The current best documentation is "[Apply for an educator or researcher discount](https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/use-github-in-your-classroom-and-research/apply-for-an-educator-or-researcher-discount)".  Notice this program is more more lightweight than a program like ["GitHub Campus"](https://education.github.com/schools), which involves your whole campus apparently.
 
 ggplot2 {#style-ggplot}
 ------------------------------------
