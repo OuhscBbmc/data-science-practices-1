@@ -153,7 +153,7 @@ style-dates
 naming
 style-naming-variables
 style-naming-variables-characters
-style-naming-variables-lexigraphical
+style-naming-semantic
 style-naming-files
 style-naming-datasets
 style-naming-datasets-prefix
@@ -162,9 +162,12 @@ style-naming-datasets-singular
 style-naming-datasets-ds-only
 style-naming-datasets-adjective
 style-naming-datasets-define
-style-naming-semantic
 style-whitespace
 style-database
+style-repo
+style-repo-naming
+style-repo-granularity
+style-repo-pricing
 style-ggplot
 style-ggplot-order
 style-ggplot-gotchas
@@ -248,6 +251,7 @@ git-contribution-regular
 git-contribution-regular-pull
 git-contribution-regular-push
 main-vs-master-branch
+repo-style
 snippets
 snippets-reading
 snippets-reading-excel

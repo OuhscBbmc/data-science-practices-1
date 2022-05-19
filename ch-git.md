@@ -144,6 +144,11 @@ At least every few days, push your changes to the main branch so teammates can b
 
 If you are using an old repo whose default branch is called "master", it's fairly simple to [rename to "main"](https://github.com/github/renaming). 
 
+Repo Style
+------------------------------------
+
+Please see the [Code Repositories](#style-repo) section in the [Style Guide](#style) chapter.
+
 -------
 
 {Transfer & update the material from https://github.com/OuhscBbmc/BbmcResources/blob/main/instructions/github.md}

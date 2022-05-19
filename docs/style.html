@@ -7,7 +7,7 @@
 <title>Chapter 14 Style Guide | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 14 Style Guide | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most...">
@@ -270,11 +270,12 @@
 </h4>
 <p>Use lowercase letters, using underscores to separate words. Avoid uppercase letters and periods.</p>
 </div>
-<div id="style-naming-variables-lexigraphical" class="section level4">
-<h4>
-<span class="header-section-number">14.5.1.2</span> Lexigraphical Sorting<a class="anchor" aria-label="anchor" href="#style-naming-variables-lexigraphical"><i class="fas fa-link"></i></a>
-</h4>
-<p>For variables including multiple nouns or adjectives, use <a href="https://en.wikipedia.org/wiki/Lexicographical_order">lexigraphical sorting</a>. The “bigger” term goes first.</p>
+</div>
+<div id="style-naming-semantic" class="section level3">
+<h3>
+<span class="header-section-number">14.5.2</span> Semantic Order<a class="anchor" aria-label="anchor" href="#style-naming-semantic"><i class="fas fa-link"></i></a>
+</h3>
+<p>For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms. The “bigger” term goes first; the “smaller” terms are nested in the bigger terms.</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Good:</span>
 <span class="va">parent_name_last</span>
@@ -291,7 +292,7 @@
 <span class="va">last_name_kid</span>
 <span class="va">first_name_kid</span>
 <span class="va">dob_kid</span></code></pre></div>
-<p>Large datasets with multiple questionaries (each with multiple subsections) are much more managable when the variables follow a lexigraphical order.</p>
+<p>Large datasets with multiple questionnaries (each with multiple subsections) are much more managable when the variables follow a semantic order.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb60-1"><a href="style.html#cb60-1"></a><span class="kw">SELECT</span></span>
 <span id="cb60-2"><a href="style.html#cb60-2"></a>  asq3_medical_problems_01</span>
 <span id="cb60-3"><a href="style.html#cb60-3"></a>  ,asq3_medical_problems_02</span>
@@ -311,26 +312,26 @@
 <span id="cb60-17"><a href="style.html#cb60-17"></a>  ,hri_03_addressing_problems_clarity</span>
 <span id="cb60-18"><a href="style.html#cb60-18"></a>  ,hri_04_goals_discussed</span>
 <span id="cb60-19"><a href="style.html#cb60-19"></a><span class="kw">FROM</span> miechv.gpav_3</span></code></pre></div>
-</div>
+<p>I don’t know where we picked up the term “semantic order”. It may have come from <a href="https://www.geeksforgeeks.org/introduction-semantic-versioning/">Semantic Versioning</a> of software releases.</p>
 </div>
 <div id="style-naming-files" class="section level3">
 <h3>
-<span class="header-section-number">14.5.2</span> Files and Folders<a class="anchor" aria-label="anchor" href="#style-naming-files"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.3</span> Files and Folders<a class="anchor" aria-label="anchor" href="#style-naming-files"><i class="fas fa-link"></i></a>
 </h3>
-<p>Naming filers and their folders/directories follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with one small difference: separate words with dashes (<em>i.e.</em>, <code>-</code>), not underscores (<em>i.e.</em>, <code>_</code>).</p>
+<p>Naming filers and their folders/directories follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with one small difference: separate words with dashes (<em>i.e.</em>, <code>-</code>), not underscores (<em>i.e.</em>, <code>_</code>). In other words, <a href="https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841">“kebab case”</a>.</p>
 <p>Infrequently, we’ll use a dash if it helps identify a noun (that already contains an underscore). For instance, if there’s a table called <code>patient_demographics</code>, we might call the files <code>patient_demographics-truncate.sql</code> and <code>patient_demographics-insert.sql</code>.</p>
 <p>Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive. To promote portability, keep everything lowercase.</p>
 <p>Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash. Do not include spaces, uppercase letters, and especially punctuation, such as <code>:</code> or <code>(</code>.</p>
 </div>
 <div id="style-naming-datasets" class="section level3">
 <h3>
-<span class="header-section-number">14.5.3</span> Datasets<a class="anchor" aria-label="anchor" href="#style-naming-datasets"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.4</span> Datasets<a class="anchor" aria-label="anchor" href="#style-naming-datasets"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. Naming datasets follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with a few additional features.</p>
 <p>In the R world, “dataset” is typically a synonym of <code>data.frame</code> –a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that “dataset” means a collections of tables in the the <a href="https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/">.NET</a> world, and a collection of (not-necessarily-rectangular) files in <a href="https://dataverse.harvard.edu">Dataverse</a>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;To complete the survey of “dataset” definitions: TThe Java world is like R, in that “dataset” typically describes rectangular tables (&lt;em&gt;e.g.&lt;/em&gt;, &lt;a href="https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html"&gt;Java&lt;/a&gt;, &lt;a href="https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html"&gt;Spark&lt;/a&gt;, [scala]). In Julia and Python, qqq&lt;/p&gt;'><sup>9</sup></a></p>
 <div id="style-naming-datasets-prefix" class="section level4">
 <h4>
-<span class="header-section-number">14.5.3.1</span> Prefix with <code>ds_</code> and <code>d_</code><a class="anchor" aria-label="anchor" href="#style-naming-datasets-prefix"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.4.1</span> Prefix with <code>ds_</code> and <code>d_</code><a class="anchor" aria-label="anchor" href="#style-naming-datasets-prefix"><i class="fas fa-link"></i></a>
 </h4>
 <p>Datasets are handled so differently than other variables that we find it’s easier to identify its type and scope. The prefix <code>ds_</code> indicates the dataset is available to the entire file, while <code>d_</code> indicates the scope is localized to a function.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
@@ -343,7 +344,7 @@
 </div>
 <div id="style-naming-datasets-grain" class="section level4">
 <h4>
-<span class="header-section-number">14.5.3.2</span> Express the grain<a class="anchor" aria-label="anchor" href="#style-naming-datasets-grain"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.4.2</span> Express the grain<a class="anchor" aria-label="anchor" href="#style-naming-datasets-grain"><i class="fas fa-link"></i></a>
 </h4>
 <p>The <a href="https://gerardnico.com/olap/dimensional_modeling/grain#grain">grain</a> of a dataset describes what each row represents, which is a similar idea to the statistician’s concept of “unit of analysis”. Essentially it the the most granular entity described. Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy</a> dataset with a clear grain.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
@@ -364,7 +365,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 </div>
 <div id="style-naming-datasets-singular" class="section level4">
 <h4>
-<span class="header-section-number">14.5.3.3</span> Singular table names<a class="anchor" aria-label="anchor" href="#style-naming-datasets-singular"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.4.3</span> Singular table names<a class="anchor" aria-label="anchor" href="#style-naming-datasets-singular"><i class="fas fa-link"></i></a>
 </h4>
 <p>If you adopt the style that the table’s name reflects the grain, this is a corollary. If the grain is singular like “one row per client” or “one row per building”, the name should be <code>ds_client</code> and <code>ds_building</code> (not <code>ds_clients</code> and <code>ds_buildings</code>). If these datasets are saved to a database, the tables are called <code>client</code> and <code>building</code>.</p>
 <p>Table names are plural when the grain is plural. If a record has field like <code>client_id</code>, <code>date_birth</code>, <code>date_graduation</code> and <code>date_death</code>, I suggest called the table <code>client_milestones</code> (because a single row contains three milestones).</p>
@@ -373,13 +374,13 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 </div>
 <div id="style-naming-datasets-ds-only" class="section level4">
 <h4>
-<span class="header-section-number">14.5.3.4</span> Use <code>ds</code> when definition is clear<a class="anchor" aria-label="anchor" href="#style-naming-datasets-ds-only"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.4.4</span> Use <code>ds</code> when definition is clear<a class="anchor" aria-label="anchor" href="#style-naming-datasets-ds-only"><i class="fas fa-link"></i></a>
 </h4>
 <p>Many times an <a href="patterns.html#pattern-ellis">ellis file</a> handles with only one incoming csv and outgoing dataset, and the grain is obvious –typically because the ellis filename clearly states the grain.</p>
 </div>
 <div id="style-naming-datasets-adjective" class="section level4">
 <h4>
-<span class="header-section-number">14.5.3.5</span> Use an adjective after the grain, if necessary<a class="anchor" aria-label="anchor" href="#style-naming-datasets-adjective"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.4.5</span> Use an adjective after the grain, if necessary<a class="anchor" aria-label="anchor" href="#style-naming-datasets-adjective"><i class="fas fa-link"></i></a>
 </h4>
 <p>If the same R file is manipulating two datasets with the same grain, qualify their differences after the grain, such as <code>ds_client_all</code> and <code>ds_client_michigan</code>. Adjectives commonly indicate that one dataset is a subset of another.</p>
 <p>An occasional limitation with our naming scheme is that the difficult to distinguish the grain from the adjective. For instance, is the grain of <code>ds_student_enroll</code> either (a) every instance of a student enrollment (<em>i.e.</em>, <code>student</code> and <code>enroll</code> both describe the grain) or (b) the subset of students who enrolled (<em>i.e.</em>, <code>student</code> is the grain and <code>enroll</code> is the adjective)? It’s not clear without examine the code, comments, or documentation.</p>
@@ -387,7 +388,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 </div>
 <div id="style-naming-datasets-define" class="section level4">
 <h4>
-<span class="header-section-number">14.5.3.6</span> Define the dataset when in doubt<a class="anchor" aria-label="anchor" href="#style-naming-datasets-define"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.4.6</span> Define the dataset when in doubt<a class="anchor" aria-label="anchor" href="#style-naming-datasets-define"><i class="fas fa-link"></i></a>
 </h4>
 <p>If it’s potentially unclear to a new reader, use a comment immediately before the dataset’s initial use.</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
@@ -397,12 +398,6 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <span class="co">#    source: the `client` database table, where `enroll_count` is 1+.</span>
 <span class="va">ds_client_enroll</span> <span class="op">&lt;-</span> <span class="va">...</span></code></pre></div>
 </div>
-</div>
-<div id="style-naming-semantic" class="section level3">
-<h3>
-<span class="header-section-number">14.5.4</span> Semantic sorting<a class="anchor" aria-label="anchor" href="#style-naming-semantic"><i class="fas fa-link"></i></a>
-</h3>
-<p>Put the “biggest” term on the left side of the variable.</p>
 </div>
 </div>
 <div id="style-whitespace" class="section level2">
@@ -430,29 +425,94 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 </h2>
 <p>GitLab’s data team has a good <a href="https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/">style guide</a> for databases and sql that’s fairly consistent with our style. Some important similarities and differences are</p>
 <ol style="list-style-type: decimal">
-<li>Favor CTEs over subqueries because they’re easier to follow and can be reused in the same file. If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.</li>
-</ol>
-<p>Resources</p>
+<li>
+<p>Favor CTEs over subqueries because they’re easier to follow and can be reused in the same file. If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.</p>
+<p><em>Resources</em>:</p>
 <ul>
-<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/">SQL Server Common Table Expressions</a>
-</li>
-<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/">What’s Better, CTEs or Temp Tables?</a>
-</li>
+<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/">SQL Server Common Table Expressions</a> defines the basics:
+&gt; A CTE effectively creates a temporary view that a developer can reference multiple times in the underlying query.</li>
+<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/">What’s Better, CTEs or Temp Tables?</a> The article’s bottom line is:
+&gt; I’d suggest starting with CTEs because they’re easy to write and to read. If you hit a performance wall, try ripping out a CTE and writing it to a temp table, then joining to the temp table.</li>
 </ul>
-<ol style="list-style-type: decimal">
-<li>The name of the primary key should typically contain the table. In the <code>employee</code> table, the key should be <code>employee_id</code>, not <code>id</code>.</li>
+</li>
+<li><p>The name of the primary key should typically contain the table. In the <code>employee</code> table, the key should be <code>employee_id</code>, not <code>id</code>.</p></li>
 </ol>
 <!-- 1. When a boolean variable might be ambiguous, -->
 </div>
+<div id="style-repo" class="section level2">
+<h2>
+<span class="header-section-number">14.8</span> Code Repositories<a class="anchor" aria-label="anchor" href="#style-repo"><i class="fas fa-link"></i></a>
+</h2>
+<p>Our analytical team dedicates a private repo to each research project. It is a repository in GitHub accessible only to the team members given explicit privileges. Repos are also discussed in the <a href="git.html#git">Git &amp; GitHub</a> appendix.</p>
+<div id="style-repo-naming" class="section level3">
+<h3>
+<span class="header-section-number">14.8.1</span> Repo Naming<a class="anchor" aria-label="anchor" href="#style-repo-naming"><i class="fas fa-link"></i></a>
+</h3>
+<p>As of 2022, our GitHub organization has 300 repos. Many of them are focused warehouse projects that are completed within a month. The easiest and most stable naming system we’ve found is built from three parts:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>PI’s last name</strong>. Even if we are in contact with only the project manager, we prefer to use the primary investigator’s name (typically the name on the IRB application) because it rarely changes and it is easier to trace to the right team. Do not refer to a medical resident or fellow that will rotate out in a few months.</li>
+<li>
+<strong>Two or three word term</strong>. Describe the global area in a few words.</li>
+<li>
+<strong>Index</strong>. Be optimistic and prepare for follow up investigations. The initial repo is “…-1”, the subsequent repos are “…-2, …-3, …-4”.</li>
+</ol>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Good Examples</span>
+<span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">1</span>
+<span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">2</span>
+<span class="va">akande</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">1</span>
+<span class="va">bard</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">1</span>
+<span class="va">bard</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">2</span>
+<span class="va">bard</span><span class="op">-</span><span class="va">eeg</span><span class="op">-</span><span class="va">education</span><span class="op">-</span><span class="fl">1</span>
+
+<span class="co"># Bad Examples</span>
+<span class="va">akande</span><span class="op">-</span><span class="fl">1</span>
+<span class="va">akande</span><span class="op">-</span><span class="fl">2</span>
+<span class="va">covid</span><span class="op">-</span><span class="fl">1</span>
+<span class="va">covid</span><span class="op">-</span><span class="fl">2</span>
+<span class="va">covid</span><span class="op">-</span><span class="fl">3</span>
+<span class="va">bard</span><span class="op">-</span><span class="va">research</span><span class="op">-</span><span class="fl">1</span></code></pre></div>
+<p>We informally call this the “project tag” and try to use it consistently in different arenas, such as:</p>
+<ul>
+<li>The GitHub repo’s name.</li>
+<li>The parent directory for the project on the file server (<em>e.g.</em>, <code>M:/pediatrics/bbmc/akande-covid-1</code>).</li>
+<li>The database schema containing the project’s tables (<em>e.g.</em>, <code>akande_covid_1.patient</code>, <code>akande_covid_1.visit</code>, <code>akande_covid_2.visit</code>). Change from <a href="https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841">kebab case</a> to <a href="http://theblogreaders.com/list-case-types-example-lightning-web-component-pascal-camel-kebab-snake-upper-case/">snake case</a> (<em>e.g.</em>, <code>akande-covid-1</code> to <code>akande_covid_1</code>) so the sql code doesn’t have to escape the schema name with brackets.</li>
+<li>In the body of emails to help retrospective searches.</li>
+</ul>
+</div>
+<div id="style-repo-granularity" class="section level3">
+<h3>
+<span class="header-section-number">14.8.2</span> Repo Granularity<a class="anchor" aria-label="anchor" href="#style-repo-granularity"><i class="fas fa-link"></i></a>
+</h3>
+<p>The boundaries of a research project may be fuzzy, so you may not have a clear answer to the question, “should this be considered one large research project with one repo, or two smaller research projects with two total repos?”. The deciding factor for us is usually determined by the amount of living code that would need to exist in both repos. If the two projects are being developed in parallel and you would have to make similar changes in both repos, strongly consider using only one repo.</p>
+<p><em>Other issues that suggest a unified repo</em>:</p>
+<ul>
+<li>The two repos have almost identical users.</li>
+<li>The two repos are covered by the same IRB.</li>
+</ul>
+<p><em>Issues that suggest separate repos</em>:</p>
+<ul>
+<li>The development windows don’t overlap. If the initial project wrapped up last year and a follow-up study is starting, consider a separate repo that starts with a subset of the code. Start fresh and copy over only what’s necessary</li>
+</ul>
+</div>
+<div id="style-repo-pricing" class="section level3">
+<h3>
+<span class="header-section-number">14.8.3</span> Repo Pricing<a class="anchor" aria-label="anchor" href="#style-repo-pricing"><i class="fas fa-link"></i></a>
+</h3>
+<p>We enrolled in some GitHub program in 2012 that allows academic research group to have unlimited private repos in the <a href="https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations">GitHub Organization</a>. Otherwise, it would not be feasible to have 300+ tightly-focused repos.</p>
+<p>GitHub seems to introduce new programs or modify existing branding every few years. The current best documentation is “<a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/use-github-in-your-classroom-and-research/apply-for-an-educator-or-researcher-discount">Apply for an educator or researcher discount</a>”. Notice this program is more more lightweight than a program like <a href="https://education.github.com/schools">“GitHub Campus”</a>, which involves your whole campus apparently.</p>
+</div>
+</div>
 <div id="style-ggplot" class="section level2">
 <h2>
-<span class="header-section-number">14.8</span> ggplot2<a class="anchor" aria-label="anchor" href="#style-ggplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9</span> ggplot2<a class="anchor" aria-label="anchor" href="#style-ggplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>The expressiveness of <a href="https://ggplot2.tidyverse.org/">ggplot2</a> allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a <a href="https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md">textbook for introductory statistics</a> (<span class="citation">Lise DeShea (<a href="references.html#ref-deshea" role="doc-biblioref">2015</a>)</span>); the 200+ graphs and their code is publicly available.</p>
 <p>There are a few additional ggplot2 tips in the <a href="https://style.tidyverse.org/ggplot2.html">tidyverse style guide</a>.</p>
 <div id="style-ggplot-order" class="section level3">
 <h3>
-<span class="header-section-number">14.8.1</span> Order of commands<a class="anchor" aria-label="anchor" href="#style-ggplot-order"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.1</span> Order of commands<a class="anchor" aria-label="anchor" href="#style-ggplot-order"><i class="fas fa-link"></i></a>
 </h3>
 <p>ggplot2 is essentially a collection of functions combined with the <code>+</code> operator. Publication graphs common require at least 20 functions, which means the functions can sometimes be redundant or step on each other toes. The family of functions should follow a consistent order ideally starting with the more important structural functions and ending with the cosmetic functions. Our preference is:</p>
 <ol style="list-style-type: decimal">
@@ -474,18 +534,18 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 </div>
 <div id="style-ggplot-gotchas" class="section level3">
 <h3>
-<span class="header-section-number">14.8.2</span> Gotchas<a class="anchor" aria-label="anchor" href="#style-ggplot-gotchas"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.2</span> Gotchas<a class="anchor" aria-label="anchor" href="#style-ggplot-gotchas"><i class="fas fa-link"></i></a>
 </h3>
 <p>Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).</p>
 <div id="style-ggplot-zoom" class="section level4">
 <h4>
-<span class="header-section-number">14.8.2.1</span> Zooming<a class="anchor" aria-label="anchor" href="#style-ggplot-zoom"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.2.1</span> Zooming<a class="anchor" aria-label="anchor" href="#style-ggplot-zoom"><i class="fas fa-link"></i></a>
 </h4>
 <p>Call <code>coord_*()</code> to restrict the plotted <em>x</em>/<em>y</em> values, not <code>scale_*()</code> or <code>lims()</code>/<code><a href="https://rdrr.io/r/graphics/plot.window.html">xlim()</a></code>/<code><a href="https://rdrr.io/r/graphics/plot.window.html">ylim()</a></code>. <code>coord_*()</code> zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to <code>geom_smooth()</code> (<em>e.g.</em>, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling <code>coord_*()</code>, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.</p>
 </div>
 <div id="style-ggplot-seed" class="section level4">
 <h4>
-<span class="header-section-number">14.8.2.2</span> Seed<a class="anchor" aria-label="anchor" href="#style-ggplot-seed"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9.2.2</span> Seed<a class="anchor" aria-label="anchor" href="#style-ggplot-seed"><i class="fas fa-link"></i></a>
 </h4>
 <p>When jittering, set the seed in the ‘declare-globals’ chunk so that rerunning the report won’t create a (slightly) different png. The insignificantly different pngs will consume extra space in the Git repository. Also, the GitHub diff will show the difference between png versions, which requires extra cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.</p>
 
@@ -523,17 +583,24 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <li>
 <a class="nav-link" href="#naming"><span class="header-section-number">14.5</span> Naming</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#style-naming-variables"><span class="header-section-number">14.5.1</span> Variables</a></li>
-<li><a class="nav-link" href="#style-naming-files"><span class="header-section-number">14.5.2</span> Files and Folders</a></li>
-<li><a class="nav-link" href="#style-naming-datasets"><span class="header-section-number">14.5.3</span> Datasets</a></li>
-<li><a class="nav-link" href="#style-naming-semantic"><span class="header-section-number">14.5.4</span> Semantic sorting</a></li>
+<li><a class="nav-link" href="#style-naming-semantic"><span class="header-section-number">14.5.2</span> Semantic Order</a></li>
+<li><a class="nav-link" href="#style-naming-files"><span class="header-section-number">14.5.3</span> Files and Folders</a></li>
+<li><a class="nav-link" href="#style-naming-datasets"><span class="header-section-number">14.5.4</span> Datasets</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#style-whitespace"><span class="header-section-number">14.6</span> Whitespace</a></li>
 <li><a class="nav-link" href="#style-database"><span class="header-section-number">14.7</span> Database</a></li>
 <li>
-<a class="nav-link" href="#style-ggplot"><span class="header-section-number">14.8</span> ggplot2</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#style-ggplot-order"><span class="header-section-number">14.8.1</span> Order of commands</a></li>
-<li><a class="nav-link" href="#style-ggplot-gotchas"><span class="header-section-number">14.8.2</span> Gotchas</a></li>
+<a class="nav-link" href="#style-repo"><span class="header-section-number">14.8</span> Code Repositories</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#style-repo-naming"><span class="header-section-number">14.8.1</span> Repo Naming</a></li>
+<li><a class="nav-link" href="#style-repo-granularity"><span class="header-section-number">14.8.2</span> Repo Granularity</a></li>
+<li><a class="nav-link" href="#style-repo-pricing"><span class="header-section-number">14.8.3</span> Repo Pricing</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#style-ggplot"><span class="header-section-number">14.9</span> ggplot2</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#style-ggplot-order"><span class="header-section-number">14.9.1</span> Order of commands</a></li>
+<li><a class="nav-link" href="#style-ggplot-gotchas"><span class="header-section-number">14.9.2</span> Gotchas</a></li>
 </ul>
 </li>
 </ul>
@@ -553,7 +620,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-04-13.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-05-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
