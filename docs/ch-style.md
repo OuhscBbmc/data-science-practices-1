@@ -46,14 +46,14 @@ However, some terms are too long to reasonably use without shortening.  We make 
 
 When your team choose terms (*e.g.*, 'apt' vs 'appt'), try to use a standard vocabulary, such as [MedTerms Medical Dictionary](https://www.medicinenet.com/medterms-medical-dictionary/article.htm).
 
-Datasets
+Datasets {#style-datasets}
 ------------------------------------
 
-### Filtering Rows {#style-filter}
+### Filtering Rows {#style-datasets-filter}
 
 Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices have hopefully reduced our mistakes and improved maintainability.
 
-#### Dropping rows with missing values {#style-filter-drop_na}
+#### Dropping rows with missing values {#style-datasets-filter-drop_na}
 
 [`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.
 
@@ -74,11 +74,11 @@ ds |>
 ds[!is.na(ds$dob), ]
 ```
 
-#### Mimic number line {#style-filter-number-line}
+#### Mimic number line {#style-datasets-filter-number-line}
 
 When ordering quantities, go smallest-to-largest as you type left-to-right.
 
-#### Searchable verbs {#style-filter-searchable}
+#### Searchable verbs {#style-datasets-filter-searchable}
 
 You've probably asked in frustration, "Where did all the rows go?  I had 1,000 in the middle of the file, but now have only 782."  Try to keep a consistent tools for filtering, so you can 'ctrl+f' only a handful of terms, such as
 `filter`,
@@ -87,7 +87,7 @@ You've probably asked in frustration, "Where did all the rows go?  I had 1,000 i
 
 It's more difficult to highlight the When using the base R's filtering style, (*e.g.*, `ds <- ds[4 <= ds$count, ]`).
 
-### Don't attach {#style-attach}
+### Don't attach {#style-datasets-attach}
 
 As the [Google Stylesheet](https://google.github.io/styleguide/Rguide.html#dont-use-attach) says, "The possibilities for creating errors when using [`attach()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html) are numerous."
 
@@ -152,7 +152,7 @@ Dates {#style-dates}
 
 * Don't use the minus operator (*i.e.*, `-`).  See [Defensive Date Arithmetic](#coding-defensive-date-arithmetic).
 
-Naming
+Naming {#style-naming}
 ------------------------------------
 
 ### Variables {#style-naming-variables}
@@ -309,8 +309,13 @@ Some of these guidelines are handled automatically by modern IDEs, if you config
     1. R: 2 spaces
     1. SQL: 2 spaces
     1. Python: 4 spaces
-1. Each file should end [with a blank line](https://unix.stackexchange.com/a/18746/104659).  (RStudio calls this "Ensure that source files end with newline.")
-1. Remove spaces and tabs at the end of lines.  (RStudio calls this "Strip trailing horizontal whitespace when saving".)
+1. Each file should end [with a blank line](https://unix.stackexchange.com/a/18746/104659).  (The RStudio checkbox is "Ensure that source files end with newline.")
+1. Remove spaces and tabs at the end of lines.
+   * VS Code: see the [VS Code](#workstation-vscode) section of the Workstation chapter.
+   * Azure Data Studio: See the [ADS](#workstation-ads) section of the Workstation chapter.
+   * RStudio: Gobal Options | Code | Saving | Strip trailing horizontal whitespace when saving.
+   * SSMS:
+
 
 Database {#style-database}
 ------------------------------------
@@ -329,7 +334,7 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 
         > I’d suggest starting with CTEs because they’re easy to write and to read. If you hit a performance wall, try ripping out a CTE and writing it to a temp table, then joining to the temp table.
 
-1. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `employee_id`, not `id`.
+2. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `employee_id`, not `id`.
 
 <!-- 1. When a boolean variable might be ambiguous, -->
 
@@ -420,4 +425,4 @@ Call `coord_*()` to restrict the plotted *x*/*y* values, not `scale_*()` or `lim
 
 #### Seed {#style-ggplot-seed}
 
-When jittering, set the seed in the 'declare-globals' chunk so that rerunning the report won't create a (slightly) different png.  The insignificantly different pngs will consume extra space in the Git repository.  Also, the GitHub diff will show the difference between png versions, which requires extra cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.
+When jittering, set the seed in the 'declare-globals' chunk so that rerunning the report won't create a (slightly) different png.  The insignificantly different pngs will consume extra space in the Git repository.  Also, the GitHub diff will show the difference between png versions, which requires extra subjectivity and cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.
