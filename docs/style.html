@@ -429,10 +429,18 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <p>Favor CTEs over subqueries because they’re easier to follow and can be reused in the same file. If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.</p>
 <p><em>Resources</em>:</p>
 <ul>
-<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/">SQL Server Common Table Expressions</a> defines the basics:
-&gt; A CTE effectively creates a temporary view that a developer can reference multiple times in the underlying query.</li>
-<li>Brent Ozar’s <a href="https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/">What’s Better, CTEs or Temp Tables?</a> The article’s bottom line is:
-&gt; I’d suggest starting with CTEs because they’re easy to write and to read. If you hit a performance wall, try ripping out a CTE and writing it to a temp table, then joining to the temp table.</li>
+<li>
+<p>Brent Ozar’s <a href="https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/">SQL Server Common Table Expressions</a> defines the basics:</p>
+<blockquote>
+<p>A CTE effectively creates a temporary view that a developer can reference multiple times in the underlying query.</p>
+</blockquote>
+</li>
+<li>
+<p>Brent Ozar’s <a href="https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/">What’s Better, CTEs or Temp Tables?</a> The article’s bottom line is:</p>
+<blockquote>
+<p>I’d suggest starting with CTEs because they’re easy to write and to read. If you hit a performance wall, try ripping out a CTE and writing it to a temp table, then joining to the temp table.</p>
+</blockquote>
+</li>
 </ul>
 </li>
 <li><p>The name of the primary key should typically contain the table. In the <code>employee</code> table, the key should be <code>employee_id</code>, not <code>id</code>.</p></li>
@@ -620,7 +628,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-05-19.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-05-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
