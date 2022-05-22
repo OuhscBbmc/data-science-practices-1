@@ -359,6 +359,9 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The 'rgl' package; https://stackoverflow.com/a/39952771/1082435
   sudo apt-get --yes install libcgal-dev libglu1-mesa-dev
+  
+  The 'gsl' package; https://cran.rstudio.com/web/packages/gsl/INSTALL
+  sudo apt-get --yes install libgsl0-dev
 
   # The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source
   sudo apt-get --yes install 'libmagick++-dev'
@@ -371,6 +374,9 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The 'sys' package
   sudo apt-get --yes install libapparmor-dev
+  
+  # The 'archvie' package; https://CRAN.R-project.org/package=archive 
+  sudo apt-get --yes install libarchive-dev
 
   # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208
   sudo apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev

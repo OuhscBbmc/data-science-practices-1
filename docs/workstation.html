@@ -465,48 +465,54 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <span id="cb74-30"><a href="workstation.html#cb74-30"></a></span>
 <span id="cb74-31"><a href="workstation.html#cb74-31"></a>  <span class="co"># The 'rgl' package; https://stackoverflow.com/a/39952771/1082435</span></span>
 <span id="cb74-32"><a href="workstation.html#cb74-32"></a>  <span class="fu">sudo</span> apt-get --yes install libcgal-dev libglu1-mesa-dev</span>
-<span id="cb74-33"><a href="workstation.html#cb74-33"></a></span>
-<span id="cb74-34"><a href="workstation.html#cb74-34"></a>  <span class="co"># The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
-<span id="cb74-35"><a href="workstation.html#cb74-35"></a>  <span class="fu">sudo</span> apt-get --yes install <span class="st">'libmagick++-dev'</span></span>
+<span id="cb74-33"><a href="workstation.html#cb74-33"></a>  </span>
+<span id="cb74-34"><a href="workstation.html#cb74-34"></a>  <span class="ex">The</span> <span class="st">'gsl'</span> package<span class="kw">;</span> <span class="ex">https</span>://cran.rstudio.com/web/packages/gsl/INSTALL</span>
+<span id="cb74-35"><a href="workstation.html#cb74-35"></a>  <span class="fu">sudo</span> apt-get --yes install libgsl0-dev</span>
 <span id="cb74-36"><a href="workstation.html#cb74-36"></a></span>
-<span id="cb74-37"><a href="workstation.html#cb74-37"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
-<span id="cb74-38"><a href="workstation.html#cb74-38"></a>  <span class="fu">sudo</span> apt-get --yes install qpdf</span>
+<span id="cb74-37"><a href="workstation.html#cb74-37"></a>  <span class="co"># The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
+<span id="cb74-38"><a href="workstation.html#cb74-38"></a>  <span class="fu">sudo</span> apt-get --yes install <span class="st">'libmagick++-dev'</span></span>
 <span id="cb74-39"><a href="workstation.html#cb74-39"></a></span>
-<span id="cb74-40"><a href="workstation.html#cb74-40"></a>  <span class="co"># The 'pdftools' and 'Rpoppler' packages, which involve PDFs</span></span>
-<span id="cb74-41"><a href="workstation.html#cb74-41"></a>  <span class="fu">sudo</span> apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev</span>
+<span id="cb74-40"><a href="workstation.html#cb74-40"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
+<span id="cb74-41"><a href="workstation.html#cb74-41"></a>  <span class="fu">sudo</span> apt-get --yes install qpdf</span>
 <span id="cb74-42"><a href="workstation.html#cb74-42"></a></span>
-<span id="cb74-43"><a href="workstation.html#cb74-43"></a>  <span class="co"># The 'sys' package</span></span>
-<span id="cb74-44"><a href="workstation.html#cb74-44"></a>  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</span>
+<span id="cb74-43"><a href="workstation.html#cb74-43"></a>  <span class="co"># The 'pdftools' and 'Rpoppler' packages, which involve PDFs</span></span>
+<span id="cb74-44"><a href="workstation.html#cb74-44"></a>  <span class="fu">sudo</span> apt-get --yes install libpoppler-cpp-dev libpoppler-glib-dev</span>
 <span id="cb74-45"><a href="workstation.html#cb74-45"></a></span>
-<span id="cb74-46"><a href="workstation.html#cb74-46"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
-<span id="cb74-47"><a href="workstation.html#cb74-47"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
-<span id="cb74-48"><a href="workstation.html#cb74-48"></a></span>
-<span id="cb74-49"><a href="workstation.html#cb74-49"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
-<span id="cb74-50"><a href="workstation.html#cb74-50"></a>  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</span>
+<span id="cb74-46"><a href="workstation.html#cb74-46"></a>  <span class="co"># The 'sys' package</span></span>
+<span id="cb74-47"><a href="workstation.html#cb74-47"></a>  <span class="fu">sudo</span> apt-get --yes install libapparmor-dev</span>
+<span id="cb74-48"><a href="workstation.html#cb74-48"></a>  </span>
+<span id="cb74-49"><a href="workstation.html#cb74-49"></a>  <span class="co"># The 'archvie' package; https://CRAN.R-project.org/package=archive </span></span>
+<span id="cb74-50"><a href="workstation.html#cb74-50"></a>  <span class="fu">sudo</span> apt-get --yes install libarchive-dev</span>
 <span id="cb74-51"><a href="workstation.html#cb74-51"></a></span>
-<span id="cb74-52"><a href="workstation.html#cb74-52"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
-<span id="cb74-53"><a href="workstation.html#cb74-53"></a>  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</span>
-<span id="cb74-54"><a href="workstation.html#cb74-54"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
-<span id="cb74-55"><a href="workstation.html#cb74-55"></a>  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</span>
-<span id="cb74-56"><a href="workstation.html#cb74-56"></a></span>
-<span id="cb74-57"><a href="workstation.html#cb74-57"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
-<span id="cb74-58"><a href="workstation.html#cb74-58"></a>  <span class="fu">sudo</span> apt-get --yes install xclip</span>
-<span id="cb74-59"><a href="workstation.html#cb74-59"></a></span>
-<span id="cb74-60"><a href="workstation.html#cb74-60"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
-<span id="cb74-61"><a href="workstation.html#cb74-61"></a>  <span class="fu">sudo</span> apt-get --yes install cargo</span>
+<span id="cb74-52"><a href="workstation.html#cb74-52"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
+<span id="cb74-53"><a href="workstation.html#cb74-53"></a>  <span class="fu">sudo</span> apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
+<span id="cb74-54"><a href="workstation.html#cb74-54"></a></span>
+<span id="cb74-55"><a href="workstation.html#cb74-55"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
+<span id="cb74-56"><a href="workstation.html#cb74-56"></a>  <span class="fu">sudo</span> apt-get --yes install libcairo2-dev</span>
+<span id="cb74-57"><a href="workstation.html#cb74-57"></a></span>
+<span id="cb74-58"><a href="workstation.html#cb74-58"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
+<span id="cb74-59"><a href="workstation.html#cb74-59"></a>  <span class="fu">sudo</span> apt-get --yes install default-jre default-jdk</span>
+<span id="cb74-60"><a href="workstation.html#cb74-60"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
+<span id="cb74-61"><a href="workstation.html#cb74-61"></a>  <span class="fu">sudo</span> apt-get --yes install r-cran-rjava</span>
 <span id="cb74-62"><a href="workstation.html#cb74-62"></a></span>
-<span id="cb74-63"><a href="workstation.html#cb74-63"></a>  <span class="co"># For databases</span></span>
-<span id="cb74-64"><a href="workstation.html#cb74-64"></a>  <span class="fu">sudo</span> apt-get --yes install sqlite sqliteman</span>
-<span id="cb74-65"><a href="workstation.html#cb74-65"></a>  <span class="fu">sudo</span> apt-get --yes install postgresql postgresql-contrib pgadmin3</span>
-<span id="cb74-66"><a href="workstation.html#cb74-66"></a></span>
-<span id="cb74-67"><a href="workstation.html#cb74-67"></a>  <span class="co"># pandoc</span></span>
-<span id="cb74-68"><a href="workstation.html#cb74-68"></a>  <span class="fu">sudo</span> apt-get --yes install pandoc</span>
-<span id="cb74-69"><a href="workstation.html#cb74-69"></a></span>
-<span id="cb74-70"><a href="workstation.html#cb74-70"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
-<span id="cb74-71"><a href="workstation.html#cb74-71"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
-<span id="cb74-72"><a href="workstation.html#cb74-72"></a><span class="kw">}</span></span>
-<span id="cb74-73"><a href="workstation.html#cb74-73"></a><span class="ex">install-packages</span></span>
-<span id="cb74-74"><a href="workstation.html#cb74-74"></a><span class="kw">)</span></span></code></pre></div>
+<span id="cb74-63"><a href="workstation.html#cb74-63"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
+<span id="cb74-64"><a href="workstation.html#cb74-64"></a>  <span class="fu">sudo</span> apt-get --yes install xclip</span>
+<span id="cb74-65"><a href="workstation.html#cb74-65"></a></span>
+<span id="cb74-66"><a href="workstation.html#cb74-66"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
+<span id="cb74-67"><a href="workstation.html#cb74-67"></a>  <span class="fu">sudo</span> apt-get --yes install cargo</span>
+<span id="cb74-68"><a href="workstation.html#cb74-68"></a></span>
+<span id="cb74-69"><a href="workstation.html#cb74-69"></a>  <span class="co"># For databases</span></span>
+<span id="cb74-70"><a href="workstation.html#cb74-70"></a>  <span class="fu">sudo</span> apt-get --yes install sqlite sqliteman</span>
+<span id="cb74-71"><a href="workstation.html#cb74-71"></a>  <span class="fu">sudo</span> apt-get --yes install postgresql postgresql-contrib pgadmin3</span>
+<span id="cb74-72"><a href="workstation.html#cb74-72"></a></span>
+<span id="cb74-73"><a href="workstation.html#cb74-73"></a>  <span class="co"># pandoc</span></span>
+<span id="cb74-74"><a href="workstation.html#cb74-74"></a>  <span class="fu">sudo</span> apt-get --yes install pandoc</span>
+<span id="cb74-75"><a href="workstation.html#cb74-75"></a></span>
+<span id="cb74-76"><a href="workstation.html#cb74-76"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
+<span id="cb74-77"><a href="workstation.html#cb74-77"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
+<span id="cb74-78"><a href="workstation.html#cb74-78"></a><span class="kw">}</span></span>
+<span id="cb74-79"><a href="workstation.html#cb74-79"></a><span class="ex">install-packages</span></span>
+<span id="cb74-80"><a href="workstation.html#cb74-80"></a><span class="kw">)</span></span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-pandoc" class="section level3">
 <h3>
@@ -661,7 +667,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-05-20.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-05-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
