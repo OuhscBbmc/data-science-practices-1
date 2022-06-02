@@ -19,7 +19,7 @@ If you are going to open up a repo/package to the public, consider creating a [t
 
 > \@nutterb \@haozhu233, \@rparrish, \@sybandrew, and any one else, if you have time, please look at the [new issue template](https://github.com/OuhscBbmc/REDCapR/blob/master/.github/ISSUE_TEMPLATE/unexpected-behavior-issue-template.md) that is customized for REDCapR/redcapAPI.  I'd appreciate any feedback that could improve the experience for someone encountering a problem.
 >
-> I'd like something to (a) make it easier for the user to provide useful information with less effort and (b) make it easier for us to help more accurately with fewer back-and-forths.  And if the template happens to help the user identify and solve the problem without creating the issue  ...then I think everyone is happier too.  
+> I'd like something to (a) make it easier for the user to provide useful information with less effort and (b) make it easier for us to help more accurately with fewer back-and-forths.  And if the template happens to help the user identify and solve the problem without creating the issue  ...then I think everyone is happier too.
 >
 > I think the issue should leverage the [Troubleshooter](https://ouhscbbmc.github.io/REDCapR/articles/TroubleshootingApiCalls.html) that 10+ people have contributed to.  It should help locate the problematic area more quickly.
 >
@@ -32,5 +32,15 @@ Flow Diagrams
 
 Setting up new machine
 ------------------------------------
+
+Thoroughly describe the programs and configuration settings your team should follow.  Feel free to adapt [our list](#workstation) for your needs.
+
+You'll see a handful of benefits:
+
+1. New hires will be more productive sooner, and you will be able to spend more time on conceptual issues instead of walking them through tedious installation issues.
+1. When everyone on the team has a similar environment, it is easier to share code. And the quality of the code hopefully improves because everyone can leverage each others contributions.
+1. Sometimes an IT department is reluctant grant admin rights, especially to new users.  IT is more likely to trust your team when your installation documentation demonstrates you have thought carefully through the issues.  Typically most users just need a few programs like Office and Adobe; IT may not realize how many tools are used by a well-round data scientist.
+
+    If IT is still reluctant to grant admin privileges, make sure they realize that (a) it takes ~45 minutes to install the ~12 programs on a fresh machine, (b) many of the programs are updated every few months, and (c) a data scientist typically installs a 5+ R packages a month as they explore tools and stay current with the field.  Installing and maintaining everyone's workstation would require a significant amount of their time.  You and your team are willing to help alleviate that burden and maintain your own software.
 
 ([example](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md))
