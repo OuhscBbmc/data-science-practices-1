@@ -8,12 +8,15 @@ Authors@R: c(
     )
 Imports:
     bookdown,
+    bslib,
+    downlit,
     kableExtra,
     pagedown,
     pdftools,
     printr,
     rmarkdown,
     tikzDevice,
-    tinytex
+    tinytex,
+    withr
 Encoding: UTF-8
 Language: en-US

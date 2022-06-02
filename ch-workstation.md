@@ -15,6 +15,11 @@ The installation order matters.
 ### RStudio {#workstation-rstudio}
 
 [RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.
+ix problems, but this is not required to start.)
+
+### R Tools {#workstation-rtools}
+
+[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If runing Windows, follow the page's instructions, especially the "Putting Rtools on the PATH" section.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
 
 ### Installing R Packages {#workstation-r-package-installation}
 
@@ -49,7 +54,7 @@ OuhscMunge::update_packages_addin()
 
 ### Updating R Packages {#workstation-r-package-update}
 
-Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(checkBuilt=TRUE)`.
+Several R packages will need to be updated every weeks.  Unless you have been told not to (because it would break something -this is rare), periodically update the packages by executing the following code `update.packages(checkBuilt = TRUE, ask = FALSE)`.
 
 ### GitHub {#workstation-github}
 
@@ -57,11 +62,7 @@ Several R packages will need to be updated every weeks.  Unless you have been to
 
 ### GitHub Desktop {#workstation-github-client}
 
-[GitHub Desktop](http://desktop.github.com/) does the basic tasks a little easier than the git features built into RStudio.  This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to fix problems, but this is not required to start.)
-
-### R Tools {#workstation-rtools}
-
-[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
+[GitHub Desktop](http://desktop.github.com/) does the basic tasks a little easier than the git features built into RStudio.  This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to f
 
 Recommended Installation {#workstation-recommended}
 ------------------------------------
@@ -70,7 +71,7 @@ The installation order does not matter.
 
 ### ODBC Driver {#workstation-odbc}
 
-[ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 17 is the most recent driver version.  See if a new one exists. {updated Apr 2018}
+[ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 18 is the most recent driver version.  See if a new one exists. {updated Feb 2022}
 
 ### Notepad++ {#workstation-notepadpp}
 
@@ -88,7 +89,7 @@ The installation order does not matter.
   1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
   1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
   1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
-  1. Data | Sql | **Copy Include Headers: check** {`"sql.copyIncludeHeaders": true`}
+  1. Data | Sql | **Include Headers: check** {`"sql.copyIncludeHeaders": false`}
 
 ```json
 {
@@ -100,13 +101,15 @@ The installation order does not matter.
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "queryEditor.showConnectionInfoInTitle": false,
-  "queryEditor.results.copyIncludeHeaders": true
+  "queryEditor.results.copyIncludeHeaders": false
 }
 ```
 
 ### Visual Studio Code {#workstation-vscode}
 
-[Visual Studio Code](https://code.visualstudio.com/) is an extensible text editor that runs on Windows and Linux, similar to [Atom](https://atom.io/) (described above).  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like Atom, it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown.  Currently, it supports searching CSVs better than Atom.  Productivity is enhanced with the following extensions:  {added Dec 2018}
+[Visual Studio Code](https://code.visualstudio.com/) is an extensible text editor that runs on Windows and Linux.  It's much [lighter](https://stackoverflow.com/questions/30527522/what-are-the-differences-between-visual-studio-code-and-visual-studio) than the full [Visual Studio](https://visualstudio.microsoft.com/).  Like [Atom](#workstation-retired), it supports browsing through the directory structure, replacing across files, interaction with git, and previewing markdown. VS Code has good documentation for [Basic Editing](https://code.visualstudio.com/docs/editor/codebasics).
+
+Productivity in VS Code is enhanced with the following extensions:  {added Dec 2018}
 
 * [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) isn't a good name, but I've liked the capability.  It displays CSVs and other files in a grid. {added Dec 2018}
 
@@ -277,7 +280,20 @@ Installation Troubleshooting {#workstation-troubleshooting}
 
 * **Git**: On a different computer, Will Beasley couldn't get RStudio to recognize msysGit, so installed the `Full installer for official Git for Windows 1.7.11` from (http://code.google.com/p/msysgit/downloads/list) and switched the Git Path in the RStudio Options. {added Sept 2012}
 
-* **RStudio** If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio-Desktop\monitored\user-settings\user-settings`. {added Sept 2012}
+* **RStudio** 
+    * If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio\monitored\user-settings\user-settings`. See RStudio's support page, [Resetting RStudio Desktop's State](https://support.rstudio.com/hc/en-us/articles/200534577-Resetting-RStudio-s-State). {added Sept 2012}
+    * Hold down the ctrl button when clicking on RStudio in the Windows Start Menu.  Try switching up the 64/32-bit option.  For a VDI, forcing it to a software-rendering option fixed a problem where the RStudio window opened, but nothing was visible inside.  {added Jan 2022}
+    * It might help to look in the logs, which are stored inthe equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\logs`  {added Jan 2022}
+
+Windows Installation {#workstation-windows}
+-----------------------------------
+
+### File Explorer {#workstation-windows-explorer}
+
+When reviewing repo files, it's frequently important to see file extensions and hidden files in [File Explorer](https://en.wikipedia.org/wiki/File_Explorer).
+* View Menu: check the box for "File name extensions"
+* View Menu: check the box for "Hidden items"
+
 
 Ubuntu Installation {#workstation-ubuntu}
 -----------------------------------
@@ -343,6 +359,9 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The 'rgl' package; https://stackoverflow.com/a/39952771/1082435
   sudo apt-get --yes install libcgal-dev libglu1-mesa-dev
+  
+  # The 'gsl' package; https://cran.rstudio.com/web/packages/gsl/INSTALL
+  sudo apt-get --yes install libgsl0-dev
 
   # The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source
   sudo apt-get --yes install 'libmagick++-dev'
@@ -355,6 +374,9 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The 'sys' package
   sudo apt-get --yes install libapparmor-dev
+  
+  # The 'archive' package; https://CRAN.R-project.org/package=archive 
+  sudo apt-get --yes install libarchive-dev
 
   # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208
   sudo apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev

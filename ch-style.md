@@ -46,14 +46,14 @@ However, some terms are too long to reasonably use without shortening.  We make 
 
 When your team choose terms (*e.g.*, 'apt' vs 'appt'), try to use a standard vocabulary, such as [MedTerms Medical Dictionary](https://www.medicinenet.com/medterms-medical-dictionary/article.htm).
 
-Datasets
+Datasets {#style-datasets}
 ------------------------------------
 
-### Filtering Rows {#style-filter}
+### Filtering Rows {#style-datasets-filter}
 
 Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices have hopefully reduced our mistakes and improved maintainability.
 
-#### Dropping rows with missing values {#style-filter-drop_na}
+#### Dropping rows with missing values {#style-datasets-filter-drop_na}
 
 [`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.
 
@@ -74,11 +74,11 @@ ds |>
 ds[!is.na(ds$dob), ]
 ```
 
-#### Mimic number line {#style-filter-number-line}
+#### Mimic number line {#style-datasets-filter-number-line}
 
 When ordering quantities, go smallest-to-largest as you type left-to-right.
 
-#### Searchable verbs {#style-filter-searchable}
+#### Searchable verbs {#style-datasets-filter-searchable}
 
 You've probably asked in frustration, "Where did all the rows go?  I had 1,000 in the middle of the file, but now have only 782."  Try to keep a consistent tools for filtering, so you can 'ctrl+f' only a handful of terms, such as
 `filter`,
@@ -87,7 +87,7 @@ You've probably asked in frustration, "Where did all the rows go?  I had 1,000 i
 
 It's more difficult to highlight the When using the base R's filtering style, (*e.g.*, `ds <- ds[4 <= ds$count, ]`).
 
-### Don't attach {#style-attach}
+### Don't attach {#style-datasets-attach}
 
 As the [Google Stylesheet](https://google.github.io/styleguide/Rguide.html#dont-use-attach) says, "The possibilities for creating errors when using [`attach()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html) are numerous."
 
@@ -152,7 +152,7 @@ Dates {#style-dates}
 
 * Don't use the minus operator (*i.e.*, `-`).  See [Defensive Date Arithmetic](#coding-defensive-date-arithmetic).
 
-Naming
+Naming {#style-naming}
 ------------------------------------
 
 ### Variables {#style-naming-variables}
@@ -163,9 +163,9 @@ This builds upon the [tidyverse style guide](https://style.tidyverse.org/syntax.
 
 Use lowercase letters, using underscores to separate words.  Avoid uppercase letters and periods.
 
-#### Lexigraphical Sorting {#style-naming-variables-lexigraphical}
+### Semantic Order {#style-naming-semantic}
 
-For variables including multiple nouns or adjectives, use [lexigraphical sorting](https://en.wikipedia.org/wiki/Lexicographical_order).  The "bigger" term goes first.
+For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms.  The "bigger" term goes first; the "smaller" terms are nested in the bigger terms.
 
 ```r
 # Good:
@@ -185,7 +185,7 @@ first_name_kid
 dob_kid
 ```
 
-Large datasets with multiple questionaries (each with multiple subsections) are much more managable when the variables follow a lexigraphical order.
+Large datasets with multiple questionnaries (each with multiple subsections) are much more managable when the variables follow a semantic order.
 
 ```sql
 SELECT
@@ -209,17 +209,17 @@ SELECT
 FROM miechv.gpav_3
 ```
 
+I don't know where we picked up the term "semantic order".  It may have come from [Semantic Versioning](https://www.geeksforgeeks.org/introduction-semantic-versioning/) of software releases.
+
 ### Files and Folders {#style-naming-files}
 
-Naming filers and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  
+Naming filers and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  In other words, ["kebab case"](https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841).
 
 Infrequently, we'll use a dash if it helps identify a noun (that already contains an underscore).  For instance, if there's a table called `patient_demographics`, we might call the files `patient_demographics-truncate.sql` and `patient_demographics-insert.sql`.
 
 Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive.  To promote portability, keep everything lowercase.
 
 Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash.  Do not include spaces, uppercase letters, and especially punctuation, such as `:` or `(`.
-
-
 
 ### Datasets {#style-naming-datasets}
 
@@ -297,10 +297,6 @@ If it's potentially unclear to a new reader, use a comment immediately before th
 ds_client_enroll <- ...
 ```
 
-### Semantic sorting {#style-naming-semantic}
-
-Put the "biggest" term on the left side of the variable.
-
 Whitespace {#style-whitespace}
 ------------------------------------
 
@@ -313,8 +309,13 @@ Some of these guidelines are handled automatically by modern IDEs, if you config
     1. R: 2 spaces
     1. SQL: 2 spaces
     1. Python: 4 spaces
-1. Each file should end [with a blank line](https://unix.stackexchange.com/a/18746/104659).  (RStudio calls this "Ensure that source files end with newline.")
-1. Remove spaces and tabs at the end of lines.  (RStudio calls this "Strip trailing horizontal whitespace when saving".)
+1. Each file should end [with a blank line](https://unix.stackexchange.com/a/18746/104659).  (The RStudio checkbox is "Ensure that source files end with newline.")
+1. Remove spaces and tabs at the end of lines.
+   * VS Code: see the [VS Code](#workstation-vscode) section of the Workstation chapter.
+   * Azure Data Studio: See the [ADS](#workstation-ads) section of the Workstation chapter.
+   * RStudio: Gobal Options | Code | Saving | Strip trailing horizontal whitespace when saving.
+   * SSMS:
+
 
 Database {#style-database}
 ------------------------------------
@@ -323,14 +324,76 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 
 1. Favor CTEs over subqueries because they're easier to follow and can be reused in the same file.   If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.
 
-  Resources
-  
-  * Brent Ozar's [SQL Server Common Table Expressions](https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/)
-  * Brent Ozar's [What’s Better, CTEs or Temp Tables?](https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/)
+    *Resources*:
 
-1. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `employee_id`, not `id`.
+    * Brent Ozar's [SQL Server Common Table Expressions](https://www.brentozar.com/archive/2015/03/sql-server-common-table-expressions/) defines the basics:
+
+        > A CTE effectively creates a temporary view that a developer can reference multiple times in the underlying query.
+
+    * Brent Ozar's [What’s Better, CTEs or Temp Tables?](https://www.brentozar.com/archive/2019/06/whats-better-ctes-or-temp-tables/)  The article's bottom line is:
+
+        > I’d suggest starting with CTEs because they’re easy to write and to read. If you hit a performance wall, try ripping out a CTE and writing it to a temp table, then joining to the temp table.
+
+2. The name of the primary key should typically contain the table.  In the `employee` table, the key should be `employee_id`, not `id`.
 
 <!-- 1. When a boolean variable might be ambiguous, -->
+
+Code Repositories {#style-repo}
+------------------------------------
+
+Our analytical team dedicates a private repo to each research project.  It is a repository in GitHub accessible only to the team members given explicit privileges.  Repos are also discussed in the [Git & GitHub](#git) appendix. 
+
+### Repo Naming {#style-repo-naming}
+
+As of 2022, our GitHub organization has 300 repos.  Many of them are focused warehouse projects that are completed within a month.  The easiest and most stable naming system we've found is built from three parts:
+
+1. **PI's last name**.  Even if we are in contact with only the project manager, we prefer to use the primary investigator's name (typically the name on the IRB application) because it rarely changes and it is easier to trace to the right team.  Do not refer to a medical resident or fellow that will rotate out in a few months.
+2. **Two or three word term**.  Describe the global area in a few words.
+3. **Index**.  Be optimistic and prepare for follow up investigations.  The initial repo is "...-1", the subsequent repos are "...-2, ...-3, ...-4".
+
+```r
+# Good Examples
+akande-asthma-hospitalization-1
+akande-asthma-hospitalization-2
+akande-covid-1
+bard-covid-1
+bard-covid-2
+bard-eeg-education-1
+
+# Bad Examples
+akande-1
+akande-2
+covid-1
+covid-2
+covid-3
+bard-research-1
+```
+
+We informally call this the "project tag" and try to use it consistently in different arenas, such as:
+
+* The GitHub repo's name.
+* The parent directory for the project on the file server (*e.g.*, `M:/pediatrics/bbmc/akande-covid-1`).
+* The database schema containing the project's tables (*e.g.*, `akande_covid_1.patient`, `akande_covid_1.visit`, `akande_covid_2.visit`).  Change from [kebab case](https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841) to [snake case](http://theblogreaders.com/list-case-types-example-lightning-web-component-pascal-camel-kebab-snake-upper-case/) (*e.g.*, `akande-covid-1` to `akande_covid_1`) so the sql code doesn't have to escape the schema name with brackets.
+* In the body of emails to help retrospective searches.
+
+### Repo Granularity {#style-repo-granularity}
+
+The boundaries of a research project may be fuzzy, so you may not have a clear answer to the question, "should this be considered one large research project with one repo, or two smaller research projects with two total repos?".  The deciding factor for us is usually determined by the amount of living code that would need to exist in both repos.  If the two projects are being developed in parallel and you would have to make similar changes in both repos, strongly consider using only one repo.
+
+*Other issues that suggest a unified repo*:
+
+* The two repos have almost identical users.
+* The two repos are covered by the same IRB.
+
+*Issues that suggest separate repos*:
+
+* The development windows don't overlap.  If the initial project wrapped up last year and a follow-up study is starting, consider a separate repo that starts with a subset of the code.  Start fresh and copy over only what's necessary
+
+### Repo Pricing {#style-repo-pricing}
+
+We enrolled in some GitHub program in 2012 that allows academic research group to have unlimited private repos in the [GitHub Organization](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/about-organizations).  Otherwise, it would not be feasible to have 300+ tightly-focused repos.
+
+GitHub seems to introduce new programs or modify existing branding every few years.  The current best documentation is "[Apply for an educator or researcher discount](https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/use-github-in-your-classroom-and-research/apply-for-an-educator-or-researcher-discount)".  Notice this program is more more lightweight than a program like ["GitHub Campus"](https://education.github.com/schools), which involves your whole campus apparently.
 
 ggplot2 {#style-ggplot}
 ------------------------------------
@@ -362,4 +425,4 @@ Call `coord_*()` to restrict the plotted *x*/*y* values, not `scale_*()` or `lim
 
 #### Seed {#style-ggplot-seed}
 
-When jittering, set the seed in the 'declare-globals' chunk so that rerunning the report won't create a (slightly) different png.  The insignificantly different pngs will consume extra space in the Git repository.  Also, the GitHub diff will show the difference between png versions, which requires extra cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.
+When jittering, set the seed in the 'declare-globals' chunk so that rerunning the report won't create a (slightly) different png.  The insignificantly different pngs will consume extra space in the Git repository.  Also, the GitHub diff will show the difference between png versions, which requires extra subjectivity and cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.
