@@ -291,6 +291,7 @@ Windows Installation {#workstation-windows}
 ### File Explorer {#workstation-windows-explorer}
 
 When reviewing repo files, it's frequently important to see file extensions and hidden files in [File Explorer](https://en.wikipedia.org/wiki/File_Explorer).
+
 * View Menu: check the box for "File name extensions"
 * View Menu: check the box for "Hidden items"
 
