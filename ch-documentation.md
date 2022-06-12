@@ -10,7 +10,7 @@ Project-specific
 Dataset Origin & Structure
 ------------------------------------
 
-Issues & Tasks
+Issues & Tasks {#document-issues}
 ------------------------------------
 
 ### GitHub Issue Template {#documentation-issue-template}
@@ -30,7 +30,7 @@ If you are going to open up a repo/package to the public, consider creating a [t
 Flow Diagrams
 ------------------------------------
 
-Setting up new machine
+Setting up new machine {#document-workstation}
 ------------------------------------
 
 Thoroughly describe the programs and configuration settings your team should follow.  Feel free to adapt [our list](#workstation) for your needs.
@@ -43,4 +43,10 @@ You'll see a handful of benefits:
 
     If IT is still reluctant to grant admin privileges, make sure they realize that (a) it takes ~45 minutes to install the ~12 programs on a fresh machine, (b) many of the programs are updated every few months, and (c) a data scientist typically installs a 5+ R packages a month as they explore tools and stay current with the field.  Installing and maintaining everyone's workstation would require a significant amount of their time.  You and your team are willing to help alleviate that burden and maintain your own software.
 
-([example](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md))
+Documenting with Markdown in a GitHub Repo {#document-mechanics}
+------------------------------------
+
+This quick demo walks through https://national-covid-cohort-collaborative.github.io/book-of-n3c-v1/
+
+1. Select correct file in repo.
+1.
