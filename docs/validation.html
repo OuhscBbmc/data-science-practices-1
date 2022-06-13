@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 21 Growing a Team | Collaborative Data Science Practices</title>
+<title>Chapter 16 Validation | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="21.1 Recruiting   21.2 Training to Data Science Starting with a Researcher Starting with a Statistician Starting with a DBA Starting with a Software Developer  21.3 Bridges Outside the Team...">
+<meta name="description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 21 Growing a Team | Collaborative Data Science Practices">
+<meta property="og:title" content="Chapter 16 Validation | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="21.1 Recruiting   21.2 Training to Data Science Starting with a Researcher Starting with a Statistician Starting with a DBA Starting with a Software Developer  21.3 Bridges Outside the Team...">
+<meta property="og:description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 21 Growing a Team | Collaborative Data Science Practices">
-<meta name="twitter:description" content="21.1 Recruiting   21.2 Training to Data Science Starting with a Researcher Starting with a Statistician Starting with a DBA Starting with a Software Developer  21.3 Bridges Outside the Team...">
+<meta name="twitter:title" content="Chapter 16 Validation | Collaborative Data Science Practices">
+<meta name="twitter:description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -58,12 +58,12 @@
 <li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
 <li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
 <li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
-<li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
+<li><a class="active" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
 <li><a class="" href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
 <li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
 <li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
-<li><a class="active" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
 <li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
 <li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
 <li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
@@ -83,52 +83,79 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="team" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="validation" class="section level1">
 <h1>
-<span class="header-section-number">21</span> Growing a Team<a class="anchor" aria-label="anchor" href="#team"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> Validation<a class="anchor" aria-label="anchor" href="#validation"><i class="fas fa-link"></i></a>
 </h1>
-<div id="recruiting" class="section level2">
+<div id="validation-intro" class="section level2">
 <h2>
-<span class="header-section-number">21.1</span> Recruiting<a class="anchor" aria-label="anchor" href="#recruiting"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Intro<a class="anchor" aria-label="anchor" href="#validation-intro"><i class="fas fa-link"></i></a>
 </h2>
-</div>
-<div id="training-to-data-science" class="section level2">
-<h2>
-<span class="header-section-number">21.2</span> Training to Data Science<a class="anchor" aria-label="anchor" href="#training-to-data-science"><i class="fas fa-link"></i></a>
-</h2>
+<p>Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off.</p>
+<p>Validating your dataset serves many beneficial roles, including</p>
 <ol style="list-style-type: decimal">
-<li>Starting with a Researcher</li>
-<li>Starting with a Statistician</li>
-<li>Starting with a DBA</li>
-<li>Starting with a Software Developer</li>
+<li>exploring basic descriptive patterns,</li>
+<li>verifying that you understand the variable’s definition,</li>
+<li>communicating to your team what you already understand,</li>
+<li>describing variation between locations or time periods,</li>
+<li>evaluating preliminary hypotheses, and</li>
+<li>assessing the likelihood that the assumptions of your inferential models are reasonable.</li>
 </ol>
 </div>
-<div id="bridges-outside-the-team" class="section level2">
+<div id="validation-ad-hoc" class="section level2">
 <h2>
-<span class="header-section-number">21.3</span> Bridges Outside the Team<a class="anchor" aria-label="anchor" href="#bridges-outside-the-team"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Ad-hoc Manual Inspections<a class="anchor" aria-label="anchor" href="#validation-ad-hoc"><i class="fas fa-link"></i></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li>Monthly User Groups</li>
-<li>Annual Conferences</li>
-</ol>
+<p>We recommend starting with a basic question and developing a quick and dirty report that addresses an immediate need. Once your initial curiosity is satisfied, consider if the report can evolve into to address future needs. One common evolutionary path is informing an inferential model. A second common path is being assimilated in an automated report that is frequently run.</p>
+</div>
+<div id="validation-inferential" class="section level2">
+<h2>
+<span class="header-section-number">16.3</span> Inferential Support<a class="anchor" aria-label="anchor" href="#validation-inferential"><i class="fas fa-link"></i></a>
+</h2>
+<div id="validation-inferential-background" class="section level3">
+<h3>
+<span class="header-section-number">16.3.1</span> Brief Intro to Inferential Statistics<a class="anchor" aria-label="anchor" href="#validation-inferential-background"><i class="fas fa-link"></i></a>
+</h3>
+<p><em>Descriptive</em> statistics differ from <em>inferential</em> statistics. A descriptive statistic concerns only the observed elements in a sample, such as the average height or the range between the weakest and strongest systolic blood pressure. There is no fuzziness or forecasting in a descriptive statistic –it’s simply a straight-forward equation from observed points.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Of course sometimes life isn’t this easy, but that’s the overall idea&lt;/p&gt;"><sup>10</sup></a></p>
+<p>An inferential statistic tries to reach beyond a descriptive statistic: it projects beyond an observed sample. It assesses if a pattern within a collected sample is likely to exist in the larger population. Suppose a group of 40 newborns had faster heart rates than 34 infants. A large Student <em>t</em> (and its accompanying small <em>p</em>-value) may indicate that <em>all</em> newborns have faster rates –not just the 40.</p>
+<p>See <span class="citation">(Lise DeShea <a href="references.html#ref-deshea" role="doc-biblioref">2015</a>)</span> for information about the <em>t</em>-test and other analyses commonly used in health care. However in order for its conclusions to be valid, several assumptions must be met.</p>
+<p>In this sense, the <em>t</em>-test resembles the broad category of inferential statistics: the validity of some assumptions can be evaluated from the research design (<em>e.g.</em>, each kid is measured independently), while other assumptions are best evaluated from the data (<em>e.g.</em>, the residuals/errors follow an approximate bell-shaped distribution).</p>
+<p>Here are some graphs that are commonly useful to assess the appropriateness of an inferential statistic.
+* histograms
+* scatterplot of observed</p>
+<p>In other words, these can help you establish the foundation that justifies the inferential statistic.</p>
+<p>It is important to</p>
+<p>inferential statistics to be valid
+Automated Reports
+——————–</p>
+<p>The two strategies can be connected. If a ad-hoc inspection is enlightening, consider spending ~15 minutes to make the report easily reproducible as things change. Here are some reasons why the report should be be monitored repeatedly are changes in</p>
+<ul>
+<li>Temporal Trends (<em>e.g.</em>, the dataset from Jan 2020 to Dec 2020 looks different that from Jan 2020 to Dec 2022)</li>
+<li>Inclusion criteria (<em>e.g.</em>, you further restrict the list of diagnosis code)</li>
+<li>Data Partner sites (<em>e.g.</em>, a new site contributes data with patterns you did’t anticipate)</li>
+</ul>
 </div>
 </div>
+</div>
+
   <div class="chapter-nav">
-<div class="prev"><a href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></div>
-<div class="next"><a href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></div>
+<div class="prev"><a href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></div>
+<div class="next"><a href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#team"><span class="header-section-number">21</span> Growing a Team</a></li>
-<li><a class="nav-link" href="#recruiting"><span class="header-section-number">21.1</span> Recruiting</a></li>
-<li><a class="nav-link" href="#training-to-data-science"><span class="header-section-number">21.2</span> Training to Data Science</a></li>
-<li><a class="nav-link" href="#bridges-outside-the-team"><span class="header-section-number">21.3</span> Bridges Outside the Team</a></li>
+<li><a class="nav-link" href="#validation"><span class="header-section-number">16</span> Validation</a></li>
+<li><a class="nav-link" href="#validation-intro"><span class="header-section-number">16.1</span> Intro</a></li>
+<li><a class="nav-link" href="#validation-ad-hoc"><span class="header-section-number">16.2</span> Ad-hoc Manual Inspections</a></li>
+<li>
+<a class="nav-link" href="#validation-inferential"><span class="header-section-number">16.3</span> Inferential Support</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#validation-inferential-background"><span class="header-section-number">16.3.1</span> Brief Intro to Inferential Statistics</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-team.md">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-team.md">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-validation.md">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-validation.md">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

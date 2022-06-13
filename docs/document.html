@@ -58,14 +58,15 @@
 <li><a class="active" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
 <li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
 <li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
-<li><a class="" href="testing-and-validation.html"><span class="header-section-number">16</span> Testing, Validation, &amp; Defensive Programming</a></li>
-<li><a class="" href="troubleshooting.html"><span class="header-section-number">17</span> Troubleshooting and Debugging</a></li>
-<li><a class="" href="workstation.html"><span class="header-section-number">18</span> Workstation</a></li>
-<li><a class="" href="tools.html"><span class="header-section-number">19</span> Considerations when Selecting Tools</a></li>
-<li><a class="" href="team.html"><span class="header-section-number">20</span> Growing a Team</a></li>
-<li><a class="" href="redcap-user.html"><span class="header-section-number">21</span> Material for REDCap Users</a></li>
-<li><a class="" href="redcap-developer.html"><span class="header-section-number">22</span> Material for REDCap Developers</a></li>
-<li><a class="" href="redcap-admin.html"><span class="header-section-number">23</span> Material for REDCap Admins</a></li>
+<li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
+<li><a class="" href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
+<li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
 <li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
@@ -101,9 +102,9 @@
 <span class="header-section-number">13.3</span> Dataset Origin &amp; Structure<a class="anchor" aria-label="anchor" href="#dataset-origin-structure"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="issues-tasks" class="section level2">
+<div id="document-issues" class="section level2">
 <h2>
-<span class="header-section-number">13.4</span> Issues &amp; Tasks<a class="anchor" aria-label="anchor" href="#issues-tasks"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4</span> Issues &amp; Tasks<a class="anchor" aria-label="anchor" href="#document-issues"><i class="fas fa-link"></i></a>
 </h2>
 <div id="documentation-issue-template" class="section level3">
 <h3>
@@ -124,9 +125,9 @@
 <span class="header-section-number">13.5</span> Flow Diagrams<a class="anchor" aria-label="anchor" href="#flow-diagrams"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="setting-up-new-machine" class="section level2">
+<div id="document-workstation" class="section level2">
 <h2>
-<span class="header-section-number">13.6</span> Setting up new machine<a class="anchor" aria-label="anchor" href="#setting-up-new-machine"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.6</span> Setting up new machine<a class="anchor" aria-label="anchor" href="#document-workstation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Thoroughly describe the programs and configuration settings your team should follow. Feel free to adapt <a href="workstation.html#workstation">our list</a> for your needs.</p>
 <p>You’ll see a handful of benefits:</p>
@@ -138,8 +139,16 @@
 <p>If IT is still reluctant to grant admin privileges, make sure they realize that (a) it takes ~45 minutes to install the ~12 programs on a fresh machine, (b) many of the programs are updated every few months, and (c) a data scientist typically installs a 5+ R packages a month as they explore tools and stay current with the field. Installing and maintaining everyone’s workstation would require a significant amount of their time. You and your team are willing to help alleviate that burden and maintain your own software.</p>
 </li>
 </ol>
-<p>(<a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md">example</a>)</p>
-
+</div>
+<div id="document-mechanics" class="section level2">
+<h2>
+<span class="header-section-number">13.7</span> Documenting with Markdown in a GitHub Repo<a class="anchor" aria-label="anchor" href="#document-mechanics"><i class="fas fa-link"></i></a>
+</h2>
+<p>This quick demo walks through <a href="https://national-covid-cohort-collaborative.github.io/book-of-n3c-v1/" class="uri">https://national-covid-cohort-collaborative.github.io/book-of-n3c-v1/</a></p>
+<ol style="list-style-type: decimal">
+<li>Select correct file in repo.</li>
+<li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
@@ -153,10 +162,11 @@
 <li><a class="nav-link" href="#project-specific"><span class="header-section-number">13.2</span> Project-specific</a></li>
 <li><a class="nav-link" href="#dataset-origin-structure"><span class="header-section-number">13.3</span> Dataset Origin &amp; Structure</a></li>
 <li>
-<a class="nav-link" href="#issues-tasks"><span class="header-section-number">13.4</span> Issues &amp; Tasks</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#documentation-issue-template"><span class="header-section-number">13.4.1</span> GitHub Issue Template</a></li></ul>
+<a class="nav-link" href="#document-issues"><span class="header-section-number">13.4</span> Issues &amp; Tasks</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#documentation-issue-template"><span class="header-section-number">13.4.1</span> GitHub Issue Template</a></li></ul>
 </li>
 <li><a class="nav-link" href="#flow-diagrams"><span class="header-section-number">13.5</span> Flow Diagrams</a></li>
-<li><a class="nav-link" href="#setting-up-new-machine"><span class="header-section-number">13.6</span> Setting up new machine</a></li>
+<li><a class="nav-link" href="#document-workstation"><span class="header-section-number">13.6</span> Setting up new machine</a></li>
+<li><a class="nav-link" href="#document-mechanics"><span class="header-section-number">13.7</span> Documenting with Markdown in a GitHub Repo</a></li>
 </ul>
 
       <div class="book-extra">
@@ -174,7 +184,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-03.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

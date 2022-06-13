@@ -132,10 +132,11 @@ document
 team-wide
 project-specific
 dataset-origin-structure
-issues-tasks
+document-issues
 documentation-issue-template
 flow-diagrams
-setting-up-new-machine
+document-workstation
+document-mechanics
 style
 readability
 style-number
@@ -177,6 +178,11 @@ publication
 publication-analysts
 publication-experts
 publication-phobic
+validation
+validation-intro
+validation-ad-hoc
+validation-inferential
+validation-inferential-background
 testing-and-validation
 testing-functions
 defensive-programming
