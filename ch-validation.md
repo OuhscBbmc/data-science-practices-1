@@ -6,7 +6,7 @@ Intro {#validation-intro}
 
 Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off.
 
-Validating your dataset has many benefits and can serve many roles, including
+Validating your dataset serves many beneficial roles, including
 
 1. exploring basic descriptive patterns,
 1. verifying that you understand the variable's definition,
@@ -18,11 +18,30 @@ Validating your dataset has many benefits and can serve many roles, including
 Ad-hoc Manual Inspections {#validation-ad-hoc}
 --------------------------------
 
-We recommend starting with a basic question and developing a quick and dirty report that addresses the immediate need.  Once your initial curiosity is satisfied, consider if the report can evolve into to address future needs.  One common evolutionary path is informing an inferential model.  A second common path is being assimilated in an automated report that is frequently run.
+We recommend starting with a basic question and developing a quick and dirty report that addresses an immediate need.  Once your initial curiosity is satisfied, consider if the report can evolve into to address future needs.  One common evolutionary path is informing an inferential model.  A second common path is being assimilated in an automated report that is frequently run.
 
-Inferential Support
+Inferential Support {#validation-inferential}
 --------------------
 
+### Brief Intro to Inferential Statistics {#validation-inferential-background}
+
+*Descriptive* statistics differ from *inferential* statistics.  A descriptive statistic concerns only the observed elements in a sample, such as the average height or the range between the weakest and strongest  systolic blood pressure.  There is no fuzziness or forecasting in a descriptive statistic --it's simply a straight-forward equation from observed points.^[Of course sometimes life isn't this easy, but that's the overall idea]
+
+An inferential statistic tries to reach beyond a descriptive statistic: it projects beyond an observed sample.  It assesses if a pattern within a collected sample is likely to exist in the larger population.  Suppose a group of 40 newborns had faster heart rates than 34 infants.  A large Student *t* (and its accompanying small *p*-value) may indicate that *all* newborns have faster rates --not just the 40.
+
+See [@deshea] for information about the *t*-test and other analyses commonly used in health care.  However in order for its conclusions to be valid, several assumptions must be met.
+
+In this sense, the *t*-test resembles the broad category of inferential statistics: the validity of some assumptions can be evaluated from the research design (*e.g.*, each kid is measured independently), while other assumptions are best evaluated from the data (*e.g.*, the residuals/errors follow an approximate bell-shaped distribution).
+
+Here are some graphs that are commonly useful to assess the appropriateness of an inferential statistic.
+* histograms
+* scatterplot of observed
+
+In other words, these can help you establish the foundation that justifies the inferential statistic.
+
+It is important to
+
+ inferential statistics to be valid
 Automated Reports
 --------------------
 
