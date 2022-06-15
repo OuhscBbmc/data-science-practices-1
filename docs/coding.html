@@ -7,7 +7,7 @@
 <title>Chapter 2 Coding Principles | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="2.1 Simplify  2.1.1 Data Types Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called gender can...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Coding Principles | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="2.1 Simplify  2.1.1 Data Types Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called gender can...">
@@ -59,7 +59,7 @@
 <li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
 <li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
 <li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="" href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
 <li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
 <li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
@@ -205,11 +205,11 @@
 <li>
 <p><strong><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a></strong>: The function transforms a single numeric variable into a factor. Its range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer). Modify the <code>right</code> parameter to <code>FALSE</code> if you’d like the left/lower bound to be inclusive (which tends to be more natural for me).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> |&gt; 
-  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
+<code class="sourceCode R"><span class="va">mtcars</span> |&gt;
+  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> |&gt;
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>
     <span class="va">disp</span>,
-  <span class="op">)</span> |&gt; 
+  <span class="op">)</span> |&gt;
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
     <span class="co"># Example of a simple inequality operator (see two bullets above)</span>
     muscle_car            <span class="op">=</span> <span class="op">(</span><span class="fl">300</span> <span class="op">&lt;=</span> <span class="va">disp</span><span class="op">)</span>,
@@ -219,15 +219,15 @@
 
     <span class="co"># Divide `disp` into three levels with custom labels.</span>
     size_cut3             <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span>
-      <span class="va">disp</span>, 
+      <span class="va">disp</span>,
       breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,   <span class="fl">200</span>,      <span class="fl">300</span>,   <span class="cn">Inf</span><span class="op">)</span>,
       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="st">"small"</span>, <span class="st">"medium"</span>, <span class="st">"big"</span><span class="op">)</span>,
       right <span class="op">=</span> <span class="cn">FALSE</span>  <span class="co"># Is the right boundary INclusive ('FALSE' is an EXclusive boundary)</span>
-    <span class="op">)</span>,  
+    <span class="op">)</span>,
 
     <span class="co"># Divide `disp` into five levels with custom labels.</span>
     size_cut5             <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span>
-      <span class="va">disp</span>, 
+      <span class="va">disp</span>,
       breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,         <span class="fl">100</span>,            <span class="fl">150</span>,            <span class="fl">200</span>,      <span class="fl">300</span>,   <span class="cn">Inf</span><span class="op">)</span>,
       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="st">"small small"</span>, <span class="st">"medium small"</span>, <span class="st">"biggie small"</span>, <span class="st">"medium"</span>, <span class="st">"big"</span><span class="op">)</span>,
       right <span class="op">=</span> <span class="cn">FALSE</span>
@@ -274,8 +274,7 @@
 <p>Tips for <code>dplyr::recode()</code>:</p>
 <ul>
 <li>A reusable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like “disagree”, “neutral”, “agree”.</li>
-<li>Use <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode_factor()</code></a> to map integers to factor levels.<br>
-</li>
+<li>Use <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode_factor()</code></a> to map integers to factor levels.</li>
 <li>
 <a href="https://forcats.tidyverse.org/reference/fct_recode.html"><code>forcats::fct_recode()</code></a> is similar. We prefer the <code>.missing</code> parameter of <code>dplyr::recode()</code> that translates an <code>NA</code> into an explicit value.</li>
 <li>When using the <a href="https://ouhscbbmc.github.io/REDCapR/">REDCap API</a>, these functions help convert radio buttons to a character or factor variable.</li>
@@ -311,7 +310,7 @@
 <h3>
 <span class="header-section-number">2.2.3</span> Excluding Bad Cases<a class="anchor" aria-label="anchor" href="#excluding-bad-cases"><i class="fas fa-link"></i></a>
 </h3>
-<p>Some variables are critical to the record, and if it’s missing, you don’t want or trust any of its other values. For instance, a hospital visit record rarely useful if missing the patient ID. In these cases, prevent the record from passing through the <a href="patterns.html#pattern-ellis">ellis</a>.</p>
+<p>Some variables are critical to the record, and if it’s missing, you don’t want or trust any of its other values. For instance, a hospital visit record rarely useful with a null patient ID. In these cases, prevent the record from passing through the <a href="patterns.html#pattern-ellis">ellis</a>.</p>
 <p>In this example, we’ll presume we cannot trust a patient record if it lacks a clean date of birth (<code>dob</code>).</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -329,11 +328,80 @@
   <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
 </li>
 <li>
-<p>Near the end of the file, verify the variable for three reasons: (a) there’s a chance that the code above isn’t working as expected, (b) some later code later might have introduced bad values, and (c) it clearly documents to a reader that <code>dob</code> was included in this range at this stage of the pipeline.</p>
+<p>Even though it’s overkill after trimming, (eventually) verify the variable for three reasons: (a) there’s a chance that the code above isn’t working as expected, (b) later code might have introduced bad values, and (c) it clearly documents to a reader that <code>dob</code> was included in this range at this stage of the pipeline.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_date</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span>, any.missing<span class="op">=</span><span class="cn">F</span>, lower<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, upper<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 </li>
 </ol>
+</div>
+<div id="throw-errors-for-bad-cells" class="section level3">
+<h3>
+<span class="header-section-number">2.2.4</span> Throw errors for bad cells<a class="anchor" aria-label="anchor" href="#throw-errors-for-bad-cells"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code>checkmate::assert_*()</code> functions will throw an error and stop R’s execution when encountering a vector that violates the constraints you specified. The previous snippet will alert you if</p>
+<ul>
+<li>
+<code>ds$dob</code> is not a date,</li>
+<li>
+<code>ds$dob</code> has at least one <code>NA</code> value, or</li>
+<li>
+<code>ds$dob</code> has value earlier than <code>config$range_dob[1]</code> or later than <code>config$range_dob[2]</code>.</li>
+</ul>
+<p>The package has a family of functions that accommodate many types of vectors. Some common conditions to verify are:</p>
+<ul>
+<li>
+<p>the vector’s values are unique, which arises when you’re about to upload a primary key to a database (<em>e.g.</em>, a patient ID to the patient table),</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">pt_id</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+</li>
+<li>
+<p>a vector’s string should follow a strict pattern (<em>e.g.</em>, the patient ID is a “A” or “B”, followed by 4 digits)</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">pt_id</span>, pattern <span class="op">=</span> <span class="st">"^[AB]\\d{4}$"</span><span class="op">)</span></code></pre></div>
+</li>
+<li>
+<p>the database doesn’t accept names longer than 50 characters</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">name_first</span>, min.chars <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
+<span class="co"># or</span>
+<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">name_first</span>, pattern <span class="op">=</span> <span class="st">"^.{0,50}$"</span><span class="op">)</span></code></pre></div>
+</li>
+</ul>
+<p>The <code>pattern</code> argument is ultimately passed to <code><a href="https://rdrr.io/r/base/grep.html">base::grepl()</a></code>, which leverage regular expressions.</p>
+</div>
+<div id="throw-errors-for-bad-conditions" class="section level3">
+<h3>
+<span class="header-section-number">2.2.5</span> Throw errors for bad conditions<a class="anchor" aria-label="anchor" href="#throw-errors-for-bad-conditions"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes a dataset smells fishy even though no single cell violates a constraint. Send up a flare if it’s kinda bad, yet stop the execution if it really stinks.</p>
+<p>This is especially important for recurring scripts that process new datasets that are never inspected by a human, such as a daily forecast. Even though today’s incoming dataset is fine, you shouldn’t trust next month’s. At worst, the lonely test never catches a violation (and you wasted 5 minutes). At best, it catches a problem that would have proceeded undetected and compromised your downstream analyses.</p>
+<p>The following snippet asserts it’s acceptable that 2% of patients are missing an age, but it should never get worse than 5%. Therefore it throws an error when the missingness exceeds 5% and it throws an warning if it exceeds 2%.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Simulate a vector of ages.</span>
+<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="co"># Define thresholds for errors &amp; warnings.</span>
+<span class="va">threshold_error</span>     <span class="op">&lt;-</span> <span class="fl">.05</span>
+<span class="va">threshold_warning</span>   <span class="op">&lt;-</span> <span class="fl">.02</span>
+
+<span class="co"># Calculate proportion of missing cells.</span>
+<span class="va">missing_proportion</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Accompany the error/warning with an informative message.</span>
+<span class="kw">if</span> <span class="op">(</span><span class="va">threshold_error</span> <span class="op">&lt;</span> <span class="va">missing_proportion</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span>
+    <span class="st">"The proportion of missing `age` values is "</span>, <span class="va">missing_proportion</span>,
+    <span class="st">", but it shouldn't exceed "</span>, <span class="va">threshold_error</span>, <span class="st">"."</span>
+  <span class="op">)</span>
+<span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">threshold_warning</span> <span class="op">&lt;</span> <span class="va">missing_proportion</span><span class="op">)</span> <span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span>
+    <span class="st">"The proportion of missing `age` values is "</span>, <span class="va">missing_proportion</span>,
+    <span class="st">", but ideally it stays below "</span>, <span class="va">threshold_warning</span>, <span class="st">"."</span>
+  <span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+
 </div>
 </div>
 </div>
@@ -357,6 +425,8 @@
 <li><a class="nav-link" href="#coding-defensive-qualify-functions"><span class="header-section-number">2.2.1</span> Qualify functions</a></li>
 <li><a class="nav-link" href="#coding-defensive-date-arithmetic"><span class="header-section-number">2.2.2</span> Date Arithmetic</a></li>
 <li><a class="nav-link" href="#excluding-bad-cases"><span class="header-section-number">2.2.3</span> Excluding Bad Cases</a></li>
+<li><a class="nav-link" href="#throw-errors-for-bad-cells"><span class="header-section-number">2.2.4</span> Throw errors for bad cells</a></li>
+<li><a class="nav-link" href="#throw-errors-for-bad-conditions"><span class="header-section-number">2.2.5</span> Throw errors for bad conditions</a></li>
 </ul>
 </li>
 </ul>
@@ -376,7 +446,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-13.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

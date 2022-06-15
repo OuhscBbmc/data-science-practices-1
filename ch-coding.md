@@ -81,7 +81,7 @@ Almost every project recodes variables.  Choose the simplest function possible. 
     big_boy             <- (threshold_in_kg <= birth_weight_in_kg)
     ```
 
-1. **[`dplyr::if_else()`](https://dplyr.tidyverse.org/reference/if_else.html)**:  The function evaluates a single boolean variable or expression.  The output branches to only three possibilities: the input is (a) true, (b) false, or (c) (optionally) `NA`.  Notice that unlike the `<=` operator, `dplyr::if_else()` lets you specify a value if the input expression evaluates to `NA`. 
+1. **[`dplyr::if_else()`](https://dplyr.tidyverse.org/reference/if_else.html)**:  The function evaluates a single boolean variable or expression.  The output branches to only three possibilities: the input is (a) true, (b) false, or (c) (optionally) `NA`.  Notice that unlike the `<=` operator, `dplyr::if_else()` lets you specify a value if the input expression evaluates to `NA`.
 
     ```r
     date_start  <- as.Date("2017-01-01")
@@ -110,7 +110,7 @@ Almost every project recodes variables.  Choose the simplest function possible. 
     # This is equivalent to the previous line.
     goldilocks_2  <- (too_cold <= temperature & temperature <= too_hot)
     ```
-    
+
     If you need an *ex*clusive boundary, abandon `dplyr::between()` and specify it exactly.
 
     ```r
@@ -126,29 +126,29 @@ Almost every project recodes variables.  Choose the simplest function possible. 
 1. **[`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html)**: The function transforms a single numeric variable into a factor.  Its range is cut into different segments/categories on the one-dimensional number line.  The output branches to single discrete value (either a factor-level or an integer).  Modify the `right` parameter to `FALSE` if you'd like the left/lower bound to be inclusive (which tends to be more natural for me).
 
     ```r
-    mtcars |> 
-      tibble::as_tibble() |> 
+    mtcars |>
+      tibble::as_tibble() |>
       dplyr::select(
         disp,
-      ) |> 
+      ) |>
       dplyr::mutate(
         # Example of a simple inequality operator (see two bullets above)
         muscle_car            = (300 <= disp),
-        
+
         # Divide `disp` into three levels.
         size_default_labels   = cut(disp, breaks = c(-Inf, 200, 300, Inf), right = F),
-        
+
         # Divide `disp` into three levels with custom labels.
         size_cut3             = cut(
-          disp, 
+          disp,
           breaks = c(-Inf,   200,      300,   Inf),
           labels = c(  "small", "medium", "big"),
           right = FALSE  # Is the right boundary INclusive ('FALSE' is an EXclusive boundary)
-        ),  
-        
+        ),
+
         # Divide `disp` into five levels with custom labels.
         size_cut5             = cut(
-          disp, 
+          disp,
           breaks = c(-Inf,         100,            150,            200,      300,   Inf),
           labels = c(  "small small", "medium small", "biggie small", "medium", "big"),
           right = FALSE
@@ -173,9 +173,9 @@ Almost every project recodes variables.  Choose the simplest function possible. 
         .missing = "Unknown"
       )
     ```
-    
+
     If multiple variables have the same mapping, define the mapping once in a named vector, and pass it for multiple calls to `dplyr::recode()`.  Notice that the two variables `race` and `race_spouse` use the same mapping.^[For now, employ the `!!!` operator without understanding it.  When you're more comfortable with R, read about [quosures and lazy evaluation](https://adv-r.hadley.nz/quasiquotation.html#unquoting-many-arguments) so you can use it in more general scenarios.]
-    
+
     ```r
     mapping_race <- c(
       "1" = "White",
@@ -197,10 +197,10 @@ Almost every project recodes variables.  Choose the simplest function possible. 
         .missing = "Unknown"
       )
     ```
-    
+
     Tips for `dplyr::recode()`:
       * A reusable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like "disagree", "neutral", "agree".
-      * Use [`dplyr::recode_factor()`](https://dplyr.tidyverse.org/reference/recode.html) to map integers to factor levels.  
+      * Use [`dplyr::recode_factor()`](https://dplyr.tidyverse.org/reference/recode.html) to map integers to factor levels.
       * [`forcats::fct_recode()`](https://forcats.tidyverse.org/reference/fct_recode.html) is similar.  We prefer the `.missing` parameter of `dplyr::recode()` that translates an `NA` into an explicit value.
       * When using the [REDCap API](https://ouhscbbmc.github.io/REDCapR/), these functions help convert radio buttons to a character or factor variable.
 
@@ -227,7 +227,7 @@ Don't use the minus operator (*i.e.*, `-`) to subtract dates.  Instead use `as.i
 
 ### Excluding Bad Cases
 
-Some variables are critical to the record, and if it's missing, you don't want or trust any of its other values.  For instance, a hospital visit record rarely useful if missing the patient ID.  In these cases, prevent the record from passing through the [ellis](#pattern-ellis).
+Some variables are critical to the record, and if it's missing, you don't want or trust any of its other values.  For instance, a hospital visit record rarely useful with a null patient ID.  In these cases, prevent the record from passing through the [ellis](#pattern-ellis).
 
 In this example, we'll presume we cannot trust a patient record if it lacks a clean date of birth (`dob`).
 
@@ -248,8 +248,76 @@ In this example, we'll presume we cannot trust a patient record if it lacks a cl
       tidyr::drop_na(dob)
     ```
 
-1. Near the end of the file, verify the variable for three reasons: (a) there's a chance that the code above isn't working as expected, (b) some later code later might have introduced bad values, and (c) it clearly documents to a reader that `dob` was included in this range at this stage of the pipeline.
+1. Even though it's overkill after trimming, (eventually) verify the variable for three reasons: (a) there's a chance that the code above isn't working as expected, (b) later code might have introduced bad values, and (c) it clearly documents to a reader that `dob` was included in this range at this stage of the pipeline.
 
     ```r
     checkmate::assert_date(ds$dob, any.missing=F, lower=config$range_dob[1], upper=config$range_dob[2])
     ```
+
+### Throw errors for bad cells
+
+The `checkmate::assert_*()` functions will throw an error and stop R's execution when encountering a vector that violates the constraints you specified. The previous snippet will alert you if
+
+* `ds$dob` is not a date,
+* `ds$dob` has at least one `NA` value, or
+* `ds$dob` has value earlier than `config$range_dob[1]` or later than `config$range_dob[2]`.
+
+The package has a family of functions that accommodate many types of vectors.  Some common conditions to verify are:
+
+* the vector's values are unique, which arises when you're about to upload a primary key to a database (*e.g.*, a patient ID to the patient table),
+
+    ```r
+    checkmate::assert_integer(ds$pt_id, unique = TRUE)
+    ```
+
+* a vector's string should follow a strict pattern (*e.g.*, the patient ID is a "A" or "B", followed by 4 digits)
+
+    ```r
+    checkmate::assert_character(ds$pt_id, pattern = "^[AB]\\d{4}$")
+    ```
+
+* the database doesn't accept names longer than 50 characters
+
+    ```r
+    checkmate::assert_character(ds$name_first, min.chars = 50)
+    # or
+    checkmate::assert_character(ds$name_first, pattern = "^.{0,50}$")
+    ```
+
+The `pattern` argument is ultimately passed to `base::grepl()`, which leverage regular expressions.
+
+### Throw errors for bad conditions
+
+Sometimes a dataset smells fishy even though no single cell violates a constraint.  Send up a flare if it's kinda bad, yet stop the execution if it really stinks.
+
+This is especially important for recurring scripts that process new datasets that are never inspected by a human, such as a daily forecast.  Even though today's incoming dataset is fine, you shouldn't trust next month's.  At worst, the lonely test never catches a violation (and you wasted 5 minutes).  At best, it catches a problem that would have proceeded undetected and compromised your downstream analyses.
+
+The following snippet asserts it's acceptable that 2% of patients are missing an age, but it should never get worse than 5%.  Therefore it throws an error when the missingness exceeds 5% and it throws an warning if it exceeds 2%.
+
+
+```r
+# Simulate a vector of ages.
+ds <- tibble::tibble(
+  age = sample(c(NA, 1:19), size = 100, replace = TRUE)
+)
+
+# Define thresholds for errors & warnings.
+threshold_error     <- .05
+threshold_warning   <- .02
+
+# Calculate proportion of missing cells.
+missing_proportion  <- mean(is.na(ds$age))
+
+# Accompany the error/warning with an informative message.
+if (threshold_error < missing_proportion) {
+  stop(
+    "The proportion of missing `age` values is ", missing_proportion,
+    ", but it shouldn't exceed ", threshold_error, "."
+  )
+} else if (threshold_warning < missing_proportion) {
+  warning(
+    "The proportion of missing `age` values is ", missing_proportion,
+    ", but ideally it stays below ", threshold_warning, "."
+  )
+}
+```

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 17 Testing, Validation, &amp; Defensive Programming | Collaborative Data Science Practices</title>
+<title>Chapter 17 Testing | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="17.1 Testing Functions   17.2 Defensive Programming Throwing errors  17.3 Validator Benefits for Analysts Benefits for Data Collectors">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
-<meta property="og:title" content="Chapter 17 Testing, Validation, &amp; Defensive Programming | Collaborative Data Science Practices">
+<meta name="description" content="17.1 Testing Functions   17.2 Validator Benefits for Analysts Benefits for Data Collectors">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 17 Testing | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="17.1 Testing Functions   17.2 Defensive Programming Throwing errors  17.3 Validator Benefits for Analysts Benefits for Data Collectors">
+<meta property="og:description" content="17.1 Testing Functions   17.2 Validator Benefits for Analysts Benefits for Data Collectors">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 17 Testing, Validation, &amp; Defensive Programming | Collaborative Data Science Practices">
-<meta name="twitter:description" content="17.1 Testing Functions   17.2 Defensive Programming Throwing errors  17.3 Validator Benefits for Analysts Benefits for Data Collectors">
+<meta name="twitter:title" content="Chapter 17 Testing | Collaborative Data Science Practices">
+<meta name="twitter:description" content="17.1 Testing Functions   17.2 Validator Benefits for Analysts Benefits for Data Collectors">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -59,7 +59,7 @@
 <li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
 <li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
 <li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="active" href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="active" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
 <li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
 <li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
@@ -83,26 +83,18 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="testing-and-validation" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="testing" class="section level1">
 <h1>
-<span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming<a class="anchor" aria-label="anchor" href="#testing-and-validation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17</span> Testing<a class="anchor" aria-label="anchor" href="#testing"><i class="fas fa-link"></i></a>
 </h1>
 <div id="testing-functions" class="section level2">
 <h2>
 <span class="header-section-number">17.1</span> Testing Functions<a class="anchor" aria-label="anchor" href="#testing-functions"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="defensive-programming" class="section level2">
-<h2>
-<span class="header-section-number">17.2</span> Defensive Programming<a class="anchor" aria-label="anchor" href="#defensive-programming"><i class="fas fa-link"></i></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li>Throwing errors</li>
-</ol>
-</div>
 <div id="validator" class="section level2">
 <h2>
-<span class="header-section-number">17.3</span> Validator<a class="anchor" aria-label="anchor" href="#validator"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2</span> Validator<a class="anchor" aria-label="anchor" href="#validator"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>Benefits for Analysts</li>
@@ -116,10 +108,9 @@
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#testing-and-validation"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="nav-link" href="#testing"><span class="header-section-number">17</span> Testing</a></li>
 <li><a class="nav-link" href="#testing-functions"><span class="header-section-number">17.1</span> Testing Functions</a></li>
-<li><a class="nav-link" href="#defensive-programming"><span class="header-section-number">17.2</span> Defensive Programming</a></li>
-<li><a class="nav-link" href="#validator"><span class="header-section-number">17.3</span> Validator</a></li>
+<li><a class="nav-link" href="#validator"><span class="header-section-number">17.2</span> Validator</a></li>
 </ul>
 
       <div class="book-extra">
@@ -137,7 +128,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-13.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

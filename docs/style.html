@@ -7,7 +7,7 @@
 <title>Chapter 14 Style Guide | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Chapter 14 Style Guide | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most...">
@@ -59,7 +59,7 @@
 <li><a class="active" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
 <li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
 <li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="" href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
 <li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
 <li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
@@ -155,12 +155,12 @@
 <span class="header-section-number">14.2.1.1</span> Dropping rows with missing values<a class="anchor" aria-label="anchor" href="#style-datasets-filter-drop_na"><i class="fas fa-link"></i></a>
 </h4>
 <p><a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> drops rows with a missing value in a specific column.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Good</span>
 <span class="va">ds</span> |&gt;
   <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
 <p>is cleaner to read and write than these two styles. In particular, it’s easy to forget/overlook a <code>!</code>.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Worse</span>
 <span class="va">ds</span> |&gt;
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span><span class="op">)</span>
@@ -208,42 +208,42 @@
 <span class="header-section-number">14.3.2</span> Granularity<a class="anchor" aria-label="anchor" href="#style-factor-granularity"><i class="fas fa-link"></i></a>
 </h3>
 <p>Sometimes it helps to represent the values differently, say a granular and a coarse way. We say <code>cut7</code> or <code>cut3</code> to denotes the number of levels; this is related to <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a>. ‘unknown’ and ‘other’ are frequently levels, and they count toward the quantity.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="style.html#cb58-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
-<span id="cb58-2"><a href="style.html#cb58-2"></a>education_cut7      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
-<span id="cb58-3"><a href="style.html#cb58-3"></a>  education_cut7,</span>
-<span id="cb58-4"><a href="style.html#cb58-4"></a>  <span class="st">"No Highschool Degree / GED"</span>  =<span class="st"> "no diploma"</span>,</span>
-<span id="cb58-5"><a href="style.html#cb58-5"></a>  <span class="st">"High School Degree / GED"</span>    =<span class="st"> "diploma"</span>,</span>
-<span id="cb58-6"><a href="style.html#cb58-6"></a>  <span class="st">"Some College"</span>                =<span class="st"> "some college"</span>,</span>
-<span id="cb58-7"><a href="style.html#cb58-7"></a>  <span class="st">"Associate's Degree"</span>          =<span class="st"> "associate"</span>,</span>
-<span id="cb58-8"><a href="style.html#cb58-8"></a>  <span class="st">"Bachelor's Degree"</span>           =<span class="st"> "bachelor"</span>,</span>
-<span id="cb58-9"><a href="style.html#cb58-9"></a>  <span class="st">"Post-graduate degree"</span>        =<span class="st"> "post-grad"</span>,</span>
-<span id="cb58-10"><a href="style.html#cb58-10"></a>  <span class="st">"Unknown"</span>                     =<span class="st"> "unknown"</span>,</span>
-<span id="cb58-11"><a href="style.html#cb58-11"></a>  <span class="dt">.missing                      =</span> <span class="st">"unknown"</span>,</span>
-<span id="cb58-12"><a href="style.html#cb58-12"></a>),</span>
-<span id="cb58-13"><a href="style.html#cb58-13"></a>education_cut3      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
-<span id="cb58-14"><a href="style.html#cb58-14"></a>  education_cut7,</span>
-<span id="cb58-15"><a href="style.html#cb58-15"></a>  <span class="st">"no diploma"</span>    =<span class="st"> "no bachelor"</span>,</span>
-<span id="cb58-16"><a href="style.html#cb58-16"></a>  <span class="st">"diploma"</span>       =<span class="st"> "no bachelor"</span>,</span>
-<span id="cb58-17"><a href="style.html#cb58-17"></a>  <span class="st">"some college"</span>  =<span class="st"> "no bachelor"</span>,</span>
-<span id="cb58-18"><a href="style.html#cb58-18"></a>  <span class="st">"associate"</span>     =<span class="st"> "no bachelor"</span>,</span>
-<span id="cb58-19"><a href="style.html#cb58-19"></a>  <span class="st">"bachelor"</span>      =<span class="st"> "bachelor"</span>,</span>
-<span id="cb58-20"><a href="style.html#cb58-20"></a>  <span class="st">"post-grad"</span>     =<span class="st"> "bachelor"</span>,</span>
-<span id="cb58-21"><a href="style.html#cb58-21"></a>  <span class="st">"unknown"</span>       =<span class="st"> "unknown"</span>,</span>
-<span id="cb58-22"><a href="style.html#cb58-22"></a>),</span>
-<span id="cb58-23"><a href="style.html#cb58-23"></a>education_cut7 =<span class="st"> </span><span class="kw">factor</span>(education_cut7, <span class="dt">levels=</span><span class="kw">c</span>(</span>
-<span id="cb58-24"><a href="style.html#cb58-24"></a>  <span class="st">"no diploma"</span>,</span>
-<span id="cb58-25"><a href="style.html#cb58-25"></a>  <span class="st">"diploma"</span>,</span>
-<span id="cb58-26"><a href="style.html#cb58-26"></a>  <span class="st">"some college"</span>,</span>
-<span id="cb58-27"><a href="style.html#cb58-27"></a>  <span class="st">"associate"</span>,</span>
-<span id="cb58-28"><a href="style.html#cb58-28"></a>  <span class="st">"bachelor"</span>,</span>
-<span id="cb58-29"><a href="style.html#cb58-29"></a>  <span class="st">"post-grad"</span>,</span>
-<span id="cb58-30"><a href="style.html#cb58-30"></a>  <span class="st">"unknown"</span></span>
-<span id="cb58-31"><a href="style.html#cb58-31"></a>)),</span>
-<span id="cb58-32"><a href="style.html#cb58-32"></a>education_cut3 =<span class="st"> </span><span class="kw">factor</span>(education_cut3, <span class="dt">levels=</span><span class="kw">c</span>(</span>
-<span id="cb58-33"><a href="style.html#cb58-33"></a>  <span class="st">"no bachelor"</span>,</span>
-<span id="cb58-34"><a href="style.html#cb58-34"></a>  <span class="st">"bachelor"</span>,</span>
-<span id="cb58-35"><a href="style.html#cb58-35"></a>  <span class="st">"unknown"</span></span>
-<span id="cb58-36"><a href="style.html#cb58-36"></a>))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="style.html#cb62-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
+<span id="cb62-2"><a href="style.html#cb62-2"></a>education_cut7      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
+<span id="cb62-3"><a href="style.html#cb62-3"></a>  education_cut7,</span>
+<span id="cb62-4"><a href="style.html#cb62-4"></a>  <span class="st">"No Highschool Degree / GED"</span>  =<span class="st"> "no diploma"</span>,</span>
+<span id="cb62-5"><a href="style.html#cb62-5"></a>  <span class="st">"High School Degree / GED"</span>    =<span class="st"> "diploma"</span>,</span>
+<span id="cb62-6"><a href="style.html#cb62-6"></a>  <span class="st">"Some College"</span>                =<span class="st"> "some college"</span>,</span>
+<span id="cb62-7"><a href="style.html#cb62-7"></a>  <span class="st">"Associate's Degree"</span>          =<span class="st"> "associate"</span>,</span>
+<span id="cb62-8"><a href="style.html#cb62-8"></a>  <span class="st">"Bachelor's Degree"</span>           =<span class="st"> "bachelor"</span>,</span>
+<span id="cb62-9"><a href="style.html#cb62-9"></a>  <span class="st">"Post-graduate degree"</span>        =<span class="st"> "post-grad"</span>,</span>
+<span id="cb62-10"><a href="style.html#cb62-10"></a>  <span class="st">"Unknown"</span>                     =<span class="st"> "unknown"</span>,</span>
+<span id="cb62-11"><a href="style.html#cb62-11"></a>  <span class="dt">.missing                      =</span> <span class="st">"unknown"</span>,</span>
+<span id="cb62-12"><a href="style.html#cb62-12"></a>),</span>
+<span id="cb62-13"><a href="style.html#cb62-13"></a>education_cut3      =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">recode</span>(</span>
+<span id="cb62-14"><a href="style.html#cb62-14"></a>  education_cut7,</span>
+<span id="cb62-15"><a href="style.html#cb62-15"></a>  <span class="st">"no diploma"</span>    =<span class="st"> "no bachelor"</span>,</span>
+<span id="cb62-16"><a href="style.html#cb62-16"></a>  <span class="st">"diploma"</span>       =<span class="st"> "no bachelor"</span>,</span>
+<span id="cb62-17"><a href="style.html#cb62-17"></a>  <span class="st">"some college"</span>  =<span class="st"> "no bachelor"</span>,</span>
+<span id="cb62-18"><a href="style.html#cb62-18"></a>  <span class="st">"associate"</span>     =<span class="st"> "no bachelor"</span>,</span>
+<span id="cb62-19"><a href="style.html#cb62-19"></a>  <span class="st">"bachelor"</span>      =<span class="st"> "bachelor"</span>,</span>
+<span id="cb62-20"><a href="style.html#cb62-20"></a>  <span class="st">"post-grad"</span>     =<span class="st"> "bachelor"</span>,</span>
+<span id="cb62-21"><a href="style.html#cb62-21"></a>  <span class="st">"unknown"</span>       =<span class="st"> "unknown"</span>,</span>
+<span id="cb62-22"><a href="style.html#cb62-22"></a>),</span>
+<span id="cb62-23"><a href="style.html#cb62-23"></a>education_cut7 =<span class="st"> </span><span class="kw">factor</span>(education_cut7, <span class="dt">levels=</span><span class="kw">c</span>(</span>
+<span id="cb62-24"><a href="style.html#cb62-24"></a>  <span class="st">"no diploma"</span>,</span>
+<span id="cb62-25"><a href="style.html#cb62-25"></a>  <span class="st">"diploma"</span>,</span>
+<span id="cb62-26"><a href="style.html#cb62-26"></a>  <span class="st">"some college"</span>,</span>
+<span id="cb62-27"><a href="style.html#cb62-27"></a>  <span class="st">"associate"</span>,</span>
+<span id="cb62-28"><a href="style.html#cb62-28"></a>  <span class="st">"bachelor"</span>,</span>
+<span id="cb62-29"><a href="style.html#cb62-29"></a>  <span class="st">"post-grad"</span>,</span>
+<span id="cb62-30"><a href="style.html#cb62-30"></a>  <span class="st">"unknown"</span></span>
+<span id="cb62-31"><a href="style.html#cb62-31"></a>)),</span>
+<span id="cb62-32"><a href="style.html#cb62-32"></a>education_cut3 =<span class="st"> </span><span class="kw">factor</span>(education_cut3, <span class="dt">levels=</span><span class="kw">c</span>(</span>
+<span id="cb62-33"><a href="style.html#cb62-33"></a>  <span class="st">"no bachelor"</span>,</span>
+<span id="cb62-34"><a href="style.html#cb62-34"></a>  <span class="st">"bachelor"</span>,</span>
+<span id="cb62-35"><a href="style.html#cb62-35"></a>  <span class="st">"unknown"</span></span>
+<span id="cb62-36"><a href="style.html#cb62-36"></a>))</span></code></pre></div>
 </div>
 </div>
 <div id="style-dates" class="section level2">
@@ -277,7 +277,7 @@
 <span class="header-section-number">14.5.2</span> Semantic Order<a class="anchor" aria-label="anchor" href="#style-naming-semantic"><i class="fas fa-link"></i></a>
 </h3>
 <p>For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms. The “bigger” term goes first; the “smaller” terms are nested in the bigger terms.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Good:</span>
 <span class="va">parent_name_last</span>
 <span class="va">parent_name_first</span>
@@ -294,25 +294,25 @@
 <span class="va">first_name_kid</span>
 <span class="va">dob_kid</span></code></pre></div>
 <p>Large datasets with multiple questionnaries (each with multiple subsections) are much more managable when the variables follow a semantic order.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb60-1"><a href="style.html#cb60-1"></a><span class="kw">SELECT</span></span>
-<span id="cb60-2"><a href="style.html#cb60-2"></a>  asq3_medical_problems_01</span>
-<span id="cb60-3"><a href="style.html#cb60-3"></a>  ,asq3_medical_problems_02</span>
-<span id="cb60-4"><a href="style.html#cb60-4"></a>  ,asq3_medical_problems_03</span>
-<span id="cb60-5"><a href="style.html#cb60-5"></a>  ,asq3_behavior_concerns_01</span>
-<span id="cb60-6"><a href="style.html#cb60-6"></a>  ,asq3_behavior_concerns_02</span>
-<span id="cb60-7"><a href="style.html#cb60-7"></a>  ,asq3_behavior_concerns_03</span>
-<span id="cb60-8"><a href="style.html#cb60-8"></a>  ,asq3_worry_01</span>
-<span id="cb60-9"><a href="style.html#cb60-9"></a>  ,asq3_worry_02</span>
-<span id="cb60-10"><a href="style.html#cb60-10"></a>  ,asq3_worry_03</span>
-<span id="cb60-11"><a href="style.html#cb60-11"></a>  ,wai_01_steps_beneficial</span>
-<span id="cb60-12"><a href="style.html#cb60-12"></a>  ,wai_02_hv_useful</span>
-<span id="cb60-13"><a href="style.html#cb60-13"></a>  ,wai_03_parent_likes_me</span>
-<span id="cb60-14"><a href="style.html#cb60-14"></a>  ,wai_04_hv_doubts</span>
-<span id="cb60-15"><a href="style.html#cb60-15"></a>  ,hri_01_client_input</span>
-<span id="cb60-16"><a href="style.html#cb60-16"></a>  ,hri_02_problems_discussed</span>
-<span id="cb60-17"><a href="style.html#cb60-17"></a>  ,hri_03_addressing_problems_clarity</span>
-<span id="cb60-18"><a href="style.html#cb60-18"></a>  ,hri_04_goals_discussed</span>
-<span id="cb60-19"><a href="style.html#cb60-19"></a><span class="kw">FROM</span> miechv.gpav_3</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb64-1"><a href="style.html#cb64-1"></a><span class="kw">SELECT</span></span>
+<span id="cb64-2"><a href="style.html#cb64-2"></a>  asq3_medical_problems_01</span>
+<span id="cb64-3"><a href="style.html#cb64-3"></a>  ,asq3_medical_problems_02</span>
+<span id="cb64-4"><a href="style.html#cb64-4"></a>  ,asq3_medical_problems_03</span>
+<span id="cb64-5"><a href="style.html#cb64-5"></a>  ,asq3_behavior_concerns_01</span>
+<span id="cb64-6"><a href="style.html#cb64-6"></a>  ,asq3_behavior_concerns_02</span>
+<span id="cb64-7"><a href="style.html#cb64-7"></a>  ,asq3_behavior_concerns_03</span>
+<span id="cb64-8"><a href="style.html#cb64-8"></a>  ,asq3_worry_01</span>
+<span id="cb64-9"><a href="style.html#cb64-9"></a>  ,asq3_worry_02</span>
+<span id="cb64-10"><a href="style.html#cb64-10"></a>  ,asq3_worry_03</span>
+<span id="cb64-11"><a href="style.html#cb64-11"></a>  ,wai_01_steps_beneficial</span>
+<span id="cb64-12"><a href="style.html#cb64-12"></a>  ,wai_02_hv_useful</span>
+<span id="cb64-13"><a href="style.html#cb64-13"></a>  ,wai_03_parent_likes_me</span>
+<span id="cb64-14"><a href="style.html#cb64-14"></a>  ,wai_04_hv_doubts</span>
+<span id="cb64-15"><a href="style.html#cb64-15"></a>  ,hri_01_client_input</span>
+<span id="cb64-16"><a href="style.html#cb64-16"></a>  ,hri_02_problems_discussed</span>
+<span id="cb64-17"><a href="style.html#cb64-17"></a>  ,hri_03_addressing_problems_clarity</span>
+<span id="cb64-18"><a href="style.html#cb64-18"></a>  ,hri_04_goals_discussed</span>
+<span id="cb64-19"><a href="style.html#cb64-19"></a><span class="kw">FROM</span> miechv.gpav_3</span></code></pre></div>
 <p>I don’t know where we picked up the term “semantic order”. It may have come from <a href="https://www.geeksforgeeks.org/introduction-semantic-versioning/">Semantic Versioning</a> of software releases.</p>
 </div>
 <div id="style-naming-files" class="section level3">
@@ -335,7 +335,7 @@
 <span class="header-section-number">14.5.4.1</span> Prefix with <code>ds_</code> and <code>d_</code><a class="anchor" aria-label="anchor" href="#style-naming-datasets-prefix"><i class="fas fa-link"></i></a>
 </h4>
 <p>Datasets are handled so differently than other variables that we find it’s easier to identify its type and scope. The prefix <code>ds_</code> indicates the dataset is available to the entire file, while <code>d_</code> indicates the scope is localized to a function.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">count_elements</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>
 <span class="op">}</span>
@@ -348,12 +348,12 @@
 <span class="header-section-number">14.5.4.2</span> Express the grain<a class="anchor" aria-label="anchor" href="#style-naming-datasets-grain"><i class="fas fa-link"></i></a>
 </h4>
 <p>The <a href="https://gerardnico.com/olap/dimensional_modeling/grain#grain">grain</a> of a dataset describes what each row represents, which is a similar idea to the statistician’s concept of “unit of analysis”. Essentially it the the most granular entity described. Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy</a> dataset with a clear grain.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_student</span>          <span class="co"># One row per student</span>
 <span class="va">ds_teacher</span>          <span class="co"># One row per teacher</span>
 <span class="va">ds_course</span>           <span class="co"># One row per course</span>
 <span class="va">ds_course_student</span>   <span class="co"># One row per student-course combination</span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds_pt</span>         <span class="co"># One row per patient</span>
 <span class="va">ds_pt_visit</span>   <span class="co"># One row per patient-visit combination</span>
 <span class="va">ds_visit</span>      <span class="co"># Same as above, since it's clear a visit is connected w/ a pt</span></code></pre></div>
@@ -392,7 +392,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <span class="header-section-number">14.5.4.6</span> Define the dataset when in doubt<a class="anchor" aria-label="anchor" href="#style-naming-datasets-define"><i class="fas fa-link"></i></a>
 </h4>
 <p>If it’s potentially unclear to a new reader, use a comment immediately before the dataset’s initial use.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># `ds_client_enroll`:</span>
 <span class="co">#    grain: one row per client</span>
 <span class="co">#    subset: only clients who have successfully enrolled are included</span>
@@ -473,7 +473,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <li>
 <strong>Index</strong>. Be optimistic and prepare for follow up investigations. The initial repo is “…-1”, the subsequent repos are “…-2, …-3, …-4”.</li>
 </ol>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Good Examples</span>
 <span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">1</span>
 <span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">2</span>
@@ -636,7 +636,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-13.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

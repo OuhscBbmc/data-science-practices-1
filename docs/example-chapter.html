@@ -7,7 +7,7 @@
 <title>F Example Chapter | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="This intro was copied from the 1st chapter of the example bookdown repo. I’m keeping it temporarily for reference. You can label chapter and section titles using {#label} after them, e.g., we can...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="F Example Chapter | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="This intro was copied from the 1st chapter of the example bookdown repo. I’m keeping it temporarily for reference. You can label chapter and section titles using {#label} after them, e.g., we can...">
@@ -59,7 +59,7 @@
 <li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
 <li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
 <li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="" href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
 <li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
 <li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
@@ -90,7 +90,7 @@
 <p><em>This intro was copied from the 1st chapter of the example bookdown repo. I’m keeping it temporarily for reference.</em></p>
 <p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference the <a href="index.html#intro">Intro</a> Chapter. If you do not manually label them, there will be automatic labels anyway</p>
 <p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pressure</span>, type <span class="op">=</span> <span class="st">'b'</span>, pch <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
@@ -100,7 +100,7 @@ Figure F.1: Here is a nice figure!
 </p>
 </div>
 <p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="example-chapter.html#fig:nice-fig">F.1</a>. Similarly, you can reference tables generated from <code><a href="https://rdrr.io/pkg/knitr/man/kable.html">knitr::kable()</a></code>, e.g., see Table <a href="example-chapter.html#tab:nice-tab">F.1</a>.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">20</span><span class="op">)</span>, caption <span class="op">=</span> <span class="st">'Here is a nice table!'</span>,
   booktabs <span class="op">=</span> <span class="cn">TRUE</span>
@@ -283,7 +283,7 @@ Figure F.1: Here is a nice figure!
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-13.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

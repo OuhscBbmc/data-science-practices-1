@@ -1,13 +1,8 @@
-Testing, Validation, & Defensive Programming {#testing-and-validation}
+Testing {#testing}
 ====================================
 
 Testing Functions
 ------------------------------------
-
-Defensive Programming
-------------------------------------
-
-1. Throwing errors
 
 Validator
 ------------------------------------

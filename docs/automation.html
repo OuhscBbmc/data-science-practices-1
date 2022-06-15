@@ -7,7 +7,7 @@
 <title>Chapter 10 Automation &amp; Reproducibility | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Automation is an important prerequisite of reproducibility.  10.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
-<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Automation &amp; Reproducibility | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Automation is an important prerequisite of reproducibility.  10.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
@@ -59,7 +59,7 @@
 <li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
 <li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
 <li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="" href="testing-and-validation.html"><span class="header-section-number">17</span> Testing, Validation, &amp; Defensive Programming</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
 <li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
 <li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
@@ -133,7 +133,7 @@
 <ol style="list-style-type: decimal">
 <li>
 <p><strong>Program/script:</strong> is the absolute path to <code>Rscript.exe</code>. It needs to be updated every time you upgrade R (unless you’re doing something tricky with the <code>PATH</code> environmental OS variable). Notice we are using the “patched” version of R. The entry should be enclosed in quotes.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb51-1"><a href="automation.html#cb51-1"></a><span class="st">"C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb55-1"><a href="automation.html#cb55-1"></a><span class="st">"C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Add arguments (optional):</strong> specifies the flow file to run. In this case, the repo ‘butcher-hearing-screen-1’ is under in the ’Documents/cdw/` directory; the <a href="automation.html#automation-flow">flow file</a> is located in the repo’s root directory, as discussed in the <a href="repo-prototype.html#repo-flow">prototypical repo</a>. The entry should be enclosed in quotes.</p>
@@ -198,7 +198,7 @@
 <li>
 <p>On the other side of the spectrum, you can meticulously specify the desired version of each R package. This approach reduces the chance of a new version of a package breaking existing pipeline code. We recommend this approach when uptime is very important.</p>
 <p>The most intuitive implementation is to install with explicit code in a file like <code>utility/install-dependencies.R</code>:</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"dplyr"</span>     , version <span class="op">=</span> <span class="st">"0.4.3"</span> <span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"ggplot2"</span>   , version <span class="op">=</span> <span class="st">"2.0.0"</span> <span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"data.table"</span>, version <span class="op">=</span> <span class="st">"1.10.4"</span><span class="op">)</span>
@@ -206,12 +206,12 @@
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"openxlsx"</span>  , version <span class="op">=</span> <span class="st">"4.0.17"</span><span class="op">)</span>
 <span class="co"># ... package list continues ...</span></code></pre></div>
 <p>Another implementation is to convert the repo to a package itself, and <a href="http://r-pkgs.had.co.nz/description.html#dependencies">specify the versions</a> in the <code>DESCRIPTION</code> file.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="automation.html#cb55-1"></a>Imports<span class="op">:</span></span>
-<span id="cb55-2"><a href="automation.html#cb55-2"></a><span class="st">   </span><span class="kw">dplyr</span>       (<span class="op">==</span><span class="st"> </span><span class="dv">0</span>.<span class="fl">4.3</span> )</span>
-<span id="cb55-3"><a href="automation.html#cb55-3"></a>   <span class="kw">ggplot2</span>     (<span class="op">==</span><span class="st"> </span><span class="dv">2</span>.<span class="fl">0.0</span> )</span>
-<span id="cb55-4"><a href="automation.html#cb55-4"></a>   <span class="kw">data.table</span>  (<span class="op">==</span><span class="st"> </span><span class="dv">1</span>.<span class="fl">10.4</span>)</span>
-<span id="cb55-5"><a href="automation.html#cb55-5"></a>   <span class="kw">lubridate</span>   (<span class="op">==</span><span class="st"> </span><span class="dv">1</span>.<span class="fl">6.0</span> )</span>
-<span id="cb55-6"><a href="automation.html#cb55-6"></a>   <span class="kw">openxlsx</span>    (<span class="op">==</span><span class="st"> </span><span class="dv">4</span>.<span class="fl">0.17</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="automation.html#cb59-1"></a>Imports<span class="op">:</span></span>
+<span id="cb59-2"><a href="automation.html#cb59-2"></a><span class="st">   </span><span class="kw">dplyr</span>       (<span class="op">==</span><span class="st"> </span><span class="dv">0</span>.<span class="fl">4.3</span> )</span>
+<span id="cb59-3"><a href="automation.html#cb59-3"></a>   <span class="kw">ggplot2</span>     (<span class="op">==</span><span class="st"> </span><span class="dv">2</span>.<span class="fl">0.0</span> )</span>
+<span id="cb59-4"><a href="automation.html#cb59-4"></a>   <span class="kw">data.table</span>  (<span class="op">==</span><span class="st"> </span><span class="dv">1</span>.<span class="fl">10.4</span>)</span>
+<span id="cb59-5"><a href="automation.html#cb59-5"></a>   <span class="kw">lubridate</span>   (<span class="op">==</span><span class="st"> </span><span class="dv">1</span>.<span class="fl">6.0</span> )</span>
+<span id="cb59-6"><a href="automation.html#cb59-6"></a>   <span class="kw">openxlsx</span>    (<span class="op">==</span><span class="st"> </span><span class="dv">4</span>.<span class="fl">0.17</span>)</span></code></pre></div>
 <p>A downside is that it can be difficult to set up a identical machine in a few months. Sometimes these packages depend on a package version that is incompatible with other package versions. For example, at one point, the current version of dplyr was 0.4.3. A few months later, the rlang package (which wasn’t explicitly specified in the list of 42 packages) required at least version 0.8.0 of dplyr. The developer on the new machine needs to decide whether to upgrade dplyr (and test for breaking changes in the pipeline) or to install an older version of rlang.</p>
 <p>A second important downside is that this approach can lock all the user’s projects to specific outdated package version.</p>
 <p>We and others<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="https://insightindustry.com/"&gt;Chris Modzelewski&lt;/a&gt;&lt;/p&gt;'><sup>8</sup></a> advocate this approach when your team is experienced with only R, and has a machine dedicated to an important line-of-business workflow.</p>
@@ -267,7 +267,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-13.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
