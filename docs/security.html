@@ -17,9 +17,31 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
 <link rel="stylesheet" href="bs4_style.css">
 </head>
@@ -83,7 +105,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="security" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="security" class="section level1" number="9">
 <h1>
 <span class="header-section-number">9</span> Security &amp; Private Data<a class="anchor" aria-label="anchor" href="#security"><i class="fas fa-link"></i></a>
 </h1>
@@ -101,7 +123,7 @@ It provides schemas to further partition authorization.
 Real databases aren’t accidentally emailed or copied to an unsecured location.
 Transfer PHI into REDCap &amp; SQL Server as early as possible (particularly the CSVs &amp; XLSXs we regularly receive from partners).
 Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.</p>
-<div id="security-guidelines" class="section level2">
+<div id="security-guidelines" class="section level2" number="9.1">
 <h2>
 <span class="header-section-number">9.1</span> Security Guidelines<a class="anchor" aria-label="anchor" href="#security-guidelines"><i class="fas fa-link"></i></a>
 </h2>
@@ -141,7 +163,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 </li>
 </ul>
 </div>
-<div id="dataset-level-redaction" class="section level2">
+<div id="dataset-level-redaction" class="section level2" number="9.2">
 <h2>
 <span class="header-section-number">9.2</span> Dataset-level Redaction<a class="anchor" aria-label="anchor" href="#dataset-level-redaction"><i class="fas fa-link"></i></a>
 </h2>
@@ -155,7 +177,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <em>Hash and salt identifiers</em>: use cryptographic-quality algorithms transform an ID to a derived value. For example, “234” becomes “1432c1a399”. The original value of 234 is not recoverable from 1432c1a399. But two rows with 1432c1a399 are still attributed to the same patient by the statistical model.</li>
 </ol>
 </div>
-<div id="security-for-data-at-rest" class="section level2">
+<div id="security-for-data-at-rest" class="section level2" number="9.3">
 <h2>
 <span class="header-section-number">9.3</span> Security for Data at Rest<a class="anchor" aria-label="anchor" href="#security-for-data-at-rest"><i class="fas fa-link"></i></a>
 </h2>
@@ -181,21 +203,21 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li>Hash values when possible. For instance, when we determine families/networks of people, we use things like SSNs. But the algorithm that identifies the clusters doesn’t need to know the <em>actual</em> SSN, just that two records have the <em>same</em> SSN. Something like a <a href="http://en.wikipedia.org/wiki/SHA-2">SHA-256 hash</a> is good for this. The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can’t be determined from its hashed value. If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing &amp; salting process: <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/CodeUtilities/HashUtility.R">HashUtility.R</a> and <a href="https://github.com/OuhscBbmc/RedcapExample/blob/master/CodeUtilities/CreateSalt.R">CreateSalt.R</a>.</li>
 </ul>
 </div>
-<div id="file-level-permissions" class="section level2">
+<div id="file-level-permissions" class="section level2" number="9.4">
 <h2>
 <span class="header-section-number">9.4</span> File-level permissions<a class="anchor" aria-label="anchor" href="#file-level-permissions"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="database-permissions" class="section level2">
+<div id="database-permissions" class="section level2" number="9.5">
 <h2>
 <span class="header-section-number">9.5</span> Database permissions<a class="anchor" aria-label="anchor" href="#database-permissions"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="public-private-repositories" class="section level2">
+<div id="public-private-repositories" class="section level2" number="9.6">
 <h2>
 <span class="header-section-number">9.6</span> Public &amp; Private Repositories<a class="anchor" aria-label="anchor" href="#public-private-repositories"><i class="fas fa-link"></i></a>
 </h2>
-<div id="repo-rules" class="section level3">
+<div id="repo-rules" class="section level3" number="9.6.1">
 <h3>
 <span class="header-section-number">9.6.1</span> Repo Rules<a class="anchor" aria-label="anchor" href="#repo-rules"><i class="fas fa-link"></i></a>
 </h3>
@@ -211,7 +233,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 </li>
 </ul>
 </div>
-<div id="scrubbing-github-history" class="section level3">
+<div id="scrubbing-github-history" class="section level3" number="9.6.2">
 <h3>
 <span class="header-section-number">9.6.2</span> Scrubbing GitHub history<a class="anchor" aria-label="anchor" href="#scrubbing-github-history"><i class="fas fa-link"></i></a>
 </h3>
@@ -227,31 +249,31 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li><p>Download the most recent jar file from the BFG site to the home directory.</p></li>
 <li>
 <p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="security.html#cb50-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb50-2"><a href="security.html#cb50-2"></a><span class="fu">git</span> clone --mirror https://github.com/your-org/bloated.git</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="security.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb50-2"><a href="security.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--mirror</span> https://github.com/your-org/bloated.git</span></code></pre></div>
 </li>
 <li>
 <p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="security.html#cb51-1"></a><span class="ex">java</span> -jar bfg-*.jar --delete-files monster-data.csv bloated.git</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="security.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> bfg-<span class="pp">*</span>.jar <span class="at">--delete-files</span> monster-data.csv bloated.git</span></code></pre></div>
 </li>
 <li>
 <p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="security.html#cb52-1"></a><span class="bu">cd</span> bloated.git</span>
-<span id="cb52-2"><a href="security.html#cb52-2"></a><span class="fu">git</span> reflog expire --expire=now --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc --prune=now --aggressive</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="security.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bloated.git</span>
+<span id="cb52-2"><a href="security.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog expire <span class="at">--expire</span><span class="op">=</span>now <span class="at">--all</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc <span class="at">--prune</span><span class="op">=</span>now <span class="at">--aggressive</span></span></code></pre></div>
 </li>
 <li>
 <p>Push your local changes to the GitHub server.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="security.html#cb53-1"></a><span class="fu">git</span> push</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="security.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
 </li>
 <li>
 <p>Delete the bfg jar from the home directory.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="security.html#cb54-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb54-2"><a href="security.html#cb54-2"></a><span class="fu">rm</span> bfg-*.jar</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="security.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb54-2"><a href="security.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> bfg-<span class="pp">*</span>.jar</span></code></pre></div>
 </li>
 <li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
-<div id="resources" class="section level5">
+<div id="resources" class="section level5" number="9.6.2.0.1">
 <h5>
 <span class="header-section-number">9.6.2.0.1</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
 </h5>
@@ -299,7 +321,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

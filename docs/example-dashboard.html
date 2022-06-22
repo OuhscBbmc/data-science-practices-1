@@ -17,9 +17,31 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
 <link rel="stylesheet" href="bs4_style.css">
 </head>
@@ -83,7 +105,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="example-dashboard" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="example-dashboard" class="section level1" number="29">
 <h1>
 <span class="header-section-number">E</span> Example Dashboard<a class="anchor" aria-label="anchor" href="#example-dashboard"><i class="fas fa-link"></i></a>
 </h1>
@@ -96,7 +118,7 @@
 <li>The lessons we’ve learned (and mistakes we’ve made) can be applied to later dashboards. The quality should improve and the development should quicken.</li>
 </ol>
 <p>Just like our CQI grant encourages an HV program to learn from its history and to learn from others, we as analysts should too. As we work with the programs to design a PDSA, each one analyst will learn about the strengths and weaknesses of our current dashboard style, and propose improvements.</p>
-<div id="example-dashboard-example" class="section level2">
+<div id="example-dashboard-example" class="section level2" number="29.1">
 <h2>
 <span class="header-section-number">E.1</span> Example<a class="anchor" aria-label="anchor" href="#example-dashboard-example"><i class="fas fa-link"></i></a>
 </h2>
@@ -104,13 +126,13 @@
 <p>We’ve had success developing and distributing dashboards as self-contained html files. They are portable and don’t have dependencies on local data files or remote databases, yet the JavaScript and CSS provide a modest amount of interactivity. The dashboard’s principal components are <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a>, <a href="https://plot.ly/r/">plotly</a>, <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, and <a href="https://rmarkdown.rstudio.com/">R Markdown</a>.</p>
 <p>In this dashboard of synthetic data, a cognitive measure is tracked across 14 years in three home visiting counties.</p>
 </div>
-<div id="example-dashboard-guide" class="section level2">
+<div id="example-dashboard-guide" class="section level2" number="29.2">
 <h2>
 <span class="header-section-number">E.2</span> Style Guide<a class="anchor" aria-label="anchor" href="#example-dashboard-guide"><i class="fas fa-link"></i></a>
 </h2>
 <p>This section describes a set of practices that the <a href="https://ouhsc.edu/bbmc/">BBMC analysts</a> have decided are best for the CQI dashboards used in our MIECHV evaluations. In a sense, this CQI dashboard guide supplements our overall <a href="style.html#style">style guide</a>.</p>
 <p>The MIECHV CQI dashboards are based on RStudio’s <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a> package, which uses <a href="https://CRAN.R-project.org/package=rmarkdown">rmarkdown</a>, JavaScript, and CSS. flexdashboard has a <a href="https://rmarkdown.rstudio.com/flexdashboard/">great website</a> that should be read by anyone adapting this guide for their own CQI projects.</p>
-<div id="headline-page" class="section level3">
+<div id="headline-page" class="section level3" number="29.2.1">
 <h3>
 <span class="header-section-number">E.2.1</span> Headline page<a class="anchor" aria-label="anchor" href="#headline-page"><i class="fas fa-link"></i></a>
 </h3>
@@ -140,7 +162,7 @@
 </li>
 </ol>
 </div>
-<div id="tables-page" class="section level3">
+<div id="tables-page" class="section level3" number="29.2.2">
 <h3>
 <span class="header-section-number">E.2.2</span> Tables page<a class="anchor" aria-label="anchor" href="#tables-page"><i class="fas fa-link"></i></a>
 </h3>
@@ -164,7 +186,7 @@
 </li>
 </ol>
 </div>
-<div id="graphs-page" class="section level3">
+<div id="graphs-page" class="section level3" number="29.2.3">
 <h3>
 <span class="header-section-number">E.2.3</span> Graphs page<a class="anchor" aria-label="anchor" href="#graphs-page"><i class="fas fa-link"></i></a>
 </h3>
@@ -192,7 +214,7 @@
 <li>use <code>spaghetti_2()</code> located in <a href="https://github.com/OuhscBbmc/miechv-3/blob/master/analysis/common/display-1.R">display-1.R</a>. <strong>(not yet developed.)</strong> Add hover text to each spaghetti.</li>
 </ul>
 </div>
-<div id="marginal-graphs-page" class="section level3">
+<div id="marginal-graphs-page" class="section level3" number="29.2.4">
 <h3>
 <span class="header-section-number">E.2.4</span> Marginal Graphs page<a class="anchor" aria-label="anchor" href="#marginal-graphs-page"><i class="fas fa-link"></i></a>
 </h3>
@@ -215,7 +237,7 @@
 <li><p>histograms have a more specific <em>y</em>-axis. For example, “Count of Months” instead of “Frequency”</p></li>
 </ul>
 </div>
-<div id="documentation-page" class="section level3">
+<div id="documentation-page" class="section level3" number="29.2.5">
 <h3>
 <span class="header-section-number">E.2.5</span> Documentation page<a class="anchor" aria-label="anchor" href="#documentation-page"><i class="fas fa-link"></i></a>
 </h3>
@@ -237,7 +259,7 @@
 </li>
 </ol>
 </div>
-<div id="miscellaneous-notes" class="section level3">
+<div id="miscellaneous-notes" class="section level3" number="29.2.6">
 <h3>
 <span class="header-section-number">E.2.6</span> Miscellaneous Notes<a class="anchor" aria-label="anchor" href="#miscellaneous-notes"><i class="fas fa-link"></i></a>
 </h3>
@@ -259,7 +281,7 @@
 </ul>
 </div>
 </div>
-<div id="example-dashboard-architecture" class="section level2">
+<div id="example-dashboard-architecture" class="section level2" number="29.3">
 <h2>
 <span class="header-section-number">E.3</span> Architecture<a class="anchor" aria-label="anchor" href="#example-dashboard-architecture"><i class="fas fa-link"></i></a>
 </h2>
@@ -267,17 +289,17 @@
 <p><a href="https://github.com/wibeasley/RAnalysisSkeleton#intra-individual-differences">
 <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;">.
 </a></p>
-<div id="data-from-external-system" class="section level3">
+<div id="data-from-external-system" class="section level3" number="29.3.1">
 <h3>
 <span class="header-section-number">E.3.1</span> Data from External System<a class="anchor" aria-label="anchor" href="#data-from-external-system"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="groomed-data-in-warehouse" class="section level3">
+<div id="groomed-data-in-warehouse" class="section level3" number="29.3.2">
 <h3>
 <span class="header-section-number">E.3.2</span> Groomed Data in Warehouse<a class="anchor" aria-label="anchor" href="#groomed-data-in-warehouse"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="analysis-ready-dataset" class="section level3">
+<div id="analysis-ready-dataset" class="section level3" number="29.3.3">
 <h3>
 <span class="header-section-number">E.3.3</span> Analysis-Ready Dataset<a class="anchor" aria-label="anchor" href="#analysis-ready-dataset"><i class="fas fa-link"></i></a>
 </h3>
@@ -330,7 +352,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

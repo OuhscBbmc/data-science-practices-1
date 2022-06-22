@@ -17,9 +17,31 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
 <link rel="stylesheet" href="bs4_style.css">
 </head>
@@ -83,11 +105,11 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="rest" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="rest" class="section level1" number="7">
 <h1>
 <span class="header-section-number">7</span> Data at Rest<a class="anchor" aria-label="anchor" href="#rest"><i class="fas fa-link"></i></a>
 </h1>
-<div id="data-states" class="section level2">
+<div id="data-states" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Data States<a class="anchor" aria-label="anchor" href="#data-states"><i class="fas fa-link"></i></a>
 </h2>
@@ -104,32 +126,32 @@
 <li>Original</li>
 </ol>
 </div>
-<div id="data-containers" class="section level2">
+<div id="data-containers" class="section level2" number="7.2">
 <h2>
 <span class="header-section-number">7.2</span> Data Containers<a class="anchor" aria-label="anchor" href="#data-containers"><i class="fas fa-link"></i></a>
 </h2>
-<div id="data-containers-csv" class="section level3">
+<div id="data-containers-csv" class="section level3" number="7.2.1">
 <h3>
 <span class="header-section-number">7.2.1</span> csv<a class="anchor" aria-label="anchor" href="#data-containers-csv"><i class="fas fa-link"></i></a>
 </h3>
 <p>When exchanging data between two different systems, the preferred format is frequently plain text, where each cell in a record is separated by a comma. This is commonly called a csv –a <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma separated value</a> file. As opposed to <a href="rest.html#data-containers-avoid">proprietary formats</a> like xlsx or sas7bdat, a csv file is easily opened and parsable by most statistical software, and even conventional text editors and <a href="https://help.github.com/en/github/managing-files-in-a-repository/rendering-csv-and-tsv-data">GitHub</a>.</p>
 </div>
-<div id="data-containers-rds" class="section level3">
+<div id="data-containers-rds" class="section level3" number="7.2.2">
 <h3>
 <span class="header-section-number">7.2.2</span> rds<a class="anchor" aria-label="anchor" href="#data-containers-rds"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-yaml" class="section level3">
+<div id="data-containers-yaml" class="section level3" number="7.2.3">
 <h3>
 <span class="header-section-number">7.2.3</span> yaml, json, and xml<a class="anchor" aria-label="anchor" href="#data-containers-yaml"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/">yaml</a>, <a href="https://www.w3schools.com/js/js_json_intro.asp">json</a>, and <a href="https://www.w3schools.com/xml/">xml</a> are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds). If you are unsure where to start with a nested dataset, see tidyr’s <a href="https://tidyr.tidyverse.org/articles/rectangle.html">Rectangling vignette</a>.</p>
 <p>In the same way we advocate for the <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-recoding">simplest recoding</a> function that is adequate for the task, we prefer yaml over json, and json over xml. Yaml accommodates most, but not all our needs. Initially it may be tricky to correctly use whitespacing to specify the correct nesting structure in yaml, but once you are familar, the file is easy to read and edit, and the Git diffs can be quickly reviewed. The <a href="http://biostat.mc.vanderbilt.edu/wiki/Main/YamlR">yaml</a> package reads a yaml file, and returns a (nested) <a href="https://www.tutorialspoint.com/r/r_lists.htm">R list</a>; it can also convert an R list into a yaml file.</p>
 <p>The <a href="https://github.com/rstudio/config">config</a> package wraps the yaml package to fill a common need: retrieving repository configuration information from a yaml file. We recommend using the config package when it fits. In some ways its functionality is a simplification of the yaml package, but it is an extension in other ways. For example, when a value follows <code>!expr</code>, R will evaluate the expression. We commonly specify the allowable ranges for variables in <a href="https://github.com/OuhscBbmc/cdw-skeleton-1/blob/master/config.yml"><code>config.yml</code></a></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb40-1"><a href="rest.html#cb40-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb40-1"><a href="rest.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))</span></span></code></pre></div>
 <p>See the discussion of the <a href="https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html#repo-config"><code>config.yml</code></a> in our prototypical repository, as well.</p>
 </div>
-<div id="data-containers-arrow" class="section level3">
+<div id="data-containers-arrow" class="section level3" number="7.2.4">
 <h3>
 <span class="header-section-number">7.2.4</span> Arrow<a class="anchor" aria-label="anchor" href="#data-containers-arrow"><i class="fas fa-link"></i></a>
 </h3>
@@ -137,26 +159,26 @@
 <p>It is both an in-memory specification (which allows a Python process to directly access an R object), and an on-disk specification (which allows a Python process to read a saved R file). The file format is compressed, so it takes much less space to store on disk and less time to transfer over a network.</p>
 <p>Its downside is the file is not plain-text, but binary. That means the file is not readable and editable by as many programs, which hurts your project’s portability. You wouldn’t want to store most metadata files as arrow because then your collaborators couldn’t easily help you map the values to qqq</p>
 </div>
-<div id="data-containers-sqlite" class="section level3">
+<div id="data-containers-sqlite" class="section level3" number="7.2.5">
 <h3>
 <span class="header-section-number">7.2.5</span> SQLite<a class="anchor" aria-label="anchor" href="#data-containers-sqlite"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-database" class="section level3">
+<div id="data-containers-database" class="section level3" number="7.2.6">
 <h3>
 <span class="header-section-number">7.2.6</span> Central Enterprise database<a class="anchor" aria-label="anchor" href="#data-containers-database"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-redcap" class="section level3">
+<div id="data-containers-redcap" class="section level3" number="7.2.7">
 <h3>
 <span class="header-section-number">7.2.7</span> Central REDCap database<a class="anchor" aria-label="anchor" href="#data-containers-redcap"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-avoid" class="section level3">
+<div id="data-containers-avoid" class="section level3" number="7.2.8">
 <h3>
 <span class="header-section-number">7.2.8</span> Containers to avoid<a class="anchor" aria-label="anchor" href="#data-containers-avoid"><i class="fas fa-link"></i></a>
 </h3>
-<div id="data-containers-avoid-spreadsheets" class="section level4">
+<div id="data-containers-avoid-spreadsheets" class="section level4" number="7.2.8.1">
 <h4>
 <span class="header-section-number">7.2.8.1</span> Spreadsheets<a class="anchor" aria-label="anchor" href="#data-containers-avoid-spreadsheets"><i class="fas fa-link"></i></a>
 </h4>
@@ -164,7 +186,7 @@
 <p>If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values. After you close the spreadsheet, <a href="git.html#git-stability">review the Git commits</a> to verify no values were corrupted.</p>
 <p>See <a href="snippets.html#snippets-correspondence-excel">the appendix</a> for a list of the ways your analyses can be undermined when receiving Excel files, as well as a template to correspond with your less-experienced colleagues that is sending your team Excel files.</p>
 </div>
-<div id="data-containers-avoid-proprietary" class="section level4">
+<div id="data-containers-avoid-proprietary" class="section level4" number="7.2.8.2">
 <h4>
 <span class="header-section-number">7.2.8.2</span> Proprietary<a class="anchor" aria-label="anchor" href="#data-containers-avoid-proprietary"><i class="fas fa-link"></i></a>
 </h4>
@@ -173,11 +195,11 @@
 </div>
 </div>
 </div>
-<div id="data-conventions" class="section level2">
+<div id="data-conventions" class="section level2" number="7.3">
 <h2>
 <span class="header-section-number">7.3</span> Storage Conventions<a class="anchor" aria-label="anchor" href="#data-conventions"><i class="fas fa-link"></i></a>
 </h2>
-<div id="data-conventions-all" class="section level3">
+<div id="data-conventions-all" class="section level3" number="7.3.1">
 <h3>
 <span class="header-section-number">7.3.1</span> All Sources<a class="anchor" aria-label="anchor" href="#data-conventions-all"><i class="fas fa-link"></i></a>
 </h3>
@@ -193,7 +215,7 @@
 <li><p><strong>currency</strong>: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> or <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>) to be performed directly. Avoid commas and symbols like “$”. If there is a possibility of ambiguity, indicate the denomination in the variable name (<em>e.g.</em>, <code>payment_dollars</code> or <code>payment_euros</code>).</p></li>
 </ol>
 </div>
-<div id="data-conventions-text" class="section level3">
+<div id="data-conventions-text" class="section level3" number="7.3.2">
 <h3>
 <span class="header-section-number">7.3.2</span> Text<a class="anchor" aria-label="anchor" href="#data-conventions-text"><i class="fas fa-link"></i></a>
 </h3>
@@ -203,7 +225,7 @@
 <li><p><strong>cells enclosed in quotes</strong>: a ‘cell’ should be enclosed in double quotes, especially if it’s a string/character variable.</p></li>
 </ol>
 </div>
-<div id="data-conventions-excel" class="section level3">
+<div id="data-conventions-excel" class="section level3" number="7.3.3">
 <h3>
 <span class="header-section-number">7.3.3</span> Excel<a class="anchor" aria-label="anchor" href="#data-conventions-excel"><i class="fas fa-link"></i></a>
 </h3>
@@ -213,7 +235,7 @@
 <li><p><strong>save the cells as text</strong>: avoiding Excel attempting to save cells as dates or numbers. Admitedly, this is a last-ditch effort. If someone is using Excel to convert cells to text, the values are probably already corrupted.</p></li>
 </ol>
 </div>
-<div id="data-conventions-meditech" class="section level3">
+<div id="data-conventions-meditech" class="section level3" number="7.3.4">
 <h3>
 <span class="header-section-number">7.3.4</span> Meditech<a class="anchor" aria-label="anchor" href="#data-conventions-meditech"><i class="fas fa-link"></i></a>
 </h3>
@@ -236,7 +258,7 @@
 <strong>blood pressure</strong>: in most systems the <code>bp_diastolic</code> and <code>bp_systolic</code> values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a forward slash.</li>
 </ol>
 </div>
-<div id="data-conventions-database" class="section level3">
+<div id="data-conventions-database" class="section level3" number="7.3.5">
 <h3>
 <span class="header-section-number">7.3.5</span> Databases<a class="anchor" aria-label="anchor" href="#data-conventions-database"><i class="fas fa-link"></i></a>
 </h3>
@@ -291,7 +313,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-15.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
