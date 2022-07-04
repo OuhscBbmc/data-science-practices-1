@@ -209,6 +209,12 @@ The installation order does not matter.
 
 * **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install pysftp`; this calls pip through the `py` command which is sometimes in the path variable after installation.
 
+* **Updating Packages** Python packages don't need to be updated as frequently as R packages, but it's still good to do it every few months.  Paste this single line into PowerShell on Windows.  ([Stack Overflow solution](https://stackoverflow.com/a/51022937/1082435) from [Sébastien Wieckowski](https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski))
+
+    ```ps
+    pip list -o --format json | ConvertFrom-Json | foreach {pip install $_.name -U --no-warn-script-location}
+    ```
+
 ### PilotEdit {#workstation-pilot-edit}
 
 [PilotEdit](https://www.pilotedit.com/) can load huge text files that cannot fit into RAM, such as files that are over 100MB that choke Excel, [Calc](#workstation-calc),  [Notepad++](#workstation-notepadpp), and [Visual Studio Code](#workstation-vscode).  
