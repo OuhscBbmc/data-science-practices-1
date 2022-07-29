@@ -19,7 +19,7 @@ ix problems, but this is not required to start.)
 
 ### R Tools {#workstation-rtools}
 
-[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If runing Windows, follow the page's instructions, especially the "Putting Rtools on the PATH" section.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
+[R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If running Windows, follow the page's instructions, especially the "Putting Rtools on the PATH" section.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
 
 ### Installing R Packages {#workstation-r-package-installation}
 
@@ -121,7 +121,7 @@ Productivity in VS Code is enhanced with the following extensions:  {added Dec 2
 
 * [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) has some useful markdown capabilities, such as converting the file to html.
 
-* [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) has some useful markdown capbilities, such as converting the file to pdf.
+* [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf) has some useful markdown capabilities, such as converting the file to pdf.
 
 * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) has linting and style checking.
 
@@ -169,6 +169,8 @@ Note: here are some non-default changes that facilitate our workflow.  Either co
         "allowed_elements": [
           "mermaid",
           "a",
+          "br",
+          "details",
           "img"
         ]
       }
@@ -207,11 +209,11 @@ The installation order does not matter.
   conda install numpy pandas scikit-learn matplotlib
   ```
 
-* **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install pysftp`; this calls pip through the `py` command which is sometimes in the path variable after installation.
+* **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install paramiko`; this calls pip through the `py` command which is sometimes in the path variable after installation.
 
 ### PilotEdit {#workstation-pilot-edit}
 
-[PilotEdit](https://www.pilotedit.com/) can load huge text files that cannot fit into RAM, such as files that are over 100MB that choke Excel, [Calc](#workstation-calc),  [Notepad++](#workstation-notepadpp), and [Visual Studio Code](#workstation-vscode).  
+[PilotEdit](https://www.pilotedit.com/) can load huge text files that cannot fit into RAM, such as files that are over 100MB that choke Excel, [Calc](#workstation-calc),  [Notepad++](#workstation-notepadpp), and [Visual Studio Code](#workstation-vscode).
 
 Like Notepad++ and VS Code, PilotEdit has good Find features that can (a) present all search hits within a file, (b) scan multiple files, and (c) use regular expressions.  This helps trace the origin of problems in a pipeline.  For example, if our data warehouse has a suspicious character in patient 10009's BMI value, the [regex](https://www.regular-expressions.info/) `\b10009\tbmi\b` locates the origin among the multiple 1+GB files we received.
 
@@ -271,7 +273,9 @@ For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/b
 
 ### WinSCP {#workstation-winscp}
 
-[WinSCP](https://winscp.net/eng/download.php) is a GUI for SCP and SFTP file transfer using SSH keys.  The tool is occassionally useful for admins when collaborating with other institutions or [other OU computing resources](https://www.ou.edu/oscer).  Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators.  The typical data scientist on our teams does not need this tool.
+[WinSCP](https://winscp.net/eng/download.php) is a GUI for SCP and SFTP file transfer using SSH keys.  The tool is occasionally useful for admins when collaborating with other institutions or [other OU computing resources](https://www.ou.edu/oscer).  Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators.  The typical data scientist on our teams does not need this tool.
+
+An alternative is FileZilla.  It works with multiple OSes, but currently doesn't support scp (only sftp).
 
 Installation Troubleshooting {#workstation-troubleshooting}
 -----------------------------------
@@ -280,10 +284,10 @@ Installation Troubleshooting {#workstation-troubleshooting}
 
 * **Git**: On a different computer, Will Beasley couldn't get RStudio to recognize msysGit, so installed the `Full installer for official Git for Windows 1.7.11` from (http://code.google.com/p/msysgit/downloads/list) and switched the Git Path in the RStudio Options. {added Sept 2012}
 
-* **RStudio** 
-    * If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\`.  The options settings are stored (and can be manipulated) in this extentionless text file: `C:\Users\wibeasley\AppData\Local\RStudio\monitored\user-settings\user-settings`. See RStudio's support page, [Resetting RStudio Desktop's State](https://support.rstudio.com/hc/en-us/articles/200534577-Resetting-RStudio-s-State). {added Sept 2012}
+* **RStudio**
+    * If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren't erased.  To be safe, you can be thorough and delete the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\`.  The options settings are stored (and can be manipulated) in this extensionless text file: `C:\Users\wibeasley\AppData\Local\RStudio\monitored\user-settings\user-settings`. See RStudio's support page, [Resetting RStudio Desktop's State](https://support.rstudio.com/hc/en-us/articles/200534577-Resetting-RStudio-s-State). {added Sept 2012}
     * Hold down the ctrl button when clicking on RStudio in the Windows Start Menu.  Try switching up the 64/32-bit option.  For a VDI, forcing it to a software-rendering option fixed a problem where the RStudio window opened, but nothing was visible inside.  {added Jan 2022}
-    * It might help to look in the logs, which are stored inthe equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\logs`  {added Jan 2022}
+    * It might help to look in the logs, which are stored in the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\logs`  {added Jan 2022}
 
 Windows Installation {#workstation-windows}
 -----------------------------------
@@ -329,7 +333,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
 ```sh
 ( function install-packages {
-  
+
   ### Git
   sudo apt-get install git-core
   git config --global user.email "wibeasley@hotmail.com"
@@ -360,7 +364,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The 'rgl' package; https://stackoverflow.com/a/39952771/1082435
   sudo apt-get --yes install libcgal-dev libglu1-mesa-dev
-  
+
   # The 'gsl' package; https://cran.rstudio.com/web/packages/gsl/INSTALL
   sudo apt-get --yes install libgsl0-dev
 
@@ -375,8 +379,8 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   # The 'sys' package
   sudo apt-get --yes install libapparmor-dev
-  
-  # The 'archive' package; https://CRAN.R-project.org/package=archive 
+
+  # The 'archive' package; https://CRAN.R-project.org/package=archive
   sudo apt-get --yes install libarchive-dev
 
   # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208
@@ -466,7 +470,7 @@ We previously installed the software below.  Most have been replaced by software
     1. [minimap](https://atom.io/packages/minimap): A preview of the full source code (in the right margin).
     1. [script](https://atom.io/packages/script): Run scripts based on file name, a selection of code, or by line number.
     1. [git-plus](https://atom.io/packages/git-plus): Do git things without the terminal (I don't think this is necessary anymore).
-    
+
     The packages can be installed through Atom, or through the `apm` utility in the command line:
 
     ```bash

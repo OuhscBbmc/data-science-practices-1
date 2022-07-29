@@ -287,7 +287,7 @@ If someone has a proposed solution, we would love to hear it.  So far, we've bee
 
 #### Define the dataset when in doubt {#style-naming-datasets-define}
 
-If it's potentially unclear to a new reader, use a comment immediately before the dataset's initial use.
+If it's potentially unclear to a new reader, use a comment immediately before the dataset's initial use.  The [grain](#style-naming-datasets-grain) is frequently the most important characteristic to document.
 
 ```r
 # `ds_client_enroll`:
@@ -341,7 +341,7 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 Code Repositories {#style-repo}
 ------------------------------------
 
-Our analytical team dedicates a private repo to each research project.  It is a repository in GitHub accessible only to the team members given explicit privileges.  Repos are also discussed in the [Git & GitHub](#git) appendix. 
+Our analytical team dedicates a private repo to each research project.  It is a repository in GitHub accessible only to the team members given explicit privileges.  Repos are also discussed in the [Git & GitHub](#git) appendix.
 
 ### Repo Naming {#style-repo-naming}
 

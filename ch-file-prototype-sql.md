@@ -33,11 +33,11 @@ declare @stop_date  date = dateadd(day, -1, cast(getdate() as date));  -- sync w
 
 DROP TABLE if exists ley_covid_1.dx;
 CREATE TABLE ley_covid_1.dx(
-  dx_id           int identity(1, 1) primary key,
-  patient_id      int         not null,
-  covid_confirmed bit         not null,
-  problem_date    date            null,
-  icd10_code      varchar(20) not null
+  dx_id           int identity  primary key,
+  patient_id      int           not null,
+  covid_confirmed bit           not null,
+  problem_date    date,
+  icd10_code      varchar(20)   not null
 );
 -- TRUNCATE TABLE ley_covid_1.dx;
 
