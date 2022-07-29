@@ -230,9 +230,9 @@ workstation-retired
 tools
 general
 the-components-goal
-current-skillset-of-team
-desired-future-skillset-of-team
-skillset-of-audience
+current-skill-set-of-team
+desired-future-skill-set-of-team
+skill-set-of-audience
 languages
 r-packages
 database

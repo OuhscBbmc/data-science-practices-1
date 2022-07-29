@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="2.1 Simplify  2.1.1 Data Types Use the simplest data type reasonable. A simpler data type is less likely contain unintended values. As we have seen, a string variable called gender can...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -168,131 +168,131 @@
 <p><strong><a href="https://dplyr.tidyverse.org/reference/coalesce.html"><code>dplyr::coalesce()</code></a></strong>: The function evaluates a single variable and replaces <code>NA</code> with values from another variable.</p>
 <p>A coalesce like</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">coalesce</span><span class="op">(</span><span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">coalesce</span><span class="op">(</span><span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>is much easier to read and not mess up than</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">visit_completed</span><span class="op">)</span>, <span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">visit_completed</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">visit_completed</span><span class="op">)</span>, <span class="va">visit_completed</span>, <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong><a href="https://dplyr.tidyverse.org/reference/na_if.html"><code>dplyr::na_if()</code></a></strong> transforms a nonmissing value into an NA.</p>
 <p>Recoding missing values like</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">na_if</span><span class="op">(</span><span class="va">birth_apgar</span>, <span class="fl">99</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">na_if</span><span class="op">(</span><span class="va">birth_apgar</span>, <span class="fl">99</span><span class="op">)</span></span></code></pre></div>
 <p>is easier to read and not mess up than</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">birth_apgar</span> <span class="op">==</span> <span class="fl">99</span>, <span class="cn">NA_real_</span>, <span class="va">birth_apgar</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">birth_apgar</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">birth_apgar</span> <span class="op">==</span> <span class="fl">99</span>, <span class="cn">NA_real_</span>, <span class="va">birth_apgar</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong><code>&lt;=</code></strong> (or a similar comparison operator): Compare two quantities to output a boolean variable. The parentheses are unnecessary, but can help readability. If either value is <code>NA</code>, then the result is <code>NA</code>.</p>
 <p>Notice that we prefer to order the variables like a number line. When the result is <code>TRUE</code>, the smaller value is to the left of the larger value.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dob_in_the_future</span>   <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">dob</span><span class="op">)</span>
-<span class="va">dod_follows_dob</span>     <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="va">dod</span><span class="op">)</span>
-<span class="va">premature</span>           <span class="op">&lt;-</span> <span class="op">(</span><span class="va">gestation_weeks</span> <span class="op">&lt;</span> <span class="fl">37</span><span class="op">)</span>
-<span class="va">big_boy</span>             <span class="op">&lt;-</span> <span class="op">(</span><span class="va">threshold_in_kg</span> <span class="op">&lt;=</span> <span class="va">birth_weight_in_kg</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dob_in_the_future</span>   <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&lt;</span> <span class="va">dob</span><span class="op">)</span></span>
+<span><span class="va">dod_follows_dob</span>     <span class="op">&lt;-</span> <span class="op">(</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="va">dod</span><span class="op">)</span></span>
+<span><span class="va">premature</span>           <span class="op">&lt;-</span> <span class="op">(</span><span class="va">gestation_weeks</span> <span class="op">&lt;</span> <span class="fl">37</span><span class="op">)</span></span>
+<span><span class="va">big_boy</span>             <span class="op">&lt;-</span> <span class="op">(</span><span class="va">threshold_in_kg</span> <span class="op">&lt;=</span> <span class="va">birth_weight_in_kg</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong><a href="https://dplyr.tidyverse.org/reference/if_else.html"><code>dplyr::if_else()</code></a></strong>: The function evaluates a single boolean variable or expression. The output branches to only three possibilities: the input is (a) true, (b) false, or (c) (optionally) <code>NA</code>. Notice that unlike the <code>&lt;=</code> operator, <code>dplyr::if_else()</code> lets you specify a value if the input expression evaluates to <code>NA</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">date_start</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2017-01-01"</span><span class="op">)</span>
-
-<span class="co"># If a missing month element needs to be handled explicitly.</span>
-<span class="va">stage</span>       <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="st">"post"</span>, <span class="st">"pre"</span>, missing <span class="op">=</span> <span class="st">"missing-month"</span><span class="op">)</span>
-
-<span class="co"># Otherwise a simple boolean output is sufficient.</span>
-<span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">date_start</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2017-01-01"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># If a missing month element needs to be handled explicitly.</span></span>
+<span><span class="va">stage</span>       <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="st">"post"</span>, <span class="st">"pre"</span>, missing <span class="op">=</span> <span class="st">"missing-month"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Otherwise a simple boolean output is sufficient.</span></span>
+<span><span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span><span class="op">)</span></span></code></pre></div>
 <p>If it is important that the reader understand that an input expression of <code>NA</code> will produce an NA, consider using <code>dplyr::if_else()</code>. Even though these two lines are equivalent, a casual reader may not consider that <code>stage_post</code> could be <code>NA</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span><span class="op">)</span>
-<span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, missing <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span><span class="op">)</span></span>
+<span><span class="va">stage_post</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">date_start</span> <span class="op">&lt;=</span> <span class="va">month</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, missing <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong><a href="https://dplyr.tidyverse.org/reference/between.html"><code>dplyr::between()</code></a></strong>: The function evaluates a numeric <code>x</code> against a <code>left</code> and a <code>right</code> boundary to return a boolean value. The output is <code>TRUE</code> if <code>x</code> is inside the boundaries or equal to either boundary (<em>i.e.</em>, the boundaries are <em>in</em>clusive). The output is <code>FALSE</code> if <code>x</code> is outside either boundary.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">too_cold</span>      <span class="op">&lt;-</span> <span class="fl">60</span>
-<span class="va">too_hot</span>       <span class="op">&lt;-</span> <span class="fl">88</span>
-<span class="va">goldilocks_1</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">between</span><span class="op">(</span><span class="va">temperature</span>, <span class="va">too_cold</span>, <span class="va">too_hot</span><span class="op">)</span>
-
-<span class="co"># This is equivalent to the previous line.</span>
-<span class="va">goldilocks_2</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;=</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;=</span> <span class="va">too_hot</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">too_cold</span>      <span class="op">&lt;-</span> <span class="fl">60</span></span>
+<span><span class="va">too_hot</span>       <span class="op">&lt;-</span> <span class="fl">88</span></span>
+<span><span class="va">goldilocks_1</span>  <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">between</span><span class="op">(</span><span class="va">temperature</span>, <span class="va">too_cold</span>, <span class="va">too_hot</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># This is equivalent to the previous line.</span></span>
+<span><span class="va">goldilocks_2</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;=</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;=</span> <span class="va">too_hot</span><span class="op">)</span></span></code></pre></div>
 <p>If you need an <em>ex</em>clusive boundary, abandon <code>dplyr::between()</code> and specify it exactly.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Left boundary is exclusive</span>
-<span class="va">goldilocks_3</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;=</span> <span class="va">too_hot</span><span class="op">)</span>
-
-<span class="co"># Both boundaries are exclusive</span>
-<span class="va">goldilocks_4</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;</span>  <span class="va">too_hot</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Left boundary is exclusive</span></span>
+<span><span class="va">goldilocks_3</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;=</span> <span class="va">too_hot</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Both boundaries are exclusive</span></span>
+<span><span class="va">goldilocks_4</span>  <span class="op">&lt;-</span> <span class="op">(</span><span class="va">too_cold</span> <span class="op">&lt;</span> <span class="va">temperature</span> <span class="op">&amp;</span> <span class="va">temperature</span> <span class="op">&lt;</span>  <span class="va">too_hot</span><span class="op">)</span></span></code></pre></div>
 <p>If your code starts to nest <code>dplyr::between()</code> calls inside <code>dplyr::if_else()</code>, consider <code><a href="https://rdrr.io/r/base/cut.html">base::cut()</a></code>.</p>
 </li>
 <li>
 <p><strong><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a></strong>: The function transforms a single numeric variable into a factor. Its range is cut into different segments/categories on the one-dimensional number line. The output branches to single discrete value (either a factor-level or an integer). Modify the <code>right</code> parameter to <code>FALSE</code> if you’d like the left/lower bound to be inclusive (which tends to be more natural for me).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> |&gt;
-  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>
-    <span class="va">disp</span>,
-  <span class="op">)</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
-    <span class="co"># Example of a simple inequality operator (see two bullets above)</span>
-    muscle_car            <span class="op">=</span> <span class="op">(</span><span class="fl">300</span> <span class="op">&lt;=</span> <span class="va">disp</span><span class="op">)</span>,
-
-    <span class="co"># Divide `disp` into three levels.</span>
-    size_default_labels   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">disp</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">200</span>, <span class="fl">300</span>, <span class="cn">Inf</span><span class="op">)</span>, right <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,
-
-    <span class="co"># Divide `disp` into three levels with custom labels.</span>
-    size_cut3             <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span>
-      <span class="va">disp</span>,
-      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,   <span class="fl">200</span>,      <span class="fl">300</span>,   <span class="cn">Inf</span><span class="op">)</span>,
-      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="st">"small"</span>, <span class="st">"medium"</span>, <span class="st">"big"</span><span class="op">)</span>,
-      right <span class="op">=</span> <span class="cn">FALSE</span>  <span class="co"># Is the right boundary INclusive ('FALSE' is an EXclusive boundary)</span>
-    <span class="op">)</span>,
-
-    <span class="co"># Divide `disp` into five levels with custom labels.</span>
-    size_cut5             <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span>
-      <span class="va">disp</span>,
-      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,         <span class="fl">100</span>,            <span class="fl">150</span>,            <span class="fl">200</span>,      <span class="fl">300</span>,   <span class="cn">Inf</span><span class="op">)</span>,
-      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="st">"small small"</span>, <span class="st">"medium small"</span>, <span class="st">"biggie small"</span>, <span class="st">"medium"</span>, <span class="st">"big"</span><span class="op">)</span>,
-      right <span class="op">=</span> <span class="cn">FALSE</span>
-    <span class="op">)</span>,
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span></span>
+<span>    <span class="va">disp</span>,</span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
+<span>    <span class="co"># Example of a simple inequality operator (see two bullets above)</span></span>
+<span>    muscle_car            <span class="op">=</span> <span class="op">(</span><span class="fl">300</span> <span class="op">&lt;=</span> <span class="va">disp</span><span class="op">)</span>,</span>
+<span></span>
+<span>    <span class="co"># Divide `disp` into three levels.</span></span>
+<span>    size_default_labels   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">disp</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">200</span>, <span class="fl">300</span>, <span class="cn">Inf</span><span class="op">)</span>, right <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>,</span>
+<span></span>
+<span>    <span class="co"># Divide `disp` into three levels with custom labels.</span></span>
+<span>    size_cut3             <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span></span>
+<span>      <span class="va">disp</span>,</span>
+<span>      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,   <span class="fl">200</span>,      <span class="fl">300</span>,   <span class="cn">Inf</span><span class="op">)</span>,</span>
+<span>      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="st">"small"</span>, <span class="st">"medium"</span>, <span class="st">"big"</span><span class="op">)</span>,</span>
+<span>      right <span class="op">=</span> <span class="cn">FALSE</span>  <span class="co"># Is the right boundary INclusive ('FALSE' is an EXclusive boundary)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span></span>
+<span>    <span class="co"># Divide `disp` into five levels with custom labels.</span></span>
+<span>    size_cut5             <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span></span>
+<span>      <span class="va">disp</span>,</span>
+<span>      breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>,         <span class="fl">100</span>,            <span class="fl">150</span>,            <span class="fl">200</span>,      <span class="fl">300</span>,   <span class="cn">Inf</span><span class="op">)</span>,</span>
+<span>      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>  <span class="st">"small small"</span>, <span class="st">"medium small"</span>, <span class="st">"biggie small"</span>, <span class="st">"medium"</span>, <span class="st">"big"</span><span class="op">)</span>,</span>
+<span>      right <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong><a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode()</code></a></strong>: The function accepts an integer or character variable. The output branches to a single discrete value. This example maps integers to strings.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># https://www.census.gov/quickfacts/fact/note/US/RHI625219</span>
-<span class="va">race_id</span>        <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">3L</span>, <span class="fl">4L</span>, <span class="fl">2L</span>, <span class="cn">NA_integer_</span><span class="op">)</span>
-<span class="va">race_id_spouse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="cn">NA_integer_</span><span class="op">)</span>
-<span class="va">race</span> <span class="op">&lt;-</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span>
-    <span class="va">race_id</span>,
-    <span class="st">"1"</span>      <span class="op">=</span> <span class="st">"White"</span>,
-    <span class="st">"2"</span>      <span class="op">=</span> <span class="st">"Black or African American"</span>,
-    <span class="st">"3"</span>      <span class="op">=</span> <span class="st">"American Indian and Alaska Native"</span>,
-    <span class="st">"4"</span>      <span class="op">=</span> <span class="st">"Asian"</span>,
-    <span class="st">"5"</span>      <span class="op">=</span> <span class="st">"Native Hawaiian or Other Pacific Islander"</span>,
-    .missing <span class="op">=</span> <span class="st">"Unknown"</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># https://www.census.gov/quickfacts/fact/note/US/RHI625219</span></span>
+<span><span class="va">race_id</span>        <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">3L</span>, <span class="fl">4L</span>, <span class="fl">2L</span>, <span class="cn">NA_integer_</span><span class="op">)</span></span>
+<span><span class="va">race_id_spouse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="cn">NA_integer_</span><span class="op">)</span></span>
+<span><span class="va">race</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span></span>
+<span>    <span class="va">race_id</span>,</span>
+<span>    <span class="st">"1"</span>      <span class="op">=</span> <span class="st">"White"</span>,</span>
+<span>    <span class="st">"2"</span>      <span class="op">=</span> <span class="st">"Black or African American"</span>,</span>
+<span>    <span class="st">"3"</span>      <span class="op">=</span> <span class="st">"American Indian and Alaska Native"</span>,</span>
+<span>    <span class="st">"4"</span>      <span class="op">=</span> <span class="st">"Asian"</span>,</span>
+<span>    <span class="st">"5"</span>      <span class="op">=</span> <span class="st">"Native Hawaiian or Other Pacific Islander"</span>,</span>
+<span>    .missing <span class="op">=</span> <span class="st">"Unknown"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>If multiple variables have the same mapping, define the mapping once in a named vector, and pass it for multiple calls to <code>dplyr::recode()</code>. Notice that the two variables <code>race</code> and <code>race_spouse</code> use the same mapping.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;For now, employ the &lt;code&gt;!!!&lt;/code&gt; operator without understanding it. When you’re more comfortable with R, read about &lt;a href="https://adv-r.hadley.nz/quasiquotation.html#unquoting-many-arguments"&gt;quosures and lazy evaluation&lt;/a&gt; so you can use it in more general scenarios.&lt;/p&gt;'><sup>3</sup></a></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mapping_race</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"White"</span>,
-  <span class="st">"2"</span> <span class="op">=</span> <span class="st">"Black or African American"</span>,
-  <span class="st">"3"</span> <span class="op">=</span> <span class="st">"American Indian and Alaska Native"</span>,
-  <span class="st">"4"</span> <span class="op">=</span> <span class="st">"Asian"</span>,
-  <span class="st">"5"</span> <span class="op">=</span> <span class="st">"Native Hawaiian or Other Pacific Islander"</span>
-<span class="op">)</span>
-<span class="va">race</span> <span class="op">&lt;-</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span>
-    <span class="va">race_id</span>,
-    <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">mapping_race</span>,
-    .missing <span class="op">=</span> <span class="st">"Unknown"</span>
-  <span class="op">)</span>
-<span class="va">race_spouse</span> <span class="op">&lt;-</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span>
-    <span class="va">race_id_spouse</span>,
-    <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">mapping_race</span>,
-    .missing <span class="op">=</span> <span class="st">"Unknown"</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mapping_race</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"1"</span> <span class="op">=</span> <span class="st">"White"</span>,</span>
+<span>  <span class="st">"2"</span> <span class="op">=</span> <span class="st">"Black or African American"</span>,</span>
+<span>  <span class="st">"3"</span> <span class="op">=</span> <span class="st">"American Indian and Alaska Native"</span>,</span>
+<span>  <span class="st">"4"</span> <span class="op">=</span> <span class="st">"Asian"</span>,</span>
+<span>  <span class="st">"5"</span> <span class="op">=</span> <span class="st">"Native Hawaiian or Other Pacific Islander"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">race</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span></span>
+<span>    <span class="va">race_id</span>,</span>
+<span>    <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">mapping_race</span>,</span>
+<span>    .missing <span class="op">=</span> <span class="st">"Unknown"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="va">race_spouse</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">recode</span><span class="op">(</span></span>
+<span>    <span class="va">race_id_spouse</span>,</span>
+<span>    <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">mapping_race</span>,</span>
+<span>    .missing <span class="op">=</span> <span class="st">"Unknown"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>Tips for <code>dplyr::recode()</code>:</p>
 <ul>
 <li>A reusable dedicated mapping vector is very useful for surveys with 10+ Likert items with consistent levels like “disagree”, “neutral”, “agree”.</li>
@@ -342,17 +342,17 @@
 <li>
 <p>In the <a href="file-prototype-r.html#chunk-tweak-data">tweak-data</a> chunk, use <a href="https://ouhscbbmc.github.io/OuhscMunge/reference/trim.html"><code>OuhscMunge::trim_date()</code></a> to set the cell to <code>NA</code> if it falls outside an acceptable range. After <a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>dplyr::mutate()</code></a>, call <a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> to exclude the entire record, regardless if (a) it was already <code>NA</code>, or (b) was “trimmed” to <code>NA</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span>
-  <span class="va">ds</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
-    dob <span class="op">=</span> <span class="fu">OuhscMunge</span><span class="fu">::</span><span class="fu">trim_date</span><span class="op">(</span><span class="va">dob</span>, <span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">)</span>
-  <span class="op">)</span> |&gt;
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
+<span>    dob <span class="op">=</span> <span class="fu">OuhscMunge</span><span class="fu">::</span><span class="fu">trim_date</span><span class="op">(</span><span class="va">dob</span>, <span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p>Even though it’s overkill after trimming, (eventually) verify the variable for three reasons: (a) there’s a chance that the code above isn’t working as expected, (b) later code might have introduced bad values, and (c) it clearly documents to a reader that <code>dob</code> was included in this range at this stage of the pipeline.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_date</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span>, any.missing<span class="op">=</span><span class="cn">F</span>, lower<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, upper<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_date</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span>, any.missing<span class="op">=</span><span class="cn">F</span>, lower<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, upper<span class="op">=</span><span class="va">config</span><span class="op">$</span><span class="va">range_dob</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 </li>
 </ol>
 </div>
@@ -374,19 +374,19 @@
 <li>
 <p>the vector’s values are unique, which arises when you’re about to upload a primary key to a database (<em>e.g.</em>, a patient ID to the patient table),</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">pt_id</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">pt_id</span>, unique <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p>a vector’s string should follow a strict pattern (<em>e.g.</em>, the patient ID is a “A” or “B”, followed by 4 digits)</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">pt_id</span>, pattern <span class="op">=</span> <span class="st">"^[AB]\\d{4}$"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">pt_id</span>, pattern <span class="op">=</span> <span class="st">"^[AB]\\d{4}$"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p>the database doesn’t accept names longer than 50 characters</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">name_first</span>, min.chars <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>
-<span class="co"># or</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">name_first</span>, pattern <span class="op">=</span> <span class="st">"^.{0,50}$"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">name_first</span>, min.chars <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
+<span><span class="co"># or</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">name_first</span>, pattern <span class="op">=</span> <span class="st">"^.{0,50}$"</span><span class="op">)</span></span></code></pre></div>
 </li>
 </ul>
 <p>The <code>pattern</code> argument is ultimately passed to <code><a href="https://rdrr.io/r/base/grep.html">base::grepl()</a></code>, which leverage regular expressions.</p>
@@ -399,30 +399,30 @@
 <p>This is especially important for recurring scripts that process new datasets that are never inspected by a human, such as a daily forecast. Even though today’s incoming dataset is fine, you shouldn’t trust next month’s. At worst, the lonely test never catches a violation (and you wasted 5 minutes). At best, it catches a problem that would have proceeded undetected and compromised your downstream analyses.</p>
 <p>The following snippet asserts it’s acceptable that 2% of patients are missing an age, but it should never get worse than 5%. Therefore it throws an error when the missingness exceeds 5% and it throws an warning if it exceeds 2%.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Simulate a vector of ages.</span>
-<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="co"># Define thresholds for errors &amp; warnings.</span>
-<span class="va">threshold_error</span>     <span class="op">&lt;-</span> <span class="fl">.05</span>
-<span class="va">threshold_warning</span>   <span class="op">&lt;-</span> <span class="fl">.02</span>
-
-<span class="co"># Calculate proportion of missing cells.</span>
-<span class="va">missing_proportion</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Accompany the error/warning with an informative message.</span>
-<span class="kw">if</span> <span class="op">(</span><span class="va">threshold_error</span> <span class="op">&lt;</span> <span class="va">missing_proportion</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span>
-    <span class="st">"The proportion of missing `age` values is "</span>, <span class="va">missing_proportion</span>,
-    <span class="st">", but it shouldn't exceed "</span>, <span class="va">threshold_error</span>, <span class="st">"."</span>
-  <span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">threshold_warning</span> <span class="op">&lt;</span> <span class="va">missing_proportion</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span>
-    <span class="st">"The proportion of missing `age` values is "</span>, <span class="va">missing_proportion</span>,
-    <span class="st">", but ideally it stays below "</span>, <span class="va">threshold_warning</span>, <span class="st">"."</span>
-  <span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Simulate a vector of ages.</span></span>
+<span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define thresholds for errors &amp; warnings.</span></span>
+<span><span class="va">threshold_error</span>     <span class="op">&lt;-</span> <span class="fl">.05</span></span>
+<span><span class="va">threshold_warning</span>   <span class="op">&lt;-</span> <span class="fl">.02</span></span>
+<span></span>
+<span><span class="co"># Calculate proportion of missing cells.</span></span>
+<span><span class="va">missing_proportion</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Accompany the error/warning with an informative message.</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">threshold_error</span> <span class="op">&lt;</span> <span class="va">missing_proportion</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span></span>
+<span>    <span class="st">"The proportion of missing `age` values is "</span>, <span class="va">missing_proportion</span>,</span>
+<span>    <span class="st">", but it shouldn't exceed "</span>, <span class="va">threshold_error</span>, <span class="st">"."</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">threshold_warning</span> <span class="op">&lt;</span> <span class="va">missing_proportion</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/warning.html">warning</a></span><span class="op">(</span></span>
+<span>    <span class="st">"The proportion of missing `age` values is "</span>, <span class="va">missing_proportion</span>,</span>
+<span>    <span class="st">", but ideally it stays below "</span>, <span class="va">threshold_warning</span>, <span class="st">"."</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 
 </div>
 </div>
@@ -468,7 +468,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

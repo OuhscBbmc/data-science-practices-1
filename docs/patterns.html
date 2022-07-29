@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="8.1 Ellis  8.1.1 Purpose To incorporate outside data source into your system safely.  8.1.2 Philosophy  Without data immigration, all warehouses are useless. Embrace the power of fresh information...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -173,46 +173,46 @@
 <li>
 <p><strong>Clear memory</strong> In scripting languages like R (unlike compiled languages like Java), it’s easy for old variables to hang around. Explicitly clear them before you run the file again.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co">#Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Load Sources</strong> In R, a <code><a href="https://rdrr.io/r/base/source.html">source()</a></code>d file is run to execute its code. We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation. There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like. The first is collecting those common functions into a single file (and then sourcing it in the callers). The second is to make the repo a legitimate R package.</p>
 <p>The first approach is better suited for quick &amp; easy development. The second allows you to add documentation and unit tests.</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- load-sources ------------------------------------------------------------</span>
-<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"./manipulation/osdh/ellis/common-ellis.R"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"./manipulation/osdh/ellis/common-ellis.R"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Load Packages</strong> This is another precaution necessary in a scripting language. Determine if the necessary packages are available on the machine. Avoiding attaching packages (with the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> function) when possible. Their functions don’t need to be qualified (<em>e.g.</em>, <code>dplyr::intersect()</code>) and could cause naming conflicts. Even if you can guarantee they don’t conflict with packages now, packages could add new functions in the future that do conflict.</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- load-packages -----------------------------------------------------------</span>
-<span class="co"># Attach these package(s) so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span>            , quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span>                 , quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-
-<span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"readr"</span>        <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyr"</span>        <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span>        <span class="op">)</span> <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"testit"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"checkmate"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"OuhscMunge"</span><span class="op">)</span> <span class="co"># remotes::install_github(repo="OuhscBbmc/OuhscMunge")</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
+<span><span class="co"># Attach these package(s) so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span>            , quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span>                 , quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"readr"</span>        <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyr"</span>        <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span>        <span class="op">)</span> <span class="co"># Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"testit"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"checkmate"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"OuhscMunge"</span><span class="op">)</span> <span class="co"># remotes::install_github(repo="OuhscBbmc/OuhscMunge")</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Declare Global Variables and Functions</strong>. This includes defining the expected column names and types of the data sources; use <code>readr::cols_only()</code> (as opposed to <code>readr::cols()</code>) to ignore any new columns that may be been added since the dataset’s last refresh.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- declare-globals ---------------------------------------------------------</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Load Data Source(s)</strong> See <a href="file-prototype-r.html#chunk-load-data">load-data</a> chunk described in the prototypical file.</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- load-data ---------------------------------------------------------------</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- load-data ---------------------------------------------------------------</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Tweak Data</strong></p>
 <p>See <a href="file-prototype-r.html#chunk-tweak-data">tweak-data</a> chunk described in the prototypical file.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- tweak-data --------------------------------------------------------------</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- tweak-data --------------------------------------------------------------</span></span></code></pre></div>
 </li>
 <li><p><strong>Body of the Ellis</strong></p></li>
 <li><p><strong>Verify</strong></p></li>
@@ -220,13 +220,13 @@
 <p><strong>Specify Columns</strong></p>
 <p>See <a href="file-prototype-r.html#chunk-specify-columns">specify-columns-to-upload</a> chunk described in the prototypical file.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- specify-columns-to-upload -----------------------------------------------</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Welcome</strong> into your warehouse. Until this chunk, nothing should be persisted.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- save-to-db --------------------------------------------------------------</span>
-<span class="co"># ---- save-to-disk ------------------------------------------------------------</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- save-to-db --------------------------------------------------------------</span></span>
+<span><span class="co"># ---- save-to-disk ------------------------------------------------------------</span></span></code></pre></div>
 </li>
 </ol>
 </div>
@@ -437,7 +437,7 @@
 <li><p>each <strong>survey wave</strong> gets its own <strong>column</strong> within the csv, such as <code>description_2011</code> and <code>description_2016</code>. These are the human labels corresponding to variables like <code>code_2011</code> and <code>code_2016</code>.</p></li>
 <li><p>each <strong>variable</strong> benefits from a unique <em>display order</em> value, that will be used later in analyses. Categorical variables typically have some desired sequence in graph legends and tables; specify that order here. This helps define the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html"><code>factor</code></a> levels in R or the <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical"><code>pandas.Categorical</code></a> levels in Python.</p></li>
 <li>
-<p>Mappings are usually informed by outside documentation. For transparency and maintainability, clearly describe where the documentation can be found. One option is to include it in <code>data-public/metadata/README.md</code>. Another option is to include it at the bottonm of the csv, preceded by a <code>#</code>, or some ‘comment’ character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells. Notes for this example are:</p>
+<p>Mappings are usually informed by outside documentation. For transparency and maintainability, clearly describe where the documentation can be found. One option is to include it in <code>data-public/metadata/README.md</code>. Another option is to include it at the bottom of the csv, preceded by a <code>#</code>, or some ‘comment’ character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells. Notes for this example are:</p>
 <pre class="csv"><code># Notes,,,,,,
 # 2016 codes come from `documentation/2106/fd_endireh2016_dbf.pdf`, pages 14-15,,,,,
 # 2011 codes come from `documentation/2011/fd_endireh11.xls`, ‘TSDem’ tab,,,,,</code></pre>
@@ -492,7 +492,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Automation is an important prerequisite of reproducibility.  10.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -221,12 +221,12 @@
 <p>On the other side of the spectrum, you can meticulously specify the desired version of each R package. This approach reduces the chance of a new version of a package breaking existing pipeline code. We recommend this approach when uptime is very important.</p>
 <p>The most intuitive implementation is to install with explicit code in a file like <code>utility/install-dependencies.R</code>:</p>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"dplyr"</span>     , version <span class="op">=</span> <span class="st">"0.4.3"</span> <span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"ggplot2"</span>   , version <span class="op">=</span> <span class="st">"2.0.0"</span> <span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"data.table"</span>, version <span class="op">=</span> <span class="st">"1.10.4"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"lubridate"</span> , version <span class="op">=</span> <span class="st">"1.6.0"</span> <span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"openxlsx"</span>  , version <span class="op">=</span> <span class="st">"4.0.17"</span><span class="op">)</span>
-<span class="co"># ... package list continues ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"dplyr"</span>     , version <span class="op">=</span> <span class="st">"0.4.3"</span> <span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"ggplot2"</span>   , version <span class="op">=</span> <span class="st">"2.0.0"</span> <span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"data.table"</span>, version <span class="op">=</span> <span class="st">"1.10.4"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"lubridate"</span> , version <span class="op">=</span> <span class="st">"1.6.0"</span> <span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html">install_version</a></span><span class="op">(</span><span class="st">"openxlsx"</span>  , version <span class="op">=</span> <span class="st">"4.0.17"</span><span class="op">)</span></span>
+<span><span class="co"># ... package list continues ...</span></span></code></pre></div>
 <p>Another implementation is to convert the repo to a package itself, and <a href="http://r-pkgs.had.co.nz/description.html#dependencies">specify the versions</a> in the <code>DESCRIPTION</code> file.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="automation.html#cb59-1" aria-hidden="true" tabindex="-1"></a>Imports<span class="sc">:</span></span>
 <span id="cb59-2"><a href="automation.html#cb59-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">dplyr</span>       (<span class="sc">==</span> <span class="dv">0</span>.<span class="fl">4.3</span> )</span>
@@ -289,7 +289,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="As stated in Consistency across Files, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -119,7 +119,7 @@
 <p>Manipulation R files are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d with the argument <code>local=new.env()</code>. The file is executed in a fresh environment, so there are no variables to clear. Analysis R files are typically called from an Rmd file’s <code><a href="https://rdrr.io/pkg/knitr/man/read_chunk.html">knitr::read_chunk()</a></code>, and code positioned above the first chunk is not called by knitr <a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Read more about knitr’s &lt;a href="https://yihui.name/knitr/demo/externalization/"&gt;code externalization&lt;/a&gt;&lt;/p&gt;'><sup>4</sup></a>.</p>
 <p>However typically do not clear the memory in R files that are <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html"><code>source</code></a>d in the same environment as the caller, as it will interfere with the caller’s variables.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span>all.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="chunk-load-sources" class="section level2" number="4.2">
 <h2>
@@ -130,15 +130,15 @@
 <p>When the sourced file contains only function definitions, these operations can be called at any time in the current file with much tighter control of which variables are modified. A bonus of the discipline of defining functions (instead of executing functions) is that the operations are typically more robust and generalizable.</p>
 <p>Keep the chunk even if no files are sourced. An empty chunk is instructive to readers trying to determine if any files are sourced. This applies recommendation applies to all the chunks discussed in this chapter. As always, your team should agree on its own set of standards.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- load-sources ------------------------------------------------------------</span>
-<span class="fu">base</span><span class="fu">::</span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"./analysis/common/display-1.R"</span><span class="op">)</span>      <span class="co"># Load common graphing functions.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- load-sources ------------------------------------------------------------</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"./analysis/common/display-1.R"</span><span class="op">)</span>      <span class="co"># Load common graphing functions.</span></span></code></pre></div>
 </div>
 <div id="chunk-load-packages" class="section level2" number="4.3">
 <h2>
 <span class="header-section-number">4.3</span> Load Packages<a class="anchor" aria-label="anchor" href="#chunk-load-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p>The ‘load-packages’ chunk declares required packages near the file’s beginning for three reasons. First, a reader scanning the file can quickly determine its dependencies when located in a single chunk. Second, if your machine is lacking a required package, it is best to know early<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;The error message “Error in library(foo) : there is no package called ‘foo’” is easier to understand than “Error in bar() : could not find function ‘bar’” thrown somewhere in the middle of the file; this check can also illuminate conflicts arising when two packages have a &lt;code&gt;bar()&lt;/code&gt; function. See McConnell 2004 Section qqq for more about the ‘fail early’ principle.&lt;/p&gt;"><sup>5</sup></a>. Third, this style mimics a requirement of other languages (such as declaring headers at the top of a C++ file) and follows the <a href="https://style.tidyverse.org/files.html#internal-structure">tidyverse style guide</a>.</p>
-<p>As discussed in the previous <a href="#qualify-functions">qualify all functions</a> section, we recommend that functions are qualified with their package (<em>e.g.</em>, <code>foo::bar()</code> instead of merely <code><a href="https://rdrr.io/r/grDevices/plotmath.html">bar()</a></code>). Consequently, the ‘load-packages’ chunk calls <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> more frequently than <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> verifies the package is available on the local machine, but does not load it into memory; <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> verifies the package is available, and then loads it.</p>
+<p>As discussed in the previous <a href="#qualify-functions">qualify all functions</a> section, we recommend that functions are qualified with their package (<em>e.g.</em>, <code>foo::bar()</code> instead of merely <code>bar()</code>). Consequently, the ‘load-packages’ chunk calls <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> more frequently than <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> verifies the package is available on the local machine, but does not load it into memory; <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> verifies the package is available, and then loads it.</p>
 <p><code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code> is not used in several scenarios.</p>
 <ol style="list-style-type: decimal">
 <li>Core packages (<em>e.g.</em>, ‘base’ and ‘stats’) are loaded by R in most default installations. We avoid unnecessary calls like <code><a href="https://rdrr.io/r/base/library.html">library(stats)</a></code> because they distract from more important features.</li>
@@ -151,15 +151,15 @@
 <p>Read <a href="http://r-pkgs.had.co.nz/namespace.html#search-path">R Packages</a> for more about <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code>, and their siblings, as well as the larger concepts such as attaching functions into the search path.</p>
 <p>Here are packages found in most of our manipulation files. Notice the lesser-known packages have a quick explanation; this helps maintainers decide if the declaration is still necessary. Also notice the packages distributed outside of CRAN (<em>e.g.</em>, GitHub) have a quick commented line to help the user install or update the package.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- load-packages -----------------------------------------------------------</span>
-<span class="co"># import::from(magrittr, "%&gt;%" )</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"readr"</span>     <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyr"</span>     <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span>     <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"config"</span>    <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"checkmate"</span> <span class="op">)</span> <span class="co"># Asserts expected conditions</span>
-<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"OuhscMunge"</span><span class="op">)</span> <span class="co"># remotes::install_github(repo="OuhscBbmc/OuhscMunge")</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
+<span><span class="co"># import::from(magrittr, "%&gt;%" )</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"readr"</span>     <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"tidyr"</span>     <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"dplyr"</span>     <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"config"</span>    <span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"checkmate"</span> <span class="op">)</span> <span class="co"># Asserts expected conditions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"OuhscMunge"</span><span class="op">)</span> <span class="co"># remotes::install_github(repo="OuhscBbmc/OuhscMunge")</span></span></code></pre></div>
 </div>
 <div id="chunk-declare" class="section level2" number="4.4">
 <h2>
@@ -168,20 +168,20 @@
 <p>When values are repeatedly used within a file, consider dedicating a variable so it’s defined and set only once. This is also a good place for variables that are used only once, but whose value are central to the file’s mission. Typical variables in our ‘declare-globals’ chunk include data file paths, data file variables, color palettes, and values in the <em>config</em> file.</p>
 <p>The <a href="repo-prototype.html#repo-root">config file</a> can coordinate a static variable across multiple files. Centrally</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- declare-globals ---------------------------------------------------------</span>
-<span class="co"># Constant values that won't change.</span>
-<span class="va">config</span>                         <span class="op">&lt;-</span> <span class="fu">config</span><span class="fu">::</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span>
-<span class="va">path_db</span>                        <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">path_database</span>
-
-<span class="co"># Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).</span>
-<span class="co">#   OuhscMunge::readr_spec_aligned(config$path_subject_1_raw)</span>
-<span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">cols_only</span><span class="op">(</span>
-  subject_id          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,
-  county_id           <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,
-  gender_id           <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_double</span><span class="op">(</span><span class="op">)</span>,
-  race                <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,
-  ethnicity           <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span><span class="co"># Constant values that won't change.</span></span>
+<span><span class="va">config</span>                         <span class="op">&lt;-</span> <span class="fu">config</span><span class="fu">::</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">path_db</span>                        <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">path_database</span></span>
+<span></span>
+<span><span class="co"># Execute to specify the column types.  It might require some manual adjustment (eg doubles to integers).</span></span>
+<span><span class="co">#   OuhscMunge::readr_spec_aligned(config$path_subject_1_raw)</span></span>
+<span><span class="va">col_types</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">cols_only</span><span class="op">(</span></span>
+<span>  subject_id          <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  county_id           <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  gender_id           <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_double</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  race                <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ethnicity           <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">col_character</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="chunk-load-data" class="section level2" number="4.5">
 <h2>
@@ -203,21 +203,21 @@ the chunk reads all data (<em>e.g.</em>, database table, networked CSV, local lo
 <p><em>loose scrap</em>:
 It’s best to rename the dataset (a) in a single place and (b) early in the pipeline, so the bad variable are never referenced.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.</span>
-<span class="va">ds</span> <span class="op">&lt;-</span>
-  <span class="va">ds</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>    <span class="co"># `dplyr::select()` drops columns not included.</span>
-    <span class="va">subject_id</span>,
-    <span class="va">county_id</span>,
-    <span class="va">gender_id</span>,
-    <span class="va">race</span>,
-    <span class="va">ethnicity</span>
-  <span class="op">)</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span>
-
-  <span class="op">)</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="va">subject_id</span><span class="op">)</span> <span class="co"># |&gt;</span>
-  <span class="co"># tibble::rowid_to_column("subject_id") # Add a unique index if necessary</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># OuhscMunge::column_rename_headstart(ds) # Help write `dplyr::select()` call.</span></span>
+<span><span class="va">ds</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>    <span class="co"># `dplyr::select()` drops columns not included.</span></span>
+<span>    <span class="va">subject_id</span>,</span>
+<span>    <span class="va">county_id</span>,</span>
+<span>    <span class="va">gender_id</span>,</span>
+<span>    <span class="va">race</span>,</span>
+<span>    <span class="va">ethnicity</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
+<span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="va">subject_id</span><span class="op">)</span> <span class="co"># |&gt;</span></span>
+<span>  <span class="co"># tibble::rowid_to_column("subject_id") # Add a unique index if necessary</span></span></code></pre></div>
 </div>
 <div id="chunk-unique" class="section level2" number="4.7">
 <h2>
@@ -232,20 +232,20 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 </h2>
 <p>Running <code>OuhscMunge::verify_value_headstart(ds)</code> will</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># ---- verify-values -----------------------------------------------------------</span>
-<span class="co"># Sniff out problems</span>
-<span class="co"># OuhscMunge::verify_value_headstart(ds)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_month_id</span>    , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">3080</span>                , unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">77</span>                            <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_date</span><span class="op">(</span>     <span class="va">ds</span><span class="op">$</span><span class="va">month</span>              , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2012-06-15"</span><span class="op">)</span>, upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">county_name</span>        , any.missing<span class="op">=</span><span class="cn">F</span> , pattern<span class="op">=</span><span class="st">"^.{3,12}$"</span>                          <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">region_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">20</span>                            <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_numeric</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte</span>                , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_logical</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_approximated</span>   , any.missing<span class="op">=</span><span class="cn">F</span>                                                <span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_numeric</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_rolling_median</span> , any.missing<span class="op">=</span><span class="cn">T</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span>
-
-<span class="va">county_month_combo</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">county_id</span>, <span class="va">ds</span><span class="op">$</span><span class="va">month</span><span class="op">)</span>
-<span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">county_month_combo</span>, pattern  <span class="op">=</span><span class="st">"^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$"</span>, any.missing<span class="op">=</span><span class="cn">F</span>, unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># ---- verify-values -----------------------------------------------------------</span></span>
+<span><span class="co"># Sniff out problems</span></span>
+<span><span class="co"># OuhscMunge::verify_value_headstart(ds)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_month_id</span>    , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">3080</span>                , unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">county_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">77</span>                            <span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_date</span><span class="op">(</span>     <span class="va">ds</span><span class="op">$</span><span class="va">month</span>              , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2012-06-15"</span><span class="op">)</span>, upper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">county_name</span>        , any.missing<span class="op">=</span><span class="cn">F</span> , pattern<span class="op">=</span><span class="st">"^.{3,12}$"</span>                          <span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_integer</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">region_id</span>          , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">1</span>, upper<span class="op">=</span><span class="fl">20</span>                            <span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_numeric</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte</span>                , any.missing<span class="op">=</span><span class="cn">F</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_logical</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_approximated</span>   , any.missing<span class="op">=</span><span class="cn">F</span>                                                <span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_numeric</span><span class="op">(</span>  <span class="va">ds</span><span class="op">$</span><span class="va">fte_rolling_median</span> , any.missing<span class="op">=</span><span class="cn">T</span> , lower<span class="op">=</span><span class="fl">0</span>, upper<span class="op">=</span><span class="fl">40</span>                            <span class="op">)</span></span>
+<span></span>
+<span><span class="va">county_month_combo</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">county_id</span>, <span class="va">ds</span><span class="op">$</span><span class="va">month</span><span class="op">)</span></span>
+<span><span class="fu">checkmate</span><span class="fu">::</span><span class="fu">assert_character</span><span class="op">(</span><span class="va">county_month_combo</span>, pattern  <span class="op">=</span><span class="st">"^\\d{1,2} \\d{4}-\\d{2}-\\d{2}$"</span>, any.missing<span class="op">=</span><span class="cn">F</span>, unique<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="chunk-specify-columns" class="section level2" number="4.9">
 <h2>
@@ -262,24 +262,24 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <p>If you doubt the variable will be needed downstream, leave it in the <code>dplyr::select()</code>, but commented out. If someone needs it in the future, they’ll easily determine where it might come from, and then uncomment the line (and possibly modify the database table). Once you import a column into a warehouse that multiple people are using, it can be tough to remove without breaking their code.</p>
 <p>This chunk follows <a href="file-prototype-r.html#chunk-verify-values">verify-values</a> because sometimes you want to check the validity of variables that are not consumed downstream. These variables are not important themselves, but an illegal value may reveal a larger problem with the dataset.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Print colnames that `dplyr::select()`  should contain below:</span>
-<span class="co">#   cat(paste0("    ", colnames(ds), collapse=",\n"))</span>
-
-<span class="co"># Define the subset of columns that will be needed in the analyses.</span>
-<span class="co">#   The fewer columns that are exported, the fewer things that can break downstream.</span>
-
-<span class="va">ds_slim</span> <span class="op">&lt;-</span>
-  <span class="va">ds</span> |&gt;
-  <span class="co"># dplyr::slice(1:100) |&gt;</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span>
-    <span class="va">subject_id</span>,
-    <span class="va">county_id</span>,
-    <span class="va">gender_id</span>,
-    <span class="va">race</span>,
-    <span class="va">ethnicity</span>
-  <span class="op">)</span>
-
-<span class="va">ds_slim</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Print colnames that `dplyr::select()`  should contain below:</span></span>
+<span><span class="co">#   cat(paste0("    ", colnames(ds), collapse=",\n"))</span></span>
+<span></span>
+<span><span class="co"># Define the subset of columns that will be needed in the analyses.</span></span>
+<span><span class="co">#   The fewer columns that are exported, the fewer things that can break downstream.</span></span>
+<span></span>
+<span><span class="va">ds_slim</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># dplyr::slice(1:100) |&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span></span>
+<span>    <span class="va">subject_id</span>,</span>
+<span>    <span class="va">county_id</span>,</span>
+<span>    <span class="va">gender_id</span>,</span>
+<span>    <span class="va">race</span>,</span>
+<span>    <span class="va">ethnicity</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">ds_slim</span></span></code></pre></div>
 </div>
 <div id="save-to-disk-or-database" class="section level2" number="4.10">
 <h2>
@@ -332,7 +332,7 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

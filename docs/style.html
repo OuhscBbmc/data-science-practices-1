@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -178,17 +178,17 @@
 </h4>
 <p><a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> drops rows with a missing value in a specific column.</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Good</span>
-<span class="va">ds</span> |&gt;
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Good</span></span>
+<span><span class="va">ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></span></code></pre></div>
 <p>is cleaner to read and write than these two styles. In particular, it’s easy to forget/overlook a <code>!</code>.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Worse</span>
-<span class="va">ds</span> |&gt;
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Worst</span>
-<span class="va">ds</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Worse</span></span>
+<span><span class="va">ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Worst</span></span>
+<span><span class="va">ds</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 </div>
 <div id="style-datasets-filter-number-line" class="section level4" number="14.2.1.2">
 <h4>
@@ -300,21 +300,21 @@
 </h3>
 <p>For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms. The “bigger” term goes first; the “smaller” terms are nested in the bigger terms.</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Good:</span>
-<span class="va">parent_name_last</span>
-<span class="va">parent_name_first</span>
-<span class="va">parent_dob</span>
-<span class="va">kid_name_last</span>
-<span class="va">kid_name_first</span>
-<span class="va">kid_dob</span>
-
-<span class="co"># Bad:</span>
-<span class="va">last_name_parent</span>
-<span class="va">first_name_parent</span>
-<span class="va">dob_parent</span>
-<span class="va">last_name_kid</span>
-<span class="va">first_name_kid</span>
-<span class="va">dob_kid</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Good:</span></span>
+<span><span class="va">parent_name_last</span></span>
+<span><span class="va">parent_name_first</span></span>
+<span><span class="va">parent_dob</span></span>
+<span><span class="va">kid_name_last</span></span>
+<span><span class="va">kid_name_first</span></span>
+<span><span class="va">kid_dob</span></span>
+<span></span>
+<span><span class="co"># Bad:</span></span>
+<span><span class="va">last_name_parent</span></span>
+<span><span class="va">first_name_parent</span></span>
+<span><span class="va">dob_parent</span></span>
+<span><span class="va">last_name_kid</span></span>
+<span><span class="va">first_name_kid</span></span>
+<span><span class="va">dob_kid</span></span></code></pre></div>
 <p>Large datasets with multiple questionnaries (each with multiple subsections) are much more managable when the variables follow a semantic order.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb64-1"><a href="style.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
 <span id="cb64-2"><a href="style.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  asq3_medical_problems_01</span>
@@ -358,12 +358,12 @@
 </h4>
 <p>Datasets are handled so differently than other variables that we find it’s easier to identify its type and scope. The prefix <code>ds_</code> indicates the dataset is available to the entire file, while <code>d_</code> indicates the scope is localized to a function.</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">count_elements</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">mtcars</span>
-<span class="fu">count_elements</span><span class="op">(</span>d <span class="op">=</span> <span class="va">ds</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">count_elements</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
+<span><span class="fu">count_elements</span><span class="op">(</span>d <span class="op">=</span> <span class="va">ds</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="style-naming-datasets-grain" class="section level4" number="14.5.4.2">
 <h4>
@@ -371,14 +371,14 @@
 </h4>
 <p>The <a href="https://gerardnico.com/olap/dimensional_modeling/grain#grain">grain</a> of a dataset describes what each row represents, which is a similar idea to the statistician’s concept of “unit of analysis”. Essentially it the the most granular entity described. Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy</a> dataset with a clear grain.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_student</span>          <span class="co"># One row per student</span>
-<span class="va">ds_teacher</span>          <span class="co"># One row per teacher</span>
-<span class="va">ds_course</span>           <span class="co"># One row per course</span>
-<span class="va">ds_course_student</span>   <span class="co"># One row per student-course combination</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_student</span>          <span class="co"># One row per student</span></span>
+<span><span class="va">ds_teacher</span>          <span class="co"># One row per teacher</span></span>
+<span><span class="va">ds_course</span>           <span class="co"># One row per course</span></span>
+<span><span class="va">ds_course_student</span>   <span class="co"># One row per student-course combination</span></span></code></pre></div>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds_pt</span>         <span class="co"># One row per patient</span>
-<span class="va">ds_pt_visit</span>   <span class="co"># One row per patient-visit combination</span>
-<span class="va">ds_visit</span>      <span class="co"># Same as above, since it's clear a visit is connected w/ a pt</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ds_pt</span>         <span class="co"># One row per patient</span></span>
+<span><span class="va">ds_pt_visit</span>   <span class="co"># One row per patient-visit combination</span></span>
+<span><span class="va">ds_visit</span>      <span class="co"># Same as above, since it's clear a visit is connected w/ a pt</span></span></code></pre></div>
 <p>For more insight into grains, <a href="https://www.kimballgroup.com/2003/03/declaring-the-grain/">Ralph Kimball writes</a></p>
 <blockquote>
 <p>In debugging literally thousands of dimensional designs from my students over the years, I have found that the most frequent design error by far is not declaring the grain of the fact table at the beginning of the design process. If the grain isn’t clearly defined, the whole design rests on quicksand. Discussions about candidate dimensions go around in circles, and rogue facts that introduce application errors sneak into the design.
@@ -413,13 +413,13 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h4>
 <span class="header-section-number">14.5.4.6</span> Define the dataset when in doubt<a class="anchor" aria-label="anchor" href="#style-naming-datasets-define"><i class="fas fa-link"></i></a>
 </h4>
-<p>If it’s potentially unclear to a new reader, use a comment immediately before the dataset’s initial use.</p>
+<p>If it’s potentially unclear to a new reader, use a comment immediately before the dataset’s initial use. The <a href="style.html#style-naming-datasets-grain">grain</a> is frequently the most important characteristic to document.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># `ds_client_enroll`:</span>
-<span class="co">#    grain: one row per client</span>
-<span class="co">#    subset: only clients who have successfully enrolled are included</span>
-<span class="co">#    source: the `client` database table, where `enroll_count` is 1+.</span>
-<span class="va">ds_client_enroll</span> <span class="op">&lt;-</span> <span class="va">...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># `ds_client_enroll`:</span></span>
+<span><span class="co">#    grain: one row per client</span></span>
+<span><span class="co">#    subset: only clients who have successfully enrolled are included</span></span>
+<span><span class="co">#    source: the `client` database table, where `enroll_count` is 1+.</span></span>
+<span><span class="va">ds_client_enroll</span> <span class="op">&lt;-</span> <span class="va">...</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -496,21 +496,21 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <strong>Index</strong>. Be optimistic and prepare for follow up investigations. The initial repo is “…-1”, the subsequent repos are “…-2, …-3, …-4”.</li>
 </ol>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Good Examples</span>
-<span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">1</span>
-<span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">2</span>
-<span class="va">akande</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">1</span>
-<span class="va">bard</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">1</span>
-<span class="va">bard</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">2</span>
-<span class="va">bard</span><span class="op">-</span><span class="va">eeg</span><span class="op">-</span><span class="va">education</span><span class="op">-</span><span class="fl">1</span>
-
-<span class="co"># Bad Examples</span>
-<span class="va">akande</span><span class="op">-</span><span class="fl">1</span>
-<span class="va">akande</span><span class="op">-</span><span class="fl">2</span>
-<span class="va">covid</span><span class="op">-</span><span class="fl">1</span>
-<span class="va">covid</span><span class="op">-</span><span class="fl">2</span>
-<span class="va">covid</span><span class="op">-</span><span class="fl">3</span>
-<span class="va">bard</span><span class="op">-</span><span class="va">research</span><span class="op">-</span><span class="fl">1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Good Examples</span></span>
+<span><span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">2</span></span>
+<span><span class="va">akande</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">bard</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">bard</span><span class="op">-</span><span class="va">covid</span><span class="op">-</span><span class="fl">2</span></span>
+<span><span class="va">bard</span><span class="op">-</span><span class="va">eeg</span><span class="op">-</span><span class="va">education</span><span class="op">-</span><span class="fl">1</span></span>
+<span></span>
+<span><span class="co"># Bad Examples</span></span>
+<span><span class="va">akande</span><span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">akande</span><span class="op">-</span><span class="fl">2</span></span>
+<span><span class="va">covid</span><span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">covid</span><span class="op">-</span><span class="fl">2</span></span>
+<span><span class="va">covid</span><span class="op">-</span><span class="fl">3</span></span>
+<span><span class="va">bard</span><span class="op">-</span><span class="va">research</span><span class="op">-</span><span class="fl">1</span></span></code></pre></div>
 <p>We informally call this the “project tag” and try to use it consistently in different arenas, such as:</p>
 <ul>
 <li>The GitHub repo’s name.</li>
@@ -579,7 +579,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h4>
 <span class="header-section-number">14.9.2.1</span> Zooming<a class="anchor" aria-label="anchor" href="#style-ggplot-zoom"><i class="fas fa-link"></i></a>
 </h4>
-<p>Call <code>coord_*()</code> to restrict the plotted <em>x</em>/<em>y</em> values, not <code>scale_*()</code> or <code>lims()</code>/<code><a href="https://rdrr.io/r/graphics/plot.window.html">xlim()</a></code>/<code><a href="https://rdrr.io/r/graphics/plot.window.html">ylim()</a></code>. <code>coord_*()</code> zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to <code>geom_smooth()</code> (<em>e.g.</em>, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling <code>coord_*()</code>, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.</p>
+<p>Call <code>coord_*()</code> to restrict the plotted <em>x</em>/<em>y</em> values, not <code>scale_*()</code> or <code>lims()</code>/<code>xlim()</code>/<code>ylim()</code>. <code>coord_*()</code> zooms in on the axes, so extreme values essentially fall off the page; in contrast, the latter three functions essentially remove the values from the dataset. The distinction does not matter for a simple bivariate scatterplot, but likely will mislead you and the viewer in two common scenarios. First, a call to <code>geom_smooth()</code> (<em>e.g.</em>, that overlays a loess regression curve) ignore the extreme values entirely; consequently the summary location will be misplaced and its standard errors too tight. Second, when a line graph or spaghetti plots contains an extreme value, it is sometimes desirable to zoom in on the the primary area of activity; when calling <code>coord_*()</code>, the trend line will leave and return to the plotting panel (which implies points exist which do not fit the page), yet when calling the others, the trend line will appear interrupted, as if the extreme point is a missing value.</p>
 </div>
 <div id="style-ggplot-seed" class="section level4" number="14.9.2.2">
 <h4>
@@ -658,7 +658,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

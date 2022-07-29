@@ -24,7 +24,7 @@ Given the needs of our small data science team, we believe that private GitHub r
 **Alternatives**: The GitHub approach described above is the most common, but is not the only approached endorsed by contemporary developers.  Others include:
 
 * GitHub Enterprise: hosting solution developed by GitHub, but hosted on a university-controlled VM.
-* GitLab:  A competitor to GitHub.  GitLab uses Git, but has a different hosting options, both cloud and on-premisis.
+* GitLab:  A competitor to GitHub.  GitLab uses Git, but has a different hosting options, both cloud and on-premises.
 * Mercurial: modern version control that is similar to Git.  It has many of Git's strengths and avoids many of the undesirable features of Subversion/SVN.
 * Atlassian: A competitor to GitHub that focuses on businesses.  Altassian/Bitbucket repositories can use Git or Mercurial.  Like GitHub and GitLab, they offers different hosting options.
 
@@ -88,7 +88,7 @@ Our core-wide goal of being [secure by default](https://en.wikipedia.org/wiki/Se
 
 *Defaults*
 
-1. Two-factor authentication [is required](https://help.github.com/articles/requiring-two-factor-authentication-in-your-organization/) for all organization memebers and outside collaborators.  See setting "Security" => "Two-factor authentication"
+1. Two-factor authentication [is required](https://help.github.com/articles/requiring-two-factor-authentication-in-your-organization/) for all organization members and outside collaborators.  See setting "Security" => "Two-factor authentication"
 
 1. Organization members are [restricted from creating repositories](https://help.github.com/articles/repository-permission-levels-for-an-organization/#restricting-people-from-creating-repositories).  See setting "Member privileges" => "Repository creation".
 
@@ -110,7 +110,7 @@ Our core-wide goal of being [secure by default](https://en.wikipedia.org/wiki/Se
     1. [OAuth applications](https://developer.github.com/v3/oauth/).
 
     Currently, the only approved entity is the [Codecov](https://codecov.io/) integration, which helps us test our package code and quantify its coverage ("Improve code quality. Expose bugs and security vulnerabilities.").  Codecov must be explicitly turned on for each desired repository.
-    
+
 for New Collaborators {#git-collaborators}
 ------------------------------------
 
@@ -142,7 +142,7 @@ At least every few days, push your changes to the main branch so teammates can b
 
 #### "Main" vs "Master" Branch
 
-If you are using an old repo whose default branch is called "master", it's fairly simple to [rename to "main"](https://github.com/github/renaming). 
+If you are using an old repo whose default branch is called "master", it's fairly simple to [rename to "main"](https://github.com/github/renaming).
 
 Repo Style
 ------------------------------------

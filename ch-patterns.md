@@ -29,16 +29,16 @@ To incorporate outside data source into your system safely.
 
 ### Examples
 
-* https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/te-ellis.R
-* https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/
-* https://github.com/OuhscBbmc/usnavy-billets/blob/master/manipulation/survey-ellis.R
+* <https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/te-ellis.R>
+* <https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/>
+* <https://github.com/OuhscBbmc/usnavy-billets/blob/master/manipulation/survey-ellis.R>
 
 ### Elements
 
 1. **Clear memory** In scripting languages like R (unlike compiled languages like Java), it's easy for old variables to hang around.  Explicitly clear them before you run the file again.
 
     ```r
-    rm(list=ls(all=TRUE)) #Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.
+    rm(list = ls(all = TRUE)) # Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.
     ```
 
 1. **Load Sources** In R, a `source()`d file is run to execute its code.  We prefer that a sourced file only load variables (like function definitions), instead of do real operations like read a dataset or perform a calculation.  There are many times that you want a function to be available to multiple files in a repo; there are two approaches we like.  The first is collecting those common functions into a single file (and then sourcing it in the callers).  The second is to make the repo a legitimate R package.
@@ -171,7 +171,7 @@ In this scenarios, the first three columns are critical (*i.e.*, `relationship_i
 
 1. each **variable** benefits from a unique *display order* value, that will be used later in analyses.  Categorical variables typically have some desired sequence in graph legends and tables; specify that order here.  This helps define the [`factor`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html) levels in R or the [`pandas.Categorical`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Categorical.html#pandas.Categorical) levels in Python.
 
-1. Mappings are usually informed by outside documentation.  For transparency and maintainability, clearly describe where the documentation can be found.  One option is to include it in `data-public/metadata/README.md`.  Another option is to include it at the bottonm of the csv, preceded by a `#`, or some 'comment' character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells.  Notes for this example are:
+1. Mappings are usually informed by outside documentation.  For transparency and maintainability, clearly describe where the documentation can be found.  One option is to include it in `data-public/metadata/README.md`.  Another option is to include it at the bottom of the csv, preceded by a `#`, or some 'comment' character that can keep the csv-parser from treating the notes like data it needs to squeeze into cells.  Notes for this example are:
 
     ```csv
     # Notes,,,,,,

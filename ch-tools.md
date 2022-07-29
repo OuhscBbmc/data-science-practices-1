@@ -10,11 +10,11 @@ While discussing the advantages and disadvantages of tools, a colleague once sai
 
 Likewise, I care less about the line count, and more about the readability.  I'd prefer to maintain a 20-line chunk that is familiar and readable than a 10-line chunk with dense phrases and unfamiliar functions.  The bottleneck for most of our projects is human time, not execution time.
 
-### Current Skillset of Team
+### Current Skill Set of Team
 
-### Desired Future Skillset of Team
+### Desired Future Skill Set of Team
 
-### Skillset of Audience
+### Skill Set of Audience
 
 Languages
 ------------------------------------
@@ -26,7 +26,7 @@ R Packages
 
     Therefore when considering between two functions with comparable capabilities (*e.g.*, [`xlsx::read.xlsx()`](https://CRAN.R-project.org/package=xlsx) and [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html)), avoid the package that requires a proper installation and configuration of Java and rJava.
 
-    If the more intensive choice is required (say, you need to a capability in [xslx](https://CRAN.R-project.org/package=xlsx) missing from [readxl](https://readxl.tidyverse.org/)), take:
+    If the more intensive choice is required (say, you need to a capability in [xlsx](https://CRAN.R-project.org/package=xlsx) missing from [readxl](https://readxl.tidyverse.org/)), take:
 
     1. 20 minutes to **start a markdown file** that enumerates the package's direct and indirect dependencies that require manual configuration (*e.g.*, rJava and Java), where to download them, and the typical installation steps.
 

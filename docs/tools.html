@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="20.1 General  20.1.1 The Component’s Goal While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -120,19 +120,19 @@
 <p>While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base R, and sometimes it even requires more lines of code”. Regardless if I agree, I feel these two points are irrelevant. Sometimes the advantage of a tool isn’t to expand existing capabilities, but rather to facilitate development and maintenance for the same capability.</p>
 <p>Likewise, I care less about the line count, and more about the readability. I’d prefer to maintain a 20-line chunk that is familiar and readable than a 10-line chunk with dense phrases and unfamiliar functions. The bottleneck for most of our projects is human time, not execution time.</p>
 </div>
-<div id="current-skillset-of-team" class="section level3" number="20.1.2">
+<div id="current-skill-set-of-team" class="section level3" number="20.1.2">
 <h3>
-<span class="header-section-number">20.1.2</span> Current Skillset of Team<a class="anchor" aria-label="anchor" href="#current-skillset-of-team"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.1.2</span> Current Skill Set of Team<a class="anchor" aria-label="anchor" href="#current-skill-set-of-team"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="desired-future-skillset-of-team" class="section level3" number="20.1.3">
+<div id="desired-future-skill-set-of-team" class="section level3" number="20.1.3">
 <h3>
-<span class="header-section-number">20.1.3</span> Desired Future Skillset of Team<a class="anchor" aria-label="anchor" href="#desired-future-skillset-of-team"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.1.3</span> Desired Future Skill Set of Team<a class="anchor" aria-label="anchor" href="#desired-future-skill-set-of-team"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="skillset-of-audience" class="section level3" number="20.1.4">
+<div id="skill-set-of-audience" class="section level3" number="20.1.4">
 <h3>
-<span class="header-section-number">20.1.4</span> Skillset of Audience<a class="anchor" aria-label="anchor" href="#skillset-of-audience"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.1.4</span> Skill Set of Audience<a class="anchor" aria-label="anchor" href="#skill-set-of-audience"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 </div>
@@ -149,7 +149,7 @@
 <li>
 <p>When developing a codebase used by many people, choose packages both on their functionality, as well as their ease of installation and maintainability. For example, the <a href="https://CRAN.R-project.org/package=rJava">rJava</a> package is a powerful package that allows R package developers to leverage the widespread <a href="https://www.java.com/en/">Java</a> framework and many popular Java packages. However, installing Java and setting the appropriate <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> or <a href="https://en.wikipedia.org/wiki/Windows_Registry">registry</a> settings can be error-prone, especially for non-developers.</p>
 <p>Therefore when considering between two functions with comparable capabilities (<em>e.g.</em>, <a href="https://CRAN.R-project.org/package=xlsx"><code>xlsx::read.xlsx()</code></a> and <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a>), avoid the package that requires a proper installation and configuration of Java and rJava.</p>
-<p>If the more intensive choice is required (say, you need to a capability in <a href="https://CRAN.R-project.org/package=xlsx">xslx</a> missing from <a href="https://readxl.tidyverse.org/">readxl</a>), take:</p>
+<p>If the more intensive choice is required (say, you need to a capability in <a href="https://CRAN.R-project.org/package=xlsx">xlsx</a> missing from <a href="https://readxl.tidyverse.org/">readxl</a>), take:</p>
 <ol style="list-style-type: decimal">
 <li><p>20 minutes to <strong>start a markdown file</strong> that enumerates the package’s direct and indirect dependencies that require manual configuration (<em>e.g.</em>, rJava and Java), where to download them, and the typical installation steps.</p></li>
 <li><p>5 minutes to <strong>create a GitHub Issue</strong> that (a) announces the new requirement, (b) describes who/what needs to install the requirement, (c) points to the markdown documentation, and (d) encourages teammates to post their problems, recommendations, and solutions in this issue. We’ve found that a dedicated Issue helps communicate that the package dependency necessitates some intention and encourages people to assist other people’s troubleshooting. When something potentially useful is posted in the Issue, move it to the markdown document. Make sure the document and the issue hyperlink to each other.</p></li>
@@ -191,9 +191,9 @@
 <li>
 <a class="nav-link" href="#general"><span class="header-section-number">20.1</span> General</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#the-components-goal"><span class="header-section-number">20.1.1</span> The Component’s Goal</a></li>
-<li><a class="nav-link" href="#current-skillset-of-team"><span class="header-section-number">20.1.2</span> Current Skillset of Team</a></li>
-<li><a class="nav-link" href="#desired-future-skillset-of-team"><span class="header-section-number">20.1.3</span> Desired Future Skillset of Team</a></li>
-<li><a class="nav-link" href="#skillset-of-audience"><span class="header-section-number">20.1.4</span> Skillset of Audience</a></li>
+<li><a class="nav-link" href="#current-skill-set-of-team"><span class="header-section-number">20.1.2</span> Current Skill Set of Team</a></li>
+<li><a class="nav-link" href="#desired-future-skill-set-of-team"><span class="header-section-number">20.1.3</span> Desired Future Skill Set of Team</a></li>
+<li><a class="nav-link" href="#skill-set-of-audience"><span class="header-section-number">20.1.4</span> Skill Set of Audience</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#languages"><span class="header-section-number">20.2</span> Languages</a></li>
@@ -217,7 +217,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

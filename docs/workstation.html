@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="We believe it is important to keep software updated and consistent across workstations in your project. This material was originally posted at...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -132,7 +132,7 @@ ix problems, but this is not required to start.)</p>
 <h3>
 <span class="header-section-number">19.1.3</span> R Tools<a class="anchor" aria-label="anchor" href="#workstation-rtools"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://cran.r-project.org/bin/windows/Rtools/">R Tools for Windows</a> is necessary to build some packages in development hosted on GitHub. If runing Windows, follow the page’s instructions, especially the “Putting Rtools on the PATH” section. If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}</p>
+<p><a href="https://cran.r-project.org/bin/windows/Rtools/">R Tools for Windows</a> is necessary to build some packages in development hosted on GitHub. If running Windows, follow the page’s instructions, especially the “Putting Rtools on the PATH” section. If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}</p>
 </div>
 <div id="workstation-r-package-installation" class="section level3" number="19.1.4">
 <h3>
@@ -141,24 +141,24 @@ ix problems, but this is not required to start.)</p>
 <p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
 <p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;As an alternative to the Gist, run the local R script &lt;a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"&gt;&lt;code&gt;install-packages.R&lt;/code&gt;&lt;/a&gt; (located in that repository’s &lt;code&gt;utility/&lt;/code&gt; directory). The workhorse of this function is &lt;a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"&gt;&lt;code&gt;OuhscMunge::package_janitor()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>11</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">package-dependency-list.csv</a> and <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list-more.csv">package-dependency-list-more.csv</a>.</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">source_gist</span><span class="op">(</span><span class="st">"2c5e7459b88ec28b9e8fa0c695b15ee3"</span>, filename<span class="op">=</span><span class="st">"package-janitor-bbmc.R"</span><span class="op">)</span>
-
-<span class="co"># Important packages required by most BBMC projects</span>
-<span class="fu">package_janitor_remote</span><span class="op">(</span>
-  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"</span>
-<span class="op">)</span>
-
-<span class="co"># Nonessential packages used in a few BBMC projects</span>
-<span class="fu">package_janitor_remote</span><span class="op">(</span>
-  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list-more.csv"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">source_gist</span><span class="op">(</span><span class="st">"2c5e7459b88ec28b9e8fa0c695b15ee3"</span>, filename<span class="op">=</span><span class="st">"package-janitor-bbmc.R"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Important packages required by most BBMC projects</span></span>
+<span><span class="fu">package_janitor_remote</span><span class="op">(</span></span>
+<span>  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Nonessential packages used in a few BBMC projects</span></span>
+<span><span class="fu">package_janitor_remote</span><span class="op">(</span></span>
+<span>  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list-more.csv"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper <a href="http://r-pkgs.had.co.nz/description.html">DESCRIPTION</a> file. See <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION">RAnalysisSkeleton</a> for an example.</p>
 <p>When the project is opened in RStudio, <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html"><code>update_packages_addin()</code></a> in <a href="https://ouhscbbmc.github.io/OuhscMunge">OuhscMunge</a> will find the DESCRIPTION file and install the package dependencies.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span> <span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>   <span class="op">)</span> <span class="op">)</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="kw">if</span><span class="op">(</span> <span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"OuhscMunge"</span><span class="op">)</span> <span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"OuhscBbmc/OuhscMunge"</span><span class="op">)</span>
-<span class="fu">OuhscMunge</span><span class="fu">::</span><span class="fu">update_packages_addin</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span> <span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>   <span class="op">)</span> <span class="op">)</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="kw">if</span><span class="op">(</span> <span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"OuhscMunge"</span><span class="op">)</span> <span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"OuhscBbmc/OuhscMunge"</span><span class="op">)</span></span>
+<span><span class="fu">OuhscMunge</span><span class="fu">::</span><span class="fu">update_packages_addin</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="workstation-r-package-update" class="section level3" number="19.1.5">
 <h3>
@@ -235,7 +235,7 @@ ix problems, but this is not required to start.)</p>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql">SQL Server</a> allows you to execute against a database, and view/copy/save the grid results. It doesn’t replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}</p></li>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a> produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.</p></li>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a> has some useful markdown capabilities, such as converting the file to html.</p></li>
-<li><p><a href="https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf">Markdown PDF</a> has some useful markdown capbilities, such as converting the file to pdf.</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf">Markdown PDF</a> has some useful markdown capabilities, such as converting the file to pdf.</p></li>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">markdownlint</a> has linting and style checking.</p></li>
 </ul>
 <p>These extensions <a href="https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions">can be installed by command line</a>.</p>
@@ -276,11 +276,13 @@ ix problems, but this is not required to start.)</p>
 <span id="cb74-26"><a href="workstation.html#cb74-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"allowed_elements"</span><span class="fu">:</span> <span class="ot">[</span></span>
 <span id="cb74-27"><a href="workstation.html#cb74-27" aria-hidden="true" tabindex="-1"></a>          <span class="st">"mermaid"</span><span class="ot">,</span></span>
 <span id="cb74-28"><a href="workstation.html#cb74-28" aria-hidden="true" tabindex="-1"></a>          <span class="st">"a"</span><span class="ot">,</span></span>
-<span id="cb74-29"><a href="workstation.html#cb74-29" aria-hidden="true" tabindex="-1"></a>          <span class="st">"img"</span></span>
-<span id="cb74-30"><a href="workstation.html#cb74-30" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
-<span id="cb74-31"><a href="workstation.html#cb74-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
-<span id="cb74-32"><a href="workstation.html#cb74-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb74-33"><a href="workstation.html#cb74-33" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<span id="cb74-29"><a href="workstation.html#cb74-29" aria-hidden="true" tabindex="-1"></a>          <span class="st">"br"</span><span class="ot">,</span></span>
+<span id="cb74-30"><a href="workstation.html#cb74-30" aria-hidden="true" tabindex="-1"></a>          <span class="st">"details"</span><span class="ot">,</span></span>
+<span id="cb74-31"><a href="workstation.html#cb74-31" aria-hidden="true" tabindex="-1"></a>          <span class="st">"img"</span></span>
+<span id="cb74-32"><a href="workstation.html#cb74-32" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
+<span id="cb74-33"><a href="workstation.html#cb74-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb74-34"><a href="workstation.html#cb74-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb74-35"><a href="workstation.html#cb74-35" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Auto Renumber: false</strong> {<code>"markdown.extension.orderedList.autoRenumber": false</code>}</li>
 <li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Marker: one</strong> {<code>"markdown.extension.orderedList.marker": "one"</code>}</li>
@@ -321,7 +323,11 @@ ix problems, but this is not required to start.)</p>
 <p><strong><a href="https://www.anaconda.com/distribution/#download-section">Anaconda</a></strong>, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open “Anaconda Prompt” with administrative privileges</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="workstation.html#cb75-1" aria-hidden="true" tabindex="-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div>
 </li>
-<li><p><strong><a href="https://www.python.org/downloads/">Standard Python</a></strong>, while installing packages through pip3 in the terminal. If the <code>pip3</code> command is unrecognized because it’s missing from the OS <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> variable, an alternative is <code>py -3 -mpip install pysftp</code>; this calls pip through the <code>py</code> command which is sometimes in the path variable after installation.</p></li>
+<li><p><strong><a href="https://www.python.org/downloads/">Standard Python</a></strong>, while installing packages through pip3 in the terminal. If the <code>pip3</code> command is unrecognized because it’s missing from the OS <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> variable, an alternative is <code>py -3 -mpip install paramiko</code>; this calls pip through the <code>py</code> command which is sometimes in the path variable after installation.</p></li>
+<li>
+<p><strong>Updating Packages</strong> Python packages don’t need to be updated as frequently as R packages, but it’s still good to do it every few months. Paste this single line into PowerShell on Windows. (<a href="https://stackoverflow.com/a/51022937/1082435">Stack Overflow solution</a> from <a href="https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski">Sébastien Wieckowski</a>)</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb76-1"><a href="workstation.html#cb76-1" aria-hidden="true" tabindex="-1"></a>pip list -o --format json | ConvertFrom-Json | foreach {pip install $_.name -U --no-warn-script-location}</span></code></pre></div>
+</li>
 </ul>
 </div>
 <div id="workstation-pilot-edit" class="section level3" number="19.3.5">
@@ -392,7 +398,8 @@ ix problems, but this is not required to start.)</p>
 <h3>
 <span class="header-section-number">19.5.4</span> WinSCP<a class="anchor" aria-label="anchor" href="#workstation-winscp"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://winscp.net/eng/download.php">WinSCP</a> is a GUI for SCP and SFTP file transfer using SSH keys. The tool is occassionally useful for admins when collaborating with other institutions or <a href="https://www.ou.edu/oscer">other OU computing resources</a>. Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators. The typical data scientist on our teams does not need this tool.</p>
+<p><a href="https://winscp.net/eng/download.php">WinSCP</a> is a GUI for SCP and SFTP file transfer using SSH keys. The tool is occasionally useful for admins when collaborating with other institutions or <a href="https://www.ou.edu/oscer">other OU computing resources</a>. Because PHI can accidentally be sent to collaborators without a DUA, we recommend that WinSCP be installed only informed administrators. The typical data scientist on our teams does not need this tool.</p>
+<p>An alternative is FileZilla. It works with multiple OSes, but currently doesn’t support scp (only sftp).</p>
 </div>
 </div>
 <div id="workstation-troubleshooting" class="section level2" number="19.6">
@@ -405,9 +412,9 @@ ix problems, but this is not required to start.)</p>
 <li>
 <p><strong>RStudio</strong></p>
 <ul>
-<li>If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren’t erased. To be safe, you can be thorough and delete the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\</code>. The options settings are stored (and can be manipulated) in this extentionless text file: <code>C:\Users\wibeasley\AppData\Local\RStudio\monitored\user-settings\user-settings</code>. See RStudio’s support page, <a href="https://support.rstudio.com/hc/en-us/articles/200534577-Resetting-RStudio-s-State">Resetting RStudio Desktop’s State</a>. {added Sept 2012}</li>
+<li>If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren’t erased. To be safe, you can be thorough and delete the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\</code>. The options settings are stored (and can be manipulated) in this extensionless text file: <code>C:\Users\wibeasley\AppData\Local\RStudio\monitored\user-settings\user-settings</code>. See RStudio’s support page, <a href="https://support.rstudio.com/hc/en-us/articles/200534577-Resetting-RStudio-s-State">Resetting RStudio Desktop’s State</a>. {added Sept 2012}</li>
 <li>Hold down the ctrl button when clicking on RStudio in the Windows Start Menu. Try switching up the 64/32-bit option. For a VDI, forcing it to a software-rendering option fixed a problem where the RStudio window opened, but nothing was visible inside. {added Jan 2022}</li>
-<li>It might help to look in the logs, which are stored inthe equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\logs</code> {added Jan 2022}</li>
+<li>It might help to look in the logs, which are stored in the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\logs</code> {added Jan 2022}</li>
 </ul>
 </li>
 </ul>
@@ -436,12 +443,12 @@ ix problems, but this is not required to start.)</p>
 <span class="header-section-number">19.8.1</span> R<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>Check <a href="https://cran.r-project.org/bin/linux/ubuntu/" class="uri">https://cran.r-project.org/bin/linux/ubuntu/</a> for the most recent instructions.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb76-1"><a href="workstation.html#cb76-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Add the key, update the list, then install base R.</span></span>
-<span id="cb76-2"><a href="workstation.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt update <span class="at">-qq</span></span>
-<span id="cb76-3"><a href="workstation.html#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt install <span class="at">--no-install-recommends</span> software-properties-common dirmngr</span>
-<span id="cb76-4"><a href="workstation.html#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span>
-<span id="cb76-5"><a href="workstation.html#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> add-apt-repository <span class="st">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/"</span></span>
-<span id="cb76-6"><a href="workstation.html#cb76-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install r-base r-base-dev</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb77-1"><a href="workstation.html#cb77-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Add the key, update the list, then install base R.</span></span>
+<span id="cb77-2"><a href="workstation.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt update <span class="at">-qq</span></span>
+<span id="cb77-3"><a href="workstation.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt install <span class="at">--no-install-recommends</span> software-properties-common dirmngr</span>
+<span id="cb77-4"><a href="workstation.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wget</span> <span class="at">-qO-</span> https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc <span class="kw">|</span> <span class="fu">sudo</span> tee <span class="at">-a</span> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc</span>
+<span id="cb77-5"><a href="workstation.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> add-apt-repository <span class="st">"deb https://cloud.r-project.org/bin/linux/ubuntu </span><span class="va">$(</span><span class="ex">lsb_release</span> <span class="at">-cs</span><span class="va">)</span><span class="st">-cran40/"</span></span>
+<span id="cb77-6"><a href="workstation.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install r-base r-base-dev</span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-rstudio" class="section level3" number="19.8.2">
 <h3>
@@ -449,110 +456,110 @@ ix problems, but this is not required to start.)</p>
 </h3>
 <p>Download the most recent version from <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a>. Then run the two <code>gdebi()</code> lines.
 Alternatively, update the <code>wget</code> line with the most recent version.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb77-1"><a href="workstation.html#cb77-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.4.1717-amd64.deb</span></span>
-<span id="cb77-2"><a href="workstation.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install gdebi-core</span>
-<span id="cb77-3"><a href="workstation.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> gdebi rstudio-<span class="pp">*</span>-amd64.deb</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb78-1"><a href="workstation.html#cb78-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.4.1717-amd64.deb</span></span>
+<span id="cb78-2"><a href="workstation.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install gdebi-core</span>
+<span id="cb78-3"><a href="workstation.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> gdebi rstudio-<span class="pp">*</span>-amd64.deb</span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-packages" class="section level3" number="19.8.3">
 <h3>
 <span class="header-section-number">19.8.3</span> apt-get Packages<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-packages"><i class="fas fa-link"></i></a>
 </h3>
 <p>This next block can be copied and pasted (ctrl-shift-v) into the console <a href="https://stackoverflow.com/a/43164204">entirely</a>. Or lines can be pasted individual (without the <code>( function install-packages {</code> line, or the last three lines).</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb78-1"><a href="workstation.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></span>
-<span id="cb78-2"><a href="workstation.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb78-3"><a href="workstation.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Git</span></span>
-<span id="cb78-4"><a href="workstation.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install git-core</span>
-<span id="cb78-5"><a href="workstation.html#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"wibeasley@hotmail.com"</span></span>
-<span id="cb78-6"><a href="workstation.html#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Will Beasley"</span></span>
-<span id="cb78-7"><a href="workstation.html#cb78-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">'cache --timeout=3600000'</span></span>
-<span id="cb78-8"><a href="workstation.html#cb78-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-9"><a href="workstation.html#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Ubuntu &amp; Bioconductor packages that are indirectly needed for packages and BBMC scripts</span></span>
-<span id="cb78-10"><a href="workstation.html#cb78-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-11"><a href="workstation.html#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Supports the `locate` command in bash</span></span>
-<span id="cb78-12"><a href="workstation.html#cb78-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install mlocate</span>
-<span id="cb78-13"><a href="workstation.html#cb78-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-14"><a href="workstation.html#cb78-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The genefilter package is needed for 'modeest' on CRAN.</span></span>
-<span id="cb78-15"><a href="workstation.html#cb78-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># No longer a modeest dependency: Rscript -e 'BiocManager::install("genefilter")'</span></span>
-<span id="cb78-16"><a href="workstation.html#cb78-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-17"><a href="workstation.html#cb78-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">### CRAN packages that are also on the Ubuntu repositories</span></span>
-<span id="cb78-18"><a href="workstation.html#cb78-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-19"><a href="workstation.html#cb78-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'xml2' package; https://CRAN.R-project.org/package=xml2</span></span>
-<span id="cb78-20"><a href="workstation.html#cb78-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libxml2-dev r-cran-xml</span>
-<span id="cb78-21"><a href="workstation.html#cb78-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-22"><a href="workstation.html#cb78-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'curl' package, and others; https://CRAN.R-project.org/package=curl</span></span>
-<span id="cb78-23"><a href="workstation.html#cb78-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libssl-dev libcurl4-openssl-dev</span>
-<span id="cb78-24"><a href="workstation.html#cb78-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-25"><a href="workstation.html#cb78-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
-<span id="cb78-26"><a href="workstation.html#cb78-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev</span>
-<span id="cb78-27"><a href="workstation.html#cb78-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-28"><a href="workstation.html#cb78-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
-<span id="cb78-29"><a href="workstation.html#cb78-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
-<span id="cb78-30"><a href="workstation.html#cb78-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-31"><a href="workstation.html#cb78-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'rgl' package; https://stackoverflow.com/a/39952771/1082435</span></span>
-<span id="cb78-32"><a href="workstation.html#cb78-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcgal-dev libglu1-mesa-dev</span>
-<span id="cb78-33"><a href="workstation.html#cb78-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb78-34"><a href="workstation.html#cb78-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'gsl' package; https://cran.rstudio.com/web/packages/gsl/INSTALL</span></span>
-<span id="cb78-35"><a href="workstation.html#cb78-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libgsl0-dev</span>
-<span id="cb78-36"><a href="workstation.html#cb78-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-37"><a href="workstation.html#cb78-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
-<span id="cb78-38"><a href="workstation.html#cb78-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install <span class="st">'libmagick++-dev'</span></span>
-<span id="cb78-39"><a href="workstation.html#cb78-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-40"><a href="workstation.html#cb78-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
-<span id="cb78-41"><a href="workstation.html#cb78-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install qpdf</span>
-<span id="cb78-42"><a href="workstation.html#cb78-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-43"><a href="workstation.html#cb78-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'pdftools' and 'Rpoppler' packages, which involve PDFs</span></span>
-<span id="cb78-44"><a href="workstation.html#cb78-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libpoppler-cpp-dev libpoppler-glib-dev</span>
-<span id="cb78-45"><a href="workstation.html#cb78-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-46"><a href="workstation.html#cb78-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sys' package</span></span>
-<span id="cb78-47"><a href="workstation.html#cb78-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libapparmor-dev</span>
-<span id="cb78-48"><a href="workstation.html#cb78-48" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb78-49"><a href="workstation.html#cb78-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'archive' package; https://CRAN.R-project.org/package=archive </span></span>
-<span id="cb78-50"><a href="workstation.html#cb78-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libarchive-dev</span>
-<span id="cb78-51"><a href="workstation.html#cb78-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-52"><a href="workstation.html#cb78-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
-<span id="cb78-53"><a href="workstation.html#cb78-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
-<span id="cb78-54"><a href="workstation.html#cb78-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-55"><a href="workstation.html#cb78-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
-<span id="cb78-56"><a href="workstation.html#cb78-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
-<span id="cb78-57"><a href="workstation.html#cb78-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-58"><a href="workstation.html#cb78-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
-<span id="cb78-59"><a href="workstation.html#cb78-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
-<span id="cb78-60"><a href="workstation.html#cb78-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
-<span id="cb78-61"><a href="workstation.html#cb78-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
-<span id="cb78-62"><a href="workstation.html#cb78-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-63"><a href="workstation.html#cb78-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
-<span id="cb78-64"><a href="workstation.html#cb78-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
-<span id="cb78-65"><a href="workstation.html#cb78-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-66"><a href="workstation.html#cb78-66" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
-<span id="cb78-67"><a href="workstation.html#cb78-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
-<span id="cb78-68"><a href="workstation.html#cb78-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-69"><a href="workstation.html#cb78-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For databases</span></span>
-<span id="cb78-70"><a href="workstation.html#cb78-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
-<span id="cb78-71"><a href="workstation.html#cb78-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
-<span id="cb78-72"><a href="workstation.html#cb78-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-73"><a href="workstation.html#cb78-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
-<span id="cb78-74"><a href="workstation.html#cb78-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
-<span id="cb78-75"><a href="workstation.html#cb78-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-76"><a href="workstation.html#cb78-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
-<span id="cb78-77"><a href="workstation.html#cb78-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
-<span id="cb78-78"><a href="workstation.html#cb78-78" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb78-79"><a href="workstation.html#cb78-79" aria-hidden="true" tabindex="-1"></a><span class="ex">install-packages</span></span>
-<span id="cb78-80"><a href="workstation.html#cb78-80" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb79-1"><a href="workstation.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="kw">function</span><span class="fu"> install-packages</span> <span class="kw">{</span></span>
+<span id="cb79-2"><a href="workstation.html#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="workstation.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Git</span></span>
+<span id="cb79-4"><a href="workstation.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install git-core</span>
+<span id="cb79-5"><a href="workstation.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"wibeasley@hotmail.com"</span></span>
+<span id="cb79-6"><a href="workstation.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Will Beasley"</span></span>
+<span id="cb79-7"><a href="workstation.html#cb79-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">git</span> config <span class="at">--global</span> credential.helper <span class="st">'cache --timeout=3600000'</span></span>
+<span id="cb79-8"><a href="workstation.html#cb79-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-9"><a href="workstation.html#cb79-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">### Ubuntu &amp; Bioconductor packages that are indirectly needed for packages and BBMC scripts</span></span>
+<span id="cb79-10"><a href="workstation.html#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="workstation.html#cb79-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Supports the `locate` command in bash</span></span>
+<span id="cb79-12"><a href="workstation.html#cb79-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install mlocate</span>
+<span id="cb79-13"><a href="workstation.html#cb79-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-14"><a href="workstation.html#cb79-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The genefilter package is needed for 'modeest' on CRAN.</span></span>
+<span id="cb79-15"><a href="workstation.html#cb79-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># No longer a modeest dependency: Rscript -e 'BiocManager::install("genefilter")'</span></span>
+<span id="cb79-16"><a href="workstation.html#cb79-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-17"><a href="workstation.html#cb79-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">### CRAN packages that are also on the Ubuntu repositories</span></span>
+<span id="cb79-18"><a href="workstation.html#cb79-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-19"><a href="workstation.html#cb79-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'xml2' package; https://CRAN.R-project.org/package=xml2</span></span>
+<span id="cb79-20"><a href="workstation.html#cb79-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libxml2-dev r-cran-xml</span>
+<span id="cb79-21"><a href="workstation.html#cb79-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-22"><a href="workstation.html#cb79-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'curl' package, and others; https://CRAN.R-project.org/package=curl</span></span>
+<span id="cb79-23"><a href="workstation.html#cb79-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libssl-dev libcurl4-openssl-dev</span>
+<span id="cb79-24"><a href="workstation.html#cb79-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-25"><a href="workstation.html#cb79-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
+<span id="cb79-26"><a href="workstation.html#cb79-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev</span>
+<span id="cb79-27"><a href="workstation.html#cb79-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-28"><a href="workstation.html#cb79-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
+<span id="cb79-29"><a href="workstation.html#cb79-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
+<span id="cb79-30"><a href="workstation.html#cb79-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-31"><a href="workstation.html#cb79-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'rgl' package; https://stackoverflow.com/a/39952771/1082435</span></span>
+<span id="cb79-32"><a href="workstation.html#cb79-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcgal-dev libglu1-mesa-dev</span>
+<span id="cb79-33"><a href="workstation.html#cb79-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-34"><a href="workstation.html#cb79-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'gsl' package; https://cran.rstudio.com/web/packages/gsl/INSTALL</span></span>
+<span id="cb79-35"><a href="workstation.html#cb79-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libgsl0-dev</span>
+<span id="cb79-36"><a href="workstation.html#cb79-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-37"><a href="workstation.html#cb79-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
+<span id="cb79-38"><a href="workstation.html#cb79-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install <span class="st">'libmagick++-dev'</span></span>
+<span id="cb79-39"><a href="workstation.html#cb79-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-40"><a href="workstation.html#cb79-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
+<span id="cb79-41"><a href="workstation.html#cb79-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install qpdf</span>
+<span id="cb79-42"><a href="workstation.html#cb79-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-43"><a href="workstation.html#cb79-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'pdftools' and 'Rpoppler' packages, which involve PDFs</span></span>
+<span id="cb79-44"><a href="workstation.html#cb79-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libpoppler-cpp-dev libpoppler-glib-dev</span>
+<span id="cb79-45"><a href="workstation.html#cb79-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-46"><a href="workstation.html#cb79-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sys' package</span></span>
+<span id="cb79-47"><a href="workstation.html#cb79-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libapparmor-dev</span>
+<span id="cb79-48"><a href="workstation.html#cb79-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-49"><a href="workstation.html#cb79-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'archive' package; https://CRAN.R-project.org/package=archive</span></span>
+<span id="cb79-50"><a href="workstation.html#cb79-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libarchive-dev</span>
+<span id="cb79-51"><a href="workstation.html#cb79-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-52"><a href="workstation.html#cb79-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
+<span id="cb79-53"><a href="workstation.html#cb79-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
+<span id="cb79-54"><a href="workstation.html#cb79-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-55"><a href="workstation.html#cb79-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
+<span id="cb79-56"><a href="workstation.html#cb79-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
+<span id="cb79-57"><a href="workstation.html#cb79-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-58"><a href="workstation.html#cb79-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
+<span id="cb79-59"><a href="workstation.html#cb79-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
+<span id="cb79-60"><a href="workstation.html#cb79-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
+<span id="cb79-61"><a href="workstation.html#cb79-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
+<span id="cb79-62"><a href="workstation.html#cb79-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-63"><a href="workstation.html#cb79-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
+<span id="cb79-64"><a href="workstation.html#cb79-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
+<span id="cb79-65"><a href="workstation.html#cb79-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-66"><a href="workstation.html#cb79-66" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
+<span id="cb79-67"><a href="workstation.html#cb79-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
+<span id="cb79-68"><a href="workstation.html#cb79-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-69"><a href="workstation.html#cb79-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For databases</span></span>
+<span id="cb79-70"><a href="workstation.html#cb79-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
+<span id="cb79-71"><a href="workstation.html#cb79-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
+<span id="cb79-72"><a href="workstation.html#cb79-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-73"><a href="workstation.html#cb79-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
+<span id="cb79-74"><a href="workstation.html#cb79-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
+<span id="cb79-75"><a href="workstation.html#cb79-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-76"><a href="workstation.html#cb79-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
+<span id="cb79-77"><a href="workstation.html#cb79-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
+<span id="cb79-78"><a href="workstation.html#cb79-78" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb79-79"><a href="workstation.html#cb79-79" aria-hidden="true" tabindex="-1"></a><span class="ex">install-packages</span></span>
+<span id="cb79-80"><a href="workstation.html#cb79-80" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-pandoc" class="section level3" number="19.8.4">
 <h3>
 <span class="header-section-number">19.8.4</span> Pandoc<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-pandoc"><i class="fas fa-link"></i></a>
 </h3>
 <p>The version of pandoc from the Ubuntu repository may be delayed. To install the latest version, <a href="https://github.com/jgm/pandoc/releases">download the .deb file</a> then install from the same directory. Finally, verify the version.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb79-1"><a href="workstation.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> pandoc-<span class="pp">*</span></span>
-<span id="cb79-2"><a href="workstation.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-v</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb80-1"><a href="workstation.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dpkg <span class="at">-i</span> pandoc-<span class="pp">*</span></span>
+<span id="cb80-2"><a href="workstation.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">-v</span></span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-postman" class="section level3" number="19.8.5">
 <h3>
 <span class="header-section-number">19.8.5</span> Postman<a class="anchor" aria-label="anchor" href="#workstation-ubuntu-postman"><i class="fas fa-link"></i></a>
 </h3>
 <p>The Postman native app for Ubuntu is <a href="https://learning.postman.com/docs/getting-started/installation-and-updates/#installing-postman-on-linux">installed</a> through <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage">snap</a>, which is <a href="https://tutorials.ubuntu.com/tutorial/basic-snap-usage#2">updated daily automatically</a>.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb80-1"><a href="workstation.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snap</span> install postman</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb81-1"><a href="workstation.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snap</span> install postman</span></code></pre></div>
 </div>
 </div>
 <div id="workstation-retired" class="section level2" number="19.9">
@@ -606,7 +613,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <a href="https://atom.io/packages/git-plus">git-plus</a>: Do git things without the terminal (I don’t think this is necessary anymore).</li>
 </ol>
 <p>The packages can be installed through Atom, or through the <code>apm</code> utility in the command line:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb81-1"><a href="workstation.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apm</span> install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb82-1"><a href="workstation.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apm</span> install sublime-style-column-selection atom-language-r language-csv atom-beautify atom-wrap-in-tag minimap script</span></code></pre></div>
 <p>And the following settings keep files consistent among developers.</p>
 <ol style="list-style-type: decimal">
 <li>File | Settings | Editor | Tab Length: 2 (As opposed to 3 or 4, used in other conventions)</li>
@@ -692,7 +699,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-06-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
