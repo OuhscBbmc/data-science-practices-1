@@ -1,4 +1,4 @@
-Prototypical Repository {#repo-prototype}
+Prototypical Repository {#prototype-repo}
 ====================================
 
 The follow structure has worked for us for a wide spectrum of projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one analysis report to (b) a large, multi-year project fed by dozens of input files to support multiple statisticians and a sophisticated enrollment process.
