@@ -1,7 +1,19 @@
 Prototypical Repository {#repo-prototype}
 ====================================
 
-https://github.com/wibeasley/RAnalysisSkeleton
+The follow structure has worked for us for a wide spectrum of projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one analysis report to (b) a large, multi-year project fed by dozens of input files to support multiple statisticians and a sophisticated enrollment process.
+
+Looking beyond any single project, we strongly encourage your team to adopt a common file organization.  Pursuing commonality provides multiple benefits:
+
+* An evolved and thought-out system makes it easier to follow good practices and avoid common traps.
+
+* Code files are more portable between projects.  More code can be reused if both the source and destination have refer to same files and directories like [config.yml](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml), [data-public/raw](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/raw), and [data-public/derived](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/derived)
+
+* People are more portable between projects.  If the organization is familiar to a person, they can start contributing to the project more quickly if they already know to debug code that transforms incoming data in [manipulation/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation) and to look for statistical reports in [analysis/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/analysis).
+
+If a specific project doesn't use a directory or file, we recommend retaining the stub.  Like the empty chunks described in the [Prototypical R File](#file-prototype-r) chapter, a stub communicates to your collaborator, "this project currently doesn't use the feature, but when/if it does, this will be the location".  The collaborator can stop their search immediately, and does not have to search weird places in order to rule-out the feature is located elsewhere.
+
+The template that has worked well for us is publicly available at <https://github.com/wibeasley/RAnalysisSkeleton>.  The important files and directories are described below.  Please use this as a starting point, and not as a dogmatic prison.  Make adjustments when it fits your specific project or your overall team.
 
 Root {#repo-root}
 ------------------------------------
