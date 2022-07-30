@@ -73,18 +73,17 @@ The readme is automatically displayed the GitHub repository is opened in a brows
 * The PI's expectations and goals for your analysis team
 * Likely deadlines, such as grant and conference submission dates
 
+Each directory can have its own readme file, but (for typical analysis projects) we discourage you from putting too much in each individual readme.  We've found it becomes cumbersome to keep all the scattered files updated and consistent; it's also more work for the reader to traverse the directory structure reading everything.  Our approach is to concentrate most of the information in the repo's root readme, and the most of the remaining  readmes are static and unchanged across projects (*e.g.*, generic description of `data-public/metadata/`).
+
 ### `*.Rproj` {#repo-rproj}
 
 The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled.  The file's major benefit is that it sets the R session's working directory, which facilitates good discipline about setting a constant location for all files in the repo.  Although the plain-text file can be edited directly, we recommend using RStudio's dialog box.  There is good documentation about Rproj settings.  If you are unsure, copy [this file](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj) to the repo's root directory and rename it to match the repo exactly.
 
-Analysis {#repo-analysis}
+`analysis/` {#repo-analysis}
 ------------------------------------
 
-Data Public {#repo-data-public}
+`data-public/` {#repo-data-public}
 ------------------------------------
-
-`data-public/` Directory
-=========
 
 This directory should contain information that is not sensitive and is not proprietary.  It SHOULD NOT hold [PHI](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html) (Protected Health Information), or other information like participant names, social security numbers, or passwords.  Files with PHI should **not** be stored in a GitHub repository, even a [private GitHub repository](https://help.github.com/articles/publicizing-or-hiding-your-private-contributions-on-your-profile/).
 
@@ -109,11 +108,9 @@ The characteristics of `data-public/` vary based on the subject matter.  For ins
 We feel a private GitHub repo offers adequate protection if being scooped is the biggest risk.
 
 
-Data Unshared {#repo-data-unshared}
+`data-unshared/` {#repo-data-unshared}
 ------------------------------------
 
-`data-unshared/` Directory
-=========
 
 Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server.  This makes the folder a decent container for:
 
@@ -136,10 +133,10 @@ Compared to `data-unshared/`, we prefer storing PHI in an enterprise database (s
 1. It's sometimes possible to recover lost data from a file share or database.  It's much less likely to turn back the clock for `data-unshared/` files.
 1. It's not too unlikely to mess up the `.gitignore` entries which would allow the sensitive files to be committed to the repository.  If sensitive information is stored on `data-unshared/`, it is important to review every commit to ensure information isn't about to sneak into the repo.
 
-Documentation {#repo-documentation}
+`documentation/` {#repo-documentation}
 ------------------------------------
 
-Manipulation {#repo-manipulation}
+`manipulation/` {#repo-manipulation}
 ------------------------------------
 
 Stitched Output {#repo-stitched}
