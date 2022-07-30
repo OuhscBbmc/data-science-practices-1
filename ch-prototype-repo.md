@@ -1,17 +1,17 @@
 Prototypical Repository {#prototype-repo}
 ====================================
 
-The follow structure has worked for us for a wide spectrum of projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one analysis report to (b) a large, multi-year project fed by dozens of input files to support multiple statisticians and a sophisticated enrollment process.
+The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one analysis report to (b) a large, multi-year project fed by dozens of input files to support multiple statisticians and a sophisticated enrollment process.
 
 Looking beyond any single project, we strongly encourage your team to adopt a common file organization.  Pursuing commonality provides multiple benefits:
 
-* An evolved and thought-out system makes it easier to follow good practices and avoid common traps.
+* An evolved and thought-out structure makes it easier to follow good practices and avoid common traps.
 
-* Code files are more portable between projects.  More code can be reused if both the source and destination have refer to same files and directories like [config.yml](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml), [data-public/raw](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/raw), and [data-public/derived](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/derived)
+* Code files are more portable between projects.  More code can be reused if both environments refer to same files and directories like [config.yml](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml), [data-public/raw](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/raw), and [data-public/derived](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/derived)
 
-* People are more portable between projects.  If the organization is familiar to a person, they can start contributing to the project more quickly if they already know to debug code that transforms incoming data in [manipulation/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation) and to look for statistical reports in [analysis/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/analysis).
+* People are more portable between projects.  When a person is already familiar with the structure, they start contributing more quickly because they already know to look for statistical reports in [analysis/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/analysis) and to debug problematic file ingestions in [manipulation/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation) files.
 
-If a specific project doesn't use a directory or file, we recommend retaining the stub.  Like the empty chunks described in the [Prototypical R File](#prototype-r) chapter, a stub communicates to your collaborator, "this project currently doesn't use the feature, but when/if it does, this will be the location".  The collaborator can stop their search immediately, and does not have to search weird places in order to rule-out the feature is located elsewhere.
+If a specific project doesn't use a directory or file, we recommend retaining the stub.  Like the empty chunks discusses in the [Prototypical R File](#prototype-r) chapter, a stub communicates to your collaborator, "this project currently doesn't use the feature, but when/if it does, this will be the location".  The collaborator can stop their search immediately, and avoid searching weird places in order to rule-out the feature is located elsewhere.
 
 The template that has worked well for us is publicly available at <https://github.com/wibeasley/RAnalysisSkeleton>.  The important files and directories are described below.  Please use this as a starting point, and not as a dogmatic prison.  Make adjustments when it fits your specific project or your overall team.
 
@@ -20,7 +20,7 @@ Root {#repo-root}
 
 ### `config.R` {#repo-config}
 
-The configuration file is simply a plain-text yaml file read by the [config](https://CRAN.R-project.org/package=config) package.  It is great when a value has to be coordinated across multiple files.
+The configuration file is simply a plain-text yaml file read by the [config](https://CRAN.R-project.org/package=config) package.  It is well-suited when a value has to be coordinated across multiple files.
 
 Also see the discussion of how we use the config file for [excluding bad data values](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases) and of how the config file [relates to yaml](#data-containers-yaml), json, and xml.
 
@@ -54,11 +54,24 @@ default:
 
 ### `flow.R` {#repo-flow}
 
-The workflow of the repo is determined by `flow.R`.  It calls (typically R and SQL) files in a specific order, while sending the log messages to a file.
+The workflow of the repo is determined by `flow.R`.  It calls (typically R, Python, and SQL) files in a specific order, while sending the log messages to a file.
 
 See [automation mediators](#automation-flow) for more details.
 
 ### `README.md` {#repo-readme}
+
+The readme is automatically displayed the GitHub repository is opened in a browser.  Include all the static information that can quickly orientate a collaborator.  Common elements include:
+
+* Project Name (see our [style guide](#style-repo-naming) for naming recommendations)
+* Principal Investigator (ultimately accountable for the research) and Project Coordinator (easy contact if questions arise)
+* IRB Tracking Number (or whatever board/committee that reviewed and approved the project).  This will help communicate more accurately within your larger university or company.
+* Abstract or some project description that is already written (for example, part of the IRB submission).
+* Data Locations and resources, such as
+  * database and database server
+  * REDCap project id
+  * networked file share
+* The PI's expectations and goals for your analysis team
+* Likely deadlines, such as grant and conference submission dates
 
 ### `*.Rproj` {#repo-rproj}
 
