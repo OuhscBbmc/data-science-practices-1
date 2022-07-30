@@ -46,7 +46,7 @@ Chapters & Sections to Form
 
 1. Cargo cult programming "is a style of computer programming characterized by the ritual inclusion of code or program structures that serve no real purpose." ([Wikipedia](https://en.wikipedia.org/wiki/Cargo_cult_programming))
 
-    Your team should decide which elements of [a file prototype](https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html) and [repo prototype](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html) are best for you.
+    Your team should decide which elements of [a file prototype](https://ouhscbbmc.github.io/data-science-practices-1/prototype-r.html) and [repo prototype](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html) are best for you.
 
 Practices
 ------------------------------------

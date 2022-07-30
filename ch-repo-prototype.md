@@ -11,7 +11,7 @@ Looking beyond any single project, we strongly encourage your team to adopt a co
 
 * People are more portable between projects.  If the organization is familiar to a person, they can start contributing to the project more quickly if they already know to debug code that transforms incoming data in [manipulation/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation) and to look for statistical reports in [analysis/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/analysis).
 
-If a specific project doesn't use a directory or file, we recommend retaining the stub.  Like the empty chunks described in the [Prototypical R File](#file-prototype-r) chapter, a stub communicates to your collaborator, "this project currently doesn't use the feature, but when/if it does, this will be the location".  The collaborator can stop their search immediately, and does not have to search weird places in order to rule-out the feature is located elsewhere.
+If a specific project doesn't use a directory or file, we recommend retaining the stub.  Like the empty chunks described in the [Prototypical R File](#prototype-r) chapter, a stub communicates to your collaborator, "this project currently doesn't use the feature, but when/if it does, this will be the location".  The collaborator can stop their search immediately, and does not have to search weird places in order to rule-out the feature is located elsewhere.
 
 The template that has worked well for us is publicly available at <https://github.com/wibeasley/RAnalysisSkeleton>.  The important files and directories are described below.  Please use this as a starting point, and not as a dogmatic prison.  Make adjustments when it fits your specific project or your overall team.
 
