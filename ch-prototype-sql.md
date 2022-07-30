@@ -1,4 +1,4 @@
-Prototypical SQL File {#file-prototype-sql}
+Prototypical SQL File {#prototype-sql}
 ====================================
 
 New data scientists typically import entire tables from a database into R, and then merge, filter, and groom the data.frames.  A more efficient approach is to submit [sql](https://en.wikipedia.org/wiki/SQL) that executes on the database and returns a more specialized dataset.

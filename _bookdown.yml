@@ -12,7 +12,7 @@ rmd_files:
     "ch-coding.md",
     "ch-architecture.md",
     "ch-prototype-r.md",
-    "ch-file-prototype-sql.md",
+    "ch-prototype-sql.md",
     "ch-repo-prototype.md",
     "ch-rest.md",
     "ch-patterns.md",
