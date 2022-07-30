@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 20 Considerations when Selecting Tools | Collaborative Data Science Practices</title>
+<title>Chapter 22 Considerations when Selecting Tools | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="20.1 General  20.1.1 The Component’s Goal While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base...">
+<meta name="description" content="22.1 General  22.1.1 The Component’s Goal While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 20 Considerations when Selecting Tools | Collaborative Data Science Practices">
+<meta property="og:title" content="Chapter 22 Considerations when Selecting Tools | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="20.1 General  20.1.1 The Component’s Goal While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base...">
+<meta property="og:description" content="22.1 General  22.1.1 The Component’s Goal While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 20 Considerations when Selecting Tools | Collaborative Data Science Practices">
-<meta name="twitter:description" content="20.1 General  20.1.1 The Component’s Goal While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base...">
+<meta name="twitter:title" content="Chapter 22 Considerations when Selecting Tools | Collaborative Data Science Practices">
+<meta name="twitter:description" content="22.1 General  22.1.1 The Component’s Goal While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -71,24 +71,26 @@
 <li><a class="" href="file-prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
 <li><a class="" href="file-prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
 <li><a class="" href="repo-prototype.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
-<li><a class="" href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></li>
-<li><a class="" href="patterns.html"><span class="header-section-number">8</span> Patterns</a></li>
-<li><a class="" href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
-<li><a class="" href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
-<li><a class="" href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></li>
-<li><a class="" href="collaboration.html"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
-<li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
-<li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
-<li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
-<li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
-<li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
-<li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
-<li><a class="active" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
-<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
-<li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
-<li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
-<li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
+<li><a class="" href="data-public-directory.html"><span class="header-section-number">7</span> data-public/ Directory</a></li>
+<li><a class="" href="data-unshared-directory.html"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
+<li><a class="" href="rest.html"><span class="header-section-number">9</span> Data at Rest</a></li>
+<li><a class="" href="patterns.html"><span class="header-section-number">10</span> Patterns</a></li>
+<li><a class="" href="security.html"><span class="header-section-number">11</span> Security &amp; Private Data</a></li>
+<li><a class="" href="automation.html"><span class="header-section-number">12</span> Automation &amp; Reproducibility</a></li>
+<li><a class="" href="scaling-up.html"><span class="header-section-number">13</span> Scaling Up</a></li>
+<li><a class="" href="collaboration.html"><span class="header-section-number">14</span> Parallel Collaboration</a></li>
+<li><a class="" href="document.html"><span class="header-section-number">15</span> Documentation</a></li>
+<li><a class="" href="style.html"><span class="header-section-number">16</span> Style Guide</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></li>
+<li><a class="" href="validation.html"><span class="header-section-number">18</span> Validation</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">19</span> Testing</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">20</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">21</span> Workstation</a></li>
+<li><a class="active" href="tools.html"><span class="header-section-number">22</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">23</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">24</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">25</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">26</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
 <li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
@@ -105,45 +107,45 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tools" class="section level1" number="20">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tools" class="section level1" number="22">
 <h1>
-<span class="header-section-number">20</span> Considerations when Selecting Tools<a class="anchor" aria-label="anchor" href="#tools"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22</span> Considerations when Selecting Tools<a class="anchor" aria-label="anchor" href="#tools"><i class="fas fa-link"></i></a>
 </h1>
-<div id="general" class="section level2" number="20.1">
+<div id="general" class="section level2" number="22.1">
 <h2>
-<span class="header-section-number">20.1</span> General<a class="anchor" aria-label="anchor" href="#general"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.1</span> General<a class="anchor" aria-label="anchor" href="#general"><i class="fas fa-link"></i></a>
 </h2>
-<div id="the-components-goal" class="section level3" number="20.1.1">
+<div id="the-components-goal" class="section level3" number="22.1.1">
 <h3>
-<span class="header-section-number">20.1.1</span> The Component’s Goal<a class="anchor" aria-label="anchor" href="#the-components-goal"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.1.1</span> The Component’s Goal<a class="anchor" aria-label="anchor" href="#the-components-goal"><i class="fas fa-link"></i></a>
 </h3>
 <p>While discussing the advantages and disadvantages of tools, a colleague once said, “Tidyverse packages don’t do anything that I can’t already do in Base R, and sometimes it even requires more lines of code”. Regardless if I agree, I feel these two points are irrelevant. Sometimes the advantage of a tool isn’t to expand existing capabilities, but rather to facilitate development and maintenance for the same capability.</p>
 <p>Likewise, I care less about the line count, and more about the readability. I’d prefer to maintain a 20-line chunk that is familiar and readable than a 10-line chunk with dense phrases and unfamiliar functions. The bottleneck for most of our projects is human time, not execution time.</p>
 </div>
-<div id="current-skill-set-of-team" class="section level3" number="20.1.2">
+<div id="current-skill-set-of-team" class="section level3" number="22.1.2">
 <h3>
-<span class="header-section-number">20.1.2</span> Current Skill Set of Team<a class="anchor" aria-label="anchor" href="#current-skill-set-of-team"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.1.2</span> Current Skill Set of Team<a class="anchor" aria-label="anchor" href="#current-skill-set-of-team"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="desired-future-skill-set-of-team" class="section level3" number="20.1.3">
+<div id="desired-future-skill-set-of-team" class="section level3" number="22.1.3">
 <h3>
-<span class="header-section-number">20.1.3</span> Desired Future Skill Set of Team<a class="anchor" aria-label="anchor" href="#desired-future-skill-set-of-team"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.1.3</span> Desired Future Skill Set of Team<a class="anchor" aria-label="anchor" href="#desired-future-skill-set-of-team"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="skill-set-of-audience" class="section level3" number="20.1.4">
+<div id="skill-set-of-audience" class="section level3" number="22.1.4">
 <h3>
-<span class="header-section-number">20.1.4</span> Skill Set of Audience<a class="anchor" aria-label="anchor" href="#skill-set-of-audience"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.1.4</span> Skill Set of Audience<a class="anchor" aria-label="anchor" href="#skill-set-of-audience"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 </div>
-<div id="languages" class="section level2" number="20.2">
+<div id="languages" class="section level2" number="22.2">
 <h2>
-<span class="header-section-number">20.2</span> Languages<a class="anchor" aria-label="anchor" href="#languages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.2</span> Languages<a class="anchor" aria-label="anchor" href="#languages"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="r-packages" class="section level2" number="20.3">
+<div id="r-packages" class="section level2" number="22.3">
 <h2>
-<span class="header-section-number">20.3</span> R Packages<a class="anchor" aria-label="anchor" href="#r-packages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.3</span> R Packages<a class="anchor" aria-label="anchor" href="#r-packages"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>
@@ -159,9 +161,9 @@
 </ol>
 <p>Finally, consider how much traffic passes through the dependency A brittle dependency will not be too disruptive if isolated in a downstream analysis file run by only one statistician. On the other hand, be very protective in the middle of the pipeline where typically most of your team runs.</p>
 </div>
-<div id="database" class="section level2" number="20.4">
+<div id="database" class="section level2" number="22.4">
 <h2>
-<span class="header-section-number">20.4</span> Database<a class="anchor" aria-label="anchor" href="#database"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4</span> Database<a class="anchor" aria-label="anchor" href="#database"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p>Ease of installation &amp; maintenance</p></li>
@@ -170,9 +172,9 @@
 <li><p>Warehouse vs transactional performance</p></li>
 </ol>
 </div>
-<div id="additional-resources-2" class="section level2" number="20.5">
+<div id="additional-resources-2" class="section level2" number="22.5">
 <h2>
-<span class="header-section-number">20.5</span> Additional Resources<a class="anchor" aria-label="anchor" href="#additional-resources-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.5</span> Additional Resources<a class="anchor" aria-label="anchor" href="#additional-resources-2"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -182,24 +184,24 @@
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="workstation.html"><span class="header-section-number">19</span> Workstation</a></div>
-<div class="next"><a href="team.html"><span class="header-section-number">21</span> Growing a Team</a></div>
+<div class="prev"><a href="workstation.html"><span class="header-section-number">21</span> Workstation</a></div>
+<div class="next"><a href="team.html"><span class="header-section-number">23</span> Growing a Team</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#tools"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
+<li><a class="nav-link" href="#tools"><span class="header-section-number">22</span> Considerations when Selecting Tools</a></li>
 <li>
-<a class="nav-link" href="#general"><span class="header-section-number">20.1</span> General</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-components-goal"><span class="header-section-number">20.1.1</span> The Component’s Goal</a></li>
-<li><a class="nav-link" href="#current-skill-set-of-team"><span class="header-section-number">20.1.2</span> Current Skill Set of Team</a></li>
-<li><a class="nav-link" href="#desired-future-skill-set-of-team"><span class="header-section-number">20.1.3</span> Desired Future Skill Set of Team</a></li>
-<li><a class="nav-link" href="#skill-set-of-audience"><span class="header-section-number">20.1.4</span> Skill Set of Audience</a></li>
+<a class="nav-link" href="#general"><span class="header-section-number">22.1</span> General</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-components-goal"><span class="header-section-number">22.1.1</span> The Component’s Goal</a></li>
+<li><a class="nav-link" href="#current-skill-set-of-team"><span class="header-section-number">22.1.2</span> Current Skill Set of Team</a></li>
+<li><a class="nav-link" href="#desired-future-skill-set-of-team"><span class="header-section-number">22.1.3</span> Desired Future Skill Set of Team</a></li>
+<li><a class="nav-link" href="#skill-set-of-audience"><span class="header-section-number">22.1.4</span> Skill Set of Audience</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#languages"><span class="header-section-number">20.2</span> Languages</a></li>
-<li><a class="nav-link" href="#r-packages"><span class="header-section-number">20.3</span> R Packages</a></li>
-<li><a class="nav-link" href="#database"><span class="header-section-number">20.4</span> Database</a></li>
-<li><a class="nav-link" href="#additional-resources-2"><span class="header-section-number">20.5</span> Additional Resources</a></li>
+<li><a class="nav-link" href="#languages"><span class="header-section-number">22.2</span> Languages</a></li>
+<li><a class="nav-link" href="#r-packages"><span class="header-section-number">22.3</span> R Packages</a></li>
+<li><a class="nav-link" href="#database"><span class="header-section-number">22.4</span> Database</a></li>
+<li><a class="nav-link" href="#additional-resources-2"><span class="header-section-number">22.5</span> Additional Resources</a></li>
 </ul>
 
       <div class="book-extra">
@@ -217,7 +219,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -57,7 +57,9 @@ repo-readme
 repo-rproj
 repo-analysis
 repo-data-public
+data-public-directory
 repo-data-unshared
+data-unshared-directory
 repo-documentation
 repo-manipulation
 repo-stitched

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 16 Validation | Collaborative Data Science Practices</title>
+<title>Chapter 18 Validation | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
+<meta name="description" content="18.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 16 Validation | Collaborative Data Science Practices">
+<meta property="og:title" content="Chapter 18 Validation | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
+<meta property="og:description" content="18.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 16 Validation | Collaborative Data Science Practices">
-<meta name="twitter:description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
+<meta name="twitter:title" content="Chapter 18 Validation | Collaborative Data Science Practices">
+<meta name="twitter:description" content="18.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -71,24 +71,26 @@
 <li><a class="" href="file-prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
 <li><a class="" href="file-prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
 <li><a class="" href="repo-prototype.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
-<li><a class="" href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></li>
-<li><a class="" href="patterns.html"><span class="header-section-number">8</span> Patterns</a></li>
-<li><a class="" href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
-<li><a class="" href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
-<li><a class="" href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></li>
-<li><a class="" href="collaboration.html"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
-<li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
-<li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
-<li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
-<li><a class="active" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
-<li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
-<li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
-<li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
-<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
-<li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
-<li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
-<li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
+<li><a class="" href="data-public-directory.html"><span class="header-section-number">7</span> data-public/ Directory</a></li>
+<li><a class="" href="data-unshared-directory.html"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
+<li><a class="" href="rest.html"><span class="header-section-number">9</span> Data at Rest</a></li>
+<li><a class="" href="patterns.html"><span class="header-section-number">10</span> Patterns</a></li>
+<li><a class="" href="security.html"><span class="header-section-number">11</span> Security &amp; Private Data</a></li>
+<li><a class="" href="automation.html"><span class="header-section-number">12</span> Automation &amp; Reproducibility</a></li>
+<li><a class="" href="scaling-up.html"><span class="header-section-number">13</span> Scaling Up</a></li>
+<li><a class="" href="collaboration.html"><span class="header-section-number">14</span> Parallel Collaboration</a></li>
+<li><a class="" href="document.html"><span class="header-section-number">15</span> Documentation</a></li>
+<li><a class="" href="style.html"><span class="header-section-number">16</span> Style Guide</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></li>
+<li><a class="active" href="validation.html"><span class="header-section-number">18</span> Validation</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">19</span> Testing</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">20</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">21</span> Workstation</a></li>
+<li><a class="" href="tools.html"><span class="header-section-number">22</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">23</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">24</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">25</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">26</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
 <li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
@@ -105,13 +107,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="validation" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="validation" class="section level1" number="18">
 <h1>
-<span class="header-section-number">16</span> Validation<a class="anchor" aria-label="anchor" href="#validation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18</span> Validation<a class="anchor" aria-label="anchor" href="#validation"><i class="fas fa-link"></i></a>
 </h1>
-<div id="validation-intro" class="section level2" number="16.1">
+<div id="validation-intro" class="section level2" number="18.1">
 <h2>
-<span class="header-section-number">16.1</span> Intro<a class="anchor" aria-label="anchor" href="#validation-intro"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1</span> Intro<a class="anchor" aria-label="anchor" href="#validation-intro"><i class="fas fa-link"></i></a>
 </h2>
 <p>Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off.</p>
 <p>Validating your dataset serves many beneficial roles, including</p>
@@ -124,19 +126,19 @@
 <li>assessing the likelihood that the assumptions of your inferential models are reasonable.</li>
 </ol>
 </div>
-<div id="validation-ad-hoc" class="section level2" number="16.2">
+<div id="validation-ad-hoc" class="section level2" number="18.2">
 <h2>
-<span class="header-section-number">16.2</span> Ad-hoc Manual Inspections<a class="anchor" aria-label="anchor" href="#validation-ad-hoc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.2</span> Ad-hoc Manual Inspections<a class="anchor" aria-label="anchor" href="#validation-ad-hoc"><i class="fas fa-link"></i></a>
 </h2>
 <p>We recommend starting with a basic question and developing a quick and dirty report that addresses an immediate need. Once your initial curiosity is satisfied, consider if the report can evolve into to address future needs. One common evolutionary path is informing an inferential model. A second common path is being assimilated in an automated report that is frequently run.</p>
 </div>
-<div id="validation-inferential" class="section level2" number="16.3">
+<div id="validation-inferential" class="section level2" number="18.3">
 <h2>
-<span class="header-section-number">16.3</span> Inferential Support<a class="anchor" aria-label="anchor" href="#validation-inferential"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.3</span> Inferential Support<a class="anchor" aria-label="anchor" href="#validation-inferential"><i class="fas fa-link"></i></a>
 </h2>
-<div id="validation-inferential-background" class="section level3" number="16.3.1">
+<div id="validation-inferential-background" class="section level3" number="18.3.1">
 <h3>
-<span class="header-section-number">16.3.1</span> Brief Intro to Inferential Statistics<a class="anchor" aria-label="anchor" href="#validation-inferential-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.3.1</span> Brief Intro to Inferential Statistics<a class="anchor" aria-label="anchor" href="#validation-inferential-background"><i class="fas fa-link"></i></a>
 </h3>
 <p><em>Descriptive</em> statistics differ from <em>inferential</em> statistics. A descriptive statistic concerns only the observed elements in a sample, such as the average height or the range between the weakest and strongest systolic blood pressure. There is no fuzziness or forecasting in a descriptive statistic –it’s simply a straight-forward equation from observed points.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Of course sometimes life isn’t this easy, but that’s the overall idea&lt;/p&gt;"><sup>10</sup></a></p>
 <p>An inferential statistic tries to reach beyond a descriptive statistic: it projects beyond an observed sample. It assesses if a pattern within a collected sample is likely to exist in the larger population. Suppose a group of 40 newborns had faster heart rates than 34 infants. A large Student <em>t</em> (and its accompanying small <em>p</em>-value) may indicate that <em>all</em> newborns have faster rates –not just the 40.</p>
@@ -161,16 +163,16 @@ Automated Reports
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></div>
-<div class="next"><a href="testing.html"><span class="header-section-number">17</span> Testing</a></div>
+<div class="prev"><a href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></div>
+<div class="next"><a href="testing.html"><span class="header-section-number">19</span> Testing</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#validation"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="nav-link" href="#validation-intro"><span class="header-section-number">16.1</span> Intro</a></li>
-<li><a class="nav-link" href="#validation-ad-hoc"><span class="header-section-number">16.2</span> Ad-hoc Manual Inspections</a></li>
+<li><a class="nav-link" href="#validation"><span class="header-section-number">18</span> Validation</a></li>
+<li><a class="nav-link" href="#validation-intro"><span class="header-section-number">18.1</span> Intro</a></li>
+<li><a class="nav-link" href="#validation-ad-hoc"><span class="header-section-number">18.2</span> Ad-hoc Manual Inspections</a></li>
 <li>
-<a class="nav-link" href="#validation-inferential"><span class="header-section-number">16.3</span> Inferential Support</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#validation-inferential-background"><span class="header-section-number">16.3.1</span> Brief Intro to Inferential Statistics</a></li></ul>
+<a class="nav-link" href="#validation-inferential"><span class="header-section-number">18.3</span> Inferential Support</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#validation-inferential-background"><span class="header-section-number">18.3.1</span> Brief Intro to Inferential Statistics</a></li></ul>
 </li>
 </ul>
 
@@ -189,7 +191,7 @@ Automated Reports
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

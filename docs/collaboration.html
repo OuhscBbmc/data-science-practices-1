@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 12 Parallel Collaboration | Collaborative Data Science Practices</title>
+<title>Chapter 14 Parallel Collaboration | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="12.1 Social Contract Issues Organized Commits &amp; Coherent Diffs Branch &amp; Merge Strategy  12.2 Code Reviews Daily Reviews of PRs Periodic Reviews of Files  12.3 Remote Headset &amp; sharing screens ...">
+<meta name="description" content="14.1 Social Contract Issues Organized Commits &amp; Coherent Diffs Branch &amp; Merge Strategy  14.2 Code Reviews Daily Reviews of PRs Periodic Reviews of Files  14.3 Remote Headset &amp; sharing screens ...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 12 Parallel Collaboration | Collaborative Data Science Practices">
+<meta property="og:title" content="Chapter 14 Parallel Collaboration | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="12.1 Social Contract Issues Organized Commits &amp; Coherent Diffs Branch &amp; Merge Strategy  12.2 Code Reviews Daily Reviews of PRs Periodic Reviews of Files  12.3 Remote Headset &amp; sharing screens ...">
+<meta property="og:description" content="14.1 Social Contract Issues Organized Commits &amp; Coherent Diffs Branch &amp; Merge Strategy  14.2 Code Reviews Daily Reviews of PRs Periodic Reviews of Files  14.3 Remote Headset &amp; sharing screens ...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 12 Parallel Collaboration | Collaborative Data Science Practices">
-<meta name="twitter:description" content="12.1 Social Contract Issues Organized Commits &amp; Coherent Diffs Branch &amp; Merge Strategy  12.2 Code Reviews Daily Reviews of PRs Periodic Reviews of Files  12.3 Remote Headset &amp; sharing screens ...">
+<meta name="twitter:title" content="Chapter 14 Parallel Collaboration | Collaborative Data Science Practices">
+<meta name="twitter:description" content="14.1 Social Contract Issues Organized Commits &amp; Coherent Diffs Branch &amp; Merge Strategy  14.2 Code Reviews Daily Reviews of PRs Periodic Reviews of Files  14.3 Remote Headset &amp; sharing screens ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -71,24 +71,26 @@
 <li><a class="" href="file-prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
 <li><a class="" href="file-prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
 <li><a class="" href="repo-prototype.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
-<li><a class="" href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></li>
-<li><a class="" href="patterns.html"><span class="header-section-number">8</span> Patterns</a></li>
-<li><a class="" href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
-<li><a class="" href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
-<li><a class="" href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></li>
-<li><a class="active" href="collaboration.html"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
-<li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
-<li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
-<li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
-<li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
-<li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
-<li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
-<li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
-<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
-<li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
-<li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
-<li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
+<li><a class="" href="data-public-directory.html"><span class="header-section-number">7</span> data-public/ Directory</a></li>
+<li><a class="" href="data-unshared-directory.html"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
+<li><a class="" href="rest.html"><span class="header-section-number">9</span> Data at Rest</a></li>
+<li><a class="" href="patterns.html"><span class="header-section-number">10</span> Patterns</a></li>
+<li><a class="" href="security.html"><span class="header-section-number">11</span> Security &amp; Private Data</a></li>
+<li><a class="" href="automation.html"><span class="header-section-number">12</span> Automation &amp; Reproducibility</a></li>
+<li><a class="" href="scaling-up.html"><span class="header-section-number">13</span> Scaling Up</a></li>
+<li><a class="active" href="collaboration.html"><span class="header-section-number">14</span> Parallel Collaboration</a></li>
+<li><a class="" href="document.html"><span class="header-section-number">15</span> Documentation</a></li>
+<li><a class="" href="style.html"><span class="header-section-number">16</span> Style Guide</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></li>
+<li><a class="" href="validation.html"><span class="header-section-number">18</span> Validation</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">19</span> Testing</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">20</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">21</span> Workstation</a></li>
+<li><a class="" href="tools.html"><span class="header-section-number">22</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">23</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">24</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">25</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">26</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
 <li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
@@ -105,13 +107,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="collaboration" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="collaboration" class="section level1" number="14">
 <h1>
-<span class="header-section-number">12</span> Parallel Collaboration<a class="anchor" aria-label="anchor" href="#collaboration"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14</span> Parallel Collaboration<a class="anchor" aria-label="anchor" href="#collaboration"><i class="fas fa-link"></i></a>
 </h1>
-<div id="social-contract" class="section level2" number="12.1">
+<div id="social-contract" class="section level2" number="14.1">
 <h2>
-<span class="header-section-number">12.1</span> Social Contract<a class="anchor" aria-label="anchor" href="#social-contract"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1</span> Social Contract<a class="anchor" aria-label="anchor" href="#social-contract"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>Issues</li>
@@ -119,26 +121,26 @@
 <li>Branch &amp; Merge Strategy</li>
 </ol>
 </div>
-<div id="code-reviews" class="section level2" number="12.2">
+<div id="code-reviews" class="section level2" number="14.2">
 <h2>
-<span class="header-section-number">12.2</span> Code Reviews<a class="anchor" aria-label="anchor" href="#code-reviews"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2</span> Code Reviews<a class="anchor" aria-label="anchor" href="#code-reviews"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>Daily Reviews of PRs</li>
 <li>Periodic Reviews of Files</li>
 </ol>
 </div>
-<div id="remote" class="section level2" number="12.3">
+<div id="remote" class="section level2" number="14.3">
 <h2>
-<span class="header-section-number">12.3</span> Remote<a class="anchor" aria-label="anchor" href="#remote"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3</span> Remote<a class="anchor" aria-label="anchor" href="#remote"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>Headset &amp; sharing screens</li>
 </ol>
 </div>
-<div id="additional-resources-1" class="section level2" number="12.4">
+<div id="additional-resources-1" class="section level2" number="14.4">
 <h2>
-<span class="header-section-number">12.4</span> Additional Resources<a class="anchor" aria-label="anchor" href="#additional-resources-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4</span> Additional Resources<a class="anchor" aria-label="anchor" href="#additional-resources-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -146,13 +148,13 @@
 <li><span class="citation">(<a href="references.html#ref-fitzpatrick" role="doc-biblioref">Brian Fitzpatrick 2012</a>)</span></li>
 </ul>
 </div>
-<div id="loose-notes" class="section level2" number="12.5">
+<div id="loose-notes" class="section level2" number="14.5">
 <h2>
-<span class="header-section-number">12.5</span> Loose Notes<a class="anchor" aria-label="anchor" href="#loose-notes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5</span> Loose Notes<a class="anchor" aria-label="anchor" href="#loose-notes"><i class="fas fa-link"></i></a>
 </h2>
-<div id="github" class="section level3" number="12.5.1">
+<div id="github" class="section level3" number="14.5.1">
 <h3>
-<span class="header-section-number">12.5.1</span> GitHub<a class="anchor" aria-label="anchor" href="#github"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.1</span> GitHub<a class="anchor" aria-label="anchor" href="#github"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li><p>Review your diffs before committing. Check for things like accidental deletions and debugging code that should be deleted (or at least commented out).</p></li>
@@ -172,9 +174,9 @@
 </li>
 </ol>
 </div>
-<div id="common-code" class="section level3" number="12.5.2">
+<div id="common-code" class="section level3" number="14.5.2">
 <h3>
-<span class="header-section-number">12.5.2</span> Common Code<a class="anchor" aria-label="anchor" href="#common-code"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5.2</span> Common Code<a class="anchor" aria-label="anchor" href="#common-code"><i class="fas fa-link"></i></a>
 </h3>
 <p>This involves code/files that multiple people use, like the REDCap arches.</p>
 <ol style="list-style-type: decimal">
@@ -185,20 +187,20 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></div>
-<div class="next"><a href="document.html"><span class="header-section-number">13</span> Documentation</a></div>
+<div class="prev"><a href="scaling-up.html"><span class="header-section-number">13</span> Scaling Up</a></div>
+<div class="next"><a href="document.html"><span class="header-section-number">15</span> Documentation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#collaboration"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
-<li><a class="nav-link" href="#social-contract"><span class="header-section-number">12.1</span> Social Contract</a></li>
-<li><a class="nav-link" href="#code-reviews"><span class="header-section-number">12.2</span> Code Reviews</a></li>
-<li><a class="nav-link" href="#remote"><span class="header-section-number">12.3</span> Remote</a></li>
-<li><a class="nav-link" href="#additional-resources-1"><span class="header-section-number">12.4</span> Additional Resources</a></li>
+<li><a class="nav-link" href="#collaboration"><span class="header-section-number">14</span> Parallel Collaboration</a></li>
+<li><a class="nav-link" href="#social-contract"><span class="header-section-number">14.1</span> Social Contract</a></li>
+<li><a class="nav-link" href="#code-reviews"><span class="header-section-number">14.2</span> Code Reviews</a></li>
+<li><a class="nav-link" href="#remote"><span class="header-section-number">14.3</span> Remote</a></li>
+<li><a class="nav-link" href="#additional-resources-1"><span class="header-section-number">14.4</span> Additional Resources</a></li>
 <li>
-<a class="nav-link" href="#loose-notes"><span class="header-section-number">12.5</span> Loose Notes</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#github"><span class="header-section-number">12.5.1</span> GitHub</a></li>
-<li><a class="nav-link" href="#common-code"><span class="header-section-number">12.5.2</span> Common Code</a></li>
+<a class="nav-link" href="#loose-notes"><span class="header-section-number">14.5</span> Loose Notes</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#github"><span class="header-section-number">14.5.1</span> GitHub</a></li>
+<li><a class="nav-link" href="#common-code"><span class="header-section-number">14.5.2</span> Common Code</a></li>
 </ul>
 </li>
 </ul>
@@ -218,7 +220,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-29.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

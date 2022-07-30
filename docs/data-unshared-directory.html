@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 17 Publishing Results | Collaborative Data Science Practices</title>
+<title>Chapter 8 data-unshared/ Directory | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="17.1 To Other Analysts   17.2 To Researchers &amp; Content Experts   17.3 To Technical-Phobic Audiences">
+<meta name="description" content="Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server. This makes the folder a decent container for: sensitive...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 17 Publishing Results | Collaborative Data Science Practices">
+<meta property="og:title" content="Chapter 8 data-unshared/ Directory | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="17.1 To Other Analysts   17.2 To Researchers &amp; Content Experts   17.3 To Technical-Phobic Audiences">
+<meta property="og:description" content="Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server. This makes the folder a decent container for: sensitive...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 17 Publishing Results | Collaborative Data Science Practices">
-<meta name="twitter:description" content="17.1 To Other Analysts   17.2 To Researchers &amp; Content Experts   17.3 To Technical-Phobic Audiences">
+<meta name="twitter:title" content="Chapter 8 data-unshared/ Directory | Collaborative Data Science Practices">
+<meta name="twitter:description" content="Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server. This makes the folder a decent container for: sensitive...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -72,7 +72,7 @@
 <li><a class="" href="file-prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
 <li><a class="" href="repo-prototype.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
 <li><a class="" href="data-public-directory.html"><span class="header-section-number">7</span> data-public/ Directory</a></li>
-<li><a class="" href="data-unshared-directory.html"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
+<li><a class="active" href="data-unshared-directory.html"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
 <li><a class="" href="rest.html"><span class="header-section-number">9</span> Data at Rest</a></li>
 <li><a class="" href="patterns.html"><span class="header-section-number">10</span> Patterns</a></li>
 <li><a class="" href="security.html"><span class="header-section-number">11</span> Security &amp; Private Data</a></li>
@@ -81,7 +81,7 @@
 <li><a class="" href="collaboration.html"><span class="header-section-number">14</span> Parallel Collaboration</a></li>
 <li><a class="" href="document.html"><span class="header-section-number">15</span> Documentation</a></li>
 <li><a class="" href="style.html"><span class="header-section-number">16</span> Style Guide</a></li>
-<li><a class="active" href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></li>
 <li><a class="" href="validation.html"><span class="header-section-number">18</span> Validation</a></li>
 <li><a class="" href="testing.html"><span class="header-section-number">19</span> Testing</a></li>
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">20</span> Troubleshooting and Debugging</a></li>
@@ -107,43 +107,65 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="publication" class="section level1" number="17">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-unshared-directory" class="section level1" number="8">
 <h1>
-<span class="header-section-number">17</span> Publishing Results<a class="anchor" aria-label="anchor" href="#publication"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> <code>data-unshared/</code> Directory<a class="anchor" aria-label="anchor" href="#data-unshared-directory"><i class="fas fa-link"></i></a>
 </h1>
-<div id="publication-analysts" class="section level2" number="17.1">
+<p>Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server. This makes the folder a decent container for:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>sensitive information</strong>, such as <a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">PHI</a> (Protected Health Information). When PHI is involved, we recommend <code>data-unshared/</code> only if a database or a secured networked file share is not feasible. See the discussion below.</p></li>
+<li><p><strong>public files that are huge</strong> (say, 1+ GB) and easily downloadable or reproducible. For instance, files from stable sources like the US Census, NLSY, or Dataverse.</p></li>
+<li><p><strong>diagnostic logs</strong> that are not useful to collaborators.</p></li>
+</ol>
+<p>A line in the repo’s <code>.gitignore</code> file blocks the directory’s contents from being staged/committed (look for <code>/data-unshared/*</code>). Since files in this directory are not committed, it requires more discipline to communicate what files should be on a collaborator’s computer. Keep a list of files (like a table of contents) updated at <code>data-unshared/contents.md</code>; at a minimum declare the name of each file and how it can be downloaded or reproduced. If you are curious the line <code>!data-unshared/contents.md</code> in <code>.gitignore</code> declares an exception so the markdown file is committed and updated on a collaborator’s machine.</p>
+<p>Even though these files are kept off the central repository, we recommend encrypting your local drive if the <code>data-unshared/</code> contains sensitive (such as PHI). See the <code>data-public/</code> <a href="data-public/"><code>README.md</code></a> for more information.</p>
+<p>The directory works best with the subdirectories described in the organization of <a href="repo-prototype.html#repo-data-public"><code>data-public/</code></a>.</p>
+<p>Compared to <code>data-unshared/</code>, we prefer storing PHI in an enterprise database (such as SQL Server, PostgreSQL, MariaDB/MySQL, or Oracle) or networked drive for four reasons.</p>
+<ol style="list-style-type: decimal">
+<li>These central resources are typically managed by Campus IT and reviewed by security professionals.</li>
+<li>It’s trivial to stay synchronized across collaborators with a file share or database. In contrast, <code>data-unshared/</code> isn’t synchronized across machines so extra discipline is required to tell collaborators to update their machines.</li>
+<li>It’s sometimes possible to recover lost data from a file share or database. It’s much less likely to turn back the clock for <code>data-unshared/</code> files.</li>
+<li>It’s not too unlikely to mess up the <code>.gitignore</code> entries which would allow the sensitive files to be committed to the repository. If sensitive information is stored on <code>data-unshared/</code>, it is important to review every commit to ensure information isn’t about to sneak into the repo.</li>
+</ol>
+<div id="repo-documentation" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">17.1</span> To Other Analysts<a class="anchor" aria-label="anchor" href="#publication-analysts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> Documentation<a class="anchor" aria-label="anchor" href="#repo-documentation"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="publication-experts" class="section level2" number="17.2">
+<div id="repo-manipulation" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">17.2</span> To Researchers &amp; Content Experts<a class="anchor" aria-label="anchor" href="#publication-experts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Manipulation<a class="anchor" aria-label="anchor" href="#repo-manipulation"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="publication-phobic" class="section level2" number="17.3">
+<div id="repo-stitched" class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">17.3</span> To Technical-Phobic Audiences<a class="anchor" aria-label="anchor" href="#publication-phobic"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Stitched Output<a class="anchor" aria-label="anchor" href="#repo-stitched"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="repo-utility" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Utility<a class="anchor" aria-label="anchor" href="#repo-utility"><i class="fas fa-link"></i></a>
 </h2>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="style.html"><span class="header-section-number">16</span> Style Guide</a></div>
-<div class="next"><a href="validation.html"><span class="header-section-number">18</span> Validation</a></div>
+<div class="prev"><a href="data-public-directory.html"><span class="header-section-number">7</span> data-public/ Directory</a></div>
+<div class="next"><a href="rest.html"><span class="header-section-number">9</span> Data at Rest</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#publication"><span class="header-section-number">17</span> Publishing Results</a></li>
-<li><a class="nav-link" href="#publication-analysts"><span class="header-section-number">17.1</span> To Other Analysts</a></li>
-<li><a class="nav-link" href="#publication-experts"><span class="header-section-number">17.2</span> To Researchers &amp; Content Experts</a></li>
-<li><a class="nav-link" href="#publication-phobic"><span class="header-section-number">17.3</span> To Technical-Phobic Audiences</a></li>
+<li><a class="nav-link" href="#data-unshared-directory"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
+<li><a class="nav-link" href="#repo-documentation"><span class="header-section-number">8.1</span> Documentation</a></li>
+<li><a class="nav-link" href="#repo-manipulation"><span class="header-section-number">8.2</span> Manipulation</a></li>
+<li><a class="nav-link" href="#repo-stitched"><span class="header-section-number">8.3</span> Stitched Output</a></li>
+<li><a class="nav-link" href="#repo-utility"><span class="header-section-number">8.4</span> Utility</a></li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-publication.md">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-publication.md">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-repo-prototype.md">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-repo-prototype.md">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
