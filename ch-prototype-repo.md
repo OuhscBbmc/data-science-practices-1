@@ -64,11 +64,15 @@ The readme is automatically displayed the GitHub repository is opened in a brows
 
 * Project Name (see our [style guide](#style-repo-naming) for naming recommendations)
 * Principal Investigator (ultimately accountable for the research) and Project Coordinator (easy contact if questions arise)
-* IRB Tracking Number (or whatever board/committee that reviewed and approved the project).  This will help communicate more accurately within your larger university or company.
+* IRB Tracking Number (or whatever oversight committee reviewed and approved the project).  This will help communicate more accurately within your larger university or company.
 * Abstract or some project description that is already written (for example, part of the IRB submission).
+* Documentation locations and resources, such as
+  * Approval letters from the IRB or other oversight board, which should be also stored in [documentation/](#repo-documentation).
+  * data dictionaries for the incoming datasets your team is ingesting
+  * data dictionaries for the derived datasets your team is producing
 * Data Locations and resources, such as
   * database and database server
-  * REDCap project id
+  * REDCap project id and url
   * networked file share
 * The PI's expectations and goals for your analysis team
 * Likely deadlines, such as grant and conference submission dates
@@ -78,9 +82,6 @@ Each directory can have its own readme file, but (for typical analysis projects)
 ### `*.Rproj` {#repo-rproj}
 
 The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled.  The file's major benefit is that it sets the R session's working directory, which facilitates good discipline about setting a constant location for all files in the repo.  Although the plain-text file can be edited directly, we recommend using RStudio's dialog box.  There is good documentation about Rproj settings.  If you are unsure, copy [this file](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj) to the repo's root directory and rename it to match the repo exactly.
-
-`analysis/` {#repo-analysis}
-------------------------------------
 
 `data-public/` {#repo-data-public}
 ------------------------------------
@@ -107,10 +108,8 @@ The characteristics of `data-public/` vary based on the subject matter.  For ins
 
 We feel a private GitHub repo offers adequate protection if being scooped is the biggest risk.
 
-
 `data-unshared/` {#repo-data-unshared}
 ------------------------------------
-
 
 Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server.  This makes the folder a decent container for:
 
@@ -120,7 +119,7 @@ Files in this directory are stored on the local computer, but are not committed 
 
 1. **diagnostic logs** that are not useful to collaborators.
 
-A line in the repo's `.gitignore` file blocks the directory's contents from being staged/committed (look for `/data-unshared/*`).  Since files in this directory are not committed, it requires more discipline to communicate what files should be on a collaborator's computer.  Keep a list of files (like a table of contents) updated at `data-unshared/contents.md`; at a minimum declare the name of each file and how it can be downloaded or reproduced.  If you are curious the line `!data-unshared/contents.md` in `.gitignore` declares an exception so the markdown file is committed and updated on a collaborator's machine.
+A line in the repo's `.gitignore` file blocks the directory's contents from being staged/committed (look for `/data-unshared/*`).  Since files in this directory are not committed, it requires more discipline to communicate what files should be on a collaborator's computer.  List the files either in the [repo's readme](#repo-readme) or in `data-unshared/contents.md`; at a minimum declare the name of each file and how it can be downloaded or reproduced.  (If you are curious, the `!data-unshared/contents.md` line in `.gitignore` declares an exception so the markdown file is committed and updated on a collaborator's machine.)
 
 Even though these files are kept off the central repository, we recommend encrypting your local drive if the `data-unshared/` contains sensitive (such as PHI).  See the `data-public/` [`README.md`](data-public/) for more information.
 
@@ -136,8 +135,19 @@ Compared to `data-unshared/`, we prefer storing PHI in an enterprise database (s
 `documentation/` {#repo-documentation}
 ------------------------------------
 
+
+
 `manipulation/` {#repo-manipulation}
 ------------------------------------
+
+`analysis/` {#repo-analysis}
+------------------------------------
+
+In a sense, all the directories exist only to support the contents of `analysis/`.  All the exploratory, descriptive, and inferential statistics are produced by the Rmd files.  Each subdirectory is the name of the report, (*e.g.*, `analysis/report-te-1`) and within that directory are four files:
+  * the R file that contains the meat of the analysis (*e.g.*, `analysis/report-te-1/report-te-1.R`).
+  * the Rmd file that serves as the "presentation layer" and calls the R file (*e.g.*, `analysis/report-te-1/report-te-1.Rmd`).
+  * the markdown file produced directly by the Rmd (*e.g.*, `analysis/report-te-1/report-te-1.md`).  Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
+  * the html file that is derived from the markdown file (*e.g.*, `analysis/report-te-1/report-te-1.html`).  The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered.  All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from.  Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.
 
 Stitched Output {#repo-stitched}
 ------------------------------------
