@@ -66,10 +66,7 @@ The readme is automatically displayed the GitHub repository is opened in a brows
 * Principal Investigator (ultimately accountable for the research) and Project Coordinator (easy contact if questions arise)
 * IRB Tracking Number (or whatever oversight committee reviewed and approved the project).  This will help communicate more accurately within your larger university or company.
 * Abstract or some project description that is already written (for example, part of the IRB submission).
-* Documentation locations and resources, such as
-  * Approval letters from the IRB or other oversight board, which should be also stored in [documentation/](#repo-documentation).
-  * data dictionaries for the incoming datasets your team is ingesting
-  * data dictionaries for the derived datasets your team is producing
+* Documentation locations and resources, such as those described in the [`documentation/` section below](#repo-documentation)
 * Data Locations and resources, such as
   * database and database server
   * REDCap project id and url
@@ -111,11 +108,11 @@ We feel a private GitHub repo offers adequate protection if being scooped is the
 `data-unshared/` {#repo-data-unshared}
 ------------------------------------
 
-Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server.  This makes the folder a decent container for:
+Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server.  This makes the folder a candidate for:
 
 1. **sensitive information**, such as [PHI](https://www.hhs.gov/answers/hipaa/what-is-phi/index.html) (Protected Health Information).  When PHI is involved, we recommend `data-unshared/` only if a database or a secured networked file share is not feasible.  See the discussion below.
 
-1. **public files that are huge** (say, 1+ GB) and easily downloadable or reproducible.  For instance, files from stable sources like the US Census, NLSY, or Dataverse.
+1. **huge public files** say, files that 1+ GB and easily downloadable or reproducible.  For instance, files from stable sources like the [US Census](https://www.census.gov/data/datasets.html), [Bureau of Labor Statistics](https://www.bls.gov/nls/), or [dataverse.org](https://dataverse.org/).
 
 1. **diagnostic logs** that are not useful to collaborators.
 
@@ -135,7 +132,13 @@ Compared to `data-unshared/`, we prefer storing PHI in an enterprise database (s
 `documentation/` {#repo-documentation}
 ------------------------------------
 
+Good documentation is scarce and documentation files consume little space, so liberally copy everything you get to this directory.  The most helpful include:
 
+* Approval letters from the IRB or other oversight board.  This is especially important if you are also the gatekeeper of a database, and must justify releasing sensitive information.
+* Data dictionaries for the incoming datasets your team is ingesting.
+* Data dictionaries for the derived datasets your team is producing.
+
+If the documentation is public and stable, like the CDC's site for [vaccination codes](https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx), include the url in the [repo's readme](#repo-readme).  If you feel the information or the location may change, copy the url and also the full document so it is easier to reconstruct your logic when returning to the project in a few years.
 
 `manipulation/` {#repo-manipulation}
 ------------------------------------
@@ -149,8 +152,32 @@ In a sense, all the directories exist only to support the contents of `analysis/
   * the markdown file produced directly by the Rmd (*e.g.*, `analysis/report-te-1/report-te-1.md`).  Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
   * the html file that is derived from the markdown file (*e.g.*, `analysis/report-te-1/report-te-1.html`).  The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered.  All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from.  Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.
 
-Stitched Output {#repo-stitched}
+
+Optional {#repo-optional}
 ------------------------------------
 
-Utility {#repo-utility}
-------------------------------------
+Everything mentioned until now should exist in the repo, even if the file or directory is empty.  Some projects benefit from the following additional capabilities.
+
+### `DESCRIPTION` {#repo-description}
+
+The plain-text `DESCRIPTION` file lives in the repo's root directory --see the [example](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/DESCRIPTION) in R Analysis Skeleton.  The file allows your repo to become an R package, which provides the following benefits even if it will never be deployed to CRAN.
+
+* specify the packages (and their versions) required by your code.  This include packages that aren't available on CRAN, like [OuhscBbmc/OuhscMunge](https://github.com/OuhscBbmc/OuhscMunge).
+* better unify and test the common code called from multiple files.
+* better document functions and datasets within the repo.
+
+The last two bullets are essentially an upgrade from merely sticking code in a file and [sourcing](#chunk-load-sources) it.
+
+A package offers many capabilities beyond those listed above, but a typical data science repo will not scratch the surface.  The larger topic is covered in Hadley Wickham's  *R Packages*.
+
+### `utility/` {#repo-utility}
+
+Include files that may be run occasionally, but are not required to reproduce the analyses.  Examples include:
+
+* code for submitting the entire repo pipeline on a super computer,
+* simulate artificial demonstration data, or
+* running diagnostic checks on your code using something like the [goodpractice](goodpractice) or [urlchecker](urlchecker).
+
+### `stitched-output/` {#repo-stitched}
+
+[Stitching]() is a light-weight capability of rmarkdown.  If the repo's manipulation files stich their output (as a type of logging), consider directing all output to this directory.
