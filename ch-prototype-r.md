@@ -1,4 +1,4 @@
-Prototypical R File {#file-prototype-r}
+Prototypical R File {#prototype-r}
 ====================================
 
 As stated in [Consistency across Files](#consistency-files), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.

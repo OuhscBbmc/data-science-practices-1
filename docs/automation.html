@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 12 Automation &amp; Reproducibility | Collaborative Data Science Practices</title>
+<title>Chapter 10 Automation &amp; Reproducibility | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="Automation is an important prerequisite of reproducibility.  12.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
+<meta name="description" content="Automation is an important prerequisite of reproducibility.  10.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 12 Automation &amp; Reproducibility | Collaborative Data Science Practices">
+<meta property="og:title" content="Chapter 10 Automation &amp; Reproducibility | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Automation is an important prerequisite of reproducibility.  12.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
+<meta property="og:description" content="Automation is an important prerequisite of reproducibility.  10.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 12 Automation &amp; Reproducibility | Collaborative Data Science Practices">
-<meta name="twitter:description" content="Automation is an important prerequisite of reproducibility.  12.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
+<meta name="twitter:title" content="Chapter 10 Automation &amp; Reproducibility | Collaborative Data Science Practices">
+<meta name="twitter:description" content="Automation is an important prerequisite of reproducibility.  10.1 Mediator A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -68,29 +68,27 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
 <li><a class="" href="coding.html"><span class="header-section-number">2</span> Coding Principles</a></li>
 <li><a class="" href="architecture.html"><span class="header-section-number">3</span> Architecture Principles</a></li>
-<li><a class="" href="file-prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
-<li><a class="" href="file-prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
-<li><a class="" href="repo-prototype.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
-<li><a class="" href="data-public-directory.html"><span class="header-section-number">7</span> data-public/ Directory</a></li>
-<li><a class="" href="data-unshared-directory.html"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
-<li><a class="" href="rest.html"><span class="header-section-number">9</span> Data at Rest</a></li>
-<li><a class="" href="patterns.html"><span class="header-section-number">10</span> Patterns</a></li>
-<li><a class="" href="security.html"><span class="header-section-number">11</span> Security &amp; Private Data</a></li>
-<li><a class="active" href="automation.html"><span class="header-section-number">12</span> Automation &amp; Reproducibility</a></li>
-<li><a class="" href="scaling-up.html"><span class="header-section-number">13</span> Scaling Up</a></li>
-<li><a class="" href="collaboration.html"><span class="header-section-number">14</span> Parallel Collaboration</a></li>
-<li><a class="" href="document.html"><span class="header-section-number">15</span> Documentation</a></li>
-<li><a class="" href="style.html"><span class="header-section-number">16</span> Style Guide</a></li>
-<li><a class="" href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></li>
-<li><a class="" href="validation.html"><span class="header-section-number">18</span> Validation</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">19</span> Testing</a></li>
-<li><a class="" href="troubleshooting.html"><span class="header-section-number">20</span> Troubleshooting and Debugging</a></li>
-<li><a class="" href="workstation.html"><span class="header-section-number">21</span> Workstation</a></li>
-<li><a class="" href="tools.html"><span class="header-section-number">22</span> Considerations when Selecting Tools</a></li>
-<li><a class="" href="team.html"><span class="header-section-number">23</span> Growing a Team</a></li>
-<li><a class="" href="redcap-user.html"><span class="header-section-number">24</span> Material for REDCap Users</a></li>
-<li><a class="" href="redcap-developer.html"><span class="header-section-number">25</span> Material for REDCap Developers</a></li>
-<li><a class="" href="redcap-admin.html"><span class="header-section-number">26</span> Material for REDCap Admins</a></li>
+<li><a class="" href="prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
+<li><a class="" href="prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
+<li><a class="" href="prototype-repo.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
+<li><a class="" href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></li>
+<li><a class="" href="patterns.html"><span class="header-section-number">8</span> Patterns</a></li>
+<li><a class="" href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
+<li><a class="active" href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
+<li><a class="" href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></li>
+<li><a class="" href="collaboration.html"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
+<li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
+<li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
+<li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
+<li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
 <li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
@@ -107,50 +105,50 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="automation" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="automation" class="section level1" number="10">
 <h1>
-<span class="header-section-number">12</span> Automation &amp; Reproducibility<a class="anchor" aria-label="anchor" href="#automation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10</span> Automation &amp; Reproducibility<a class="anchor" aria-label="anchor" href="#automation"><i class="fas fa-link"></i></a>
 </h1>
 <p>Automation is an important prerequisite of reproducibility.</p>
-<div id="automation-mediator" class="section level2" number="12.1">
+<div id="automation-mediator" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">12.1</span> Mediator<a class="anchor" aria-label="anchor" href="#automation-mediator"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Mediator<a class="anchor" aria-label="anchor" href="#automation-mediator"><i class="fas fa-link"></i></a>
 </h2>
 <p>A nontrivial project usually has multiple stages in its pipeline. Instead of a human deciding when to execute which piece, a single file should execute the pieces. The single file makes the project more portable, and also clearly documents the process.</p>
 <p>This single file is a special cases of the <a href="https://en.wikipedia.org/wiki/Mediator_pattern">mediator pattern</a>, in the sense that it defines how each piece relates to each other.</p>
-<div id="automation-flow" class="section level3" number="12.1.1">
+<div id="automation-flow" class="section level3" number="10.1.1">
 <h3>
-<span class="header-section-number">12.1.1</span> Flow File in R<a class="anchor" aria-label="anchor" href="#automation-flow"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.1</span> Flow File in R<a class="anchor" aria-label="anchor" href="#automation-flow"><i class="fas fa-link"></i></a>
 </h3>
 <p>{Describe <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/flow.R" class="uri">https://github.com/wibeasley/RAnalysisSkeleton/blob/master/flow.R</a>.}</p>
-<p>See also the <a href="repo-prototype.html#repo-flow">prototypical repo</a>.</p>
+<p>See also the <a href="prototype-repo.html#repo-flow">prototypical repo</a>.</p>
 </div>
-<div id="automation-makefile" class="section level3" number="12.1.2">
+<div id="automation-makefile" class="section level3" number="10.1.2">
 <h3>
-<span class="header-section-number">12.1.2</span> Makefile<a class="anchor" aria-label="anchor" href="#automation-makefile"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.2</span> Makefile<a class="anchor" aria-label="anchor" href="#automation-makefile"><i class="fas fa-link"></i></a>
 </h3>
 <p>{Briefly describe this language, how it can be more efficient, and what additional obstacles it presents.}</p>
 </div>
-<div id="automation-ssis" class="section level3" number="12.1.3">
+<div id="automation-ssis" class="section level3" number="10.1.3">
 <h3>
-<span class="header-section-number">12.1.3</span> SSIS<a class="anchor" aria-label="anchor" href="#automation-ssis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1.3</span> SSIS<a class="anchor" aria-label="anchor" href="#automation-ssis"><i class="fas fa-link"></i></a>
 </h3>
 <p>{Describe SSIS package development.}</p>
 </div>
 </div>
-<div id="automation-scheduling" class="section level2" number="12.2">
+<div id="automation-scheduling" class="section level2" number="10.2">
 <h2>
-<span class="header-section-number">12.2</span> Scheduling<a class="anchor" aria-label="anchor" href="#automation-scheduling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Scheduling<a class="anchor" aria-label="anchor" href="#automation-scheduling"><i class="fas fa-link"></i></a>
 </h2>
-<div id="automation-cron" class="section level3" number="12.2.1">
+<div id="automation-cron" class="section level3" number="10.2.1">
 <h3>
-<span class="header-section-number">12.2.1</span> cron<a class="anchor" aria-label="anchor" href="#automation-cron"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.1</span> cron<a class="anchor" aria-label="anchor" href="#automation-cron"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://en.wikipedia.org/wiki/Cron">cron</a> is the common choice when scheduling tasks on Linux. A plain text file specifies which file to run, and on what recurring schedule. A lot of <a href="https://www.computerhope.com/unix/ucrontab.htm">helpful documentation and tutorials</a> exists, as well as sites that help construct and validate your entries like <a href="https://crontab.guru/">crontab guru</a>.</p>
 </div>
-<div id="automation-task-scheduler" class="section level3" number="12.2.2">
+<div id="automation-task-scheduler" class="section level3" number="10.2.2">
 <h3>
-<span class="header-section-number">12.2.2</span> Task Scheduler<a class="anchor" aria-label="anchor" href="#automation-task-scheduler"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.2</span> Task Scheduler<a class="anchor" aria-label="anchor" href="#automation-task-scheduler"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://en.wikipedia.org/wiki/Windows_Task_Scheduler">Windows Task Scheduler</a> is the common choice when scheduling tasks on Windows.</p>
 <p>Many of the GUI options are easy to specify, but three are error-prone, and must be specified carefully. They exist under “Actions” | “Start a program”.</p>
@@ -160,7 +158,7 @@
 <div class="sourceCode" id="cb55"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb55-1"><a href="automation.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="st">"C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"</span></span></code></pre></div>
 </li>
 <li>
-<p><strong>Add arguments (optional):</strong> specifies the flow file to run. In this case, the repo ‘butcher-hearing-screen-1’ is under in the ’Documents/cdw/` directory; the <a href="automation.html#automation-flow">flow file</a> is located in the repo’s root directory, as discussed in the <a href="repo-prototype.html#repo-flow">prototypical repo</a>. The entry should be enclosed in quotes.</p>
+<p><strong>Add arguments (optional):</strong> specifies the flow file to run. In this case, the repo ‘butcher-hearing-screen-1’ is under in the ’Documents/cdw/` directory; the <a href="automation.html#automation-flow">flow file</a> is located in the repo’s root directory, as discussed in the <a href="prototype-repo.html#repo-flow">prototypical repo</a>. The entry should be enclosed in quotes.</p>
 <pre class="shell"><code>"C:\Users\wbeasley\Documents\cdw\butcher-hearing-screen-1\flow.R"</code></pre>
 </li>
 <li>
@@ -184,9 +182,9 @@
 <p>If you have 10+ tasks, consider creating a <a href="https://www.computerhope.com/issues/ch000549.htm">System Environment Variable</a> called <code>%rscript_path%</code> whose value is something like <code>"C:\Program Files\R\R-4.1.1patched\bin\Rscript.exe"</code>. The text <code>%rscript_path%</code> goes into step one (“Program/script” above). When R is updated every few months, you need to change the path in only one place (<em>i.e.</em>, in the Environment Variables GUI) instead of in each task, which requires repeatedly re-entering your username and password. If you defined the tasks differently than describe here, you may need to restart your machine to load the fresh variable value into the Task Scheduler environment.</p>
 <p>If code executed by the task scheduler accesses a network drive or file share, the path cannot naturally reference the mapped letter. The easiest solution is to spell out the full path. For instance in the Python/R code, replace “<b>Q:/</b>subdirectory/hospital-location.csv” with “<b>//server-name/data-files/</b>subdirectory/hospital-location.csv”.</p>
 </div>
-<div id="automation-sql-server-agent" class="section level3" number="12.2.3">
+<div id="automation-sql-server-agent" class="section level3" number="10.2.3">
 <h3>
-<span class="header-section-number">12.2.3</span> SQL Server Agent<a class="anchor" aria-label="anchor" href="#automation-sql-server-agent"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2.3</span> SQL Server Agent<a class="anchor" aria-label="anchor" href="#automation-sql-server-agent"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://docs.microsoft.com/en-us/sql/ssms/agent/sql-server-agent">SQL Server Agent</a> executes jobs on a specified schedule. It also naturally interfaces with <a href="automation.html#automation-ssis">SSIS packages</a> deployed to the server, but can also execute other formats, like a plain sql file.</p>
 <p>An important distinction is that it runs as a service <em>on the database server</em>, as opposed to Task Scheduler, which runs as a service on the client machine. We prefer running jobs on the server when the job either:</p>
@@ -197,20 +195,20 @@
 </ol>
 </div>
 </div>
-<div id="auxiliary-issues" class="section level2" number="12.3">
+<div id="auxiliary-issues" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">12.3</span> Auxiliary Issues<a class="anchor" aria-label="anchor" href="#auxiliary-issues"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Auxiliary Issues<a class="anchor" aria-label="anchor" href="#auxiliary-issues"><i class="fas fa-link"></i></a>
 </h2>
 <p>The following subsections do not execute or schedule any code, but should be considered.</p>
-<div id="sink-log-files" class="section level3" number="12.3.1">
+<div id="sink-log-files" class="section level3" number="10.3.1">
 <h3>
-<span class="header-section-number">12.3.1</span> Sink Log Files<a class="anchor" aria-label="anchor" href="#sink-log-files"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.1</span> Sink Log Files<a class="anchor" aria-label="anchor" href="#sink-log-files"><i class="fas fa-link"></i></a>
 </h3>
 <p>{Describe how to sink output to a file that can be examined easily.}</p>
 </div>
-<div id="package-versions" class="section level3" number="12.3.2">
+<div id="package-versions" class="section level3" number="10.3.2">
 <h3>
-<span class="header-section-number">12.3.2</span> Package Versions<a class="anchor" aria-label="anchor" href="#package-versions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3.2</span> Package Versions<a class="anchor" aria-label="anchor" href="#package-versions"><i class="fas fa-link"></i></a>
 </h3>
 <p>When a project runs repeatedly on a schedule without human intervention, errors can easily go undetected in simple systems. And when they are, the error messages may not be as clear as when you are running the procedure in RStudio. For these and other reasons, plan your strategy for maintaining the version of R and its packages. Here are three approaches and their tradeoffs.</p>
 <ol style="list-style-type: decimal">
@@ -248,30 +246,30 @@
 </div>
 
   <div class="chapter-nav">
-<div class="prev"><a href="security.html"><span class="header-section-number">11</span> Security &amp; Private Data</a></div>
-<div class="next"><a href="scaling-up.html"><span class="header-section-number">13</span> Scaling Up</a></div>
+<div class="prev"><a href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></div>
+<div class="next"><a href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#automation"><span class="header-section-number">12</span> Automation &amp; Reproducibility</a></li>
+<li><a class="nav-link" href="#automation"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
 <li>
-<a class="nav-link" href="#automation-mediator"><span class="header-section-number">12.1</span> Mediator</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#automation-flow"><span class="header-section-number">12.1.1</span> Flow File in R</a></li>
-<li><a class="nav-link" href="#automation-makefile"><span class="header-section-number">12.1.2</span> Makefile</a></li>
-<li><a class="nav-link" href="#automation-ssis"><span class="header-section-number">12.1.3</span> SSIS</a></li>
+<a class="nav-link" href="#automation-mediator"><span class="header-section-number">10.1</span> Mediator</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#automation-flow"><span class="header-section-number">10.1.1</span> Flow File in R</a></li>
+<li><a class="nav-link" href="#automation-makefile"><span class="header-section-number">10.1.2</span> Makefile</a></li>
+<li><a class="nav-link" href="#automation-ssis"><span class="header-section-number">10.1.3</span> SSIS</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#automation-scheduling"><span class="header-section-number">12.2</span> Scheduling</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#automation-cron"><span class="header-section-number">12.2.1</span> cron</a></li>
-<li><a class="nav-link" href="#automation-task-scheduler"><span class="header-section-number">12.2.2</span> Task Scheduler</a></li>
-<li><a class="nav-link" href="#automation-sql-server-agent"><span class="header-section-number">12.2.3</span> SQL Server Agent</a></li>
+<a class="nav-link" href="#automation-scheduling"><span class="header-section-number">10.2</span> Scheduling</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#automation-cron"><span class="header-section-number">10.2.1</span> cron</a></li>
+<li><a class="nav-link" href="#automation-task-scheduler"><span class="header-section-number">10.2.2</span> Task Scheduler</a></li>
+<li><a class="nav-link" href="#automation-sql-server-agent"><span class="header-section-number">10.2.3</span> SQL Server Agent</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#auxiliary-issues"><span class="header-section-number">12.3</span> Auxiliary Issues</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sink-log-files"><span class="header-section-number">12.3.1</span> Sink Log Files</a></li>
-<li><a class="nav-link" href="#package-versions"><span class="header-section-number">12.3.2</span> Package Versions</a></li>
+<a class="nav-link" href="#auxiliary-issues"><span class="header-section-number">10.3</span> Auxiliary Issues</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sink-log-files"><span class="header-section-number">10.3.1</span> Sink Log Files</a></li>
+<li><a class="nav-link" href="#package-versions"><span class="header-section-number">10.3.2</span> Package Versions</a></li>
 </ul>
 </li>
 </ul>
@@ -291,7 +289,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-30.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

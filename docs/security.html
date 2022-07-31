@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Security &amp; Private Data | Collaborative Data Science Practices</title>
+<title>Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
 <meta name="generator" content="bookdown 0.27 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Security &amp; Private Data | Collaborative Data Science Practices">
+<meta property="og:title" content="Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Security &amp; Private Data | Collaborative Data Science Practices">
+<meta name="twitter:title" content="Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices">
 <meta name="twitter:description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -68,29 +68,27 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
 <li><a class="" href="coding.html"><span class="header-section-number">2</span> Coding Principles</a></li>
 <li><a class="" href="architecture.html"><span class="header-section-number">3</span> Architecture Principles</a></li>
-<li><a class="" href="file-prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
-<li><a class="" href="file-prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
-<li><a class="" href="repo-prototype.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
-<li><a class="" href="data-public-directory.html"><span class="header-section-number">7</span> data-public/ Directory</a></li>
-<li><a class="" href="data-unshared-directory.html"><span class="header-section-number">8</span> data-unshared/ Directory</a></li>
-<li><a class="" href="rest.html"><span class="header-section-number">9</span> Data at Rest</a></li>
-<li><a class="" href="patterns.html"><span class="header-section-number">10</span> Patterns</a></li>
-<li><a class="active" href="security.html"><span class="header-section-number">11</span> Security &amp; Private Data</a></li>
-<li><a class="" href="automation.html"><span class="header-section-number">12</span> Automation &amp; Reproducibility</a></li>
-<li><a class="" href="scaling-up.html"><span class="header-section-number">13</span> Scaling Up</a></li>
-<li><a class="" href="collaboration.html"><span class="header-section-number">14</span> Parallel Collaboration</a></li>
-<li><a class="" href="document.html"><span class="header-section-number">15</span> Documentation</a></li>
-<li><a class="" href="style.html"><span class="header-section-number">16</span> Style Guide</a></li>
-<li><a class="" href="publication.html"><span class="header-section-number">17</span> Publishing Results</a></li>
-<li><a class="" href="validation.html"><span class="header-section-number">18</span> Validation</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">19</span> Testing</a></li>
-<li><a class="" href="troubleshooting.html"><span class="header-section-number">20</span> Troubleshooting and Debugging</a></li>
-<li><a class="" href="workstation.html"><span class="header-section-number">21</span> Workstation</a></li>
-<li><a class="" href="tools.html"><span class="header-section-number">22</span> Considerations when Selecting Tools</a></li>
-<li><a class="" href="team.html"><span class="header-section-number">23</span> Growing a Team</a></li>
-<li><a class="" href="redcap-user.html"><span class="header-section-number">24</span> Material for REDCap Users</a></li>
-<li><a class="" href="redcap-developer.html"><span class="header-section-number">25</span> Material for REDCap Developers</a></li>
-<li><a class="" href="redcap-admin.html"><span class="header-section-number">26</span> Material for REDCap Admins</a></li>
+<li><a class="" href="prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
+<li><a class="" href="prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
+<li><a class="" href="prototype-repo.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
+<li><a class="" href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></li>
+<li><a class="" href="patterns.html"><span class="header-section-number">8</span> Patterns</a></li>
+<li><a class="active" href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
+<li><a class="" href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
+<li><a class="" href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></li>
+<li><a class="" href="collaboration.html"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
+<li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
+<li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
+<li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
+<li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
 <li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
@@ -107,9 +105,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="security" class="section level1" number="11">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="security" class="section level1" number="9">
 <h1>
-<span class="header-section-number">11</span> Security &amp; Private Data<a class="anchor" aria-label="anchor" href="#security"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Security &amp; Private Data<a class="anchor" aria-label="anchor" href="#security"><i class="fas fa-link"></i></a>
 </h1>
 <p>Overview</p>
 <p><em>{Include a few paragraphs that describe principles and mentality, and how the following sections contribute.}</em></p>
@@ -125,9 +123,9 @@ It provides schemas to further partition authorization.
 Real databases aren’t accidentally emailed or copied to an unsecured location.
 Transfer PHI into REDCap &amp; SQL Server as early as possible (particularly the CSVs &amp; XLSXs we regularly receive from partners).
 Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.</p>
-<div id="security-guidelines" class="section level2" number="11.1">
+<div id="security-guidelines" class="section level2" number="9.1">
 <h2>
-<span class="header-section-number">11.1</span> Security Guidelines<a class="anchor" aria-label="anchor" href="#security-guidelines"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1</span> Security Guidelines<a class="anchor" aria-label="anchor" href="#security-guidelines"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you encounter a decision that’s not described by this chapter’s the security practices, follow these underlying concepts. And of course, consult other people.</p>
 <ul>
@@ -165,9 +163,9 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 </li>
 </ul>
 </div>
-<div id="dataset-level-redaction" class="section level2" number="11.2">
+<div id="dataset-level-redaction" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">11.2</span> Dataset-level Redaction<a class="anchor" aria-label="anchor" href="#dataset-level-redaction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Dataset-level Redaction<a class="anchor" aria-label="anchor" href="#dataset-level-redaction"><i class="fas fa-link"></i></a>
 </h2>
 <p>Several multi-layered strategies exist to prevent exposing PHI. One approach is simply to reduce the information contained in each variable. Much of the information in a medical record is not useful for modeling or descriptive statistics, and therefore can be omitted from downstream datasets. The techniques include:</p>
 <ol style="list-style-type: decimal">
@@ -179,9 +177,9 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <em>Hash and salt identifiers</em>: use cryptographic-quality algorithms transform an ID to a derived value. For example, “234” becomes “1432c1a399”. The original value of 234 is not recoverable from 1432c1a399. But two rows with 1432c1a399 are still attributed to the same patient by the statistical model.</li>
 </ol>
 </div>
-<div id="security-for-data-at-rest" class="section level2" number="11.3">
+<div id="security-for-data-at-rest" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">11.3</span> Security for Data at Rest<a class="anchor" aria-label="anchor" href="#security-for-data-at-rest"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Security for Data at Rest<a class="anchor" aria-label="anchor" href="#security-for-data-at-rest"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>The report’s dataset(s) are preferably stored in REDCap or SQL Server.
@@ -205,23 +203,23 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li>Hash values when possible. For instance, when we determine families/networks of people, we use things like SSNs. But the algorithm that identifies the clusters doesn’t need to know the <em>actual</em> SSN, just that two records have the <em>same</em> SSN. Something like a <a href="http://en.wikipedia.org/wiki/SHA-2">SHA-256 hash</a> is good for this. The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can’t be determined from its hashed value. If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing &amp; salting process: <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/CodeUtilities/HashUtility.R">HashUtility.R</a> and <a href="https://github.com/OuhscBbmc/RedcapExample/blob/master/CodeUtilities/CreateSalt.R">CreateSalt.R</a>.</li>
 </ul>
 </div>
-<div id="file-level-permissions" class="section level2" number="11.4">
+<div id="file-level-permissions" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">11.4</span> File-level permissions<a class="anchor" aria-label="anchor" href="#file-level-permissions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> File-level permissions<a class="anchor" aria-label="anchor" href="#file-level-permissions"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="database-permissions" class="section level2" number="11.5">
+<div id="database-permissions" class="section level2" number="9.5">
 <h2>
-<span class="header-section-number">11.5</span> Database permissions<a class="anchor" aria-label="anchor" href="#database-permissions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.5</span> Database permissions<a class="anchor" aria-label="anchor" href="#database-permissions"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="public-private-repositories" class="section level2" number="11.6">
+<div id="public-private-repositories" class="section level2" number="9.6">
 <h2>
-<span class="header-section-number">11.6</span> Public &amp; Private Repositories<a class="anchor" aria-label="anchor" href="#public-private-repositories"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6</span> Public &amp; Private Repositories<a class="anchor" aria-label="anchor" href="#public-private-repositories"><i class="fas fa-link"></i></a>
 </h2>
-<div id="repo-rules" class="section level3" number="11.6.1">
+<div id="repo-rules" class="section level3" number="9.6.1">
 <h3>
-<span class="header-section-number">11.6.1</span> Repo Rules<a class="anchor" aria-label="anchor" href="#repo-rules"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6.1</span> Repo Rules<a class="anchor" aria-label="anchor" href="#repo-rules"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>A code repository should be private, and restricted to only the necessary project members.</li>
@@ -235,9 +233,9 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 </li>
 </ul>
 </div>
-<div id="scrubbing-github-history" class="section level3" number="11.6.2">
+<div id="scrubbing-github-history" class="section level3" number="9.6.2">
 <h3>
-<span class="header-section-number">11.6.2</span> Scrubbing GitHub history<a class="anchor" aria-label="anchor" href="#scrubbing-github-history"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6.2</span> Scrubbing GitHub history<a class="anchor" aria-label="anchor" href="#scrubbing-github-history"><i class="fas fa-link"></i></a>
 </h3>
 <p>Occasionally files may be committed to your git repository that need to be removed completely. Not just from the current collections of files (<em>i.e.</em>, the branch’s <a href="https://git-scm.com/docs/gitglossary#gitglossary-aiddefHEADaHEAD">head</a>), but from the entire history of the repo.</p>
 <p>Scrubbing is require typically when (a) a sensitive file has been accidentally committed and pushed to GitHub, or (b) a huge file has bloated your repository and disrupted productivity.</p>
@@ -275,9 +273,9 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li><p>If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
 </ol>
-<div id="resources" class="section level5" number="11.6.2.0.1">
+<div id="resources" class="section level5" number="9.6.2.0.1">
 <h5>
-<span class="header-section-number">11.6.2.0.1</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6.2.0.1</span> Resources<a class="anchor" aria-label="anchor" href="#resources"><i class="fas fa-link"></i></a>
 </h5>
 <ul>
 <li><a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG Repo-Cleaner site</a></li>
@@ -289,21 +287,21 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="patterns.html"><span class="header-section-number">10</span> Patterns</a></div>
-<div class="next"><a href="automation.html"><span class="header-section-number">12</span> Automation &amp; Reproducibility</a></div>
+<div class="prev"><a href="patterns.html"><span class="header-section-number">8</span> Patterns</a></div>
+<div class="next"><a href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#security"><span class="header-section-number">11</span> Security &amp; Private Data</a></li>
-<li><a class="nav-link" href="#security-guidelines"><span class="header-section-number">11.1</span> Security Guidelines</a></li>
-<li><a class="nav-link" href="#dataset-level-redaction"><span class="header-section-number">11.2</span> Dataset-level Redaction</a></li>
-<li><a class="nav-link" href="#security-for-data-at-rest"><span class="header-section-number">11.3</span> Security for Data at Rest</a></li>
-<li><a class="nav-link" href="#file-level-permissions"><span class="header-section-number">11.4</span> File-level permissions</a></li>
-<li><a class="nav-link" href="#database-permissions"><span class="header-section-number">11.5</span> Database permissions</a></li>
+<li><a class="nav-link" href="#security"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
+<li><a class="nav-link" href="#security-guidelines"><span class="header-section-number">9.1</span> Security Guidelines</a></li>
+<li><a class="nav-link" href="#dataset-level-redaction"><span class="header-section-number">9.2</span> Dataset-level Redaction</a></li>
+<li><a class="nav-link" href="#security-for-data-at-rest"><span class="header-section-number">9.3</span> Security for Data at Rest</a></li>
+<li><a class="nav-link" href="#file-level-permissions"><span class="header-section-number">9.4</span> File-level permissions</a></li>
+<li><a class="nav-link" href="#database-permissions"><span class="header-section-number">9.5</span> Database permissions</a></li>
 <li>
-<a class="nav-link" href="#public-private-repositories"><span class="header-section-number">11.6</span> Public &amp; Private Repositories</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#repo-rules"><span class="header-section-number">11.6.1</span> Repo Rules</a></li>
-<li><a class="nav-link" href="#scrubbing-github-history"><span class="header-section-number">11.6.2</span> Scrubbing GitHub history</a></li>
+<a class="nav-link" href="#public-private-repositories"><span class="header-section-number">9.6</span> Public &amp; Private Repositories</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#repo-rules"><span class="header-section-number">9.6.1</span> Repo Rules</a></li>
+<li><a class="nav-link" href="#scrubbing-github-history"><span class="header-section-number">9.6.2</span> Scrubbing GitHub history</a></li>
 </ul>
 </li>
 </ul>
@@ -323,7 +321,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-30.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

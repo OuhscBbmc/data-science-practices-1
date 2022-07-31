@@ -1,4 +1,4 @@
-Prototypical SQL File {#file-prototype-sql}
+Prototypical SQL File {#prototype-sql}
 ====================================
 
 New data scientists typically import entire tables from a database into R, and then merge, filter, and groom the data.frames.  A more efficient approach is to submit [sql](https://en.wikipedia.org/wiki/SQL) that executes on the database and returns a more specialized dataset.
@@ -11,7 +11,7 @@ This provides several advantages:
 
 In some scenarios, it is desirable to use the `INSERT` SQL command to transfer data within the database; and never travel across the network and never touch R or your local machine.  For our large and complicated projects, the majority of data movement uses `INSERT` commands within SQL files.  Among these scenarios, the analysis-focused projects use R to call the sequence of SQL files (see [`flow.R`](#repo-flow)), while the database-focused project uss [SSIS](https://en.wikipedia.org/wiki/SQL_Server_Integration_Services).
 
-In both cases, we try to write the SQL files to conform to similar standards and conventions.  As stated in [Consistency across Files](#consistency-files) (and in the [previous chapter](#file-prototype-r)), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
+In both cases, we try to write the SQL files to conform to similar standards and conventions.  As stated in [Consistency across Files](#consistency-files) (and in the [previous chapter](#prototype-r)), using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and (b) allow your intentions to be more clear to teammates because they are familiar with the order and intentions of the chunks.
 
 Choice of Database Engine {#sql-choice}
 ------------------------------------
@@ -72,7 +72,7 @@ We prefer not to specify the database of each table, and instead control it thro
 Declare Values Databases {#sql-declare}
 ------------------------------------
 
-Similar to the [Declare Globals](#chunk-declare) chunk in a [prototypical R file](file-prototype-r), values set at the top of the file are easy to read and modify.
+Similar to the [Declare Globals](#chunk-declare) chunk in a [prototypical R file](prototype-r), values set at the top of the file are easy to read and modify.
 
 ```sql
 declare @start_date date = '2020-02-01';                               -- sync with config.yml

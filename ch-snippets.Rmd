@@ -58,9 +58,9 @@ ds        <- readr::read_csv(raw_text, col_types=col_types)
 
 ### Removing Trailing Comma from Header {#snippets-reading-vroom}
 
-*Background*: When incoming data files are on the large side to comfortably accept with [readr](https://readr.tidyverse.org/), we use [vroom](https://vroom.r-lib.org/).  The two packages are develoepd by the same group and [might be combined](https://github.com/tidyverse/tidyverse.org/pull/375#issuecomment-564781603) in the future.
+*Background*: When incoming data files are on the large side to comfortably accept with [readr](https://readr.tidyverse.org/), we use [vroom](https://vroom.r-lib.org/).  The two packages are developed by the same group and [might be combined](https://github.com/tidyverse/tidyverse.org/pull/375#issuecomment-564781603) in the future.
 
-*Explanation*: This snippet defines the `col_types` list with names to mimic [our approach](https://ouhscbbmc.github.io/data-science-practices-1/file-prototype-r.html#chunk-declare) of using readr.  There are some small differences with our readr approach: 
+*Explanation*: This snippet defines the `col_types` list with names to mimic [our approach](https://ouhscbbmc.github.io/data-science-practices-1/prototype-r.html#chunk-declare) of using readr.  There are some small differences with our readr approach:
   1. `col_types` is a [list](https://stat.ethz.ch/R-manual/R-devel/library/base/html/list.html) instead of a [`readr::cols_only`](https://readr.tidyverse.org/reference/cols.html) object.
   1. The call to [`vroom::vroom()`](https://vroom.r-lib.org/reference/vroom.html) passes `col_names = names(col_types)` explicitly.
   1. If the data file contains columns we don't need, we define them in `col_types` anyway; vroom needs to know the file structure if it's missing a header row.

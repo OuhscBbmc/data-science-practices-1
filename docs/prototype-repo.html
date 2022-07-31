@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Prototypical Repository | Collaborative Data Science Practices</title>
+<meta name="author" content="Will Beasley">
+<meta name="description" content="The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one...">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Prototypical Repository | Collaborative Data Science Practices">
+<meta property="og:type" content="book">
+<meta property="og:description" content="The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Prototypical Repository | Collaborative Data Science Practices">
+<meta name="twitter:description" content="The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Collaborative Data Science Practices</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="coding.html"><span class="header-section-number">2</span> Coding Principles</a></li>
+<li><a class="" href="architecture.html"><span class="header-section-number">3</span> Architecture Principles</a></li>
+<li><a class="" href="prototype-r.html"><span class="header-section-number">4</span> Prototypical R File</a></li>
+<li><a class="" href="prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></li>
+<li><a class="active" href="prototype-repo.html"><span class="header-section-number">6</span> Prototypical Repository</a></li>
+<li><a class="" href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></li>
+<li><a class="" href="patterns.html"><span class="header-section-number">8</span> Patterns</a></li>
+<li><a class="" href="security.html"><span class="header-section-number">9</span> Security &amp; Private Data</a></li>
+<li><a class="" href="automation.html"><span class="header-section-number">10</span> Automation &amp; Reproducibility</a></li>
+<li><a class="" href="scaling-up.html"><span class="header-section-number">11</span> Scaling Up</a></li>
+<li><a class="" href="collaboration.html"><span class="header-section-number">12</span> Parallel Collaboration</a></li>
+<li><a class="" href="document.html"><span class="header-section-number">13</span> Documentation</a></li>
+<li><a class="" href="style.html"><span class="header-section-number">14</span> Style Guide</a></li>
+<li><a class="" href="publication.html"><span class="header-section-number">15</span> Publishing Results</a></li>
+<li><a class="" href="validation.html"><span class="header-section-number">16</span> Validation</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">17</span> Testing</a></li>
+<li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
+<li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
+<li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
+<li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
+<li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
+<li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
+<li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
+<li><a class="" href="presentations.html"><span class="header-section-number">C</span> Presentations</a></li>
+<li><a class="" href="scratch-pad.html"><span class="header-section-number">D</span> Scratch Pad of Loose Ideas</a></li>
+<li><a class="" href="example-dashboard.html"><span class="header-section-number">E</span> Example Dashboard</a></li>
+<li><a class="" href="example-chapter.html"><span class="header-section-number">F</span> Example Chapter</a></li>
+<li><a class="" href="acknowledgements.html"><span class="header-section-number">G</span> Acknowledgements</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">H</span> References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/OuhscBbmc/data-science-practices-1">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="prototype-repo" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Prototypical Repository<a class="anchor" aria-label="anchor" href="#prototype-repo"><i class="fas fa-link"></i></a>
+</h1>
+<p>The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one analysis report to (b) a large, multi-year project fed by dozens of input files to support multiple statisticians and a sophisticated enrollment process.</p>
+<p>Looking beyond any single project, we strongly encourage your team to adopt a common file organization. Pursuing commonality provides multiple benefits:</p>
+<ul>
+<li><p>An evolved and thought-out structure makes it easier to follow good practices and avoid common traps.</p></li>
+<li><p>Code files are more portable between projects. More code can be reused if both environments refer to same files and directories like <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml">config.yml</a>, <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/raw">data-public/raw</a>, and <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/derived">data-public/derived</a></p></li>
+<li><p>People are more portable between projects. When a person is already familiar with the structure, they start contributing more quickly because they already know to look for statistical reports in <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/analysis">analysis/</a> and to debug problematic file ingestions in <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation">manipulation/</a> files.</p></li>
+</ul>
+<p>If a specific project doesn’t use a directory or file, we recommend retaining the stub. Like the empty chunks discusses in the <a href="prototype-r.html#prototype-r">Prototypical R File</a> chapter, a stub communicates to your collaborator, “this project currently doesn’t use the feature, but when/if it does, this will be the location”. The collaborator can stop their search immediately, and avoid searching weird places in order to rule-out the feature is located elsewhere.</p>
+<p>The template that has worked well for us is publicly available at <a href="https://github.com/wibeasley/RAnalysisSkeleton" class="uri">https://github.com/wibeasley/RAnalysisSkeleton</a>. The important files and directories are described below. Please use this as a starting point, and not as a dogmatic prison. Make adjustments when it fits your specific project or your overall team.</p>
+<div id="repo-root" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Root<a class="anchor" aria-label="anchor" href="#repo-root"><i class="fas fa-link"></i></a>
+</h2>
+<div id="repo-config" class="section level3" number="6.1.1">
+<h3>
+<span class="header-section-number">6.1.1</span> <code>config.R</code><a class="anchor" aria-label="anchor" href="#repo-config"><i class="fas fa-link"></i></a>
+</h3>
+<p>The configuration file is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is well-suited when a value has to be coordinated across multiple files.</p>
+<p>Also see the discussion of how we use the config file for <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases">excluding bad data values</a> and of how the config file <a href="rest.html#data-containers-yaml">relates to yaml</a>, json, and xml.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb39-1"><a href="prototype-repo.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb39-2"><a href="prototype-repo.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">  # To be processed by Ellis lanes</span></span>
+<span id="cb39-3"><a href="prototype-repo.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">"data-public/raw/subject-1.csv"</span></span>
+<span id="cb39-4"><a href="prototype-repo.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">"data-public/raw/mlm-1.csv"</span></span>
+<span id="cb39-5"><a href="prototype-repo.html#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="prototype-repo.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">  # Central Database (produced by Ellis lanes).</span></span>
+<span id="cb39-7"><a href="prototype-repo.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">"data-public/derived/db.sqlite3"</span></span>
+<span id="cb39-8"><a href="prototype-repo.html#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="prototype-repo.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co">  # Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
+<span id="cb39-10"><a href="prototype-repo.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">"data-public/derived/mlm-1.rds"</span></span>
+<span id="cb39-11"><a href="prototype-repo.html#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="prototype-repo.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co">  # Metadata</span></span>
+<span id="cb39-13"><a href="prototype-repo.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">"data-public/metadata/cqi-annotation.csv"</span></span>
+<span id="cb39-14"><a href="prototype-repo.html#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="prototype-repo.html#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co">  # Logging errors and messages from automated execution.</span></span>
+<span id="cb39-16"><a href="prototype-repo.html#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")</span></span>
+<span id="cb39-17"><a href="prototype-repo.html#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-18"><a href="prototype-repo.html#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="co">  # time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.</span></span>
+<span id="cb39-19"><a href="prototype-repo.html#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="prototype-repo.html#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="co">  # ---- Validation Ranges &amp; Patterns ----</span></span>
+<span id="cb39-21"><a href="prototype-repo.html#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
+<span id="cb39-22"><a href="prototype-repo.html#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))</span></span>
+<span id="cb39-23"><a href="prototype-repo.html#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())</span></span>
+<span id="cb39-24"><a href="prototype-repo.html#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
+<span id="cb39-25"><a href="prototype-repo.html#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern_mrn             </span><span class="kw">:</span><span class="at"> </span><span class="st">"^E</span><span class="sc">\\</span><span class="st">d{9}$"</span><span class="co">  # An 'E', followed by 9 digits.</span></span></code></pre></div>
+</div>
+<div id="repo-flow" class="section level3" number="6.1.2">
+<h3>
+<span class="header-section-number">6.1.2</span> <code>flow.R</code><a class="anchor" aria-label="anchor" href="#repo-flow"><i class="fas fa-link"></i></a>
+</h3>
+<p>The workflow of the repo is determined by <code>flow.R</code>. It calls (typically R, Python, and SQL) files in a specific order, while sending the log messages to a file.</p>
+<p>See <a href="automation.html#automation-flow">automation mediators</a> for more details.</p>
+</div>
+<div id="repo-readme" class="section level3" number="6.1.3">
+<h3>
+<span class="header-section-number">6.1.3</span> <code>README.md</code><a class="anchor" aria-label="anchor" href="#repo-readme"><i class="fas fa-link"></i></a>
+</h3>
+<p>The readme is automatically displayed the GitHub repository is opened in a browser. Include all the static information that can quickly orientate a collaborator. Common elements include:</p>
+<ul>
+<li>Project Name (see our <a href="style.html#style-repo-naming">style guide</a> for naming recommendations)</li>
+<li>Principal Investigator (ultimately accountable for the research) and Project Coordinator (easy contact if questions arise)</li>
+<li>IRB Tracking Number (or whatever oversight committee reviewed and approved the project). This will help communicate more accurately within your larger university or company.</li>
+<li>Abstract or some project description that is already written (for example, part of the IRB submission).</li>
+<li>Documentation locations and resources, such as
+<ul>
+<li>Approval letters from the IRB or other oversight board, which should be also stored in <a href="prototype-repo.html#repo-documentation">documentation/</a>.</li>
+<li>data dictionaries for the incoming datasets your team is ingesting</li>
+<li>data dictionaries for the derived datasets your team is producing</li>
+</ul>
+</li>
+<li>Data Locations and resources, such as
+<ul>
+<li>database and database server</li>
+<li>REDCap project id and url</li>
+<li>networked file share</li>
+</ul>
+</li>
+<li>The PI’s expectations and goals for your analysis team</li>
+<li>Likely deadlines, such as grant and conference submission dates</li>
+</ul>
+<p>Each directory can have its own readme file, but (for typical analysis projects) we discourage you from putting too much in each individual readme. We’ve found it becomes cumbersome to keep all the scattered files updated and consistent; it’s also more work for the reader to traverse the directory structure reading everything. Our approach is to concentrate most of the information in the repo’s root readme, and the most of the remaining readmes are static and unchanged across projects (<em>e.g.</em>, generic description of <code>data-public/metadata/</code>).</p>
+</div>
+<div id="repo-rproj" class="section level3" number="6.1.4">
+<h3>
+<span class="header-section-number">6.1.4</span> <code>*.Rproj</code><a class="anchor" aria-label="anchor" href="#repo-rproj"><i class="fas fa-link"></i></a>
+</h3>
+<p>The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled. The file’s major benefit is that it sets the R session’s working directory, which facilitates good discipline about setting a constant location for all files in the repo. Although the plain-text file can be edited directly, we recommend using RStudio’s dialog box. There is good documentation about Rproj settings. If you are unsure, copy <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj">this file</a> to the repo’s root directory and rename it to match the repo exactly.</p>
+</div>
+</div>
+<div id="repo-data-public" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> <code>data-public/</code><a class="anchor" aria-label="anchor" href="#repo-data-public"><i class="fas fa-link"></i></a>
+</h2>
+<p>This directory should contain information that is not sensitive and is not proprietary. It SHOULD NOT hold <a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">PHI</a> (Protected Health Information), or other information like participant names, social security numbers, or passwords. Files with PHI should <strong>not</strong> be stored in a GitHub repository, even a <a href="https://help.github.com/articles/publicizing-or-hiding-your-private-contributions-on-your-profile/">private GitHub repository</a>.</p>
+<p>Please see <a href="prototype-repo.html#repo-data-unshared"><code>data-unshared/</code></a> for options storing sensitive information.</p>
+<p>The <code>data-public/</code> directory typically works best if organized with subdirectories. We commonly use</p>
+<ul>
+<li><p><strong><code>data-public/raw/</code></strong> for the input to the pipelines. These datasets usually represents all the hard work of the data collection.</p></li>
+<li><p><strong><code>data-public/metadata/</code></strong> for the definitions of the datasets in raw. For example, “gender.csv” might translate the values 1 and 2 to male and female. Sometimes a dataset feels natural in either the raw or the metadata subdirectory. If the file would remain unchanged if a subsequent sample was collected, lean towards metadata.</p></li>
+<li><p><strong><code>data-public/derived/</code></strong> for output of the pipelines. Its contents should be completely reproducible when starting with <code>data-public/raw/</code> and the repo’s code. In other words, it can be deleted and recreated at ease. This might contain a small database file, like SQLite.</p></li>
+<li><p><strong><code>data-public/logs/</code></strong> for logs that are useful to collaborators or necessary to demonstrate something in the future, beyond the reports contained in the <code>analysis/</code> directory.</p></li>
+<li>
+<p><strong><code>data-public/original/</code></strong> for nothing (hopefully); ideally it is never used. It is similar to <code>data-public/raw/</code>. The difference is that <code>data-public/raw/</code> is called by the pipeline code, while <code>data-public/original/</code> is not.</p>
+<p>A file in <code>data-public/original/</code>typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to <code>data-public/raw/</code>. Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.</p>
+</li>
+</ul>
+<p>The characteristics of <code>data-public/</code> vary based on the subject matter. For instance, medical research projects typically use only the metadata directory, because the incoming information contains PHI and is stored in a database. On the other hand, microbiology and physics research typically do not have data protected by law, and it is desirable for the repo to contain everything.</p>
+<p>We feel a private GitHub repo offers adequate protection if being scooped is the biggest risk.</p>
+</div>
+<div id="repo-data-unshared" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> <code>data-unshared/</code><a class="anchor" aria-label="anchor" href="#repo-data-unshared"><i class="fas fa-link"></i></a>
+</h2>
+<p>Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server. This makes the folder a decent container for:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>sensitive information</strong>, such as <a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">PHI</a> (Protected Health Information). When PHI is involved, we recommend <code>data-unshared/</code> only if a database or a secured networked file share is not feasible. See the discussion below.</p></li>
+<li><p><strong>public files that are huge</strong> (say, 1+ GB) and easily downloadable or reproducible. For instance, files from stable sources like the US Census, NLSY, or Dataverse.</p></li>
+<li><p><strong>diagnostic logs</strong> that are not useful to collaborators.</p></li>
+</ol>
+<p>A line in the repo’s <code>.gitignore</code> file blocks the directory’s contents from being staged/committed (look for <code>/data-unshared/*</code>). Since files in this directory are not committed, it requires more discipline to communicate what files should be on a collaborator’s computer. List the files either in the <a href="prototype-repo.html#repo-readme">repo’s readme</a> or in <code>data-unshared/contents.md</code>; at a minimum declare the name of each file and how it can be downloaded or reproduced. (If you are curious, the <code>!data-unshared/contents.md</code> line in <code>.gitignore</code> declares an exception so the markdown file is committed and updated on a collaborator’s machine.)</p>
+<p>Even though these files are kept off the central repository, we recommend encrypting your local drive if the <code>data-unshared/</code> contains sensitive (such as PHI). See the <code>data-public/</code> <a href="data-public/"><code>README.md</code></a> for more information.</p>
+<p>The directory works best with the subdirectories described in the organization of <a href="prototype-repo.html#repo-data-public"><code>data-public/</code></a>.</p>
+<p>Compared to <code>data-unshared/</code>, we prefer storing PHI in an enterprise database (such as SQL Server, PostgreSQL, MariaDB/MySQL, or Oracle) or networked drive for four reasons.</p>
+<ol style="list-style-type: decimal">
+<li>These central resources are typically managed by Campus IT and reviewed by security professionals.</li>
+<li>It’s trivial to stay synchronized across collaborators with a file share or database. In contrast, <code>data-unshared/</code> isn’t synchronized across machines so extra discipline is required to tell collaborators to update their machines.</li>
+<li>It’s sometimes possible to recover lost data from a file share or database. It’s much less likely to turn back the clock for <code>data-unshared/</code> files.</li>
+<li>It’s not too unlikely to mess up the <code>.gitignore</code> entries which would allow the sensitive files to be committed to the repository. If sensitive information is stored on <code>data-unshared/</code>, it is important to review every commit to ensure information isn’t about to sneak into the repo.</li>
+</ol>
+</div>
+<div id="repo-documentation" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> <code>documentation/</code><a class="anchor" aria-label="anchor" href="#repo-documentation"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="repo-manipulation" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> <code>manipulation/</code><a class="anchor" aria-label="anchor" href="#repo-manipulation"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="repo-analysis" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> <code>analysis/</code><a class="anchor" aria-label="anchor" href="#repo-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<p>In a sense, all the directories exist only to support the contents of <code>analysis/</code>. All the exploratory, descriptive, and inferential statistics are produced by the Rmd files. Each subdirectory is the name of the report, (<em>e.g.</em>, <code>analysis/report-te-1</code>) and within that directory are four files:
+* the R file that contains the meat of the analysis (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.R</code>).
+* the Rmd file that serves as the “presentation layer” and calls the R file (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.Rmd</code>).
+* the markdown file produced directly by the Rmd (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.md</code>). Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
+* the html file that is derived from the markdown file (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.html</code>). The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered. All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from. Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.</p>
+</div>
+<div id="repo-stitched" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> Stitched Output<a class="anchor" aria-label="anchor" href="#repo-stitched"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="repo-utility" class="section level2" number="6.8">
+<h2>
+<span class="header-section-number">6.8</span> Utility<a class="anchor" aria-label="anchor" href="#repo-utility"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="prototype-sql.html"><span class="header-section-number">5</span> Prototypical SQL File</a></div>
+<div class="next"><a href="rest.html"><span class="header-section-number">7</span> Data at Rest</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prototype-repo"><span class="header-section-number">6</span> Prototypical Repository</a></li>
+<li>
+<a class="nav-link" href="#repo-root"><span class="header-section-number">6.1</span> Root</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#repo-config"><span class="header-section-number">6.1.1</span> config.R</a></li>
+<li><a class="nav-link" href="#repo-flow"><span class="header-section-number">6.1.2</span> flow.R</a></li>
+<li><a class="nav-link" href="#repo-readme"><span class="header-section-number">6.1.3</span> README.md</a></li>
+<li><a class="nav-link" href="#repo-rproj"><span class="header-section-number">6.1.4</span> *.Rproj</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#repo-data-public"><span class="header-section-number">6.2</span> data-public/</a></li>
+<li><a class="nav-link" href="#repo-data-unshared"><span class="header-section-number">6.3</span> data-unshared/</a></li>
+<li><a class="nav-link" href="#repo-documentation"><span class="header-section-number">6.4</span> documentation/</a></li>
+<li><a class="nav-link" href="#repo-manipulation"><span class="header-section-number">6.5</span> manipulation/</a></li>
+<li><a class="nav-link" href="#repo-analysis"><span class="header-section-number">6.6</span> analysis/</a></li>
+<li><a class="nav-link" href="#repo-stitched"><span class="header-section-number">6.7</span> Stitched Output</a></li>
+<li><a class="nav-link" href="#repo-utility"><span class="header-section-number">6.8</span> Utility</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-prototype-repo.md">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-prototype-repo.md">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-31.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

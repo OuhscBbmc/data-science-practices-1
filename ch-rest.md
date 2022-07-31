@@ -33,7 +33,7 @@ The [config](https://github.com/rstudio/config) package wraps the yaml package t
 range_dob   : !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))
 ```
 
-See the discussion of the [`config.yml`](https://ouhscbbmc.github.io/data-science-practices-1/repo-prototype.html#repo-config) in our prototypical repository, as well.
+See the discussion of the [`config.yml`](https://ouhscbbmc.github.io/data-science-practices-1/prototype-repo.html#repo-config) in our prototypical repository, as well.
 
 ### Arrow {#data-containers-arrow}
 
