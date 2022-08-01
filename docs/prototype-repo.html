@@ -122,6 +122,7 @@
 <h2>
 <span class="header-section-number">6.1</span> Root<a class="anchor" aria-label="anchor" href="#repo-root"><i class="fas fa-link"></i></a>
 </h2>
+<p>The following files live in the repository’s root directory, meaning they are not in any subfolder/subdirectory.</p>
 <div id="repo-config" class="section level3" number="6.1.1">
 <h3>
 <span class="header-section-number">6.1.1</span> <code>config.R</code><a class="anchor" aria-label="anchor" href="#repo-config"><i class="fas fa-link"></i></a>
@@ -171,12 +172,7 @@
 <li>Principal Investigator (ultimately accountable for the research) and Project Coordinator (easy contact if questions arise)</li>
 <li>IRB Tracking Number (or whatever oversight committee reviewed and approved the project). This will help communicate more accurately within your larger university or company.</li>
 <li>Abstract or some project description that is already written (for example, part of the IRB submission).</li>
-<li>Documentation locations and resources, such as
-<ul>
-<li>Approval letters from the IRB or other oversight board, which should be also stored in <a href="prototype-repo.html#repo-documentation">documentation/</a>.</li>
-<li>data dictionaries for the incoming datasets your team is ingesting</li>
-<li>data dictionaries for the derived datasets your team is producing</li>
-</ul>
+<li>Documentation locations and resources, such as those described in the <a href="prototype-repo.html#repo-documentation"><code>documentation/</code> section below</a>
 </li>
 <li>Data Locations and resources, such as
 <ul>
@@ -197,9 +193,24 @@
 <p>The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled. The file’s major benefit is that it sets the R session’s working directory, which facilitates good discipline about setting a constant location for all files in the repo. Although the plain-text file can be edited directly, we recommend using RStudio’s dialog box. There is good documentation about Rproj settings. If you are unsure, copy <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj">this file</a> to the repo’s root directory and rename it to match the repo exactly.</p>
 </div>
 </div>
-<div id="repo-data-public" class="section level2" number="6.2">
+<div id="repo-manipulation" class="section level2" number="6.2">
 <h2>
-<span class="header-section-number">6.2</span> <code>data-public/</code><a class="anchor" aria-label="anchor" href="#repo-data-public"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.2</span> <code>manipulation/</code><a class="anchor" aria-label="anchor" href="#repo-manipulation"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="repo-analysis" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> <code>analysis/</code><a class="anchor" aria-label="anchor" href="#repo-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<p>In a sense, all the directories exist only to support the contents of <code>analysis/</code>. All the exploratory, descriptive, and inferential statistics are produced by the Rmd files. Each subdirectory is the name of the report, (<em>e.g.</em>, <code>analysis/report-te-1</code>) and within that directory are four files:
+* the R file that contains the meat of the analysis (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.R</code>).
+* the Rmd file that serves as the “presentation layer” and calls the R file (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.Rmd</code>).
+* the markdown file produced directly by the Rmd (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.md</code>). Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
+* the html file that is derived from the markdown file (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.html</code>). The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered. All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from. Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.</p>
+</div>
+<div id="repo-data-public" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> <code>data-public/</code><a class="anchor" aria-label="anchor" href="#repo-data-public"><i class="fas fa-link"></i></a>
 </h2>
 <p>This directory should contain information that is not sensitive and is not proprietary. It SHOULD NOT hold <a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">PHI</a> (Protected Health Information), or other information like participant names, social security numbers, or passwords. Files with PHI should <strong>not</strong> be stored in a GitHub repository, even a <a href="https://help.github.com/articles/publicizing-or-hiding-your-private-contributions-on-your-profile/">private GitHub repository</a>.</p>
 <p>Please see <a href="prototype-repo.html#repo-data-unshared"><code>data-unshared/</code></a> for options storing sensitive information.</p>
@@ -217,18 +228,18 @@
 <p>The characteristics of <code>data-public/</code> vary based on the subject matter. For instance, medical research projects typically use only the metadata directory, because the incoming information contains PHI and is stored in a database. On the other hand, microbiology and physics research typically do not have data protected by law, and it is desirable for the repo to contain everything.</p>
 <p>We feel a private GitHub repo offers adequate protection if being scooped is the biggest risk.</p>
 </div>
-<div id="repo-data-unshared" class="section level2" number="6.3">
+<div id="repo-data-unshared" class="section level2" number="6.5">
 <h2>
-<span class="header-section-number">6.3</span> <code>data-unshared/</code><a class="anchor" aria-label="anchor" href="#repo-data-unshared"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.5</span> <code>data-unshared/</code><a class="anchor" aria-label="anchor" href="#repo-data-unshared"><i class="fas fa-link"></i></a>
 </h2>
-<p>Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server. This makes the folder a decent container for:</p>
+<p>Files in this directory are stored on the local computer, but are not committed and are not sent to the central GitHub repository/server. This makes the folder a candidate for:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>sensitive information</strong>, such as <a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">PHI</a> (Protected Health Information). When PHI is involved, we recommend <code>data-unshared/</code> only if a database or a secured networked file share is not feasible. See the discussion below.</p></li>
-<li><p><strong>public files that are huge</strong> (say, 1+ GB) and easily downloadable or reproducible. For instance, files from stable sources like the US Census, NLSY, or Dataverse.</p></li>
+<li><p><strong>huge public files</strong> say, files that 1+ GB and easily downloadable or reproducible. For instance, files from stable sources like the <a href="https://www.census.gov/data/datasets.html">US Census</a>, <a href="https://www.bls.gov/nls/">Bureau of Labor Statistics</a>, or <a href="https://dataverse.org/">dataverse.org</a>.</p></li>
 <li><p><strong>diagnostic logs</strong> that are not useful to collaborators.</p></li>
 </ol>
 <p>A line in the repo’s <code>.gitignore</code> file blocks the directory’s contents from being staged/committed (look for <code>/data-unshared/*</code>). Since files in this directory are not committed, it requires more discipline to communicate what files should be on a collaborator’s computer. List the files either in the <a href="prototype-repo.html#repo-readme">repo’s readme</a> or in <code>data-unshared/contents.md</code>; at a minimum declare the name of each file and how it can be downloaded or reproduced. (If you are curious, the <code>!data-unshared/contents.md</code> line in <code>.gitignore</code> declares an exception so the markdown file is committed and updated on a collaborator’s machine.)</p>
-<p>Even though these files are kept off the central repository, we recommend encrypting your local drive if the <code>data-unshared/</code> contains sensitive (such as PHI). See the <code>data-public/</code> <a href="data-public/"><code>README.md</code></a> for more information.</p>
+<p>Even though these files are kept off the central repository, we recommend encrypting your local drive if the <code>data-unshared/</code> contains sensitive data (such as PHI). See the <code>data-public/</code> <a href="data-public/"><code>README.md</code></a> for more information.</p>
 <p>The directory works best with the subdirectories described in the organization of <a href="prototype-repo.html#repo-data-public"><code>data-public/</code></a>.</p>
 <p>Compared to <code>data-unshared/</code>, we prefer storing PHI in an enterprise database (such as SQL Server, PostgreSQL, MariaDB/MySQL, or Oracle) or networked drive for four reasons.</p>
 <ol style="list-style-type: decimal">
@@ -238,36 +249,54 @@
 <li>It’s not too unlikely to mess up the <code>.gitignore</code> entries which would allow the sensitive files to be committed to the repository. If sensitive information is stored on <code>data-unshared/</code>, it is important to review every commit to ensure information isn’t about to sneak into the repo.</li>
 </ol>
 </div>
-<div id="repo-documentation" class="section level2" number="6.4">
+<div id="repo-documentation" class="section level2" number="6.6">
 <h2>
-<span class="header-section-number">6.4</span> <code>documentation/</code><a class="anchor" aria-label="anchor" href="#repo-documentation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.6</span> <code>documentation/</code><a class="anchor" aria-label="anchor" href="#repo-documentation"><i class="fas fa-link"></i></a>
 </h2>
+<p>Good documentation is scarce and documentation files consume little space, so liberally copy everything you get to this directory. The most helpful include:</p>
+<ul>
+<li>Approval letters from the IRB or other oversight board. This is especially important if you are also the gatekeeper of a database, and must justify releasing sensitive information.</li>
+<li>Data dictionaries for the incoming datasets your team is ingesting.</li>
+<li>Data dictionaries for the derived datasets your team is producing.</li>
+</ul>
+<p>If the documentation is public and stable, like the CDC’s site for <a href="https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx">vaccination codes</a>, include the url in the <a href="prototype-repo.html#repo-readme">repo’s readme</a>. If you feel the information or the location may change, copy the url and also the full document so it is easier to reconstruct your logic when returning to the project in a few years.</p>
 </div>
-<div id="repo-manipulation" class="section level2" number="6.5">
+<div id="repo-optional" class="section level2" number="6.7">
 <h2>
-<span class="header-section-number">6.5</span> <code>manipulation/</code><a class="anchor" aria-label="anchor" href="#repo-manipulation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">6.7</span> Optional<a class="anchor" aria-label="anchor" href="#repo-optional"><i class="fas fa-link"></i></a>
 </h2>
+<p>Everything mentioned until now should exist in the repo, even if the file or directory is empty. Some projects benefit from the following additional capabilities.</p>
+<div id="repo-description" class="section level3" number="6.7.1">
+<h3>
+<span class="header-section-number">6.7.1</span> <code>DESCRIPTION</code><a class="anchor" aria-label="anchor" href="#repo-description"><i class="fas fa-link"></i></a>
+</h3>
+<p>The plain-text <code>DESCRIPTION</code> file lives in the repo’s root directory –see the <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/DESCRIPTION">example</a> in R Analysis Skeleton. The file allows your repo to become an R package, which provides the following benefits even if it will never be deployed to CRAN.</p>
+<ul>
+<li>specify the packages (and their versions) required by your code. This include packages that aren’t available on CRAN, like <a href="https://github.com/OuhscBbmc/OuhscMunge">OuhscBbmc/OuhscMunge</a>.</li>
+<li>better unify and test the common code called from multiple files.</li>
+<li>better document functions and datasets within the repo.</li>
+</ul>
+<p>The last two bullets are essentially an upgrade from merely sticking code in a file and <a href="prototype-r.html#chunk-load-sources">sourcing</a> it.</p>
+<p>A package offers many capabilities beyond those listed above, but a typical data science repo will not scratch the surface. The larger topic is covered in Hadley Wickham’s <em>R Packages</em>.</p>
 </div>
-<div id="repo-analysis" class="section level2" number="6.6">
-<h2>
-<span class="header-section-number">6.6</span> <code>analysis/</code><a class="anchor" aria-label="anchor" href="#repo-analysis"><i class="fas fa-link"></i></a>
-</h2>
-<p>In a sense, all the directories exist only to support the contents of <code>analysis/</code>. All the exploratory, descriptive, and inferential statistics are produced by the Rmd files. Each subdirectory is the name of the report, (<em>e.g.</em>, <code>analysis/report-te-1</code>) and within that directory are four files:
-* the R file that contains the meat of the analysis (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.R</code>).
-* the Rmd file that serves as the “presentation layer” and calls the R file (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.Rmd</code>).
-* the markdown file produced directly by the Rmd (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.md</code>). Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
-* the html file that is derived from the markdown file (<em>e.g.</em>, <code>analysis/report-te-1/report-te-1.html</code>). The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered. All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from. Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.</p>
+<div id="repo-utility" class="section level3" number="6.7.2">
+<h3>
+<span class="header-section-number">6.7.2</span> <code>utility/</code><a class="anchor" aria-label="anchor" href="#repo-utility"><i class="fas fa-link"></i></a>
+</h3>
+<p>Include files that may be run occasionally, but are not required to reproduce the analyses. Examples include:</p>
+<ul>
+<li>code for submitting the entire repo pipeline on a super computer,</li>
+<li>simulate artificial demonstration data, or</li>
+<li>running diagnostic checks on your code using something like the <a href="goodpractice">goodpractice</a> or <a href="urlchecker">urlchecker</a>.</li>
+</ul>
 </div>
-<div id="repo-stitched" class="section level2" number="6.7">
-<h2>
-<span class="header-section-number">6.7</span> Stitched Output<a class="anchor" aria-label="anchor" href="#repo-stitched"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="repo-utility" class="section level2" number="6.8">
-<h2>
-<span class="header-section-number">6.8</span> Utility<a class="anchor" aria-label="anchor" href="#repo-utility"><i class="fas fa-link"></i></a>
-</h2>
+<div id="repo-stitched" class="section level3" number="6.7.3">
+<h3>
+<span class="header-section-number">6.7.3</span> <code>stitched-output/</code><a class="anchor" aria-label="anchor" href="#repo-stitched"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="">Stitching</a> is a light-weight capability of rmarkdown. If the repo’s manipulation files stich their output (as a type of logging), consider directing all output to this directory.</p>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -285,13 +314,18 @@
 <li><a class="nav-link" href="#repo-rproj"><span class="header-section-number">6.1.4</span> *.Rproj</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#repo-data-public"><span class="header-section-number">6.2</span> data-public/</a></li>
-<li><a class="nav-link" href="#repo-data-unshared"><span class="header-section-number">6.3</span> data-unshared/</a></li>
-<li><a class="nav-link" href="#repo-documentation"><span class="header-section-number">6.4</span> documentation/</a></li>
-<li><a class="nav-link" href="#repo-manipulation"><span class="header-section-number">6.5</span> manipulation/</a></li>
-<li><a class="nav-link" href="#repo-analysis"><span class="header-section-number">6.6</span> analysis/</a></li>
-<li><a class="nav-link" href="#repo-stitched"><span class="header-section-number">6.7</span> Stitched Output</a></li>
-<li><a class="nav-link" href="#repo-utility"><span class="header-section-number">6.8</span> Utility</a></li>
+<li><a class="nav-link" href="#repo-manipulation"><span class="header-section-number">6.2</span> manipulation/</a></li>
+<li><a class="nav-link" href="#repo-analysis"><span class="header-section-number">6.3</span> analysis/</a></li>
+<li><a class="nav-link" href="#repo-data-public"><span class="header-section-number">6.4</span> data-public/</a></li>
+<li><a class="nav-link" href="#repo-data-unshared"><span class="header-section-number">6.5</span> data-unshared/</a></li>
+<li><a class="nav-link" href="#repo-documentation"><span class="header-section-number">6.6</span> documentation/</a></li>
+<li>
+<a class="nav-link" href="#repo-optional"><span class="header-section-number">6.7</span> Optional</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#repo-description"><span class="header-section-number">6.7.1</span> DESCRIPTION</a></li>
+<li><a class="nav-link" href="#repo-utility"><span class="header-section-number">6.7.2</span> utility/</a></li>
+<li><a class="nav-link" href="#repo-stitched"><span class="header-section-number">6.7.3</span> stitched-output/</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -309,7 +343,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-07-31.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
