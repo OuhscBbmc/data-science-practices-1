@@ -115,7 +115,7 @@ The `data-public/` directory typically works best if organized with subdirectori
 
   A file in `data-public/original/`typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to `data-public/raw/`.  Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.
 
-The characteristics of `data-public/` vary based on the subject matter.  For instance, medical research projects typically use only the metadata directory, because the incoming information contains PHI and is stored in a database.  On the other hand, microbiology and physics research typically do not have data protected by law, and it is desirable for the repo to contain everything.
+The characteristics of `data-public/` vary based on the subject matter.  For instance, medical research projects typically use only the metadata directory of a repo, because the incoming information contains PHI and therefore a database is the preferred location.  On the other hand, microbiology and physics research typically do not have data protected by law, and it is desirable for the repo to contain everything so it's not unnecessarily spread out.
 
 We feel a private GitHub repo offers adequate protection if being scooped is the biggest risk.
 
@@ -169,7 +169,7 @@ The plain-text `DESCRIPTION` file lives in the repo's root directory --see the [
 
 The last two bullets are essentially an upgrade from merely sticking code in a file and [sourcing](#chunk-load-sources) it.
 
-A package offers many capabilities beyond those listed above, but a typical data science repo will not scratch the surface.  The larger topic is covered in Hadley Wickham's  *R Packages*.
+A package offers many capabilities beyond those listed above, but a typical data science repo will not scratch the surface.  The larger topic is covered in Hadley Wickham's  [*R Packages*](https://r-pkgs.org/).
 
 ### `utility/` {#repo-utility}
 
@@ -177,8 +177,17 @@ Include files that may be run occasionally, but are not required to reproduce th
 
 * code for submitting the entire repo pipeline on a super computer,
 * simulate artificial demonstration data, or
-* running diagnostic checks on your code using something like the [goodpractice](goodpractice) or [urlchecker](urlchecker).
+* running diagnostic checks on your code using something like the [goodpractice](http://mangothecat.github.io/goodpractice/) or [urlchecker](https://r-lib.github.io/urlchecker/).
 
 ### `stitched-output/` {#repo-stitched}
 
-[Stitching]() is a light-weight capability of rmarkdown.  If the repo's manipulation files stich their output (as a type of logging), consider directing all output to this directory.
+[Stitching](https://yihui.org/knitr/demo/stitch/) is a light-weight capability of [knitr](https://yihui.org/knitr/)/[rmarkdown](https://rmarkdown.rstudio.com/).  If you stitch the repo's files (to server as a type of logging), consider directing all output to this directory.  The basic call is:
+
+```r
+knitr::stitch_rmd(
+  script = "manipulation/car-ellis.R",
+  output = "stitched-output/manipulation/car-ellis.md"
+)
+```
+
+We don't use this approach for medical research, because sensitive information is usually contained in the output, and sensitive patient information should not be stored in the repo.  (That's the last time I'll talk about sensitive information --at least in this chapter.)
