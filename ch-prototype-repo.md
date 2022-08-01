@@ -7,9 +7,9 @@ Looking beyond any single project, we strongly encourage your team to adopt a co
 
 * An evolved and thought-out structure makes it easier to follow good practices and avoid common traps.
 
-* Code files are more portable between projects.  More code can be reused if both environments refer to same files and directories like [config.yml](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml), [data-public/raw](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/raw), and [data-public/derived](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/derived)
+* Code files are more portable between projects.  More code can be reused if both environments refer to same files and directories like [config.yml](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml), [data-public/raw](https://github.com/wibeasley/RAnalysisSkeleton/tree/main/data-public/raw), and [data-public/derived](https://github.com/wibeasley/RAnalysisSkeleton/tree/main/data-public/derived)
 
-* People are more portable between projects.  When a person is already familiar with the structure, they start contributing more quickly because they already know to look for statistical reports in [analysis/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/analysis) and to debug problematic file ingestions in [manipulation/](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation) files.
+* People are more portable between projects.  When a person is already familiar with the structure, they start contributing more quickly because they already know to look for statistical reports in [analysis/](https://github.com/wibeasley/RAnalysisSkeleton/tree/main/analysis) and to debug problematic file ingestions in [manipulation/](https://github.com/wibeasley/RAnalysisSkeleton/tree/main/manipulation) files.
 
 If a specific project doesn't use a directory or file, we recommend retaining the stub.  Like the empty chunks discusses in the [Prototypical R File](#prototype-r) chapter, a stub communicates to your collaborator, "this project currently doesn't use the feature, but when/if it does, this will be the location".  The collaborator can stop their search immediately, and avoid searching weird places in order to rule-out the feature is located elsewhere.
 
