@@ -24,7 +24,7 @@ The following files live in the repository's root directory, meaning they are no
 
 The configuration file is simply a plain-text yaml file read by the [config](https://CRAN.R-project.org/package=config) package.  It is well-suited when a value has to be coordinated across multiple files.
 
-Also see the discussion of how we use the config file for [excluding bad data values](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases) and of how the config file [relates to yaml](#data-containers-yaml), json, and xml.
+Also see the discussion of how we use the config file for [excluding bad data values](https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases) and of how the config file [relates to yaml](#rest-containers-yaml), json, and xml.
 
 ```yaml
 default:
@@ -102,7 +102,7 @@ This directory should contain information that is not sensitive and is not propr
 
 Please see [`data-unshared/`](#repo-data-unshared) for options storing sensitive information.
 
-The `data-public/` directory typically works best if organized with subdirectories.  We commonly use
+The `data-public/` directory typically works best if organized with subdirectories.  We commonly use these subdirectories, which corresponds with the [Data at Rest](#rest) chapter.
 
 ###  `data-public/raw/`
 ...for the input to the pipelines.  These datasets usually represents all the hard work of the data collection.
@@ -123,7 +123,7 @@ The `data-public/` directory typically works best if organized with subdirectori
 
 ...for nothing (hopefully); ideally it is never used.  It is similar to `data-public/raw/`.  The difference is that `data-public/raw/` is called by the pipeline code, while `data-public/original/`  is not.
 
-  A file in `data-public/original/`typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to `data-public/raw/`.  Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.
+  A file in `data-public/original/` typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to `data-public/raw/`.  Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.
 
 ### Characteristics
 
