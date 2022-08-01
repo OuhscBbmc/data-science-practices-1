@@ -58,6 +58,12 @@ repo-rproj
 repo-manipulation
 repo-analysis
 repo-data-public
+data-publicraw
+data-publicmetadata
+data-publicderived
+data-publiclogs
+data-publicoriginal
+characteristics
 repo-data-unshared
 repo-documentation
 repo-optional

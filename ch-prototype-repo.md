@@ -89,10 +89,11 @@ The Rproj file stores project-wide settings used by the RStudio IDE, such how tr
 ------------------------------------
 
 In a sense, all the directories exist only to support the contents of `analysis/`.  All the exploratory, descriptive, and inferential statistics are produced by the Rmd files.  Each subdirectory is the name of the report, (*e.g.*, `analysis/report-te-1`) and within that directory are four files:
-  * the R file that contains the meat of the analysis (*e.g.*, `analysis/report-te-1/report-te-1.R`).
-  * the Rmd file that serves as the "presentation layer" and calls the R file (*e.g.*, `analysis/report-te-1/report-te-1.Rmd`).
-  * the markdown file produced directly by the Rmd (*e.g.*, `analysis/report-te-1/report-te-1.md`).  Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
-  * the html file that is derived from the markdown file (*e.g.*, `analysis/report-te-1/report-te-1.html`).  The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered.  All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from.  Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.
+
+* the R file that contains the meat of the analysis (*e.g.*, `analysis/report-te-1/report-te-1.R`).
+* the Rmd file that serves as the "presentation layer" and calls the R file (*e.g.*, `analysis/report-te-1/report-te-1.Rmd`).
+* the markdown file produced directly by the Rmd (*e.g.*, `analysis/report-te-1/report-te-1.md`).  Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
+* the html file that is derived from the markdown file (*e.g.*, `analysis/report-te-1/report-te-1.html`).  The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered.  All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from.  Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.
 
 `data-public/` {#repo-data-public}
 ------------------------------------
@@ -103,17 +104,28 @@ Please see [`data-unshared/`](#repo-data-unshared) for options storing sensitive
 
 The `data-public/` directory typically works best if organized with subdirectories.  We commonly use
 
-* **`data-public/raw/`** for the input to the pipelines.  These datasets usually represents all the hard work of the data collection.
+###  `data-public/raw/`
+...for the input to the pipelines.  These datasets usually represents all the hard work of the data collection.
 
-* **`data-public/metadata/`** for the definitions of the datasets in raw.  For example, "gender.csv" might translate the values 1 and 2 to male and female.  Sometimes a dataset feels natural in either the raw or the metadata subdirectory.  If the file would remain unchanged if a subsequent sample was collected, lean towards metadata.
+### `data-public/metadata/`
 
-* **`data-public/derived/`** for output of the pipelines.  Its contents should be completely reproducible when starting with `data-public/raw/` and the repo's code.  In other words, it can be deleted and recreated at ease.  This might contain a small database file, like SQLite.
+...for the definitions of the datasets in raw.  For example, "gender.csv" might translate the values 1 and 2 to male and female.  Sometimes a dataset feels natural in either the raw or the metadata subdirectory.  If the file would remain unchanged if a subsequent sample was collected, lean towards metadata.
 
-* **`data-public/logs/`** for logs that are useful to collaborators or necessary to demonstrate something in the future, beyond the reports contained in the `analysis/` directory.
+### `data-public/derived/`
 
-* **`data-public/original/`** for nothing (hopefully); ideally it is never used.  It is similar to `data-public/raw/`.  The difference is that `data-public/raw/` is called by the pipeline code, while `data-public/original/`  is not.
+...for output of the pipelines.  Its contents should be completely reproducible when starting with `data-public/raw/` and the repo's code.  In other words, it can be deleted and recreated at ease.  This might contain a small database file, like SQLite.
+
+### `data-public/logs/`
+
+...for logs that are useful to collaborators or necessary to demonstrate something in the future, beyond the reports contained in the `analysis/` directory.
+
+### `data-public/original/`
+
+...for nothing (hopefully); ideally it is never used.  It is similar to `data-public/raw/`.  The difference is that `data-public/raw/` is called by the pipeline code, while `data-public/original/`  is not.
 
   A file in `data-public/original/`typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to `data-public/raw/`.  Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.
+
+### Characteristics
 
 The characteristics of `data-public/` vary based on the subject matter.  For instance, medical research projects typically use only the metadata directory of a repo, because the incoming information contains PHI and therefore a database is the preferred location.  On the other hand, microbiology and physics research typically do not have data protected by law, and it is desirable for the repo to contain everything so it's not unnecessarily spread out.
 
