@@ -113,8 +113,8 @@
 <p>Looking beyond any single project, we strongly encourage your team to adopt a common file organization. Pursuing commonality provides multiple benefits:</p>
 <ul>
 <li><p>An evolved and thought-out structure makes it easier to follow good practices and avoid common traps.</p></li>
-<li><p>Code files are more portable between projects. More code can be reused if both environments refer to same files and directories like <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml">config.yml</a>, <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/raw">data-public/raw</a>, and <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/data-public/derived">data-public/derived</a></p></li>
-<li><p>People are more portable between projects. When a person is already familiar with the structure, they start contributing more quickly because they already know to look for statistical reports in <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/analysis">analysis/</a> and to debug problematic file ingestions in <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation">manipulation/</a> files.</p></li>
+<li><p>Code files are more portable between projects. More code can be reused if both environments refer to same files and directories like <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/config.yml">config.yml</a>, <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/main/data-public/raw">data-public/raw</a>, and <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/main/data-public/derived">data-public/derived</a></p></li>
+<li><p>People are more portable between projects. When a person is already familiar with the structure, they start contributing more quickly because they already know to look for statistical reports in <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/main/analysis">analysis/</a> and to debug problematic file ingestions in <a href="https://github.com/wibeasley/RAnalysisSkeleton/tree/main/manipulation">manipulation/</a> files.</p></li>
 </ul>
 <p>If a specific project doesn’t use a directory or file, we recommend retaining the stub. Like the empty chunks discusses in the <a href="prototype-r.html#prototype-r">Prototypical R File</a> chapter, a stub communicates to your collaborator, “this project currently doesn’t use the feature, but when/if it does, this will be the location”. The collaborator can stop their search immediately, and avoid searching weird places in order to rule-out the feature is located elsewhere.</p>
 <p>The template that has worked well for us is publicly available at <a href="https://github.com/wibeasley/RAnalysisSkeleton" class="uri">https://github.com/wibeasley/RAnalysisSkeleton</a>. The important files and directories are described below. Please use this as a starting point, and not as a dogmatic prison. Make adjustments when it fits your specific project or your overall team.</p>
@@ -225,7 +225,7 @@
 <p>A file in <code>data-public/original/</code>typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to <code>data-public/raw/</code>. Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.</p>
 </li>
 </ul>
-<p>The characteristics of <code>data-public/</code> vary based on the subject matter. For instance, medical research projects typically use only the metadata directory, because the incoming information contains PHI and is stored in a database. On the other hand, microbiology and physics research typically do not have data protected by law, and it is desirable for the repo to contain everything.</p>
+<p>The characteristics of <code>data-public/</code> vary based on the subject matter. For instance, medical research projects typically use only the metadata directory of a repo, because the incoming information contains PHI and therefore a database is the preferred location. On the other hand, microbiology and physics research typically do not have data protected by law, and it is desirable for the repo to contain everything so it’s not unnecessarily spread out.</p>
 <p>We feel a private GitHub repo offers adequate protection if being scooped is the biggest risk.</p>
 </div>
 <div id="repo-data-unshared" class="section level2" number="6.5">
@@ -277,7 +277,7 @@
 <li>better document functions and datasets within the repo.</li>
 </ul>
 <p>The last two bullets are essentially an upgrade from merely sticking code in a file and <a href="prototype-r.html#chunk-load-sources">sourcing</a> it.</p>
-<p>A package offers many capabilities beyond those listed above, but a typical data science repo will not scratch the surface. The larger topic is covered in Hadley Wickham’s <em>R Packages</em>.</p>
+<p>A package offers many capabilities beyond those listed above, but a typical data science repo will not scratch the surface. The larger topic is covered in Hadley Wickham’s <a href="https://r-pkgs.org/"><em>R Packages</em></a>.</p>
 </div>
 <div id="repo-utility" class="section level3" number="6.7.2">
 <h3>
@@ -287,14 +287,20 @@
 <ul>
 <li>code for submitting the entire repo pipeline on a super computer,</li>
 <li>simulate artificial demonstration data, or</li>
-<li>running diagnostic checks on your code using something like the <a href="goodpractice">goodpractice</a> or <a href="urlchecker">urlchecker</a>.</li>
+<li>running diagnostic checks on your code using something like the <a href="http://mangothecat.github.io/goodpractice/">goodpractice</a> or <a href="https://r-lib.github.io/urlchecker/">urlchecker</a>.</li>
 </ul>
 </div>
 <div id="repo-stitched" class="section level3" number="6.7.3">
 <h3>
 <span class="header-section-number">6.7.3</span> <code>stitched-output/</code><a class="anchor" aria-label="anchor" href="#repo-stitched"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="">Stitching</a> is a light-weight capability of rmarkdown. If the repo’s manipulation files stich their output (as a type of logging), consider directing all output to this directory.</p>
+<p><a href="https://yihui.org/knitr/demo/stitch/">Stitching</a> is a light-weight capability of <a href="https://yihui.org/knitr/">knitr</a>/<a href="https://rmarkdown.rstudio.com/">rmarkdown</a>. If you stitch the repo’s files (to server as a type of logging), consider directing all output to this directory. The basic call is:</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/stitch.html">stitch_rmd</a></span><span class="op">(</span></span>
+<span>  script <span class="op">=</span> <span class="st">"manipulation/car-ellis.R"</span>,</span>
+<span>  output <span class="op">=</span> <span class="st">"stitched-output/manipulation/car-ellis.md"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>We don’t use this approach for medical research, because sensitive information is usually contained in the output, and sensitive patient information should not be stored in the repo. (That’s the last time I’ll talk about sensitive information –at least in this chapter.)</p>
 
 </div>
 </div>
