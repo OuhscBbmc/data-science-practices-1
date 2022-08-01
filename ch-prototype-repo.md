@@ -18,6 +18,8 @@ The template that has worked well for us is publicly available at <https://githu
 Root {#repo-root}
 ------------------------------------
 
+The following files live in the repository's root directory, meaning they are not in any subfolder/subdirectory.
+
 ### `config.R` {#repo-config}
 
 The configuration file is simply a plain-text yaml file read by the [config](https://CRAN.R-project.org/package=config) package.  It is well-suited when a value has to be coordinated across multiple files.
@@ -80,6 +82,18 @@ Each directory can have its own readme file, but (for typical analysis projects)
 
 The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled.  The file's major benefit is that it sets the R session's working directory, which facilitates good discipline about setting a constant location for all files in the repo.  Although the plain-text file can be edited directly, we recommend using RStudio's dialog box.  There is good documentation about Rproj settings.  If you are unsure, copy [this file](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj) to the repo's root directory and rename it to match the repo exactly.
 
+`manipulation/` {#repo-manipulation}
+------------------------------------
+
+`analysis/` {#repo-analysis}
+------------------------------------
+
+In a sense, all the directories exist only to support the contents of `analysis/`.  All the exploratory, descriptive, and inferential statistics are produced by the Rmd files.  Each subdirectory is the name of the report, (*e.g.*, `analysis/report-te-1`) and within that directory are four files:
+  * the R file that contains the meat of the analysis (*e.g.*, `analysis/report-te-1/report-te-1.R`).
+  * the Rmd file that serves as the "presentation layer" and calls the R file (*e.g.*, `analysis/report-te-1/report-te-1.Rmd`).
+  * the markdown file produced directly by the Rmd (*e.g.*, `analysis/report-te-1/report-te-1.md`).  Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
+  * the html file that is derived from the markdown file (*e.g.*, `analysis/report-te-1/report-te-1.html`).  The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered.  All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from.  Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.
+
 `data-public/` {#repo-data-public}
 ------------------------------------
 
@@ -118,7 +132,7 @@ Files in this directory are stored on the local computer, but are not committed 
 
 A line in the repo's `.gitignore` file blocks the directory's contents from being staged/committed (look for `/data-unshared/*`).  Since files in this directory are not committed, it requires more discipline to communicate what files should be on a collaborator's computer.  List the files either in the [repo's readme](#repo-readme) or in `data-unshared/contents.md`; at a minimum declare the name of each file and how it can be downloaded or reproduced.  (If you are curious, the `!data-unshared/contents.md` line in `.gitignore` declares an exception so the markdown file is committed and updated on a collaborator's machine.)
 
-Even though these files are kept off the central repository, we recommend encrypting your local drive if the `data-unshared/` contains sensitive (such as PHI).  See the `data-public/` [`README.md`](data-public/) for more information.
+Even though these files are kept off the central repository, we recommend encrypting your local drive if the `data-unshared/` contains sensitive data (such as PHI).  See the `data-public/` [`README.md`](data-public/) for more information.
 
 The directory works best with the subdirectories described in the organization of [`data-public/`](#repo-data-public).
 
@@ -139,19 +153,6 @@ Good documentation is scarce and documentation files consume little space, so li
 * Data dictionaries for the derived datasets your team is producing.
 
 If the documentation is public and stable, like the CDC's site for [vaccination codes](https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx), include the url in the [repo's readme](#repo-readme).  If you feel the information or the location may change, copy the url and also the full document so it is easier to reconstruct your logic when returning to the project in a few years.
-
-`manipulation/` {#repo-manipulation}
-------------------------------------
-
-`analysis/` {#repo-analysis}
-------------------------------------
-
-In a sense, all the directories exist only to support the contents of `analysis/`.  All the exploratory, descriptive, and inferential statistics are produced by the Rmd files.  Each subdirectory is the name of the report, (*e.g.*, `analysis/report-te-1`) and within that directory are four files:
-  * the R file that contains the meat of the analysis (*e.g.*, `analysis/report-te-1/report-te-1.R`).
-  * the Rmd file that serves as the "presentation layer" and calls the R file (*e.g.*, `analysis/report-te-1/report-te-1.Rmd`).
-  * the markdown file produced directly by the Rmd (*e.g.*, `analysis/report-te-1/report-te-1.md`).  Some people consider this an intermediate file because it exists mostly by knitr/rmarkdown/pandoc to produce the eventual html file.
-  * the html file that is derived from the markdown file (*e.g.*, `analysis/report-te-1/report-te-1.html`).  The markdown and html files can be safely discarded because they will be reproduced the next time the Rmd is rendered.  All the tables and graphs in the html file are self-contained, meaning the single file is portable and emailed without concern for the directory it is read from.  Collaborators rarely care about any manipulation files or analysis code; they almost always look exclusively at the outputed html.
-
 
 Optional {#repo-optional}
 ------------------------------------
