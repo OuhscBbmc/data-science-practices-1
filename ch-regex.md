@@ -1,8 +1,3 @@
-\cleardoublepage
-
-(APPENDIX) Appendix {-}
-====================================
-
 Regular Expressions {#regex}
 ====================================
 
