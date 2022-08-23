@@ -142,7 +142,16 @@ At least every few days, push your changes to the main branch so teammates can b
 
 #### "Main" vs "Master" Branch
 
-If you are using an old repo whose default branch is called "master", it's fairly simple to [rename to "main"](https://github.com/github/renaming).
+If you are using an old repo (that was initialized [before 2021](https://www.theserverside.com/feature/Why-GitHub-renamed-its-master-branch-to-main)) and whose default branch is still called "master", it's fairly simple to [rename to "main"](https://github.com/github/renaming) on the server.
+
+In the client, there are two options.  The first is to delete and reclone (make sure everything is pushed to the central repo before deleting).  The second is to open a command prompt (with Window's cmd, Window's PowerShell, or Linux bash) and paste these four lines.
+
+```sh
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
 
 Repo Style
 ------------------------------------

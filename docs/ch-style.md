@@ -398,7 +398,7 @@ GitHub seems to introduce new programs or modify existing branding every few yea
 ggplot2 {#style-ggplot}
 ------------------------------------
 
-The expressiveness of [ggplot2](https://ggplot2.tidyverse.org/) allows someone to quickly develop precise scientific graphics.  One graph can be specified in many equivalent styles, which increases the opportunity for confusion.  We formalized much of this style while writing a [textbook for introductory statistics](https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/master/thumbnails/thumbnails.md) (@deshea); the 200+ graphs and their code is publicly available.
+The expressiveness of [ggplot2](https://ggplot2.tidyverse.org/) allows someone to quickly develop precise scientific graphics.  One graph can be specified in many equivalent styles, which increases the opportunity for confusion.  We formalized much of this style while writing a [textbook for introductory statistics](https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/main/thumbnails/thumbnails.md) (@deshea); the 200+ graphs and their code is publicly available.
 
 There are a few additional ggplot2 tips in the [tidyverse style guide](https://style.tidyverse.org/ggplot2.html).
 

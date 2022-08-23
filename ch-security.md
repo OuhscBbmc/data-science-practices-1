@@ -64,7 +64,7 @@ Security for Data at Rest
   * Real databases aren't accidentally emailed or copied to an unsecured location.
 * Transfer PHI into REDCap & SQL Server as early as possible (particularly the CSVs & XLSXs we regularly receive from partners).
 * Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.
-* Hash values when possible.  For instance, when we determine families/networks of people, we use things like SSNs.  But the algorithm that identifies the clusters doesn't need to know the *actual* SSN, just that two records have the *same* SSN.  Something like a [SHA-256 hash](http://en.wikipedia.org/wiki/SHA-2) is good for this.  The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can't be determined from its hashed value.  If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing & salting process: [HashUtility.R](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/CodeUtilities/HashUtility.R) and [CreateSalt.R](https://github.com/OuhscBbmc/RedcapExample/blob/master/CodeUtilities/CreateSalt.R).
+* Hash values when possible.  For instance, when we determine families/networks of people, we use things like SSNs.  But the algorithm that identifies the clusters doesn't need to know the *actual* SSN, just that two records have the *same* SSN.  Something like a [SHA-256 hash](http://en.wikipedia.org/wiki/SHA-2) is good for this.  The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can't be determined from its hashed value.  If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing & salting process: [HashUtility.R](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/CodeUtilities/HashUtility.R) and [CreateSalt.R](https://github.com/OuhscBbmc/RedcapExample/blob/main/CodeUtilities/CreateSalt.R).
 
 File-level permissions
 ------------------------------------
@@ -82,7 +82,7 @@ Public & Private Repositories
 * The `.gitignore` file prohibits common data file formats from being pushed/uploaded to the central repository.
   * Examples: accdb, mdb, xlsx, csv, sas7bdat, rdata, RHistory.
   * If you have a text file without PHI that must be on GitHub, create a new extension for it like '*.PhiFree'.
-  * Or you can include a specific exception to the .gitignore file, but adding an exclamation point in front of the file, such as `!RecruitmentProductivity/RecruitingZones/ZipcodesToZone.csv`.  An example is included in the current repository's [.gitignore file(https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/.gitignore).
+  * Or you can include a specific exception to the .gitignore file, but adding an exclamation point in front of the file, such as `!RecruitmentProductivity/RecruitingZones/ZipcodesToZone.csv`.  An example is included in the current repository's [.gitignore file(https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/.gitignore).
 
 ### Scrubbing GitHub history
 

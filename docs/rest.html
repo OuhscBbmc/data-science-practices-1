@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 7 Data at Rest | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="7.1 Data States Raw Derived Project-wide File on Repo Project-wide File on Protected File Server User-specific File on Protected File Server Project-wide Database Original  7.2 Data Containers ...">
-<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta name="description" content="7.1 Data States This is an extension of the data-public/ discussion. This chapter is more theoretical and applies to all forms of data, not just files in a prototypical repo. It is easiest to...">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Data at Rest | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="7.1 Data States Raw Derived Project-wide File on Repo Project-wide File on Protected File Server User-specific File on Protected File Server Project-wide Database Original  7.2 Data Containers ...">
+<meta property="og:description" content="7.1 Data States This is an extension of the data-public/ discussion. This chapter is more theoretical and applies to all forms of data, not just files in a prototypical repo. It is easiest to...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 7 Data at Rest | Collaborative Data Science Practices">
-<meta name="twitter:description" content="7.1 Data States Raw Derived Project-wide File on Repo Project-wide File on Protected File Server User-specific File on Protected File Server Project-wide Database Original  7.2 Data Containers ...">
+<meta name="twitter:description" content="7.1 Data States This is an extension of the data-public/ discussion. This chapter is more theoretical and applies to all forms of data, not just files in a prototypical repo. It is easiest to...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -91,13 +91,14 @@
 <li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
-<li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
-<li><a class="" href="presentations.html"><span class="header-section-number">C</span> Presentations</a></li>
-<li><a class="" href="scratch-pad.html"><span class="header-section-number">D</span> Scratch Pad of Loose Ideas</a></li>
-<li><a class="" href="example-dashboard.html"><span class="header-section-number">E</span> Example Dashboard</a></li>
-<li><a class="" href="example-chapter.html"><span class="header-section-number">F</span> Example Chapter</a></li>
-<li><a class="" href="acknowledgements.html"><span class="header-section-number">G</span> Acknowledgements</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">H</span> References</a></li>
+<li><a class="" href="regex.html"><span class="header-section-number">B</span> Regular Expressions</a></li>
+<li><a class="" href="snippets.html"><span class="header-section-number">C</span> Snippets</a></li>
+<li><a class="" href="presentations.html"><span class="header-section-number">D</span> Presentations</a></li>
+<li><a class="" href="scratch-pad.html"><span class="header-section-number">E</span> Scratch Pad of Loose Ideas</a></li>
+<li><a class="" href="example-dashboard.html"><span class="header-section-number">F</span> Example Dashboard</a></li>
+<li><a class="" href="example-chapter.html"><span class="header-section-number">G</span> Example Chapter</a></li>
+<li><a class="" href="acknowledgements.html"><span class="header-section-number">H</span> Acknowledgements</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">I</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -109,13 +110,36 @@
 <h1>
 <span class="header-section-number">7</span> Data at Rest<a class="anchor" aria-label="anchor" href="#rest"><i class="fas fa-link"></i></a>
 </h1>
-<div id="data-states" class="section level2" number="7.1">
+<div id="rest-states" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">7.1</span> Data States<a class="anchor" aria-label="anchor" href="#data-states"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Data States<a class="anchor" aria-label="anchor" href="#rest-states"><i class="fas fa-link"></i></a>
 </h2>
+<p>This is an extension of the <a href="prototype-repo.html#repo-data-public"><code>data-public/</code></a> discussion. This chapter is more theoretical and applies to all forms of data, not just files in a <a href="prototype-repo.html#prototype-repo">prototypical repo</a>.</p>
+<p>It is easiest to demarcate data into two states: raw and derived. <em>Raw</em> data represents the input to the pipelines. Sometimes their junk. But usually these files should be cherished as the culmination of all the hard work of the data collection. <em>Derived</em> data represents the output of the pipelines. Its contents should be completely reproducible when starting with the raw data and the repo’s code. In other words, derived information can be deleted and recreated at ease.</p>
+<p>In our terminology, an <em>original</em> data file is directly received from your collaborator. On a good day, “original” and “raw” are synonymous. Meaning the files received are ingestible directly into your pipeline. However sometimes a collaborator provides a malformed data file that requires manual intervention. Once it is rehabilitated, it becomes raw data. Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.</p>
+<p>If an original file isn’t perfect, you’ll have to decide what blemishes can be programmatically fixed, and what blemishes will be manually fixed. During this triage process, it is sometimes difficult to determine what is worth investing time to fix with code. When everything can be fixed with code, the original and raw data are equivalent (and the “original” state can be ignored).</p>
+<p>Here are some heuristics to help you decide what to address manually or programmatically.</p>
+<p>Arguments for Programmatic Fixes:</p>
 <ol style="list-style-type: decimal">
-<li>Raw</li>
-<li>Derived
+<li><p><em>The original data is frequently refreshed.</em> If your pipeline ingests new files every day, it’s probably worth the investment to fix.</p></li>
+<li><p>*The code would</p></li>
+</ol>
+<p>Arguments for Manual Fixes:</p>
+<ol style="list-style-type: decimal">
+<li><p><em>The corrections are subjective.</em> Sometimes the desired fix does not follow deterministic rules. In these scenarios, see the “Return the file to your collaborator” alternative.</p></li>
+<li><p><em>It’s a quick fix for a one-time dataset.</em></p></li>
+</ol>
+<p>Alternatives:</p>
+<ol style="list-style-type: decimal">
+<li>
+<em>Return the file to your collaborator.</em> Especially if grad students or interns are available. One justification is that they’re usually the experts in the field, while you are not. They are better equipped to evaluate the data point and its context and determine the correct correction. A second justification is your company/university probably doesn’t want to pay statisticians and data scientists to clean up</li>
+</ol>
+<p>If you are a corporate consultant, propose that your team is willing to fix the data points and then provide the estimated cost for training your personnel how to correctly evaluate the context so the client can offload this task.</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Separate and excise the manual step.</em> When the majority of a file can be ingested without manual intervention, try to split the task in two. Consider a patient’s visit record in a hospital database. Most of the information is well-structured and easily transformed into discrete cells. However the “visit notes” written by the nurses and physician are not. Sometimes the notes are</p></li>
+<li><p>Raw</p></li>
+<li>
+<p>Derived</p>
 <ol style="list-style-type: decimal">
 <li>Project-wide File on Repo</li>
 <li>Project-wide File on Protected File Server</li>
@@ -123,72 +147,72 @@
 <li>Project-wide Database</li>
 </ol>
 </li>
-<li>Original</li>
+<li><p>Original</p></li>
 </ol>
 </div>
 <div id="data-containers" class="section level2" number="7.2">
 <h2>
 <span class="header-section-number">7.2</span> Data Containers<a class="anchor" aria-label="anchor" href="#data-containers"><i class="fas fa-link"></i></a>
 </h2>
-<div id="data-containers-csv" class="section level3" number="7.2.1">
+<div id="rest-containers-csv" class="section level3" number="7.2.1">
 <h3>
-<span class="header-section-number">7.2.1</span> csv<a class="anchor" aria-label="anchor" href="#data-containers-csv"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.1</span> csv<a class="anchor" aria-label="anchor" href="#rest-containers-csv"><i class="fas fa-link"></i></a>
 </h3>
-<p>When exchanging data between two different systems, the preferred format is frequently plain text, where each cell in a record is separated by a comma. This is commonly called a csv –a <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma separated value</a> file. As opposed to <a href="rest.html#data-containers-avoid">proprietary formats</a> like xlsx or sas7bdat, a csv file is easily opened and parsable by most statistical software, and even conventional text editors and <a href="https://help.github.com/en/github/managing-files-in-a-repository/rendering-csv-and-tsv-data">GitHub</a>.</p>
+<p>When exchanging data between two different systems, the preferred format is frequently plain text, where each cell in a record is separated by a comma. This is commonly called a csv –a <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma separated value</a> file. As opposed to <a href="#data-containers-avoid">proprietary formats</a> like xlsx or sas7bdat, a csv file is easily opened and parsable by most statistical software, and even conventional text editors and <a href="https://help.github.com/en/github/managing-files-in-a-repository/rendering-csv-and-tsv-data">GitHub</a>.</p>
 </div>
-<div id="data-containers-rds" class="section level3" number="7.2.2">
+<div id="rest-containers-rds" class="section level3" number="7.2.2">
 <h3>
-<span class="header-section-number">7.2.2</span> rds<a class="anchor" aria-label="anchor" href="#data-containers-rds"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.2</span> rds<a class="anchor" aria-label="anchor" href="#rest-containers-rds"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-yaml" class="section level3" number="7.2.3">
+<div id="rest-containers-yaml" class="section level3" number="7.2.3">
 <h3>
-<span class="header-section-number">7.2.3</span> yaml, json, and xml<a class="anchor" aria-label="anchor" href="#data-containers-yaml"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.3</span> yaml, json, and xml<a class="anchor" aria-label="anchor" href="#rest-containers-yaml"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/">yaml</a>, <a href="https://www.w3schools.com/js/js_json_intro.asp">json</a>, and <a href="https://www.w3schools.com/xml/">xml</a> are three plain-text hierarchical formats commonly used when the data structure cannot be naturally represented by a rectangle or a set of rectangles (and therefore it is not a good fit for csv or rds). If you are unsure where to start with a nested dataset, see tidyr’s <a href="https://tidyr.tidyverse.org/articles/rectangle.html">Rectangling vignette</a>.</p>
 <p>In the same way we advocate for the <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#coding-simplify-recoding">simplest recoding</a> function that is adequate for the task, we prefer yaml over json, and json over xml. Yaml accommodates most, but not all our needs. Initially it may be tricky to correctly use whitespacing to specify the correct nesting structure in yaml, but once you are familar, the file is easy to read and edit, and the Git diffs can be quickly reviewed. The <a href="http://biostat.mc.vanderbilt.edu/wiki/Main/YamlR">yaml</a> package reads a yaml file, and returns a (nested) <a href="https://www.tutorialspoint.com/r/r_lists.htm">R list</a>; it can also convert an R list into a yaml file.</p>
-<p>The <a href="https://github.com/rstudio/config">config</a> package wraps the yaml package to fill a common need: retrieving repository configuration information from a yaml file. We recommend using the config package when it fits. In some ways its functionality is a simplification of the yaml package, but it is an extension in other ways. For example, when a value follows <code>!expr</code>, R will evaluate the expression. We commonly specify the allowable ranges for variables in <a href="https://github.com/OuhscBbmc/cdw-skeleton-1/blob/master/config.yml"><code>config.yml</code></a></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb41-1"><a href="rest.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range_dob   </span><span class="kw">:</span><span class="at"> !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))</span></span></code></pre></div>
+<p>The <a href="https://github.com/rstudio/config">config</a> package wraps the yaml package to fill a common need: retrieving repository configuration information from a yaml file. We recommend using the config package when it fits. In some ways its functionality is a simplification of the yaml package, but it is an extension in other ways. For example, when a value follows <code>!expr</code>, R will evaluate the expression. We commonly specify the allowable ranges for variables in <a href="https://github.com/OuhscBbmc/cdw-skeleton-1/blob/main/config.yml"><code>config.yml</code></a></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb41-1"><a href="rest.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range_dob</span><span class="kw">:</span><span class="at"> !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))</span></span></code></pre></div>
 <p>See the discussion of the <a href="https://ouhscbbmc.github.io/data-science-practices-1/prototype-repo.html#repo-config"><code>config.yml</code></a> in our prototypical repository, as well.</p>
 </div>
-<div id="data-containers-arrow" class="section level3" number="7.2.4">
+<div id="rest-containers-arrow" class="section level3" number="7.2.4">
 <h3>
-<span class="header-section-number">7.2.4</span> Arrow<a class="anchor" aria-label="anchor" href="#data-containers-arrow"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.4</span> Arrow<a class="anchor" aria-label="anchor" href="#rest-containers-arrow"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://arrow.apache.org/">Apache Arrow</a> is an open source specification that is developed to work with many languages such as <a href="https://arrow.apache.org/docs/r/">R</a>, <a href="https://towardsdatascience.com/a-gentle-introduction-to-apache-arrow-with-apache-spark-and-pandas-bb19ffe0ddae">Spark</a>, <a href="https://spark.apache.org/docs/latest/sql-pyspark-pandas-with-arrow.html">Python</a>, and many others. It accommodates nice rectangles where CSVs are used, and hierarchical nesting where json and xml are used.</p>
 <p>It is both an in-memory specification (which allows a Python process to directly access an R object), and an on-disk specification (which allows a Python process to read a saved R file). The file format is compressed, so it takes much less space to store on disk and less time to transfer over a network.</p>
 <p>Its downside is the file is not plain-text, but binary. That means the file is not readable and editable by as many programs, which hurts your project’s portability. You wouldn’t want to store most metadata files as arrow because then your collaborators couldn’t easily help you map the values to qqq</p>
 </div>
-<div id="data-containers-sqlite" class="section level3" number="7.2.5">
+<div id="rest-containers-sqlite" class="section level3" number="7.2.5">
 <h3>
-<span class="header-section-number">7.2.5</span> SQLite<a class="anchor" aria-label="anchor" href="#data-containers-sqlite"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.5</span> SQLite<a class="anchor" aria-label="anchor" href="#rest-containers-sqlite"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-database" class="section level3" number="7.2.6">
+<div id="rest-containers-database" class="section level3" number="7.2.6">
 <h3>
-<span class="header-section-number">7.2.6</span> Central Enterprise database<a class="anchor" aria-label="anchor" href="#data-containers-database"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.6</span> Central Enterprise database<a class="anchor" aria-label="anchor" href="#rest-containers-database"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-redcap" class="section level3" number="7.2.7">
+<div id="rest-containers-redcap" class="section level3" number="7.2.7">
 <h3>
-<span class="header-section-number">7.2.7</span> Central REDCap database<a class="anchor" aria-label="anchor" href="#data-containers-redcap"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.7</span> Central REDCap database<a class="anchor" aria-label="anchor" href="#rest-containers-redcap"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="data-containers-avoid" class="section level3" number="7.2.8">
+<div id="rest-containers-avoid" class="section level3" number="7.2.8">
 <h3>
-<span class="header-section-number">7.2.8</span> Containers to avoid<a class="anchor" aria-label="anchor" href="#data-containers-avoid"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.8</span> Containers to avoid<a class="anchor" aria-label="anchor" href="#rest-containers-avoid"><i class="fas fa-link"></i></a>
 </h3>
-<div id="data-containers-avoid-spreadsheets" class="section level4" number="7.2.8.1">
+<div id="rest-containers-avoid-spreadsheets" class="section level4" number="7.2.8.1">
 <h4>
-<span class="header-section-number">7.2.8.1</span> Spreadsheets<a class="anchor" aria-label="anchor" href="#data-containers-avoid-spreadsheets"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.8.1</span> Spreadsheets<a class="anchor" aria-label="anchor" href="#rest-containers-avoid-spreadsheets"><i class="fas fa-link"></i></a>
 </h4>
 <p>Try not to receive data in Excel files. We think Excel can be useful for light brainstorming and prototyping equations –but is should not be trusted to transport serious information. Other spreadsheet software like <a href="https://en.wikipedia.org/wiki/LibreOffice_Calc">LibreOffice Calc</a> is less problematic in our experience, but still less desirable than the formats mentioned above.</p>
 <p>If you receive a csv and open it in a typical spreadsheet program, we strongly recommend to you do not save it, because of the potential for mangling values. After you close the spreadsheet, <a href="git.html#git-stability">review the Git commits</a> to verify no values were corrupted.</p>
 <p>See <a href="snippets.html#snippets-correspondence-excel">the appendix</a> for a list of the ways your analyses can be undermined when receiving Excel files, as well as a template to correspond with your less-experienced colleagues that is sending your team Excel files.</p>
 </div>
-<div id="data-containers-avoid-proprietary" class="section level4" number="7.2.8.2">
+<div id="rest-containers-avoid-proprietary" class="section level4" number="7.2.8.2">
 <h4>
-<span class="header-section-number">7.2.8.2</span> Proprietary<a class="anchor" aria-label="anchor" href="#data-containers-avoid-proprietary"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.8.2</span> Proprietary<a class="anchor" aria-label="anchor" href="#rest-containers-avoid-proprietary"><i class="fas fa-link"></i></a>
 </h4>
 <p>Proprietary formats like <a href="https://en.wikipedia.org/wiki/SAS_(software)">SAS</a>’s “sas7bdat” are less accessible to people without the current expensive software licenses. Therefore distributing proprietary file formats hurts reproducibility and decreases your project’s impact. On the other hand, using proprietary formats may be advantageous when you need to conceal the project’s failure.</p>
 <p>We formerly distributed sas7bdat files to supplement (otherwise identical) csvs, in order to cater to the suprisingly large population of SAS users who were unfamiliar with <a href="https://documentation.sas.com/?docsetId=proc&amp;docsetTarget=n18jyszn33umngn14czw2qfw7thc.htm&amp;docsetVersion=9.4&amp;locale=en">proc import</a> or the Google search engine. Recently we have distributed only the csvs, with example code for reading the file from SAS.</p>
@@ -199,9 +223,9 @@
 <h2>
 <span class="header-section-number">7.3</span> Storage Conventions<a class="anchor" aria-label="anchor" href="#data-conventions"><i class="fas fa-link"></i></a>
 </h2>
-<div id="data-conventions-all" class="section level3" number="7.3.1">
+<div id="rest-conventions-all" class="section level3" number="7.3.1">
 <h3>
-<span class="header-section-number">7.3.1</span> All Sources<a class="anchor" aria-label="anchor" href="#data-conventions-all"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.1</span> All Sources<a class="anchor" aria-label="anchor" href="#rest-conventions-all"><i class="fas fa-link"></i></a>
 </h3>
 <p>Across all file formats, these conventions usually work best.</p>
 <ol style="list-style-type: decimal">
@@ -215,9 +239,9 @@
 <li><p><strong>currency</strong>: represent money as an integer or floating-point variable. This representation is more easily parsable by software, and enables mathematical operations (like <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> or <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>) to be performed directly. Avoid commas and symbols like “$”. If there is a possibility of ambiguity, indicate the denomination in the variable name (<em>e.g.</em>, <code>payment_dollars</code> or <code>payment_euros</code>).</p></li>
 </ol>
 </div>
-<div id="data-conventions-text" class="section level3" number="7.3.2">
+<div id="rest-conventions-text" class="section level3" number="7.3.2">
 <h3>
-<span class="header-section-number">7.3.2</span> Text<a class="anchor" aria-label="anchor" href="#data-conventions-text"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.2</span> Text<a class="anchor" aria-label="anchor" href="#rest-conventions-text"><i class="fas fa-link"></i></a>
 </h3>
 <p>These conventions usually work best within plain-text formats.</p>
 <ol style="list-style-type: decimal">
@@ -225,9 +249,9 @@
 <li><p><strong>cells enclosed in quotes</strong>: a ‘cell’ should be enclosed in double quotes, especially if it’s a string/character variable.</p></li>
 </ol>
 </div>
-<div id="data-conventions-excel" class="section level3" number="7.3.3">
+<div id="rest-conventions-excel" class="section level3" number="7.3.3">
 <h3>
-<span class="header-section-number">7.3.3</span> Excel<a class="anchor" aria-label="anchor" href="#data-conventions-excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.3</span> Excel<a class="anchor" aria-label="anchor" href="#rest-conventions-excel"><i class="fas fa-link"></i></a>
 </h3>
 <p>As <a href="%7B#data-containers-avoid">discussed above</a> avoid Excel. When that is not possible, these conventions helps reduce ambiguity and corrupted values. See <a href="snippets.html#snippets-reading-excel">the appendix</a> for our preferred approach to reading Excel files.</p>
 <ol style="list-style-type: decimal">
@@ -235,9 +259,9 @@
 <li><p><strong>save the cells as text</strong>: avoiding Excel attempting to save cells as dates or numbers. Admitedly, this is a last-ditch effort. If someone is using Excel to convert cells to text, the values are probably already corrupted.</p></li>
 </ol>
 </div>
-<div id="data-conventions-meditech" class="section level3" number="7.3.4">
+<div id="rest-conventions-meditech" class="section level3" number="7.3.4">
 <h3>
-<span class="header-section-number">7.3.4</span> Meditech<a class="anchor" aria-label="anchor" href="#data-conventions-meditech"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.4</span> Meditech<a class="anchor" aria-label="anchor" href="#rest-conventions-meditech"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>patient identifier</strong>: <code>mrn_meditech</code> instead of <code>mrn</code>, <code>MRN Rec#</code>, or <code>Med Rec#</code>.</p></li>
@@ -258,9 +282,9 @@
 <strong>blood pressure</strong>: in most systems the <code>bp_diastolic</code> and <code>bp_systolic</code> values are stored in separate integer variables. In Meditech, they are stored in a single character variable, separated by a forward slash.</li>
 </ol>
 </div>
-<div id="data-conventions-database" class="section level3" number="7.3.5">
+<div id="rest-conventions-database" class="section level3" number="7.3.5">
 <h3>
-<span class="header-section-number">7.3.5</span> Databases<a class="anchor" aria-label="anchor" href="#data-conventions-database"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.5</span> Databases<a class="anchor" aria-label="anchor" href="#rest-conventions-database"><i class="fas fa-link"></i></a>
 </h3>
 <p>When exchanging data between two different systems, …</p>
 
@@ -274,26 +298,26 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#rest"><span class="header-section-number">7</span> Data at Rest</a></li>
-<li><a class="nav-link" href="#data-states"><span class="header-section-number">7.1</span> Data States</a></li>
+<li><a class="nav-link" href="#rest-states"><span class="header-section-number">7.1</span> Data States</a></li>
 <li>
 <a class="nav-link" href="#data-containers"><span class="header-section-number">7.2</span> Data Containers</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-containers-csv"><span class="header-section-number">7.2.1</span> csv</a></li>
-<li><a class="nav-link" href="#data-containers-rds"><span class="header-section-number">7.2.2</span> rds</a></li>
-<li><a class="nav-link" href="#data-containers-yaml"><span class="header-section-number">7.2.3</span> yaml, json, and xml</a></li>
-<li><a class="nav-link" href="#data-containers-arrow"><span class="header-section-number">7.2.4</span> Arrow</a></li>
-<li><a class="nav-link" href="#data-containers-sqlite"><span class="header-section-number">7.2.5</span> SQLite</a></li>
-<li><a class="nav-link" href="#data-containers-database"><span class="header-section-number">7.2.6</span> Central Enterprise database</a></li>
-<li><a class="nav-link" href="#data-containers-redcap"><span class="header-section-number">7.2.7</span> Central REDCap database</a></li>
-<li><a class="nav-link" href="#data-containers-avoid"><span class="header-section-number">7.2.8</span> Containers to avoid</a></li>
+<li><a class="nav-link" href="#rest-containers-csv"><span class="header-section-number">7.2.1</span> csv</a></li>
+<li><a class="nav-link" href="#rest-containers-rds"><span class="header-section-number">7.2.2</span> rds</a></li>
+<li><a class="nav-link" href="#rest-containers-yaml"><span class="header-section-number">7.2.3</span> yaml, json, and xml</a></li>
+<li><a class="nav-link" href="#rest-containers-arrow"><span class="header-section-number">7.2.4</span> Arrow</a></li>
+<li><a class="nav-link" href="#rest-containers-sqlite"><span class="header-section-number">7.2.5</span> SQLite</a></li>
+<li><a class="nav-link" href="#rest-containers-database"><span class="header-section-number">7.2.6</span> Central Enterprise database</a></li>
+<li><a class="nav-link" href="#rest-containers-redcap"><span class="header-section-number">7.2.7</span> Central REDCap database</a></li>
+<li><a class="nav-link" href="#rest-containers-avoid"><span class="header-section-number">7.2.8</span> Containers to avoid</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#data-conventions"><span class="header-section-number">7.3</span> Storage Conventions</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-conventions-all"><span class="header-section-number">7.3.1</span> All Sources</a></li>
-<li><a class="nav-link" href="#data-conventions-text"><span class="header-section-number">7.3.2</span> Text</a></li>
-<li><a class="nav-link" href="#data-conventions-excel"><span class="header-section-number">7.3.3</span> Excel</a></li>
-<li><a class="nav-link" href="#data-conventions-meditech"><span class="header-section-number">7.3.4</span> Meditech</a></li>
-<li><a class="nav-link" href="#data-conventions-database"><span class="header-section-number">7.3.5</span> Databases</a></li>
+<li><a class="nav-link" href="#rest-conventions-all"><span class="header-section-number">7.3.1</span> All Sources</a></li>
+<li><a class="nav-link" href="#rest-conventions-text"><span class="header-section-number">7.3.2</span> Text</a></li>
+<li><a class="nav-link" href="#rest-conventions-excel"><span class="header-section-number">7.3.3</span> Excel</a></li>
+<li><a class="nav-link" href="#rest-conventions-meditech"><span class="header-section-number">7.3.4</span> Meditech</a></li>
+<li><a class="nav-link" href="#rest-conventions-database"><span class="header-section-number">7.3.5</span> Databases</a></li>
 </ul>
 </li>
 </ul>
@@ -313,7 +337,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-08-01.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-08-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 21 Growing a Team | Collaborative Data Science Practices</title>
+<title>B Regular Expressions | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
-<meta name="description" content="21.1 Recruiting   21.2 Training to Data Science Starting with a Researcher Starting with a Statistician Starting with a DBA Starting with a Software Developer  21.3 Bridges Outside the Team...">
+<meta name="description" content="A “regular expression” (commonly called a “regex”) allows a programmer to leverage a pattern that identifies (and possibly extracts) nuggets of information buried within text fields that are...">
 <meta name="generator" content="bookdown 0.28 with bs4_book()">
-<meta property="og:title" content="Chapter 21 Growing a Team | Collaborative Data Science Practices">
+<meta property="og:title" content="B Regular Expressions | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
-<meta property="og:description" content="21.1 Recruiting   21.2 Training to Data Science Starting with a Researcher Starting with a Statistician Starting with a DBA Starting with a Software Developer  21.3 Bridges Outside the Team...">
+<meta property="og:description" content="A “regular expression” (commonly called a “regex”) allows a programmer to leverage a pattern that identifies (and possibly extracts) nuggets of information buried within text fields that are...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 21 Growing a Team | Collaborative Data Science Practices">
-<meta name="twitter:description" content="21.1 Recruiting   21.2 Training to Data Science Starting with a Researcher Starting with a Statistician Starting with a DBA Starting with a Software Developer  21.3 Bridges Outside the Team...">
+<meta name="twitter:title" content="B Regular Expressions | Collaborative Data Science Practices">
+<meta name="twitter:description" content="A “regular expression” (commonly called a “regex”) allows a programmer to leverage a pattern that identifies (and possibly extracts) nuggets of information buried within text fields that are...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -85,13 +85,13 @@
 <li><a class="" href="troubleshooting.html"><span class="header-section-number">18</span> Troubleshooting and Debugging</a></li>
 <li><a class="" href="workstation.html"><span class="header-section-number">19</span> Workstation</a></li>
 <li><a class="" href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></li>
-<li><a class="active" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
+<li><a class="" href="team.html"><span class="header-section-number">21</span> Growing a Team</a></li>
 <li><a class="" href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></li>
 <li><a class="" href="redcap-developer.html"><span class="header-section-number">23</span> Material for REDCap Developers</a></li>
 <li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
-<li><a class="" href="regex.html"><span class="header-section-number">B</span> Regular Expressions</a></li>
+<li><a class="active" href="regex.html"><span class="header-section-number">B</span> Regular Expressions</a></li>
 <li><a class="" href="snippets.html"><span class="header-section-number">C</span> Snippets</a></li>
 <li><a class="" href="presentations.html"><span class="header-section-number">D</span> Presentations</a></li>
 <li><a class="" href="scratch-pad.html"><span class="header-section-number">E</span> Scratch Pad of Loose Ideas</a></li>
@@ -106,52 +106,39 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="team" class="section level1" number="21">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regex" class="section level1" number="26">
 <h1>
-<span class="header-section-number">21</span> Growing a Team<a class="anchor" aria-label="anchor" href="#team"><i class="fas fa-link"></i></a>
+<span class="header-section-number">B</span> Regular Expressions<a class="anchor" aria-label="anchor" href="#regex"><i class="fas fa-link"></i></a>
 </h1>
-<div id="recruiting" class="section level2" number="21.1">
-<h2>
-<span class="header-section-number">21.1</span> Recruiting<a class="anchor" aria-label="anchor" href="#recruiting"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="training-to-data-science" class="section level2" number="21.2">
-<h2>
-<span class="header-section-number">21.2</span> Training to Data Science<a class="anchor" aria-label="anchor" href="#training-to-data-science"><i class="fas fa-link"></i></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li>Starting with a Researcher</li>
-<li>Starting with a Statistician</li>
-<li>Starting with a DBA</li>
-<li>Starting with a Software Developer</li>
-</ol>
-</div>
-<div id="bridges-outside-the-team" class="section level2" number="21.3">
-<h2>
-<span class="header-section-number">21.3</span> Bridges Outside the Team<a class="anchor" aria-label="anchor" href="#bridges-outside-the-team"><i class="fas fa-link"></i></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li>Monthly User Groups</li>
-<li>Annual Conferences</li>
-</ol>
-</div>
+<p>A “regular expression” (commonly called a “regex”) allows a programmer to leverage a pattern that identifies (and possibly extracts) nuggets of information buried within text fields that are otherwise unparsable. You can’t be too comfortable with regexes while data sciencing. As you learn new regex capabilities, you’ll see more opportunities to extract information with more efficiency and more integrity.</p>
+<p>Regexes may be confusing at first (and they may always remain a little confusing) but the following resources will help you become proficient.</p>
+<p>Tools:</p>
+<ul>
+<li>
+<p><a href="http://regex101.com" class="uri">http://regex101.com</a> is a easy tool for developing and testing regex patterns and replacements. Cool features include (a) a panel with a thorough explanation of every characteristic of the regex and (b) the ability to save your regex and publicly share with collaborators. It supports different flavors –the latest PCRE version corresponds with R’s regex engine.</p>
+<p>When transferring the regex from the website to R, don’t forget to “backslash the backslashes”. In other words, if the regex pattern is <code>\d{3}</code> (which matches three consecutive digits), declare the R variable as <code>pattern &lt;- "\\d{3}"</code>.</p>
+</li>
+</ul>
+<p>Books:</p>
+<ul>
+<li>TODO: list the two O’Reilly books</li>
+</ul>
+<p>Presentations:</p>
+<ul>
+<li>SCUG</li>
+</ul>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="tools.html"><span class="header-section-number">20</span> Considerations when Selecting Tools</a></div>
-<div class="next"><a href="redcap-user.html"><span class="header-section-number">22</span> Material for REDCap Users</a></div>
+<div class="prev"><a href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></div>
+<div class="next"><a href="snippets.html"><span class="header-section-number">C</span> Snippets</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#team"><span class="header-section-number">21</span> Growing a Team</a></li>
-<li><a class="nav-link" href="#recruiting"><span class="header-section-number">21.1</span> Recruiting</a></li>
-<li><a class="nav-link" href="#training-to-data-science"><span class="header-section-number">21.2</span> Training to Data Science</a></li>
-<li><a class="nav-link" href="#bridges-outside-the-team"><span class="header-section-number">21.3</span> Bridges Outside the Team</a></li>
-</ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#regex"><span class="header-section-number">B</span> Regular Expressions</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-team.md">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-team.md">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/OuhscBbmc/data-science-practices-1/blob/main/ch-regex.md">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/OuhscBbmc/data-science-practices-1/edit/main/ch-regex.md">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

@@ -29,9 +29,9 @@ To incorporate outside data source into your system safely.
 
 ### Examples
 
-* <https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/te-ellis.R>
-* <https://github.com/wibeasley/RAnalysisSkeleton/blob/master/manipulation/>
-* <https://github.com/OuhscBbmc/usnavy-billets/blob/master/manipulation/survey-ellis.R>
+* <https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation/te-ellis.R>
+* <https://github.com/wibeasley/RAnalysisSkeleton/blob/main/manipulation/>
+* <https://github.com/OuhscBbmc/usnavy-billets/blob/main/manipulation/survey-ellis.R>
 
 ### Elements
 

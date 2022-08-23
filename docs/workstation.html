@@ -7,7 +7,7 @@
 <title>Chapter 19 Workstation | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="We believe it is important to keep software updated and consistent across workstations in your project. This material was originally posted at...">
-<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Chapter 19 Workstation | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="We believe it is important to keep software updated and consistent across workstations in your project. This material was originally posted at...">
@@ -91,13 +91,14 @@
 <li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
-<li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
-<li><a class="" href="presentations.html"><span class="header-section-number">C</span> Presentations</a></li>
-<li><a class="" href="scratch-pad.html"><span class="header-section-number">D</span> Scratch Pad of Loose Ideas</a></li>
-<li><a class="" href="example-dashboard.html"><span class="header-section-number">E</span> Example Dashboard</a></li>
-<li><a class="" href="example-chapter.html"><span class="header-section-number">F</span> Example Chapter</a></li>
-<li><a class="" href="acknowledgements.html"><span class="header-section-number">G</span> Acknowledgements</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">H</span> References</a></li>
+<li><a class="" href="regex.html"><span class="header-section-number">B</span> Regular Expressions</a></li>
+<li><a class="" href="snippets.html"><span class="header-section-number">C</span> Snippets</a></li>
+<li><a class="" href="presentations.html"><span class="header-section-number">D</span> Presentations</a></li>
+<li><a class="" href="scratch-pad.html"><span class="header-section-number">E</span> Scratch Pad of Loose Ideas</a></li>
+<li><a class="" href="example-dashboard.html"><span class="header-section-number">F</span> Example Dashboard</a></li>
+<li><a class="" href="example-chapter.html"><span class="header-section-number">G</span> Example Chapter</a></li>
+<li><a class="" href="acknowledgements.html"><span class="header-section-number">H</span> Acknowledgements</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">I</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -109,7 +110,7 @@
 <h1>
 <span class="header-section-number">19</span> Workstation<a class="anchor" aria-label="anchor" href="#workstation"><i class="fas fa-link"></i></a>
 </h1>
-<p>We believe it is important to keep software updated and consistent across workstations in your project. This material was originally posted at <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md</a>. It should help establish our tools on a new development computer.</p>
+<p>We believe it is important to keep software updated and consistent across workstations in your project. This material was originally posted at <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/DocumentationGlobal/ResourcesInstallation.md" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/DocumentationGlobal/ResourcesInstallation.md</a>. It should help establish our tools on a new development computer.</p>
 <div id="workstation-required" class="section level2" number="19.1">
 <h2>
 <span class="header-section-number">19.1</span> Required Installation<a class="anchor" aria-label="anchor" href="#workstation-required"><i class="fas fa-link"></i></a>
@@ -138,22 +139,22 @@ ix problems, but this is not required to start.)</p>
 <h3>
 <span class="header-section-number">19.1.4</span> Installing R Packages<a class="anchor" aria-label="anchor" href="#workstation-r-package-installation"><i class="fas fa-link"></i></a>
 </h3>
-<p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
-<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;As an alternative to the Gist, run the local R script &lt;a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R"&gt;&lt;code&gt;install-packages.R&lt;/code&gt;&lt;/a&gt; (located in that repository’s &lt;code&gt;utility/&lt;/code&gt; directory). The workhorse of this function is &lt;a href="https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R"&gt;&lt;code&gt;OuhscMunge::package_janitor()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>11</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv">package-dependency-list.csv</a> and <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list-more.csv">package-dependency-list-more.csv</a>.</p>
+<p>Dozens of R Packages will need to be installed. Choose between one of the two related scripts. It will install <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv">from our list of packages that our data analysts typically need</a>. The script installs a package only if it’s not already installed; also an existing package is updated if a newer version is available. Create a new ‘personal library’ if it prompts you. It takes at least fifteen minutes, so start it before you go to lunch. The list of packages will evolve over time, so please help keep the list updated.</p>
+<p>To install our frequently-used packages, run the following snippet. The first lines installs an important package. The second line calls the online <a href="https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3">Gist</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;As an alternative to the Gist, run the local R script &lt;a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/install-packages.R"&gt;&lt;code&gt;install-packages.R&lt;/code&gt;&lt;/a&gt; (located in that repository’s &lt;code&gt;utility/&lt;/code&gt; directory). The workhorse of this function is &lt;a href="https://github.com/OuhscBbmc/OuhscMunge/blob/main/R/package-janitor.R"&gt;&lt;code&gt;OuhscMunge::package_janitor()&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>11</sup></a>, which defines the <code>package_janitor_remote()</code> function. This function then installs the packages listed in the two CSVs, <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv">package-dependency-list.csv</a> and <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list-more.csv">package-dependency-list-more.csv</a>.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">source_gist</span><span class="op">(</span><span class="st">"2c5e7459b88ec28b9e8fa0c695b15ee3"</span>, filename<span class="op">=</span><span class="st">"package-janitor-bbmc.R"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Important packages required by most BBMC projects</span></span>
 <span><span class="fu">package_janitor_remote</span><span class="op">(</span></span>
-<span>  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"</span></span>
+<span>  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list.csv"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Nonessential packages used in a few BBMC projects</span></span>
 <span><span class="fu">package_janitor_remote</span><span class="op">(</span></span>
-<span>  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list-more.csv"</span></span>
+<span>  <span class="st">"https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list-more.csv"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper <a href="http://r-pkgs.had.co.nz/description.html">DESCRIPTION</a> file. See <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION">RAnalysisSkeleton</a> for an example.</p>
+<p>Some of our projects require specialized packages that are not typically used. In these cases, we will develop the git repo as an R package that includes a proper <a href="http://r-pkgs.had.co.nz/description.html">DESCRIPTION</a> file. See <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/DESCRIPTION">RAnalysisSkeleton</a> for an example.</p>
 <p>When the project is opened in RStudio, <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html"><code>update_packages_addin()</code></a> in <a href="https://ouhscbbmc.github.io/OuhscMunge">OuhscMunge</a> will find the DESCRIPTION file and install the package dependencies.</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span> <span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>   <span class="op">)</span> <span class="op">)</span> <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
@@ -188,7 +189,7 @@ ix problems, but this is not required to start.)</p>
 <h3>
 <span class="header-section-number">19.2.1</span> ODBC Driver<a class="anchor" aria-label="anchor" href="#workstation-odbc"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server">ODBC Driver for SQL Server</a> is for connecting to the <a href="https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd">token server</a>, if your institution is using one. As of this writing, version 18 is the most recent driver version. See if a new one exists. {updated Feb 2022}</p>
+<p><a href="https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server">ODBC Driver for SQL Server</a> is for connecting to the <a href="https://github.com/OuhscBbmc/REDCapR/blob/main/vignettes/SecurityDatabase.Rmd">token server</a>, if your institution is using one. As of this writing, version 18 is the most recent driver version. See if a new one exists. {updated Feb 2022}</p>
 </div>
 <div id="workstation-notepadpp" class="section level3" number="19.2.2">
 <h3>
@@ -392,7 +393,7 @@ ix problems, but this is not required to start.)</p>
 <li>Text Editor | All Languages | General | Line Numbers: true</li>
 </ol>
 <p>A dark theme is unofficially supported in SSMS 18. If you have write privileges in the “Program Files” directory, <a href="https://blog.sqlauthority.com/2019/09/12/sql-server-management-studio-18-enable-dark-theme/">a quick modification</a> to a config file will reduce eye strain. This change also prevents your screen from flashing dark-to-light-to-dark, which broadcasts your wandering attention during a Zoom meeting.</p>
-<p>For more details, see <a href="https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md">setting-up-dev-machine.md</a> (in a private repo that’s restricted to BBMC members).</p>
+<p>For more details, see <a href="https://github.com/OuhscBbmc/bbmc-database-management/blob/main/maintenance/setting-up-server/setting-up-dev-machine.md">setting-up-dev-machine.md</a> (in a private repo that’s restricted to BBMC members).</p>
 </div>
 <div id="workstation-winscp" class="section level3" number="19.5.4">
 <h3>
@@ -699,7 +700,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-08-01.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-08-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

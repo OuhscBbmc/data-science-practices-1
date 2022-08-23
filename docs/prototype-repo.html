@@ -7,7 +7,7 @@
 <title>Chapter 6 Prototypical Repository | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one...">
-<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Prototypical Repository | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one...">
@@ -91,13 +91,14 @@
 <li><a class="" href="redcap-admin.html"><span class="header-section-number">24</span> Material for REDCap Admins</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git.html"><span class="header-section-number">A</span> Git &amp; GitHub</a></li>
-<li><a class="" href="snippets.html"><span class="header-section-number">B</span> Snippets</a></li>
-<li><a class="" href="presentations.html"><span class="header-section-number">C</span> Presentations</a></li>
-<li><a class="" href="scratch-pad.html"><span class="header-section-number">D</span> Scratch Pad of Loose Ideas</a></li>
-<li><a class="" href="example-dashboard.html"><span class="header-section-number">E</span> Example Dashboard</a></li>
-<li><a class="" href="example-chapter.html"><span class="header-section-number">F</span> Example Chapter</a></li>
-<li><a class="" href="acknowledgements.html"><span class="header-section-number">G</span> Acknowledgements</a></li>
-<li><a class="" href="references.html"><span class="header-section-number">H</span> References</a></li>
+<li><a class="" href="regex.html"><span class="header-section-number">B</span> Regular Expressions</a></li>
+<li><a class="" href="snippets.html"><span class="header-section-number">C</span> Snippets</a></li>
+<li><a class="" href="presentations.html"><span class="header-section-number">D</span> Presentations</a></li>
+<li><a class="" href="scratch-pad.html"><span class="header-section-number">E</span> Scratch Pad of Loose Ideas</a></li>
+<li><a class="" href="example-dashboard.html"><span class="header-section-number">F</span> Example Dashboard</a></li>
+<li><a class="" href="example-chapter.html"><span class="header-section-number">G</span> Example Chapter</a></li>
+<li><a class="" href="acknowledgements.html"><span class="header-section-number">H</span> Acknowledgements</a></li>
+<li><a class="" href="references.html"><span class="header-section-number">I</span> References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -128,7 +129,7 @@
 <span class="header-section-number">6.1.1</span> <code>config.R</code><a class="anchor" aria-label="anchor" href="#repo-config"><i class="fas fa-link"></i></a>
 </h3>
 <p>The configuration file is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is well-suited when a value has to be coordinated across multiple files.</p>
-<p>Also see the discussion of how we use the config file for <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases">excluding bad data values</a> and of how the config file <a href="rest.html#data-containers-yaml">relates to yaml</a>, json, and xml.</p>
+<p>Also see the discussion of how we use the config file for <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases">excluding bad data values</a> and of how the config file <a href="rest.html#rest-containers-yaml">relates to yaml</a>, json, and xml.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb39-1"><a href="prototype-repo.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span></span>
 <span id="cb39-2"><a href="prototype-repo.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">  # To be processed by Ellis lanes</span></span>
 <span id="cb39-3"><a href="prototype-repo.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">"data-public/raw/subject-1.csv"</span></span>
@@ -190,7 +191,7 @@
 <h3>
 <span class="header-section-number">6.1.4</span> <code>*.Rproj</code><a class="anchor" aria-label="anchor" href="#repo-rproj"><i class="fas fa-link"></i></a>
 </h3>
-<p>The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled. The file’s major benefit is that it sets the R session’s working directory, which facilitates good discipline about setting a constant location for all files in the repo. Although the plain-text file can be edited directly, we recommend using RStudio’s dialog box. There is good documentation about Rproj settings. If you are unsure, copy <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/RAnalysisSkeleton.Rproj">this file</a> to the repo’s root directory and rename it to match the repo exactly.</p>
+<p>The Rproj file stores project-wide settings used by the RStudio IDE, such how trailing whitespaces are handled. The file’s major benefit is that it sets the R session’s working directory, which facilitates good discipline about setting a constant location for all files in the repo. Although the plain-text file can be edited directly, we recommend using RStudio’s dialog box. There is good documentation about Rproj settings. If you are unsure, copy <a href="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/RAnalysisSkeleton.Rproj">this file</a> to the repo’s root directory and rename it to match the repo exactly.</p>
 </div>
 </div>
 <div id="repo-manipulation" class="section level2" number="6.2">
@@ -216,7 +217,7 @@
 </h2>
 <p>This directory should contain information that is not sensitive and is not proprietary. It SHOULD NOT hold <a href="https://www.hhs.gov/answers/hipaa/what-is-phi/index.html">PHI</a> (Protected Health Information), or other information like participant names, social security numbers, or passwords. Files with PHI should <strong>not</strong> be stored in a GitHub repository, even a <a href="https://help.github.com/articles/publicizing-or-hiding-your-private-contributions-on-your-profile/">private GitHub repository</a>.</p>
 <p>Please see <a href="prototype-repo.html#repo-data-unshared"><code>data-unshared/</code></a> for options storing sensitive information.</p>
-<p>The <code>data-public/</code> directory typically works best if organized with subdirectories. We commonly use</p>
+<p>The <code>data-public/</code> directory typically works best if organized with subdirectories. We commonly use these subdirectories, which corresponds with the <a href="rest.html#rest">Data at Rest</a> chapter.</p>
 <div id="data-publicraw" class="section level3" number="6.4.1">
 <h3>
 <span class="header-section-number">6.4.1</span> <code>data-public/raw/</code><a class="anchor" aria-label="anchor" href="#data-publicraw"><i class="fas fa-link"></i></a>
@@ -246,7 +247,7 @@
 <span class="header-section-number">6.4.5</span> <code>data-public/original/</code><a class="anchor" aria-label="anchor" href="#data-publicoriginal"><i class="fas fa-link"></i></a>
 </h3>
 <p>…for nothing (hopefully); ideally it is never used. It is similar to <code>data-public/raw/</code>. The difference is that <code>data-public/raw/</code> is called by the pipeline code, while <code>data-public/original/</code> is not.</p>
-<p>A file in <code>data-public/original/</code>typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to <code>data-public/raw/</code>. Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.</p>
+<p>A file in <code>data-public/original/</code> typically comes from the investigator in a malformed state and requires some manual intervention; then it is copied to <code>data-public/raw/</code>. Common offenders are (a) a csv or Excel file with bad or missing column headers, (b) a strange file format that is not readable by an R package, (c) a corrupted file that require a rehabilitation utility.</p>
 </div>
 <div id="characteristics" class="section level3" number="6.4.6">
 <h3>
@@ -386,7 +387,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-08-01.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-08-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

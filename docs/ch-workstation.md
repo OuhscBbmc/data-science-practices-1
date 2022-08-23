@@ -1,7 +1,7 @@
 Workstation {#workstation}
 ====================================
 
-We believe it is important to keep software updated and consistent across workstations in your project.  This material was originally posted at https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/DocumentationGlobal/ResourcesInstallation.md.  It should help establish our tools on a new development computer.
+We believe it is important to keep software updated and consistent across workstations in your project.  This material was originally posted at https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/DocumentationGlobal/ResourcesInstallation.md.  It should help establish our tools on a new development computer.
 
 Required Installation {#workstation-required}
 ------------------------------------
@@ -23,9 +23,9 @@ ix problems, but this is not required to start.)
 
 ### Installing R Packages {#workstation-r-package-installation}
 
-Dozens of R Packages will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least fifteen minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated.
+Dozens of R Packages will need to be installed.  Choose between one of the two related scripts.  It will install [from our list of packages that our data analysts typically need](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv).  The script installs a package only if it's not already installed; also an existing package is updated if a newer version is available.  Create a new 'personal library' if it prompts you.  It takes at least fifteen minutes, so start it before you go to lunch.  The list of packages will evolve over time, so please help keep the list updated.
 
-To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/install-packages.R) (located in that repository's `utility/` directory). The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/master/R/package-janitor.R).], which defines the `package_janitor_remote()` function.  This function then installs the packages listed in the two CSVs, [package-dependency-list.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list.csv) and [package-dependency-list-more.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/master/utility/package-dependency-list-more.csv).
+To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/install-packages.R) (located in that repository's `utility/` directory). The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/main/R/package-janitor.R).], which defines the `package_janitor_remote()` function.  This function then installs the packages listed in the two CSVs, [package-dependency-list.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv) and [package-dependency-list-more.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list-more.csv).
 
 ```r
 if (!base::requireNamespace("devtools")) utils::install.packages("devtools")
@@ -33,16 +33,16 @@ devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-jani
 
 # Important packages required by most BBMC projects
 package_janitor_remote(
-  "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list.csv"
+  "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list.csv"
 )
 
 # Nonessential packages used in a few BBMC projects
 package_janitor_remote(
-  "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/master/utility/package-dependency-list-more.csv"
+  "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list-more.csv"
 )
 ```
 
-Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper [DESCRIPTION](http://r-pkgs.had.co.nz/description.html) file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/master/DESCRIPTION) for an example.
+Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper [DESCRIPTION](http://r-pkgs.had.co.nz/description.html) file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/DESCRIPTION) for an example.
 
 When the project is opened in RStudio, [`update_packages_addin()`](http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html) in [OuhscMunge](https://ouhscbbmc.github.io/OuhscMunge) will find the DESCRIPTION file and install the package dependencies.
 
@@ -71,7 +71,7 @@ The installation order does not matter.
 
 ### ODBC Driver {#workstation-odbc}
 
-[ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/master/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 18 is the most recent driver version.  See if a new one exists. {updated Feb 2022}
+[ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/main/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 18 is the most recent driver version.  See if a new one exists. {updated Feb 2022}
 
 ### Notepad++ {#workstation-notepadpp}
 
@@ -275,7 +275,7 @@ These don't affect the saved files, but make life easier.  The first makes the [
 
 A dark theme is unofficially supported in SSMS 18.  If you have write privileges in the "Program Files" directory, [a quick modification](https://blog.sqlauthority.com/2019/09/12/sql-server-management-studio-18-enable-dark-theme/) to a config file will reduce eye strain.  This change also prevents your screen from flashing dark-to-light-to-dark, which broadcasts your wandering attention during a Zoom meeting.
 
-For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/master/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
+For more details, see [setting-up-dev-machine.md](https://github.com/OuhscBbmc/bbmc-database-management/blob/main/maintenance/setting-up-server/setting-up-dev-machine.md) (in a private repo that's restricted to BBMC members).
 
 ### WinSCP {#workstation-winscp}
 

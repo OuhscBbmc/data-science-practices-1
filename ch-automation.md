@@ -12,7 +12,7 @@ This single file is a special cases of the [mediator pattern](https://en.wikiped
 
 ### Flow File in R {#automation-flow}
 
-{Describe https://github.com/wibeasley/RAnalysisSkeleton/blob/master/flow.R.}
+{Describe https://github.com/wibeasley/RAnalysisSkeleton/blob/main/flow.R.}
 
 See also the [prototypical repo](#repo-flow).
 
