@@ -16,7 +16,7 @@ Just like our CQI grant encourages an HV program to learn from its history and t
 Example {#example-dashboard-example}
 ------------------------------------
 
-A example dashboard that mimic the real CQI is available at [https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html).  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/master/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton#readme) repository'; this repo contains the code and documents the entire pipeline leading up to this dashboard.
+A example dashboard that mimic the real CQI is available at [https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html](https://ouhscbbmc.github.io/data-science-practices-1/dashboard-1.html).  The dashboard source code is available in the [`analysis/dashboard-1`](https://github.com/wibeasley/RAnalysisSkeleton/tree/main/analysis/dashboard-1) directory of the [R Analysis Skeleton](https://github.com/wibeasley/RAnalysisSkeleton#readme) repository'; this repo contains the code and documents the entire pipeline leading up to this dashboard.
 
 We've had success developing and distributing dashboards as self-contained html files.  They are portable and don't have dependencies on local data files or remote databases, yet the JavaScript and CSS provide a modest amount of interactivity.  The dashboard's principal components are [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/), [plotly](https://plot.ly/r/), [ggplot2](https://ggplot2.tidyverse.org/), and [R Markdown](https://rmarkdown.rstudio.com/).
 
@@ -155,7 +155,7 @@ Architecture {#example-dashboard-architecture}
 The dashboard is only one piece of a large workflow. The design and construction of this workflow are discussed in this book, which are highlighted below.
 
 <a href="https://github.com/wibeasley/RAnalysisSkeleton#intra-individual-differences">
-    <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/master/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
+    <img src="https://github.com/wibeasley/RAnalysisSkeleton/blob/main/documentation/images/flow-skeleton.png?raw=true" style="width: 1000px;"/>.
 </a>
 
 ### Data from External System

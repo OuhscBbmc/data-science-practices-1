@@ -65,7 +65,7 @@ ds        <- readr::read_csv(raw_text, col_types=col_types)
   1. The call to [`vroom::vroom()`](https://vroom.r-lib.org/reference/vroom.html) passes `col_names = names(col_types)` explicitly.
   1. If the data file contains columns we don't need, we define them in `col_types` anyway; vroom needs to know the file structure if it's missing a header row.
 
-*Real Example*: [akande-medically-complex-1](https://github.com/OuhscBbmc/akande-medically-complex-1/tree/master/manipulation/ohca) (Accessible to only CDW members.)  Thesee files did not have a header of variable names; the first line of the file is the first data row.
+*Real Example*: [akande-medically-complex-1](https://github.com/OuhscBbmc/akande-medically-complex-1/tree/main/manipulation/ohca) (Accessible to only CDW members.)  Thesee files did not have a header of variable names; the first line of the file is the first data row.
 
 *Last Modified*: 2020-08-21 by Will
 
