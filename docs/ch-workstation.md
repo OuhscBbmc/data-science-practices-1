@@ -211,6 +211,29 @@ The installation order does not matter.
 
 * **[Standard Python](https://www.python.org/downloads/)**, while installing packages through pip3 in the terminal.  If the `pip3` command is unrecognized because it's missing from the OS [path](https://en.wikipedia.org/wiki/PATH_(variable)) variable, an alternative is `py -3 -mpip install paramiko`; this calls pip through the `py` command which is sometimes in the path variable after installation.
 
+  When using the Windows .msi installer, the recommended options are
+  
+  * Check "Add Python 3.10 to PATH"
+
+  * Check "Install launcher for all users (recommended)"
+  
+  * Click "Customize Installation"
+  
+  * Optional Features
+
+    * Check "Documentation"
+    * Check "pip"
+    * optional: Check "tcl/tk and IDLE"
+    * optional: Check "Python test suite"
+    * optional: "py launcher"
+    * "for all users (requires elevation)"
+
+  * Advanced Options
+
+    * Check "Install for all users" (This will set the install path to something like "C:\Program Files\Python310"
+    * Check "Add Python to enviornment variables"
+    * Check "Precompile standard library"
+
 * **Updating Packages** Python packages don't need to be updated as frequently as R packages, but it's still good to do it every few months.  Paste this single line into PowerShell on Windows.  ([Stack Overflow solution](https://stackoverflow.com/a/51022937/1082435) from [Sébastien Wieckowski](https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski))
 
     ```ps
