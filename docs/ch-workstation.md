@@ -223,25 +223,22 @@ The installation order does not matter.
 
     * Check "Documentation"
     * Check "pip"
-    * optional: Check "tcl/tk and IDLE"
-    * optional: Check "Python test suite"
-    * optional: "py launcher"
     * "for all users (requires elevation)"
 
   * Advanced Options
 
-    * Check "Install for all users" (This will set the install path to something like "C:\Program Files\Python310"
-    * Check "Add Python to enviornment variables"
+    * Check "Install for all users" (This will set the install path to something like `C:\Program Files\Python310`.)
+    * Check "Add Python to environment variables"
     * Check "Precompile standard library"
 
   * After the msi completes:
   
-    * Add an entry like "C:/Users/yourname/AppData/Romain/Python/Python310" to the [System Variables](https://www.computerhope.com/issues/ch000549.htm) for the scripts in your personal `AppData` directory (even if you clicked "Install for all users").  This helps RStudio/[reticulate](https://CRAN.R-project.org/package=reticulate) run python scripts.
+    * Add an entry like `C:\Users\USERNAME\AppData\Roaming\Python\Python310` or `C:\Users\USERNAME\AppData\Local\Programs\Python\Python310` to the [System Variables](https://www.computerhope.com/issues/ch000549.htm) for the scripts in your personal `AppData` directory (even if you clicked "Install for all users").  This helps RStudio/[reticulate](https://CRAN.R-project.org/package=reticulate) run python scripts.
 
     * Install Python packages from PowerShell or the command line (not from Python)
     
       ```ps
-      pip3 install biopython matplotlib numpy pandas paramiko pyarrow pyodbc pyyaml scikit-learn scipy sqlalchemy strictyaml
+      py -3 -mpip install biopython matplotlib numpy pandas paramiko pyarrow pyodbc pyyaml scikit-learn scipy sqlalchemy strictyaml
       ```
 
 * **Updating Packages** Python packages don't need to be updated as frequently as R packages, but it's still good to do it every few months.  Paste this single line into PowerShell on Windows.  ([Stack Overflow solution](https://stackoverflow.com/a/51022937/1082435) from [Sébastien Wieckowski](https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski))

@@ -336,27 +336,24 @@ ix problems, but this is not required to start.)</p>
 <ul>
 <li>Check “Documentation”</li>
 <li>Check “pip”</li>
-<li>optional: Check “tcl/tk and IDLE”</li>
-<li>optional: Check “Python test suite”</li>
-<li>optional: “py launcher”</li>
 <li>“for all users (requires elevation)”</li>
 </ul>
 </li>
 <li>
 <p>Advanced Options</p>
 <ul>
-<li>Check “Install for all users” (This will set the install path to something like “C:Files”</li>
-<li>Check “Add Python to enviornment variables”</li>
+<li>Check “Install for all users” (This will set the install path to something like <code>C:\Program Files\Python310</code>.)</li>
+<li>Check “Add Python to environment variables”</li>
 <li>Check “Precompile standard library”</li>
 </ul>
 </li>
 <li>
 <p>After the msi completes:</p>
 <ul>
-<li><p>Add an entry like “C:/Users/yourname/AppData/Romain/Python/Python310” to the <a href="https://www.computerhope.com/issues/ch000549.htm">System Variables</a> for the scripts in your personal <code>AppData</code> directory (even if you clicked “Install for all users”). This helps RStudio/<a href="https://CRAN.R-project.org/package=reticulate">reticulate</a> run python scripts.</p></li>
+<li><p>Add an entry like <code>C:\Users\USERNAME\AppData\Roaming\Python\Python310</code> or <code>C:\Users\USERNAME\AppData\Local\Programs\Python\Python310</code> to the <a href="https://www.computerhope.com/issues/ch000549.htm">System Variables</a> for the scripts in your personal <code>AppData</code> directory (even if you clicked “Install for all users”). This helps RStudio/<a href="https://CRAN.R-project.org/package=reticulate">reticulate</a> run python scripts.</p></li>
 <li>
 <p>Install Python packages from PowerShell or the command line (not from Python)</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb77-1"><a href="workstation.html#cb77-1" aria-hidden="true" tabindex="-1"></a>pip3 install biopython matplotlib numpy pandas paramiko pyarrow pyodbc pyyaml scikit-learn scipy sqlalchemy strictyaml</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb77-1"><a href="workstation.html#cb77-1" aria-hidden="true" tabindex="-1"></a>py -<span class="dv">3</span> -mpip install biopython matplotlib numpy pandas paramiko pyarrow pyodbc pyyaml scikit-learn scipy sqlalchemy strictyaml</span></code></pre></div>
 </li>
 </ul>
 </li>
@@ -737,7 +734,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-09-13.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-09-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
