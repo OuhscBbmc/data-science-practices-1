@@ -277,9 +277,9 @@ Again, file and folder names should contain only (a) lowercase letters, (b) digi
 
 ### Datasets {#style-naming-datasets}
 
-[`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html)s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  Naming datasets follows the style of [naming variables](#style-naming-variables), with a few additional features.
+[`tibble`](https://tibble.tidyverse.org/index.html)s (which are fancy [`data.frame`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html)s) are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent.  Naming datasets follows the style of [naming variables](#style-naming-variables), with a few additional features.
 
-In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent of a conventional table.  Note that "dataset" means a collections of tables in the the [.NET](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/) world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).^[To complete the survey of "dataset" definitions: TThe Java world is like R, in that "dataset" typically describes rectangular tables (*e.g.*, [Java](https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html), [Spark](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html), [scala]).  In Julia and Python, qqq]
+In the R world, "dataset" is typically a synonym of `data.frame`  --a rectangular structure of rows and columns.  The database equivalent is a conventional table.  Note that "dataset" means a collections of tables in the the [.NET](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/) world, and a collection of (not-necessarily-rectangular) files in [Dataverse](https://dataverse.harvard.edu).^[To complete the survey of "dataset" definitions: TThe Java world is like R, in that "dataset" typically describes rectangular tables (*e.g.*, [Java](https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html), [Spark](https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html), [scala]).  In Julia and Python, qqq]
 
 #### Prefix with `ds_` and `d_` {#style-naming-datasets-prefix}
 
@@ -315,7 +315,7 @@ For more insight into grains, [Ralph Kimball writes](https://www.kimballgroup.co
 
 > In debugging literally thousands of dimensional designs from my students over the years, I have found that the most frequent design error by far is not declaring the grain of the fact table at the beginning of the design process. If the grain isn’t clearly defined, the whole design rests on quicksand. Discussions about candidate dimensions go around in circles, and rogue facts that introduce application errors sneak into the design.
 > ...
-> I hope you’ve noticed some powerful effects from declaring the grain. First, you can visualize the dimensionality of the doctor bill line item very precisely, and you can therefore confidently examine your data sources, deciding whether or not a dimension can be attached to this data. For example, you probably would exclude “treatment outcome” from this example because most medical billing data doesn’t tie to any notion of outcome.
+> I hope you’ve noticed some powerful effects from declaring the grain. First, you can visualize the dimensionality of the doctor bill line item very precisely, and you can therefore confidently examine your data sources, deciding whether or not a dimension can be attached to this data. For example, you probably would exclude "treatment outcome" from this example because most medical billing data doesn’t tie to any notion of outcome.
 
 #### Singular table names {#style-naming-datasets-singular}
 
@@ -331,13 +331,15 @@ I think it's acceptable if the R vectors follow a different style than R `data.f
 
 Many times an [ellis file](#pattern-ellis) handles with only one incoming csv and outgoing dataset, and the grain is obvious --typically because the ellis filename clearly states the grain.
 
+In this case, the R script can use just `ds` instead of `ds_county`.
+
 #### Use an adjective after the grain, if necessary {#style-naming-datasets-adjective}
 
 If the same R file is manipulating two datasets with the same grain, qualify their differences after the grain, such as `ds_client_all` and `ds_client_michigan`.  Adjectives commonly indicate that one dataset is a subset of another.
 
 An occasional limitation with our naming scheme is that the difficult to distinguish the grain from the adjective.  For instance, is the grain of `ds_student_enroll` either (a) every instance of a student enrollment (*i.e.*, `student` and `enroll` both describe the grain) or (b) the subset of students who enrolled (*i.e.*, `student` is the grain and `enroll` is the adjective)?  It's not clear without examine the code, comments, or documentation.
 
-If someone has a proposed solution, we would love to hear it.  So far, we've been reluctant to decorate the variable name more, such as `ds_grain_client_adj_enroll`.
+If someone has a solution, we would love to hear it.  So far, we've been reluctant to decorate the variable name more, such as `ds_grain_client_adj_enroll`.
 
 #### Define the dataset when in doubt {#style-naming-datasets-define}
 
@@ -367,14 +369,14 @@ Some of these guidelines are handled automatically by modern IDEs, if you config
 1. Remove spaces and tabs at the end of lines.
    * VS Code: see the [VS Code](#workstation-vscode) section of the Workstation chapter.
    * Azure Data Studio: See the [ADS](#workstation-ads) section of the Workstation chapter.
-   * RStudio: Gobal Options | Code | Saving | Strip trailing horizontal whitespace when saving.
+   * RStudio: Global Options | Code | Saving | Strip trailing horizontal whitespace when saving.
    * SSMS:
 
 
 Database {#style-database}
 ------------------------------------
 
-GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/) for databases and sql that's fairly consistent with our style.  Some important similarities and differences are
+GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/) for databases and sql that's fairly consistent with our style.  Some important additions and differences are
 
 1. Favor CTEs over subqueries because they're easier to follow and can be reused in the same file.   If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.
 
@@ -395,7 +397,7 @@ GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/bu
 Code Repositories {#style-repo}
 ------------------------------------
 
-Our analytical team dedicates a private repo to each research project.  It is a repository in GitHub accessible only to the team members given explicit privileges.  Repos are also discussed in the [Git & GitHub](#git) appendix.
+Our analytical team dedicates a private repo to each research project.  It is a repository in GitHub accessible only to the team members granted explicit privileges.  Repos are also discussed in the [Git & GitHub](#git) appendix.
 
 ### Repo Naming {#style-repo-naming}
 
@@ -469,9 +471,29 @@ ggplot2 is essentially a collection of functions combined with the `+` operator.
 1. `theme()`  (call the 'big' themes like `theme_minimal()` before overriding the details like `theme(panel.grid = element_line(color = "gray"))`)
 1. `labs()`
 
+This graph contains most typical ggplot2 elements.
+
+```r
+ggplot(ds, aes(x = group, y = lift_count, fill = group, color = group)) +
+  geom_bar(stat = "summary", fun.y = "mean", color = NA) +
+  geom_point(position = position_jitter(w = 0.4, h = 0), shape = 21) +
+  scale_color_manual(values = palette_pregnancy_dark) +
+  scale_fill_manual( values = palette_pregnancy_light) +
+  coord_flip() +
+  facet_wrap("time") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  theme(panel.grid.major.y = element_blank()) +
+  labs(
+    title = "Lifting by Group across Time"
+    x     = NULL, 
+    y     = "Number of Lifts"
+  )
+```
+
 ### Gotchas {#style-ggplot-gotchas}
 
-Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).
+Here are some common mistakes we see not-so-infrequently (even sometimes in our own ggplot2 code).
 
 #### Zooming {#style-ggplot-zoom}
 
@@ -479,4 +501,34 @@ Call `coord_*()` to restrict the plotted *x*/*y* values, not `scale_*()` or `lim
 
 #### Seed {#style-ggplot-seed}
 
-When jittering, set the seed in the 'declare-globals' chunk so that rerunning the report won't create a (slightly) different png.  The insignificantly different pngs will consume extra space in the Git repository.  Also, the GitHub diff will show the difference between png versions, which requires extra subjectivity and cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.
+When jittering, set a seed in the 'declare-globals' chunk so that rerunning the report won't create a (slightly) different png.  The insignificantly different pngs will consume extra space in the Git repository.  Also, the GitHub diff will show the difference between png versions, which requires extra subjectivity and cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.
+
+```r
+# ---- declare-globals ---------------------------------------------------------
+set.seed(seed = 789) # Set a seed so the jittered graphs are consistent across renders.
+```
+
+Occasionally you'll want multiple graphs in the same report to have a consistent jitter, so set the same seed prior to each `ggplot()` call.  In [Lise DeShea's 2015 book](https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/main/thumbnails/thumbnails.md), Figures 3-21, 3-22, and 3-23 needed to be as similar as possible so the inter-graph differences were easier to distinguish.  
+
+```r
+# ---- figure-03-21 ------------------------------------------------------
+set.seed(seed = 789)
+ggplot(ds, aes(x = group, y = t1_lifts, fill = group)) +
+...
+
+# ---- figure-03-22 ------------------------------------------------------
+set.seed(seed = 789)
+ggplot(ds, aes(x = group, y = t1_lifts, fill = group)) +
+...
+
+# ---- figure-03-23 ------------------------------------------------------
+set.seed(seed = 789)
+ggplot(ds, aes(x = group, y = t1_lifts, fill = group)) +
+...
+```
+
+<a><img border="0" alt="figure-03-21-1.png" src="https://raw.githubusercontent.com/OuhscBbmc/DeSheaToothakerIntroStats/main/chapter-03/figure-png/figure-03-21-1.png" width="600"></a> 
+
+<a><img border="0" alt="figure-03-22-1.png" src="https://raw.githubusercontent.com/OuhscBbmc/DeSheaToothakerIntroStats/main/chapter-03/figure-png/figure-03-22-1.png" width="600"></a> 
+ 
+<a><img border="0" alt="figure-03-23-1.png" src="https://raw.githubusercontent.com/OuhscBbmc/DeSheaToothakerIntroStats/main/chapter-03/figure-png/figure-03-23-1.png" width="600"></a>   
