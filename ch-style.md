@@ -198,9 +198,11 @@ education_cut3      = dplyr::recode_factor(
 Dates {#style-dates}
 ------------------------------------
 
-* yob is an integer, but mob and wob are dates.  Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of [`OuhscMunge::clump_month_date()`](http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html) and [`OuhscMunge::clump_week_date()`](http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html).  These help obfuscate the real value, if PHI is involved.  Months are centered because the midpoint is usually a better representation of the month's performance than the month's initial day.
+[Date arithmetic](https://r4ds.had.co.nz/dates-and-times.html) is hard.  Naming dates well might be harder.
 
 * `birth_month_index` can be values 1 through 12, while `birth_month` (or commonly `mob`) contains the year (*e.g.*, 2014-07-15).
+
+* `birth_year` is an integer, but `birth_month` and `birth_week` are dates.  Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of [`OuhscMunge::clump_month_date()`](http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html) and [`OuhscMunge::clump_week_date()`](http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html).  These obfuscate the real value when PHI is involved.  Months are centered because the midpoint is usually a better representation of the month's performance than the month's initial day.
 
 * Don't use the minus operator (*i.e.*, `-`).  See [Defensive Date Arithmetic](#coding-defensive-date-arithmetic).
 
@@ -217,7 +219,7 @@ Use lowercase letters, using underscores to separate words.  Avoid uppercase let
 
 ### Semantic Order {#style-naming-semantic}
 
-For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms.  The "bigger" term goes first; the "smaller" terms are nested in the bigger terms.
+For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms.  The "bigger" term goes first; the "smaller" terms are successively nested in the bigger terms.
 
 ```r
 # Good:
@@ -237,7 +239,7 @@ first_name_kid
 dob_kid
 ```
 
-Large datasets with multiple questionnaries (each with multiple subsections) are much more managable when the variables follow a semantic order.
+Large datasets with multiple questionnaires (each with multiple subsections) are much more manageable when the variables follow a semantic order.
 
 ```sql
 SELECT
@@ -265,13 +267,13 @@ I don't know where we picked up the term "semantic order".  It may have come fro
 
 ### Files and Folders {#style-naming-files}
 
-Naming filers and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  In other words, ["kebab case"](https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841).
+Naming files and their folders/directories follows the style of [naming variables](#style-naming-variables), with one small difference: separate words with dashes (*i.e.*, `-`), not underscores (*i.e.*, `_`).  In other words, ["kebab case"](https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841) instead of "snake case.
 
-Infrequently, we'll use a dash if it helps identify a noun (that already contains an underscore).  For instance, if there's a table called `patient_demographics`, we might call the files `patient_demographics-truncate.sql` and `patient_demographics-insert.sql`.
+Occasionally, we'll use a dash if it helps identify a noun (that already contains an underscore).  For instance, if there's a table called `patient_demographics`, we might call the files `patient_demographics-truncate.sql` and `patient_demographics-insert.sql`.
 
 Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive.  To promote portability, keep everything lowercase.
 
-Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash.  Do not include spaces, uppercase letters, and especially punctuation, such as `:` or `(`.
+Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occasional dash.  Do not include spaces, uppercase letters, and especially punctuation, such as `:` or `(`.
 
 ### Datasets {#style-naming-datasets}
 
