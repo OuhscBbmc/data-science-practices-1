@@ -153,9 +153,9 @@ style-number
 style-abbreviation
 style-datasets
 style-datasets-filter
-style-datasets-filter-drop_na
 style-datasets-filter-number-line
 style-datasets-filter-searchable
+style-datasets-filter-drop_na
 style-datasets-attach
 style-factor
 style-factor-unknown

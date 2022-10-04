@@ -172,40 +172,61 @@
 <h3>
 <span class="header-section-number">14.2.1</span> Filtering Rows<a class="anchor" aria-label="anchor" href="#style-datasets-filter"><i class="fas fa-link"></i></a>
 </h3>
-<p>Removing datasets rows is an important operation that is a frequent source of sneaky errors. These practices have hopefully reduced our mistakes and improved maintainability.</p>
-<div id="style-datasets-filter-drop_na" class="section level4" number="14.2.1.1">
+<p>Removing datasets rows is an important operation that is a frequent source of sneaky errors. These practices reduce our mistakes and improve maintainability.</p>
+<div id="style-datasets-filter-number-line" class="section level4" number="14.2.1.1">
 <h4>
-<span class="header-section-number">14.2.1.1</span> Dropping rows with missing values<a class="anchor" aria-label="anchor" href="#style-datasets-filter-drop_na"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2.1.1</span> Mimic number line<a class="anchor" aria-label="anchor" href="#style-datasets-filter-number-line"><i class="fas fa-link"></i></a>
 </h4>
-<p><a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> drops rows with a missing value in a specific column.</p>
+<p>When ordering quantities, go smallest-to-largest as you type left-to-right. At minimum be consistent with the direction. In other words, use operators like <code>&lt;</code> and <code>&lt;=</code> and avoid <code>&gt;</code> and <code>&gt;=</code>. This approach also makes it more consistent with the SQL and dplyr function, <a href="https://dplyr.tidyverse.org/reference/between.html"><code>between()</code></a>.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Good</span></span>
-<span><span class="va">ds</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></span></code></pre></div>
-<p>is cleaner to read and write than these two styles. In particular, it’s easy to forget/overlook a <code>!</code>.</p>
+<code class="sourceCode R"><span><span class="co"># Good (b/c quantities increase as you read left-to-right)</span></span>
+<span><span class="va">ds_teenager</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="fl">13</span> <span class="op">&lt;=</span> <span class="va">age</span> <span class="op">&amp;</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Not as good (b/c quantities increase as you read right-to-left)</span></span>
+<span><span class="va">ds_teenager</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="fl">20</span> <span class="op">&gt;</span> <span class="va">age</span> <span class="op">&amp;</span> <span class="va">age</span> <span class="op">&lt;=</span> <span class="fl">13</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Bad (b/c the order is inconsistent)</span></span>
+<span><span class="va">ds_teenager</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">13</span> <span class="op">&amp;</span> <span class="va">age</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">ds_teenager</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fl">20</span> <span class="op">&amp;</span> <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="style-datasets-filter-searchable" class="section level4" number="14.2.1.2">
+<h4>
+<span class="header-section-number">14.2.1.2</span> Searchable verbs<a class="anchor" aria-label="anchor" href="#style-datasets-filter-searchable"><i class="fas fa-link"></i></a>
+</h4>
+<p>You’ve occasionally asked in frustration, “Where did the dataset lose some rows? It had 900 rows in the middle of the script, but now has only 782.” You then scan through the script for any location that potentially removes rows. These locations are easier to identify when you’re scanning for only a small set of filtering functions such as
+<a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a>,
+<a href="https://dplyr.tidyverse.org/reference/filter.html"><code>dplyr::filter()</code></a>, and
+<a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>dplyr::summarize()</code></a>. You can even highlight them with ‘ctrl+f’. In contrast, the base R’s filtering style is more difficult to identify.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Worse</span></span>
+<code class="sourceCode R"><span><span class="co"># tidyverse's approach is easy to see in a long script</span></span>
+<span><span class="va">ds</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="fl">4</span> <span class="op">&lt;=</span> <span class="va">count</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="co"># base R's approach is harder to see</span></span>
+<span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span><span class="op">[</span><span class="fl">4</span> <span class="op">&lt;=</span> <span class="va">ds</span><span class="op">$</span><span class="va">count</span>, <span class="op">]</span></span></code></pre></div>
+</div>
+<div id="style-datasets-filter-drop_na" class="section level4" number="14.2.1.3">
+<h4>
+<span class="header-section-number">14.2.1.3</span> Remove rows with missing values<a class="anchor" aria-label="anchor" href="#style-datasets-filter-drop_na"><i class="fas fa-link"></i></a>
+</h4>
+<p>Even within <a href="https://www.tidyverse.org/">tidyverse</a> functions, there are preferences in certain scenarios. This entry covers the scenario of dropping an entire row if an important column is missing a value.</p>
+<p><a href="https://tidyr.tidyverse.org/reference/drop_na.html"><code>tidyr::drop_na()</code></a> removes rows with a missing value in a specific column. It is cleaner to read and write dplyr’s <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> and base R’s subsetting bracket. In particular, it’s easy to forget/overlook a <code>!</code>.</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Cleanest</span></span>
+<span><span class="va">ds</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dob</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Not as good</span></span>
 <span><span class="va">ds</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">dob</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Worst</span></span>
+<span><span class="co"># Ripest for mistakes or misinterpretation</span></span>
 <span><span class="va">ds</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ds</span><span class="op">$</span><span class="va">dob</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
-</div>
-<div id="style-datasets-filter-number-line" class="section level4" number="14.2.1.2">
-<h4>
-<span class="header-section-number">14.2.1.2</span> Mimic number line<a class="anchor" aria-label="anchor" href="#style-datasets-filter-number-line"><i class="fas fa-link"></i></a>
-</h4>
-<p>When ordering quantities, go smallest-to-largest as you type left-to-right.</p>
-</div>
-<div id="style-datasets-filter-searchable" class="section level4" number="14.2.1.3">
-<h4>
-<span class="header-section-number">14.2.1.3</span> Searchable verbs<a class="anchor" aria-label="anchor" href="#style-datasets-filter-searchable"><i class="fas fa-link"></i></a>
-</h4>
-<p>You’ve probably asked in frustration, “Where did all the rows go? I had 1,000 in the middle of the file, but now have only 782.” Try to keep a consistent tools for filtering, so you can ‘ctrl+f’ only a handful of terms, such as
-<code>filter</code>,
-<code>drop_na</code>, and
-<code>summarize/summarise</code>.</p>
-<p>It’s more difficult to highlight the When using the base R’s filtering style, (<em>e.g.</em>, <code>ds &lt;- ds[4 &lt;= ds$count, ]</code>).</p>
 </div>
 </div>
 <div id="style-datasets-attach" class="section level3" number="14.2.2">
@@ -213,6 +234,7 @@
 <span class="header-section-number">14.2.2</span> Don’t attach<a class="anchor" aria-label="anchor" href="#style-datasets-attach"><i class="fas fa-link"></i></a>
 </h3>
 <p>As the <a href="https://google.github.io/styleguide/Rguide.html#dont-use-attach">Google Stylesheet</a> says, “The possibilities for creating errors when using <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html"><code>attach()</code></a> are numerous.”</p>
+<p>Hopefully you’ve learned R recently enough that you haven’t read examples from the 1990s that used <code><a href="https://rdrr.io/r/base/attach.html">attach()</a></code>. It may have made sense in the early days of <a href="https://en.wikipedia.org/wiki/S-PLUS">S-PLUS</a> when the language was used primarily interactively by a single statistician. But the contemporary tradeoffs are unfavorable, now that R scripts are frequently run by multiple people and functions are run in multiple contexts.</p>
 </div>
 </div>
 <div id="style-factor" class="section level2" number="14.3">
@@ -224,58 +246,82 @@
 <h3>
 <span class="header-section-number">14.3.1</span> Explicit Missing Values<a class="anchor" aria-label="anchor" href="#style-factor-unknown"><i class="fas fa-link"></i></a>
 </h3>
-<p>Define a level like <code>"unknown"</code> so the data manipulation doesn’t have to test for both <code>is.na(x)</code> and <code>x=="unknown"</code>. The explicit labels also helps when included in a statistical procedure and coefficient table.</p>
+<p>Define a level like <code>"unknown"</code> so the data manipulation doesn’t have to test for both <code>is.na(x)</code> and <code>x == "unknown"</code>. The explicit label also helps when included in a statistical procedure and coefficient table.</p>
 </div>
 <div id="style-factor-granularity" class="section level3" number="14.3.2">
 <h3>
 <span class="header-section-number">14.3.2</span> Granularity<a class="anchor" aria-label="anchor" href="#style-factor-granularity"><i class="fas fa-link"></i></a>
 </h3>
-<p>Sometimes it helps to represent the values differently, say a granular and a coarse way. We say <code>cut7</code> or <code>cut3</code> to denotes the number of levels; this is related to <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a>. ‘unknown’ and ‘other’ are frequently levels, and they count toward the quantity.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="style.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
-<span id="cb63-2"><a href="style.html#cb63-2" aria-hidden="true" tabindex="-1"></a>education_cut7      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
-<span id="cb63-3"><a href="style.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
-<span id="cb63-4"><a href="style.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"No Highschool Degree / GED"</span>  <span class="ot">=</span> <span class="st">"no diploma"</span>,</span>
-<span id="cb63-5"><a href="style.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"High School Degree / GED"</span>    <span class="ot">=</span> <span class="st">"diploma"</span>,</span>
-<span id="cb63-6"><a href="style.html#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Some College"</span>                <span class="ot">=</span> <span class="st">"some college"</span>,</span>
-<span id="cb63-7"><a href="style.html#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Associate's Degree"</span>          <span class="ot">=</span> <span class="st">"associate"</span>,</span>
-<span id="cb63-8"><a href="style.html#cb63-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bachelor's Degree"</span>           <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb63-9"><a href="style.html#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Post-graduate degree"</span>        <span class="ot">=</span> <span class="st">"post-grad"</span>,</span>
-<span id="cb63-10"><a href="style.html#cb63-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unknown"</span>                     <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
-<span id="cb63-11"><a href="style.html#cb63-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">.missing                      =</span> <span class="st">"unknown"</span>,</span>
-<span id="cb63-12"><a href="style.html#cb63-12" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb63-13"><a href="style.html#cb63-13" aria-hidden="true" tabindex="-1"></a>education_cut3      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
-<span id="cb63-14"><a href="style.html#cb63-14" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
-<span id="cb63-15"><a href="style.html#cb63-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>    <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb63-16"><a href="style.html#cb63-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>       <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb63-17"><a href="style.html#cb63-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>  <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb63-18"><a href="style.html#cb63-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>     <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb63-19"><a href="style.html#cb63-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>      <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb63-20"><a href="style.html#cb63-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>     <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb63-21"><a href="style.html#cb63-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span>       <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
-<span id="cb63-22"><a href="style.html#cb63-22" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb63-23"><a href="style.html#cb63-23" aria-hidden="true" tabindex="-1"></a>education_cut7 <span class="ot">=</span> <span class="fu">factor</span>(education_cut7, <span class="at">levels=</span><span class="fu">c</span>(</span>
-<span id="cb63-24"><a href="style.html#cb63-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>,</span>
-<span id="cb63-25"><a href="style.html#cb63-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>,</span>
-<span id="cb63-26"><a href="style.html#cb63-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>,</span>
-<span id="cb63-27"><a href="style.html#cb63-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>,</span>
-<span id="cb63-28"><a href="style.html#cb63-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
-<span id="cb63-29"><a href="style.html#cb63-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>,</span>
-<span id="cb63-30"><a href="style.html#cb63-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
-<span id="cb63-31"><a href="style.html#cb63-31" aria-hidden="true" tabindex="-1"></a>)),</span>
-<span id="cb63-32"><a href="style.html#cb63-32" aria-hidden="true" tabindex="-1"></a>education_cut3 <span class="ot">=</span> <span class="fu">factor</span>(education_cut3, <span class="at">levels=</span><span class="fu">c</span>(</span>
-<span id="cb63-33"><a href="style.html#cb63-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no bachelor"</span>,</span>
-<span id="cb63-34"><a href="style.html#cb63-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
-<span id="cb63-35"><a href="style.html#cb63-35" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
-<span id="cb63-36"><a href="style.html#cb63-36" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<p>Sometimes it helps to represent the values differently, say with a granular variable and a coarse variable. If two related variables have 7 and 3 levels respectively, we say <code>*_cut7</code> and <code>*_cut3</code> to denote the resolution; this is related to <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a>. Don’t forget to include “unknown” and “other” when necessary.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="style.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
+<span id="cb64-2"><a href="style.html#cb64-2" aria-hidden="true" tabindex="-1"></a>education_cut7      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
+<span id="cb64-3"><a href="style.html#cb64-3" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb64-4"><a href="style.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"No Highschool Degree / GED"</span>  <span class="ot">=</span> <span class="st">"no diploma"</span>,</span>
+<span id="cb64-5"><a href="style.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"High School Degree / GED"</span>    <span class="ot">=</span> <span class="st">"diploma"</span>,</span>
+<span id="cb64-6"><a href="style.html#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Some College"</span>                <span class="ot">=</span> <span class="st">"some college"</span>,</span>
+<span id="cb64-7"><a href="style.html#cb64-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Associate's Degree"</span>          <span class="ot">=</span> <span class="st">"associate"</span>,</span>
+<span id="cb64-8"><a href="style.html#cb64-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bachelor's Degree"</span>           <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb64-9"><a href="style.html#cb64-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Post-graduate degree"</span>        <span class="ot">=</span> <span class="st">"post-grad"</span>,</span>
+<span id="cb64-10"><a href="style.html#cb64-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unknown"</span>                     <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb64-11"><a href="style.html#cb64-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">.missing                      =</span> <span class="st">"unknown"</span>,</span>
+<span id="cb64-12"><a href="style.html#cb64-12" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb64-13"><a href="style.html#cb64-13" aria-hidden="true" tabindex="-1"></a>education_cut3      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
+<span id="cb64-14"><a href="style.html#cb64-14" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb64-15"><a href="style.html#cb64-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>    <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-16"><a href="style.html#cb64-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>       <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-17"><a href="style.html#cb64-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>  <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-18"><a href="style.html#cb64-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>     <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-19"><a href="style.html#cb64-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>      <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb64-20"><a href="style.html#cb64-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>     <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb64-21"><a href="style.html#cb64-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span>       <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb64-22"><a href="style.html#cb64-22" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb64-23"><a href="style.html#cb64-23" aria-hidden="true" tabindex="-1"></a>education_cut7 <span class="ot">=</span> <span class="fu">factor</span>(education_cut7, <span class="at">levels=</span><span class="fu">c</span>(</span>
+<span id="cb64-24"><a href="style.html#cb64-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>,</span>
+<span id="cb64-25"><a href="style.html#cb64-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>,</span>
+<span id="cb64-26"><a href="style.html#cb64-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>,</span>
+<span id="cb64-27"><a href="style.html#cb64-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>,</span>
+<span id="cb64-28"><a href="style.html#cb64-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
+<span id="cb64-29"><a href="style.html#cb64-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>,</span>
+<span id="cb64-30"><a href="style.html#cb64-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
+<span id="cb64-31"><a href="style.html#cb64-31" aria-hidden="true" tabindex="-1"></a>)),</span>
+<span id="cb64-32"><a href="style.html#cb64-32" aria-hidden="true" tabindex="-1"></a>education_cut3 <span class="ot">=</span> <span class="fu">factor</span>(education_cut3, <span class="at">levels=</span><span class="fu">c</span>(</span>
+<span id="cb64-33"><a href="style.html#cb64-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-34"><a href="style.html#cb64-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
+<span id="cb64-35"><a href="style.html#cb64-35" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
+<span id="cb64-36"><a href="style.html#cb64-36" aria-hidden="true" tabindex="-1"></a>)),</span></code></pre></div>
+<p>The <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode_factor()</code></a> is an ideal replacement in the scenario above, because a single call combines the work of <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode()</code></a> and <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html"><code>base::factor()</code></a>. Just make sure the recoding order represents the desired order of the factor levels.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="style.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
+<span id="cb65-2"><a href="style.html#cb65-2" aria-hidden="true" tabindex="-1"></a>education_cut7      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(</span>
+<span id="cb65-3"><a href="style.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb65-4"><a href="style.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"No Highschool Degree / GED"</span>  <span class="ot">=</span> <span class="st">"no diploma"</span>,</span>
+<span id="cb65-5"><a href="style.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"High School Degree / GED"</span>    <span class="ot">=</span> <span class="st">"diploma"</span>,</span>
+<span id="cb65-6"><a href="style.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Some College"</span>                <span class="ot">=</span> <span class="st">"some college"</span>,</span>
+<span id="cb65-7"><a href="style.html#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Associate's Degree"</span>          <span class="ot">=</span> <span class="st">"associate"</span>,</span>
+<span id="cb65-8"><a href="style.html#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bachelor's Degree"</span>           <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb65-9"><a href="style.html#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Post-graduate degree"</span>        <span class="ot">=</span> <span class="st">"post-grad"</span>,</span>
+<span id="cb65-10"><a href="style.html#cb65-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unknown"</span>                     <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb65-11"><a href="style.html#cb65-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">.missing                      =</span> <span class="st">"unknown"</span>,</span>
+<span id="cb65-12"><a href="style.html#cb65-12" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb65-13"><a href="style.html#cb65-13" aria-hidden="true" tabindex="-1"></a>education_cut3      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(</span>
+<span id="cb65-14"><a href="style.html#cb65-14" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb65-15"><a href="style.html#cb65-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>    <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-16"><a href="style.html#cb65-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>       <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-17"><a href="style.html#cb65-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>  <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-18"><a href="style.html#cb65-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>     <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-19"><a href="style.html#cb65-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>      <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb65-20"><a href="style.html#cb65-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>     <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb65-21"><a href="style.html#cb65-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span>       <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb65-22"><a href="style.html#cb65-22" aria-hidden="true" tabindex="-1"></a>),</span></code></pre></div>
 </div>
 </div>
 <div id="style-dates" class="section level2" number="14.4">
 <h2>
 <span class="header-section-number">14.4</span> Dates<a class="anchor" aria-label="anchor" href="#style-dates"><i class="fas fa-link"></i></a>
 </h2>
+<p><a href="https://r4ds.had.co.nz/dates-and-times.html">Date arithmetic</a> is hard. Naming dates well might be harder.</p>
 <ul>
-<li><p>yob is an integer, but mob and wob are dates. Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html"><code>OuhscMunge::clump_month_date()</code></a> and <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html"><code>OuhscMunge::clump_week_date()</code></a>. These help obfuscate the real value, if PHI is involved. Months are centered because the midpoint is usually a better representation of the month’s performance than the month’s initial day.</p></li>
 <li><p><code>birth_month_index</code> can be values 1 through 12, while <code>birth_month</code> (or commonly <code>mob</code>) contains the year (<em>e.g.</em>, 2014-07-15).</p></li>
+<li><p><code>birth_year</code> is an integer, but <code>birth_month</code> and <code>birth_week</code> are dates. Typically months are collapsed to the 15th day and weeks are collapsed to Monday, which are the defaults of <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html"><code>OuhscMunge::clump_month_date()</code></a> and <a href="http://ouhscbbmc.github.io/OuhscMunge/reference/clump_date.html"><code>OuhscMunge::clump_week_date()</code></a>. These obfuscate the real value when PHI is involved. Months are centered because the midpoint is usually a better representation of the month’s performance than the month’s initial day.</p></li>
 <li><p>Don’t use the minus operator (<em>i.e.</em>, <code>-</code>). See <a href="coding.html#coding-defensive-date-arithmetic">Defensive Date Arithmetic</a>.</p></li>
 </ul>
 </div>
@@ -299,8 +345,8 @@
 <h3>
 <span class="header-section-number">14.5.2</span> Semantic Order<a class="anchor" aria-label="anchor" href="#style-naming-semantic"><i class="fas fa-link"></i></a>
 </h3>
-<p>For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms. The “bigger” term goes first; the “smaller” terms are nested in the bigger terms.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<p>For variables including multiple nouns or adjectives, place the more global terms before the more microscopic terms. The “bigger” term goes first; the “smaller” terms are successively nested in the bigger terms.</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Good:</span></span>
 <span><span class="va">parent_name_last</span></span>
 <span><span class="va">parent_name_first</span></span>
@@ -316,49 +362,49 @@
 <span><span class="va">last_name_kid</span></span>
 <span><span class="va">first_name_kid</span></span>
 <span><span class="va">dob_kid</span></span></code></pre></div>
-<p>Large datasets with multiple questionnaries (each with multiple subsections) are much more managable when the variables follow a semantic order.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb65-1"><a href="style.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb65-2"><a href="style.html#cb65-2" aria-hidden="true" tabindex="-1"></a>  asq3_medical_problems_01</span>
-<span id="cb65-3"><a href="style.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  ,asq3_medical_problems_02</span>
-<span id="cb65-4"><a href="style.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  ,asq3_medical_problems_03</span>
-<span id="cb65-5"><a href="style.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_01</span>
-<span id="cb65-6"><a href="style.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_02</span>
-<span id="cb65-7"><a href="style.html#cb65-7" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_03</span>
-<span id="cb65-8"><a href="style.html#cb65-8" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_01</span>
-<span id="cb65-9"><a href="style.html#cb65-9" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_02</span>
-<span id="cb65-10"><a href="style.html#cb65-10" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_03</span>
-<span id="cb65-11"><a href="style.html#cb65-11" aria-hidden="true" tabindex="-1"></a>  ,wai_01_steps_beneficial</span>
-<span id="cb65-12"><a href="style.html#cb65-12" aria-hidden="true" tabindex="-1"></a>  ,wai_02_hv_useful</span>
-<span id="cb65-13"><a href="style.html#cb65-13" aria-hidden="true" tabindex="-1"></a>  ,wai_03_parent_likes_me</span>
-<span id="cb65-14"><a href="style.html#cb65-14" aria-hidden="true" tabindex="-1"></a>  ,wai_04_hv_doubts</span>
-<span id="cb65-15"><a href="style.html#cb65-15" aria-hidden="true" tabindex="-1"></a>  ,hri_01_client_input</span>
-<span id="cb65-16"><a href="style.html#cb65-16" aria-hidden="true" tabindex="-1"></a>  ,hri_02_problems_discussed</span>
-<span id="cb65-17"><a href="style.html#cb65-17" aria-hidden="true" tabindex="-1"></a>  ,hri_03_addressing_problems_clarity</span>
-<span id="cb65-18"><a href="style.html#cb65-18" aria-hidden="true" tabindex="-1"></a>  ,hri_04_goals_discussed</span>
-<span id="cb65-19"><a href="style.html#cb65-19" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> miechv.gpav_3</span></code></pre></div>
+<p>Large datasets with multiple questionnaires (each with multiple subsections) are much more manageable when the variables follow a semantic order.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb67-1"><a href="style.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb67-2"><a href="style.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  asq3_medical_problems_01</span>
+<span id="cb67-3"><a href="style.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  ,asq3_medical_problems_02</span>
+<span id="cb67-4"><a href="style.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  ,asq3_medical_problems_03</span>
+<span id="cb67-5"><a href="style.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_01</span>
+<span id="cb67-6"><a href="style.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_02</span>
+<span id="cb67-7"><a href="style.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_03</span>
+<span id="cb67-8"><a href="style.html#cb67-8" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_01</span>
+<span id="cb67-9"><a href="style.html#cb67-9" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_02</span>
+<span id="cb67-10"><a href="style.html#cb67-10" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_03</span>
+<span id="cb67-11"><a href="style.html#cb67-11" aria-hidden="true" tabindex="-1"></a>  ,wai_01_steps_beneficial</span>
+<span id="cb67-12"><a href="style.html#cb67-12" aria-hidden="true" tabindex="-1"></a>  ,wai_02_hv_useful</span>
+<span id="cb67-13"><a href="style.html#cb67-13" aria-hidden="true" tabindex="-1"></a>  ,wai_03_parent_likes_me</span>
+<span id="cb67-14"><a href="style.html#cb67-14" aria-hidden="true" tabindex="-1"></a>  ,wai_04_hv_doubts</span>
+<span id="cb67-15"><a href="style.html#cb67-15" aria-hidden="true" tabindex="-1"></a>  ,hri_01_client_input</span>
+<span id="cb67-16"><a href="style.html#cb67-16" aria-hidden="true" tabindex="-1"></a>  ,hri_02_problems_discussed</span>
+<span id="cb67-17"><a href="style.html#cb67-17" aria-hidden="true" tabindex="-1"></a>  ,hri_03_addressing_problems_clarity</span>
+<span id="cb67-18"><a href="style.html#cb67-18" aria-hidden="true" tabindex="-1"></a>  ,hri_04_goals_discussed</span>
+<span id="cb67-19"><a href="style.html#cb67-19" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> miechv.gpav_3</span></code></pre></div>
 <p>I don’t know where we picked up the term “semantic order”. It may have come from <a href="https://www.geeksforgeeks.org/introduction-semantic-versioning/">Semantic Versioning</a> of software releases.</p>
 </div>
 <div id="style-naming-files" class="section level3" number="14.5.3">
 <h3>
 <span class="header-section-number">14.5.3</span> Files and Folders<a class="anchor" aria-label="anchor" href="#style-naming-files"><i class="fas fa-link"></i></a>
 </h3>
-<p>Naming filers and their folders/directories follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with one small difference: separate words with dashes (<em>i.e.</em>, <code>-</code>), not underscores (<em>i.e.</em>, <code>_</code>). In other words, <a href="https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841">“kebab case”</a>.</p>
-<p>Infrequently, we’ll use a dash if it helps identify a noun (that already contains an underscore). For instance, if there’s a table called <code>patient_demographics</code>, we might call the files <code>patient_demographics-truncate.sql</code> and <code>patient_demographics-insert.sql</code>.</p>
+<p>Naming files and their folders/directories follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with one small difference: separate words with dashes (<em>i.e.</em>, <code>-</code>), not underscores (<em>i.e.</em>, <code>_</code>). In other words, <a href="https://betterprogramming.pub/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841">“kebab case”</a> instead of “snake case.</p>
+<p>Occasionally, we’ll use a dash if it helps identify a noun (that already contains an underscore). For instance, if there’s a table called <code>patient_demographics</code>, we might call the files <code>patient_demographics-truncate.sql</code> and <code>patient_demographics-insert.sql</code>.</p>
 <p>Using lower case is important because some databases and operating systems are case-sensitive, and some are case-insensitive. To promote portability, keep everything lowercase.</p>
-<p>Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occassional dash. Do not include spaces, uppercase letters, and especially punctuation, such as <code>:</code> or <code>(</code>.</p>
+<p>Again, file and folder names should contain only (a) lowercase letters, (b) digits, (c) dashes, and (d) an occasional dash. Do not include spaces, uppercase letters, and especially punctuation, such as <code>:</code> or <code>(</code>.</p>
 </div>
 <div id="style-naming-datasets" class="section level3" number="14.5.4">
 <h3>
 <span class="header-section-number">14.5.4</span> Datasets<a class="anchor" aria-label="anchor" href="#style-naming-datasets"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>s are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. Naming datasets follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with a few additional features.</p>
-<p>In the R world, “dataset” is typically a synonym of <code>data.frame</code> –a rectangular structure of rows and columns. The database equivalent of a conventional table. Note that “dataset” means a collections of tables in the the <a href="https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/">.NET</a> world, and a collection of (not-necessarily-rectangular) files in <a href="https://dataverse.harvard.edu">Dataverse</a>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;To complete the survey of “dataset” definitions: TThe Java world is like R, in that “dataset” typically describes rectangular tables (&lt;em&gt;e.g.&lt;/em&gt;, &lt;a href="https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html"&gt;Java&lt;/a&gt;, &lt;a href="https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html"&gt;Spark&lt;/a&gt;, [scala]). In Julia and Python, qqq&lt;/p&gt;'><sup>9</sup></a></p>
+<p><a href="https://tibble.tidyverse.org/index.html"><code>tibble</code></a>s (which are fancy <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/data.frame.html"><code>data.frame</code></a>s) are used in almost every analysis file, so we put extra effort formulating conventions that are informative and consistent. Naming datasets follows the style of <a href="style.html#style-naming-variables">naming variables</a>, with a few additional features.</p>
+<p>In the R world, “dataset” is typically a synonym of <code>data.frame</code> –a rectangular structure of rows and columns. The database equivalent is a conventional table. Note that “dataset” means a collections of tables in the the <a href="https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/dataset-datatable-dataview/">.NET</a> world, and a collection of (not-necessarily-rectangular) files in <a href="https://dataverse.harvard.edu">Dataverse</a>.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;To complete the survey of “dataset” definitions: TThe Java world is like R, in that “dataset” typically describes rectangular tables (&lt;em&gt;e.g.&lt;/em&gt;, &lt;a href="https://docs.oracle.com/cd/E17802_01/j2se/javase/6/jcp/beta/apidiffs/java/sql/DataSet.html"&gt;Java&lt;/a&gt;, &lt;a href="https://spark.apache.org/docs/latest/api/java/org/apache/spark/sql/Dataset.html"&gt;Spark&lt;/a&gt;, [scala]). In Julia and Python, qqq&lt;/p&gt;'><sup>9</sup></a></p>
 <div id="style-naming-datasets-prefix" class="section level4" number="14.5.4.1">
 <h4>
 <span class="header-section-number">14.5.4.1</span> Prefix with <code>ds_</code> and <code>d_</code><a class="anchor" aria-label="anchor" href="#style-naming-datasets-prefix"><i class="fas fa-link"></i></a>
 </h4>
 <p>Datasets are handled so differently than other variables that we find it’s easier to identify its type and scope. The prefix <code>ds_</code> indicates the dataset is available to the entire file, while <code>d_</code> indicates the scope is localized to a function.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">count_elements</span> <span class="op">&lt;-</span> <span class="kw">function</span> <span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -371,12 +417,12 @@
 <span class="header-section-number">14.5.4.2</span> Express the grain<a class="anchor" aria-label="anchor" href="#style-naming-datasets-grain"><i class="fas fa-link"></i></a>
 </h4>
 <p>The <a href="https://gerardnico.com/olap/dimensional_modeling/grain#grain">grain</a> of a dataset describes what each row represents, which is a similar idea to the statistician’s concept of “unit of analysis”. Essentially it the the most granular entity described. Many miscommunications and silly mistakes are avoided when your team is disciplined enough to define a <a href="https://r4ds.had.co.nz/tidy-data.html">tidy</a> dataset with a clear grain.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_student</span>          <span class="co"># One row per student</span></span>
 <span><span class="va">ds_teacher</span>          <span class="co"># One row per teacher</span></span>
 <span><span class="va">ds_course</span>           <span class="co"># One row per course</span></span>
 <span><span class="va">ds_course_student</span>   <span class="co"># One row per student-course combination</span></span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds_pt</span>         <span class="co"># One row per patient</span></span>
 <span><span class="va">ds_pt_visit</span>   <span class="co"># One row per patient-visit combination</span></span>
 <span><span class="va">ds_visit</span>      <span class="co"># Same as above, since it's clear a visit is connected w/ a pt</span></span></code></pre></div>
@@ -401,6 +447,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <span class="header-section-number">14.5.4.4</span> Use <code>ds</code> when definition is clear<a class="anchor" aria-label="anchor" href="#style-naming-datasets-ds-only"><i class="fas fa-link"></i></a>
 </h4>
 <p>Many times an <a href="patterns.html#pattern-ellis">ellis file</a> handles with only one incoming csv and outgoing dataset, and the grain is obvious –typically because the ellis filename clearly states the grain.</p>
+<p>In this case, the R script can use just <code>ds</code> instead of <code>ds_county</code>.</p>
 </div>
 <div id="style-naming-datasets-adjective" class="section level4" number="14.5.4.5">
 <h4>
@@ -408,14 +455,14 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 </h4>
 <p>If the same R file is manipulating two datasets with the same grain, qualify their differences after the grain, such as <code>ds_client_all</code> and <code>ds_client_michigan</code>. Adjectives commonly indicate that one dataset is a subset of another.</p>
 <p>An occasional limitation with our naming scheme is that the difficult to distinguish the grain from the adjective. For instance, is the grain of <code>ds_student_enroll</code> either (a) every instance of a student enrollment (<em>i.e.</em>, <code>student</code> and <code>enroll</code> both describe the grain) or (b) the subset of students who enrolled (<em>i.e.</em>, <code>student</code> is the grain and <code>enroll</code> is the adjective)? It’s not clear without examine the code, comments, or documentation.</p>
-<p>If someone has a proposed solution, we would love to hear it. So far, we’ve been reluctant to decorate the variable name more, such as <code>ds_grain_client_adj_enroll</code>.</p>
+<p>If someone has a solution, we would love to hear it. So far, we’ve been reluctant to decorate the variable name more, such as <code>ds_grain_client_adj_enroll</code>.</p>
 </div>
 <div id="style-naming-datasets-define" class="section level4" number="14.5.4.6">
 <h4>
 <span class="header-section-number">14.5.4.6</span> Define the dataset when in doubt<a class="anchor" aria-label="anchor" href="#style-naming-datasets-define"><i class="fas fa-link"></i></a>
 </h4>
 <p>If it’s potentially unclear to a new reader, use a comment immediately before the dataset’s initial use. The <a href="style.html#style-naming-datasets-grain">grain</a> is frequently the most important characteristic to document.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># `ds_client_enroll`:</span></span>
 <span><span class="co">#    grain: one row per client</span></span>
 <span><span class="co">#    subset: only clients who have successfully enrolled are included</span></span>
@@ -444,7 +491,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <ul>
 <li>VS Code: see the <a href="workstation.html#workstation-vscode">VS Code</a> section of the Workstation chapter.</li>
 <li>Azure Data Studio: See the <a href="workstation.html#workstation-ads">ADS</a> section of the Workstation chapter.</li>
-<li>RStudio: Gobal Options | Code | Saving | Strip trailing horizontal whitespace when saving.</li>
+<li>RStudio: Global Options | Code | Saving | Strip trailing horizontal whitespace when saving.</li>
 <li>SSMS:</li>
 </ul>
 </li>
@@ -454,7 +501,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h2>
 <span class="header-section-number">14.7</span> Database<a class="anchor" aria-label="anchor" href="#style-database"><i class="fas fa-link"></i></a>
 </h2>
-<p>GitLab’s data team has a good <a href="https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/">style guide</a> for databases and sql that’s fairly consistent with our style. Some important similarities and differences are</p>
+<p>GitLab’s data team has a good <a href="https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/">style guide</a> for databases and sql that’s fairly consistent with our style. Some important additions and differences are</p>
 <ol style="list-style-type: decimal">
 <li>
 <p>Favor CTEs over subqueries because they’re easier to follow and can be reused in the same file. If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.</p>
@@ -482,7 +529,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h2>
 <span class="header-section-number">14.8</span> Code Repositories<a class="anchor" aria-label="anchor" href="#style-repo"><i class="fas fa-link"></i></a>
 </h2>
-<p>Our analytical team dedicates a private repo to each research project. It is a repository in GitHub accessible only to the team members given explicit privileges. Repos are also discussed in the <a href="git.html#git">Git &amp; GitHub</a> appendix.</p>
+<p>Our analytical team dedicates a private repo to each research project. It is a repository in GitHub accessible only to the team members granted explicit privileges. Repos are also discussed in the <a href="git.html#git">Git &amp; GitHub</a> appendix.</p>
 <div id="style-repo-naming" class="section level3" number="14.8.1">
 <h3>
 <span class="header-section-number">14.8.1</span> Repo Naming<a class="anchor" aria-label="anchor" href="#style-repo-naming"><i class="fas fa-link"></i></a>
@@ -496,7 +543,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <li>
 <strong>Index</strong>. Be optimistic and prepare for follow up investigations. The initial repo is “…-1”, the subsequent repos are “…-2, …-3, …-4”.</li>
 </ol>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Good Examples</span></span>
 <span><span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">1</span></span>
 <span><span class="va">akande</span><span class="op">-</span><span class="va">asthma</span><span class="op">-</span><span class="va">hospitalization</span><span class="op">-</span><span class="fl">2</span></span>
@@ -570,12 +617,28 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <code>theme()</code> (call the ‘big’ themes like <code>theme_minimal()</code> before overriding the details like <code>theme(panel.grid = element_line(color = "gray"))</code>)</li>
 <li><code>labs()</code></li>
 </ol>
+<p>This graph contains most typical ggplot2 elements.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="style.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ds, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> lift_count, <span class="at">fill =</span> group, <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb73-2"><a href="style.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.y =</span> <span class="st">"mean"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb73-3"><a href="style.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">w =</span> <span class="fl">0.4</span>, <span class="at">h =</span> <span class="dv">0</span>), <span class="at">shape =</span> <span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb73-4"><a href="style.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> palette_pregnancy_dark) <span class="sc">+</span></span>
+<span id="cb73-5"><a href="style.html#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>( <span class="at">values =</span> palette_pregnancy_light) <span class="sc">+</span></span>
+<span id="cb73-6"><a href="style.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb73-7"><a href="style.html#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">"time"</span>) <span class="sc">+</span></span>
+<span id="cb73-8"><a href="style.html#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb73-9"><a href="style.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb73-10"><a href="style.html#cb73-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb73-11"><a href="style.html#cb73-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb73-12"><a href="style.html#cb73-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Lifting by Group across Time"</span></span>
+<span id="cb73-13"><a href="style.html#cb73-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x     =</span> <span class="cn">NULL</span>, </span>
+<span id="cb73-14"><a href="style.html#cb73-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Number of Lifts"</span></span>
+<span id="cb73-15"><a href="style.html#cb73-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 <div id="style-ggplot-gotchas" class="section level3" number="14.9.2">
 <h3>
 <span class="header-section-number">14.9.2</span> Gotchas<a class="anchor" aria-label="anchor" href="#style-ggplot-gotchas"><i class="fas fa-link"></i></a>
 </h3>
-<p>Here are some common mistakes we see not-so-infrequently (even sometimes in our own code).</p>
+<p>Here are some common mistakes we see not-so-infrequently (even sometimes in our own ggplot2 code).</p>
 <div id="style-ggplot-zoom" class="section level4" number="14.9.2.1">
 <h4>
 <span class="header-section-number">14.9.2.1</span> Zooming<a class="anchor" aria-label="anchor" href="#style-ggplot-zoom"><i class="fas fa-link"></i></a>
@@ -586,7 +649,29 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h4>
 <span class="header-section-number">14.9.2.2</span> Seed<a class="anchor" aria-label="anchor" href="#style-ggplot-seed"><i class="fas fa-link"></i></a>
 </h4>
-<p>When jittering, set the seed in the ‘declare-globals’ chunk so that rerunning the report won’t create a (slightly) different png. The insignificantly different pngs will consume extra space in the Git repository. Also, the GitHub diff will show the difference between png versions, which requires extra subjectivity and cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.</p>
+<p>When jittering, set a seed in the ‘declare-globals’ chunk so that rerunning the report won’t create a (slightly) different png. The insignificantly different pngs will consume extra space in the Git repository. Also, the GitHub diff will show the difference between png versions, which requires extra subjectivity and cognitive load to determine if the difference is due solely to jittering, or if something really changed in the analysis.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">789</span><span class="op">)</span> <span class="co"># Set a seed so the jittered graphs are consistent across renders.</span></span></code></pre></div>
+<p>Occasionally you’ll want multiple graphs in the same report to have a consistent jitter, so set the same seed prior to each <code>ggplot()</code> call. In <a href="https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/main/thumbnails/thumbnails.md">Lise DeShea’s 2015 book</a>, Figures 3-21, 3-22, and 3-23 needed to be as similar as possible so the inter-graph differences were easier to distinguish.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ---- figure-03-21 ------------------------------------------------------</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">789</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">ds</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">t1_lifts</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">...</span></span>
+<span></span>
+<span><span class="co"># ---- figure-03-22 ------------------------------------------------------</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">789</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">ds</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">t1_lifts</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">...</span></span>
+<span></span>
+<span><span class="co"># ---- figure-03-23 ------------------------------------------------------</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">789</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">ds</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">t1_lifts</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">...</span></span></code></pre></div>
+<p><a><img border="0" alt="figure-03-21-1.png" src="https://raw.githubusercontent.com/OuhscBbmc/DeSheaToothakerIntroStats/main/chapter-03/figure-png/figure-03-21-1.png" width="600"></a></p>
+<p><a><img border="0" alt="figure-03-22-1.png" src="https://raw.githubusercontent.com/OuhscBbmc/DeSheaToothakerIntroStats/main/chapter-03/figure-png/figure-03-22-1.png" width="600"></a></p>
+<p><a><img border="0" alt="figure-03-23-1.png" src="https://raw.githubusercontent.com/OuhscBbmc/DeSheaToothakerIntroStats/main/chapter-03/figure-png/figure-03-23-1.png" width="600"></a></p>
 
 </div>
 </div>
@@ -659,7 +744,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-09-14.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-10-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
