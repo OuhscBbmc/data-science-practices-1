@@ -53,23 +53,6 @@ Datasets {#style-datasets}
 
 Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices reduce our mistakes and improve maintainability.
 
-#### Dropping rows with missing values {#style-datasets-filter-drop_na}
-
-[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.  It is cleaner to read and write than `dplyr::filter()` and the base R approach.  In particular, it's easy to forget/overlook a `!`.
-
-```r
-# Good
-ds |>
-  tidyr::drop_na(dob)
-
-# Not as good
-ds |>
-  dplyr::filter(!is.na(dob))
-
-# Ripest for mistakes or misinterpretation
-ds[!is.na(ds$dob), ]
-```
-
 #### Mimic number line {#style-datasets-filter-number-line}
 
 When ordering quantities, go smallest-to-largest as you type left-to-right.  At minimum be consistent with the direction.  In other words, use operators like `<` and `<=` and avoid `>` and `>=`.  This approach also makes it more consistent with the SQL and dplyr function, [`between()`](https://dplyr.tidyverse.org/reference/between.html).
@@ -92,16 +75,45 @@ ds_teenager |>
 
 #### Searchable verbs {#style-datasets-filter-searchable}
 
-You've probably asked in frustration, "Where did all the rows go?  I had 1,000 in the middle of the file, but now have only 782."  Try to keep a consistent tools for filtering, so you can 'ctrl+f' only a handful of terms, such as
-`filter`,
-`drop_na`, and
-`summarize/summarise`.
+You've occasionally asked in frustration, "Where did the dataset lose some rows?  It had 900 rows in the middle of the script, but now has only 782."  You then scan through the script for any location that potentially removes rows.  These locations are easier to identify when you're scanning for only a small set of filtering functions such as
+[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html),
+[`dplyr::filter()`](https://dplyr.tidyverse.org/reference/filter.html), and
+[`dplyr::summarize()`](https://dplyr.tidyverse.org/reference/summarise.html).  You can even highlight them with 'ctrl+f'.  In contrast, the base R's filtering style is more difficult to identify.
 
-It's more difficult to highlight the When using the base R's filtering style, (*e.g.*, `ds <- ds[4 <= ds$count, ]`).
+```r
+# tidyverse's approach is easy to see in a long script
+ds <-
+  ds |>
+  dplyr::filter(4 <= count)
+  
+# base R's approach is harder to see
+ds <- ds[4 <= ds$count, ]
+```
+
+#### Remove rows with missing values {#style-datasets-filter-drop_na}
+
+Even within [tidyverse](https://www.tidyverse.org/) functions, there are preferences in certain scenarios.  This entry covers the scenario of dropping an entire row if an important column is missing a value.
+
+[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) removes rows with a missing value in a specific column.  It is cleaner to read and write dplyr's `filter()` and base R's subsetting bracket.  In particular, it's easy to forget/overlook a `!`.
+
+```r
+# Cleanest
+ds |>
+  tidyr::drop_na(dob)
+
+# Not as good
+ds |>
+  dplyr::filter(!is.na(dob))
+
+# Ripest for mistakes or misinterpretation
+ds[!is.na(ds$dob), ]
+```
 
 ### Don't attach {#style-datasets-attach}
 
-As the [Google Stylesheet](https://google.github.io/styleguide/Rguide.html#dont-use-attach) says, "The possibilities for creating errors when using [`attach()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html) are numerous."
+As the [Google Stylesheet](https://google.github.io/styleguide/Rguide.html#dont-use-attach) says, "The possibilities for creating errors when using [`attach()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/attach.html) are numerous."  
+
+Hopefully you've learned R recently enough that you haven't read examples from the 1990s that used `attach()`.  It may have made sense in the early days of [S-PLUS](https://en.wikipedia.org/wiki/S-PLUS) when the language was used primarily interactively by a single statistician.  But the contemporary tradeoffs are unfavorable, now that R scripts are frequently run by multiple people and functions are run in multiple contexts.
 
 Categorical Variables {#style-factor}
 ------------------------------------
