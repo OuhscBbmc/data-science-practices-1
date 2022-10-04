@@ -51,32 +51,44 @@ Datasets {#style-datasets}
 
 ### Filtering Rows {#style-datasets-filter}
 
-Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices have hopefully reduced our mistakes and improved maintainability.
+Removing datasets rows is an important operation that is a frequent source of sneaky errors.  These practices reduce our mistakes and improve maintainability.
 
 #### Dropping rows with missing values {#style-datasets-filter-drop_na}
 
-[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.
+[`tidyr::drop_na()`](https://tidyr.tidyverse.org/reference/drop_na.html) drops rows with a missing value in a specific column.  It is cleaner to read and write than `dplyr::filter()` and the base R approach.  In particular, it's easy to forget/overlook a `!`.
 
 ```r
 # Good
 ds |>
   tidyr::drop_na(dob)
-```
 
-is cleaner to read and write than these two styles.  In particular, it's easy to forget/overlook a `!`.
-
-```r
-# Worse
+# Not as good
 ds |>
   dplyr::filter(!is.na(dob))
 
-# Worst
+# Ripest for mistakes or misinterpretation
 ds[!is.na(ds$dob), ]
 ```
 
 #### Mimic number line {#style-datasets-filter-number-line}
 
-When ordering quantities, go smallest-to-largest as you type left-to-right.
+When ordering quantities, go smallest-to-largest as you type left-to-right.  At minimum be consistent with the direction.  In other words, use operators like `<` and `<=` and avoid `>` and `>=`.  This approach also makes it more consistent with the SQL and dplyr function, [`between()`](https://dplyr.tidyverse.org/reference/between.html).
+
+```r
+# Good (b/c quantities increase as you read left-to-right)
+ds_teenager |>
+  dplyr::filter(13 <= age & age < 20)
+
+# Not as good (b/c quantities increase as you read right-to-left)
+ds_teenager |>
+  dplyr::filter(20 > age & age <= 13)
+
+# Bad (b/c the order is inconsistent)
+ds_teenager |>
+  dplyr::filter(age >= 13 & age < 20)
+ds_teenager |>
+  dplyr::filter(age < 20 & age >= 13)
+```
 
 #### Searchable verbs {#style-datasets-filter-searchable}
 
