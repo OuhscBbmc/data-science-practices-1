@@ -122,11 +122,11 @@ There are lots of names for a categorical variable across the different discipli
 
 ### Explicit Missing Values {#style-factor-unknown}
 
-Define a level like `"unknown"` so the data manipulation doesn't have to test for both `is.na(x)` and `x=="unknown"`.  The explicit labels also helps when included in a statistical procedure and coefficient table.
+Define a level like `"unknown"` so the data manipulation doesn't have to test for both `is.na(x)` and `x == "unknown"`.  The explicit label also helps when included in a statistical procedure and coefficient table.
 
 ### Granularity {#style-factor-granularity}
 
-Sometimes it helps to represent the values differently, say a granular and a coarse way.  We say `cut7` or `cut3` to denotes the number of levels; this is related to [`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html).  'unknown' and 'other' are frequently levels, and they count toward the quantity.
+Sometimes it helps to represent the values differently, say with a granular variable and a coarse variable.  If two related variables have 7 and 3 levels respectively, we say `*_cut7` and `*_cut3` to denote the resolution; this is related to [`base::cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html).  Don't forget to include "unknown" and "other" when necessary.
 
 ```r
 # Inside a dplyr::mutate() clause
@@ -164,7 +164,35 @@ education_cut3 = factor(education_cut3, levels=c(
   "no bachelor",
   "bachelor",
   "unknown"
-))
+)),
+```
+
+The [`dplyr::recode_factor()`](https://dplyr.tidyverse.org/reference/recode.html) is an ideal replacement in the scenario above, because a single call combines the work of [`dplyr::recode()`](https://dplyr.tidyverse.org/reference/recode.html) and [`base::factor()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html).  Just make sure the recoding order represents the desired order of the factor levels.
+
+
+```r
+# Inside a dplyr::mutate() clause
+education_cut7      = dplyr::recode_factor(
+  education_cut7,
+  "No Highschool Degree / GED"  = "no diploma",
+  "High School Degree / GED"    = "diploma",
+  "Some College"                = "some college",
+  "Associate's Degree"          = "associate",
+  "Bachelor's Degree"           = "bachelor",
+  "Post-graduate degree"        = "post-grad",
+  "Unknown"                     = "unknown",
+  .missing                      = "unknown",
+),
+education_cut3      = dplyr::recode_factor(
+  education_cut7,
+  "no diploma"    = "no bachelor",
+  "diploma"       = "no bachelor",
+  "some college"  = "no bachelor",
+  "associate"     = "no bachelor",
+  "bachelor"      = "bachelor",
+  "post-grad"     = "bachelor",
+  "unknown"       = "unknown",
+),
 ```
 
 Dates {#style-dates}
