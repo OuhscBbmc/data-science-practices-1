@@ -241,10 +241,18 @@ The installation order does not matter.
       py -3 -mpip install biopython matplotlib numpy pandas paramiko pyarrow pyodbc pyyaml scikit-learn scipy sqlalchemy strictyaml
       ```
 
-* **Updating Packages** Python packages don't need to be updated as frequently as R packages, but it's still good to do it every few months.  Paste this single line into PowerShell on Windows.  ([Stack Overflow solution](https://stackoverflow.com/a/51022937/1082435) from [Sébastien Wieckowski](https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski))
+* **Updating Packages** Python packages don't need to be updated as frequently as R packages, but it's still good to do it every few months.  
+
+    Paste this single line into PowerShell on Windows.  ([Stack Overflow solution](https://stackoverflow.com/a/51022937/1082435) from [Sébastien Wieckowski](https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski))
 
     ```ps
     pip list -o --format json | ConvertFrom-Json | foreach {pip install $_.name -U --no-warn-script-location}
+    ```
+    
+    Paste this single line into a Bash terminal on Linux.  ([ActiveState.com post]([https://stackoverflow.com/a/51022937/1082435](https://www.activestate.com/resources/quick-reads/how-to-update-all-python-packages/)).
+
+    ```sh
+    pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U 
     ```
 
 ### PilotEdit {#workstation-pilot-edit}
