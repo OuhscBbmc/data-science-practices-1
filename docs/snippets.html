@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="C.1 Reading External Data  C.1.1 Reading from Excel Background: Avoid Excel for the reasons previously discussed. But if there isn’t another good option, be protective. readxl::read_excel() allows...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -121,7 +121,7 @@
 <p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p>See the readxl vignette, <a href="https://readxl.tidyverse.org/articles/cell-and-column-types.html">Cell and Column Types</a>, for more info.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
 <span><span class="va">config</span>                         <span class="op">&lt;-</span> <span class="fu">config</span><span class="fu">::</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -153,7 +153,7 @@
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The next two lines remove the trailing comma at the end of the 1st line.</span></span>
 <span><span class="va">raw_text</span>  <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu">read_file</span><span class="op">(</span><span class="va">path_in</span><span class="op">)</span></span>
 <span><span class="va">raw_text</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"^(.+Dx50 Name),"</span>, <span class="st">"\\1"</span>, <span class="va">raw_text</span><span class="op">)</span></span>
@@ -171,7 +171,7 @@
 1. If the data file contains columns we don’t need, we define them in <code>col_types</code> anyway; vroom needs to know the file structure if it’s missing a header row.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/akande-medically-complex-1/tree/main/manipulation/ohca">akande-medically-complex-1</a> (Accessible to only CDW members.) Thesee files did not have a header of variable names; the first line of the file is the first data row.</p>
 <p><em>Last Modified</em>: 2020-08-21 by Will</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ---- declare-globals ---------------------------------------------------------</span></span>
 <span><span class="va">config</span>            <span class="op">&lt;-</span> <span class="fu">config</span><span class="fu">::</span><span class="fu">get</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -216,7 +216,7 @@
 <p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="va">ds</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
 <span>    dob <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">dob</span>, <span class="va">dob</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu">years</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
@@ -235,7 +235,7 @@
 <p><em>Explanation</em>: This snippet will create a 5-row csv with random 7-character “tags” to send to the research team collecting patients. The</p>
 <p><em>Instruction</em>: Set <code>pt_count</code>, <code>tag_length</code>, <code>path_out</code>, and execute. Add and rename the columns to be more appropriate for your domain (<em>e.g.</em>, change “patient tag” to “store tag”).</p>
 <p><em>Last Modified</em>: 2019-12-30 by Will</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pt_count</span>    <span class="op">&lt;-</span> <span class="fl">5L</span>   <span class="co"># The number of rows in the dataset.</span></span>
 <span><span class="va">tag_length</span>  <span class="op">&lt;-</span> <span class="fl">7L</span>   <span class="co"># The number of characters in each tag.</span></span>
 <span><span class="va">path_out</span>    <span class="op">&lt;-</span> <span class="st">"data-private/derived/pt-pool.csv"</span></span>
@@ -330,7 +330,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-10-17.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2022-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
