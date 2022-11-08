@@ -13,8 +13,11 @@ Tools:
 
 Books:
 
-* TODO: list the two O'Reilly books
+* [Regular Expressions Chapter](https://r4ds.hadley.nz/regexps.html) of [*R for Data Science, 2nd edition*](https://r4ds.hadley.nz/).
+* [*Introducing Regular Expressions*](https://www.oreilly.com/library/view/introducing-regular-expressions/9781449338879/)
+* [*Regular Expressions Cookbook, 2nd Edition*](https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/)
+* [*Mastering Regular Expressions, 3rd edition*](https://www.oreilly.com/library/view/mastering-regular-expressions/0596528124/)
 
 Presentations:
 
-* SCUG
+* [Regex SCUG Presentation](https://rawgit.com/OuhscBbmc/StatisticalComputing/master/2019-presentations/11-november/beasley-scug-regex-part-2-2019-11.html#/)
