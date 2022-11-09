@@ -211,6 +211,7 @@ workstation-github
 workstation-github-client
 workstation-recommended
 workstation-odbc
+workstation-quarto
 workstation-notepadpp
 workstation-ads
 workstation-vscode

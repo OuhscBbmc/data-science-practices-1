@@ -73,6 +73,27 @@ The installation order does not matter.
 
 [ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/main/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 18 is the most recent driver version.  See if a new one exists. {updated Feb 2022}
 
+### Quarto++ {#workstation-quarto}
+
+[Quarto](https://quarto.org/docs/get-started/) is Posit's/RStudio's successor to knitr.  It uses an embedded version of [Pandoc](https://pandoc.org/) to translate R/Python/Julia code into html or pdf reports (via [Markdown](https://www.markdownguide.org/)).  Reporting and reproducible research has been a foundation of our workflow and Quarto will be will be used the upcoming generation of reports.  If an existing Rmd file is delivering what you need (for something like an article or federal report), continue using knitr and R Markdown.  If you are developing a new report from scratch, strongly consider Quarto. {added Nov 2022}
+
+* Quarto's [Get Started](https://quarto.org/docs/get-started/) page has instructions.  You'll want it installed for the RStudio IDE, and probably VS Code too.
+
+* If (while rendering a document) you encounter this error like `compilation failed- no matching packages ...LaTeX Error: File 'scrreprt.cls' not found.`, you'll need to [replace your installation of tinytex](https://github.com/quarto-dev/quarto-cli/issues/679).
+
+    First uinstall & remove it via R.
+    
+    ```r
+    tinytex::uninstall_tinytex()
+    remove.packages("tinytex")
+    ```
+    
+    Then reinstall it via the command line or PowerShell.
+    
+    ```ps
+    quarto tools install tinytex
+    ```
+    
 ### Notepad++ {#workstation-notepadpp}
 
 [Notepad++](http://notepad-plus-plus.org/) is a text editor that allows you look at the raw text files, such as code and CSVs.  For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks & causes some issues).  {added Sept 2012}
