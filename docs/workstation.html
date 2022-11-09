@@ -126,8 +126,7 @@
 <h3>
 <span class="header-section-number">19.1.2</span> RStudio<a class="anchor" aria-label="anchor" href="#workstation-rstudio"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="http://www.rstudio.com/ide/download/desktop">RStudio Desktop</a> is the IDE (integrated design interface) that you’ll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus <code>Help</code> -&gt; <code>Check for updates</code>.
-ix problems, but this is not required to start.)</p>
+<p><a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a> is the IDE (integrated design interface) that you’ll use to interact with R, GitHub, and Markdown. Updates can be checked easily through the menus <code>Help</code> -&gt; <code>Check for Updates</code>. {added Sept 2012}</p>
 </div>
 <div id="workstation-rtools" class="section level3" number="19.1.3">
 <h3>
@@ -171,13 +170,13 @@ ix problems, but this is not required to start.)</p>
 <h3>
 <span class="header-section-number">19.1.6</span> GitHub<a class="anchor" aria-label="anchor" href="#workstation-github"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://github.com/">GitHub</a> registration is necessary to push modified files to the repository. First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator (<em>e.g.</em>, to <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns</a>).</p>
+<p><a href="https://github.com/">GitHub</a> registration is necessary to push modified files to the repository. First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator (<em>e.g.</em>, to <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns" class="uri">https://github.com/OuhscBbmc/RedcapExamplesAndPatterns</a>). {added Sept 2012}</p>
 </div>
 <div id="workstation-github-client" class="section level3" number="19.1.7">
 <h3>
 <span class="header-section-number">19.1.7</span> GitHub Desktop<a class="anchor" aria-label="anchor" href="#workstation-github-client"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="http://desktop.github.com/">GitHub Desktop</a> does the basic tasks a little easier than the git features built into RStudio. This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to f</p>
+<p><a href="http://desktop.github.com/">GitHub Desktop</a> does the basic tasks a little easier than the git features built into RStudio. This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to fix problems, but this is not required to start.) {added Sept 2012}</p>
 </div>
 </div>
 <div id="workstation-recommended" class="section level2" number="19.2">
@@ -193,21 +192,10 @@ ix problems, but this is not required to start.)</p>
 </div>
 <div id="workstation-quarto" class="section level3" number="19.2.2">
 <h3>
-<span class="header-section-number">19.2.2</span> Quarto++<a class="anchor" aria-label="anchor" href="#workstation-quarto"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.2.2</span> Quarto<a class="anchor" aria-label="anchor" href="#workstation-quarto"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://quarto.org/docs/get-started/">Quarto</a> is Posit’s/RStudio’s successor to knitr. It uses an embedded version of <a href="https://pandoc.org/">Pandoc</a> to translate R/Python/Julia code into html or pdf reports (via <a href="https://www.markdownguide.org/">Markdown</a>). Reporting and reproducible research has been a foundation of our workflow and Quarto will be will be used the upcoming generation of reports. If an existing Rmd file is delivering what you need (for something like an article or federal report), continue using knitr and R Markdown. If you are developing a new report from scratch, strongly consider Quarto. {added Nov 2022}</p>
-<ul>
-<li><p>Quarto’s <a href="https://quarto.org/docs/get-started/">Get Started</a> page has instructions. You’ll want it installed for the RStudio IDE, and probably VS Code too.</p></li>
-<li>
-<p>If (while rendering a document) you encounter this error like <code>compilation failed- no matching packages ...LaTeX Error: File 'scrreprt.cls' not found.</code>, you’ll need to <a href="https://github.com/quarto-dev/quarto-cli/issues/679">replace your installation of tinytex</a>.</p>
-<p>First uinstall &amp; remove it via R.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">uninstall_tinytex</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/remove.packages.html">remove.packages</a></span><span class="op">(</span><span class="st">"tinytex"</span><span class="op">)</span></span></code></pre></div>
-<p>Then reinstall it via the command line or PowerShell.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb79-1"><a href="workstation.html#cb79-1" aria-hidden="true" tabindex="-1"></a>quarto tools install tinytex</span></code></pre></div>
-</li>
-</ul>
+<p>Quarto’s <a href="https://quarto.org/docs/get-started/">Get Started</a> page has instructions. You’ll want it installed for the RStudio IDE, and probably VS Code too. See the <a href="workstation.html#workstation-troubleshooting">troubleshooting tips</a> if necessary.</p>
 </div>
 <div id="workstation-notepadpp" class="section level3" number="19.2.3">
 <h3>
@@ -230,17 +218,17 @@ ix problems, but this is not required to start.)</p>
 <li>Data | Sql | <strong>Show Connection Info In Title: uncheck</strong> {<code>"sql.showConnectionInfoInTitle": false</code>}</li>
 <li>Data | Sql | <strong>Include Headers: check</strong> {<code>"sql.copyIncludeHeaders": false</code>}</li>
 </ol>
-<div class="sourceCode" id="cb80"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb80-1"><a href="workstation.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb80-2"><a href="workstation.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"workbench.enablePreviewFeatures"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb80-3"><a href="workstation.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"workbench.colorTheme"</span><span class="fu">:</span> <span class="st">"Default Dark Azure Data Studio"</span><span class="fu">,</span></span>
-<span id="cb80-4"><a href="workstation.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.tabSize"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
-<span id="cb80-5"><a href="workstation.html#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.detectIndentation"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb80-6"><a href="workstation.html#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.insertFinalNewline"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb80-7"><a href="workstation.html#cb80-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimFinalNewlines"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb80-8"><a href="workstation.html#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimTrailingWhitespace"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb80-9"><a href="workstation.html#cb80-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"queryEditor.showConnectionInfoInTitle"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb80-10"><a href="workstation.html#cb80-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"queryEditor.results.copyIncludeHeaders"</span><span class="fu">:</span> <span class="kw">false</span></span>
-<span id="cb80-11"><a href="workstation.html#cb80-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb78-1"><a href="workstation.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb78-2"><a href="workstation.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"workbench.enablePreviewFeatures"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb78-3"><a href="workstation.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"workbench.colorTheme"</span><span class="fu">:</span> <span class="st">"Default Dark Azure Data Studio"</span><span class="fu">,</span></span>
+<span id="cb78-4"><a href="workstation.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.tabSize"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb78-5"><a href="workstation.html#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.detectIndentation"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb78-6"><a href="workstation.html#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.insertFinalNewline"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb78-7"><a href="workstation.html#cb78-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimFinalNewlines"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb78-8"><a href="workstation.html#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimTrailingWhitespace"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb78-9"><a href="workstation.html#cb78-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"queryEditor.showConnectionInfoInTitle"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb78-10"><a href="workstation.html#cb78-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"queryEditor.results.copyIncludeHeaders"</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb78-11"><a href="workstation.html#cb78-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 <div id="workstation-vscode" class="section level3" number="19.2.5">
 <h3>
@@ -258,50 +246,50 @@ ix problems, but this is not required to start.)</p>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">markdownlint</a> has linting and style checking.</p></li>
 </ul>
 <p>These extensions <a href="https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions">can be installed by command line</a>.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb81-1"><a href="workstation.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--list-extensions</span></span>
-<span id="cb81-2"><a href="workstation.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> GrapeCity.gc-excelviewer</span>
-<span id="cb81-3"><a href="workstation.html#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> mechatroner.rainbow-csv</span>
-<span id="cb81-4"><a href="workstation.html#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-mssql.mssql</span>
-<span id="cb81-5"><a href="workstation.html#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> streetsidesoftware.code-spell-checker</span>
-<span id="cb81-6"><a href="workstation.html#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzhang.markdown-all-in-one</span>
-<span id="cb81-7"><a href="workstation.html#cb81-7" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzane.markdown-pdf</span>
-<span id="cb81-8"><a href="workstation.html#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> DavidAnson.vscode-markdownlint</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb79-1"><a href="workstation.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--list-extensions</span></span>
+<span id="cb79-2"><a href="workstation.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> GrapeCity.gc-excelviewer</span>
+<span id="cb79-3"><a href="workstation.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> mechatroner.rainbow-csv</span>
+<span id="cb79-4"><a href="workstation.html#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-mssql.mssql</span>
+<span id="cb79-5"><a href="workstation.html#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> streetsidesoftware.code-spell-checker</span>
+<span id="cb79-6"><a href="workstation.html#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzhang.markdown-all-in-one</span>
+<span id="cb79-7"><a href="workstation.html#cb79-7" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzane.markdown-pdf</span>
+<span id="cb79-8"><a href="workstation.html#cb79-8" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> DavidAnson.vscode-markdownlint</span></code></pre></div>
 <p>Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings"><code>settings.json</code></a>, or manually specify the options with the <a href="https://code.visualstudio.com/docs/getstarted/settings">settings editor</a>.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb82-1"><a href="workstation.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb82-2"><a href="workstation.html#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"diffEditor.ignoreTrimWhitespace"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb82-3"><a href="workstation.html#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"diffEditor.maxComputationTime"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
-<span id="cb82-4"><a href="workstation.html#cb82-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.acceptSuggestionOnEnter"</span><span class="fu">:</span> <span class="st">"off"</span><span class="fu">,</span></span>
-<span id="cb82-5"><a href="workstation.html#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.renderWhitespace"</span><span class="fu">:</span> <span class="st">"all"</span><span class="fu">,</span></span>
-<span id="cb82-6"><a href="workstation.html#cb82-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"explorer.confirmDragAndDrop"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb82-7"><a href="workstation.html#cb82-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.associations"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb82-8"><a href="workstation.html#cb82-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"*.Rmd"</span><span class="fu">:</span> <span class="st">"markdown"</span></span>
-<span id="cb82-9"><a href="workstation.html#cb82-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb82-10"><a href="workstation.html#cb82-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimFinalNewlines"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb82-11"><a href="workstation.html#cb82-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimTrailingWhitespace"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb82-12"><a href="workstation.html#cb82-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"git.autofetch"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb82-13"><a href="workstation.html#cb82-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"git.confirmSync"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb82-14"><a href="workstation.html#cb82-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"window.zoomLevel"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
-<span id="cb82-15"><a href="workstation.html#cb82-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-16"><a href="workstation.html#cb82-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"markdown.extension.orderedList.autoRenumber"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb82-17"><a href="workstation.html#cb82-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"markdown.extension.orderedList.marker"</span><span class="fu">:</span> <span class="st">"one"</span><span class="fu">,</span></span>
-<span id="cb82-18"><a href="workstation.html#cb82-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"markdownlint.config"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb82-19"><a href="workstation.html#cb82-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD003"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"style"</span><span class="fu">:</span> <span class="st">"setext_with_atx"</span> <span class="fu">},</span></span>
-<span id="cb82-20"><a href="workstation.html#cb82-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD007"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"indent"</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
-<span id="cb82-21"><a href="workstation.html#cb82-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD022"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"lines_above"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
-<span id="cb82-22"><a href="workstation.html#cb82-22" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">"lines_below"</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
-<span id="cb82-23"><a href="workstation.html#cb82-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD024"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"siblings_only"</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
-<span id="cb82-24"><a href="workstation.html#cb82-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"no-bare-urls"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
-<span id="cb82-25"><a href="workstation.html#cb82-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"no-inline-html"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb82-26"><a href="workstation.html#cb82-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"allowed_elements"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb82-27"><a href="workstation.html#cb82-27" aria-hidden="true" tabindex="-1"></a>          <span class="st">"mermaid"</span><span class="ot">,</span></span>
-<span id="cb82-28"><a href="workstation.html#cb82-28" aria-hidden="true" tabindex="-1"></a>          <span class="st">"a"</span><span class="ot">,</span></span>
-<span id="cb82-29"><a href="workstation.html#cb82-29" aria-hidden="true" tabindex="-1"></a>          <span class="st">"br"</span><span class="ot">,</span></span>
-<span id="cb82-30"><a href="workstation.html#cb82-30" aria-hidden="true" tabindex="-1"></a>          <span class="st">"details"</span><span class="ot">,</span></span>
-<span id="cb82-31"><a href="workstation.html#cb82-31" aria-hidden="true" tabindex="-1"></a>          <span class="st">"img"</span></span>
-<span id="cb82-32"><a href="workstation.html#cb82-32" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
-<span id="cb82-33"><a href="workstation.html#cb82-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
-<span id="cb82-34"><a href="workstation.html#cb82-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb82-35"><a href="workstation.html#cb82-35" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb80-1"><a href="workstation.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb80-2"><a href="workstation.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"diffEditor.ignoreTrimWhitespace"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb80-3"><a href="workstation.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"diffEditor.maxComputationTime"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb80-4"><a href="workstation.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.acceptSuggestionOnEnter"</span><span class="fu">:</span> <span class="st">"off"</span><span class="fu">,</span></span>
+<span id="cb80-5"><a href="workstation.html#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"editor.renderWhitespace"</span><span class="fu">:</span> <span class="st">"all"</span><span class="fu">,</span></span>
+<span id="cb80-6"><a href="workstation.html#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"explorer.confirmDragAndDrop"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb80-7"><a href="workstation.html#cb80-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.associations"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb80-8"><a href="workstation.html#cb80-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"*.Rmd"</span><span class="fu">:</span> <span class="st">"markdown"</span></span>
+<span id="cb80-9"><a href="workstation.html#cb80-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb80-10"><a href="workstation.html#cb80-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimFinalNewlines"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb80-11"><a href="workstation.html#cb80-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"files.trimTrailingWhitespace"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb80-12"><a href="workstation.html#cb80-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"git.autofetch"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb80-13"><a href="workstation.html#cb80-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"git.confirmSync"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb80-14"><a href="workstation.html#cb80-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"window.zoomLevel"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb80-15"><a href="workstation.html#cb80-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-16"><a href="workstation.html#cb80-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"markdown.extension.orderedList.autoRenumber"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb80-17"><a href="workstation.html#cb80-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"markdown.extension.orderedList.marker"</span><span class="fu">:</span> <span class="st">"one"</span><span class="fu">,</span></span>
+<span id="cb80-18"><a href="workstation.html#cb80-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"markdownlint.config"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb80-19"><a href="workstation.html#cb80-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD003"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"style"</span><span class="fu">:</span> <span class="st">"setext_with_atx"</span> <span class="fu">},</span></span>
+<span id="cb80-20"><a href="workstation.html#cb80-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD007"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"indent"</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">},</span></span>
+<span id="cb80-21"><a href="workstation.html#cb80-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD022"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"lines_above"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb80-22"><a href="workstation.html#cb80-22" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">"lines_below"</span><span class="fu">:</span> <span class="dv">1</span> <span class="fu">},</span></span>
+<span id="cb80-23"><a href="workstation.html#cb80-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"MD024"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"siblings_only"</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
+<span id="cb80-24"><a href="workstation.html#cb80-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"no-bare-urls"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb80-25"><a href="workstation.html#cb80-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"no-inline-html"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb80-26"><a href="workstation.html#cb80-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"allowed_elements"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb80-27"><a href="workstation.html#cb80-27" aria-hidden="true" tabindex="-1"></a>          <span class="st">"mermaid"</span><span class="ot">,</span></span>
+<span id="cb80-28"><a href="workstation.html#cb80-28" aria-hidden="true" tabindex="-1"></a>          <span class="st">"a"</span><span class="ot">,</span></span>
+<span id="cb80-29"><a href="workstation.html#cb80-29" aria-hidden="true" tabindex="-1"></a>          <span class="st">"br"</span><span class="ot">,</span></span>
+<span id="cb80-30"><a href="workstation.html#cb80-30" aria-hidden="true" tabindex="-1"></a>          <span class="st">"details"</span><span class="ot">,</span></span>
+<span id="cb80-31"><a href="workstation.html#cb80-31" aria-hidden="true" tabindex="-1"></a>          <span class="st">"img"</span></span>
+<span id="cb80-32"><a href="workstation.html#cb80-32" aria-hidden="true" tabindex="-1"></a>        <span class="ot">]</span></span>
+<span id="cb80-33"><a href="workstation.html#cb80-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb80-34"><a href="workstation.html#cb80-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb80-35"><a href="workstation.html#cb80-35" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Auto Renumber: false</strong> {<code>"markdown.extension.orderedList.autoRenumber": false</code>}</li>
 <li>Settings | Extensions |Markdown All in One | Ordered List | <strong>Marker: one</strong> {<code>"markdown.extension.orderedList.marker": "one"</code>}</li>
@@ -340,7 +328,7 @@ ix problems, but this is not required to start.)</p>
 <ul>
 <li>
 <p><strong><a href="https://www.anaconda.com/distribution/#download-section">Anaconda</a></strong>, which include Jupyter Notebooks, Jupyter Lab, and Spyder. Plus two programs that are already on this list: RStudio and VS Code. In Windows, open “Anaconda Prompt” with administrative privileges</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="workstation.html#cb83-1" aria-hidden="true" tabindex="-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="workstation.html#cb81-1" aria-hidden="true" tabindex="-1"></a>conda install numpy pandas scikit<span class="op">-</span>learn matplotlib</span></code></pre></div>
 </li>
 <li>
 <p><strong><a href="https://www.python.org/downloads/">Standard Python</a></strong>, while installing packages through pip3 in the terminal. If the <code>pip3</code> command is unrecognized because it’s missing from the OS <a href="https://en.wikipedia.org/wiki/PATH_(variable)">path</a> variable, an alternative is <code>py -3 -mpip install paramiko</code>; this calls pip through the <code>py</code> command which is sometimes in the path variable after installation.</p>
@@ -371,7 +359,7 @@ ix problems, but this is not required to start.)</p>
 <li><p>Add an entry like <code>C:\Users\USERNAME\AppData\Roaming\Python\Python310</code> or <code>C:\Users\USERNAME\AppData\Local\Programs\Python\Python310</code> to the <a href="https://www.computerhope.com/issues/ch000549.htm">System Variables</a> for the scripts in your personal <code>AppData</code> directory (even if you clicked “Install for all users”). This helps RStudio/<a href="https://CRAN.R-project.org/package=reticulate">reticulate</a> run python scripts.</p></li>
 <li>
 <p>Install Python packages from PowerShell or the command line (not from Python)</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb84-1"><a href="workstation.html#cb84-1" aria-hidden="true" tabindex="-1"></a>py -<span class="dv">3</span> -mpip install biopython matplotlib numpy pandas paramiko pyarrow pyodbc pyyaml scikit-learn scipy sqlalchemy strictyaml</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb82-1"><a href="workstation.html#cb82-1" aria-hidden="true" tabindex="-1"></a>py -<span class="dv">3</span> -mpip install biopython matplotlib numpy pandas paramiko pyarrow pyodbc pyyaml scikit-learn scipy sqlalchemy strictyaml</span></code></pre></div>
 </li>
 </ul>
 </li>
@@ -380,9 +368,9 @@ ix problems, but this is not required to start.)</p>
 <li>
 <p><strong>Updating Packages</strong> Python packages don’t need to be updated as frequently as R packages, but it’s still good to do it every few months.</p>
 <p>Paste this single line into PowerShell on Windows. (<a href="https://stackoverflow.com/a/51022937/1082435">Stack Overflow solution</a> from <a href="https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski">Sébastien Wieckowski</a>)</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb85-1"><a href="workstation.html#cb85-1" aria-hidden="true" tabindex="-1"></a>pip list -o --format json | ConvertFrom-Json | foreach {pip install $_.name -U --no-warn-script-location}</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb83-1"><a href="workstation.html#cb83-1" aria-hidden="true" tabindex="-1"></a>pip list -o --format json | ConvertFrom-Json | foreach {pip install $_.name -U --no-warn-script-location}</span></code></pre></div>
 <p>Paste this single line into a Bash terminal on Linux. (<a href="%5Bhttps://stackoverflow.com/a/51022937/1082435%5D(https://www.activestate.com/resources/quick-reads/how-to-update-all-python-packages/)">ActiveState.com post</a>.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb86-1"><a href="workstation.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> list <span class="at">--outdated</span> <span class="at">--format</span><span class="op">=</span>freeze <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^\-e'</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> = <span class="at">-f</span> 1 <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-n1</span> pip3 install <span class="at">-U</span> </span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb84-1"><a href="workstation.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> list <span class="at">--outdated</span> <span class="at">--format</span><span class="op">=</span>freeze <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^\-e'</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> = <span class="at">-f</span> 1 <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-n1</span> pip3 install <span class="at">-U</span> </span></code></pre></div>
 </li>
 </ul>
 </div>
@@ -471,6 +459,20 @@ ix problems, but this is not required to start.)</p>
 <li>If something goes wrong with RStudio, re-installing might not fix the issue, because your personal preferences aren’t erased. To be safe, you can be thorough and delete the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\</code>. The options settings are stored (and can be manipulated) in this extensionless text file: <code>C:\Users\wibeasley\AppData\Local\RStudio\monitored\user-settings\user-settings</code>. See RStudio’s support page, <a href="https://support.rstudio.com/hc/en-us/articles/200534577-Resetting-RStudio-s-State">Resetting RStudio Desktop’s State</a>. {added Sept 2012}</li>
 <li>Hold down the ctrl button when clicking on RStudio in the Windows Start Menu. Try switching up the 64/32-bit option. For a VDI, forcing it to a software-rendering option fixed a problem where the RStudio window opened, but nothing was visible inside. {added Jan 2022}</li>
 <li>It might help to look in the logs, which are stored in the equivalent of <code>C:\Users\wibeasley\AppData\Local\RStudio\logs</code> {added Jan 2022}</li>
+</ul>
+</li>
+<li>
+<p><strong>Quarto</strong></p>
+<ul>
+<li>
+<p>If (while rendering a document) you encounter this error like <code>compilation failed- no matching packages ...LaTeX Error: File 'scrreprt.cls' not found.</code>, you’ll need to <a href="https://github.com/quarto-dev/quarto-cli/issues/679">replace your installation of tinytex</a>.</p>
+<p>First uinstall &amp; remove it via R.</p>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">uninstall_tinytex</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/remove.packages.html">remove.packages</a></span><span class="op">(</span><span class="st">"tinytex"</span><span class="op">)</span></span></code></pre></div>
+<p>Then reinstall it via the command line or PowerShell.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb86-1"><a href="workstation.html#cb86-1" aria-hidden="true" tabindex="-1"></a>quarto tools install tinytex</span></code></pre></div>
+</li>
 </ul>
 </li>
 </ul>
@@ -701,7 +703,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <li>
 <a class="nav-link" href="#workstation-recommended"><span class="header-section-number">19.2</span> Recommended Installation</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#workstation-odbc"><span class="header-section-number">19.2.1</span> ODBC Driver</a></li>
-<li><a class="nav-link" href="#workstation-quarto"><span class="header-section-number">19.2.2</span> Quarto++</a></li>
+<li><a class="nav-link" href="#workstation-quarto"><span class="header-section-number">19.2.2</span> Quarto</a></li>
 <li><a class="nav-link" href="#workstation-notepadpp"><span class="header-section-number">19.2.3</span> Notepad++</a></li>
 <li><a class="nav-link" href="#workstation-ads"><span class="header-section-number">19.2.4</span> Azure Data Studio</a></li>
 <li><a class="nav-link" href="#workstation-vscode"><span class="header-section-number">19.2.5</span> Visual Studio Code</a></li>
