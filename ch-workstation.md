@@ -14,8 +14,8 @@ The installation order matters.
 
 ### RStudio {#workstation-rstudio}
 
-[RStudio Desktop](http://www.rstudio.com/ide/download/desktop) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, Markdown, and LaTeX. Updates can be checked easily through the menus `Help` -> `Check for updates`.
-ix problems, but this is not required to start.)
+[RStudio Desktop](https://posit.co/download/rstudio-desktop/) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, and Markdown. Updates can be checked easily through the menus `Help` -> `Check for Updates`.  {added Sept 2012}
+
 
 ### R Tools {#workstation-rtools}
 
@@ -58,11 +58,11 @@ Several R packages will need to be updated every weeks.  Unless you have been to
 
 ### GitHub {#workstation-github}
 
-[GitHub](https://github.com/) registration is necessary to push modified files to the repository.    First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator  (*e.g.*, to https://github.com/OuhscBbmc/RedcapExamplesAndPatterns).
+[GitHub](https://github.com/) registration is necessary to push modified files to the repository.    First, register a free user account, then tell the repository owner your exact username, and they will add you as a collaborator  (*e.g.*, to https://github.com/OuhscBbmc/RedcapExamplesAndPatterns).  {added Sept 2012}
 
 ### GitHub Desktop {#workstation-github-client}
 
-[GitHub Desktop](http://desktop.github.com/) does the basic tasks a little easier than the git features built into RStudio.  This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to f
+[GitHub Desktop](http://desktop.github.com/) does the basic tasks a little easier than the git features built into RStudio.  This client is available for Windows and macOS. (Occasionally, someone might need to use git from the command line to fix problems, but this is not required to start.)  {added Sept 2012}
 
 Recommended Installation {#workstation-recommended}
 ------------------------------------
@@ -73,26 +73,11 @@ The installation order does not matter.
 
 [ODBC Driver for SQL Server](https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) is for connecting to the [token server](https://github.com/OuhscBbmc/REDCapR/blob/main/vignettes/SecurityDatabase.Rmd), if your institution is using one.  As of this writing, version 18 is the most recent driver version.  See if a new one exists. {updated Feb 2022}
 
-### Quarto++ {#workstation-quarto}
+### Quarto {#workstation-quarto}
 
 [Quarto](https://quarto.org/docs/get-started/) is Posit's/RStudio's successor to knitr.  It uses an embedded version of [Pandoc](https://pandoc.org/) to translate R/Python/Julia code into html or pdf reports (via [Markdown](https://www.markdownguide.org/)).  Reporting and reproducible research has been a foundation of our workflow and Quarto will be will be used the upcoming generation of reports.  If an existing Rmd file is delivering what you need (for something like an article or federal report), continue using knitr and R Markdown.  If you are developing a new report from scratch, strongly consider Quarto. {added Nov 2022}
 
-* Quarto's [Get Started](https://quarto.org/docs/get-started/) page has instructions.  You'll want it installed for the RStudio IDE, and probably VS Code too.
-
-* If (while rendering a document) you encounter this error like `compilation failed- no matching packages ...LaTeX Error: File 'scrreprt.cls' not found.`, you'll need to [replace your installation of tinytex](https://github.com/quarto-dev/quarto-cli/issues/679).
-
-    First uinstall & remove it via R.
-    
-    ```r
-    tinytex::uninstall_tinytex()
-    remove.packages("tinytex")
-    ```
-    
-    Then reinstall it via the command line or PowerShell.
-    
-    ```ps
-    quarto tools install tinytex
-    ```
+Quarto's [Get Started](https://quarto.org/docs/get-started/) page has instructions.  You'll want it installed for the RStudio IDE, and probably VS Code too.  See the [troubleshooting tips](#workstation-troubleshooting) if necessary.
     
 ### Notepad++ {#workstation-notepadpp}
 
@@ -354,6 +339,23 @@ Installation Troubleshooting {#workstation-troubleshooting}
     * Hold down the ctrl button when clicking on RStudio in the Windows Start Menu.  Try switching up the 64/32-bit option.  For a VDI, forcing it to a software-rendering option fixed a problem where the RStudio window opened, but nothing was visible inside.  {added Jan 2022}
     * It might help to look in the logs, which are stored in the equivalent of `C:\Users\wibeasley\AppData\Local\RStudio\logs`  {added Jan 2022}
 
+* **Quarto**
+
+    * If (while rendering a document) you encounter this error like `compilation failed- no matching packages ...LaTeX Error: File 'scrreprt.cls' not found.`, you'll need to [replace your installation of tinytex](https://github.com/quarto-dev/quarto-cli/issues/679).
+
+      First uinstall & remove it via R.
+
+      ```r
+      tinytex::uninstall_tinytex()
+      remove.packages("tinytex")
+      ```
+
+      Then reinstall it via the command line or PowerShell.
+
+      ```ps
+      quarto tools install tinytex
+      ```
+    
 Windows Installation {#workstation-windows}
 -----------------------------------
 
