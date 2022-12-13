@@ -16,7 +16,16 @@ The installation order matters.
 
 [RStudio Desktop](https://posit.co/download/rstudio-desktop/) is the IDE (integrated design interface) that you'll use to interact with R, GitHub, and Markdown. Updates can be checked easily through the menus `Help` -> `Check for Updates`.  {added Sept 2012}
 
+Note: here are some non-default changes that facilitate our workflow.  Choose "Global Options" from the "Tools menu bar.
 
+1. General | Basic | **Restore .RData into wokspace at startup: unchecked**
+1. General | Basic | **Save workspace to >RData on exit: never**
+1. General | Basic | **Always save history: unchecked**
+1. Code | Editing | **Use native pipe operator, |>: checked**
+1. Code | Saving | **Ensure that source files end with newline: checked**
+1. Code | Saving | **Strip trailing horizontal whitespace when saving: checked**
+1. Sweave | **Weave Rnw file using: knitr**
+ 
 ### R Tools {#workstation-rtools}
 
 [R Tools for Windows](https://cran.r-project.org/bin/windows/Rtools/) is necessary to build some packages in development hosted on GitHub.  If running Windows, follow the page's instructions, especially the "Putting Rtools on the PATH" section.  If running Linux, the components of R Tools are likely already installed on your machine. {added Feb 2017}
