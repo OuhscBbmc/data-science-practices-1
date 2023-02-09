@@ -58,8 +58,8 @@ Many of the GUI options are easy to specify, but three are error-prone, and must
 Other options we typically specify are:
 
 <ol start="4">
-  <li>"Run whether the user is logged in or not."</li>
-  <li>"Run as the highest available version of Windows."</li>
+  <li>Select "Run whether the user is logged in or not."</li>
+  <li>Configure for the highest available version of Windows, using the dropdown box.</li>
   <li>"Wake the computer to run this task" is probably necessary if this is located on a normal desktop.  It is not something we specify, because our tasks are located on a [VM](https://en.wikipedia.org/wiki/System_virtual_machine)-based workstation that is never turned off.</li>
 </ol>
 
