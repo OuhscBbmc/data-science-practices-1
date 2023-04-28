@@ -134,7 +134,7 @@ The [bash](https://www.gnu.org/software/bash/)-centric steps below remove any fi
 
 1. Ask your collaborators to re-clone the repo to their local machine.  It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo's history.
 
-1. If the file contains sensitive information, like passwords or PHI, ask GitHub to refresh the cache so the file's history isn't accessible through their website, even if the repo is private.
+1. If the file contains sensitive information, like passwords or PHI, ask [GitHub support](https://support.github.com/) to refresh the cache so the file's history isn't accessible through their website, even if the repo is private.
 
 ##### Resources
 
