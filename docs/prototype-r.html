@@ -7,7 +7,7 @@
 <title>Chapter 4 Prototypical R File | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="As stated in Consistency across Files, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and...">
-<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Prototypical R File | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="As stated in Consistency across Files, using a consistent file structure can (a) improve the quality of the code because the structure has been proven over time to facilitate good practices and...">
@@ -149,7 +149,7 @@
 <li>Compared to manipulation files, our analysis files tend to use many functions in a few concentrated packages so conflicting function names are less common. Typical packages used in analysis are ‘ggplot2’ and ‘lme4’.</li>
 </ol>
 <p>The <code>source</code>d files above may load their own packages (by calling <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>). It is important that the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> calls in this file follow the ‘load-sources’ chunk so that identically-named functions (in different packages) are called with the correct precedent. Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.</p>
-<p>Read <a href="http://r-pkgs.had.co.nz/namespace.html#search-path">R Packages</a> for more about <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code>, and their siblings, as well as the larger concepts such as attaching functions into the search path.</p>
+<p>Read <a href="http://r-pkgs.had.co.nz/namespace.html#search-path"><em>R Packages</em></a> for more about <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>, <code><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace()</a></code>, and their siblings, as well as the larger concepts such as attaching functions into the search path.</p>
 <p>Here are packages found in most of our manipulation files. Notice the lesser-known packages have a quick explanation; this helps maintainers decide if the declaration is still necessary. Also notice the packages distributed outside of CRAN (<em>e.g.</em>, GitHub) have a quick commented line to help the user install or update the package.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ---- load-packages -----------------------------------------------------------</span></span>
@@ -333,7 +333,7 @@ It’s best to rename the dataset (a) in a single place and (b) early in the pip
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-04-28.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-05-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

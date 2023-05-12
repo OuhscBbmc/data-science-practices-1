@@ -50,7 +50,7 @@ As discussed in the previous [qualify all functions](#qualify-functions) section
 
 The `source`d files above may load their own packages (by calling `library()`).  It is important that the `library()` calls in this file follow the 'load-sources' chunk so that identically-named functions (in different packages) are called with the correct precedent.  Otherwise identically-named functions will conflict in the namespace with hard-to-predict results.
 
-Read [R Packages](http://r-pkgs.had.co.nz/namespace.html#search-path) for more about `library()`, `requireNamespace()`, and their siblings, as well as the larger concepts such as attaching functions into the search path.
+Read [*R Packages*](http://r-pkgs.had.co.nz/namespace.html#search-path) for more about `library()`, `requireNamespace()`, and their siblings, as well as the larger concepts such as attaching functions into the search path.
 
 Here are packages found in most of our manipulation files.  Notice the lesser-known packages have a quick explanation; this helps maintainers decide if the declaration is still necessary.  Also notice the packages distributed outside of CRAN (*e.g.*, GitHub) have a quick commented line to help the user install or update the package.
 
