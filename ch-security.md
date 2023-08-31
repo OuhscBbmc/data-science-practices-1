@@ -136,8 +136,11 @@ The [bash](https://www.gnu.org/software/bash/)-centric steps below remove any fi
 
 1. If the file contains sensitive information, like passwords or PHI, ask [GitHub support](https://support.github.com/) to refresh the cache so the file's history isn't accessible through their website, even if the repo is private.
 
+   GitHub provides a chatbot that helps submit this request.  At the time of writing, go to <https://support.github.com/request?tags=docs-generic&q=remove+cached+views> and click the "Clear cached views with our Virtual Agent" blue button.
+
 ##### Resources
 
 * [BFG Repo-Cleaner site](https://rtyley.github.io/bfg-repo-cleaner/)
 * [Additional BFG instructions](https://github.com/IBM/BluePic/wiki/Using-BFG-Repo-Cleaner-tool-to-remove-sensitive-files-from-your-git-repo)
 * [GitHub Sensitive Data Removal Policy](https://help.github.com/articles/github-sensitive-data-removal-policy/)
+* [GitHub Removing sensitive data from a repository](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)

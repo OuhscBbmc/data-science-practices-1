@@ -7,7 +7,7 @@
 <title>Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
-<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -272,7 +272,10 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <span id="cb55-2"><a href="security.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> bfg-<span class="pp">*</span>.jar</span></code></pre></div>
 </li>
 <li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
-<li><p>If the file contains sensitive information, like passwords or PHI, ask <a href="https://support.github.com/">GitHub support</a> to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p></li>
+<li>
+<p>If the file contains sensitive information, like passwords or PHI, ask <a href="https://support.github.com/">GitHub support</a> to refresh the cache so the file’s history isn’t accessible through their website, even if the repo is private.</p>
+<p>GitHub provides a chatbot that helps submit this request. At the time of writing, go to <a href="https://support.github.com/request?tags=docs-generic&amp;q=remove+cached+views" class="uri">https://support.github.com/request?tags=docs-generic&amp;q=remove+cached+views</a> and click the “Clear cached views with our Virtual Agent” blue button.</p>
+</li>
 </ol>
 <div id="resources" class="section level5" number="9.6.2.0.1">
 <h5>
@@ -282,6 +285,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li><a href="https://rtyley.github.io/bfg-repo-cleaner/">BFG Repo-Cleaner site</a></li>
 <li><a href="https://github.com/IBM/BluePic/wiki/Using-BFG-Repo-Cleaner-tool-to-remove-sensitive-files-from-your-git-repo">Additional BFG instructions</a></li>
 <li><a href="https://help.github.com/articles/github-sensitive-data-removal-policy/">GitHub Sensitive Data Removal Policy</a></li>
+<li><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository">GitHub Removing sensitive data from a repository</a></li>
 </ul>
 </div>
 </div>
@@ -322,7 +326,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-07-17.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-08-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
