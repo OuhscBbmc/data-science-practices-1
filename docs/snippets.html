@@ -278,7 +278,8 @@
 <hr>
 <p>[Start of the letter]</p>
 <p>Sorry to be tedious, but could you please resend the extract as a <a href="https://en.wikipedia.org/wiki/Comma-separated_values">csv</a> file? Please call me if you have questions.</p>
-<p>Excel is being too helpful with some of the values, and essentially corrupting them. For example, values like <strong>109.19</strong> is interpreted as a number, not a character code (<em>e.g.</em>, see cell <strong>L14</strong>). Because of <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">limitations of finite precision</a>, this becomes <strong>109.18999999999999773</strong>. We can’t round it, because there are other values in this column that cannot be cast to numbers, such as <strong>V55.0</strong>. Furthermore, the “E”s in some codes are incorrectly interpreted as the exponent operator (<em>e.g.</em>, “4E5” is converted to 400,000). Finally, values like <strong>41.0</strong> are being converted to a number and the trailing zero is dropped (so cells like “41” are not distinguishable from “41.0”).</p>
+<p>Excel is being too helpful with some of the values, and essentially corrupting them. For example, values like <strong>109.19</strong> is interpreted as a number, not a character code (<em>e.g.</em>, see cell <strong>L14</strong>). Because of <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">limitations of finite precision</a>, this becomes <strong>109.18999999999999773</strong>. We can’t round it, because there are other values in this column that cannot be cast to numbers, such as <strong>V55.0</strong>. Furthermore, the “E”s in some codes are incorrectly interpreted as the exponent operator (<em>e.g.</em>, “4E5” is converted to 400,000).<br>
+Finally, values like <a href="http://www.icd9data.com/2015/Volume1/001-139/001-009/001/001.0.htm">001.0</a> are being converted to a number and any leading or trailing zeros are dropped (so cells like “1” are not distinguishable from “001.0”).</p>
 <p>Unfortunately the problems exist in the Excel file itself. When we import the columns <a href="https://readxl.tidyverse.org/reference/read_excel.html">as text</a>, the values are already in their corrupted state.</p>
 <p>Please compress/zip the csv if the file is be too large to email. We’ve found that an Excel file is typically 5-10 times larger than a compressed csv.</p>
 <p>As much as Excel interferes with our medical variables, we’re lucky. It has messed with other branches of science much worse. Genomics were using it far too late <a href="https://qz.com/768334/years-of-genomics-research-is-riddled-with-errors-thanks-to-a-bunch-of-botched-excel-spreadsheets/">before they realized their mistakes</a>.</p>
@@ -330,7 +331,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-09-11.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-10-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
