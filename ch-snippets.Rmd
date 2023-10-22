@@ -110,6 +110,106 @@ ds <- vroom::vroom(
 rm(col_types)
 ```
 
+
+Row Operations {#snippets-row}
+------------------------------------
+
+We frequently have to find the mean or sum across columns (within a row).  
+If 
+Finding mean across a lot of columns
+ 
+Here are several approaches for finding the mean across columns, without naming each column.  Some remarks:
+
+* `m1` & `m2` are sanity checks for this example.  
+  `m1` would be clumsy if you have 10+ items.  
+  `m2` is discouraged because it's brittle.  
+  A change in the column order could alter the calculation.
+  We prefer to use `grep()` to specify a sequence of items.
+* Especially for large datasets, 
+  I’d lean towards `m3` if the items are reasonably complete and 
+  `m4` if some participants are missing enough items that their summary score is fishy.
+  In the approaches below, `m4` and `m6` return the mean only if the participant completed 2 or more items.
+* `dplyr::rowwise()` is convenient, but slow for large datasets.
+* If you need a more complex function that’s too clumsy to include directly in a `mutate()` statement, 
+  see how the calculation for `m6` is delegated to the external function, `f6`.
+* The technique behind `nonmissing` is pretty cool, 
+  because you can apply an arbitrary function on each cell before they’re summed/averaged.  
+* This is in contrast to `f6()`, which applies to an entire (row-wise) data.frame.
+
+```r
+# Isolate the columns to average.  Remember the `grep()` approach w/ `colnames()`
+columns_to_average <- c("hp", "drat", "wt")
+
+f6 <- function(x) {
+  # browser()
+  s <- sum(x, na.rm = TRUE)
+  n <- sum(!is.na(x))
+  
+  dplyr::if_else(
+    2L <= n,
+    s / n,
+    NA_real_
+  )
+}
+
+mtcars |>
+  dplyr::mutate(
+    m1 = (hp + drat + wt) / 3,
+    m2 =
+      rowMeans(
+        dplyr::across(hp:wt), # All columns between hp & wt.
+        na.rm = TRUE
+      ),
+    m3 =
+      rowMeans(
+        dplyr::across(!!columns_to_average),
+        na.rm = TRUE
+      ),
+    s4 = # Finding the sum (used by m4)
+      rowSums(
+        dplyr::across(!!columns_to_average),
+        na.rm = TRUE
+      ),
+    nonmissing =
+      rowSums(
+        dplyr::across(
+          !!columns_to_average,
+          .fns = \(x) { !is.na(x) }
+        )
+      ),
+    m4 = 
+      dplyr::if_else(
+        2 <= nonmissing,
+        s4 / nonmissing,
+        NA_real_
+      )
+  ) |>
+  dplyr::rowwise() |> # Required for `m5`
+  dplyr::mutate(
+    m5 = mean(dplyr::c_across(dplyr::all_of(columns_to_average))),
+  ) |>
+  dplyr::ungroup() |> # Clean up after rowwise()
+  dplyr::rowwise() |> # Required for `m6`
+  dplyr::mutate(
+    m6 = f6(dplyr::across(!!columns_to_average))
+  ) |>
+  dplyr::ungroup() |>   # Clean up after rowwise()
+  dplyr::select(
+    hp,
+    drat,
+    wt,
+    m1,
+    m2, 
+    m3, 
+    s4,
+    nonmissing,
+    m4,
+    m5, 
+    m6,
+  )
+```
+
+
 Grooming {#snippets-grooming}
 ------------------------------------
 

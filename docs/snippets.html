@@ -212,38 +212,136 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">col_types</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="snippets-grooming" class="section level2" number="27.2">
+<div id="snippets-row" class="section level2" number="27.2">
 <h2>
-<span class="header-section-number">C.2</span> Grooming<a class="anchor" aria-label="anchor" href="#snippets-grooming"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.2</span> Row Operations<a class="anchor" aria-label="anchor" href="#snippets-row"><i class="fas fa-link"></i></a>
 </h2>
-<div id="snippets-grooming-two-year" class="section level3" number="27.2.1">
+<p>We frequently have to find the mean or sum across columns (within a row).<br>
+If
+Finding mean across a lot of columns</p>
+<p>Here are several approaches for finding the mean across columns, without naming each column. Some remarks:</p>
+<ul>
+<li>
+<code>m1</code> &amp; <code>m2</code> are sanity checks for this example.<br><code>m1</code> would be clumsy if you have 10+ items.<br><code>m2</code> is discouraged because it’s brittle.<br>
+A change in the column order could alter the calculation.
+We prefer to use <code><a href="https://rdrr.io/r/base/grep.html">grep()</a></code> to specify a sequence of items.</li>
+<li>Especially for large datasets,
+I’d lean towards <code>m3</code> if the items are reasonably complete and
+<code>m4</code> if some participants are missing enough items that their summary score is fishy.
+In the approaches below, <code>m4</code> and <code>m6</code> return the mean only if the participant completed 2 or more items.</li>
+<li>
+<code>dplyr::rowwise()</code> is convenient, but slow for large datasets.</li>
+<li>If you need a more complex function that’s too clumsy to include directly in a <code>mutate()</code> statement,
+see how the calculation for <code>m6</code> is delegated to the external function, <code>f6</code>.</li>
+<li>The technique behind <code>nonmissing</code> is pretty cool,
+because you can apply an arbitrary function on each cell before they’re summed/averaged.<br>
+</li>
+<li>This is in contrast to <code>f6()</code>, which applies to an entire (row-wise) data.frame.</li>
+</ul>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Isolate the columns to average.  Remember the `grep()` approach w/ `colnames()`</span></span>
+<span><span class="va">columns_to_average</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hp"</span>, <span class="st">"drat"</span>, <span class="st">"wt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">f6</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># browser()</span></span>
+<span>  <span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span></span>
+<span>    <span class="fl">2L</span> <span class="op">&lt;=</span> <span class="va">n</span>,</span>
+<span>    <span class="va">s</span> <span class="op">/</span> <span class="va">n</span>,</span>
+<span>    <span class="cn">NA_real_</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
+<span>    m1 <span class="op">=</span> <span class="op">(</span><span class="va">hp</span> <span class="op">+</span> <span class="va">drat</span> <span class="op">+</span> <span class="va">wt</span><span class="op">)</span> <span class="op">/</span> <span class="fl">3</span>,</span>
+<span>    m2 <span class="op">=</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span><span class="op">(</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">across</span><span class="op">(</span><span class="va">hp</span><span class="op">:</span><span class="va">wt</span><span class="op">)</span>, <span class="co"># All columns between hp &amp; wt.</span></span>
+<span>        na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>    m3 <span class="op">=</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowMeans</a></span><span class="op">(</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">across</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">columns_to_average</span><span class="op">)</span>,</span>
+<span>        na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>    s4 <span class="op">=</span> <span class="co"># Finding the sum (used by m4)</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">across</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">columns_to_average</span><span class="op">)</span>,</span>
+<span>        na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>    nonmissing <span class="op">=</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span></span>
+<span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">across</span><span class="op">(</span></span>
+<span>          <span class="op">!</span><span class="op">!</span><span class="va">columns_to_average</span>,</span>
+<span>          .fns <span class="op">=</span> \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span></span>
+<span>        <span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>    m4 <span class="op">=</span> </span>
+<span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span></span>
+<span>        <span class="fl">2</span> <span class="op">&lt;=</span> <span class="va">nonmissing</span>,</span>
+<span>        <span class="va">s4</span> <span class="op">/</span> <span class="va">nonmissing</span>,</span>
+<span>        <span class="cn">NA_real_</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">rowwise</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># Required for `m5`</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
+<span>    m5 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">c_across</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">all_of</span><span class="op">(</span><span class="va">columns_to_average</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># Clean up after rowwise()</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">rowwise</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># Required for `m6`</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
+<span>    m6 <span class="op">=</span> <span class="fu">f6</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">across</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="va">columns_to_average</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span>   <span class="co"># Clean up after rowwise()</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span></span>
+<span>    <span class="va">hp</span>,</span>
+<span>    <span class="va">drat</span>,</span>
+<span>    <span class="va">wt</span>,</span>
+<span>    <span class="va">m1</span>,</span>
+<span>    <span class="va">m2</span>, </span>
+<span>    <span class="va">m3</span>, </span>
+<span>    <span class="va">s4</span>,</span>
+<span>    <span class="va">nonmissing</span>,</span>
+<span>    <span class="va">m4</span>,</span>
+<span>    <span class="va">m5</span>, </span>
+<span>    <span class="va">m6</span>,</span>
+<span>  <span class="op">)</span></span></code></pre></div>
+</div>
+<div id="snippets-grooming" class="section level2" number="27.3">
+<h2>
+<span class="header-section-number">C.3</span> Grooming<a class="anchor" aria-label="anchor" href="#snippets-grooming"><i class="fas fa-link"></i></a>
+</h2>
+<div id="snippets-grooming-two-year" class="section level3" number="27.3.1">
 <h3>
-<span class="header-section-number">C.2.1</span> Correct for misinterpreted two-digit year<a class="anchor" aria-label="anchor" href="#snippets-grooming-two-year"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.3.1</span> Correct for misinterpreted two-digit year<a class="anchor" aria-label="anchor" href="#snippets-grooming-two-year"><i class="fas fa-link"></i></a>
 </h3>
 <p><em>Background</em>: Sometimes the Meditech dates are specified like <code>1/6/54</code> instead of <code>1/6/1954</code>. <code>readr::read_csv()</code> has to choose if the year is supposed to be ‘1954’ or ‘2054’. A human can use context to guess a birth date is in the past (so it guesses 1954), but readr can’t (so it guesses 2054). For avoid this and other problems, request dates in an <a href="https://www.explainxkcd.com/wiki/index.php/1179:_ISO_8601">ISO-8601</a> format.</p>
 <p><em>Explanation</em>: Correct for this in a <code>dplyr::mutate()</code> clause; compare the date value against today. If the date is today or before, use it; if the day is in the future, subtract 100 years.</p>
 <p><em>Instruction</em>: For future dates such as loan payments, the direction will flip.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="va">ds</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">mutate</span><span class="op">(</span></span>
 <span>    dob <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">if_else</span><span class="op">(</span><span class="va">dob</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">dob</span>, <span class="va">dob</span> <span class="op">-</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu">years</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-<div id="snippets-identification" class="section level2" number="27.3">
+<div id="snippets-identification" class="section level2" number="27.4">
 <h2>
-<span class="header-section-number">C.3</span> Identification<a class="anchor" aria-label="anchor" href="#snippets-identification"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.4</span> Identification<a class="anchor" aria-label="anchor" href="#snippets-identification"><i class="fas fa-link"></i></a>
 </h2>
-<div id="snippets-identification-tags" class="section level3" number="27.3.1">
+<div id="snippets-identification-tags" class="section level3" number="27.4.1">
 <h3>
-<span class="header-section-number">C.3.1</span> Generating “tags”<a class="anchor" aria-label="anchor" href="#snippets-identification-tags"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.4.1</span> Generating “tags”<a class="anchor" aria-label="anchor" href="#snippets-identification-tags"><i class="fas fa-link"></i></a>
 </h3>
 <p><em>Background</em>: When you need to generate unique identification values for future people/clients/patients, as described in the <a href="style.html#style-number">style guide</a>.</p>
 <p><em>Explanation</em>: This snippet will create a 5-row csv with random 7-character “tags” to send to the research team collecting patients. The</p>
 <p><em>Instruction</em>: Set <code>pt_count</code>, <code>tag_length</code>, <code>path_out</code>, and execute. Add and rename the columns to be more appropriate for your domain (<em>e.g.</em>, change “patient tag” to “store tag”).</p>
 <p><em>Last Modified</em>: 2019-12-30 by Will</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pt_count</span>    <span class="op">&lt;-</span> <span class="fl">5L</span>   <span class="co"># The number of rows in the dataset.</span></span>
 <span><span class="va">tag_length</span>  <span class="op">&lt;-</span> <span class="fl">7L</span>   <span class="co"># The number of characters in each tag.</span></span>
 <span><span class="va">path_out</span>    <span class="op">&lt;-</span> <span class="st">"data-private/derived/pt-pool.csv"</span></span>
@@ -273,13 +371,13 @@
 5        5 r5ei5ph FALSE    --        --</code></pre>
 </div>
 </div>
-<div id="snippets-correspondence" class="section level2" number="27.4">
+<div id="snippets-correspondence" class="section level2" number="27.5">
 <h2>
-<span class="header-section-number">C.4</span> Correspondence with Collaborators<a class="anchor" aria-label="anchor" href="#snippets-correspondence"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.5</span> Correspondence with Collaborators<a class="anchor" aria-label="anchor" href="#snippets-correspondence"><i class="fas fa-link"></i></a>
 </h2>
-<div id="snippets-correspondence-excel" class="section level3" number="27.4.1">
+<div id="snippets-correspondence-excel" class="section level3" number="27.5.1">
 <h3>
-<span class="header-section-number">C.4.1</span> Excel files<a class="anchor" aria-label="anchor" href="#snippets-correspondence-excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">C.5.1</span> Excel files<a class="anchor" aria-label="anchor" href="#snippets-correspondence-excel"><i class="fas fa-link"></i></a>
 </h3>
 <p>Receiving and storing <a href="#data-containers-avoid">Excel files should almost always be avoided</a> for the reasons explained in this letter.</p>
 <p>We receive extracts as Excel files frequently, and have the following request ready to email the person sending us Excel files. Adapt the bold values like “109.19” to your situation. If you are familiar with their tools, suggest an alternative for saving the file as a csv. Once presented with these Excel gotchas, almost everyone has an ‘aha’ moment and recognizes the problem. Unfortunately, not everyone has flexible software and can adapt easily.</p>
@@ -313,14 +411,15 @@ Finally, values like <a href="http://www.icd9data.com/2015/Volume1/001-139/001-0
 <li><a class="nav-link" href="#snippets-reading-vroom"><span class="header-section-number">C.1.3</span> Removing Trailing Comma from Header</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#snippets-row"><span class="header-section-number">C.2</span> Row Operations</a></li>
 <li>
-<a class="nav-link" href="#snippets-grooming"><span class="header-section-number">C.2</span> Grooming</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-grooming-two-year"><span class="header-section-number">C.2.1</span> Correct for misinterpreted two-digit year</a></li></ul>
+<a class="nav-link" href="#snippets-grooming"><span class="header-section-number">C.3</span> Grooming</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-grooming-two-year"><span class="header-section-number">C.3.1</span> Correct for misinterpreted two-digit year</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#snippets-identification"><span class="header-section-number">C.3</span> Identification</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-identification-tags"><span class="header-section-number">C.3.1</span> Generating “tags”</a></li></ul>
+<a class="nav-link" href="#snippets-identification"><span class="header-section-number">C.4</span> Identification</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-identification-tags"><span class="header-section-number">C.4.1</span> Generating “tags”</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#snippets-correspondence"><span class="header-section-number">C.4</span> Correspondence with Collaborators</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-correspondence-excel"><span class="header-section-number">C.4.1</span> Excel files</a></li></ul>
+<a class="nav-link" href="#snippets-correspondence"><span class="header-section-number">C.5</span> Correspondence with Collaborators</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#snippets-correspondence-excel"><span class="header-section-number">C.5.1</span> Excel files</a></li></ul>
 </li>
 </ul>
 

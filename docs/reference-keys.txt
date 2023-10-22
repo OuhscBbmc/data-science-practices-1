@@ -275,6 +275,7 @@ snippets-reading
 snippets-reading-excel
 snippets-reading-trailing-comma
 snippets-reading-vroom
+snippets-row
 snippets-grooming
 snippets-grooming-two-year
 snippets-identification
