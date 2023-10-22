@@ -7,7 +7,7 @@
 <title>C Snippets | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="C.1 Reading External Data  C.1.1 Reading from Excel Background: Avoid Excel for the reasons previously discussed. But if there isn’t another good option, be protective. readxl::read_excel() allows...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="C Snippets | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="C.1 Reading External Data  C.1.1 Reading from Excel Background: Avoid Excel for the reasons previously discussed. But if there isn’t another good option, be protective. readxl::read_excel() allows...">
@@ -142,7 +142,15 @@
 <span><span class="fu">testit</span><span class="fu">::</span><span class="fu">assert</span><span class="op">(</span></span>
 <span>  <span class="st">"The order of column names must match the expected list."</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">col_types</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Alternatively, this provides more detailed error messages than `testit::assert()`</span></span>
+<span><span class="co"># testthat::expect_equal(</span></span>
+<span><span class="co">#   colnames(d),</span></span>
+<span><span class="co">#   names(col_types),</span></span>
+<span><span class="co">#   label = "worksheet's column name (x)",</span></span>
+<span><span class="co">#   expected.label = "col_types' name (y)"</span></span>
+<span><span class="co"># )</span></span></code></pre></div>
 </div>
 <div id="snippets-reading-trailing-comma" class="section level3" number="27.1.2">
 <h3>
@@ -331,7 +339,7 @@ Finally, values like <a href="http://www.icd9data.com/2015/Volume1/001-139/001-0
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-10-03.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-10-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

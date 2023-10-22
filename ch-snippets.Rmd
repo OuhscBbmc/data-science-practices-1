@@ -34,6 +34,14 @@ testit::assert(
   "The order of column names must match the expected list.",
   names(col_types) == colnames(ds)
 )
+
+# Alternatively, this provides more detailed error messages than `testit::assert()`
+# testthat::expect_equal(
+#   colnames(d),
+#   names(col_types),
+#   label = "worksheet's column name (x)",
+#   expected.label = "col_types' name (y)"
+# )
 ```
 
 ### Removing Trailing Comma from Header {#snippets-reading-trailing-comma}
