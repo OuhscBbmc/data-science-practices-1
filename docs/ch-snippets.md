@@ -6,7 +6,7 @@ Reading External Data {#snippets-reading}
 
 ### Reading from Excel {#snippets-reading-excel}
 
-*Background*: Avoid Excel for the [reasons previously discussed]({#data-containers-avoid).  But if there isn't another good option, be protective.  [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html) allows you to specify column types, but not column order.  The names of `col_types` is ignored by `readxl::read_excel()`.  To defend against roaming columns (*e.g.*, the files changed over time), `tesit::assert()` that the order is what you expect.
+*Background*: Avoid Excel for the [reasons previously discussed](#data-containers-avoid).  But if there isn't another good option, be protective.  [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html) allows you to specify column types, but not column order.  The names of `col_types` is ignored by `readxl::read_excel()`.  To defend against roaming columns (*e.g.*, the files changed over time), `tesit::assert()` that the order is what you expect.
 
 See the readxl vignette, [Cell and Column Types](https://readxl.tidyverse.org/articles/cell-and-column-types.html), for more info.
 

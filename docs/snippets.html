@@ -118,7 +118,7 @@
 <h3>
 <span class="header-section-number">C.1.1</span> Reading from Excel<a class="anchor" aria-label="anchor" href="#snippets-reading-excel"><i class="fas fa-link"></i></a>
 </h3>
-<p><em>Background</em>: Avoid Excel for the <a href="%7B#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
+<p><em>Background</em>: Avoid Excel for the <a href="#data-containers-avoid">reasons previously discussed</a>. But if there isn’t another good option, be protective. <a href="https://readxl.tidyverse.org/reference/read_excel.html"><code>readxl::read_excel()</code></a> allows you to specify column types, but not column order. The names of <code>col_types</code> is ignored by <code>readxl::read_excel()</code>. To defend against roaming columns (<em>e.g.</em>, the files changed over time), <code>tesit::assert()</code> that the order is what you expect.</p>
 <p>See the readxl vignette, <a href="https://readxl.tidyverse.org/articles/cell-and-column-types.html">Cell and Column Types</a>, for more info.</p>
 <p><em>Last Modified</em>: 2019-12-12 by Will</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
@@ -438,7 +438,7 @@ Finally, values like <a href="http://www.icd9data.com/2015/Volume1/001-139/001-0
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-10-22.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-10-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
