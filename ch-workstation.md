@@ -278,6 +278,15 @@ Like Notepad++ and VS Code, PilotEdit has good Find features that can (a) presen
 
 PilotEdit is also a good tool for the occasional data extract with an encoding problem.  You can side-by-side inspect the hex code and (visible or non-visible) character produced ([for example with ascii](https://www.binaryhexconverter.com/ascii-text-to-hex-converter), "76" produces "v" and "0A" produces a line feed).  {Added Sept 2020}
 
+### Node.js {#workstation-node}
+
+[Node.js](https://nodejs.org/en/download) is a JavaScript runtme environment.
+You probably won't use Node directly, but some of these tools will,
+such VS Code extensions like Sqltools.
+On Windows, let the msi executable automatically install node's recommended dependencies like 
+[chocolatey](https://community.chocolatey.org/packages/nodejs).
+{Added Dec 2023}
+
 Asset Locations {#workstation-assets}
 -----------------------------------
 

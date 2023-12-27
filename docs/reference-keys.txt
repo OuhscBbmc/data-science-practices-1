@@ -221,6 +221,7 @@ workstation-calc
 workstation-pandoc
 workstation-python
 workstation-pilot-edit
+workstation-node
 workstation-assets
 workstation-administrator
 workstation-mysql

@@ -399,6 +399,17 @@
 <p>Like Notepad++ and VS Code, PilotEdit has good Find features that can (a) present all search hits within a file, (b) scan multiple files, and (c) use regular expressions. This helps trace the origin of problems in a pipeline. For example, if our data warehouse has a suspicious character in patient 10009’s BMI value, the <a href="https://www.regular-expressions.info/">regex</a> <code>\b10009\tbmi\b</code> locates the origin among the multiple 1+GB files we received.</p>
 <p>PilotEdit is also a good tool for the occasional data extract with an encoding problem. You can side-by-side inspect the hex code and (visible or non-visible) character produced (<a href="https://www.binaryhexconverter.com/ascii-text-to-hex-converter">for example with ascii</a>, “76” produces “v” and “0A” produces a line feed). {Added Sept 2020}</p>
 </div>
+<div id="workstation-node" class="section level3" number="19.3.6">
+<h3>
+<span class="header-section-number">19.3.6</span> Node.js<a class="anchor" aria-label="anchor" href="#workstation-node"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://nodejs.org/en/download">Node.js</a> is a JavaScript runtme environment.
+You probably won’t use Node directly, but some of these tools will,
+such VS Code extensions like Sqltools.
+On Windows, let the msi executable automatically install node’s recommended dependencies like
+<a href="https://community.chocolatey.org/packages/nodejs">chocolatey</a>.
+{Added Dec 2023}</p>
+</div>
 </div>
 <div id="workstation-assets" class="section level2" number="19.4">
 <h2>
@@ -733,6 +744,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <li><a class="nav-link" href="#workstation-pandoc"><span class="header-section-number">19.3.3</span> pandoc</a></li>
 <li><a class="nav-link" href="#workstation-python"><span class="header-section-number">19.3.4</span> Python</a></li>
 <li><a class="nav-link" href="#workstation-pilot-edit"><span class="header-section-number">19.3.5</span> PilotEdit</a></li>
+<li><a class="nav-link" href="#workstation-node"><span class="header-section-number">19.3.6</span> Node.js</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#workstation-assets"><span class="header-section-number">19.4</span> Asset Locations</a></li>
@@ -775,7 +787,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-12-04.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-12-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
