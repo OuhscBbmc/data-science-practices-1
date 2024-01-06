@@ -569,68 +569,71 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <span id="cb89-16"><a href="workstation.html#cb89-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb89-17"><a href="workstation.html#cb89-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">### CRAN packages that are also on the Ubuntu repositories</span></span>
 <span id="cb89-18"><a href="workstation.html#cb89-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-19"><a href="workstation.html#cb89-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'xml2' package; https://CRAN.R-project.org/package=xml2</span></span>
-<span id="cb89-20"><a href="workstation.html#cb89-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libxml2-dev r-cran-xml</span>
+<span id="cb89-19"><a href="workstation.html#cb89-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For the 'devtools' package dependencies</span></span>
+<span id="cb89-20"><a href="workstation.html#cb89-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libharfbuzz-dev libfribidi-dev</span>
 <span id="cb89-21"><a href="workstation.html#cb89-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-22"><a href="workstation.html#cb89-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'curl' package, and others; https://CRAN.R-project.org/package=curl</span></span>
-<span id="cb89-23"><a href="workstation.html#cb89-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libssl-dev libcurl4-openssl-dev</span>
+<span id="cb89-22"><a href="workstation.html#cb89-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'xml2' package; https://CRAN.R-project.org/package=xml2</span></span>
+<span id="cb89-23"><a href="workstation.html#cb89-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libxml2-dev r-cran-xml</span>
 <span id="cb89-24"><a href="workstation.html#cb89-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-25"><a href="workstation.html#cb89-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
-<span id="cb89-26"><a href="workstation.html#cb89-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev</span>
+<span id="cb89-25"><a href="workstation.html#cb89-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'curl' package, and others; https://CRAN.R-project.org/package=curl</span></span>
+<span id="cb89-26"><a href="workstation.html#cb89-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libssl-dev libcurl4-openssl-dev</span>
 <span id="cb89-27"><a href="workstation.html#cb89-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-28"><a href="workstation.html#cb89-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
-<span id="cb89-29"><a href="workstation.html#cb89-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
+<span id="cb89-28"><a href="workstation.html#cb89-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'udunits2' package: https://cran.r-project.org/web/packages/udunits2/index.html</span></span>
+<span id="cb89-29"><a href="workstation.html#cb89-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev</span>
 <span id="cb89-30"><a href="workstation.html#cb89-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-31"><a href="workstation.html#cb89-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'rgl' package; https://stackoverflow.com/a/39952771/1082435</span></span>
-<span id="cb89-32"><a href="workstation.html#cb89-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcgal-dev libglu1-mesa-dev</span>
+<span id="cb89-31"><a href="workstation.html#cb89-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'odbc' package: https://github.com/r-dbi/odbc#linux---debian--ubuntu</span></span>
+<span id="cb89-32"><a href="workstation.html#cb89-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install unixodbc-dev tdsodbc odbc-postgresql libsqliteodbc</span>
 <span id="cb89-33"><a href="workstation.html#cb89-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-34"><a href="workstation.html#cb89-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'gsl' package; https://cran.rstudio.com/web/packages/gsl/INSTALL</span></span>
-<span id="cb89-35"><a href="workstation.html#cb89-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libgsl0-dev</span>
+<span id="cb89-34"><a href="workstation.html#cb89-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'rgl' package; https://stackoverflow.com/a/39952771/1082435</span></span>
+<span id="cb89-35"><a href="workstation.html#cb89-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcgal-dev libglu1-mesa-dev</span>
 <span id="cb89-36"><a href="workstation.html#cb89-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-37"><a href="workstation.html#cb89-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
-<span id="cb89-38"><a href="workstation.html#cb89-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install <span class="st">'libmagick++-dev'</span></span>
+<span id="cb89-37"><a href="workstation.html#cb89-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'gsl' package; https://cran.rstudio.com/web/packages/gsl/INSTALL</span></span>
+<span id="cb89-38"><a href="workstation.html#cb89-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libgsl0-dev</span>
 <span id="cb89-39"><a href="workstation.html#cb89-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-40"><a href="workstation.html#cb89-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
-<span id="cb89-41"><a href="workstation.html#cb89-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install qpdf</span>
+<span id="cb89-40"><a href="workstation.html#cb89-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'magick' package; https://docs.ropensci.org/magick/articles/intro.html#build-from-source</span></span>
+<span id="cb89-41"><a href="workstation.html#cb89-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install <span class="st">'libmagick++-dev'</span></span>
 <span id="cb89-42"><a href="workstation.html#cb89-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-43"><a href="workstation.html#cb89-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'pdftools' and 'Rpoppler' packages, which involve PDFs</span></span>
-<span id="cb89-44"><a href="workstation.html#cb89-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libpoppler-cpp-dev libpoppler-glib-dev</span>
+<span id="cb89-43"><a href="workstation.html#cb89-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># To compress vignettes when building a package; https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/</span></span>
+<span id="cb89-44"><a href="workstation.html#cb89-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install qpdf</span>
 <span id="cb89-45"><a href="workstation.html#cb89-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-46"><a href="workstation.html#cb89-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sys' package</span></span>
-<span id="cb89-47"><a href="workstation.html#cb89-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libapparmor-dev</span>
+<span id="cb89-46"><a href="workstation.html#cb89-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'pdftools' and 'Rpoppler' packages, which involve PDFs</span></span>
+<span id="cb89-47"><a href="workstation.html#cb89-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libpoppler-cpp-dev libpoppler-glib-dev</span>
 <span id="cb89-48"><a href="workstation.html#cb89-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-49"><a href="workstation.html#cb89-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'archive' package; https://CRAN.R-project.org/package=archive</span></span>
-<span id="cb89-50"><a href="workstation.html#cb89-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libarchive-dev</span>
+<span id="cb89-49"><a href="workstation.html#cb89-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sys' package</span></span>
+<span id="cb89-50"><a href="workstation.html#cb89-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libapparmor-dev</span>
 <span id="cb89-51"><a href="workstation.html#cb89-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-52"><a href="workstation.html#cb89-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
-<span id="cb89-53"><a href="workstation.html#cb89-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
+<span id="cb89-52"><a href="workstation.html#cb89-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'archive' package; https://CRAN.R-project.org/package=archive</span></span>
+<span id="cb89-53"><a href="workstation.html#cb89-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libarchive-dev</span>
 <span id="cb89-54"><a href="workstation.html#cb89-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-55"><a href="workstation.html#cb89-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
-<span id="cb89-56"><a href="workstation.html#cb89-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
+<span id="cb89-55"><a href="workstation.html#cb89-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
+<span id="cb89-56"><a href="workstation.html#cb89-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
 <span id="cb89-57"><a href="workstation.html#cb89-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-58"><a href="workstation.html#cb89-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
-<span id="cb89-59"><a href="workstation.html#cb89-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
-<span id="cb89-60"><a href="workstation.html#cb89-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
-<span id="cb89-61"><a href="workstation.html#cb89-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
-<span id="cb89-62"><a href="workstation.html#cb89-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-63"><a href="workstation.html#cb89-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
-<span id="cb89-64"><a href="workstation.html#cb89-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
+<span id="cb89-58"><a href="workstation.html#cb89-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
+<span id="cb89-59"><a href="workstation.html#cb89-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
+<span id="cb89-60"><a href="workstation.html#cb89-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-61"><a href="workstation.html#cb89-61" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
+<span id="cb89-62"><a href="workstation.html#cb89-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
+<span id="cb89-63"><a href="workstation.html#cb89-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
+<span id="cb89-64"><a href="workstation.html#cb89-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
 <span id="cb89-65"><a href="workstation.html#cb89-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-66"><a href="workstation.html#cb89-66" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
-<span id="cb89-67"><a href="workstation.html#cb89-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
+<span id="cb89-66"><a href="workstation.html#cb89-66" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
+<span id="cb89-67"><a href="workstation.html#cb89-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
 <span id="cb89-68"><a href="workstation.html#cb89-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-69"><a href="workstation.html#cb89-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For databases</span></span>
-<span id="cb89-70"><a href="workstation.html#cb89-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
-<span id="cb89-71"><a href="workstation.html#cb89-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
-<span id="cb89-72"><a href="workstation.html#cb89-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-73"><a href="workstation.html#cb89-73" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
-<span id="cb89-74"><a href="workstation.html#cb89-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
+<span id="cb89-69"><a href="workstation.html#cb89-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
+<span id="cb89-70"><a href="workstation.html#cb89-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
+<span id="cb89-71"><a href="workstation.html#cb89-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-72"><a href="workstation.html#cb89-72" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For databases</span></span>
+<span id="cb89-73"><a href="workstation.html#cb89-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
+<span id="cb89-74"><a href="workstation.html#cb89-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
 <span id="cb89-75"><a href="workstation.html#cb89-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-76"><a href="workstation.html#cb89-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
-<span id="cb89-77"><a href="workstation.html#cb89-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
-<span id="cb89-78"><a href="workstation.html#cb89-78" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb89-79"><a href="workstation.html#cb89-79" aria-hidden="true" tabindex="-1"></a><span class="ex">install-packages</span></span>
-<span id="cb89-80"><a href="workstation.html#cb89-80" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
+<span id="cb89-76"><a href="workstation.html#cb89-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
+<span id="cb89-77"><a href="workstation.html#cb89-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
+<span id="cb89-78"><a href="workstation.html#cb89-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-79"><a href="workstation.html#cb89-79" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
+<span id="cb89-80"><a href="workstation.html#cb89-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
+<span id="cb89-81"><a href="workstation.html#cb89-81" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb89-82"><a href="workstation.html#cb89-82" aria-hidden="true" tabindex="-1"></a><span class="ex">install-packages</span></span>
+<span id="cb89-83"><a href="workstation.html#cb89-83" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-pandoc" class="section level3" number="19.8.4">
 <h3>
@@ -787,7 +790,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2023-12-27.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-01-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
