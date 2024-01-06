@@ -435,6 +435,9 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 
   ### CRAN packages that are also on the Ubuntu repositories
 
+  # For the 'devtools' package dependencies
+  sudo apt-get --yes install libharfbuzz-dev libfribidi-dev
+
   # The 'xml2' package; https://CRAN.R-project.org/package=xml2
   sudo apt-get --yes install libxml2-dev r-cran-xml
 
