@@ -140,6 +140,8 @@ Productivity in VS Code is enhanced with the following extensions:  {added Dec 2
 
 * [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) has linting and style checking.
 
+* [Select Compare Tabs](https://marketplace.visualstudio.com/items?itemName=outofsync42.select-compare-tabs) quickly produces diffs between tabs.
+
 These extensions [can be installed by command line](https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions).
 
 ```sh
@@ -151,6 +153,7 @@ code --install-extension streetsidesoftware.code-spell-checker
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension yzane.markdown-pdf
 code --install-extension DavidAnson.vscode-markdownlint
+code --install-extension outofsync42.select-compare-tabs
 ```
 
 Note: here are some non-default changes that facilitate our workflow.  Either copy this configuration into [`settings.json`](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings), or manually specify the options with the [settings editor](https://code.visualstudio.com/docs/getstarted/settings).
