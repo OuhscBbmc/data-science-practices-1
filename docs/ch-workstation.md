@@ -22,6 +22,7 @@ Note: here are some non-default changes that facilitate our workflow.  Choose "G
 1. General | Basic | **Save workspace to >RData on exit: never**
 1. General | Basic | **Always save history: unchecked**
 1. Code | Editing | **Use native pipe operator, |>: checked**
+1. Code | Editing | **Auto-indent code after paste: UNchecked**
 1. Code | Saving | **Ensure that source files end with newline: checked**
 1. Code | Saving | **Strip trailing horizontal whitespace when saving: checked**
 1. Sweave | **Weave Rnw file using: knitr**
