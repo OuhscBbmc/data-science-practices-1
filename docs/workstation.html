@@ -341,9 +341,15 @@
 </h3>
 <p><a href="https://pandoc.org/">pandoc</a> converts files from one markup format into another. {added Sept 2012}</p>
 </div>
-<div id="workstation-python" class="section level3" number="19.3.4">
+<div id="workstation-tad" class="section level3" number="19.3.4">
 <h3>
-<span class="header-section-number">19.3.4</span> Python<a class="anchor" aria-label="anchor" href="#workstation-python"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.4</span> Tad<a class="anchor" aria-label="anchor" href="#workstation-tad"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://www.tadviewer.com/">Tad</a> A simple viewer for DuckDB, csv, and other rectangular data files. {added Feb 2024}</p>
+</div>
+<div id="workstation-python" class="section level3" number="19.3.5">
+<h3>
+<span class="header-section-number">19.3.5</span> Python<a class="anchor" aria-label="anchor" href="#workstation-python"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://www.python.org/">Python</a> is used by some analysts. The prototypical installation involves two options.</p>
 <ul>
@@ -395,17 +401,17 @@
 </li>
 </ul>
 </div>
-<div id="workstation-pilot-edit" class="section level3" number="19.3.5">
+<div id="workstation-pilot-edit" class="section level3" number="19.3.6">
 <h3>
-<span class="header-section-number">19.3.5</span> PilotEdit<a class="anchor" aria-label="anchor" href="#workstation-pilot-edit"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.6</span> PilotEdit<a class="anchor" aria-label="anchor" href="#workstation-pilot-edit"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://www.pilotedit.com/">PilotEdit</a> can load huge text files that cannot fit into RAM, such as files that are over 100MB that choke Excel, <a href="workstation.html#workstation-calc">Calc</a>, <a href="workstation.html#workstation-notepadpp">Notepad++</a>, and <a href="workstation.html#workstation-vscode">Visual Studio Code</a>.</p>
 <p>Like Notepad++ and VS Code, PilotEdit has good Find features that can (a) present all search hits within a file, (b) scan multiple files, and (c) use regular expressions. This helps trace the origin of problems in a pipeline. For example, if our data warehouse has a suspicious character in patient 10009’s BMI value, the <a href="https://www.regular-expressions.info/">regex</a> <code>\b10009\tbmi\b</code> locates the origin among the multiple 1+GB files we received.</p>
 <p>PilotEdit is also a good tool for the occasional data extract with an encoding problem. You can side-by-side inspect the hex code and (visible or non-visible) character produced (<a href="https://www.binaryhexconverter.com/ascii-text-to-hex-converter">for example with ascii</a>, “76” produces “v” and “0A” produces a line feed). {Added Sept 2020}</p>
 </div>
-<div id="workstation-node" class="section level3" number="19.3.6">
+<div id="workstation-node" class="section level3" number="19.3.7">
 <h3>
-<span class="header-section-number">19.3.6</span> Node.js<a class="anchor" aria-label="anchor" href="#workstation-node"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.7</span> Node.js<a class="anchor" aria-label="anchor" href="#workstation-node"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://nodejs.org/en/download">Node.js</a> is a JavaScript runtme environment.
 You probably won’t use Node directly, but some of these tools will,
@@ -749,9 +755,10 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <li><a class="nav-link" href="#workstation-git"><span class="header-section-number">19.3.1</span> Git</a></li>
 <li><a class="nav-link" href="#workstation-calc"><span class="header-section-number">19.3.2</span> LibreOffice Calc</a></li>
 <li><a class="nav-link" href="#workstation-pandoc"><span class="header-section-number">19.3.3</span> pandoc</a></li>
-<li><a class="nav-link" href="#workstation-python"><span class="header-section-number">19.3.4</span> Python</a></li>
-<li><a class="nav-link" href="#workstation-pilot-edit"><span class="header-section-number">19.3.5</span> PilotEdit</a></li>
-<li><a class="nav-link" href="#workstation-node"><span class="header-section-number">19.3.6</span> Node.js</a></li>
+<li><a class="nav-link" href="#workstation-tad"><span class="header-section-number">19.3.4</span> Tad</a></li>
+<li><a class="nav-link" href="#workstation-python"><span class="header-section-number">19.3.5</span> Python</a></li>
+<li><a class="nav-link" href="#workstation-pilot-edit"><span class="header-section-number">19.3.6</span> PilotEdit</a></li>
+<li><a class="nav-link" href="#workstation-node"><span class="header-section-number">19.3.7</span> Node.js</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#workstation-assets"><span class="header-section-number">19.4</span> Asset Locations</a></li>
@@ -794,7 +801,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-02-12.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-02-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

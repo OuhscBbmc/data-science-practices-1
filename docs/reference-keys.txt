@@ -219,6 +219,7 @@ workstation-optional
 workstation-git
 workstation-calc
 workstation-pandoc
+workstation-tad
 workstation-python
 workstation-pilot-edit
 workstation-node

@@ -218,6 +218,10 @@ The installation order does not matter.
 
 [pandoc](https://pandoc.org/) converts files from one markup format into another. {added Sept 2012}
 
+### Tad {#workstation-tad}
+
+[Tad](https://www.tadviewer.com/) A simple viewer for DuckDB, csv, and other rectangular data files. {added Feb 2024}
+
 ### Python {#workstation-python}
 
 [Python](https://www.python.org/) is used by some analysts.  The prototypical installation involves two options.
