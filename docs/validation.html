@@ -7,7 +7,7 @@
 <title>Chapter 16 Validation | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chapter 16 Validation | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="16.1 Intro Once you learn the tools to efficiently generate informative descriptive reports, the time you invest almost always pays off. Validating your dataset serves many beneficial roles,...">
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -141,7 +142,7 @@
 </h3>
 <p><em>Descriptive</em> statistics differ from <em>inferential</em> statistics. A descriptive statistic concerns only the observed elements in a sample, such as the average height or the range between the weakest and strongest systolic blood pressure. There is no fuzziness or forecasting in a descriptive statistic –it’s simply a straight-forward equation from observed points.<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Of course sometimes life isn’t this easy, but that’s the overall idea&lt;/p&gt;"><sup>10</sup></a></p>
 <p>An inferential statistic tries to reach beyond a descriptive statistic: it projects beyond an observed sample. It assesses if a pattern within a collected sample is likely to exist in the larger population. Suppose a group of 40 newborns tended to have faster heart rates than 33 infants. Stated differently, the average of the 40 newborns was faster than the average of the 33 infancts. A large Student <em>t</em> (and its accompanying small <em>p</em>-value) may indicate that this difference exists among <em>all</em> babies –not just among the 73. (Notice we’re comparing the average of the two groups, and we are not saying the slowest newborn is still faster than the fastest infant)</p>
-<p>However in order for its conclusions to be valid, several assumptions must be met. See <span class="citation">(<a href="references.html#ref-deshea" role="doc-biblioref">Lise DeShea 2015</a>)</span> for information about the <em>t</em>-test and other analyses commonly used in health care.</p>
+<p>However in order for its conclusions to be valid, several assumptions must be met. See <span class="citation">(<a href="references.html#ref-deshea">Lise DeShea 2015</a>)</span> for information about the <em>t</em>-test and other analyses commonly used in health care.</p>
 <p>In this sense, the <em>t</em>-test resembles the broad category of inferential statistics: the validity of some assumptions can be evaluated from the research design (<em>e.g.</em>, each kid is measured independently), while other assumptions are best evaluated from the data (<em>e.g.</em>, the residuals/errors follow an approximate bell-shaped distribution).</p>
 <p>These graphs that are useful assessing the appropriateness of an inferential statistic:</p>
 <ul>
@@ -197,7 +198,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-02-17.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-03-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

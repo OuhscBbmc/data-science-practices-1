@@ -7,7 +7,7 @@
 <title>A Git &amp; GitHub | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="A.1 Justification (Written in 2017 to justify the service to a corporation’s IT department.) Git and GitHub are the de facto version control software and hosting solution for software development...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="A Git &amp; GitHub | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="A.1 Justification (Written in 2017 to justify the service to a corporation’s IT department.) Git and GitHub are the de facto version control software and hosting solution for software development...">
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -202,7 +203,7 @@
 <ol style="list-style-type: decimal">
 <li><p>Authorized teammates outside OUHSC are designated as <a href="https://help.github.com/articles/adding-outside-collaborators-to-repositories-in-your-organization/">outside collaborators</a>, instead of “members”.</p></li>
 <li><p>Only three people are <a href="https://help.github.com/articles/permission-levels-for-an-organization/">owners</a> of the GitHub organization. Everyone else must be explicitly added to each appropriate repository. Other important restrictions to members include (a) cannot add/delete/transfer (private or public) repositories and (b) cannot add/delete other members to organization.</p></li>
-<li><p>Every week, an owner (probably <span class="citation">(<a href="#ref-wibeasley" role="doc-biblioref"><strong>wibeasley?</strong></a>)</span>) will review the <a href="https://github.com/organizations/OuhscBbmc/settings/audit-log">organization’s audit log</a> (which only owners can view).</p></li>
+<li><p>Every week, an owner (probably <span class="citation">(<a href="#ref-wibeasley"><strong>wibeasley?</strong></a>)</span>) will review the <a href="https://github.com/organizations/OuhscBbmc/settings/audit-log">organization’s audit log</a> (which only owners can view).</p></li>
 <li>
 <p>Two or more owners must discuss and agree upon adding/modifying/deleting any extra entity added to our GitHub Organization, including</p>
 <ol style="list-style-type: decimal">
@@ -269,10 +270,10 @@
 </h4>
 <p>If you are using an old repo (that was initialized <a href="https://www.theserverside.com/feature/Why-GitHub-renamed-its-master-branch-to-main">before 2021</a>) and whose default branch is still called “master”, it’s fairly simple to <a href="https://github.com/github/renaming">rename to “main”</a> on the server.</p>
 <p>In the client, there are two options. The first is to delete and reclone (make sure everything is pushed to the central repo before deleting). The second is to open a command prompt (with Window’s cmd, Window’s PowerShell, or Linux bash) and paste these four lines.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb93-1"><a href="git.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-m</span> master main</span>
-<span id="cb93-2"><a href="git.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin</span>
-<span id="cb93-3"><a href="git.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-u</span> origin/main main</span>
-<span id="cb93-4"><a href="git.html#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote set-head origin <span class="at">-a</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb93-1"><a href="git.html#cb93-1" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-m</span> master main</span>
+<span id="cb93-2"><a href="git.html#cb93-2" tabindex="-1"></a><span class="fu">git</span> fetch origin</span>
+<span id="cb93-3"><a href="git.html#cb93-3" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-u</span> origin/main main</span>
+<span id="cb93-4"><a href="git.html#cb93-4" tabindex="-1"></a><span class="fu">git</span> remote set-head origin <span class="at">-a</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -320,7 +321,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-02-17.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-03-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

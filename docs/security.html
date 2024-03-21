@@ -7,7 +7,7 @@
 <title>Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -250,26 +251,26 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li><p>Download the most recent jar file from the BFG site to the home directory.</p></li>
 <li>
 <p>Clone a fresh copy of the repository in the user’s home directory. The <code>--mirror</code> argument avoids downloading every file, and downloads only the bookkeeping details required for scrubbing.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="security.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb51-2"><a href="security.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--mirror</span> https://github.com/your-org/bloated.git</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="security.html#cb51-1" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb51-2"><a href="security.html#cb51-2" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--mirror</span> https://github.com/your-org/bloated.git</span></code></pre></div>
 </li>
 <li>
 <p>Remove all files (in any directory) called ‘monster-data.csv’.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="security.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> bfg-<span class="pp">*</span>.jar <span class="at">--delete-files</span> monster-data.csv bloated.git</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="security.html#cb52-1" tabindex="-1"></a><span class="ex">java</span> <span class="at">-jar</span> bfg-<span class="pp">*</span>.jar <span class="at">--delete-files</span> monster-data.csv bloated.git</span></code></pre></div>
 </li>
 <li>
 <p><a href="https://git-scm.com/docs/git-reflog">Reflog</a> and <a href="https://git-scm.com/docs/git-gc">garbage collect</a> the repo.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="security.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bloated.git</span>
-<span id="cb53-2"><a href="security.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> reflog expire <span class="at">--expire</span><span class="op">=</span>now <span class="at">--all</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc <span class="at">--prune</span><span class="op">=</span>now <span class="at">--aggressive</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="security.html#cb53-1" tabindex="-1"></a><span class="bu">cd</span> bloated.git</span>
+<span id="cb53-2"><a href="security.html#cb53-2" tabindex="-1"></a><span class="fu">git</span> reflog expire <span class="at">--expire</span><span class="op">=</span>now <span class="at">--all</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> gc <span class="at">--prune</span><span class="op">=</span>now <span class="at">--aggressive</span></span></code></pre></div>
 </li>
 <li>
 <p>Push your local changes to the GitHub server.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="security.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="security.html#cb54-1" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
 </li>
 <li>
 <p>Delete the bfg jar from the home directory.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="security.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb55-2"><a href="security.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> bfg-<span class="pp">*</span>.jar</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="security.html#cb55-1" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb55-2"><a href="security.html#cb55-2" tabindex="-1"></a><span class="fu">rm</span> bfg-<span class="pp">*</span>.jar</span></code></pre></div>
 </li>
 <li><p>Ask your collaborators to re-clone the repo to their local machine. It is important they restart with a fresh copy, so the once-scrubbed file is not reintroduced into the repo’s history.</p></li>
 <li>
@@ -326,7 +327,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-02-17.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-03-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

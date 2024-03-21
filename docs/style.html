@@ -7,7 +7,7 @@
 <title>Chapter 14 Style Guide | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chapter 14 Style Guide | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most...">
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -111,7 +112,7 @@
 <span class="header-section-number">14</span> Style Guide<a class="anchor" aria-label="anchor" href="#style"><i class="fas fa-link"></i></a>
 </h1>
 <p>Using a consistent style across your projects can increase the overhead as your data science team discusses options, decides on a good choice, and develops in compliant code. But like in most themes in this document, the cost is worth the effort. Unforced code errors are reduced when code is consistent, because mistake-prone styles are more apparent.</p>
-<p>For the most part, our team follows the <a href="https://style.tidyverse.org/">tidyverse style</a>. Here are some additional conventions we attempt to follow. Many of these were inspired by <span class="citation">(<a href="references.html#ref-balena-dimauro" role="doc-biblioref">Francesco Balena 2005</a>)</span>.</p>
+<p>For the most part, our team follows the <a href="https://style.tidyverse.org/">tidyverse style</a>. Here are some additional conventions we attempt to follow. Many of these were inspired by <span class="citation">(<a href="references.html#ref-balena-dimauro">Francesco Balena 2005</a>)</span>.</p>
 <div id="readability" class="section level2" number="14.1">
 <h2>
 <span class="header-section-number">14.1</span> Readability<a class="anchor" aria-label="anchor" href="#readability"><i class="fas fa-link"></i></a>
@@ -253,65 +254,65 @@
 <span class="header-section-number">14.3.2</span> Granularity<a class="anchor" aria-label="anchor" href="#style-factor-granularity"><i class="fas fa-link"></i></a>
 </h3>
 <p>Sometimes it helps to represent the values differently, say with a granular variable and a coarse variable. If two related variables have 7 and 3 levels respectively, we say <code>*_cut7</code> and <code>*_cut3</code> to denote the resolution; this is related to <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>base::cut()</code></a>. Don’t forget to include “unknown” and “other” when necessary.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="style.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
-<span id="cb64-2"><a href="style.html#cb64-2" aria-hidden="true" tabindex="-1"></a>education_cut7      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
-<span id="cb64-3"><a href="style.html#cb64-3" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
-<span id="cb64-4"><a href="style.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"No Highschool Degree / GED"</span>  <span class="ot">=</span> <span class="st">"no diploma"</span>,</span>
-<span id="cb64-5"><a href="style.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"High School Degree / GED"</span>    <span class="ot">=</span> <span class="st">"diploma"</span>,</span>
-<span id="cb64-6"><a href="style.html#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Some College"</span>                <span class="ot">=</span> <span class="st">"some college"</span>,</span>
-<span id="cb64-7"><a href="style.html#cb64-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Associate's Degree"</span>          <span class="ot">=</span> <span class="st">"associate"</span>,</span>
-<span id="cb64-8"><a href="style.html#cb64-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bachelor's Degree"</span>           <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb64-9"><a href="style.html#cb64-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Post-graduate degree"</span>        <span class="ot">=</span> <span class="st">"post-grad"</span>,</span>
-<span id="cb64-10"><a href="style.html#cb64-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unknown"</span>                     <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
-<span id="cb64-11"><a href="style.html#cb64-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">.missing                      =</span> <span class="st">"unknown"</span>,</span>
-<span id="cb64-12"><a href="style.html#cb64-12" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb64-13"><a href="style.html#cb64-13" aria-hidden="true" tabindex="-1"></a>education_cut3      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
-<span id="cb64-14"><a href="style.html#cb64-14" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
-<span id="cb64-15"><a href="style.html#cb64-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>    <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb64-16"><a href="style.html#cb64-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>       <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb64-17"><a href="style.html#cb64-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>  <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb64-18"><a href="style.html#cb64-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>     <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb64-19"><a href="style.html#cb64-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>      <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb64-20"><a href="style.html#cb64-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>     <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb64-21"><a href="style.html#cb64-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span>       <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
-<span id="cb64-22"><a href="style.html#cb64-22" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb64-23"><a href="style.html#cb64-23" aria-hidden="true" tabindex="-1"></a>education_cut7 <span class="ot">=</span> <span class="fu">factor</span>(education_cut7, <span class="at">levels=</span><span class="fu">c</span>(</span>
-<span id="cb64-24"><a href="style.html#cb64-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>,</span>
-<span id="cb64-25"><a href="style.html#cb64-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>,</span>
-<span id="cb64-26"><a href="style.html#cb64-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>,</span>
-<span id="cb64-27"><a href="style.html#cb64-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>,</span>
-<span id="cb64-28"><a href="style.html#cb64-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
-<span id="cb64-29"><a href="style.html#cb64-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>,</span>
-<span id="cb64-30"><a href="style.html#cb64-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
-<span id="cb64-31"><a href="style.html#cb64-31" aria-hidden="true" tabindex="-1"></a>)),</span>
-<span id="cb64-32"><a href="style.html#cb64-32" aria-hidden="true" tabindex="-1"></a>education_cut3 <span class="ot">=</span> <span class="fu">factor</span>(education_cut3, <span class="at">levels=</span><span class="fu">c</span>(</span>
-<span id="cb64-33"><a href="style.html#cb64-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no bachelor"</span>,</span>
-<span id="cb64-34"><a href="style.html#cb64-34" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
-<span id="cb64-35"><a href="style.html#cb64-35" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
-<span id="cb64-36"><a href="style.html#cb64-36" aria-hidden="true" tabindex="-1"></a>)),</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="style.html#cb64-1" tabindex="-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
+<span id="cb64-2"><a href="style.html#cb64-2" tabindex="-1"></a>education_cut7      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
+<span id="cb64-3"><a href="style.html#cb64-3" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb64-4"><a href="style.html#cb64-4" tabindex="-1"></a>  <span class="st">"No Highschool Degree / GED"</span>  <span class="ot">=</span> <span class="st">"no diploma"</span>,</span>
+<span id="cb64-5"><a href="style.html#cb64-5" tabindex="-1"></a>  <span class="st">"High School Degree / GED"</span>    <span class="ot">=</span> <span class="st">"diploma"</span>,</span>
+<span id="cb64-6"><a href="style.html#cb64-6" tabindex="-1"></a>  <span class="st">"Some College"</span>                <span class="ot">=</span> <span class="st">"some college"</span>,</span>
+<span id="cb64-7"><a href="style.html#cb64-7" tabindex="-1"></a>  <span class="st">"Associate's Degree"</span>          <span class="ot">=</span> <span class="st">"associate"</span>,</span>
+<span id="cb64-8"><a href="style.html#cb64-8" tabindex="-1"></a>  <span class="st">"Bachelor's Degree"</span>           <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb64-9"><a href="style.html#cb64-9" tabindex="-1"></a>  <span class="st">"Post-graduate degree"</span>        <span class="ot">=</span> <span class="st">"post-grad"</span>,</span>
+<span id="cb64-10"><a href="style.html#cb64-10" tabindex="-1"></a>  <span class="st">"Unknown"</span>                     <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb64-11"><a href="style.html#cb64-11" tabindex="-1"></a>  <span class="at">.missing                      =</span> <span class="st">"unknown"</span>,</span>
+<span id="cb64-12"><a href="style.html#cb64-12" tabindex="-1"></a>),</span>
+<span id="cb64-13"><a href="style.html#cb64-13" tabindex="-1"></a>education_cut3      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(</span>
+<span id="cb64-14"><a href="style.html#cb64-14" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb64-15"><a href="style.html#cb64-15" tabindex="-1"></a>  <span class="st">"no diploma"</span>    <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-16"><a href="style.html#cb64-16" tabindex="-1"></a>  <span class="st">"diploma"</span>       <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-17"><a href="style.html#cb64-17" tabindex="-1"></a>  <span class="st">"some college"</span>  <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-18"><a href="style.html#cb64-18" tabindex="-1"></a>  <span class="st">"associate"</span>     <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-19"><a href="style.html#cb64-19" tabindex="-1"></a>  <span class="st">"bachelor"</span>      <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb64-20"><a href="style.html#cb64-20" tabindex="-1"></a>  <span class="st">"post-grad"</span>     <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb64-21"><a href="style.html#cb64-21" tabindex="-1"></a>  <span class="st">"unknown"</span>       <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb64-22"><a href="style.html#cb64-22" tabindex="-1"></a>),</span>
+<span id="cb64-23"><a href="style.html#cb64-23" tabindex="-1"></a>education_cut7 <span class="ot">=</span> <span class="fu">factor</span>(education_cut7, <span class="at">levels=</span><span class="fu">c</span>(</span>
+<span id="cb64-24"><a href="style.html#cb64-24" tabindex="-1"></a>  <span class="st">"no diploma"</span>,</span>
+<span id="cb64-25"><a href="style.html#cb64-25" tabindex="-1"></a>  <span class="st">"diploma"</span>,</span>
+<span id="cb64-26"><a href="style.html#cb64-26" tabindex="-1"></a>  <span class="st">"some college"</span>,</span>
+<span id="cb64-27"><a href="style.html#cb64-27" tabindex="-1"></a>  <span class="st">"associate"</span>,</span>
+<span id="cb64-28"><a href="style.html#cb64-28" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
+<span id="cb64-29"><a href="style.html#cb64-29" tabindex="-1"></a>  <span class="st">"post-grad"</span>,</span>
+<span id="cb64-30"><a href="style.html#cb64-30" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
+<span id="cb64-31"><a href="style.html#cb64-31" tabindex="-1"></a>)),</span>
+<span id="cb64-32"><a href="style.html#cb64-32" tabindex="-1"></a>education_cut3 <span class="ot">=</span> <span class="fu">factor</span>(education_cut3, <span class="at">levels=</span><span class="fu">c</span>(</span>
+<span id="cb64-33"><a href="style.html#cb64-33" tabindex="-1"></a>  <span class="st">"no bachelor"</span>,</span>
+<span id="cb64-34"><a href="style.html#cb64-34" tabindex="-1"></a>  <span class="st">"bachelor"</span>,</span>
+<span id="cb64-35"><a href="style.html#cb64-35" tabindex="-1"></a>  <span class="st">"unknown"</span></span>
+<span id="cb64-36"><a href="style.html#cb64-36" tabindex="-1"></a>)),</span></code></pre></div>
 <p>The <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode_factor()</code></a> is an ideal replacement in the scenario above, because a single call combines the work of <a href="https://dplyr.tidyverse.org/reference/recode.html"><code>dplyr::recode()</code></a> and <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html"><code>base::factor()</code></a>. Just make sure the recoding order represents the desired order of the factor levels.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="style.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
-<span id="cb65-2"><a href="style.html#cb65-2" aria-hidden="true" tabindex="-1"></a>education_cut7      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(</span>
-<span id="cb65-3"><a href="style.html#cb65-3" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
-<span id="cb65-4"><a href="style.html#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"No Highschool Degree / GED"</span>  <span class="ot">=</span> <span class="st">"no diploma"</span>,</span>
-<span id="cb65-5"><a href="style.html#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"High School Degree / GED"</span>    <span class="ot">=</span> <span class="st">"diploma"</span>,</span>
-<span id="cb65-6"><a href="style.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Some College"</span>                <span class="ot">=</span> <span class="st">"some college"</span>,</span>
-<span id="cb65-7"><a href="style.html#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Associate's Degree"</span>          <span class="ot">=</span> <span class="st">"associate"</span>,</span>
-<span id="cb65-8"><a href="style.html#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bachelor's Degree"</span>           <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb65-9"><a href="style.html#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Post-graduate degree"</span>        <span class="ot">=</span> <span class="st">"post-grad"</span>,</span>
-<span id="cb65-10"><a href="style.html#cb65-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unknown"</span>                     <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
-<span id="cb65-11"><a href="style.html#cb65-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">.missing                      =</span> <span class="st">"unknown"</span>,</span>
-<span id="cb65-12"><a href="style.html#cb65-12" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb65-13"><a href="style.html#cb65-13" aria-hidden="true" tabindex="-1"></a>education_cut3      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(</span>
-<span id="cb65-14"><a href="style.html#cb65-14" aria-hidden="true" tabindex="-1"></a>  education_cut7,</span>
-<span id="cb65-15"><a href="style.html#cb65-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"no diploma"</span>    <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb65-16"><a href="style.html#cb65-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"diploma"</span>       <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb65-17"><a href="style.html#cb65-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"some college"</span>  <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb65-18"><a href="style.html#cb65-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"associate"</span>     <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
-<span id="cb65-19"><a href="style.html#cb65-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bachelor"</span>      <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb65-20"><a href="style.html#cb65-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"post-grad"</span>     <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
-<span id="cb65-21"><a href="style.html#cb65-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"unknown"</span>       <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
-<span id="cb65-22"><a href="style.html#cb65-22" aria-hidden="true" tabindex="-1"></a>),</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="style.html#cb65-1" tabindex="-1"></a><span class="co"># Inside a dplyr::mutate() clause</span></span>
+<span id="cb65-2"><a href="style.html#cb65-2" tabindex="-1"></a>education_cut7      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(</span>
+<span id="cb65-3"><a href="style.html#cb65-3" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb65-4"><a href="style.html#cb65-4" tabindex="-1"></a>  <span class="st">"No Highschool Degree / GED"</span>  <span class="ot">=</span> <span class="st">"no diploma"</span>,</span>
+<span id="cb65-5"><a href="style.html#cb65-5" tabindex="-1"></a>  <span class="st">"High School Degree / GED"</span>    <span class="ot">=</span> <span class="st">"diploma"</span>,</span>
+<span id="cb65-6"><a href="style.html#cb65-6" tabindex="-1"></a>  <span class="st">"Some College"</span>                <span class="ot">=</span> <span class="st">"some college"</span>,</span>
+<span id="cb65-7"><a href="style.html#cb65-7" tabindex="-1"></a>  <span class="st">"Associate's Degree"</span>          <span class="ot">=</span> <span class="st">"associate"</span>,</span>
+<span id="cb65-8"><a href="style.html#cb65-8" tabindex="-1"></a>  <span class="st">"Bachelor's Degree"</span>           <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb65-9"><a href="style.html#cb65-9" tabindex="-1"></a>  <span class="st">"Post-graduate degree"</span>        <span class="ot">=</span> <span class="st">"post-grad"</span>,</span>
+<span id="cb65-10"><a href="style.html#cb65-10" tabindex="-1"></a>  <span class="st">"Unknown"</span>                     <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb65-11"><a href="style.html#cb65-11" tabindex="-1"></a>  <span class="at">.missing                      =</span> <span class="st">"unknown"</span>,</span>
+<span id="cb65-12"><a href="style.html#cb65-12" tabindex="-1"></a>),</span>
+<span id="cb65-13"><a href="style.html#cb65-13" tabindex="-1"></a>education_cut3      <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">recode_factor</span>(</span>
+<span id="cb65-14"><a href="style.html#cb65-14" tabindex="-1"></a>  education_cut7,</span>
+<span id="cb65-15"><a href="style.html#cb65-15" tabindex="-1"></a>  <span class="st">"no diploma"</span>    <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-16"><a href="style.html#cb65-16" tabindex="-1"></a>  <span class="st">"diploma"</span>       <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-17"><a href="style.html#cb65-17" tabindex="-1"></a>  <span class="st">"some college"</span>  <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-18"><a href="style.html#cb65-18" tabindex="-1"></a>  <span class="st">"associate"</span>     <span class="ot">=</span> <span class="st">"no bachelor"</span>,</span>
+<span id="cb65-19"><a href="style.html#cb65-19" tabindex="-1"></a>  <span class="st">"bachelor"</span>      <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb65-20"><a href="style.html#cb65-20" tabindex="-1"></a>  <span class="st">"post-grad"</span>     <span class="ot">=</span> <span class="st">"bachelor"</span>,</span>
+<span id="cb65-21"><a href="style.html#cb65-21" tabindex="-1"></a>  <span class="st">"unknown"</span>       <span class="ot">=</span> <span class="st">"unknown"</span>,</span>
+<span id="cb65-22"><a href="style.html#cb65-22" tabindex="-1"></a>),</span></code></pre></div>
 </div>
 </div>
 <div id="style-dates" class="section level2" number="14.4">
@@ -363,25 +364,25 @@
 <span><span class="va">first_name_kid</span></span>
 <span><span class="va">dob_kid</span></span></code></pre></div>
 <p>Large datasets with multiple questionnaires (each with multiple subsections) are much more manageable when the variables follow a semantic order.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb67-1"><a href="style.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
-<span id="cb67-2"><a href="style.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  asq3_medical_problems_01</span>
-<span id="cb67-3"><a href="style.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  ,asq3_medical_problems_02</span>
-<span id="cb67-4"><a href="style.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  ,asq3_medical_problems_03</span>
-<span id="cb67-5"><a href="style.html#cb67-5" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_01</span>
-<span id="cb67-6"><a href="style.html#cb67-6" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_02</span>
-<span id="cb67-7"><a href="style.html#cb67-7" aria-hidden="true" tabindex="-1"></a>  ,asq3_behavior_concerns_03</span>
-<span id="cb67-8"><a href="style.html#cb67-8" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_01</span>
-<span id="cb67-9"><a href="style.html#cb67-9" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_02</span>
-<span id="cb67-10"><a href="style.html#cb67-10" aria-hidden="true" tabindex="-1"></a>  ,asq3_worry_03</span>
-<span id="cb67-11"><a href="style.html#cb67-11" aria-hidden="true" tabindex="-1"></a>  ,wai_01_steps_beneficial</span>
-<span id="cb67-12"><a href="style.html#cb67-12" aria-hidden="true" tabindex="-1"></a>  ,wai_02_hv_useful</span>
-<span id="cb67-13"><a href="style.html#cb67-13" aria-hidden="true" tabindex="-1"></a>  ,wai_03_parent_likes_me</span>
-<span id="cb67-14"><a href="style.html#cb67-14" aria-hidden="true" tabindex="-1"></a>  ,wai_04_hv_doubts</span>
-<span id="cb67-15"><a href="style.html#cb67-15" aria-hidden="true" tabindex="-1"></a>  ,hri_01_client_input</span>
-<span id="cb67-16"><a href="style.html#cb67-16" aria-hidden="true" tabindex="-1"></a>  ,hri_02_problems_discussed</span>
-<span id="cb67-17"><a href="style.html#cb67-17" aria-hidden="true" tabindex="-1"></a>  ,hri_03_addressing_problems_clarity</span>
-<span id="cb67-18"><a href="style.html#cb67-18" aria-hidden="true" tabindex="-1"></a>  ,hri_04_goals_discussed</span>
-<span id="cb67-19"><a href="style.html#cb67-19" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> miechv.gpav_3</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb67-1"><a href="style.html#cb67-1" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb67-2"><a href="style.html#cb67-2" tabindex="-1"></a>  asq3_medical_problems_01</span>
+<span id="cb67-3"><a href="style.html#cb67-3" tabindex="-1"></a>  ,asq3_medical_problems_02</span>
+<span id="cb67-4"><a href="style.html#cb67-4" tabindex="-1"></a>  ,asq3_medical_problems_03</span>
+<span id="cb67-5"><a href="style.html#cb67-5" tabindex="-1"></a>  ,asq3_behavior_concerns_01</span>
+<span id="cb67-6"><a href="style.html#cb67-6" tabindex="-1"></a>  ,asq3_behavior_concerns_02</span>
+<span id="cb67-7"><a href="style.html#cb67-7" tabindex="-1"></a>  ,asq3_behavior_concerns_03</span>
+<span id="cb67-8"><a href="style.html#cb67-8" tabindex="-1"></a>  ,asq3_worry_01</span>
+<span id="cb67-9"><a href="style.html#cb67-9" tabindex="-1"></a>  ,asq3_worry_02</span>
+<span id="cb67-10"><a href="style.html#cb67-10" tabindex="-1"></a>  ,asq3_worry_03</span>
+<span id="cb67-11"><a href="style.html#cb67-11" tabindex="-1"></a>  ,wai_01_steps_beneficial</span>
+<span id="cb67-12"><a href="style.html#cb67-12" tabindex="-1"></a>  ,wai_02_hv_useful</span>
+<span id="cb67-13"><a href="style.html#cb67-13" tabindex="-1"></a>  ,wai_03_parent_likes_me</span>
+<span id="cb67-14"><a href="style.html#cb67-14" tabindex="-1"></a>  ,wai_04_hv_doubts</span>
+<span id="cb67-15"><a href="style.html#cb67-15" tabindex="-1"></a>  ,hri_01_client_input</span>
+<span id="cb67-16"><a href="style.html#cb67-16" tabindex="-1"></a>  ,hri_02_problems_discussed</span>
+<span id="cb67-17"><a href="style.html#cb67-17" tabindex="-1"></a>  ,hri_03_addressing_problems_clarity</span>
+<span id="cb67-18"><a href="style.html#cb67-18" tabindex="-1"></a>  ,hri_04_goals_discussed</span>
+<span id="cb67-19"><a href="style.html#cb67-19" tabindex="-1"></a><span class="kw">FROM</span> miechv.gpav_3</span></code></pre></div>
 <p>I don’t know where we picked up the term “semantic order”. It may have come from <a href="https://www.geeksforgeeks.org/introduction-semantic-versioning/">Semantic Versioning</a> of software releases.</p>
 </div>
 <div id="style-naming-files" class="section level3" number="14.5.3">
@@ -594,7 +595,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <h2>
 <span class="header-section-number">14.9</span> ggplot2<a class="anchor" aria-label="anchor" href="#style-ggplot"><i class="fas fa-link"></i></a>
 </h2>
-<p>The expressiveness of <a href="https://ggplot2.tidyverse.org/">ggplot2</a> allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a <a href="https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/main/thumbnails/thumbnails.md">textbook for introductory statistics</a> (<span class="citation">Lise DeShea (<a href="references.html#ref-deshea" role="doc-biblioref">2015</a>)</span>); the 200+ graphs and their code is publicly available.</p>
+<p>The expressiveness of <a href="https://ggplot2.tidyverse.org/">ggplot2</a> allows someone to quickly develop precise scientific graphics. One graph can be specified in many equivalent styles, which increases the opportunity for confusion. We formalized much of this style while writing a <a href="https://github.com/OuhscBbmc/DeSheaToothakerIntroStats/blob/main/thumbnails/thumbnails.md">textbook for introductory statistics</a> (<span class="citation">Lise DeShea (<a href="references.html#ref-deshea">2015</a>)</span>); the 200+ graphs and their code is publicly available.</p>
 <p>There are a few additional ggplot2 tips in the <a href="https://style.tidyverse.org/ggplot2.html">tidyverse style guide</a>.</p>
 <div id="style-ggplot-order" class="section level3" number="14.9.1">
 <h3>
@@ -618,21 +619,21 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <li><code>labs()</code></li>
 </ol>
 <p>This graph contains most typical ggplot2 elements.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="style.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ds, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> lift_count, <span class="at">fill =</span> group, <span class="at">color =</span> group)) <span class="sc">+</span></span>
-<span id="cb73-2"><a href="style.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.y =</span> <span class="st">"mean"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb73-3"><a href="style.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">w =</span> <span class="fl">0.4</span>, <span class="at">h =</span> <span class="dv">0</span>), <span class="at">shape =</span> <span class="dv">21</span>) <span class="sc">+</span></span>
-<span id="cb73-4"><a href="style.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> palette_pregnancy_dark) <span class="sc">+</span></span>
-<span id="cb73-5"><a href="style.html#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>( <span class="at">values =</span> palette_pregnancy_light) <span class="sc">+</span></span>
-<span id="cb73-6"><a href="style.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb73-7"><a href="style.html#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">"time"</span>) <span class="sc">+</span></span>
-<span id="cb73-8"><a href="style.html#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb73-9"><a href="style.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb73-10"><a href="style.html#cb73-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb73-11"><a href="style.html#cb73-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb73-12"><a href="style.html#cb73-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Lifting by Group across Time"</span></span>
-<span id="cb73-13"><a href="style.html#cb73-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x     =</span> <span class="cn">NULL</span>, </span>
-<span id="cb73-14"><a href="style.html#cb73-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Number of Lifts"</span></span>
-<span id="cb73-15"><a href="style.html#cb73-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="style.html#cb73-1" tabindex="-1"></a><span class="fu">ggplot</span>(ds, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> lift_count, <span class="at">fill =</span> group, <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb73-2"><a href="style.html#cb73-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"summary"</span>, <span class="at">fun.y =</span> <span class="st">"mean"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb73-3"><a href="style.html#cb73-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">w =</span> <span class="fl">0.4</span>, <span class="at">h =</span> <span class="dv">0</span>), <span class="at">shape =</span> <span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb73-4"><a href="style.html#cb73-4" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> palette_pregnancy_dark) <span class="sc">+</span></span>
+<span id="cb73-5"><a href="style.html#cb73-5" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>( <span class="at">values =</span> palette_pregnancy_light) <span class="sc">+</span></span>
+<span id="cb73-6"><a href="style.html#cb73-6" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb73-7"><a href="style.html#cb73-7" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">"time"</span>) <span class="sc">+</span></span>
+<span id="cb73-8"><a href="style.html#cb73-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb73-9"><a href="style.html#cb73-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb73-10"><a href="style.html#cb73-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb73-11"><a href="style.html#cb73-11" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb73-12"><a href="style.html#cb73-12" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Lifting by Group across Time"</span></span>
+<span id="cb73-13"><a href="style.html#cb73-13" tabindex="-1"></a>    <span class="at">x     =</span> <span class="cn">NULL</span>, </span>
+<span id="cb73-14"><a href="style.html#cb73-14" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Number of Lifts"</span></span>
+<span id="cb73-15"><a href="style.html#cb73-15" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 <div id="style-ggplot-gotchas" class="section level3" number="14.9.2">
 <h3>
@@ -744,7 +745,7 @@ I hope you’ve noticed some powerful effects from declaring the grain. First, y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-02-17.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-03-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

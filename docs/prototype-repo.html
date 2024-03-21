@@ -7,7 +7,7 @@
 <title>Chapter 6 Prototypical Repository | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Prototypical Repository | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="The following file repository structure has supported a wide spectrum of our projects, ranging from (a) a small, short-term retrospective project with one dataset, one manipulation file, and one...">
@@ -26,6 +26,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -130,31 +131,31 @@
 </h3>
 <p>The configuration file is simply a plain-text yaml file read by the <a href="https://CRAN.R-project.org/package=config">config</a> package. It is well-suited when a value has to be coordinated across multiple files.</p>
 <p>Also see the discussion of how we use the config file for <a href="https://ouhscbbmc.github.io/data-science-practices-1/coding.html#excluding-bad-cases">excluding bad data values</a> and of how the config file <a href="rest.html#rest-containers-yaml">relates to yaml</a>, json, and xml.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb39-1"><a href="prototype-repo.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span></span>
-<span id="cb39-2"><a href="prototype-repo.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">  # To be processed by Ellis lanes</span></span>
-<span id="cb39-3"><a href="prototype-repo.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">"data-public/raw/subject-1.csv"</span></span>
-<span id="cb39-4"><a href="prototype-repo.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">"data-public/raw/mlm-1.csv"</span></span>
-<span id="cb39-5"><a href="prototype-repo.html#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-6"><a href="prototype-repo.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">  # Central Database (produced by Ellis lanes).</span></span>
-<span id="cb39-7"><a href="prototype-repo.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">"data-public/derived/db.sqlite3"</span></span>
-<span id="cb39-8"><a href="prototype-repo.html#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-9"><a href="prototype-repo.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co">  # Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
-<span id="cb39-10"><a href="prototype-repo.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">"data-public/derived/mlm-1.rds"</span></span>
-<span id="cb39-11"><a href="prototype-repo.html#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-12"><a href="prototype-repo.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co">  # Metadata</span></span>
-<span id="cb39-13"><a href="prototype-repo.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">"data-public/metadata/cqi-annotation.csv"</span></span>
-<span id="cb39-14"><a href="prototype-repo.html#cb39-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-15"><a href="prototype-repo.html#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co">  # Logging errors and messages from automated execution.</span></span>
-<span id="cb39-16"><a href="prototype-repo.html#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")</span></span>
-<span id="cb39-17"><a href="prototype-repo.html#cb39-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-18"><a href="prototype-repo.html#cb39-18" aria-hidden="true" tabindex="-1"></a><span class="co">  # time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.</span></span>
-<span id="cb39-19"><a href="prototype-repo.html#cb39-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-20"><a href="prototype-repo.html#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="co">  # ---- Validation Ranges &amp; Patterns ----</span></span>
-<span id="cb39-21"><a href="prototype-repo.html#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
-<span id="cb39-22"><a href="prototype-repo.html#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))</span></span>
-<span id="cb39-23"><a href="prototype-repo.html#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())</span></span>
-<span id="cb39-24"><a href="prototype-repo.html#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
-<span id="cb39-25"><a href="prototype-repo.html#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern_mrn             </span><span class="kw">:</span><span class="at"> </span><span class="st">"^E</span><span class="sc">\\</span><span class="st">d{9}$"</span><span class="co">  # An 'E', followed by 9 digits.</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb39-1"><a href="prototype-repo.html#cb39-1" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb39-2"><a href="prototype-repo.html#cb39-2" tabindex="-1"></a><span class="co">  # To be processed by Ellis lanes</span></span>
+<span id="cb39-3"><a href="prototype-repo.html#cb39-3" tabindex="-1"></a><span class="at">  </span><span class="fu">path_subject_1_raw</span><span class="kw">:</span><span class="at">  </span><span class="st">"data-public/raw/subject-1.csv"</span></span>
+<span id="cb39-4"><a href="prototype-repo.html#cb39-4" tabindex="-1"></a><span class="at">  </span><span class="fu">path_mlm_1_raw</span><span class="kw">:</span><span class="at">      </span><span class="st">"data-public/raw/mlm-1.csv"</span></span>
+<span id="cb39-5"><a href="prototype-repo.html#cb39-5" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="prototype-repo.html#cb39-6" tabindex="-1"></a><span class="co">  # Central Database (produced by Ellis lanes).</span></span>
+<span id="cb39-7"><a href="prototype-repo.html#cb39-7" tabindex="-1"></a><span class="at">  </span><span class="fu">path_database</span><span class="kw">:</span><span class="at">       </span><span class="st">"data-public/derived/db.sqlite3"</span></span>
+<span id="cb39-8"><a href="prototype-repo.html#cb39-8" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="prototype-repo.html#cb39-9" tabindex="-1"></a><span class="co">  # Analysis-ready datasets (produced by scribes &amp; consumed by analyses).</span></span>
+<span id="cb39-10"><a href="prototype-repo.html#cb39-10" tabindex="-1"></a><span class="at">  </span><span class="fu">path_mlm_1_derived</span><span class="kw">:</span><span class="at">  </span><span class="st">"data-public/derived/mlm-1.rds"</span></span>
+<span id="cb39-11"><a href="prototype-repo.html#cb39-11" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="prototype-repo.html#cb39-12" tabindex="-1"></a><span class="co">  # Metadata</span></span>
+<span id="cb39-13"><a href="prototype-repo.html#cb39-13" tabindex="-1"></a><span class="at">  </span><span class="fu">path_annotation</span><span class="kw">:</span><span class="at">     </span><span class="st">"data-public/metadata/cqi-annotation.csv"</span></span>
+<span id="cb39-14"><a href="prototype-repo.html#cb39-14" tabindex="-1"></a></span>
+<span id="cb39-15"><a href="prototype-repo.html#cb39-15" tabindex="-1"></a><span class="co">  # Logging errors and messages from automated execution.</span></span>
+<span id="cb39-16"><a href="prototype-repo.html#cb39-16" tabindex="-1"></a><span class="at">  </span><span class="fu">path_log_flow</span><span class="kw">:</span><span class="at">       !expr strftime(Sys.time(), "data-unshared/log/flow-%Y-%m-%d--%H-%M-%S.log")</span></span>
+<span id="cb39-17"><a href="prototype-repo.html#cb39-17" tabindex="-1"></a></span>
+<span id="cb39-18"><a href="prototype-repo.html#cb39-18" tabindex="-1"></a><span class="co">  # time_zone_local       :  "America/Chicago" # Force local time, in case remotely run.</span></span>
+<span id="cb39-19"><a href="prototype-repo.html#cb39-19" tabindex="-1"></a></span>
+<span id="cb39-20"><a href="prototype-repo.html#cb39-20" tabindex="-1"></a><span class="co">  # ---- Validation Ranges &amp; Patterns ----</span></span>
+<span id="cb39-21"><a href="prototype-repo.html#cb39-21" tabindex="-1"></a><span class="at">  </span><span class="fu">range_record_id         </span><span class="kw">:</span><span class="at"> !expr c(1L, 999999L)</span></span>
+<span id="cb39-22"><a href="prototype-repo.html#cb39-22" tabindex="-1"></a><span class="at">  </span><span class="fu">range_dob               </span><span class="kw">:</span><span class="at"> !expr c(as.Date("2010-01-01"), Sys.Date() + lubridate::days(1))</span></span>
+<span id="cb39-23"><a href="prototype-repo.html#cb39-23" tabindex="-1"></a><span class="at">  </span><span class="fu">range_datetime_entry    </span><span class="kw">:</span><span class="at"> !expr c(as.POSIXct("2019-01-01", tz="America/Chicago"), Sys.time())</span></span>
+<span id="cb39-24"><a href="prototype-repo.html#cb39-24" tabindex="-1"></a><span class="at">  </span><span class="fu">max_age                 </span><span class="kw">:</span><span class="at"> </span><span class="dv">25</span></span>
+<span id="cb39-25"><a href="prototype-repo.html#cb39-25" tabindex="-1"></a><span class="at">  </span><span class="fu">pattern_mrn             </span><span class="kw">:</span><span class="at"> </span><span class="st">"^E</span><span class="sc">\\</span><span class="st">d{9}$"</span><span class="co">  # An 'E', followed by 9 digits.</span></span></code></pre></div>
 </div>
 <div id="repo-flow" class="section level3" number="6.1.2">
 <h3>
@@ -387,7 +388,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-02-17.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2024-03-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
