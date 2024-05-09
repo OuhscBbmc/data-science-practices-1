@@ -336,7 +336,7 @@ Note: here are some non-default changes that facilitate our workflow.  The first
 These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
 
 1. Environment | Fonts and Colors | Show settings for: Grid Results | Size: 10
-1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false`
+1. Query Results | SQL Server | Results to Grid | Include column headers when copying or saving the results: false
 1. Designers | Table and Database Designers | Prevent saving changes that require table-recreation: false
 1. SQL Server Tools | Transact-SQL Editor | Editor Tab and Status Bar<sup>1</sup> | Tab Text | Include Server Name: false
 1. SQL Server Tools | Transact-SQL Editor | Editor Tab and Status Bar<sup>1</sup> | Tab Text | Include Database Name: false
