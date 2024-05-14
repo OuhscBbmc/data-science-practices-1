@@ -376,7 +376,7 @@ Some of these guidelines are handled automatically by modern IDEs, if you config
 Database {#style-database}
 ------------------------------------
 
-GitLab's data team has a good [style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/) for databases and sql that's fairly consistent with our style.  Some important additions and differences are
+GitLab's data team has a good [style guide](https://handbook.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/) for databases and sql that's fairly consistent with our style.  Some important additions and differences are
 
 1. Favor CTEs over subqueries because they're easier to follow and can be reused in the same file.   If the performance is a problem, slightly rewrite the CTE as a temp table and see if it and the new indexes help.
 
