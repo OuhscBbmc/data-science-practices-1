@@ -8,7 +8,7 @@ You can label chapter and section titles using `{#label}` after them, e.g., we c
 Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
 
 
-```r
+``` r
 par(mar = c(4, 4, .1, .1))
 plot(pressure, type = 'b', pch = 19)
 ```
@@ -21,7 +21,7 @@ plot(pressure, type = 'b', pch = 19)
 Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
 
 
-```r
+``` r
 knitr::kable(
   head(iris, 20), caption = 'Here is a nice table!',
   booktabs = TRUE
