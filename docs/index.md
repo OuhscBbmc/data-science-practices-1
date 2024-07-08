@@ -1,7 +1,7 @@
 ---
 title: "Collaborative Data Science Practices"
 author: "Will Beasley"
-date: "2024-05-20"
+date: "2024-07-08"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
