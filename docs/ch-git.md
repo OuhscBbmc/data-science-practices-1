@@ -153,6 +153,40 @@ git branch -u origin/main main
 git remote set-head origin -a
 ```
 
+GitHub Personal Access Token (PAT)
+------------------------------------
+
+The tokens have two purposes that we encounter regularly.
+
+### Pushing to any repo or reading from a private repo
+
+...especially on Linux machines that don't have [GitHub Desktop](https://desktop.github.com/).
+
+{TODO: write this section}
+
+### Using the [remotes](https://remotes.r-lib.org/) package
+
+If you are using the [remotes](https://remotes.r-lib.org/) with a line like
+`remotes::install_github("Melinae/TabularManifest")` or `remotes::install_github("tidyverse/ggplot2")`,
+you may encounter this error:
+
+```
+Using GitHub PAT from the git credential store.
+Error: Failed to install 'unknown package' from GitHub:
+  HTTP error 401.
+  Bad credentials
+```
+
+If so,
+1.  Create a classic personal access token at <https://github.com/settings/tokens>.
+    (Make sure you're logged in.)
+    We suggest creating one per machine, so you don't have to juggle them between computers.
+1.  Maybe name it "ouhsc-desktop" or "home-laptop" (obligatory reminder to never store PHI on a personal machine).
+    Copy the new token to your clipboard.
+1.  Then use the [gitcreds](https://gitcreds.r-lib.org/) package by running, `gitcreds::gitcreds_set()`.
+    Then select to add/replace the token with the value that you just copied to your clipboard.
+1.  Rerun the `remotes::install_github()`.
+
 Repo Style
 ------------------------------------
 
