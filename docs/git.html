@@ -300,15 +300,17 @@ you may encounter this error:</p>
 Error: Failed to install 'unknown package' from GitHub:
   HTTP error 401.
   Bad credentials</code></pre>
-<p>If so,
-1. Create a classic personal access token at <a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>.
+<p>If so,</p>
+<ol style="list-style-type: decimal">
+<li>Create a classic personal access token at <a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>.
 (Make sure you’re logged in.)
-We suggest creating one per machine, so you don’t have to juggle them between computers.
-1. Maybe name it “ouhsc-desktop” or “home-laptop” (obligatory reminder to never store PHI on a personal machine).
-Copy the new token to your clipboard.
-1. Then use the <a href="https://gitcreds.r-lib.org/">gitcreds</a> package by running, <code>gitcreds::gitcreds_set()</code>.
-Then select to add/replace the token with the value that you just copied to your clipboard.
-1. Rerun the <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code>.</p>
+We suggest creating one per machine, so you don’t have to juggle them between computers.</li>
+<li>Maybe name it “ouhsc-desktop” or “home-laptop” (obligatory reminder to never store PHI on a personal machine).
+Copy the new token to your clipboard.</li>
+<li>Then use the <a href="https://gitcreds.r-lib.org/">gitcreds</a> package by running, <code>gitcreds::gitcreds_set()</code>.
+Then select to add/replace the token with the value that you just copied to your clipboard.</li>
+<li>Rerun the <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code>.</li>
+</ol>
 </div>
 </div>
 <div id="repo-style" class="section level2" number="25.9">

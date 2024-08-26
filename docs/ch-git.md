@@ -178,6 +178,7 @@ Error: Failed to install 'unknown package' from GitHub:
 ```
 
 If so,
+
 1.  Create a classic personal access token at <https://github.com/settings/tokens>.
     (Make sure you're logged in.)
     We suggest creating one per machine, so you don't have to juggle them between computers.
