@@ -295,6 +295,12 @@ On Windows, let the msi executable automatically install node's recommended depe
 [chocolatey](https://community.chocolatey.org/packages/nodejs).
 {Added Dec 2023}
 
+### Omnissa Horizon Client {#workstation-horizon}
+
+The [Omnissa Horizon Client](https://customerconnect.omnissa.com/downloads) (formerly VMWare Horizon Client) permits remote access to the OU and OUH VDIs.
+
+{Added Feb 2025}
+
 Asset Locations {#workstation-assets}
 -----------------------------------
 
