@@ -223,6 +223,7 @@ workstation-tad
 workstation-python
 workstation-pilot-edit
 workstation-node
+workstation-horizon
 workstation-assets
 workstation-administrator
 workstation-mysql
