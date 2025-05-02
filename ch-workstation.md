@@ -436,7 +436,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 ( function install-packages {
 
   ### Git
-  sudo apt-get install git-core
+  sudo apt-get install git git-core
   git config --global user.email "wibeasley@hotmail.com"
   git config --global user.name "Will Beasley"
   git config --global credential.helper 'cache --timeout=3600000'
