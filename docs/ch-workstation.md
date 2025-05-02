@@ -444,7 +444,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   ### Ubuntu & Bioconductor packages that are indirectly needed for packages and BBMC scripts
 
   # Supports the `locate` command in bash
-  sudo apt-get install mlocate
+  sudo apt-get install plocate
 
   # The genefilter package is needed for 'modeest' on CRAN.
   # No longer a modeest dependency: Rscript -e 'BiocManager::install("genefilter")'
