@@ -487,6 +487,9 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   # The 'archive' package; https://CRAN.R-project.org/package=archive
   sudo apt-get --yes install libarchive-dev
 
+  # The 'nloptr' package; https://CRAN.R-project.org/package=nloptr
+  sudo apt-get install cmake
+
   # The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208
   sudo apt-get --yes install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev
 
