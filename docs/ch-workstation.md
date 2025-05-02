@@ -1,7 +1,7 @@
 Workstation {#workstation}
 ====================================
 
-We believe it is important to keep software updated and consistent across workstations in your project.  This material was originally posted at https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/DocumentationGlobal/ResourcesInstallation.md.  It should help establish our tools on a new development computer.
+We believe it is important to keep software updated and consistent across workstations in your project.  This material was originally posted at https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/DocumentationGlobal/ResourcesInstallation.md.  It should help establish our tools on a new development computer.ff
 
 Required Installation {#workstation-required}
 ------------------------------------
@@ -436,7 +436,7 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
 ( function install-packages {
 
   ### Git
-  sudo apt-get install git git-core
+  sudo apt-get install git
   git config --global user.email "wibeasley@hotmail.com"
   git config --global user.name "Will Beasley"
   git config --global credential.helper 'cache --timeout=3600000'
