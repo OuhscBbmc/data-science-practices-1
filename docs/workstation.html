@@ -624,35 +624,38 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <span id="cb89-52"><a href="workstation.html#cb89-52" tabindex="-1"></a>  <span class="co"># The 'archive' package; https://CRAN.R-project.org/package=archive</span></span>
 <span id="cb89-53"><a href="workstation.html#cb89-53" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libarchive-dev</span>
 <span id="cb89-54"><a href="workstation.html#cb89-54" tabindex="-1"></a></span>
-<span id="cb89-55"><a href="workstation.html#cb89-55" tabindex="-1"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
-<span id="cb89-56"><a href="workstation.html#cb89-56" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
+<span id="cb89-55"><a href="workstation.html#cb89-55" tabindex="-1"></a>  <span class="co"># The 'nloptr' package; https://CRAN.R-project.org/package=nloptr</span></span>
+<span id="cb89-56"><a href="workstation.html#cb89-56" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install cmake</span>
 <span id="cb89-57"><a href="workstation.html#cb89-57" tabindex="-1"></a></span>
-<span id="cb89-58"><a href="workstation.html#cb89-58" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
-<span id="cb89-59"><a href="workstation.html#cb89-59" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
+<span id="cb89-58"><a href="workstation.html#cb89-58" tabindex="-1"></a>  <span class="co"># The 'sf' and other spatial packages: https://github.com/r-spatial/sf#ubuntu; https://github.com/r-spatial/sf/pull/1208</span></span>
+<span id="cb89-59"><a href="workstation.html#cb89-59" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libudunits2-dev libgdal-dev libgeos-dev libproj-dev libgeos++-dev</span>
 <span id="cb89-60"><a href="workstation.html#cb89-60" tabindex="-1"></a></span>
-<span id="cb89-61"><a href="workstation.html#cb89-61" tabindex="-1"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
-<span id="cb89-62"><a href="workstation.html#cb89-62" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
-<span id="cb89-63"><a href="workstation.html#cb89-63" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
-<span id="cb89-64"><a href="workstation.html#cb89-64" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
-<span id="cb89-65"><a href="workstation.html#cb89-65" tabindex="-1"></a></span>
-<span id="cb89-66"><a href="workstation.html#cb89-66" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
-<span id="cb89-67"><a href="workstation.html#cb89-67" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
+<span id="cb89-61"><a href="workstation.html#cb89-61" tabindex="-1"></a>  <span class="co"># For Cairo package, a dependency of Shiny &amp; plotly; https://gykovacsblog.wordpress.com/2017/05/15/installing-cairo-for-r-on-ubuntu-17-04/</span></span>
+<span id="cb89-62"><a href="workstation.html#cb89-62" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install libcairo2-dev</span>
+<span id="cb89-63"><a href="workstation.html#cb89-63" tabindex="-1"></a></span>
+<span id="cb89-64"><a href="workstation.html#cb89-64" tabindex="-1"></a>  <span class="co"># 'rJava' and others; https://www.r-bloggers.com/installing-rjava-on-ubuntu/</span></span>
+<span id="cb89-65"><a href="workstation.html#cb89-65" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install default-jre default-jdk</span>
+<span id="cb89-66"><a href="workstation.html#cb89-66" tabindex="-1"></a>  <span class="fu">sudo</span> R CMD javareconf</span>
+<span id="cb89-67"><a href="workstation.html#cb89-67" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install r-cran-rjava</span>
 <span id="cb89-68"><a href="workstation.html#cb89-68" tabindex="-1"></a></span>
-<span id="cb89-69"><a href="workstation.html#cb89-69" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
-<span id="cb89-70"><a href="workstation.html#cb89-70" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
+<span id="cb89-69"><a href="workstation.html#cb89-69" tabindex="-1"></a>  <span class="co"># For reprex and sometimes ssh keys; https://github.com/tidyverse/reprex#installation</span></span>
+<span id="cb89-70"><a href="workstation.html#cb89-70" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install xclip</span>
 <span id="cb89-71"><a href="workstation.html#cb89-71" tabindex="-1"></a></span>
-<span id="cb89-72"><a href="workstation.html#cb89-72" tabindex="-1"></a>  <span class="co"># For databases</span></span>
-<span id="cb89-73"><a href="workstation.html#cb89-73" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
-<span id="cb89-74"><a href="workstation.html#cb89-74" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
-<span id="cb89-75"><a href="workstation.html#cb89-75" tabindex="-1"></a></span>
-<span id="cb89-76"><a href="workstation.html#cb89-76" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
-<span id="cb89-77"><a href="workstation.html#cb89-77" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
+<span id="cb89-72"><a href="workstation.html#cb89-72" tabindex="-1"></a>  <span class="co"># gifski -apparently the rust compiler is necessary</span></span>
+<span id="cb89-73"><a href="workstation.html#cb89-73" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install cargo</span>
+<span id="cb89-74"><a href="workstation.html#cb89-74" tabindex="-1"></a></span>
+<span id="cb89-75"><a href="workstation.html#cb89-75" tabindex="-1"></a>  <span class="co"># For databases</span></span>
+<span id="cb89-76"><a href="workstation.html#cb89-76" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install sqlite sqliteman</span>
+<span id="cb89-77"><a href="workstation.html#cb89-77" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install postgresql postgresql-contrib pgadmin3</span>
 <span id="cb89-78"><a href="workstation.html#cb89-78" tabindex="-1"></a></span>
-<span id="cb89-79"><a href="workstation.html#cb89-79" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
-<span id="cb89-80"><a href="workstation.html#cb89-80" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
-<span id="cb89-81"><a href="workstation.html#cb89-81" tabindex="-1"></a><span class="kw">}</span></span>
-<span id="cb89-82"><a href="workstation.html#cb89-82" tabindex="-1"></a><span class="ex">install-packages</span></span>
-<span id="cb89-83"><a href="workstation.html#cb89-83" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
+<span id="cb89-79"><a href="workstation.html#cb89-79" tabindex="-1"></a>  <span class="co"># pandoc</span></span>
+<span id="cb89-80"><a href="workstation.html#cb89-80" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get <span class="at">--yes</span> install pandoc</span>
+<span id="cb89-81"><a href="workstation.html#cb89-81" tabindex="-1"></a></span>
+<span id="cb89-82"><a href="workstation.html#cb89-82" tabindex="-1"></a>  <span class="co"># For checking packages. Avoid `/usr/bin/texi2dvi: not found` warning.</span></span>
+<span id="cb89-83"><a href="workstation.html#cb89-83" tabindex="-1"></a>  <span class="fu">sudo</span> apt-get install texinfo</span>
+<span id="cb89-84"><a href="workstation.html#cb89-84" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb89-85"><a href="workstation.html#cb89-85" tabindex="-1"></a><span class="ex">install-packages</span></span>
+<span id="cb89-86"><a href="workstation.html#cb89-86" tabindex="-1"></a><span class="kw">)</span></span></code></pre></div>
 </div>
 <div id="workstation-ubuntu-pandoc" class="section level3" number="19.8.4">
 <h3>
