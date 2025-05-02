@@ -454,8 +454,11 @@ This next block can be copied and pasted (ctrl-shift-v) into the console [entire
   # For the 'devtools' package dependencies
   sudo apt-get --yes install libharfbuzz-dev libfribidi-dev
 
-  # The 'xml2' package; https://CRAN.R-project.org/package=xml2
-  sudo apt-get --yes install libxml2-dev r-cran-xml
+  # For the 'devtools' package dependencies
+  sudo apt-get --yes install libharfbuzz-dev libfribidi-dev
+
+  # The 'git2r' package; https://CRAN.R-project.org/package=git2r
+  sudo apt-get --yes install libgit2-dev
 
   # The 'curl' package, and others; https://CRAN.R-project.org/package=curl
   sudo apt-get --yes install libssl-dev libcurl4-openssl-dev
