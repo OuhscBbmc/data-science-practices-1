@@ -236,7 +236,7 @@ The installation order does not matter.
 
   When using the Windows .msi installer, the recommended options are
   
-  * Check "Add Python 3.10 to PATH"
+  * Check "Add python.exe to PATH"
 
   * Check "Install launcher for all users (recommended)"
   
@@ -246,11 +246,13 @@ The installation order does not matter.
 
     * Check "Documentation"
     * Check "pip"
-    * "for all users (requires elevation)"
+    * Check "tcl/tk and IDLE"
+    * Check "py laucher"
+    * Check "for all users (requires elevation)"
 
   * Advanced Options
 
-    * Check "Install for all users" (This will set the install path to something like `C:\Program Files\Python310`.)
+    * Check "Install for all users" (This will set the install path to something like `C:\Program Files\Python313`.)
     * Check "Add Python to environment variables"
     * Check "Precompile standard library"
 
