@@ -7,7 +7,7 @@
 <title>Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices</title>
 <meta name="author" content="Will Beasley">
 <meta name="description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
-<meta name="generator" content="bookdown 0.44 with bs4_book()">
+<meta name="generator" content="bookdown 0.45 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Security &amp; Private Data | Collaborative Data Science Practices">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Overview {Include a few paragraphs that describe principles and mentality, and how the following sections contribute.} The report’s dataset(s) are preferably stored in REDCap or SQL Server....">
@@ -184,15 +184,17 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <span class="header-section-number">9.3</span> Security for Data at Rest<a class="anchor" aria-label="anchor" href="#security-for-data-at-rest"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li>The report’s dataset(s) are preferably stored in REDCap or SQL Server.
+<li>
+<p>The report’s dataset(s) are preferably stored in REDCap or SQL Server.</p>
 <ul>
 <li>They’re absolutely not stored not on GitHub or the local machine.</li>
 <li>Avoid Microsoft Access, Excel, CSVs, or anything without user accounts.</li>
 <li>If the PHI must be stored as a loose file (eg, CSV), keep it on the encrypted file server.</li>
 </ul>
 </li>
-<li>Any PHI on a fileserver should be stored in a directory controlled by a fairly restrictive Windows AD group. Only ~4 people on a project probably need access to those files, not all ~20 people on a project.</li>
-<li>There are many benefits of SQL Server over CSVs or Excel files .
+<li><p>Any PHI on a fileserver should be stored in a directory controlled by a fairly restrictive Windows AD group. Only ~4 people on a project probably need access to those files, not all ~20 people on a project.</p></li>
+<li>
+<p>There are many benefits of SQL Server over CSVs or Excel files .</p>
 <ul>
 <li>It’s protected by Odyssey (not just the VPN).</li>
 <li>It provides auditing logs.</li>
@@ -200,9 +202,19 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <li>Real databases aren’t accidentally emailed or copied to an unsecured location.</li>
 </ul>
 </li>
-<li>Transfer PHI into REDCap &amp; SQL Server as early as possible (particularly the CSVs &amp; XLSXs we regularly receive from partners).</li>
-<li>Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.</li>
-<li>Hash values when possible. For instance, when we determine families/networks of people, we use things like SSNs. But the algorithm that identifies the clusters doesn’t need to know the <em>actual</em> SSN, just that two records have the <em>same</em> SSN. Something like a <a href="http://en.wikipedia.org/wiki/SHA-2">SHA-256 hash</a> is good for this. The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can’t be determined from its hashed value. If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing &amp; salting process: <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/CodeUtilities/HashUtility.R">HashUtility.R</a> and <a href="https://github.com/OuhscBbmc/RedcapExample/blob/main/CodeUtilities/CreateSalt.R">CreateSalt.R</a>.</li>
+<li><p>Transfer PHI into REDCap &amp; SQL Server as early as possible (particularly the CSVs &amp; XLSXs we regularly receive from partners).</p></li>
+<li><p>Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.</p></li>
+<li><p>Hash values when possible. For instance, when we determine families/networks of people, we use things like SSNs. But the algorithm that identifies the clusters doesn’t need to know the <em>actual</em> SSN, just that two records have the <em>same</em> SSN. Something like a <a href="http://en.wikipedia.org/wiki/SHA-2">SHA-256 hash</a> is good for this. The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can’t be determined from its hashed value. If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing &amp; salting process: <a href="https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/CodeUtilities/HashUtility.R">HashUtility.R</a> and <a href="https://github.com/OuhscBbmc/RedcapExample/blob/main/CodeUtilities/CreateSalt.R">CreateSalt.R</a>.</p></li>
+<li><p>We prefer to distribute PHI files via <a href="https://sft.ouhsc.edu/bds">OU’s SFT</a> server, which accommodates large files and requires a user to log in, in order to access files targeting only them.</p></li>
+<li>
+<p>If that is not feasible, we occassionally use a Microsoft SharePoint Channel.
+A subdirectory is created specifically for an investigator’s project.</p>
+<p>To prevent the investigator from accidentally downloading a PHI file to an unathorized machine,
+we have disabled SharePoint’s Sync capability <em>at the channel/team level</em>. Here is ascreenshot within “Settings : Advanced Settings”:</p>
+<div class="float">
+<img src="resources/security-sharepoint-prevent-sync.png" alt="sharepoint-settings-sync"><div class="figcaption">sharepoint-settings-sync</div>
+</div>
+</li>
 </ul>
 </div>
 <div id="file-level-permissions" class="section level2" number="9.4">
@@ -327,7 +339,7 @@ Temporary and derivative datasets are stored in SQL Server, not as a CSV on the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2025-09-10.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2025-11-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

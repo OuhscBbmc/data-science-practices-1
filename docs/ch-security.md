@@ -65,6 +65,14 @@ Security for Data at Rest
 * Transfer PHI into REDCap & SQL Server as early as possible (particularly the CSVs & XLSXs we regularly receive from partners).
 * Temporary and derivative datasets are stored in SQL Server, not as a CSV on the fileserver.
 * Hash values when possible.  For instance, when we determine families/networks of people, we use things like SSNs.  But the algorithm that identifies the clusters doesn't need to know the *actual* SSN, just that two records have the *same* SSN.  Something like a [SHA-256 hash](http://en.wikipedia.org/wiki/SHA-2) is good for this.  The algorithm can operate on the hashed SSN just as effectively as the real SSN. However the original SSN can't be determined from its hashed value.  If the table is accidentally exposed to the public, no PHI is compromised. The following two files help the hashing & salting process: [HashUtility.R](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/CodeUtilities/HashUtility.R) and [CreateSalt.R](https://github.com/OuhscBbmc/RedcapExample/blob/main/CodeUtilities/CreateSalt.R).
+* We prefer to distribute PHI files via [OU's SFT](https://sft.ouhsc.edu/bds) server, which accommodates large files and requires a user to log in, in order to access files targeting only them.
+* If that is not feasible, we occassionally use a Microsoft SharePoint Channel.
+  A subdirectory is created specifically for an investigator's project.
+
+  To prevent the investigator from accidentally downloading a PHI file to an unathorized machine,
+  we have disabled SharePoint's Sync capability _at the channel/team level_.  Here is ascreenshot within "Settings : Advanced Settings":
+
+  ![sharepoint-settings-sync](resources/security-sharepoint-prevent-sync.png)
 
 File-level permissions
 ------------------------------------
