@@ -169,6 +169,7 @@ Note: here are some non-default changes that facilitate our workflow.  Either co
   "files.associations": {
       "*.Rmd": "markdown"
   },
+  "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
