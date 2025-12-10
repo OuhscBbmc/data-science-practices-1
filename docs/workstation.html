@@ -400,7 +400,7 @@
 <p><strong>Updating Packages</strong> Python packages don’t need to be updated as frequently as R packages, but it’s still good to do it every few months.</p>
 <p>Paste this single line into PowerShell on Windows. (<a href="https://stackoverflow.com/a/51022937/1082435">Stack Overflow solution</a> from <a href="https://stackoverflow.com/users/8275142/s%c3%a9bastien-wieckowski">Sébastien Wieckowski</a>)</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode ps"><code class="sourceCode postscript"><span id="cb83-1"><a href="workstation.html#cb83-1" tabindex="-1"></a>pip list -o --format json | ConvertFrom-Json | foreach {pip install $_.name -U --no-warn-script-location}</span></code></pre></div>
-<p>Paste this single line into a Bash terminal on Linux. (<a href="%5Bhttps://stackoverflow.com/a/51022937/1082435%5D(https://www.activestate.com/resources/quick-reads/how-to-update-all-python-packages/)">ActiveState.com post</a>.</p>
+<p>Paste this single line into a Bash terminal on Linux. (<a href="https://www.activestate.com/resources/quick-reads/how-to-update-all-python-packages/">ActiveState.com post</a>.)</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb84-1"><a href="workstation.html#cb84-1" tabindex="-1"></a><span class="ex">pip3</span> list <span class="at">--outdated</span> <span class="at">--format</span><span class="op">=</span>freeze <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">'^\-e'</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> = <span class="at">-f</span> 1 <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-n1</span> pip3 install <span class="at">-U</span> </span></code></pre></div>
 </li>
 </ul>
@@ -820,7 +820,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2025-12-09.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2025-12-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
