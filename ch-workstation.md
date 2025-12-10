@@ -275,7 +275,7 @@ The installation order does not matter.
     pip list -o --format json | ConvertFrom-Json | foreach {pip install $_.name -U --no-warn-script-location}
     ```
     
-    Paste this single line into a Bash terminal on Linux.  ([ActiveState.com post]([https://stackoverflow.com/a/51022937/1082435](https://www.activestate.com/resources/quick-reads/how-to-update-all-python-packages/)).
+    Paste this single line into a Bash terminal on Linux.  ([ActiveState.com post](https://www.activestate.com/resources/quick-reads/how-to-update-all-python-packages/).)
 
     ```sh
     pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U 
