@@ -46,7 +46,7 @@ testit::assert(
 
 ### Removing Trailing Comma from Header {#snippets-reading-trailing-comma}
 
-*Background*: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line.  For each subsequent line, [`readr:read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) appropriately throws a new warning that it is missing a column.  This warning flood can mask real problems.
+*Background*: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line.  For each subsequent line, [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) appropriately throws a new warning that it is missing a column.  This warning flood can mask real problems.
 
 *Explanation*: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to `readr::read_csv()` to convert it into a data.frame.
 
