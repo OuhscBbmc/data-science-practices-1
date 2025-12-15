@@ -157,7 +157,7 @@
 <h3>
 <span class="header-section-number">C.1.2</span> Removing Trailing Comma from Header<a class="anchor" aria-label="anchor" href="#snippets-reading-trailing-comma"><i class="fas fa-link"></i></a>
 </h3>
-<p><em>Background</em>: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr:read_csv()</code></a> appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.</p>
+<p><em>Background</em>: Occasionally a Meditech Extract will have an extra comma at the end of the 1st line. For each subsequent line, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_csv()</code></a> appropriately throws a new warning that it is missing a column. This warning flood can mask real problems.</p>
 <p><em>Explanation</em>: This snippet (a) reads the csv as plain text, (b) removes the final comma, and (c) passes the plain text to <code>readr::read_csv()</code> to convert it into a data.frame.</p>
 <p><em>Instruction</em>: Modify <code>Dx50 Name</code> to the name of the final (real) column.</p>
 <p><em>Real Example</em>: <a href="https://github.com/OuhscBbmc/truong-pharmacist-transition-1/blob/eec6d7eb8aaa9e3df52dafb826dbc53aaf515c63/manipulation/ellis/dx-ellis.R#L158-L162">truong-pharmacist-transition-1</a> (Accessible to only CDW members.)</p>
@@ -439,7 +439,7 @@ Finally, values like <a href="http://www.icd9data.com/2015/Volume1/001-139/001-0
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2025-12-10.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2025-12-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
