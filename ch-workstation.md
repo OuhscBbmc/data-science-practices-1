@@ -338,9 +338,12 @@ Note: here are some non-default changes that facilitate our workflow.  The first
 
 1. SQL Server Object Explorer | Scripting | Include descriptive headers: False
 1. SQL Server Object Explorer | Scripting | Script extended properties: False
-1. Text Editor | All Languages | Tabs | Tab size: 2
-1. Text Editor | All Languages | Tabs | Indent size: 2
-1. Text Editor | All Languages | Tabs | Insert Spaces: true
+1. Languages | Transact-SQL | Tabs | Tab size: 2
+1. Languages | Transact-SQL | Tabs | Indent size: 2
+1. Languages | Transact-SQL | Tabs | Tab Character: Insert Spaces
+1. Languages | Defaults | Tabs | Tab size: 2
+1. Languages | Defaults | Tabs | Indent size: 2
+1. Languages | Defaults | Tabs | Tab Character: Insert Spaces
 
 These don't affect the saved files, but make life easier.  The first makes the [result font bigger](https://blog.sqlauthority.com/2016/05/31/sql-server-ssms-tip-get-larger-fonts-results-grid-output/).
 
