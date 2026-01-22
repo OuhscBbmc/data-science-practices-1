@@ -258,6 +258,7 @@
 <p>Productivity in VS Code is enhanced with the following extensions: {added Dec 2018}</p>
 <ul>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer">Excel Viewer</a> isn’t a good name, but I’ve liked the capability. It displays CSVs and other files in a grid. {added Dec 2018}</p></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv">Edit CSV</a> {added ~2021}</p></li>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv">Rainbow CSV</a> color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}</p></li>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql">SQL Server</a> allows you to execute against a database, and view/copy/save the grid results. It doesn’t replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}</p></li>
 <li><p><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a> produces green squiggly lines under words not in its dictionary. You can add words to your user dictionary, or a project dictionary.</p></li>
@@ -269,13 +270,14 @@
 <p>These extensions <a href="https://code.visualstudio.com/docs/editor/command-line#_working-with-extensions">can be installed by command line</a>.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb79-1"><a href="workstation.html#cb79-1" tabindex="-1"></a><span class="ex">code</span> <span class="at">--list-extensions</span></span>
 <span id="cb79-2"><a href="workstation.html#cb79-2" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> GrapeCity.gc-excelviewer</span>
-<span id="cb79-3"><a href="workstation.html#cb79-3" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> mechatroner.rainbow-csv</span>
-<span id="cb79-4"><a href="workstation.html#cb79-4" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-mssql.mssql</span>
-<span id="cb79-5"><a href="workstation.html#cb79-5" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> streetsidesoftware.code-spell-checker</span>
-<span id="cb79-6"><a href="workstation.html#cb79-6" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzhang.markdown-all-in-one</span>
-<span id="cb79-7"><a href="workstation.html#cb79-7" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzane.markdown-pdf</span>
-<span id="cb79-8"><a href="workstation.html#cb79-8" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> DavidAnson.vscode-markdownlint</span>
-<span id="cb79-9"><a href="workstation.html#cb79-9" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> outofsync42.select-compare-tabs</span></code></pre></div>
+<span id="cb79-3"><a href="workstation.html#cb79-3" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span>    janisdd.vscode-edit-csv</span>
+<span id="cb79-4"><a href="workstation.html#cb79-4" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> mechatroner.rainbow-csv</span>
+<span id="cb79-5"><a href="workstation.html#cb79-5" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> ms-mssql.mssql</span>
+<span id="cb79-6"><a href="workstation.html#cb79-6" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> streetsidesoftware.code-spell-checker</span>
+<span id="cb79-7"><a href="workstation.html#cb79-7" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzhang.markdown-all-in-one</span>
+<span id="cb79-8"><a href="workstation.html#cb79-8" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> yzane.markdown-pdf</span>
+<span id="cb79-9"><a href="workstation.html#cb79-9" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> DavidAnson.vscode-markdownlint</span>
+<span id="cb79-10"><a href="workstation.html#cb79-10" tabindex="-1"></a><span class="ex">code</span> <span class="at">--install-extension</span> outofsync42.select-compare-tabs</span></code></pre></div>
 <p>Note: here are some non-default changes that facilitate our workflow. Either copy this configuration into <a href="https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings"><code>settings.json</code></a>, or manually specify the options with the <a href="https://code.visualstudio.com/docs/getstarted/settings">settings editor</a>.</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb80-1"><a href="workstation.html#cb80-1" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb80-2"><a href="workstation.html#cb80-2" tabindex="-1"></a>  <span class="dt">"diffEditor.ignoreTrimWhitespace"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
@@ -823,7 +825,7 @@ Alternatively, update the <code>wget</code> line with the most recent version.</
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2026-01-19.</p>
+    <p>"<strong>Collaborative Data Science Practices</strong>" was written by Will Beasley. It was last built on 2026-01-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

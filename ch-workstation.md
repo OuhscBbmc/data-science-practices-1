@@ -129,6 +129,8 @@ Productivity in VS Code is enhanced with the following extensions:  {added Dec 2
 
 * [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) isn't a good name, but I've liked the capability.  It displays CSVs and other files in a grid. {added Dec 2018}
 
+* [Edit CSV](https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv) {added ~2021}
+
 * [Rainbow CSV](https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv) color codes the columns, but still allows you to see and edit the raw plain-text file. {added Dec 2018}
 
 * [SQL Server](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql) allows you to execute against a database, and view/copy/save the grid results.  It doesn't replicate all SSMS features, but is nice as your scanning through files. {added Dec 2018}
@@ -148,6 +150,7 @@ These extensions [can be installed by command line](https://code.visualstudio.co
 ```sh
 code --list-extensions
 code --install-extension GrapeCity.gc-excelviewer
+code --install-extension	janisdd.vscode-edit-csv
 code --install-extension mechatroner.rainbow-csv
 code --install-extension ms-mssql.mssql
 code --install-extension streetsidesoftware.code-spell-checker
