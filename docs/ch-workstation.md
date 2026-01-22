@@ -150,7 +150,7 @@ These extensions [can be installed by command line](https://code.visualstudio.co
 ```sh
 code --list-extensions
 code --install-extension GrapeCity.gc-excelviewer
-code --install-extension	janisdd.vscode-edit-csv
+code --install-extension janisdd.vscode-edit-csv
 code --install-extension mechatroner.rainbow-csv
 code --install-extension ms-mssql.mssql
 code --install-extension streetsidesoftware.code-spell-checker
