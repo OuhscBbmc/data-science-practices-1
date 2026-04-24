@@ -25,6 +25,12 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
+      # Bookdown installation was failing
+      - name: Install libuv dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libuv1-dev
+
       - name: Query dependencies
         run:
           Rscript -e "install.packages('remotes')" -e "saveRDS(remotes::dev_package_deps(dependencies = TRUE), 'depends.Rds', version = 2)"
