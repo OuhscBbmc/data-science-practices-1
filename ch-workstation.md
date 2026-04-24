@@ -38,6 +38,7 @@ Dozens of R Packages will need to be installed.  Choose between one of the two r
 To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/install-packages.R) (located in that repository's `utility/` directory). The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/main/R/package-janitor.R).], which defines the `package_janitor_remote()` function.  This function then installs the packages listed in the two CSVs, [package-dependency-list.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv) and [package-dependency-list-more.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list-more.csv).
 
 ```r
+if( !base::requireNamespace("remotes" )) utils::install.packages("remotes")
 if (!base::requireNamespace("devtools")) utils::install.packages("devtools")
 devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
 
