@@ -101,7 +101,7 @@ Our core-wide goal of being [secure by default](https://en.wikipedia.org/wiki/Se
 
 1. Only three people are [owners](https://help.github.com/articles/permission-levels-for-an-organization/) of the GitHub organization.  Everyone else must be explicitly added to each appropriate repository.  Other important restrictions to members include (a) cannot add/delete/transfer (private or public) repositories and (b) cannot add/delete other members to organization.
 
-1. Every week, an owner (probably @wibeasley) will review the [organization's audit log](https://github.com/organizations/OuhscBbmc/settings/audit-log) (which only owners can view).
+1. Every week, an owner (probably `@wibeasley`) will review the [organization's audit log](https://github.com/organizations/OuhscBbmc/settings/audit-log) (which only owners can view).
 
 1. Two or more owners must discuss and agree upon adding/modifying/deleting any extra entity added to our GitHub Organization, including
     1. [webhooks](https://developer.github.com/webhooks/),
