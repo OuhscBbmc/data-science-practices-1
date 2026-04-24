@@ -213,7 +213,6 @@ workstation-recommended
 workstation-odbc
 workstation-quarto
 workstation-notepadpp
-workstation-ads
 workstation-vscode
 workstation-optional
 workstation-git

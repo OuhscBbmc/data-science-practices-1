@@ -38,6 +38,7 @@ Dozens of R Packages will need to be installed.  Choose between one of the two r
 To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/install-packages.R) (located in that repository's `utility/` directory). The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/main/R/package-janitor.R).], which defines the `package_janitor_remote()` function.  This function then installs the packages listed in the two CSVs, [package-dependency-list.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv) and [package-dependency-list-more.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list-more.csv).
 
 ```r
+if( !base::requireNamespace("remotes" )) utils::install.packages("remotes")
 if (!base::requireNamespace("devtools")) utils::install.packages("devtools")
 devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
 
@@ -92,34 +93,6 @@ Quarto's [Get Started](https://quarto.org/docs/get-started/) page has instructio
 ### Notepad++ {#workstation-notepadpp}
 
 [Notepad++](http://notepad-plus-plus.org/) is a text editor that allows you look at the raw text files, such as code and CSVs.  For CSVs and other data files, it is helpful when troubleshooting (instead of looking at the file through Excel, which masks & causes some issues).  {added Sept 2012}
-
-### Azure Data Studio {#workstation-ads}
-
-[Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download) is now recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Management Studio.
-
-  Note: here are some non-default changes that facilitate our workflow.
-
-  1. Settings | Text Editor | **Tab Size: 2** {`"editor.tabSize": 2`}
-  1. Settings | Text Editor | **Detect Indentation: uncheck** {`"editor.detectIndentation": false`}
-  1. Settings | Text Editor | **Insert Final Newlines: check** {`"files.insertFinalNewline": true`}
-  1. Settings | Text Editor | **Trim Final Newlines: check** {`"files.trimFinalNewlines": true`}
-  1. Settings | Text Editor | **Trim Trailing Whitespace: check** {`"files.trimTrailingWhitespace": true`}
-  1. Data | Sql | **Show Connection Info In Title: uncheck** {`"sql.showConnectionInfoInTitle": false`}
-  1. Data | Sql | **Include Headers: check** {`"sql.copyIncludeHeaders": false`}
-
-```json
-{
-  "workbench.enablePreviewFeatures": true,
-  "workbench.colorTheme": "Default Dark Azure Data Studio",
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
-  "queryEditor.showConnectionInfoInTitle": false,
-  "queryEditor.results.copyIncludeHeaders": false
-}
-```
 
 ### Visual Studio Code {#workstation-vscode}
 
@@ -554,6 +527,9 @@ Retired Tools {#workstation-retired}
 -----------------------------------
 
 We previously installed the software below.  Most have been replaced by software above that's either newer or more natural to use.
+
+* **[Azure Data Studio (ADS)](https://docs.microsoft.com/en-us/sql/azure-data-studio/download)** was recommended by [Microsoft](https://cloudblogs.microsoft.com/sqlserver/2018/09/25/azure-data-studio-for-sql-server/) and [others](https://www.brentozar.com/archive/2019/04/if-you-work-with-sql-server-youre-really-lucky/) for analysts (and some other roles) --ahead of SQL Server Management Studio.
+   VS Code (with the SQL Server extensions) is now Microsoft's recommended IDE for this purpose
 
 * **GitLab SSL Certificate** isn't software, but still needs to be configured.
     1. Talk to Will for the server URL and the `*.cer` file.
