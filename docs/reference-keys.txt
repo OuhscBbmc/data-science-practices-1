@@ -214,6 +214,7 @@ workstation-odbc
 workstation-quarto
 workstation-notepadpp
 workstation-vscode
+workstation-vscode-aisafeguards
 workstation-optional
 workstation-git
 workstation-calc

@@ -177,6 +177,16 @@ Note: here are some non-default changes that facilitate our workflow.  Either co
 1. Settings | Extensions |Markdown All in One | Ordered List | **Auto Renumber: false** {`"markdown.extension.orderedList.autoRenumber": false`}
 1. Settings | Extensions |Markdown All in One | Ordered List | **Marker: one** {`"markdown.extension.orderedList.marker": "one"`}
 
+#### AI safeguards {#workstation-vscode-aisafeguards}
+
+While we (as a team/institution/field) are figuring out ways to use AI that doesn't reveal PHI to the wrong outlets,
+keep your head on a swivel and be skeptical.
+
+For now, make sure this VS Code setting doesn't let PHI leave.
+
+- Chat > Tools > Global: "Auto Approve" !! FALSE/UNCHECKED !!
+  - Also known as "YOLO mode", keep this unchecked to limit what files on the machine are available to the AI.
+
 Optional Installation {#workstation-optional}
 -----------------------------------
 
