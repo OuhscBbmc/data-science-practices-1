@@ -38,7 +38,6 @@ Dozens of R Packages will need to be installed.  Choose between one of the two r
 To install our frequently-used packages, run the following snippet.  The first lines installs an important package.  The second line calls the online [Gist](https://gist.github.com/wibeasley/2c5e7459b88ec28b9e8fa0c695b15ee3)^[As an alternative to the Gist, run the local R script [`install-packages.R`](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/install-packages.R) (located in that repository's `utility/` directory). The workhorse of this function is [`OuhscMunge::package_janitor()`](https://github.com/OuhscBbmc/OuhscMunge/blob/main/R/package-janitor.R).], which defines the `package_janitor_remote()` function.  This function then installs the packages listed in the two CSVs, [package-dependency-list.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list.csv) and [package-dependency-list-more.csv](https://github.com/OuhscBbmc/RedcapExamplesAndPatterns/blob/main/utility/package-dependency-list-more.csv).
 
 ```r
-if( !base::requireNamespace("remotes" )) utils::install.packages("remotes")
 if (!base::requireNamespace("devtools")) utils::install.packages("devtools")
 devtools::source_gist("2c5e7459b88ec28b9e8fa0c695b15ee3", filename="package-janitor-bbmc.R")
 
@@ -51,6 +50,11 @@ package_janitor_remote(
 package_janitor_remote(
   "https://raw.githubusercontent.com/OuhscBbmc/RedcapExamplesAndPatterns/main/utility/package-dependency-list-more.csv"
 )
+
+# OHDSI packages (Strategus, Achilles, DatabaseConnector, etc.)
+package_janitor_remote(
+  "https://raw.githubusercontent.com/OuhscBbmc/cdw-skeleton-1/main/utility/package-dependency-list-ohdsi.csv"
+)
 ```
 
 Some of our projects require specialized packages that are not typically used.  In these cases, we will develop the git repo as an R package that includes a proper [DESCRIPTION](http://r-pkgs.had.co.nz/description.html) file.  See [RAnalysisSkeleton](https://github.com/wibeasley/RAnalysisSkeleton/blob/main/DESCRIPTION) for an example.
@@ -58,8 +62,8 @@ Some of our projects require specialized packages that are not typically used.  
 When the project is opened in RStudio, [`update_packages_addin()`](http://ouhscbbmc.github.io/OuhscMunge/reference/update_packages_addin.html) in [OuhscMunge](https://ouhscbbmc.github.io/OuhscMunge) will find the DESCRIPTION file and install the package dependencies.
 
 ```r
-if( !base::requireNamespace("remotes"   ) ) utils::install.packages("remotes")
-if( !base::requireNamespace("OuhscMunge") ) remotes::install_github("OuhscBbmc/OuhscMunge")
+if( !base::requireNamespace("pak"       ) ) utils::install.packages("pak")
+if( !base::requireNamespace("OuhscMunge") ) pak::pak("OuhscBbmc/OuhscMunge")
 OuhscMunge::update_packages_addin()
 ```
 
